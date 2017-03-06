@@ -31,13 +31,12 @@ with NPM 3.10.10.
   7. execute: `npm start`  for starting the application
 
 ## Run a Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. You wont be able to communcate with the server --> see next section if you want to do requests on the backend.
 
 ## Run a Development server with proxy to backend (server-template)
-
-Run `ng start` for a dev server + proxy. Navigate to `ng serve --proxy-config proxy.conf.json`. 
-The app will automatically reload if you change any of the source files.
-The Server must be running on your localhost --> gradle bootRun
+Run `npm start` for a dev server + proxy (This will simply run `ng serve --proxy-config proxy.conf.json`, see package.json).
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The Server must be running on your localhost! --> gradle bootRun
 
 ## Code scaffolding
 
@@ -77,6 +76,7 @@ Enum      | `ng g enum my-new-enum`
 Module    | `ng g module my-module`
 
 # DEPLOYMENT TO FIREBASE
+
 Before you go throught the steps, make sure you refer your requests to your heroku server!
 (fill in your heroku-server url in apiUrl variable in e.g. user.service)
 ##BUILD
@@ -85,6 +85,7 @@ Before you go throught the steps, make sure you refer your requests to your hero
 RESULT--> DIST folder with all compiled files)
 
 ##CONFIG  (only the first time)
+
 1. go to firebase console website: `http://console.firebase.google.com` and **sign in** (forfree)
 2. click **new project** and **create** a new project
 3. go to terminal and install firebase cli --> `npm install -g firebase-tools`
@@ -105,3 +106,5 @@ FINISH JUHU --> deploy with now with `firebase deploy`
 1. `ng build --prod`
 2. `firebase deploy`
 
+
+by sali zumberi
