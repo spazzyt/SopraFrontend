@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this._service.login(this.user)
       .subscribe(result => {
         if (result) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/game']);
         } else {
           this.error = 'Username exists';
           this.loading = false;
