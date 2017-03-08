@@ -14,7 +14,7 @@ export class AuthenticationService {
     this.token = currentUser && currentUser.token;
 
     //TODO fill in your heroku-backend URL
-    this.apiUrl = '';
+    this.apiUrl = 'https://bigdata-17.herokuapp.com';
   }
 
   login(user:User): Observable<User> {

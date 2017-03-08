@@ -13,7 +13,7 @@ export class UserService {
     private authenticationService: AuthenticationService) {
 
     //TODO fill in your heroku-backend URL
-    this.apiUrl = '';
+    this.apiUrl = 'https://bigdata-17.herokuapp.com';
   }
 
   getUsers(): Observable<User[]> {
