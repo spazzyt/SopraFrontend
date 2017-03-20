@@ -6,9 +6,9 @@ import {GameComponent} from "./game/game.component";
 import {HomeComponent} from "./home/home.component";
 
 const appRoutes: Routes = [
-    { path: 'login', component: LoginComponent },
+    { path: '', component: LoginComponent },
     { path: 'game', component: GameComponent, canActivate: [AuthGuardService] },
-    { path: '', component: HomeComponent },
+    { path: 'home', component: HomeComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
