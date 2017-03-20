@@ -67,3 +67,15 @@
   border: 3px solid #867558;
   color: #edcd98;
 }
+
+.login-footer {
+  position: relative;
+  height: auto;
+  color: #d4bd88;
+  padding: 8px;
+  font-size: 18px;
+  margin-top: 290px;
+  position: relative;
+  font-family: "Lithos Pro", Serif;
+  text-align: center;
+}
