@@ -1,0 +1,21 @@
+.half{
+  width: 100%;
+  height: 50%;
+  background-color: red;
+}
+
+.upper_left{
+  width: 50%;
+  height: 100%;
+  float: top;
+  float: left;
+  background-color: green;
+}
+
+.upper_right{
+  width: 50%;
+  height: 100%;
+  float: left;
+  float: top;
+  background-color: purple;
+}
