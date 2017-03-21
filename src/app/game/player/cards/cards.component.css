@@ -11,6 +11,7 @@
 .card{
   width: 20%;
   height: 100%;
+  margin: 5px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -28,33 +29,25 @@
 }
 
 .top_middle_right{
-  width: 20%;
-  height: 100%;
-
+  background-image: url("../../../../images/icons/pyramiddec.png");
 }
 
 .top_right_right{
-  width: 20%;
-  height: 100%;
+  background-image: url("../../../../images/icons/pyramiddec.png");
 }
 
 .bottom_left_left{
-  width: 20%;
-  height: 100%;
+  background-image: url("../../../../images/icons/pyramiddec.png");
 }
 
 .bottom_middle_left{
-  width: 20%;
-  height: 100%;
+  background-image: url("../../../../images/icons/pyramiddec.png");
 }
 
 .bottom_middle_right{
-  width: 20%;
-  height: 100%;
-
+  background-image: url("../../../../images/icons/pyramiddec.png");
 }
 
 .bottom_right_right{
-  width: 20%;
-  height: 100%;
+  background-image: url("../../../../images/icons/pyramiddec.png");
 }
