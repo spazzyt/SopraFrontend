@@ -56,33 +56,33 @@
 }
 
 .top_left_left{
-  background-image: url("../../../../images/icons/burialdec.png");
+  background-image: url("../../../../images/icons/pyramiddec.png");
 }
 
 .top_middle_left{
-  background-image: url("../../../../images/icons/pyramiddec.png");
+  background-image: url("../../../../images/icons/templedec.png");
 }
 
 .top_middle_right{
-  background-image: url("../../../../images/icons/pyramiddec.png");
+  background-image: url("../../../../images/icons/burialdec.png");
 }
 
 .top_right_right{
-  background-image: url("../../../../images/icons/pyramiddec.png");
+  background-image: url("../../../../images/icons/obeliskdec.png");
 }
 
 .bottom_left_left{
-  background-image: url("../../../../images/icons/pyramiddec.png");
+  background-image: url("../../../../images/icons/chisel.png");
 }
 
 .bottom_middle_left{
-  background-image: url("../../../../images/icons/pyramiddec.png");
+  background-image: url("../../../../images/icons/hammer.png");
 }
 
 .bottom_middle_right{
-  background-image: url("../../../../images/icons/pyramiddec.png");
+  background-image: url("../../../../images/icons/sail.png");
 }
 
 .bottom_right_right{
-  background-image: url("../../../../images/icons/pyramiddec.png");
+  background-image: url("../../../../images/icons/lever.png");
 }
