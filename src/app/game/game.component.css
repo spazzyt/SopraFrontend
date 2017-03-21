@@ -83,11 +83,52 @@
 }
 
 
-/* Site Boards */
+/* Main Game Board */
+.game_header{
+  height: 13%;
+  width: 100%;
+  background-color: rgba(50, 200, 50, 0.4);
+}
+
+.game_board{
+  height: 74%;
+  width: 100%;
+  background-color: rgba(50, 50, 200, 0.4);
+}
+
+.game_footer{
+  height: 13%;
+  width: 100%;
+  background-color: rgba(50, 200, 50, 0.4);
+}
 
 
+/* Sub-Structure of Game_board */
+.site_harbours{
+  height: 100%;
+  width: 15%;
+  float: left;
+  background-color: rgba(200, 50, 50, 0.4);
+}
 
+.site_boards{
+  height: 100%;
+  width: 52%;
+  float: left;
+  background-color: rgba(200, 200, 50, 0.8);
+}
 
+.market_site{
+  height: 100%;
+  width: 25%;
+  float: left;
+  background-color: rgba(200, 50, 200, 0.8);
+}
 
-
+.market_harbour{
+  height: 100%;
+  width: 8%;
+  float: left;
+  background-color: rgba(50, 150, 250, 0.8);
+}
 /* For future use: to make the card icons B/W, use:    filter: grayscale(100%); */
