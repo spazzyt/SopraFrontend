@@ -36,12 +36,17 @@
 }
 
 .info_box{
-  width: 100%;
-  height: 60%;
-  background-color: #5bc0de;
-  float: left;
+  /* Uses a workaround at the moment to overflow background image into the top and bottom playerfields */
+  width: 184px;
+  height: 521px;
+  background-image: url(../../images/infobox.png);
+  float: right;
   float: top;
   border: 1px solid crimson;
+  padding-top: 30px;
+  margin-top: -30px;
+  padding-bottom: 30px;
+  margin-bottom: -30px;
 }
 
 .departing_harbours{
@@ -76,5 +81,13 @@
 .player_bottom_right {
   background-image: url(../../images/bottom_right.png);
 }
+
+
+/* Site Boards */
+
+
+
+
+
 
 /* For future use: to make the card icons B/W, use:    filter: grayscale(100%); */
