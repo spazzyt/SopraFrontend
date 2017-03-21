@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { BottomLeftComponent } from './bottom-left/bottom-left.component';
+import { BottomRightComponent } from './bottom-right/bottom-right.component';
+import { TopLeftComponent } from './top-left/top-left.component';
+import { TopRightComponent } from './top-right/top-right.component';
 
 @Component({
   selector: 'app-player',
