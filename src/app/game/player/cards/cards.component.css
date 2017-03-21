@@ -55,6 +55,17 @@
   border: 2px solid transparent;
 }
 
+.card:hover{
+  /* Just for testing: turn cards B/W upon hover */
+  filter: grayscale(100%);
+}
+
+.purple_card:hover{
+  /* Just for testing: turn cards B/W upon hover */
+  filter: grayscale(100%);
+}
+
+
 .top_left_left{
   background-image: url("../../../../images/icons/pyramiddec.png");
 }
