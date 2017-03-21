@@ -1,21 +1,56 @@
+@font-face {
+  font-family: 'Lithos Pro';
+  src: url("../../../../fonts/LithosPro-Regular.otf") format("opentype");
+  font-style: normal;
+}
+
 .half{
   width: 100%;
   height: 50%;
   background-color: red;
 }
 
-.upper_left{
+.lower_left{
   width: 50%;
   height: 100%;
   float: top;
   float: left;
   background-color: green;
+  /*Used to center the player-name*/
+  font: 400 20px "Lithos Pro", Helvetica, SansSerif;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  padding: 15px;
 }
 
-.upper_right{
+.lower_right{
   width: 50%;
   height: 100%;
   float: left;
   float: top;
+}
+
+.up{
+  width: 100%;
+  height: 50%;
+  float: top;
+  float: left;
+  background-color: black;
+}
+
+.low_left{
+  width: 50%;
+  height: 50%;
+  float: top;
+  float: left;
+  background-color: yellow;
+}
+
+.low_right{
+  width: 50%;
+  height: 50%;
+  float: top;
+  float: left;
   background-color: purple;
 }
