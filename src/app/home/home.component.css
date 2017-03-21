@@ -1,0 +1,24 @@
+.container_home_screen {
+  width: 1366px;
+  height: 768px;
+  background-image: url(../../images/background.png);
+  background-size:cover
+}
+
+.container{
+  padding-top: 150px;
+  max-width: 450px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+
+.button_{
+  padding-top: 10px;
+  max-width: 400px;
+  padding-left: 35%;
+  margin: 0 auto;}
+
+.jumbotron{
+  background-color: beige;
+}

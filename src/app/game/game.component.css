@@ -1,0 +1,6 @@
+.container_game_screen {
+  width: 1366px;
+  height: 768px;
+  background-image: url(../../images/background.png);
+  background-size:cover
+}

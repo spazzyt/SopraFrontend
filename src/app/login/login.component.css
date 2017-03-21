@@ -1,10 +1,8 @@
-.main-container {
+.container_login_screen {
   width: 1366px;
   height: 768px;
   background-image: url(../../images/background.png);
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
+  background-size:cover
 }
 
 .form-signin {
@@ -18,6 +16,9 @@
 .form-signin .checkbox {
   margin-bottom: 10px;
   text-align: center;
+  font: 400 100px/1.2 'Merienda One', Helvetica, sans-serif;
+  color: rgba(0,0,0,0.7);
+  text-shadow: 3px 3px 3px #fff;
 }
 .form-signin .checkbox {
   font-weight: normal;
@@ -34,13 +35,9 @@
 .form-signin .form-control:focus {
   z-index: 2;
 }
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
+.form-signin input{
+  margin-top: 50px;
+  margin-bottom: 20px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }

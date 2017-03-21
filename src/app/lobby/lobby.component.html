@@ -1,0 +1,22 @@
+<div class="container_lobby_screen">
+
+  <div class="table_">
+
+    <p>
+      Lobby Works
+    </p>
+    <h1>Sopra FS17</h1>
+    <p>Happy Coding!</p>
+    <div>
+      Users from secure api end point:
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let user of users">{{user.name}}</li>
+      </ul>
+    </div>
+
+
+    <button class="btn btn-sm btn-primary btn-block" type="submit" [routerLink]="['/game']">Game</button>
+
+  </div>
+
+</div>
