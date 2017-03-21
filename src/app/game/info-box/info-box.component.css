@@ -1,0 +1,29 @@
+.container_info_box{
+
+}
+.leave_btn{
+  position: absolute;
+  bottom: 25%;
+  right: 10%;
+  max-width: 100px;
+  margin: 0 auto;
+}
+
+.btn{
+  background-color: #edcd98;
+  border: 3px solid #d4bd88;
+  color: #867558;
+  font-family: "Lithos Pro", Serif;
+  font-size: 25px;
+  padding: 2px;
+}
+
+.btn:active{
+  background-color: #867558;
+  border: 3px solid #867558;
+  color: #edcd98;
+}
+
+.btn:hover{
+  box-shadow: 1px 1px 10px #d4bd88;
+}
