@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Lithos Pro';
+  src: url("../../fonts/LithosPro-Regular.otf") format("opentype");
+  font-style: normal;
+}
+
 .container_lobby_screen {
   width: 1366px;
   height: 768px;
@@ -14,8 +20,9 @@
 }
 
 .lobby_title{
-  font: 400 80px/1.2 'Merienda One', Helvetica, sans-serif;
-  color: rgba(0,0,0,0.7);
-  text-shadow: 3px 3px 3px #fff;
+  font: 400 80px/1.2 'Lithos Pro', Helvetica, sans-serif;
+  color: #867558;
+  text-shadow: 3px 3px 2px #d4bd88;
   text-align: center;
 }
+
