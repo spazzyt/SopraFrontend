@@ -67,5 +67,6 @@ p{
 .player_name{
   height: 30%;
   float: top;
+  vertical-align: bottom;
   background-color: rgba(250, 0, 250, 0.4);
 }

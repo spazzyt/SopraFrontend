@@ -1,6 +1,12 @@
 .container_info_box{
 
 }
+
+p{
+  color: #aa895b;
+  text-shadow: 1px 1px 13px black;
+}
+
 .leave_btn{
   position: absolute;
   bottom: 25%;
@@ -10,20 +16,20 @@
 }
 
 .btn{
-  background-color: #edcd98;
-  border: 3px solid #d4bd88;
-  color: #867558;
+  background-color: #aa895b;
+  border: 3px solid #8a6e49;
+  color: #edcd98;
   font-family: "Lithos Pro", Serif;
   font-size: 25px;
   padding: 2px;
 }
 
 .btn:active{
-  background-color: #867558;
-  border: 3px solid #867558;
+  background-color: #8a6e49;
+  border: 3px solid #8a6e49;
   color: #edcd98;
 }
 
 .btn:hover{
-  box-shadow: 1px 1px 10px #d4bd88;
+  box-shadow: 1px 1px 10px #8a6e49;
 }
