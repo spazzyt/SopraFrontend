@@ -1,0 +1,20 @@
+.container_lobby_screen {
+  width: 1366px;
+  height: 768px;
+  background-image: url(../../images/background.png);
+  background-size:cover
+}
+
+.table_{
+  padding-top: 130px;
+  max-width: 400px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+
+p{
+  font: 400 100px/1.2 'Merienda One', Helvetica, sans-serif;
+  color: rgba(0,0,0,0.7);
+  text-shadow: 3px 3px 3px #fff;
+}

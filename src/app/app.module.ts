@@ -11,13 +11,35 @@ import {AuthenticationService} from "./shared/services/authentication.service";
 import {LoginComponent} from "./login/login.component";
 import {GameComponent} from "./game/game.component";
 import { HomeComponent } from './home/home.component';
+import { LobbyComponent } from './lobby/lobby.component';
+import { PlayerComponent } from './game/player/player.component';
+import { MarketComponent } from './game/market/market.component';
+import { PyramidComponent } from './game/pyramid/pyramid.component';
+import { TempleComponent } from './game/temple/temple.component';
+import { ObeliskComponent } from './game/obelisk/obelisk.component';
+import { BurialChamberComponent } from './game/burial-chamber/burial-chamber.component';
+import { ShipComponent } from './game/ship/ship.component';
+import { SiteHarbourComponent } from './game/site-harbour/site-harbour.component';
+import { DepartingHarbourComponent } from './game/departing-harbour/departing-harbour.component';
+import { InfoBoxComponent } from './game/info-box/info-box.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     GameComponent,
-    HomeComponent
+    HomeComponent,
+    LobbyComponent,
+    PlayerComponent,
+    MarketComponent,
+    PyramidComponent,
+    TempleComponent,
+    ObeliskComponent,
+    BurialChamberComponent,
+    ShipComponent,
+    SiteHarbourComponent,
+    DepartingHarbourComponent,
+    InfoBoxComponent
   ],
   imports: [
     BrowserModule,

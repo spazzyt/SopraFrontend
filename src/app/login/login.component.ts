@@ -14,22 +14,22 @@ export class LoginComponent implements OnInit {
   error = '';
   user: User;
 
-  constructor(private router: Router, private _service: AuthenticationService, private _router: Router) {
+  constructor(private router: Router, private service: AuthenticationService) {
 
   }
 
   ngOnInit() {
     // reset login status
-    this._service.logout();
+    this.service.logout();
     this.user = new User();
 
   }
 
   login() {
-    this._service.login(this.user)
+    this.service.login(this.user)
       .subscribe(result => {
         if (result) {
-          this.router.navigate(['/game']);
+          this.router.navigate(['/lobby']);
         } else {
           this.error = 'Username exists';
           this.loading = false;
@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
 
   clearfields() {
     this.user.name = '';
-    this.user.username = '';
   }
 
 
