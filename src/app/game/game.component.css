@@ -24,8 +24,7 @@
   background-position: center;
 }
 
-
-.player_top_left {
+.player_field{
   width: 100%;
   height: 175px;
   position: relative;
@@ -34,3 +33,12 @@
   background-repeat: no-repeat;
   float: left;
 }
+
+.player_top_left {
+  background-image: url(../../images/top_left.png);
+}
+
+
+
+
+/* For future use: to make the card icons B/W, use:    filter: grayscale(100%); */
