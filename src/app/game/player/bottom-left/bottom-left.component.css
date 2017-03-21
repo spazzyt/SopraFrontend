@@ -4,10 +4,19 @@
   font-style: normal;
 }
 
-.half{
+p{
+  font: 400 20px "Lithos Pro", Helvetica, Sans-Serif;
+  vertical-align: bottom;
+}
+
+.top_part{
   width: 100%;
-  height: 50%;
-  background-color: rgba(0, 0, 250, 0.8);
+  height: 70%;
+}
+
+.bottom_part{
+  width: 100%;
+  height: 30%;
 }
 
 .lower_left{
@@ -15,7 +24,6 @@
   height: 100%;
   float: top;
   float: left;
-  background-color: rgba(250, 250, 250, 0.4);
   /*Used to center the player-name*/
   font: 400 20px "Lithos Pro", Helvetica, SansSerif;
   display: -webkit-box;
@@ -31,29 +39,33 @@
   float: top;
 }
 
-.up{
-  width: 100%;
-  height: 50%;
-  float: top;
-  float: left;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
 .low_left{
-  width: 50%;
-  height: 50%;
-  float: top;
-  float: left;
-  background-color: rgba(0, 250, 0, 0.4);
   background-image: url("../../../../images/score.png");
   background-repeat: no-repeat;
   background-position: center;
 }
 
+.low_middle{
+  background-image: url("../../../../images/supply_sled.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .low_right{
-  width: 50%;
-  height: 50%;
+  background-image: url("../../../../images/quarry.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.low{
+  width: 30%;
+  height: 100%;
   float: top;
   float: left;
+}
+
+.player_name{
+  height: 30%;
+  float: top;
   background-color: rgba(250, 0, 250, 0.4);
 }
