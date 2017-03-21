@@ -6,7 +6,7 @@
 }
 
 .form-signin {
-  padding-top: 220px;
+  padding-top: 180px;
   max-width: 400px;
   padding-left: 15px;
   padding-right: 15px;
@@ -14,9 +14,9 @@
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   text-align: center;
-  font: 400 100px/1.2 'Merienda One', Helvetica, sans-serif;
+  font: 400 80px/1.2 'Merienda One', Helvetica, sans-serif;
   color: rgba(0,0,0,0.7);
   text-shadow: 3px 3px 3px #fff;
 }
@@ -40,7 +40,7 @@
   z-index: 2;
 }
 .form-signin input{
-  margin-top: 50px;
+  margin-top: 20px;
   margin-bottom: 20px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -71,7 +71,7 @@
   color: #d4bd88;
   padding: 8px;
   font-size: 18px;
-  margin-top: 290px;
+  margin-top: 80px;
   position: relative;
   font-family: "Lithos Pro", Serif;
   text-align: center;
