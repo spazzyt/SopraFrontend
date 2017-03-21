@@ -22,6 +22,11 @@ import { ShipComponent } from './game/ship/ship.component';
 import { SiteHarbourComponent } from './game/site-harbour/site-harbour.component';
 import { DepartingHarbourComponent } from './game/departing-harbour/departing-harbour.component';
 import { InfoBoxComponent } from './game/info-box/info-box.component';
+import { BottomLeftComponent } from './game/player/bottom-left/bottom-left.component';
+import { BottomRightComponent } from './game/player/bottom-right/bottom-right.component';
+import { TopLeftComponent } from './game/player/top-left/top-left.component';
+import { TopRightComponent } from './game/player/top-right/top-right.component';
+import { CardsComponent } from './game/player/cards/cards.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,12 @@ import { InfoBoxComponent } from './game/info-box/info-box.component';
     ShipComponent,
     SiteHarbourComponent,
     DepartingHarbourComponent,
-    InfoBoxComponent
+    InfoBoxComponent,
+    BottomLeftComponent,
+    BottomRightComponent,
+    TopLeftComponent,
+    TopRightComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,
