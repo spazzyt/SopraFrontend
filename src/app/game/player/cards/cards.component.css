@@ -1,0 +1,60 @@
+.upper_quarter{
+  width: 100%;
+  height: 50%;
+}
+
+.lower_quarter{
+  width: 100%;
+  height: 50%;
+}
+
+.card{
+  width: 20%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border-radius: 50%;
+  float: left;
+  float: top;
+}
+
+.top_left_left{
+  background-image: url("../../../../images/icons/burialdec.png");
+}
+
+.top_middle_left{
+  background-image: url("../../../../images/icons/pyramiddec.png");
+}
+
+.top_middle_right{
+  width: 20%;
+  height: 100%;
+
+}
+
+.top_right_right{
+  width: 20%;
+  height: 100%;
+}
+
+.bottom_left_left{
+  width: 20%;
+  height: 100%;
+}
+
+.bottom_middle_left{
+  width: 20%;
+  height: 100%;
+}
+
+.bottom_middle_right{
+  width: 20%;
+  height: 100%;
+
+}
+
+.bottom_right_right{
+  width: 20%;
+  height: 100%;
+}
