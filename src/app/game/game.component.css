@@ -2,5 +2,35 @@
   width: 1366px;
   height: 768px;
   background-image: url(../../images/water_background.png);
-  background-size:cover
+  background-size:cover;
+}
+
+.container_side {
+  width: 20%;
+  height: 100%;
+  position: relative;
+  background-color: #c9302c;
+  background-size:cover;
+  float: left;
+}
+
+.container_middle {
+  width: 60%;
+  height: 100%;
+  position: relative;
+  float: left;
+  background-image: url(../../images/island_background.png);
+  background-size:cover;
+  background-position: center;
+}
+
+
+.player_top_left {
+  width: 100%;
+  height: 175px;
+  position: relative;
+  background-image: url(../../images/top_left.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  float: left;
 }
