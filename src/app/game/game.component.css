@@ -9,8 +9,8 @@
   width: 20%;
   height: 100%;
   position: relative;
-  background-color: #c9302c;
   background-size:cover;
+  background-color: #eea236;
   float: left;
 }
 
@@ -26,22 +26,30 @@
 
 .player_field{
   width: 100%;
-  height: 25%;
+  height: 20%;
   position: relative;
   background-image: url(../../images/top_left.png);
-  background-size: contain;
+  background-size: 100% auto;
   background-repeat: no-repeat;
   float: left;
   float: top;
 }
 
-.departing_harbours{
+.info_box{
   width: 100%;
-  height: 50%;
+  height: 60%;
   background-color: #5bc0de;
   float: left;
   float: top;
   border: 1px solid crimson;
+}
+
+.departing_harbours{
+  width: 100%;
+  height: 60%;
+  background-color: #5bc0de;
+  float: left;
+  float: top;
 }
 
 .departing_harbour{
@@ -57,7 +65,16 @@
   background-image: url(../../images/top_left.png);
 }
 
+.player_bottom_left {
+  background-image: url(../../images/bottom_left.png);
+}
 
+.player_top_right {
+  background-image: url(../../images/top_right.png);
+}
 
+.player_bottom_right {
+  background-image: url(../../images/bottom_right.png);
+}
 
 /* For future use: to make the card icons B/W, use:    filter: grayscale(100%); */
