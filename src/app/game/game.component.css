@@ -118,7 +118,6 @@
   background-color: rgba(200, 200, 50, 0.8);
 }
 
-/* For future use: to make the card cards B/W, use:    filter: grayscale(100%); */
 .market_site{
   height: 100%;
   width: 25%;
@@ -132,3 +131,14 @@
   float: left;
   background-color: rgba(50, 150, 250, 0.8);
 }
+
+/* Sub-Structure of Site_boards */
+.site_board{
+  height: 25%;
+  width: 100%;
+  float: left;
+  float: top;
+  border: 1px solid red;
+}
+
+/* For future use: to make the card cards B/W, use:    filter: grayscale(100%); */
