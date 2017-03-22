@@ -39,6 +39,7 @@ import { PurpleCardComponent } from './game/player/cards/purple-card/purple-card
 
 import {AlertModule, ModalModule} from 'ng2-bootstrap';
 import {TooltipModule} from "ng2-tooltip";
+import { DemoTempComponent } from './demo-temp/demo-temp.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import {TooltipModule} from "ng2-tooltip";
     BottomMiddleLeftComponent,
     BottomMiddleRightComponent,
     BottomRightRightComponent,
-    PurpleCardComponent
+    PurpleCardComponent,
+    DemoTempComponent
   ],
   imports: [
     BrowserModule,
