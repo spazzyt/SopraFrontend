@@ -55,14 +55,20 @@
   border: 2px solid transparent;
 }
 
-.card:hover{
+.card:hover .tooltiptext{
   /* Just for testing: turn cards B/W upon hover */
   filter: grayscale(100%);
+
+  /*Test for tooltip*/
+  visibility: visible;
 }
 
-.purple_card:hover{
+.purple_card:hover .tooltiptext{
   /* Just for testing: turn cards B/W upon hover */
   filter: grayscale(100%);
+
+  /*Test for tooltip*/
+  visibility: visible;
 }
 
 
@@ -99,3 +105,39 @@
 }
 
 
+/*
+ Test: tooltip
+ Tooltip text
+ */
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text*/
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  bottom: 100%;
+  /*
+  left: 50%;
+  margin-left: -60px; /*Use half of the width (120/2 = 60), to center the tooltip
+  */
+}
+
+/*Adding a bottom arrow to the tooltip
+.tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+*/
