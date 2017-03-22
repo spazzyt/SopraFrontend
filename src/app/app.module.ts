@@ -37,6 +37,9 @@ import { BottomMiddleRightComponent } from './game/player/cards/bottom-middle-ri
 import { BottomRightRightComponent } from './game/player/cards/bottom-right-right/bottom-right-right.component';
 import { PurpleCardComponent } from './game/player/cards/purple-card/purple-card.component';
 
+import {AlertModule, ModalModule, TooltipModule} from 'ng2-bootstrap';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +77,8 @@ import { PurpleCardComponent } from './game/player/cards/purple-card/purple-card
     FormsModule,
     HttpModule,
     JsonpModule,
-    routing
+    routing,
+    AlertModule.forRoot(), ModalModule.forRoot(), TooltipModule.forRoot()
   ],
   providers: [AuthenticationService,AuthGuardService,UserService],
   bootstrap: [AppComponent]
