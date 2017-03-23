@@ -7,7 +7,7 @@
 .container_game_screen {
   width: 1366px;
   height: 768px;
-  background-image: url(../../images/water_background.png);
+  background-image: url(../../assets/images/water_background.png);
   background-size:cover;
 }
 
@@ -25,7 +25,7 @@
   height: 100%;
   position: relative;
   float: left;
-  background-image: url(../../images/island_background.png);
+  background-image: url(../../assets/images/island_background.png);
   background-size:cover;
   background-position: center;
 }
@@ -34,7 +34,7 @@
   width: 100%;
   height: 20%;
   position: relative;
-  background-image: url(../../images/top_left.png);
+  background-image: url(../../assets/images/top_left.png);
   background-size: 100% auto;
   background-repeat: no-repeat;
   float: left;
@@ -45,7 +45,7 @@
   /* Uses a workaround at the moment to overflow background image into the top and bottom playerfields */
   width: 184px;
   height: 521px;
-  background-image: url(../../images/infobox.png);
+  background-image: url(../../assets/images/infobox.png);
   float: right;
   float: top;
   padding-top: 30px;
@@ -77,19 +77,19 @@
 }
 
 .player_top_left {
-  background-image: url(../../images/top_left.png);
+  background-image: url(../../assets/images/top_left.png);
 }
 
 .player_bottom_left {
-  background-image: url(../../images/bottom_left.png);
+  background-image: url(../../assets/images/bottom_left.png);
 }
 
 .player_top_right {
-  background-image: url(../../images/top_right.png);
+  background-image: url(../../assets/images/top_right.png);
 }
 
 .player_bottom_right {
-  background-image: url(../../images/bottom_right.png);
+  background-image: url(../../assets/images/bottom_right.png);
 }
 
 
@@ -97,7 +97,7 @@
 .game_header{
   height: 13%;
   width: 100%;
-  background-image: url("../../images/title.png");
+  background-image: url("../../assets/images/title.png");
   background-repeat: no-repeat;
   -webkit-background-size:;
   background-size: auto;
