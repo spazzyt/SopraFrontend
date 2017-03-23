@@ -40,7 +40,7 @@
   background-repeat: no-repeat;
   background-position: left;
   background-size: contain;
-  background-image: url("../../../../images/icons/statue.png");
+  background-image: url("../../../../assets/images/icons/statue.png");
   float: left;
 }
 
@@ -73,35 +73,35 @@
 
 
 .top_left_left{
-  background-image: url("../../../../images/icons/pyramiddec.png");
+  background-image: url("../../../../assets/images/icons/pyramiddec.png");
 }
 
 .top_middle_left{
-  background-image: url("../../../../images/icons/templedec.png");
+  background-image: url("../../../../assets/images/icons/templedec.png");
 }
 
 .top_middle_right{
-  background-image: url("../../../../images/icons/burialdec.png");
+  background-image: url("../../../../assets/images/icons/burialdec.png");
 }
 
 .top_right_right{
-  background-image: url("../../../../images/icons/obeliskdec.png");
+  background-image: url("../../../../assets/images/icons/obeliskdec.png");
 }
 
 .bottom_left_left{
-  background-image: url("../../../../images/icons/chisel.png");
+  background-image: url("../../../../assets/images/icons/chisel.png");
 }
 
 .bottom_middle_left{
-  background-image: url("../../../../images/icons/hammer.png");
+  background-image: url("../../../../assets/images/icons/hammer.png");
 }
 
 .bottom_middle_right{
-  background-image: url("../../../../images/icons/sail.png");
+  background-image: url("../../../../assets/images/icons/sail.png");
 }
 
 .bottom_right_right{
-  background-image: url("../../../../images/icons/lever.png");
+  background-image: url("../../../../assets/images/icons/lever.png");
 }
 
 

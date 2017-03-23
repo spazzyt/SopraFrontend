@@ -40,19 +40,19 @@ p{
 }
 
 .low_left{
-  background-image: url("../../../../images/score.png");
+  background-image: url("../../../../assets/images/score.png");
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .low_middle{
-  background-image: url("../../../../images/supply_sled.png");
+  background-image: url("../../../../assets/images/supply_sled.png");
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .low_right{
-  background-image: url("../../../../images/quarry.png");
+  background-image: url("../../../../assets/images/quarry.png");
   background-repeat: no-repeat;
   background-position: center;
 }
