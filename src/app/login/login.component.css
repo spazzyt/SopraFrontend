@@ -2,7 +2,7 @@
   width: 1366px;
   height: 768px;
   background-size:cover;
-  background-image: url(../../images/login_background.png);
+  background-image: url(../../assets/images/login_background.png);
 }
 
 .form-signin {

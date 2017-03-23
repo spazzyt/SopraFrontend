@@ -1,23 +1,89 @@
 <div class="cards_container">
   <div class="left_part">
     <div class="upper_quarter">
-      <div class="card top_left_left"></div>
-      <div class="card top_middle_left"></div>
-      <div class="card top_middle_right"></div>
-      <div class="card top_right_right"></div>
+      <div class="card top_left_left" [tooltip]="card_top_left_left" tooltipPlacement="right"></div><app-top-left-left></app-top-left-left>
+      <div class="card top_middle_left" [tooltip]="card_top_middle_left" tooltipPlacement="right"></div><app-top-middle-left></app-top-middle-left>
+      <div class="card top_middle_right" [tooltip]="card_top_middle_right" tooltipPlacement="right"></div><app-top-middle-right></app-top-middle-right>
+      <div class="card top_right_right" [tooltip]="card_top_right_right" tooltipPlacement="right"></div><app-top-right-right></app-top-right-right>
     </div>
 
     <div class="lower_quarter">
-      <div class="card bottom_left_left"></div>
-      <div class="card bottom_middle_left"></div>
-      <div class="card bottom_middle_right"></div>
-      <div class="card bottom_right_right"></div>
+      <div class="card bottom_left_left" [tooltip]="card_bottom_left_left" tooltipPlacement="right"></div><app-bottom-left-left></app-bottom-left-left>
+      <div class="card bottom_middle_left" [tooltip]="card_bottom_middle_left" tooltipPlacement="right"></div><app-bottom-middle-left></app-bottom-middle-left>
+      <div class="card bottom_middle_right" [tooltip]="card_bottom_middle_right" tooltipPlacement="right"></div><app-bottom-middle-right></app-bottom-middle-right>
+      <div class="card bottom_right_right" [tooltip]="card_bottom_right_right" tooltipPlacement="right"></div><app-bottom-right-right></app-bottom-right-right>
     </div>
   </div>
 
   <div class="right_part">
     <div class="mini_spacing"></div>
-    <div class="purple_card"></div>
+    <div class="purple_card" [tooltip]="purple_card" tooltipPlacement="top"><span class="tooltiptext">hello</span></div><app-purple-card></app-purple-card>
     <div class="mini_spacing"></div>
   </div>
+</div>
+
+<!--tooltips cards top-->
+<div>
+  <tooltip-content #card_top_left_left>
+    <b>Very</b> <span style="color: #C21F">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+    <img src="../../../../assets/images/pharao.jpeg" width="100%" height="100%"/>
+  </tooltip-content>
+</div>
+<div>
+  <tooltip-content #card_top_middle_left>
+    <b>Very</b> <span style="color: #C21F">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+    <img src="../../../../assets/images/pharao.jpeg" width="100%" height="100%"/>
+  </tooltip-content>
+</div>
+<div>
+  <tooltip-content #card_top_middle_right>
+    <b>Very</b> <span style="color: #C21F">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+    <img src="../../../../assets/images/pharao.jpeg" width="100%" height="100%"/>
+  </tooltip-content>
+</div>
+<div>
+  <tooltip-content #card_top_right_right>
+    <b>Very</b> <span style="color: #C21F">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+    <img src="../../../../assets/images/pharao.jpeg" width="100%" height="100%"/>
+  </tooltip-content>
+</div>
+<!--tooltips cards bottom-->
+<div>
+  <tooltip-content #card_bottom_left_left>
+    <b>Very</b> <span style="color: #C21F">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+    <img src="../../../../assets/images/pharao.jpeg" width="100%" height="100%"/>
+  </tooltip-content>
+</div>
+<div>
+  <tooltip-content #card_bottom_middle_left>
+    <b>Very</b> <span style="color: #C21F">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+    <img src="../../../../assets/images/pharao.jpeg" width="100%" height="100%"/>
+  </tooltip-content>
+</div>
+<div>
+  <tooltip-content #card_bottom_middle_right>
+    <b>Very</b> <span style="color: #C21F">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+    <img src="../../../../assets/images/pharao.jpeg" width="100%" height="100%"/>
+  </tooltip-content>
+</div>
+<div>
+  <tooltip-content #card_bottom_right_right>
+    <b>Very</b> <span style="color: #C21F">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+    <img src="../../../../assets/images/pharao.jpeg" width="100%" height="100%"/>
+  </tooltip-content>
+</div>
+<div>
+  <tooltip-content #purple_card>
+    <b>Very</b> <span style="color: #C21F">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+    <img src="../../../../assets/images/pharao.jpeg" width="100%" height="100%"/>
+  </tooltip-content>
 </div>
