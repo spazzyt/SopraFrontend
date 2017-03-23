@@ -40,7 +40,7 @@
   background-repeat: no-repeat;
   background-position: left;
   background-size: contain;
-  background-image: url("../../../../images/icons/statue.png");
+  background-image: url("../../../../assets/images/icons/statue.png");
   float: left;
 }
 
@@ -55,45 +55,89 @@
   border: 2px solid transparent;
 }
 
-.card:hover{
+.card:hover .tooltiptext{
   /* Just for testing: turn cards B/W upon hover */
   filter: grayscale(100%);
+
+  /*Test for tooltip*/
+  visibility: visible;
 }
 
-.purple_card:hover{
+.purple_card:hover .tooltiptext{
   /* Just for testing: turn cards B/W upon hover */
   filter: grayscale(100%);
+
+  /*Test for tooltip*/
+  visibility: visible;
 }
 
 
 .top_left_left{
-  background-image: url("../../../../images/icons/pyramiddec.png");
+  background-image: url("../../../../assets/images/icons/pyramiddec.png");
 }
 
 .top_middle_left{
-  background-image: url("../../../../images/icons/templedec.png");
+  background-image: url("../../../../assets/images/icons/templedec.png");
 }
 
 .top_middle_right{
-  background-image: url("../../../../images/icons/burialdec.png");
+  background-image: url("../../../../assets/images/icons/burialdec.png");
 }
 
 .top_right_right{
-  background-image: url("../../../../images/icons/obeliskdec.png");
+  background-image: url("../../../../assets/images/icons/obeliskdec.png");
 }
 
 .bottom_left_left{
-  background-image: url("../../../../images/icons/chisel.png");
+  background-image: url("../../../../assets/images/icons/chisel.png");
 }
 
 .bottom_middle_left{
-  background-image: url("../../../../images/icons/hammer.png");
+  background-image: url("../../../../assets/images/icons/hammer.png");
 }
 
 .bottom_middle_right{
-  background-image: url("../../../../images/icons/sail.png");
+  background-image: url("../../../../assets/images/icons/sail.png");
 }
 
 .bottom_right_right{
-  background-image: url("../../../../images/icons/lever.png");
+  background-image: url("../../../../assets/images/icons/lever.png");
 }
+
+
+/*
+ Test: tooltip
+ Tooltip text
+ */
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text*/
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  bottom: 100%;
+  /*
+  left: 50%;
+  margin-left: -60px; /*Use half of the width (120/2 = 60), to center the tooltip
+  */
+}
+
+/*Adding a bottom arrow to the tooltip
+.tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+*/
