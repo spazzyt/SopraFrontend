@@ -12,7 +12,8 @@ import {DemoTempComponent} from "./demo-temp/demo-temp.component";
 const appRoutes: Routes = [
     { path: 'lobby', component: LobbyComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'game', component: GameComponent, canActivate: [AuthGuardService] },
+    { path: 'game', component: GameComponent},
+    //{ path: 'game', component: GameComponent, canActivate: [AuthGuardService] },
     { path: '', component: HomeComponent },
 
     //Demo screen
