@@ -21,6 +21,7 @@ export class LobbyComponent implements OnInit {
   users: User[]=[];
   games: Game[]=[];
   game: string;
+  joinedGame : number=-1;
 
   constructor(private router:Router, private userService: UserService, private gameService: GameService) { }
 
@@ -55,5 +56,26 @@ export class LobbyComponent implements OnInit {
       this.loadLobbyList();
     });
   }
+
+  leaveGame(gameId){
+    this.gameService.leaveGameService(gameId)
+      .subscribe(game => {
+        //this.game = game;
+        console.log("leave game ");
+        this.loadLobbyList();
+        this.joinedGame=-1;
+      });
+  }
+
+  joinGame(gameId){
+    this.gameService.joinGameService(gameId)
+      .subscribe(game => {
+        //this.game = game;
+        console.log("join game ");
+        this.loadLobbyList();
+        this.joinedGame=gameId;
+      });
+  }
+
 
 }
