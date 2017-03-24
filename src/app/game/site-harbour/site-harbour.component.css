@@ -1,0 +1,26 @@
+.ship_space{
+  height: 100%;
+  width: 50%;
+  float: left;
+  float: right;
+  border: 1px solid blue;
+}
+
+.dock_space{
+  height: 100%;
+  width: 50%;
+  float: left;
+  float: right;
+  border: 1px solid chocolate;
+}
+
+#arriving_harbours{float:left; width: 100%; height:100%; background-color: rgb(0,0,100);}
+#arriving_harbour_1{width: 100%; height:25%; background-color: rgb(0,30,100);}
+#arriving_harbour_2{width: 100%; height:25%; background-color: rgb(0,60,100);}
+#arriving_harbour_3{width: 100%; height:25%; background-color: rgb(0,90,100);}
+#arriving_harbour_4{width: 100%; height:25%; background-color: rgb(0,30,100);}
+
+#ship_1{position:relative; top:30%; left:30%; width:30%; height:30%}
+#ship_2{position:relative; top:30%; left:30%; width:30%; height:30%}
+#ship_3{position:relative; top:30%; left:30%; width:30%; height:30%}
+#ship_4{position:relative; top:30%; left:30%; width:30%; height:30%}
