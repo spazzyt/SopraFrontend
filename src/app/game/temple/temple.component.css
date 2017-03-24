@@ -1,20 +1,19 @@
 .third{
   width: 100%;
-  border: 1px solid black;
   float: left;
   float: top;
 }
 
 #top{
-  height: 42%;
+  height: 43%;
 }
 
 #main{
-  height: 30%;
+  height: 28%;
 }
 
 #bottom{
-  height: 28%;
+  height: 29%;
 }
 
 .section{
@@ -25,16 +24,26 @@
 }
 
 #spacing_left{
-  border: 1px solid red;
   width: 48%;
 }
 
 #temple{
-  border: 1px solid green;
   width: 43.5%;
 }
 
 #spacing_right{
-  border: 1px solid black;
   width: 8.5%;
+}
+
+/* Field Formatting */
+
+.field{
+  border: 1px solid red;
+  float: left;
+  float: top;
+}
+
+#field_1, #field_2, #field_3, #field_4, #field_5{
+  height: 100%;
+  width: 20%;
 }
