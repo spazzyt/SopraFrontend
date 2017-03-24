@@ -1,0 +1,74 @@
+.space{
+  width: 100%;
+  height: 13%;
+  border: 1px solid red;
+  float: top;
+  float: left;
+}
+
+#space1{
+  height: 1%;
+
+}
+
+#space2{
+  height: 2%;
+}
+
+#space3{
+  height: 4%;
+}
+
+.left_spacing{
+  width: 5%;
+  height: 100%;
+  border: 1px solid red;
+  float: left;
+  float: top;
+}
+
+#big_one{
+  width: 8%;
+}
+
+.card_picture{
+  width: 70%;
+  height: 100%;
+  border: 1px solid red;
+  float: left;
+  float: top;
+}
+
+#first{
+  width: 73%;
+}
+
+#last{
+  width: 73%;
+}
+
+.card{
+  width: 100%;
+  border: 1px solid red;
+  float: top;
+  float: left;
+}
+
+#card1{
+  height: 17%;
+  /*background-image: url("../../../assets/images/cards/entrance.png");*/
+  background-size:contain;
+  background-repeat: no-repeat;
+}
+
+#card2{
+  height: 16.5%;
+}
+#card3{
+  height: 17%;
+}
+
+#card4{
+  height: 16.5%;
+}
+
