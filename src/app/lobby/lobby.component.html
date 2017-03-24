@@ -11,7 +11,7 @@
 
         <div>
           <ul class="list-group">
-            <li class="list-group-item" *ngFor="let user of users">{{user.name}}</li>
+            <li class="list-group-item" *ngFor="let user of users">{{user.username}}</li>
           </ul>
         </div>
 
@@ -29,8 +29,8 @@
 
             <tbody>
             <tr class="game-row" *ngFor="let game of games">
-              <td>John</td>
-              <td>Doe</td>
+              <td>{{game.name}}</td>
+              <td>{{game.players.length}} / {{game.numPlayers}}</td>
               <td>
                   *ngIf="flag==1"
                   <button class="btn btn-sm btn-primary btn-block" type="submit" (click)="DeleteGame()">Delete</button>
@@ -46,6 +46,8 @@
       </div>
 
     </div>
+
+    <button class="btn btn-sm btn-primary btn-block" type="submit" (click)="navigateToGame()">To-Game-tmp</button>
 
 
     <div class="new_game_screen">
@@ -66,10 +68,11 @@
               <div class="modal-body">
                   Add a New Game
                   Number of Players:
-                  <button type="button"  (click)="twoPlayerGame()">2</button>
-                  <button type="button"  (click)="threePlayerGame()">3</button>
-                  <button type="button"  (click)="fourPlayerGame()">4</button>
+                  <button type="button"  (click)="addGame(2)">2</button>
+                  <button type="button"  (click)="addGame(3)">3</button>
+                  <button type="button"  (click)="addGame(4)">4</button>
                   Click <b>&times;</b> to close modal.
+
               </div>
             </div>
           </div>
