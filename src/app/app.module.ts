@@ -45,6 +45,7 @@ import { DragDropComponent } from './demo-temp/drag-drop/drag-drop.component';
 import { DragComponent } from './demo-temp/drag/drag.component';
 import { DropComponent } from './demo-temp/drop/drop.component';
 import { PlayingfieldComponent } from './demo-temp/playingfield/playingfield.component';
+import {GameService} from "./shared/services/game.service";
 
 @NgModule({
   declarations: [
@@ -91,7 +92,7 @@ import { PlayingfieldComponent } from './demo-temp/playingfield/playingfield.com
     routing,
     AlertModule.forRoot(), ModalModule.forRoot(), TooltipModule
   ],
-  providers: [AuthenticationService,AuthGuardService,UserService],
+  providers: [AuthenticationService,AuthGuardService,UserService,GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
