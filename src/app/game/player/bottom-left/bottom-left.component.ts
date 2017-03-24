@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ScoreComponent } from '../score/score.component'
-import { SupplySledComponent } from '../supply-sled/supply-sled.component';
-import { QuarryComponent } from '../quarry/quarry.component';
 
 @Component({
   selector: 'app-bottom-left',
