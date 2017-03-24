@@ -46,7 +46,6 @@ import { DragComponent } from './demo-temp/drag/drag.component';
 import { DropComponent } from './demo-temp/drop/drop.component';
 import { PlayingfieldComponent } from './demo-temp/playingfield/playingfield.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +81,7 @@ import { PlayingfieldComponent } from './demo-temp/playingfield/playingfield.com
     DragDropComponent,
     DragComponent,
     DropComponent,
-    PlayingfieldComponent
+    PlayingfieldComponent,
   ],
   imports: [
     BrowserModule,
