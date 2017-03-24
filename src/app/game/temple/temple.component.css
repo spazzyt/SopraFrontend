@@ -1,10 +1,40 @@
 .third{
   width: 100%;
-  height: 35%;
-  float: left;
   border: 1px solid black;
+  float: left;
+  float: top;
+}
+
+#top{
+  height: 42%;
 }
 
 #main{
   height: 30%;
+}
+
+#bottom{
+  height: 28%;
+}
+
+.section{
+  height: 100%;
+  width: 10%;
+  float: left;
+  float: top;
+}
+
+#spacing_left{
+  border: 1px solid red;
+  width: 48%;
+}
+
+#temple{
+  border: 1px solid green;
+  width: 43.5%;
+}
+
+#spacing_right{
+  border: 1px solid black;
+  width: 8.5%;
 }
