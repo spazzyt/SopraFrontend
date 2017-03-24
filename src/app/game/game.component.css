@@ -73,6 +73,8 @@
   background-color: rgba(50, 100, 250, 0.4);
   float: left;
   float: top;
+  padding-top: 12%;
+  padding-left: 5%;
   border: 1px solid crimson;
 }
 
