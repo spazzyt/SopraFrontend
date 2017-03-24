@@ -22,9 +22,27 @@
   background-color: rgba(100, 100, 0, 0.5);
   padding-top: 105%;
 }
-#arriving_harbour_2{width: 100%; height:25%;}
-#arriving_harbour_3{width: 100%; height:25%;}
-#arriving_harbour_4{width: 100%; height:25%;}
+#arriving_harbour_2 {
+  width: 200%;
+  height: 25%;
+  transform: scale(1, 1);
+  background-color: rgba(100, 100, 0, 0.5);
+  padding-top: 80%;
+}
+#arriving_harbour_3 {
+  width: 200%;
+  height: 25%;
+  transform: scale(1, 1);
+  background-color: rgba(100, 100, 0, 0.5);
+  padding-top: 75%;
+}
+#arriving_harbour_4 {
+  width: 200%;
+  height: 25%;
+  transform: scale(1, 1);
+  background-color: rgba(100, 100, 0, 0.5);
+  padding-top: 100%;
+}
 
 #ship_1{position:relative; top:30%; left:30%; width:30%; height:30%}
 #ship_2{position:relative; top:30%; left:30%; width:30%; height:30%}

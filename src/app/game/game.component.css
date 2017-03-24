@@ -67,22 +67,6 @@
   float: top;
 }
 
-.departing_harbour{
-  width: 100%;
-  height: 25%;
-  float: left;
-  float: top;
-  padding-top: 12%;
-  padding-left: 5%;
-  border: 1px solid crimson;
-}
-
-.site_harbour{
-  width: 100%;
-  height: 25%;
-  float: left;
-  float: top;
-}
 
 .player_top_left {
   background-image: url(../../assets/images/top_left.png);
@@ -115,7 +99,6 @@
 .game_board{
   height: 74%;
   width: 100%;
-  background-color: rgba(50, 50, 200, 0.4);
 }
 
 .game_footer{
