@@ -36,9 +36,51 @@
 }
 
 .level_3{
-  background-color: rgba(255, 50, 50, 0.4);
   height: 100%;
   width: 9%;
   float: top;
   float: left;
+}
+
+/* Spacing formatting for each level */
+
+#level3_space{
+  height: 46%;
+  width: 100%;
+  float: top;
+  float: left;
+}
+
+#level2_space{
+  height: 36%;
+  width: 100%;
+  float: top;
+  float: left;
+}
+
+#level2_fields{
+  width: 100%;
+  height: 51%;
+  float: left;
+  float: top;
+}
+
+/* All fields are formatted here */
+
+.field{
+  border: 1px solid red;
+  float: left;
+  float: top;
+}
+
+/* Level 2 fields */
+#field_10, #field_11, #field_12, #field_13{
+  height: 50%;
+  width: 50%;
+}
+
+/* Level 3 fields */
+#field_14{
+  height: 27%;
+  width: 100%;
 }
