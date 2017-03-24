@@ -1,3 +1,8 @@
-<p>
-  departing-harbour works!
-</p>
+<!--drag and drop zone-->
+<div id="departing_harbour_1"  (drop)="drop($event)" (dragover)="allowDrop($event)">
+
+  <!--draggable image zone-->
+  <img height="48px" id="ship_1" src="../../../assets/images/ship_4.png" draggable="true" (dragstart)="drag($event)" />
+
+</div>
+
