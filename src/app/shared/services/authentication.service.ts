@@ -7,11 +7,13 @@ import {Observable} from 'rxjs/Rx';
 export class AuthenticationService {
   public token: string;
   private apiUrl:string;
+  public mySelf: any;
 
   constructor(private http: Http, private jsonp: Jsonp) {
     // set token if saved in local storage
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
+    this.mySelf=currentUser;
 
     //TODO fill in your heroku-backend URL
     //this.apiUrl = 'https://sopra-fs17-group13.herokuapp.com';
@@ -31,7 +33,7 @@ export class AuthenticationService {
           // set token property
           this.token = user.token;
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({ username: user.username, token: this.token }));
+          localStorage.setItem('currentUser', JSON.stringify({ username: user.username, id: user.id, token: this.token }));
           // return true to indicate successful login
           return user;
         } else {
