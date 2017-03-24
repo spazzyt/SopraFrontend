@@ -1,0 +1,32 @@
+#space_left{
+  float: left;
+  float: top;
+  height: 100%;
+  width: 17.5%;
+}
+
+#space_top{
+  float: right;
+  float: top;
+  height: 15%;
+  width: 82.5%;
+}
+
+#fields{
+  float: left;
+  float: top;
+  height: 82%;
+  width: 77%;
+}
+
+
+/* Field Formatting */
+
+.field{
+  border: 1px solid red;
+  float: left;
+  float: top;
+  width: 11.111%;
+  height: 33.333%;
+}
+
