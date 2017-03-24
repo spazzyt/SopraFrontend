@@ -18,10 +18,11 @@ import {GameService} from "../shared/services/game.service";
 
 export class LobbyComponent implements OnInit {
 
-  users: User[]=[];
-  games: Game[]=[];
-  game: string;
-  joinedGame : number=-1;
+  private users: User[]=[];
+  private games: Game[]=[];
+  private game: string;
+  private joinedGame : number=-1;
+  private myself:any;
 
   constructor(private router:Router, private userService: UserService, private gameService: GameService) { }
 
@@ -34,6 +35,7 @@ export class LobbyComponent implements OnInit {
 
     // get games from secure api end point
     this.loadLobbyList();
+    this.myself = this.userService.meMyselfAndI();
   }
 
   loadLobbyList(){
@@ -76,6 +78,8 @@ export class LobbyComponent implements OnInit {
         this.joinedGame=gameId;
       });
   }
+
+
 
 
 }

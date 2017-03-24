@@ -26,5 +26,13 @@ export class UserService {
     return this.http.get(this.apiUrl +'/user', options)
       .map((response: Response) => response.json());
   }
+
+  meMyselfAndI(){
+    // add authorization header with token
+    let mySelf = this.authenticationService.mySelf;
+    console.log(mySelf);
+    return mySelf;
+  }
+
 }
 
