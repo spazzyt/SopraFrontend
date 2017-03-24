@@ -27,24 +27,37 @@
   float: top;
 }
 
-#big_one{
-  width: 8%;
-}
-
 .card_picture{
-  width: 70%;
+  width: 75%;
   height: 100%;
-  border: 1px solid red;
+  border: 3px solid black;
+  border-radius: 6px;
   float: left;
   float: top;
 }
 
 #first{
-  width: 73%;
+  background-image: url("../../../assets/images/cards/entrance.png");
+  background-size:contain;
+  background-repeat: no-repeat;
+}
+
+#second{
+  background-image: url("../../../assets/images/cards/entrance.png");
+  background-size:contain;
+  background-repeat: no-repeat;
+}
+
+#third{
+  background-image: url("../../../assets/images/cards/entrance.png");
+  background-size:contain;
+  background-repeat: no-repeat;
 }
 
 #last{
-  width: 73%;
+  background-image: url("../../../assets/images/cards/entrance.png");
+  background-size:contain;
+  background-repeat: no-repeat;
 }
 
 .card{
@@ -56,19 +69,16 @@
 
 #card1{
   height: 17%;
-  /*background-image: url("../../../assets/images/cards/entrance.png");*/
-  background-size:contain;
-  background-repeat: no-repeat;
 }
 
 #card2{
-  height: 16.5%;
+  height: 17%;
 }
 #card3{
   height: 17%;
 }
 
 #card4{
-  height: 16.5%;
+  height: 17%;
 }
 
