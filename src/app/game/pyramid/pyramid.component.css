@@ -1,0 +1,44 @@
+.space_left{
+  height: 100%;
+  width: 29%;
+  float: top;
+  float: left;
+}
+
+.space_1{
+  height: 100%;
+  width: 5%;
+  float: top;
+  float: left;
+}
+
+.space_2{
+  height: 100%;
+  width: 8%;
+  float: top;
+  float: left;
+}
+
+.level_1{
+  background-color: rgba(0, 150, 50, 0.4);
+  height: 100%;
+  width: 25.5%;
+  float: top;
+  float: left;
+}
+
+.level_2{
+  background-color: rgba(0, 150, 255, 0.4);
+  height: 100%;
+  width: 16.5%;
+  float: top;
+  float: left;
+}
+
+.level_3{
+  background-color: rgba(255, 50, 50, 0.4);
+  height: 100%;
+  width: 9%;
+  float: top;
+  float: left;
+}
