@@ -32,12 +32,10 @@
               <td>{{game.name}}</td>
               <td>{{game.players.length}} / {{game.numPlayers}}</td>
               <td>
-                  *ngIf="flag==1"
-                  <button class="btn btn-sm btn-primary btn-block" type="submit" (click)="DeleteGame()">Delete</button>
-                  *ngIf="flag==2"
-                  <button class="btn btn-sm btn-primary btn-block" type="submit" (click)="JoinGame()">Join</button>
-                  *ngIf="flag==3"
-                  <button class="btn btn-sm btn-primary btn-block" type="submit" (click)="JoinGame()">Leave</button>
+
+                  <button *ngIf="joinedGame!=game.id" class="btn btn-sm btn-primary btn-block" type="submit" (click)="joinGame(game.id)">Join</button>
+
+                  <button *ngIf="joinedGame==game.id" class="btn btn-sm btn-primary btn-block" type="submit" (click)="leaveGame(game.id)">Leave</button>
               </td>
             </tr>
             </tbody>

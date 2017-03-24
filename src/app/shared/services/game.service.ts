@@ -50,5 +50,49 @@ export class GameService {
   }
 
 
+  leaveGameService(gameId): Observable<Game> {
+  let bodyString = JSON.stringify({ }); // Stringify payload
+  let headers      = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.token});// ... Set content type to JSON
+  let params = new URLSearchParams();
+  params.set("token", this.authenticationService.token)
+  let options       = new RequestOptions({ headers: headers, search: params }); // Create a request option
+
+  return this.http.post(this.apiUrl+'/game/'+gameId+'/leave', bodyString, options) // ...using post request
+    .map((response: Response) => {
+      // login successful if there's a jwt token in the response
+      let game = response//.json() && response.json();
+      if (game) {
+        console.log(game)
+      } else {
+        // return false to indicate failed login
+        return null;
+      }
+    }) // ...and calling .json() on the response to return data
+    .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+}
+
+
+  joinGameService(gameId): Observable<Game> {
+  let bodyString = JSON.stringify({}); // Stringify payload
+  let headers      = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.token});// ... Set content type to JSON
+  let params = new URLSearchParams();
+  params.set("token", this.authenticationService.token)
+  let options       = new RequestOptions({ headers: headers, search: params }); // Create a request option
+
+  return this.http.post(this.apiUrl+'/game/'+gameId+'/join', bodyString, options) // ...using post request
+    .map((response: Response) => {
+      // login successful if there's a jwt token in the response
+      let game = response//.json() && response.json();
+      if (game) {
+        console.log(game)
+      } else {
+        // return false to indicate failed login
+        return null;
+      }
+    }) // ...and calling .json() on the response to return data
+    .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+}
+
+
 }
 
