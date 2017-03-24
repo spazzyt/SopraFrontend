@@ -54,19 +54,19 @@ p{
   float: top;
 }
 
-.low_left{
+.score{
   background-image: url("../../../../assets/images/score.png");
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.low_middle{
+.supply_sled{
   background-image: url("../../../../assets/images/supply_sled.png");
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.low_right{
+.quarry{
   background-image: url("../../../../assets/images/quarry.png");
   background-repeat: no-repeat;
   background-position: center;
