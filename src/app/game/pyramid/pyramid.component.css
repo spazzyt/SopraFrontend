@@ -20,7 +20,6 @@
 }
 
 .level_1{
-  background-color: rgba(0, 150, 50, 0.4);
   height: 100%;
   width: 25.5%;
   float: top;
@@ -28,7 +27,6 @@
 }
 
 .level_2{
-  background-color: rgba(0, 150, 255, 0.4);
   height: 100%;
   width: 16.5%;
   float: top;
@@ -58,19 +56,40 @@
   float: left;
 }
 
+#level1_space{
+  height: 22%;
+  width: 100%;
+  float: top;
+  float: left;
+}
+
+#level1_fields{
+  width: 100%;
+  height: 79%;
+  float: left;
+  float: top;
+}
+
 #level2_fields{
   width: 100%;
   height: 51%;
   float: left;
   float: top;
 }
-
 /* All fields are formatted here */
 
 .field{
   border: 1px solid red;
   float: left;
   float: top;
+}
+
+
+
+/* Level 1 fields */
+#field_1, #field_2, #field_3, #field_4, #field_5, #field_6, #field_7, #field_8, #field_9{
+  height: 33.333%;
+  width: 33.333%;
 }
 
 /* Level 2 fields */
