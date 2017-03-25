@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'Lithos Pro';
+  src: url("../../../fonts/LithosPro-Regular.otf") format("opentype");
+  font-style: normal;
+}
+
+.container_lobby_screen {
+  width: 1366px;
+  height: 768px;
+  background-image: url(../../../assets/images/background.png);
+  background-size:cover
+}
+
+.lobby_title{padding-top:10%}
+.user_list{padding-top:0%; padding-left:25%; padding-right:25%;}
+.game_table{padding-top:0%; padding-left:25%; padding-right:25%;}
+.new_game_screen{padding-top:0%; padding-left:25%; padding-right:25%;}
+
+.table_{
+  padding-top: 20%;
+  max-width: 400px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+
+.lobby_title{
+  font: 400 80px/1.2 'Lithos Pro', Helvetica, sans-serif;
+  color: #867558;
+  text-shadow: 3px 3px 2px #d4bd88;
+  text-align: center;
+}
+

@@ -6,10 +6,9 @@ export class User {
   public id:number;
   public token: string;
   public status: string;
-  public games: number;
-  public moves: number;
+  public games: number[]; //list of past games played; data type check with backend
+  public moves: number[]; //list allowable moves; data type check with backend
   public username:string;
-  public name:string;
 
   constructor(){
   }

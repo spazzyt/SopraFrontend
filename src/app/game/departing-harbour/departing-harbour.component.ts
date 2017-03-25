@@ -13,10 +13,10 @@ export class DepartingHarbourComponent {
 
   ngOnInit() {
     let round_card = this.gameService.getRoundCard();
-    this.ships_to_harbour(round_card);
+    this.shipsToHarbour(round_card);
   }
 
-  ships_to_harbour(round_card){
+  shipsToHarbour(round_card){
     document.getElementById("departing_harbour_1").appendChild(round_card[0]);
     document.getElementById("departing_harbour_2").appendChild(round_card[1]);
     document.getElementById("departing_harbour_3").appendChild(round_card[2]);
