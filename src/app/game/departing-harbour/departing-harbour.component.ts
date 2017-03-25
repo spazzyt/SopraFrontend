@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GameService} from "../../shared/services/game.service";
 
 @Component({
   selector: 'app-departing-harbour',
@@ -7,6 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class DepartingHarbourComponent {
+
+  constructor(private gameService: GameService) { }
+
+  ngOnInit() {
+    let round_card = this.gameService.getRoundCard();
+    this.ships_to_harbour(round_card);
+  }
+
+  ships_to_harbour(round_card){
+    document.getElementById("departing_harbour_1").appendChild(round_card[0]);
+    document.getElementById("departing_harbour_2").appendChild(round_card[1]);
+    document.getElementById("departing_harbour_3").appendChild(round_card[2]);
+    document.getElementById("departing_harbour_4").appendChild(round_card[3]);
+  }
+
 
   allowDrop(ev) {
     ev.preventDefault();
@@ -38,4 +54,6 @@ export class DepartingHarbourComponent {
     console.log("document.getElementById(ev.target.id).parentElement.id: " + isArrivingHarbour);
 
   }
+
+
 }
