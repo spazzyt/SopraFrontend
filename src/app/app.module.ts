@@ -46,6 +46,7 @@ import { DragComponent } from './demo-temp/drag/drag.component';
 import { DropComponent } from './demo-temp/drop/drop.component';
 import { PlayingfieldComponent } from './demo-temp/playingfield/playingfield.component';
 import {GameService} from "./shared/services/game.service";
+import { LobbyDemoComponent } from './demo-temp/lobby-demo/lobby-demo.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {GameService} from "./shared/services/game.service";
     DragComponent,
     DropComponent,
     PlayingfieldComponent,
+    LobbyDemoComponent,
   ],
   imports: [
     BrowserModule,
