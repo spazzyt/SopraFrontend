@@ -21,7 +21,7 @@ export class AuthenticationService {
   }
 
   login(user:User): Observable<User> {
-    let bodyString = JSON.stringify({ name: user.name, username: user.username }); // Stringify payload
+    let bodyString = JSON.stringify({ name: user.username, username: user.username }); // Stringify payload
     let headers      = new Headers({ 'Content-Type': 'application/json'});// ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
