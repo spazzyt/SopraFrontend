@@ -47,6 +47,7 @@ import { DropComponent } from './demo-temp/drop/drop.component';
 import { PlayingfieldComponent } from './demo-temp/playingfield/playingfield.component';
 import {GameService} from "./shared/services/game.service";
 import { LobbyDemoComponent } from './demo-temp/lobby-demo/lobby-demo.component';
+import { DynamicChangesComponent } from './demo-temp/dynamic-changes/dynamic-changes.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { LobbyDemoComponent } from './demo-temp/lobby-demo/lobby-demo.component'
     DropComponent,
     PlayingfieldComponent,
     LobbyDemoComponent,
+    DynamicChangesComponent,
   ],
   imports: [
     BrowserModule,
