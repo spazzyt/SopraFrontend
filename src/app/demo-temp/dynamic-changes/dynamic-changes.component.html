@@ -1,0 +1,47 @@
+<p>dynamic-changes works!</p>
+
+<div id="playing_field_">
+
+  <!--drag and drop zone-->
+  <div id="departing_harbours_">
+
+    <div id="departing_harbour_1_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+
+    <div id="departing_harbour_2_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+
+    <div id="departing_harbour_3_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+
+    <div id="departing_harbour_4_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+
+  </div>
+
+
+  <!--drag and drop zone-->
+  <div id="arriving_harbours_">
+
+    <div id="arriving_harbour_1_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+
+    <div id="arriving_harbour_2_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+
+    <div id="arriving_harbour_3_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+
+    <div id="arriving_harbour_4_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+
+    <div id="arriving_harbour_5_"  [style.background-color]="changeBGColourStyle()" (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+
+  </div>
+
+  <div>
+    <button (click)="toggleStyle()">Toggle style</button>
+    <button (click)="generateAppendShipNode('2', 'ship_2_', 'departing_harbour_2_')">Append ship_2_ to departing harbour_2_</button>
+    <button (click)="changeContent('ship_2_', '4', 'ship_4_', 'departing_harbour_2_')">Replace ship_2_ with ship_4_ in departing_harbour_2</button>
+    <button (click)="removeShipNode('ship_3_')">Remove ship_3_ wherever it is</button>
+    <button (click)="removeAllContentFromDepartingHarbours()">Remove all ships from departing harbors</button>
+    <button (click)="removeAllContentFromArrivingHarbours()">Remove all ships from arriving harbors</button>
+    <button (click)="appendShipsToDepartingHarbours()">Append ships to departing harbors</button>
+
+
+  </div>
+
+</div>
+
