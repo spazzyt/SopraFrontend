@@ -12,7 +12,7 @@
 }
 
 .lobby_title{padding-top:10%}
-.user_list{padding-top:0%; padding-left:25%; padding-right:25%;}
+.user_list{padding-top:0%; padding-left:25%; padding-right:25%; border: 1px solid red;}
 .game_table{padding-top:0%; padding-left:25%; padding-right:25%;}
 .new_game_screen{padding-top:0%; padding-left:25%; padding-right:25%;}
 
@@ -29,5 +29,114 @@
   color: #867558;
   text-shadow: 3px 3px 2px #d4bd88;
   text-align: center;
+}
+
+.container{
+  /*border: 1px solid green;*/
+  width: 60%;
+}
+
+.game_table{
+  /*border: 1px solid blue;*/
+  width: 100%;
+
+}
+
+.table{
+  /*border: 1px solid red;*/
+  width: 100%;
+}
+
+#list_of_games{
+  font: 200 40px/1.2 'Lithos Pro', Helvetica, sans-serif;
+  color: #867558;
+  text-shadow: 3px 3px 2px #d4bd88;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  text-align: center;
+}
+
+#new_game{
+  font: 200 40px/1.2 'Lithos Pro', Helvetica, sans-serif;
+  color: #867558;
+  text-shadow: 3px 3px 2px #d4bd88;
+  /*border: 1px solid black;*/
+  text-align: center;
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+
+.btn{
+  background-color: #edcd98;
+  border: 3px solid #d4bd88;
+  color: #867558;
+}
+
+#new_game_button{
+  text-align: center;
+  /*border: 1px solid black;*/
+}
+
+#ngButton{
+  display: inline-block;
+  width: 40%;
+  font-size: 150%;
+}
+
+.btn:hover{
+  box-shadow: 1px 1px 10px #d4bd88;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #867558;
+}
+
+.table td{
+  border: none !important;
+}
+
+/*
+=============================================================================
+=============================================================================
+Styling for the new game modal
+=============================================================================
+=============================================================================
+ */
+
+.modal-content{
+  background-color: #edcd98;
+  font-family: 'Lithos Pro';
+  color: black;
+}
+
+.modal-header{
+  border-bottom-color: #867558;
+}
+
+.number_button{
+  background-color: #867558;
+  -webkit-appearance:none;padding:0;cursor:pointer;border:0;
+  font-size:21px;font-weight:700;line-height:1;text-shadow:0 1px 0 #d4bd88;
+  border-radius: 5px;
+}
+
+.number_button:hover{
+  color:#000;text-decoration:none;cursor:pointer;filter:alpha(opacity=50);opacity:.5;
+}
+
+#btn2{
+  width: 20%;
+}
+
+#btn3{
+  width: 20%;
+}
+
+#btn4{
+  width: 20%;
+}
+
+.buttons{
+  /*border: 1px solid black;*/
 }
 
