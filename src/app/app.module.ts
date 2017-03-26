@@ -48,6 +48,10 @@ import { PlayingfieldComponent } from './demo-temp/playingfield/playingfield.com
 import {GameService} from "./shared/services/game.service";
 import { LobbyDemoComponent } from './demo-temp/lobby-demo/lobby-demo.component';
 import { DynamicChangesComponent } from './demo-temp/dynamic-changes/dynamic-changes.component';
+import { PopoverBootstrapComponent } from './demo-temp/popover-bootstrap/popover-bootstrap.component';
+
+import * as $ from 'jquery';//for jquery, e.g. popover
+
 
 @NgModule({
   declarations: [
@@ -87,6 +91,7 @@ import { DynamicChangesComponent } from './demo-temp/dynamic-changes/dynamic-cha
     PlayingfieldComponent,
     LobbyDemoComponent,
     DynamicChangesComponent,
+    PopoverBootstrapComponent,
   ],
   imports: [
     BrowserModule,
