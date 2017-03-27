@@ -19,15 +19,11 @@ export class TopLeftLeftComponent implements OnInit {
       placement: 'top',
       trigger : 'hover',
       toggle: 'popover',
-      title: 'Title Whatever you Need',
+      title: '',
       show: 5500,
       hide: 5500,
       html: true,
-      content : '<div><b>Very</b> <span style="color: #C21F">Dynamic</span> ' +
-      '<span style="color: #00b3ee">Reusable</span>' +
-      '<b><i><span style="color: #ffc520">Tooltip With</span></i></b> ' +
-      '<small>Html support</small>.' +
-      '<img src="../../../../../assets/images/cards/pyramiddec.png"/></div>'
+      content : '<img height="50%" width="100%" src="../../../../../assets/images/cards/pyramiddec.png"/>'
     });
 
 

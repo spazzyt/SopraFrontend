@@ -2,25 +2,26 @@
 
 /* Popover */
 .popover {
-  border: 2px dotted red;
+  border: 2px solid black;
 }
 /* Popover Header */
 .popover-title {
-  background-color: #73AD21;
-  color: #FFFFFF;
+  background-color: black;
+  color: black;
   font-size: 28px;
   text-align:center;
 }
 /* Popover Body */
 .popover-content {
-  background-color: coral;
-  color: #FFFFFF;
-  padding: 25px;
+  background-color: black;
+  color: black;
+  padding: 5px;
 }
-/* Popover Arrow */
+/* Popover Arrow
 .arrow {
-  border-right-color: red !important;
+  border-bottom-color: black !important;
   size:25px;
   height:50px;
   width:14px;
 }
+*/
