@@ -104,25 +104,35 @@ Styling for the new game modal
 =============================================================================
 =============================================================================
  */
-
 .modal-content{
   background-color: #edcd98;
   font-family: 'Lithos Pro';
   color: black;
+  width: 100%;
+  float: left;
+  float: top;
 }
 
 .modal-header{
   border-bottom-color: #867558;
 }
 
+#button_row{
+  margin-top: 3%;
+  margin-bottom: 3%;
+  margin-bottom: 6%;
+}
+
 .number_button{
   -webkit-appearance:none;
   padding:0;
+  width: 23%;
+  height: 200%;
+  margin-left: 10%;
   cursor: pointer;
   border:0;
   font-size:21px;
   font-weight:700;
-  line-height:1;
   text-shadow:0 1px 0 #d4bd88;
   border-radius: 5px;
   background-color: #edcd98;
@@ -159,36 +169,41 @@ Styling for the new game modal
 }
 
 
-.buttons{
-  /*border: 1px solid black;*/
+#buttons1{
+  left: 5px;
+}
+
+#buttons2{
+  left: 5px;
+  float: left;
 }
 
 .modal {
-  position: absolute;
-  top: 40%;
-  margin-left: -27%;
+  top: 25%;
+  height: 50%;
 }
 
 
 .modal-dialog {
-  width: 624px;
-  height: 400px;
+  width: 684px;
+  height: auto;
 }
 
 .modal-content {
-
 }
 
 .modal-header, h4, .close {
-  background-color: #5cb85c;
-  color:white !important;
+  background-color: #edcd98;
+  color:black !important;
   text-align: center;
   font-size: 30px;
 }
 
 
 .modal-body {
-
+  height: 100%;
+  text-align: center;
+  font-size: 18px;
 }
 
 
@@ -196,5 +211,23 @@ Styling for the new game modal
   background-color: #f9f9f9;
 }
 
+.newgame_btn{
+  margin-left: 6%;
+  width: 41%;
+  height: 60px;
+  font-size: 30px;
+  float: left;
+}
 
+#btn_row_lower{
+  margin_top: 70px;
+  padding: 0px;
+}
 
+.modal-title{
+  text-align: center;
+  margin-left: 37.5%;
+  width: auto;
+  float: top;
+  margin-top: 1%;
+}
