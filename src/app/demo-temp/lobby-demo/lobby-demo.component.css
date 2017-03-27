@@ -116,29 +116,85 @@ Styling for the new game modal
 }
 
 .number_button{
-  background-color: #867558;
-  -webkit-appearance:none;padding:0;cursor:pointer;border:0;
-  font-size:21px;font-weight:700;line-height:1;text-shadow:0 1px 0 #d4bd88;
+  -webkit-appearance:none;
+  padding:0;
+  cursor: pointer;
+  border:0;
+  font-size:21px;
+  font-weight:700;
+  line-height:1;
+  text-shadow:0 1px 0 #d4bd88;
   border-radius: 5px;
+  background-color: #edcd98;
+  border: 3px solid #d4bd88;
+  color: #867558;
 }
 
 .number_button:hover{
-  color:#000;text-decoration:none;cursor:pointer;filter:alpha(opacity=50);opacity:.5;
+  color:#000;
+  text-decoration: none;
+  cursor: pointer;
+  filter:alpha(opacity=50);
+  opacity:.5;
+
+}
+
+.number_button:focus{
+  background-color: #867558;
+  color: #edcd98;
 }
 
 #btn2{
   width: 20%;
 }
 
+
 #btn3{
   width: 20%;
 }
+
 
 #btn4{
   width: 20%;
 }
 
+
 .buttons{
   /*border: 1px solid black;*/
 }
+
+.modal {
+  position: absolute;
+  top: 40%;
+  margin-left: -27%;
+}
+
+
+.modal-dialog {
+  width: 624px;
+  height: 400px;
+}
+
+.modal-content {
+
+}
+
+.modal-header, h4, .close {
+  background-color: #5cb85c;
+  color:white !important;
+  text-align: center;
+  font-size: 30px;
+}
+
+
+.modal-body {
+
+}
+
+
+.modal-footer {
+  background-color: #f9f9f9;
+}
+
+
 
