@@ -38,10 +38,9 @@ export class DepartingHarbourComponent {
       departingHarbourNode.appendChild(this);
 
       shipImgNode.style.position="relative";
-      shipImgNode.style.height="30%";
-      shipImgNode.style.width="30%";
-      shipImgNode.style.top="30%";
-      shipImgNode.style.left="30%";
+      shipImgNode.style.height="50%";
+      shipImgNode.style.top="25%";
+      shipImgNode.style.left="10%";
 
       function drag(ev) {
 
