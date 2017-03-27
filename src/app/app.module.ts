@@ -51,7 +51,8 @@ import { DynamicChangesComponent } from './demo-temp/dynamic-changes/dynamic-cha
 import { PopoverBootstrapComponent } from './demo-temp/popover-bootstrap/popover-bootstrap.component';
 
 import * as $ from 'jquery';
-import { ModalsComponent } from './demo-temp/modals/modals.component';//for jquery, e.g. popover
+import { ModalsComponent } from './demo-temp/modals/modals.component';
+import { MarketHarborComponent } from './game/market-harbor/market-harbor.component';//for jquery, e.g. popover
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { ModalsComponent } from './demo-temp/modals/modals.component';//for jque
     DynamicChangesComponent,
     PopoverBootstrapComponent,
     ModalsComponent,
+    MarketHarborComponent,
   ],
   imports: [
     BrowserModule,
