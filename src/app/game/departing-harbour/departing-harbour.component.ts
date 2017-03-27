@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GameService} from "../../shared/services/game.service";
+import {Ship} from "../../shared/models/ship";
 
 @Component({
   selector: 'app-departing-harbour',
@@ -13,13 +14,34 @@ export class DepartingHarbourComponent {
   addContentFlag: boolean=false;
   removeContentFlag: boolean=false;
   changeContentFlag: boolean=false;
+  ships:Ship[] = [];
 
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService) {
+
+  }
 
   ngOnInit() {
+    let ship1 = new Ship(1);
+    ship1.size = 1;
+    let ship2 = new Ship(2);
+    ship2.size = 2;
 
-    this.appendShipsToDepartingHarbours()
+    let ship3 = new Ship(3);
+    ship3.size = 3;
+
+    let ship4 = new Ship(4);
+    ship4.size = 4;
+
+
+    this.ships.push(ship1);
+    this.ships.push(ship2);
+    this.ships.push(ship3);
+    this.ships.push(ship4);
+
+
+
+    /*this.appendShipsToDepartingHarbours()*/
   }
   generateAppendShipNode(shipSize, shipImgNodeId, departingHarbourNodeId) {
 
