@@ -41,6 +41,7 @@ export class LobbyDemoComponent implements OnInit {
   private game: string;
   private joinedGame : number=-1;
   private myself:any=MYSELF;
+  private nrOfGames: number = -1;
 
   constructor(private router:Router) { }
 
@@ -48,6 +49,36 @@ export class LobbyDemoComponent implements OnInit {
 
   }
 
+  addGames() {
+    if(this.nrOfGames == 2){
+      this.addGame(2);
+    }
+    else if(this.nrOfGames == 3){
+      this.addGame(3);
+    }
+    else{
+      this.addGame(4);
+    }
+  }
+
+  addGame(nrOfPlayers){
+
+  }
+
+  changeGameVariable_2(){
+    this.nrOfGames = 2;
+    console.log("Glückwunsch, Sie haben erfolgreich 2 Spieler ausgewählt!");
+  }
+
+  changeGameVariable_3(){
+    this.nrOfGames = 3;
+    console.log("Glückwunsch, Sie haben erfolgreich 3 Spieler ausgewählt!");
+  }
+
+  changeGameVariable_4(){
+    this.nrOfGames = 4;
+    console.log("Glückwunsch, Sie haben erfolgreich 4 Spieler ausgewählt!");
+  }
 
 
 }
