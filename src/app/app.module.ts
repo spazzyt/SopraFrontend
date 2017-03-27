@@ -50,7 +50,8 @@ import { LobbyDemoComponent } from './demo-temp/lobby-demo/lobby-demo.component'
 import { DynamicChangesComponent } from './demo-temp/dynamic-changes/dynamic-changes.component';
 import { PopoverBootstrapComponent } from './demo-temp/popover-bootstrap/popover-bootstrap.component';
 
-import * as $ from 'jquery';//for jquery, e.g. popover
+import * as $ from 'jquery';
+import { ModalsComponent } from './demo-temp/modals/modals.component';//for jquery, e.g. popover
 
 
 @NgModule({
@@ -92,6 +93,7 @@ import * as $ from 'jquery';//for jquery, e.g. popover
     LobbyDemoComponent,
     DynamicChangesComponent,
     PopoverBootstrapComponent,
+    ModalsComponent,
   ],
   imports: [
     BrowserModule,
