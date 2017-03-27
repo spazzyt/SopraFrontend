@@ -1,76 +1,23 @@
 <div class="cards_container">
   <div class="left_part">
     <div class="upper_quarter">
-      <div class="card top_left_left" [tooltip]="card_top_left_left" tooltipPlacement="top"></div><app-top-left-left></app-top-left-left>
-      <div class="card top_middle_left" [tooltip]="card_top_middle_left" tooltipPlacement="top"></div><app-top-middle-left></app-top-middle-left>
-      <div class="card top_middle_right" [tooltip]="card_top_middle_right" tooltipPlacement="top"></div><app-top-middle-right></app-top-middle-right>
-      <div class="card top_right_right" [tooltip]="card_top_right_right" tooltipPlacement="top"></div><app-top-right-right></app-top-right-right>
+      <div class="card top_left_left"></div><app-top-left-left></app-top-left-left>
+      <div class="card top_middle_left"></div><app-top-middle-left></app-top-middle-left>
+      <div class="card top_middle_right"></div><app-top-middle-right></app-top-middle-right>
+      <div class="card top_right_right"></div><app-top-right-right></app-top-right-right>
     </div>
 
     <div class="lower_quarter">
-      <div class="card bottom_left_left" [tooltip]="card_bottom_left_left" tooltipPlacement="top"></div><app-bottom-left-left></app-bottom-left-left>
-      <div class="card bottom_middle_left" [tooltip]="card_bottom_middle_left" tooltipPlacement="top"></div><app-bottom-middle-left></app-bottom-middle-left>
-      <div class="card bottom_middle_right" [tooltip]="card_bottom_middle_right" tooltipPlacement="top"></div><app-bottom-middle-right></app-bottom-middle-right>
-      <div class="card bottom_right_right" [tooltip]="card_bottom_right_right" tooltipPlacement="top"></div><app-bottom-right-right></app-bottom-right-right>
+      <div class="card bottom_left_left"></div><app-bottom-left-left></app-bottom-left-left>
+      <div class="card bottom_middle_left"></div><app-bottom-middle-left></app-bottom-middle-left>
+      <div class="card bottom_middle_right"></div><app-bottom-middle-right></app-bottom-middle-right>
+      <div class="card bottom_right_right"></div><app-bottom-right-right></app-bottom-right-right>
     </div>
   </div>
 
   <div class="right_part">
     <div class="mini_spacing"></div>
-    <div class="purple_card" [tooltip]="purple_card" tooltipPlacement="top"></div><app-purple-card></app-purple-card>
+    <div class="purple_card"><app-purple-card></app-purple-card></div>
     <div class="mini_spacing"></div>
   </div>
-</div>
-
-<!--tooltips cards top-->
-<div>
-  <tooltip-content #card_top_left_left placement="top">
-    <img src="../../../../assets/images/cards/pyramiddec.png" width="100%" height="100%"/>
-  </tooltip-content>
-</div>
-
-<div>
-  <tooltip-content #card_top_middle_left>
-    <img src="../../../../assets/images/cards/templedec.png" width="100%" height="100%"/>
-  </tooltip-content>
-</div>
-
-<div>
-  <tooltip-content #card_top_middle_right>
-    <img src="../../../../assets/images/cards/burialdec.png" width="100%" height="100%"/>
-  </tooltip-content>
-</div>
-
-<div>
-  <tooltip-content #card_top_right_right>
-    <img src="../../../../assets/images/cards/obeliskdec.png" width="100%" height="100%"/>
-  </tooltip-content>
-</div>
-
-
-<!--tooltips cards bottom-->
-<div>
-  <tooltip-content #card_bottom_left_left>
-    <img src="../../../../assets/images/cards/chisel.png" width="100%" height="100%"/>
-  </tooltip-content>
-</div>
-<div>
-  <tooltip-content #card_bottom_middle_left>
-    <img src="../../../../assets/images/cards/hammer.png" width="100%" height="100%"/>
-  </tooltip-content>
-</div>
-<div>
-  <tooltip-content #card_bottom_middle_right>
-    <img src="../../../../assets/images/cards/sail.png" width="100%" height="100%"/>
-  </tooltip-content>
-</div>
-<div>
-  <tooltip-content #card_bottom_right_right>
-    <img src="../../../../assets/images/cards/lever.png" width="100%" height="100%"/>
-  </tooltip-content>
-</div>
-<div>
-  <tooltip-content #purple_card>
-    <img src="../../../../assets/images/cards/statues.png" width="100%" height="100%"/>
-  </tooltip-content>
 </div>
