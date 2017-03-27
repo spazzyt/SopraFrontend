@@ -51,15 +51,19 @@
           </div>
           <div class="modal-body">
             Choose the number of players
-            <div class="buttons">
-              <button type="button" class="number_button" id="btn2" (click)="changeGameVariable_2()">2</button>
-              <button type="button" class="number_button" id="btn3" (click)="changeGameVariable_3()">3</button>
-              <button type="button" class="number_button" id="btn4" (click)="changeGameVariable_4()">4</button>
-            </div>
-            <div class="buttons">
-              <div id="backToLobby"><button type="button" class="btn btn-primary" id="ngButton1" (click)="staticModal.hide()">Back to Lobby</button></div>
-              <div id="CreateNewGame"><button type="button" class="btn btn-primary" id="ngButton2" (click)="addGames()">Create</button></div>
+            <div class="row" id="button_row">
+                <button type="button" class="number_button" id="btn2" (click)="changeGameVariable_2()">2</button>
 
+                <button type="button" class="number_button" id="btn3" (click)="changeGameVariable_3()">3</button>
+
+                <button type="button" class="number_button" id="btn4" (click)="changeGameVariable_4()">4</button>
+
+            </div>
+
+            <div class="row" id="btn_row_lower">
+                <div id="backToLobby"><button type="button" class="newgame_btn btn btn-primary" id="ngButton1" (click)="staticModal.hide()">Back to Lobby</button></div>
+
+                <div id="CreateNewGame"><button type="button" class="newgame_btn btn btn-primary" id="ngButton2" (click)="addGames()">Create</button></div>
 
             </div>
 
