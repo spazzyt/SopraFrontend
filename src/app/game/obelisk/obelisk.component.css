@@ -5,6 +5,13 @@
   float: left;
 }
 
+#points_assignment{
+  border: 1px solid black;
+  height: 35%;
+  width: 65%;
+  margin-left: -35%;
+}
+
 #fields{
   width: 59%;
   height: 100%;
