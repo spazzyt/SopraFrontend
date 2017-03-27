@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Popover */
+/* Popover*/
 .popover {
-  border: 2px solid black;
+  background: black;
 }
 /* Popover Header */
 .popover-title {
@@ -17,12 +17,14 @@
   color: black;
   padding: 5px;
 }
-/* Popover Arrow
+/* Popover Arrow */
 .arrow {
   border-bottom-color: black !important;
   size:25px;
   height:50px;
   width:14px;
 }
-*/
 
+.popover.top .arrow:after {
+  border-top-color: black;
+}
