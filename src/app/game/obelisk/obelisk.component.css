@@ -1,0 +1,63 @@
+#spacing_left{
+  width: 38%;
+  height: 100%;
+  float: top;
+  float: left;
+}
+
+#fields{
+  width: 59%;
+  height: 100%;
+  float: top;
+  float: left;
+}
+
+.field{
+  float: top;
+  float: left;
+  width: 100%;
+  height: 31%;
+  border: 1px solid red;
+}
+
+.field_bar{
+  width: 18%;
+  height: 100%;
+  float: left;
+  float: top;
+}
+
+.field_space{
+  width: 9.3%;
+  height: 100%;
+  float: left;
+  float: top;
+}
+
+#f1_space{
+  width: 100%;
+  height: 12%;
+  float: left;
+  float: top;
+}
+
+#f2_space{
+  width: 100%;
+  height: 21.8%;
+  float: left;
+  float: top;
+}
+
+#f3_space{
+  width: 100%;
+  height: 33.7%;
+  float: left;
+  float: top;
+}
+
+#f4_space{
+  width: 100%;
+  height: 47.5%;
+  float: left;
+  float: top;
+}
