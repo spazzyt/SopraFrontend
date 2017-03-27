@@ -8,6 +8,21 @@
   height: 43%;
 }
 
+.half{
+  float: left;
+  float: top;
+  width: 50%;
+  height: 100%;
+}
+
+#points_assignment{
+  height: 60%;
+  border: 1px solid black;
+  margin-top: 10%;
+  width: 90%;
+  margin-left: 20%;
+}
+
 #main{
   height: 28%;
 }

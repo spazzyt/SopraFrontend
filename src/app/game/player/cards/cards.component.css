@@ -110,7 +110,7 @@
  Tooltip text
  */
 
-.tooltiptext {
+.tooltip {
   visibility: hidden;
   width: 120px;
   background-color: black;
