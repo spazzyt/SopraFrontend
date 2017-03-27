@@ -14,8 +14,8 @@ export class TopLeftLeftComponent implements OnInit {
     //styles in styles.css at the end under popover, to style:
     //.popover .popover-title .popover-content .arrow
 
-
-    (<any>$('#test')).popover({
+    //hover from top doesn't work properly
+    (<any>$('#tll')).popover({
       placement: 'top',
       trigger : 'hover',
       toggle: 'popover',
@@ -28,7 +28,7 @@ export class TopLeftLeftComponent implements OnInit {
 
 
 
-    (<any>$('#test')).css('color','#ffc520');
+    //(<any>$('#card')).css('color','#ffc520'); change the color of a link
 
 
 
