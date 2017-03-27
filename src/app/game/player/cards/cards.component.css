@@ -71,40 +71,6 @@
   visibility: visible;
 }
 
-
-.top_left_left{
-  background-image: url("../../../../assets/images/icons/pyramiddec.png");
-}
-
-.top_middle_left{
-  background-image: url("../../../../assets/images/icons/templedec.png");
-}
-
-.top_middle_right{
-  background-image: url("../../../../assets/images/icons/burialdec.png");
-}
-
-.top_right_right{
-  background-image: url("../../../../assets/images/icons/obeliskdec.png");
-}
-
-.bottom_left_left{
-  background-image: url("../../../../assets/images/icons/chisel.png");
-}
-
-.bottom_middle_left{
-  background-image: url("../../../../assets/images/icons/hammer.png");
-}
-
-.bottom_middle_right{
-  background-image: url("../../../../assets/images/icons/sail.png");
-}
-
-.bottom_right_right{
-  background-image: url("../../../../assets/images/icons/lever.png");
-}
-
-
 /*
  Test: tooltip
  Tooltip text
