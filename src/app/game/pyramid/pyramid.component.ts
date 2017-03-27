@@ -22,7 +22,7 @@ export class PyramidComponent implements OnInit {
       show: 5500,
       hide: 5500,
       html: true,
-      content : '<img height="50%" width="100%" src="../../../../../assets/images/cards/pyramiddec.png"/>'
+      content : 'Assess points immediately when placing the stone'
     });
   }
 
