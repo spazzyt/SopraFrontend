@@ -5,8 +5,7 @@
   float: left;
 }
 
-#points_assignment{
-  border: 1px solid black;
+.points_assignment{
   height: 35%;
   width: 65%;
   margin-left: -35%;
