@@ -1,8 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+  font-family: 'Lithos Pro';
+  src: url("/fonts/LithosPro-Regular.otf") format("opentype");
+  font-style: normal;
+}
+
 /* Popover*/
 .popover {
   background: black;
+  max-width: 100%; /* Needed so the popovers can't be bigger than their containing divs */
 }
 /* Popover Header */
 .popover-title {
@@ -14,8 +21,10 @@
 /* Popover Body */
 .popover-content {
   background-color: black;
-  color: white;
+  color: #d4bd88;
   padding: 5px;
+  font: 400 14px "Lithos Pro", Helvetica, SansSerif;
+  text-align: center;
 }
 /* Popover Arrow */
 .arrow {

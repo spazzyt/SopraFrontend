@@ -1,12 +1,17 @@
 <!--drag and drop zone-->
 <div id="departing_harbours">
 
-  <div id="departing_harbour_1_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
 
+
+    <div *ngFor="let ship of ships; let i = index" id="departing_harbour_{{i+1}}_" (drop)="drop($event)" (dragover)="allowDrop($event)">
+      <img [src]="ship.imageUrl" draggable="true" (drag)="drag($event)"/>
+      <div *ngFor="let slots of ship.slots"></div>
+    </div>
+<!--
   <div id="departing_harbour_2_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
 
   <div id="departing_harbour_3_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
 
   <div id="departing_harbour_4_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
-
+-->
 </div>
