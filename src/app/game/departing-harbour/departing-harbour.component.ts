@@ -40,7 +40,7 @@ export class DepartingHarbourComponent {
       shipImgNode.style.position="relative";
       shipImgNode.style.height="50%";
       shipImgNode.style.top="25%";
-      shipImgNode.style.left="10%";
+      shipImgNode.style.left="0%";
 
       function drag(ev) {
 
