@@ -1,0 +1,179 @@
+.screen{
+  border: 1px solid blue;/*border: 1px solid blue;*/
+  width: 1366px;
+  height: 768px;
+}
+
+
+/*
+=============================================================================
+=============================================================================
+Styling for 1. table
+=============================================================================
+=============================================================================
+ */
+
+.container{
+  border: 1px solid green;/*border: 1px solid green;*/
+  /*width: 60%;*/
+  width: 500px;
+  height: 400px;
+  overflow-y: scroll;
+  /*overflow-y: scroll;*/
+  /*overflow-y: hidden*/
+}
+
+
+.table{
+  border: 1px solid red;/*border: 1px solid red;*/
+  font-family: 'Lithos Pro';
+  padding-top: 20%;
+  max-width: 400px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #bdab82;
+}
+
+
+.tbody{
+  border: 1px solid yellow;/*border: 1px solid yellow;*/
+  height: 300px;
+  overflow-y: scroll;
+}
+
+
+.table td{
+  border: none !important;
+  border: 1px solid yellowgreen;/*border: 1px solid yellowgreen;*/
+}
+
+.btn{
+  background-color: #edcd98;
+  border: 3px solid #d4bd88;
+  color: #867558;
+}
+
+.btn:hover{
+  box-shadow: 1px 1px 10px #d4bd88;
+}
+
+
+
+/*
+=============================================================================
+=============================================================================
+Styling for 2. table
+=============================================================================
+=============================================================================
+ */
+.table-fixed{
+  width: 100%;
+  background-color: #f3f3f3;
+}
+
+.table-fixed tbody{
+  height:200px;
+  width: 100%;
+  overflow-y:auto;
+}
+
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th{
+  display:block;
+}
+
+.table-fixed tbody td{
+  float:left;
+}
+
+.table-fixed thead tr th{
+  float:left;
+  background-color: #f39c12;
+  border-color:#e67e22;
+}
+
+
+
+
+/*
+=============================================================================
+=============================================================================
+Styling for 3. table
+=============================================================================
+=============================================================================
+ */
+
+.container_lobby_screen {
+  width: 1366px;
+  height: 768px;
+
+}
+
+.container{
+  border: 1px solid blue;/*border: 1px solid blue;*/
+  width: 40%;
+  margin:auto;
+}
+
+.table-hover{
+  border: 1px solid red;/*border: 1px solid red;*/
+  width: 100%;
+}
+
+.table-hover tbody{
+  border: 1px solid green;/*border: 1px solid green;*/
+  height:200px;
+  width: 100%;
+  overflow-y:auto;
+}
+
+#td1{
+  clear:left;
+  width:30%;
+}
+#td2{
+  width:30%;
+}
+#td3{
+  width:30%;
+}
+
+.table-hover thead, .table-hover tbody, .table-hover tr, .table-hover td, .table-hover th{
+  display:block;
+}
+
+.table-hover tbody td{
+  float:left;
+}
+
+.table-hover thead tr th{
+  float:left;
+  background-color: #f39c12;
+  border-color:#e67e22;
+}
+
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #bdab82;
+}
+
+.table td{
+  border: none !important;
+  border: 1px solid yellowgreen;/*border: 1px solid yellowgreen;*/
+}
+
+.btn{
+  background-color: #edcd98;
+  border: 3px solid #d4bd88;
+  color: #867558;
+}
+
+.btn:hover{
+  box-shadow: 1px 1px 10px #d4bd88;
+}
+
+
+

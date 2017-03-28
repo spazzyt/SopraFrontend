@@ -52,7 +52,8 @@ import { PopoverBootstrapComponent } from './demo-temp/popover-bootstrap/popover
 
 import * as $ from 'jquery';
 import { ModalsComponent } from './demo-temp/modals/modals.component';
-import { MarketHarborComponent } from './game/market-harbor/market-harbor.component';//for jquery, e.g. popover
+import { MarketHarborComponent } from './game/market-harbor/market-harbor.component';
+import { ScrollbarComponent } from './demo-temp/scrollbar/scrollbar.component';//for jquery, e.g. popover
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { MarketHarborComponent } from './game/market-harbor/market-harbor.compon
     PopoverBootstrapComponent,
     ModalsComponent,
     MarketHarborComponent,
+    ScrollbarComponent,
   ],
   imports: [
     BrowserModule,
