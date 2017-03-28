@@ -11,50 +11,136 @@
   background-size:cover;
 }
 
-.lobby_title{padding-top:10%}
-.user_list{font-family: 'Lithos Pro';padding-top:0%; padding-left:25%; padding-right:25%; border: 1px solid red;}
-.game_table{font-family: 'Lithos Pro';padding-top:0%; padding-left:25%; padding-right:25%;}
-.new_game_screen{padding-top:0%; padding-left:25%; padding-right:25%;}
-
-.table_{
-  font-family: 'Lithos Pro';
-  padding-top: 20%;
-  max-width: 400px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin: 0 auto;
-}
-
 .lobby_title{
   font: 400 80px/1.2 'Lithos Pro', Helvetica, sans-serif;
   color: #867558;
   text-shadow: 3px 3px 2px #d4bd88;
   text-align: center;
+  padding-top:10%
 }
 
-.container{
-  /*border: 1px solid green;*/
-  width: 60%;
+
+/*
+=============================================================================
+=============================================================================
+Styling for the user list
+=============================================================================
+=============================================================================
+ */
+
+.user_list{
+  font-family: 'Lithos Pro';
+  padding-top:0%;
+  padding-left:25%;
+  padding-right:25%;
+  border: 1px solid red;
 }
+
+
+/*
+=============================================================================
+=============================================================================
+Styling for the game table
+=============================================================================
+=============================================================================
+ */
 
 .game_table{
-  /*border: 1px solid blue;*/
-  width: 100%;
+  /*border: 1px solid orange;*/
+  font-family: 'Lithos Pro';
+  height:50%;
 
-}
-
-.table{
-  /*border: 1px solid red;*/
-  width: 100%;
 }
 
 #list_of_games{
   font: 200 40px/1.2 'Lithos Pro', Helvetica, sans-serif;
   color: #867558;
   text-shadow: 3px 3px 2px #d4bd88;
+  text-align: center;
   margin-top: 0%;
   margin-bottom: 0%;
   text-align: center;
+}
+
+.container{
+  /*border: 1px solid blue;*/
+  width: 35%;
+  margin:auto;
+}
+
+.table{
+  /*border: 1px solid yellow;*/
+  font-family: 'Lithos Pro';
+
+}
+
+.table-hover{
+  /*border: 1px solid red;*/
+  width: 100%;
+}
+
+.table-hover tbody{
+  /*border: 1px solid green;*/
+  height:290px;
+  width: 100%;
+  overflow-y:auto;
+}
+
+.table-hover tbody td{
+  float:left;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #bdab82;
+}
+
+.table td{
+  border: none !important;
+  /*border: 1px solid yellowgreen;*/
+}
+
+
+.table-hover thead, .table-hover tbody, .table-hover tr, .table-hover td, .table-hover th{
+  display:block;
+}
+
+#td1{
+  clear:left;
+  width:35%;
+  padding-top:5%;
+}
+#td2{
+  width:30%;
+  padding-top:5%;
+}
+#td3{
+  width:35%;
+}
+
+.btn{
+  background-color: #edcd98;
+  border: 3px solid #d4bd88;
+  color: #867558;
+  width: 55%;
+}
+
+.btn:hover{
+  box-shadow: 1px 1px 10px #d4bd88;
+}
+
+
+/*
+=============================================================================
+=============================================================================
+Styling for the new game modal
+=============================================================================
+=============================================================================
+ */
+
+.new_game_screen{
+  padding-top:0%;
+  padding-left:25%;
+  padding-right:25%;
 }
 
 #new_game{
@@ -65,12 +151,6 @@
   text-align: center;
   margin-top: 0%;
   margin-bottom: 0%;
-}
-
-.btn{
-  background-color: #edcd98;
-  border: 3px solid #d4bd88;
-  color: #867558;
 }
 
 #new_game_button{
@@ -85,25 +165,16 @@
   font-size: 150%;
 }
 
-.btn:hover{
-  box-shadow: 1px 1px 10px #d4bd88;
+.modal {
+  top: 25%;
+  height: 50%;
 }
 
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #bdab82;
+.modal-dialog {
+  width: 684px;
+  height: auto;
 }
 
-.table td{
-  border: none !important;
-}
-
-/*
-=============================================================================
-=============================================================================
-Styling for the new game modal
-=============================================================================
-=============================================================================
- */
 .modal-content{
   background-color: #edcd98;
   font-family: 'Lithos Pro';
@@ -112,9 +183,29 @@ Styling for the new game modal
   float: left;
   float: top;
 }
-
 .modal-header{
   border-bottom-color: #867558;
+}
+
+.modal-header, h4, .close {
+  background-color: #edcd98;
+  color:black !important;
+  text-align: center;
+  font-size: 30px;
+}
+
+.modal-title{
+  text-align: center;
+  margin-left: 37.5%;
+  width: auto;
+  float: top;
+  margin-top: 1%;
+}
+
+.modal-body {
+  height: 100%;
+  text-align: center;
+  font-size: 18px;
 }
 
 #button_row{
@@ -168,48 +259,16 @@ Styling for the new game modal
   width: 20%;
 }
 
-
-#buttons1{
-  left: 5px;
-}
-
-#buttons2{
-  left: 5px;
-  float: left;
-}
-
-.modal {
-  top: 25%;
-  height: 50%;
-}
-
-
-.modal-dialog {
-  width: 684px;
-  height: auto;
-}
-
-.modal-content {
-}
-
-.modal-header, h4, .close {
-  background-color: #edcd98;
-  color:black !important;
-  text-align: center;
-  font-size: 30px;
-}
-
-
-.modal-body {
-  height: 100%;
-  text-align: center;
-  font-size: 18px;
-}
-
-
 .modal-footer {
   background-color: #f9f9f9;
 }
+
+
+#btn_row_lower{
+  margin_top: 70px;
+  padding: 0px;
+}
+
 
 .newgame_btn{
   margin-left: 6%;
@@ -219,15 +278,14 @@ Styling for the new game modal
   float: left;
 }
 
-#btn_row_lower{
-  margin_top: 70px;
-  padding: 0px;
+/*
+#buttons1{
+  left: 5px;
 }
 
-.modal-title{
-  text-align: center;
-  margin-left: 37.5%;
-  width: auto;
-  float: top;
-  margin-top: 1%;
+#buttons2{
+  left: 5px;
+  float: left;
 }
+*/
+

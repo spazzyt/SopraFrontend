@@ -13,15 +13,17 @@
 
       <table class="table table-hover">
 
-        <tbody>
+        <tbody class="tbody">
         <tr class="game-row" *ngFor="let game of games">
-          <td>{{game.name}}</td>
-          <td>{{game.players.length}} / {{game.numPlayers}}</td>
-          <td>
+          <td id="td1">{{game.name}}</td>
+          <td id="td2">{{game.players.length}} / {{game.numPlayers}}</td>
+          <td id="td3">
 
-            <button *ngIf="joinedGame!=game.id" class="btn btn-sm btn-primary btn-block" type="submit" (click)="joinGame(game.id)">Join</button>
+            <button *ngIf="joinedGame!=game.id" class="btn btn-sm btn-primary btn-block"
+                    type="submit" (click)="joinGame(game.id)">Join</button>
 
-            <button *ngIf="joinedGame==game.id" class="btn btn-sm btn-primary btn-block" type="submit" (click)="leaveGame(game.id)">Leave</button>
+            <button *ngIf="joinedGame==game.id" class="btn btn-sm btn-primary btn-block"
+                    type="submit" (click)="leaveGame(game.id)">Leave</button>
           </td>
         </tr>
         </tbody>
@@ -35,45 +37,49 @@
 
 
   <div class="new_game_screen">
+
     <h1 id="new_game">Add a New Game</h1>
 
-    <div id="new_game_button"><button type="button" class="btn btn-primary" id="ngButton" (click)="staticModal.show()">New Game</button></div>
+    <div id="new_game_button">
+      <button type="button" class="btn btn-primary" id="ngButton" (click)="staticModal.show()">New Game</button>
+    </div>
+  </div>
 
-    <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
-         tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title pull-left">New Game</h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Choose the number of players
-            <div class="row" id="button_row">
-                <button type="button" class="number_button" id="btn2" (click)="changeGameVariable_2()">2</button>
+  <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+       tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">New Game</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Choose the number of players
+          <div class="row" id="button_row">
+              <button type="button" class="number_button" id="btn2" (click)="changeGameVariable_2()">2</button>
 
-                <button type="button" class="number_button" id="btn3" (click)="changeGameVariable_3()">3</button>
+              <button type="button" class="number_button" id="btn3" (click)="changeGameVariable_3()">3</button>
 
-                <button type="button" class="number_button" id="btn4" (click)="changeGameVariable_4()">4</button>
-
-            </div>
-
-            <div class="row" id="btn_row_lower">
-                <div id="backToLobby"><button type="button" class="newgame_btn btn btn-primary" id="ngButton1" (click)="staticModal.hide()">Back to Lobby</button></div>
-
-                <div id="CreateNewGame"><button type="button" class="newgame_btn btn btn-primary" id="ngButton2" (click)="addGames()">Create</button></div>
-
-            </div>
+              <button type="button" class="number_button" id="btn4" (click)="changeGameVariable_4()">4</button>
 
           </div>
+
+          <div class="row" id="btn_row_lower">
+              <div id="backToLobby"><button type="button" class="newgame_btn btn btn-primary"
+                                            id="ngButton1" (click)="staticModal.hide()">Back to Lobby</button></div>
+
+              <div id="CreateNewGame"><button type="button" class="newgame_btn btn btn-primary"
+                                              id="ngButton2" (click)="addGames()">Create</button></div>
+
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-
-
 </div>
+
 
 
