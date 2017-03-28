@@ -23,6 +23,7 @@ export class LobbyComponent implements OnInit {
   private game: string;
   private joinedGame : number=-1;
   private myself:any;
+  private nrOfGames: number = -1;
 
   constructor(private router:Router, private userService: UserService, private gameService: GameService) { }
 
@@ -45,10 +46,6 @@ export class LobbyComponent implements OnInit {
       });
   }
 
-  navigateToGame(){
-  this.router.navigate(['/game']);
-  }
-
   // get games from secure api end point
   addGame(numPlayers){
   this.gameService.addGameService(numPlayers)
@@ -59,6 +56,7 @@ export class LobbyComponent implements OnInit {
     });
   }
 
+  // leave a game in game table
   leaveGame(gameId){
     this.gameService.leaveGameService(gameId)
       .subscribe(game => {
@@ -69,6 +67,7 @@ export class LobbyComponent implements OnInit {
       });
   }
 
+  //join a game in game table
   joinGame(gameId){
     this.gameService.joinGameService(gameId)
       .subscribe(game => {
@@ -78,6 +77,48 @@ export class LobbyComponent implements OnInit {
         this.joinedGame=gameId;
       });
   }
+
+  navigateToGame(){
+    this.router.navigate(['/game']);
+  }
+
+  Logout(){
+    //tell backend about it
+    //....
+    //and navigate to home screen
+    this.router.navigate(['']);
+
+
+  }
+
+  // helper functions from modal screen (can be done more direct with ng)
+  addGames() {
+    if(this.nrOfGames == 2){
+      this.addGame(2);
+    }
+    else if(this.nrOfGames == 3){
+      this.addGame(3);
+    }
+    else{
+      this.addGame(4);
+    }
+  }
+
+  changeGameVariable_2(){
+    this.nrOfGames = 2;
+    console.log("Glückwunsch, Sie haben erfolgreich 2 Spieler ausgewählt!");
+  }
+
+  changeGameVariable_3(){
+    this.nrOfGames = 3;
+    console.log("Glückwunsch, Sie haben erfolgreich 3 Spieler ausgewählt!");
+  }
+
+  changeGameVariable_4(){
+    this.nrOfGames = 4;
+    console.log("Glückwunsch, Sie haben erfolgreich 4 Spieler ausgewählt!");
+  }
+
 
 
 

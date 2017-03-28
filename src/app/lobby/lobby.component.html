@@ -1,81 +1,124 @@
 <div class="container_lobby_screen">
 
-    <p class="lobby_title">Lobby</p>
+  <div class="column_left">
 
+    <!-- User List for debugging purposes -->
+    <h3>For debugging purposes</h3>
     <p>Howdy {{myself.username}} your user id is {{myself.id}}</p>
 
     <div class="user_list">
-      <div class="container">
-
-        <h2>List of Players</h2>
-
-        <div>
-          <ul class="list-group">
-            <li class="list-group-item" *ngFor="let user of users">{{user.username}}</li>
-          </ul>
-        </div>
-
+      <h2>List of Players</h2>
+      <div>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let user of users">{{user.username}}</li>
+        </ul>
       </div>
     </div>
+
+    <h3>Navigate to Game</h3>
+    <button class="btn btn-sm btn-primary btn-block"
+            type="submit" (click)="navigateToGame()">Game Screen</button>
+
+    <h3>Logout</h3>
+    <button class="btn btn-sm btn-primary btn-block"
+            type="submit" (click)="Logout()">Logout</button>
+  </div>
+
+  <div class="column_middle">
+
+    <p class="lobby_title">Lobby</p>
 
 
     <div class="game_table">
+      <!--<div id="greeting">Howdy {{myself.username}} your user id is {{myself.id}}</div>-->
 
       <div class="container">
 
-        <h2>List of Games</h2>
+        <h2 id="list_of_games">List of Games</h2>
 
-          <table class="table table-striped">
+        <table class="table table-hover">
 
-            <tbody>
-            <tr class="game-row" *ngFor="let game of games">
-              <td>{{game.name}}</td>
-              <td>{{game.players.length}} / {{game.numPlayers}}</td>
-              <td>
+          <tbody class="tbody">
+          <tr class="game-row" *ngFor="let game of games">
+            <td id="td1">{{game.name}}</td>
+            <td id="td2">{{game.players.length}} / {{game.numPlayers}}</td>
+            <td id="td3">
 
-                  <button *ngIf="joinedGame!=game.id" class="btn btn-sm btn-primary btn-block" type="submit" (click)="joinGame(game.id)">Join</button>
+              <button *ngIf="joinedGame!=game.id" class="btn btn-sm btn-primary btn-block"
+                      type="submit" (click)="joinGame(game.id)">Join</button>
 
-                  <button *ngIf="joinedGame==game.id" class="btn btn-sm btn-primary btn-block" type="submit" (click)="leaveGame(game.id)">Leave</button>
-              </td>
-            </tr>
-            </tbody>
+              <button *ngIf="joinedGame==game.id" class="btn btn-sm btn-primary btn-block"
+                      type="submit" (click)="leaveGame(game.id)">Leave</button>
+            </td>
+          </tr>
+          </tbody>
 
-          </table>
+        </table>
       </div>
 
     </div>
 
-    <button class="btn btn-sm btn-primary btn-block" type="submit" (click)="navigateToGame()">To-Game-tmp</button>
+    <!--<button class="btn btn-sm btn-primary btn-block" type="submit" (click)="navigateToGame()">To-Game-tmp</button>-->
 
 
     <div class="new_game_screen">
-        <h1>Add a New Game</h1>
 
-        <button type="button" class="btn btn-primary" (click)="staticModal.show()">New Game</button>
+      <h1 id="new_game">Add a New Game</h1>
 
-        <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
-             tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title pull-left">New Game</h4>
-                <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                  Add a New Game
-                  Number of Players:
-                  <button type="button"  (click)="addGame(2)">2</button>
-                  <button type="button"  (click)="addGame(3)">3</button>
-                  <button type="button"  (click)="addGame(4)">4</button>
-                  Click <b>&times;</b> to close modal.
+      <div id="new_game_button">
+        <button type="button" class="btn btn-primary" id="ngButton" (click)="staticModal.show()">New Game</button>
+      </div>
+    </div>
 
-              </div>
+    <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+         tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">New Game</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Choose the number of players
+            <div class="row" id="button_row">
+              <button type="button" class="number_button"
+                      id="btn2" (click)="changeGameVariable_2()">2</button>
+
+              <button type="button" class="number_button"
+                      id="btn3" (click)="changeGameVariable_3()">3</button>
+
+              <button type="button" class="number_button"
+                      id="btn4" (click)="changeGameVariable_4()">4</button>
+
             </div>
+
+            <div class="row" id="btn_row_lower">
+
+              <!--leave modal-->
+              <div id="backToLobby">
+                <button type="button" class="newgame_btn btn btn-primary"
+                        id="ngButton1" (click)="staticModal.hide()">Back to Lobby</button>
+              </div>
+
+              <!--add game and leave modal-->
+              <div id="CreateNewGame">
+                <button type="button" class="newgame_btn btn btn-primary"
+                        id="ngButton2" (click)="staticModal.hide()" (click)="addGames()">Create</button>
+              </div>
+
+            </div>
+
           </div>
         </div>
+      </div>
     </div>
+  </div>
+
+  <div class="column_right">
+
+  </div>
 
 
 </div>
