@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GameService} from "../../shared/services/game.service";
 import {Ship} from "../../shared/models/ship";
+import {RoundCard} from "../../shared/models/round-card";
 
 @Component({
   selector: 'app-departing-harbour',
@@ -10,11 +11,14 @@ import {Ship} from "../../shared/models/ship";
 
 export class DepartingHarbourComponent {
 
-  changeStyleFlag: boolean=false;
-  addContentFlag: boolean=false;
-  removeContentFlag: boolean=false;
-  changeContentFlag: boolean=false;
+  //ship objects
   ships:Ship[] = [];
+
+  //roundCard object
+  roundCard:RoundCard;
+
+  //jQuery
+  changeStyleFlag: boolean=false;
 
 
   constructor(private gameService: GameService) {
@@ -22,98 +26,60 @@ export class DepartingHarbourComponent {
   }
 
   ngOnInit() {
-    let ship1 = new Ship(1);
-    ship1.size = 1;
-    let ship2 = new Ship(2);
-    ship2.size = 2;
 
-    let ship3 = new Ship(3);
-    ship3.size = 3;
+    //get new round card from getNewRoundCardService (and backend)
+    this.getNewRoundCard();
 
-    let ship4 = new Ship(4);
-    ship4.size = 4;
+    //generate this.ships array with four ship objects
+    this.generateFourShips();
 
+  }
 
+  //New Round Card
+  getNewRoundCard(){
+
+    //Fake Round Card to be replaced by above service
+    let fourNewShips= new Array(4);
+    for (let i=0; i < 4; i++){
+      fourNewShips[i]=new Array(2)
+    }
+
+    fourNewShips[0][0]=1;
+    fourNewShips[0][1]=4;
+    fourNewShips[1][0]=2;
+    fourNewShips[1][1]=3;
+    fourNewShips[2][0]=3;
+    fourNewShips[2][1]=2;
+    fourNewShips[3][0]=4;
+    fourNewShips[3][1]=1;
+
+    //call getNewRoundCardService()
+    //this.roundCard = new RoundCard(fourNewShips);
+    console.log(fourNewShips[0]);
+  }
+
+  //New Ships
+  generateFourShips(){
+
+    //construct four ship objects with size
+    /*let ship1 = new Ship(this.roundCard.shipId_1, this.roundCard.shipSize_1);
+    let ship2 = new Ship(this.roundCard.shipId_2, this.roundCard.shipSize_1);
+    let ship3 = new Ship(this.roundCard.shipId_3, this.roundCard.shipSize_1);
+    let ship4 = new Ship(this.roundCard.shipId_4, this.roundCard.shipSize_1);*/
+
+    let ship1 = new Ship(1, 4);
+    let ship2 = new Ship(2, 3);
+    let ship3 = new Ship(3, 2);
+    let ship4 = new Ship(4, 1);
+
+    //fill ships array
     this.ships.push(ship1);
     this.ships.push(ship2);
     this.ships.push(ship3);
     this.ships.push(ship4);
-
-
-
-    /*this.appendShipsToDepartingHarbours()*/
-  }
-  generateAppendShipNode(shipSize, shipImgNodeId, departingHarbourNodeId) {
-
-    let departingHarbourNode = document.getElementById(departingHarbourNodeId);
-
-    let shipImgNode = document.createElement("img");
-    shipImgNode.id=shipImgNodeId;
-    //shipImgNode.src="../../assets/ship_"+shipSize+".png"
-    shipImgNode.src="../../../assets/images/ship_"+shipSize+".png"
-    shipImgNode.draggable = true;
-
-    shipImgNode.onload = function (ev) {
-
-      this.addEventListener('dragstart', function () {drag(event)}, false);
-
-      departingHarbourNode.appendChild(this);
-
-      shipImgNode.style.position="relative";
-      shipImgNode.style.height="50%";
-      shipImgNode.style.top="25%";
-      shipImgNode.style.left="0%";
-
-      function drag(ev) {
-
-        console.log("1.event: " + ev );
-        console.log("2.event.target.id: " + ev.target.id );
-
-        ev.dataTransfer.setData("text", ev.target.id);
-      }
-    }
   }
 
-  appendShipsToDepartingHarbours(){
-    this.generateAppendShipNode("1", "ship_1_", "departing_harbour_1_");
-    this.generateAppendShipNode("2", "ship_2_", "departing_harbour_2_");
-    this.generateAppendShipNode("3", "ship_3_", "departing_harbour_3_");
-    this.generateAppendShipNode("4", "ship_4_", "departing_harbour_4_");
-  }
-
-
-  removeShipNode(shipImgNodeId){
-    let shipNodetoBeRemoved = document.getElementById(shipImgNodeId);
-    shipNodetoBeRemoved.parentNode.removeChild(shipNodetoBeRemoved);
-  }
-
-  changeContent(oldShipImgNodeId, newShipSize, newShipImgNodeId, departingHarbourNodeId){
-    this.removeShipNode(oldShipImgNodeId);
-    this.generateAppendShipNode(newShipSize, newShipImgNodeId, departingHarbourNodeId)
-  }
-
-  removeAllContent(parentNodeId){
-    let node=document.getElementById(parentNodeId);
-    while (node.firstChild){
-      node.removeChild(node.firstChild);
-    }
-  }
-
-  removeAllContentFromDepartingHarbours(){
-    this.removeAllContent('departing_harbour_1_');
-    this.removeAllContent('departing_harbour_2_');
-    this.removeAllContent('departing_harbour_3_');
-    this.removeAllContent('departing_harbour_4_');
-  }
-
-  removeAllContentFromArrivingHarbours(){
-    this.removeAllContent('arriving_harbour_1_');
-    this.removeAllContent('arriving_harbour_2_');
-    this.removeAllContent('arriving_harbour_3_');
-    this.removeAllContent('arriving_harbour_4_');
-    this.removeAllContent('arriving_harbour_5_');
-  }
-
+  //change Style
   toggleStyle(){
     this.changeStyleFlag =! this.changeStyleFlag;
 
@@ -124,6 +90,15 @@ export class DepartingHarbourComponent {
     { return "red"; }
     else
     { return "blue"; }
+  }
+
+
+  //ng & Jquery drag & drop
+  drag(ev) {
+    console.log("1.event: " + ev );
+    console.log("2.event.target.id: " + ev.target.id );
+
+    ev.dataTransfer.setData("text", ev.target.id);
   }
 
 

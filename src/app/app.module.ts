@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {HttpModule, JsonpModule} from '@angular/http';
 
+
 import { AppComponent } from './app.component';
 import {AuthGuardService} from "./shared/services/auth-guard.service";
 import {UserService} from "./shared/services/user.service";
@@ -37,15 +38,15 @@ import { BottomMiddleRightComponent } from './game/player/cards/bottom-middle-ri
 import { BottomRightRightComponent } from './game/player/cards/bottom-right-right/bottom-right-right.component';
 import { PurpleCardComponent } from './game/player/cards/purple-card/purple-card.component';
 
-import {AlertModule, ModalModule} from 'ng2-bootstrap';
-import {TooltipModule} from "ng2-tooltip";
+import { AlertModule, ModalModule } from 'ng2-bootstrap';
+import { TooltipModule } from "ng2-tooltip";
 
 import { DemoTempComponent } from './demo-temp/demo-temp.component';
 import { DragDropComponent } from './demo-temp/drag-drop/drag-drop.component';
 import { DragComponent } from './demo-temp/drag/drag.component';
 import { DropComponent } from './demo-temp/drop/drop.component';
 import { PlayingfieldComponent } from './demo-temp/playingfield/playingfield.component';
-import {GameService} from "./shared/services/game.service";
+import { GameService } from "./shared/services/game.service";
 import { LobbyDemoComponent } from './demo-temp/lobby-demo/lobby-demo.component';
 import { DynamicChangesComponent } from './demo-temp/dynamic-changes/dynamic-changes.component';
 import { PopoverBootstrapComponent } from './demo-temp/popover-bootstrap/popover-bootstrap.component';
@@ -53,7 +54,10 @@ import { PopoverBootstrapComponent } from './demo-temp/popover-bootstrap/popover
 import * as $ from 'jquery';
 import { ModalsComponent } from './demo-temp/modals/modals.component';
 import { MarketHarborComponent } from './game/market-harbor/market-harbor.component';
-import { ScrollbarComponent } from './demo-temp/scrollbar/scrollbar.component';//for jquery, e.g. popover
+import { ScrollbarComponent } from './demo-temp/scrollbar/scrollbar.component';
+import { DragulaDemoComponent } from './demo-temp/dragula-demo/dragula-demo.component';
+
+import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
 
 
 @NgModule({
@@ -98,6 +102,7 @@ import { ScrollbarComponent } from './demo-temp/scrollbar/scrollbar.component';/
     ModalsComponent,
     MarketHarborComponent,
     ScrollbarComponent,
+    DragulaDemoComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,9 +110,10 @@ import { ScrollbarComponent } from './demo-temp/scrollbar/scrollbar.component';/
     HttpModule,
     JsonpModule,
     routing,
-    AlertModule.forRoot(), ModalModule.forRoot(), TooltipModule
+    AlertModule.forRoot(), ModalModule.forRoot(), TooltipModule,
+    DragulaModule
   ],
-  providers: [AuthenticationService,AuthGuardService,UserService,GameService],
+  providers: [AuthenticationService,AuthGuardService,UserService,GameService, DragulaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
