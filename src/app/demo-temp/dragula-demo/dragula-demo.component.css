@@ -36,7 +36,6 @@ Styling for all.
 }
 
 .drake {
-  margin-bottom: 5px;
   border: 1px solid black;
   background: #4b86aa;
   opacity: 50;
@@ -48,10 +47,10 @@ Styling for all.
 }
 
 .item {
-  margin-bottom: 5px;
   background: #54aa54;
   font: bold 32px/1 sans-serif;
   cursor: move;
+  padding-top:2%;
   width:50%;
   height:40px;
   margin:auto;
@@ -80,7 +79,6 @@ Styling for 10.
  */
 
 .departing_harbours>div {
-  margin-bottom: 5px;
   border: 1px solid black;
   background: #4b86aa;
   opacity: 50;
@@ -92,7 +90,6 @@ Styling for 10.
 }
 
 .arriving_harbours>div {
-  margin-bottom: 5px;
   border: 1px solid black;
   background: #73a0aa;
   opacity: 50;
@@ -104,21 +101,72 @@ Styling for 10.
 }
 
 .item_ship {
-  margin-bottom: 5px;
   border: 1px solid black;
   background: #54aa54;
-  font: bold 32px/1 sans-serif;
+  font: bold 20px/1 sans-serif;
   cursor: move;
-  width:50%;
+  width:80%;
   height: 50px;
+  vertical-align: middle;
   margin:auto;
 }
 .item_ship_doNotDrag {
   border: 1px solid black;
   background: #e42d20;
   cursor: default;
-  width:50%;
-  height: 50px;
+}
+
+/*
+=============================================================================
+=============================================================================
+Styling for 20.
+=============================================================================
+=============================================================================
+ */
+
+.supply_sleds>div {
+  border: 1px solid black;
+  background: #4b86aa;
+  opacity: 50;
+  font: bold 32px/1 sans-serif;
+  cursor: move;
+  width:90%;
+  height: 70px;
+  vertical-align: middle;
   margin:auto;
 }
 
+.item_stone {
+  border: 1px solid black;
+  background: #3e5caa;
+  font: bold 20px/1 sans-serif;
+  cursor: move;
+  width:30px;
+  height: 30px;
+  vertical-align: middle;
+  margin:auto;
+}
+
+.ship_slots {
+  border: 1px solid black;
+  background: #aa2959;
+  font: bold 8px/1 sans-serif;
+  cursor: move;
+  width:60%;
+  height: 45px;
+  vertical-align: middle;
+  margin:auto;
+  float:left;
+}
+
+.ship_slot {
+  border: 1px solid black;
+  background: #aa40a5;
+  font: bold 8px/1 sans-serif;
+  cursor: move;
+  width:40px;
+  height: 40px;
+  vertical-align: middle;
+  margin:auto;
+  float:left;
+}
