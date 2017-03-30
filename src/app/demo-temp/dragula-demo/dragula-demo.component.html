@@ -1,41 +1,281 @@
-<p>
-  dragula works!
-</p>
+<p>dragula works!</p>
 
-<div class='wrapper'>
-  <div class='container' *ngFor='let group of groups' [dragula]='"nested-bag"'>
-    <div *ngFor='let item of group.items' [innerHtml]='item.name'></div>
+<div class="row">
+  <h1>--1. Bags with ngFor and elements with ngFor</h1>
+  <div class="col-md-10">
+    <div class='wrapper'>
+      <div class='container' *ngFor='let group of groups' [dragula]='"nested-bag_1"'>
+        <div *ngFor='let item of group.items' [innerHtml]='item.name'></div>
+      </div>
+    </div>
   </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <h1>--2. With two bags with same name</h1>
+  <div class="col-md-10">
+    <div>
+      <div class='wrapper'>
+        <div class='container' [dragula]='"first-bag"'>
+          <div>You can move these elements between these two containers</div>
+          <div>Moving them anywhere else isn't quite possible</div>
+          <div>There's also the possibility of moving elements around in the same container, changing their position</div>
+        </div>
+        <div class='container' [dragula]='"first-bag"'>
+          <div>This is the default use case. You only need to specify the containers you want to use</div>
+          <div>More interactive use cases lie ahead</div>
+          <div>Make sure to check out the <a href='https://github.com/bevacqua/dragula#readme'>documentation on GitHub!</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <h1>--3. four divs two bags</h1>
+  <div class="col-md-10">
+    <div>
+      <div class='wrapper'>
+        <div class='container' [dragula]='"bag-1"'>
+          <div>You can move these elements between these two containers</div>
+        </div>
+        <div class='container' [dragula]='"bag-2"'>
+          <div>Moving them anywhere else isn't quite possible</div>
+        </div>
+
+        <div class='container' [dragula]='"bag-1"'>
+          <div>This is the default use case. You only need to specify the containers you want to use</div>
+        </div>
+        <div class='container' [dragula]='"bag-2"'>
+          <div>More interactive use cases lie ahead</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <h1>--4. invlidate drag on item 4</h1>
+  <div class="col-md-10">
+    <div class="container" [dragula]="'group_4'">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="container" [dragula]="'group_4'">
+        <div class="item">3</div>
+        <div class="doNotDrag item">4</div>
+        <div class="item">5</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <h1>--5. Debugger Example: Find a solution for:</h1>
+  <p>I want to display name group on the top and cancel the drag event on it.
+  How can I disable moving some element like if this group name on the top.</p>
+  <div class="col-md-10">
+    <div class='wrapper'>
+      <div class='container' *ngFor='let group of groups' [dragula]='"nested-bag_5"'>
+        <div class="center-block">Table Number : {{group.name}}</div>
+        <div *ngFor='let item of group.items' [innerHtml]='item.name'></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <h1>--6. Events</h1>
+  <div class="col-md-10">
+    <div class="row">
+      <div class="col-md-6 departing_harbours">
+        <h1>--departing harbours</h1>
+        <div class="row drake departing_harbour_1_" [dragula]="'harbours_bag'">
+          <div class="item_ship item_ship_1">ship1</div>
+        </div>
+        <div class="row drake departing_harbour_2_" [dragula]="'harbours_bag'">
+          <div class="item_ship item_ship_2">ship2</div>
+        </div>
+        <div class="row drake departing_harbour_3_" [dragula]="'harbours_bag'">
+          <div class="item_ship item_ship_doNotDrag">ship3</div>
+        </div>
+        <div class="row drake departing_harbour_4_" [dragula]="'harbours_bag'">
+          <div class="item_ship item_ship_4">ship4</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 arriving_harbours">
+        <h1>--arriving harbours</h1>
+        <div class="row drake arriving_harbour_1_" [dragula]="'harbours_bag'">
+
+        </div>
+        <div class="row drake arriving_harbour_2_" [dragula]="'harbours_bag'">
+
+        </div>
+        <div class="row drake arriving_harbour_3_" [dragula]="'harbours_bag'">
+
+        </div>
+        <div class="row drake arriving_harbour_4_" [dragula]="'harbours_bag'">
+
+        </div>
+        <div class="row drake arriving_harbour_5_" [dragula]="'harbours_bag'">
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <h1>--7. dragula Model</h1>
+  <p>f your ngFor is compiled from array, you may wish to have it synced.
+    For that purpose you need to provide model by setting the dragulaModel
+    attribute on the bag element.</p>
+  <p>The standard drop event is fired before the model is synced.
+    For that purpose you need to use the dropModel.
+    The same behavior exists in the remove event.
+    Therefore is the removeModel event. Further details are available under Events</p>
+  <div class="col-md-10">
+    <div class="col-md-10">
+      <div class='wrapper'>
+        <div class='container' *ngFor='let group of groups'
+             [dragula]='"nested-bag_7"' [dragulaModel]='items'>
+          <div *ngFor='let item of group.items' [innerHtml]='item.name'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <h1>--8. drake options</h1>
+  <p>If you need to configure the drake (there's only one drake per bag),
+    you can use the DragulaService.</p>
+  <!--<p>"dragulaService.setOptions('third-bag', &#123removeOnSpill: true&#125 );"</p>-->
+  <p>You can also set your options by binding an options object
+    to the dragulaOptions attribute.</p>
+  <div class="col-md-10">
+    <div class="drake" [dragula]='"bag-one"' [dragulaOptions]="option_8_1">
+      <div class="item">1</div>
+    </div>
+    <div class="drake" [dragula]='"bag-one"' [dragulaOptions]="option_8_2">
+      <div class="item">2</div>
+    </div>
+    <div class="drake" [dragula]='"bag-one"' [dragulaOptions]="option_8_3">
+      <div class="item">3</div>
+    </div>
+    <div class="drake" [dragula]='"bag-two"' [dragulaOptions]="option_8_4">
+      <div class="item">1</div>
+    </div>
+    <div class="drake" [dragula]='"bag-two"' [dragulaOptions]="option_8_5">
+      <div class="item">2</div>
+    </div>
+    <div class="drake" [dragula]='"bag-two"' [dragulaOptions]="option_8_5">
+      <div class="item">3</div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <h1>--9.</h1>
+  <div class="col-md-10">
+    <ul [dragula]='"foo-list_9"' class="list">
+      <li class="list ignore">a</li>
+      <li class="list ignore">b</li>
+      <li class="list" *ngFor="let item of getList()" [attr.data-id]="item.id">{{ item.name }}</li>
+    </ul>
+
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <h1>--10. </h1>
+  <div class="col-md-10">
+    <div class="row">
+      <div id="departing_harbours" class="col-md-6 departing_harbours">
+        <h1>--departing harbours</h1>
+        <div id="departing_harbour_1" class="row drake departing_harbour_1_" [dragula]="'harbours_bag'">
+          <div id="ship1" class="item_ship item_ship_1">ship1</div>
+        </div>
+        <div id="departing_harbour_2" class="row drake departing_harbour_2_" [dragula]="'harbours_bag'">
+          <div class="item_ship item_ship_2">ship2</div>
+        </div>
+        <div id="departing_harbour_3" class="row drake departing_harbour_3_" [dragula]="'harbours_bag'">
+          <div class="item_ship item_ship_doNotDrag">ship3</div>
+        </div>
+        <div id="departing_harbour_4" class="row drake departing_harbour_4_" [dragula]="'harbours_bag'">
+          <div class="item_ship item_ship_4">ship4</div>
+        </div>
+      </div>
+
+      <div id="arriving_harbours" class="col-md-6 arriving_harbours">
+        <h1>--arriving harbours</h1>
+        <div id="arriving_harbour_1" class="row drake arriving_harbour_1_ "
+             [dragula]="'harbours_bag'"></div> <!-- innerHTML no space, no new line allowed-->
+        <div id="arriving_harbour_2" class="row drake arriving_harbour_2_"
+             [dragula]="'harbours_bag'"></div> <!-- innerHTML no space, no new line allowed-->
+        <div id="arriving_harbour_3" class="row drake arriving_harbour_3_"
+             [dragula]="'harbours_bag'"></div> <!-- innerHTML no space, no new line allowed-->
+        <div id="arriving_harbour_4" class="row drake arriving_harbour_4_"
+             [dragula]="'harbours_bag'"></div> <!-- innerHTML no space, no new line allowed-->
+        <div id="arriving_harbour_5" class="row drake arriving_harbour_5_"
+             [dragula]="'harbours_bag'"></div>
+
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-md-2"></div>
 </div>
 
 
-<div>
-  <div class='wrapper'>
-    <div class='container' [dragula]='"first-bag"'>
-      <div>You can move these elements between these two containers</div>
-      <div>Moving them anywhere else isn't quite possible</div>
-      <div>There's also the possibility of moving elements around in the same container, changing their position</div>
+
+
+<div class="row">
+  <h1>--20. Game Demo</h1>
+  <div class="col-md-6 departing_harbours">
+    <h1>--departing harbours</h1>
+    <div class="row departing_harbour_1_" [dragula]="'departing_harbour_1'">
+      <div class="item_ship item_ship_1">ship1</div>
     </div>
-    <div class='container' [dragula]='"first-bag"'>
-      <div>This is the default use case. You only need to specify the containers you want to use</div>
-      <div>More interactive use cases lie ahead</div>
-      <div>Make sure to check out the <a href='https://github.com/bevacqua/dragula#readme'>documentation on GitHub!</a></div>
+    <div class="row departing_harbour_2_" [dragula]="'departing_harbour_2'">
+      <div class="item_ship item_ship_2">ship2</div>
+    </div>
+    <div class="row departing_harbour_3_" [dragula]="'departing_harbour_3'">
+      <div class="item_ship item_ship_doNotDrag">ship3</div>
+    </div>
+    <div class="row departing_harbour_4_" [dragula]="'departing_harbour_4'">
+      <div class="item_ship item_ship_4">ship4</div>
+    </div>
+  </div>
+
+  <div class="col-md-6 arriving_harbours">
+    <h1>--arriving harbours</h1>
+    <div class="row arriving_harbour_1_" [dragula]="'arriving_harbour_1'">
+
+    </div>
+    <div class="row arriving_harbour_2_" [dragula]="'arriving_harbour_2'">
+
+    </div>
+    <div class="row arriving_harbour_3_" [dragula]="'arriving_harbour_3'">
+
+    </div>
+    <div class="row arriving_harbour_4_" [dragula]="'arriving_harbour_4'">
+
+    </div>
+    <div class="row arriving_harbour_5_" [dragula]="'arriving_harbour_5'">
+
     </div>
   </div>
 </div>
-
-
-<h1>My First Angular 2 App</h1>
-<div>
-  <div class='wrapper'>
-    <div class='container' [dragula]='"first-bag"'>
-      <div>Drag/drop item 1</div>
-    </div>
-    <div class='container' [dragula]='"first-bag"'>
-      <div>Drag/drop item 2</div>
-    </div>
-  </div>
-</div>
-
-
-
