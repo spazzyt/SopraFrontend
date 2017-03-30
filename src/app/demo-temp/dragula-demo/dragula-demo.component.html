@@ -199,22 +199,42 @@
 </div>
 
 <div class="row">
-  <h1>--10. </h1>
+  <h1>--10. Game Demo </h1>
   <div class="col-md-10">
     <div class="row">
       <div id="departing_harbours" class="col-md-6 departing_harbours">
         <h1>--departing harbours</h1>
         <div id="departing_harbour_1" class="row drake departing_harbour_1_" [dragula]="'harbours_bag'">
-          <div id="ship1" class="item_ship item_ship_1">ship1</div>
+          <div id="ship1" class="item_ship item_ship_1">ship1
+            <div id="ship_1_slots" class="col-md-12 ship_slots">
+              <div id="ship_1_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+              <div id="ship_1_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+            </div>
+          </div>
         </div>
         <div id="departing_harbour_2" class="row drake departing_harbour_2_" [dragula]="'harbours_bag'">
-          <div class="item_ship item_ship_2">ship2</div>
+          <div class="item_ship item_ship_2">ship2
+            <div id="ship_2_slots" class="col-md-12 ship_slots">
+              <div id="ship_2_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+              <div id="ship_2_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+            </div>
+          </div>
         </div>
         <div id="departing_harbour_3" class="row drake departing_harbour_3_" [dragula]="'harbours_bag'">
-          <div class="item_ship item_ship_doNotDrag">ship3</div>
+          <div class="item_ship">ship3
+            <div id="ship_3_slots" class="col-md-12 ship_slots">
+              <div id="ship_3_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+              <div id="ship_3_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+            </div>
+          </div>
         </div>
         <div id="departing_harbour_4" class="row drake departing_harbour_4_" [dragula]="'harbours_bag'">
-          <div class="item_ship item_ship_4">ship4</div>
+          <div class="item_ship item_ship_4">ship4
+            <div id="ship_4_slots" class="col-md-12 ship_slots">
+              <div id="ship_4_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+              <div id="ship_4_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -230,52 +250,27 @@
              [dragula]="'harbours_bag'"></div> <!-- innerHTML no space, no new line allowed-->
         <div id="arriving_harbour_5" class="row drake arriving_harbour_5_"
              [dragula]="'harbours_bag'"></div>
-
       </div>
+
+      <div id="supply_sleds" class="col-md-6 supply_sled_">
+        <h1>--supply sleds</h1>
+        <div id="supply_sled_1" class="row drake you-may-copy-us" [dragula]="'stone_slots_bag'">
+          <div id="stones_1" class="item_stone you-may-copy-us">stone</div>
+        </div>
+        <div id="supply_sled_2" class="row drake" [dragula]="'stone_slots_bag'">
+          <div id="stones_2" class="item_stone you-may-copy-us">stone</div>
+        </div>
+        <div id="supply_sled_3" class="row drake" [dragula]="'stone_slots_bag'">
+          <div id="stones_3" class="item_stone you-may-copy-us">stone</div>
+        </div>
+        <div id="supply_sled_4" class="row drake" [dragula]="'stone_slots_bag'">
+          <div id="stones_4" class="item_stone you-may-copy-us">stone</div>
+        </div>
+      </div>
+
     </div>
 
 
   </div>
   <div class="col-md-2"></div>
-</div>
-
-
-
-
-<div class="row">
-  <h1>--20. Game Demo</h1>
-  <div class="col-md-6 departing_harbours">
-    <h1>--departing harbours</h1>
-    <div class="row departing_harbour_1_" [dragula]="'departing_harbour_1'">
-      <div class="item_ship item_ship_1">ship1</div>
-    </div>
-    <div class="row departing_harbour_2_" [dragula]="'departing_harbour_2'">
-      <div class="item_ship item_ship_2">ship2</div>
-    </div>
-    <div class="row departing_harbour_3_" [dragula]="'departing_harbour_3'">
-      <div class="item_ship item_ship_doNotDrag">ship3</div>
-    </div>
-    <div class="row departing_harbour_4_" [dragula]="'departing_harbour_4'">
-      <div class="item_ship item_ship_4">ship4</div>
-    </div>
-  </div>
-
-  <div class="col-md-6 arriving_harbours">
-    <h1>--arriving harbours</h1>
-    <div class="row arriving_harbour_1_" [dragula]="'arriving_harbour_1'">
-
-    </div>
-    <div class="row arriving_harbour_2_" [dragula]="'arriving_harbour_2'">
-
-    </div>
-    <div class="row arriving_harbour_3_" [dragula]="'arriving_harbour_3'">
-
-    </div>
-    <div class="row arriving_harbour_4_" [dragula]="'arriving_harbour_4'">
-
-    </div>
-    <div class="row arriving_harbour_5_" [dragula]="'arriving_harbour_5'">
-
-    </div>
-  </div>
 </div>
