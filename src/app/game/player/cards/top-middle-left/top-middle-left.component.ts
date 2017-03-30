@@ -13,7 +13,6 @@ export class TopMiddleLeftComponent implements OnInit {
     //styles in styles.css at the end under popover, to style:
     //.popover .popover-title .popover-content .arrow
 
-
     (<any>$('#tml')).popover({
       placement: 'top',
       trigger : 'hover',
