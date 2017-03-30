@@ -14,14 +14,12 @@ export class TopLeftLeftComponent implements OnInit {
     //styles in styles.css at the end under popover, to style:
     //.popover .popover-title .popover-content .arrow
 
-    //hover from top doesn't work properly
     (<any>$('#tll')).popover({
       placement: 'top',
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      show: 5500,
-      hide: 5500,
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
       content : '<img height="50%" width="100%" src="../../../../../assets/images/cards/pyramiddec.png"/>'
     });
