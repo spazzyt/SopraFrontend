@@ -3,10 +3,10 @@
 
   <!--add ships to departing harbours-->
     <div *ngFor="let ship of ships; let i = index"
-         id="departing_harbour_{{i+1}}_" (drop)="drop($event)" (dragover)="allowDrop($event)">
+         id="departing_harbour_{{i+1}}_" [dragula]='"nested-bag"'>
 
       <!--add image of ship-->
-      <img [src]="ship.imageUrl" (draggable)="true" (dragstart)="drag($event)" />
+      <img [src]="ship.imageUrl"  />
 
       <!--add slots to ship-->
       <div *ngFor="let slots of ship.slots"></div>
