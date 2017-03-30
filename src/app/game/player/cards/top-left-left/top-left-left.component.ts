@@ -14,7 +14,6 @@ export class TopLeftLeftComponent implements OnInit {
     //styles in styles.css at the end under popover, to style:
     //.popover .popover-title .popover-content .arrow
 
-    //hover from top doesn't work properly
     (<any>$('#tll')).popover({
       placement: 'top',
       trigger : 'hover',
