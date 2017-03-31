@@ -16,12 +16,17 @@
   height: 100%;
   position: relative;
   background-size:cover;
-  background-color: rgba(200, 200, 20, 0.4);
+  float: left;
+}
+
+.spacing_left{
+  height: 100%;
+  width: 1%;
   float: left;
 }
 
 .container_middle {
-  width: 60%;
+  width: 59%;
   height: 100%;
   position: relative;
   float: left;
@@ -93,6 +98,7 @@
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
+  margin-left: -2%;
 }
 
 .game_board{
