@@ -5,44 +5,26 @@
   padding-left: 1%;
 }
 
-.departing_harbour_1{
+.departing_harbour{
   width: 100%;
   height:25%;
-  border: 1px solid red;
 }
 
-.departing_harbour_2{
-  width: 100%;
-  height:25%;
-  border: 1px solid red;
-}
-
-.departing_harbour_3{
-  width: 100%;
-  height:25%;
-  border: 1px solid red;
-}
-
-.departing_harbour_4{
-  width: 100%;
-  height:25%;
-  border: 1px solid red;
-}
-
+/* Ship 1 is on the bottom, ship 4 on top */
 .ship_1{
-  position:relative; top:30%; left:20%; width:225px; height:70px; border: 1px solid #54ff50;
+  position:relative; top:20%; width:225px; height:70px;
   background-image:url("../../../assets/images/ship_1.png"); background-repeat: no-repeat;
   background-position: center;
 }
-.ship_2{position:relative; top:30%; left:20%; width:225px; height:70px; border: 1px solid #54ff50;
+.ship_2{position:relative; top:20%; width:225px; height:70px;
   background-image:url("../../../assets/images/ship_2.png"); background-repeat: no-repeat;
   background-position: center;
 }
-.ship_3{position:relative; top:30%; left:20%; width:225px; height:70px; border: 1px solid #54ff50;
+.ship_3{position:relative; top:20%; width:225px; height:70px;
   background-image:url("../../../assets/images/ship_3.png"); background-repeat: no-repeat;
   background-position: center;
 }
-.ship_4{position:relative; top:30%; left:20%; width:225px; height:70px; border: 1px solid #54ff50;
+.ship_4{position:relative; top:20%; width:225px; height:70px;
   background-image:url("../../../assets/images/ship_4.png"); background-repeat: no-repeat;
   background-position: center;
 }
@@ -50,29 +32,26 @@
 .ship_slots{
   width: 77%;
   height:100%;
-  border: 1px solid #ff47e1;
 }
 
-#ship_1_slot_1{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_1_slot_2{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_1_slot_3{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_1_slot_4{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
+#ship_1_slot_1{ margin-top: 10%; margin-right: 3%; margin-left: 2.3%; width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_1_slot_2{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_1_slot_3{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_1_slot_4{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
 
-#ship_2_slot_1{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_2_slot_2{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_2_slot_3{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_2_slot_4{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
+#ship_2_slot_1{ margin-top: 10%; margin-right: 3%; margin-left: 2.3%; width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_2_slot_2{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_2_slot_3{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_2_slot_4{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
 
-#ship_3_slot_1{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_3_slot_2{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_3_slot_3{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_3_slot_4{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
+#ship_3_slot_1{ margin-top: 10%; margin-right: 3%; margin-left: 2.3%; width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_3_slot_2{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_3_slot_3{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_3_slot_4{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
 
-#ship_4_slot_1{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_4_slot_2{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_4_slot_3{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-#ship_4_slot_4{ width: 25%; height:100%; float:right; border: 1px solid #0c0c0c; }
-
-
+#ship_4_slot_1{ margin-top: 10%; margin-right: 3%; margin-left: 2.3%; width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_4_slot_2{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_4_slot_3{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
+#ship_4_slot_4{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
 
 
