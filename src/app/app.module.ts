@@ -27,16 +27,6 @@ import { BottomLeftComponent } from './game/player/bottom-left/bottom-left.compo
 import { BottomRightComponent } from './game/player/bottom-right/bottom-right.component';
 import { TopLeftComponent } from './game/player/top-left/top-left.component';
 import { TopRightComponent } from './game/player/top-right/top-right.component';
-import { CardsComponent } from './game/player/cards/cards.component';
-import { TopLeftLeftComponent } from './game/player/cards/top-left-left/top-left-left.component';
-import { TopMiddleLeftComponent } from './game/player/cards/top-middle-left/top-middle-left.component';
-import { TopMiddleRightComponent } from './game/player/cards/top-middle-right/top-middle-right.component';
-import { TopRightRightComponent } from './game/player/cards/top-right-right/top-right-right.component';
-import { BottomLeftLeftComponent } from './game/player/cards/bottom-left-left/bottom-left-left.component';
-import { BottomMiddleLeftComponent } from './game/player/cards/bottom-middle-left/bottom-middle-left.component';
-import { BottomMiddleRightComponent } from './game/player/cards/bottom-middle-right/bottom-middle-right.component';
-import { BottomRightRightComponent } from './game/player/cards/bottom-right-right/bottom-right-right.component';
-import { PurpleCardComponent } from './game/player/cards/purple-card/purple-card.component';
 
 import { AlertModule, ModalModule } from 'ng2-bootstrap';
 import { TooltipModule } from "ng2-tooltip";
@@ -81,16 +71,6 @@ import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
     BottomRightComponent,
     TopLeftComponent,
     TopRightComponent,
-    CardsComponent,
-    TopLeftLeftComponent,
-    TopMiddleLeftComponent,
-    TopMiddleRightComponent,
-    TopRightRightComponent,
-    BottomLeftLeftComponent,
-    BottomMiddleLeftComponent,
-    BottomMiddleRightComponent,
-    BottomRightRightComponent,
-    PurpleCardComponent,
     DemoTempComponent,
     DragDropComponent,
     DragComponent,
