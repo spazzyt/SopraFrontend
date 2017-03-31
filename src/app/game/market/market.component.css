@@ -43,6 +43,13 @@
   border-radius: 6px;
   float: left;
   float: top;
+  -webkit-transition: -webkit-transform 0.4s;
+  transition: transform 0.4s;
+}
+
+.card_picture:hover {
+  -webkit-transform: scale(1.8) rotate(0.01deg);
+  transform: scale(1.8) rotate(0.01deg);
 }
 
 #first{
