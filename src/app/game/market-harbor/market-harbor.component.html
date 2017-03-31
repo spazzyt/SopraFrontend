@@ -1,8 +1,11 @@
 <div class="dock_space"></div>
 
 <div class="ship_space">
+
   <!--drag and drop zone-->
-  <div id="arriving_harbours">
-    <div id="arriving_harbour_5_"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
+  <div id="arriving_harbours" class="arriving_harbours">
+    <div id="arriving_harbour_5" class="arriving_harbour_5 market_harbour"
+         [dragula]="'harbours_bag'"></div><!-- innerHTML no space, no new line allowed-->
   </div>
+
 </div>

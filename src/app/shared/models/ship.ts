@@ -21,7 +21,19 @@ export class Ship {
     //initialize attributes
     this.id=id_;
     this.size=size_;
-    this.minStones=minStones_;
+    this.minStones=this.fmin(minStones_);
     this.imageUrl = "../../../assets/images/ship_" + size_ + ".png"
+    this.slots=new Array<ShipSlot>(size_);
+
+  }
+  fmin(minStones):number{
+    if (minStones===null){
+      if(this.size==1){
+        return 1;
+      }
+      else{
+        return this.size - 1;
+      }
+    }
   }
 }
