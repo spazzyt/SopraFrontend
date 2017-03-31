@@ -16,10 +16,11 @@ p{
 
 .name_text{
   font: 400 20px "Lithos Pro", Helvetica, Sans-Serif;
-  vertical-align: top;
+  vertical-align: bottom;
   color: white;
   text-align: left;
   display: inherit;
+  vertical-align: 0%;
   padding-left: 0%;
   padding-top: 3%;
 }
@@ -81,9 +82,9 @@ p{
 
 .player_name{
   height: 30%;
-  float: top;
+  float: left;
   vertical-align: bottom;
-  border: 10px solid #87cbff;/*border: 1px solid #87cbff;;*/
+  border: 1px solid #87cbff;/*border: 1px solid #87cbff;;*/
 }
 
 
