@@ -4,18 +4,18 @@
 <div class="ship_space">
 
   <!--drag and drop zone-->
-  <div id="arriving_harbours">
-
-    <div id="arriving_harbour_1"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
-
-    <div id="arriving_harbour_2"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
-
-    <div id="arriving_harbour_3"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
-
-    <div id="arriving_harbour_4"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
-
-    <div id="arriving_harbour_5"  (drop)="drop($event)" (dragover)="allowDrop($event)"></div>
-
+  <div id="arriving_harbours" class="arriving_harbours">
+    <div id="arriving_harbour_1" class="row arriving_harbour_1"
+         [dragula]="'harbours_bag'"></div> <!-- innerHTML no space, no new line allowed-->
+    <div id="arriving_harbour_2" class="row arriving_harbour_2"
+         [dragula]="'harbours_bag'"></div> <!-- innerHTML no space, no new line allowed-->
+    <div id="arriving_harbour_3" class="row arriving_harbour_3"
+         [dragula]="'harbours_bag'"></div> <!-- innerHTML no space, no new line allowed-->
+    <div id="arriving_harbour_4" class="row arriving_harbour_4"
+         [dragula]="'harbours_bag'"></div> <!-- innerHTML no space, no new line allowed-->
   </div>
 
+
 </div>
+
+

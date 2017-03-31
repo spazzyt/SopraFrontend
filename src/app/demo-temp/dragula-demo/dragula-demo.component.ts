@@ -154,6 +154,7 @@ export class DragulaDemoComponent implements OnInit {
 
     //ex.11
     dragulaService.setOptions('stone_slots_bag', {
+
       accepts: function (el, target, source, sibling) {
         console.log("11.1.1 ", `el: ${el}`); /*moved element*/
         console.log("11.1.2 ", `el.id: ${el.id}`); /*its id*/
