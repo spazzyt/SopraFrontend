@@ -19,16 +19,16 @@ export class SiteSlot {
   //stone
   public stonePlaced:Stone=null;
 
-  //number of stones placed (temple)
-  public numberOfTempleStones:number=0;
+  //number of stones placed (obelisk)
+  public numberOfObeliskStones:number=0;
 
-  constructor(id_:number, numberOfTempleStones_?:number, stonePlaced_?:Stone){
+  constructor(id_:number, numberOfObeliskStones_?:number, stonePlaced_?:Stone){
 
     //initialize attributes
     this.id=id_;
     this.stonePlaced=stonePlaced_;
     this.hasStone= !this.isEmpty(this.stonePlaced);
-    this.numberOfTempleStones=numberOfTempleStones_;
+    this.numberOfObeliskStones=numberOfObeliskStones_;
 
     console.log("hasStone ", this.hasStone);
   }
