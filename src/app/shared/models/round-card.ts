@@ -1,4 +1,13 @@
+
 export class RoundCard {
+
+  //Backend attributes
+  //==================
+
+
+
+  //Additional Frontend attributes
+  //==============================
 
   //unique identifier
   public id:number;
