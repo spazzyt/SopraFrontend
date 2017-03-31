@@ -289,3 +289,19 @@ Styling for the new game modal
 }
 */
 
+
+::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background-color: #edcd98;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background-color: #867558;
+}
