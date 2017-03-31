@@ -19,8 +19,7 @@ export class TopRightRightComponent implements OnInit {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      show: 5500,
-      hide: 5500,
+      delay: {show: 500, hide: 500},
       html: true,
       content : '<img height="50%" width="100%" src="../../../../../assets/images/cards/obeliskdec.png"/>'
     });

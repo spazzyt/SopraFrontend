@@ -19,7 +19,7 @@ export class TopLeftLeftComponent implements OnInit {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 500, hide: 500},
       html: true,
       content : '<img height="50%" width="100%" src="../../../../../assets/images/cards/pyramiddec.png"/>'
     });
