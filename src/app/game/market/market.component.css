@@ -31,13 +31,12 @@
 .left_spacing{
   width: 5%;
   height: 100%;
-  border: 1px solid red;
   float: left;
   float: top;
 }
 
 .card_picture{
-  width: 74.7%;
+  width: 75%;
   height: 100%;
   border: 3px solid black;
   border-radius: 6px;
@@ -54,47 +53,32 @@
 
 #first{
   background-image: url("../../../assets/images/cards/entrance.png");
-  background-size:contain;
+  background-size:cover;
   background-repeat: no-repeat;
 }
 
 #second{
   background-image: url("../../../assets/images/cards/entrance.png");
-  background-size:contain;
+  background-size:cover;
   background-repeat: no-repeat;
 }
 
 #third{
   background-image: url("../../../assets/images/cards/entrance.png");
-  background-size:contain;
+  background-size:cover;
   background-repeat: no-repeat;
 }
 
 #last{
   background-image: url("../../../assets/images/cards/entrance.png");
-  background-size:contain;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
 .card{
   width: 100%;
-  border: 1px solid red;
+  height: 95px;
   float: top;
   float: left;
-}
-
-#card1{
-  height: 17%;
-}
-
-#card2{
-  height: 17%;
-}
-#card3{
-  height: 17%;
-}
-
-#card4{
-  height: 17%;
 }
 
