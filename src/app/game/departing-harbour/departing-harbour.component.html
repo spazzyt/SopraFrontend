@@ -4,7 +4,7 @@
 
   <!--add ships to departing harbours-->
     <div *ngFor="let ship of ships; let i = index"
-         id="departing_harbour_{{i+1}}" class="departing_harbour_{{i+1}}"
+         id="departing_harbour_{{i+1}}" class="departing_harbour"
          [dragula]="'harbours_bag'">
 
       <div id="ship_{{i+1}}" class="ship_{{ship.size}}">
@@ -25,6 +25,11 @@
     </div>
 
 </div>
+
+
+
+
+
 
 
   <!--Example
