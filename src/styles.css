@@ -38,3 +38,6 @@
   border-top-color: black;
 }
 
+.popover.bottom .arrow:after {
+  border-bottom-color: black;
+}
