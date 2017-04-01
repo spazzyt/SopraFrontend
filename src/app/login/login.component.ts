@@ -8,13 +8,16 @@ import {User} from "../shared/models/user";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
+
   model: any = {};
   loading = false;
   error = '';
   user: User;
 
-  constructor(private router: Router, private service: AuthenticationService) {
+  constructor(private router: Router,
+              private service: AuthenticationService) {
 
   }
 
