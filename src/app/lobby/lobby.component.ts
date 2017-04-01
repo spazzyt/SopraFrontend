@@ -18,28 +18,51 @@ import {GameService} from "../shared/services/game.service";
 
 export class LobbyComponent implements OnInit {
 
+  //Attributes
+  //==========
   private users: User[]=[];
   private games: Game[]=[];
   private game: string;
   private joinedGame : number=-1;
   private myself:any;
   private nrOfGames: number = -1;
+  private requestIntervalTime = 5000 // set to 5000 during development, for production set to 500
 
-  constructor(private router:Router, private userService: UserService, private gameService: GameService) { }
+  //Constructor
+  //===========
+  constructor(private router:Router,
+              private userService: UserService,
+              private gameService: GameService) { }
 
+
+  //ngOnInit
+  //==========
   ngOnInit() {
-    // get users from secure api end point
+
+    // subscribe to service: get users from userService (from backend)
+    this.loadUserList();
+
+    // subscribe to service: get games from gameService (from backend)
+    this.loadGameList();
+
+    //
+    this.myself = this.userService.meMyselfAndI();
+
+    // interval to update game list (every X ms a request is made to the frontend)
+    setInterval(()=>this.loadGameList(), this.requestIntervalTime)
+
+  }
+
+  //Methods
+  //=======
+  loadUserList(){
     this.userService.getUsers()
       .subscribe(users => {
         this.users = users;
       });
-
-    // get games from secure api end point
-    this.loadLobbyList();
-    this.myself = this.userService.meMyselfAndI();
   }
 
-  loadLobbyList(){
+  loadGameList(){
     this.gameService.getGames()
       .subscribe(games => {
         this.games = games;
@@ -52,17 +75,17 @@ export class LobbyComponent implements OnInit {
     .subscribe(game => {
       //this.game = game;
       console.log("add game ");
-      this.loadLobbyList();
+      this.loadGameList();
     });
   }
 
-  // leave a game in game table
+  // leave a game ( seen in game table)
   leaveGame(gameId){
     this.gameService.leaveGameService(gameId)
       .subscribe(game => {
         //this.game = game;
         console.log("leave game ");
-        this.loadLobbyList();
+        this.loadGameList();
         this.joinedGame=-1;
       });
   }
@@ -73,7 +96,7 @@ export class LobbyComponent implements OnInit {
       .subscribe(game => {
         //this.game = game;
         console.log("join game ");
-        this.loadLobbyList();
+        this.loadGameList();
         this.joinedGame=gameId;
       });
   }
@@ -90,6 +113,9 @@ export class LobbyComponent implements OnInit {
 
 
   }
+
+
+
 
   // helper functions from modal screen (can be done more direct with ng)
   addGames() {
