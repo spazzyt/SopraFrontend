@@ -21,43 +21,46 @@ export class MarketCard {
   //stone image
   public imageUrl:string="";
 
+  //constructor
   constructor(id_:number, currentPosition_?:string){
 
     //initialize attributes
     this.id=id_;
     this.name=this.idToName(id_);
     this.imageUrl = "../../../assets/images/cards/" + this.name + ".png"
+    //console.log("URL: ", this.imageUrl)
     this.currentPosition=currentPosition_;
 
   }
 
+  //fix!!! correct list of ids 34 in total
   idToName(id){
     switch (id)
     {
-      case'01':
+      case 1:
         return "burialdec";
-      case'02':
+      case 2:
         return "chisel";
-      case'03':
+      case 3:
         return "entrance";
-      case'04':
+      case 4:
         return "hammer";
-      case'05':
+      case 5:
         return "lever";
-      case'06':
+      case 6:
         return "obeliskdec";
-      case'07':
+      case 7:
         return "pyramiddec";
-      case'08':
+      case 8:
         return "sail";
-      case'09':
+      case 9:
         return "sacophagus";
-      case'10':
+      case 10:
         return "statues";
-      case'11':
+      case 11:
         return "templedec"
       default:
-        alert("Error");
+        alert("Error from market-card.ts: idToName(id)");
         return null;
     }
   }

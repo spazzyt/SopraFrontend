@@ -2,6 +2,8 @@
   <div class="market_info" id="market"></div>
 </div>
 
+
+<!--
 <div class="card" id="card1">
   <div class="left_spacing"></div>
   <div class="card_picture" id="first"></div>
@@ -20,6 +22,22 @@
 <div class="card" id="card4">
   <div class="left_spacing" id="left_spacing"></div>
   <div class="card_picture" id="last"></div>
+</div>
+-->
+
+
+<!--add marketCardSlot_i-->
+<div *ngFor="let marketCard of marketCards; let i = index"
+     id="market_card_slot_{{i+1}}" class="market_card_slot card">
+
+  <!--add marketCard_i to market-->
+  <div class="left_spacing"></div>
+  <div id="market_card_{{i+1}}" class="market_card_{{i+1}} card_picture"
+       [ngStyle]="{ 'background-image': 'url(' + marketCard.imageUrl + ')' }"></div>
+  <div class="space" id="space1"></div>
+
+
+
 </div>
 
 
