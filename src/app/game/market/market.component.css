@@ -81,3 +81,24 @@
   float: left;
 }
 
+/*Roland: New classes replacing old above */
+
+#market_card_1{
+  background-size:cover;
+  background-repeat: no-repeat;
+}
+
+#market_card_2{
+  background-size:cover;
+  background-repeat: no-repeat;
+}
+
+#market_card_3{
+  background-size:cover;
+  background-repeat: no-repeat;
+}
+
+#market_card_4{
+  background-size: cover;
+  background-repeat: no-repeat;
+}

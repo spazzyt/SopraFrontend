@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MarketCard} from "../../shared/models/market-card";
+import {CurrentPosition} from "../../shared/models/current-position.enum"
 
 @Component({
   selector: 'app-market',
@@ -7,7 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketComponent implements OnInit {
 
-  constructor() { }
+  //===============
+  //Class Variables
+  //===============
+  marketCards:MarketCard[] = [];
+
+  //===============
+  //Constructor
+  //===============
+  constructor() {
+
+  }
+
+  //===============
+  //ngOnInit
+  //===============
 
   ngOnInit() {
     //styles in styles.css at the end under popover, to style:
@@ -19,11 +35,49 @@ export class MarketComponent implements OnInit {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      show: 5500,
-      hide: 5500,
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : 'For each stone delivered here, the owner of the stone can immediately take any 1 face-up market card.'
+      content : '<p>For each stone delivered here, the owner of the stone can immediately take any 1 face-up market card.</p>'
     });
+
+    //RemoveOldMarketCards
+    this.removeUnusedMarketCards();
+
+    //generate this.ships array with four ship objects
+    this.generateFourMarketCards();
+
+  }
+
+
+  //===============
+  //Class Methods
+  //===============
+
+
+  //User chooses a market card
+  chooseMarketCardOnClick(){}
+
+  //Unused market cards will be removed after each round
+  removeUnusedMarketCards(){}
+
+
+  //Generate four new market cards
+  generateFourMarketCards(){
+
+    //Fake maket cards
+    let marketCard1 = new MarketCard(1);
+    let marketCard2 = new MarketCard(2);
+    let marketCard3 = new MarketCard(3);
+    let marketCard4 = new MarketCard(4);
+
+    //fill market cards array
+    this.marketCards.push(marketCard1);
+    this.marketCards.push(marketCard2);
+    this.marketCards.push(marketCard3);
+    this.marketCards.push(marketCard4);
   }
 
 }
+
+
+
