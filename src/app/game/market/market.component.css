@@ -5,6 +5,7 @@
   border-radius: 6px;
   margin-top: 20%;
   float: left;
+
 }
 
 .space{
@@ -15,8 +16,8 @@
 }
 
 #space1{
-  height: 1%;
-
+  height: 10%;
+  border: 1px solid black;
 }
 
 #space2{
@@ -35,14 +36,14 @@
 }
 
 .card_picture{
-  width: 75%;
+  width: 80%;
   height: 100%;
   border: 3px solid black;
   border-radius: 6px;
   float: left;
   float: top;
   -webkit-transition: -webkit-transform 0.4s;
-  transition: transform 0.4s;
+  transition: transform 0.3s;
 }
 
 .card_picture:hover {
@@ -101,4 +102,8 @@
 #market_card_4{
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.market_card_slot{
+  margin: 3%;
 }
