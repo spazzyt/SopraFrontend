@@ -40,6 +40,5 @@ testem.log
 Thumbs.db
 
 #Firebase
-firebase.json
 database.rules.json
-.firebaserc
+
