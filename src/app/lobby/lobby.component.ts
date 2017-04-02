@@ -66,15 +66,20 @@ export class LobbyComponent implements OnInit {
 
     // local storage (workaround1: used to reload lobby, prevent infinit reloading)
     this._ngZone.runOutsideAngular(() => {
+
       let storedToken:string = localStorage.getItem(this.tokenKey);
       console.log("storedToken: ", storedToken);
+
       if (storedToken=="false") {
+
         //prevent infinite reloading
         localStorage.setItem(this.tokenKey, "true");
         console.log("storedToken: ", storedToken);
-        //window.location.reload();
+
+        //reload page
         location.reload();
       }
+
     });
 
     // subscribe to service: this.userService.getUsers()

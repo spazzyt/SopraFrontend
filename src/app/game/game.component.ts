@@ -4,6 +4,17 @@ import {GameService} from "../shared/services/game.service";
 import {MarketComponent} from "./market/market.component";
 import {DepartingHarbourComponent} from "./departing-harbour/departing-harbour.component";
 import {PlayerComponent} from "./player/player.component";
+import {BottomLeftComponent} from "./player/bottom-left/bottom-left.component";
+import {TempleComponent} from "./temple/temple.component";
+import {PyramidComponent} from "./pyramid/pyramid.component";
+import {ObeliskComponent} from "./obelisk/obelisk.component";
+import {SiteHarbourComponent} from "./site-harbour/site-harbour.component";
+import {MarketHarbourComponent} from "./market-harbour/market-harbour.component";
+import {BurialChamberComponent} from "./burial-chamber/burial-chamber.component";
+import {ShipComponent} from "./ship/ship.component";
+import {BottomRightComponent} from "./player/bottom-right/bottom-right.component";
+import {TopRightComponent} from "./player/top-right/top-right.component";
+import {TopLeftComponent} from "./player/top-left/top-left.component";
 
 @Component({
   selector: 'app-game',
@@ -47,14 +58,48 @@ export class GameComponent  implements OnInit {
   // Enable Communication with Child Components
   //===========================================
 
-  // Enable communication with MarketComponent
-  @ViewChild(MarketComponent) marketComponent:MarketComponent;
+  // Enable communication with PlayerComponent
+  @ViewChild(PlayerComponent) playerComponent:PlayerComponent;
+
+  // Enable communication with active player component BottomLeftComponent
+  @ViewChild(BottomLeftComponent) bottomLeftComponent:BottomLeftComponent;
+
+  // Enable communication with not active player component BottomLeftComponent
+  @ViewChild(TopLeftComponent) topLeftComponent:TopLeftComponent;
+
+  // Enable communication with not active player component BottomLeftComponent
+  @ViewChild(TopRightComponent) topRightComponent:TopRightComponent;
+
+  // Enable communication with not active player component BottomLeftComponent
+  @ViewChild(BottomRightComponent) bottomRightComponent:BottomRightComponent;
 
   // Enable communication with DepartingHarbour
   @ViewChild(DepartingHarbourComponent) departingHarbourComponent:DepartingHarbourComponent;
 
-  // Enable communication with PlayerComponent
-  @ViewChild(PlayerComponent) playerComponent:PlayerComponent;
+  // Enable communication with SiteHarbour
+  @ViewChild(SiteHarbourComponent) siteHarbourComponent:SiteHarbourComponent;
+
+  // Enable communication with MaketHarbour
+  @ViewChild(MarketHarbourComponent) maketHarbourComponent:MarketHarbourComponent;
+
+  // Enable communication with PyramidComponent
+  @ViewChild(PyramidComponent) pyramidComponent:PyramidComponent;
+
+  // Enable communication with TempleComponent
+  @ViewChild(TempleComponent) templeComponent:TempleComponent;
+
+  // Enable communication with MarketComponent
+  @ViewChild(BurialChamberComponent) burialChamberComponent:BurialChamberComponent;
+
+  // Enable communication with MarketComponent
+  @ViewChild(ObeliskComponent) obeliskComponent:ObeliskComponent;
+
+  // Enable communication with MarketComponent
+  @ViewChild(MarketComponent) marketComponent:MarketComponent;
+
+  // Enable communication with MarketComponent
+  @ViewChild(ShipComponent) shipComponent:ShipComponent;
+
 
   //==================================================
   // Test-Methods: Communication with Child Components
