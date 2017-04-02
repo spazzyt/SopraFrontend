@@ -9,10 +9,12 @@ import {User} from "../shared/models/user";
   styleUrls: ['./login.component.css']
 })
 
+//===========
 // Component
 //===========
 export class LoginComponent implements OnInit {
 
+  //============
   // Attributes
   //============
 
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
   // no idea what this is
   model: any = {}; //??
 
-
+  //=============
   // Constructor
   //=============
   constructor(private router: Router,
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+  //==========
   // ngOnInit
   //==========
   ngOnInit() {
@@ -46,6 +49,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+  //===================
   // Subscribe-Methods
   //===================
 
@@ -62,7 +66,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-
+  //===============
   // Other-Methods
   //===============
 
