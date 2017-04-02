@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, NgZone} from '@angular/core';
 import {Router} from "@angular/router";
 
 import {User} from "../shared/models/user";
@@ -44,6 +44,9 @@ export class LobbyComponent implements OnInit {
   // game name
   public game: string; //??
 
+  // local storage (workaround1: used to reload lobby, prevent infinit reloading)
+  private tokenKey:string = 'justOnce';
+
 
   //=============
   // Constructor
@@ -51,7 +54,8 @@ export class LobbyComponent implements OnInit {
   constructor(private router:Router,
               private userService: UserService,
               private gameService: GameService,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private _ngZone: NgZone) {
 
   }
 
@@ -59,6 +63,19 @@ export class LobbyComponent implements OnInit {
   // ngOnInit
   //==========
   ngOnInit() {
+
+    // local storage (workaround1: used to reload lobby, prevent infinit reloading)
+    this._ngZone.runOutsideAngular(() => {
+      let storedToken:string = localStorage.getItem(this.tokenKey);
+      console.log("storedToken: ", storedToken);
+      if (storedToken=="false") {
+        //prevent infinite reloading
+        localStorage.setItem(this.tokenKey, "true");
+        console.log("storedToken: ", storedToken);
+        //window.location.reload();
+        location.reload();
+      }
+    });
 
     // subscribe to service: this.userService.getUsers()
     this.loadUserList();
@@ -73,7 +90,20 @@ export class LobbyComponent implements OnInit {
     // subscribe to service: this.userService.meMyselfAndI()
     this.whoAmI();
 
+
   }
+
+  //================
+  // ngAfterViewInit
+  //================
+
+  ngAfterViewInit() {
+
+
+
+  }
+
+
 
   //===================
   // Subscribe-Methods

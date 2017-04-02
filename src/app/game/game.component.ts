@@ -79,10 +79,10 @@ export class GameComponent  implements OnInit {
 
   // communicate with Player
   trigger_setMarketCard(){
-    //this.playerComponent.setMarketCard(); //(click)="trigger_setMarketCards()"
+    //this.playerComponent.setMarketCards(); //(click)="trigger_setMarketCards()"
   }
   trigger_setScore(){
-    //this.playerComponent.setScores(); //(click)="trigger_setScores()"
+    //this.playerComponent.setScore(); //(click)="trigger_setScore()"
   }
   trigger_setStonesInSled(){
     //this.playerComponent.setStonesInSled(); //(click)="trigger_setStonesInSled()"

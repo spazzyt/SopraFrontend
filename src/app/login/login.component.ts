@@ -28,11 +28,17 @@ export class LoginComponent implements OnInit {
   // no idea what this is
   model: any = {}; //??
 
+  // local storage (workaround1: used to reload lobby, prevent infinit reloading)
+  private tokenKey:string = 'justOnce';
+
   //=============
   // Constructor
   //=============
   constructor(private router: Router,
               private service: AuthenticationService) {
+
+    // local storage (workaround1: used to reload lobby, prevent infinit reloading)
+    localStorage.setItem(this.tokenKey, "false");
 
   }
 
