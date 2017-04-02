@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MarketHarborComponent } from './market-harbor.component';
+import { MarketHarborComponent } from './market-harbour.component';
 
 describe('MarketHarborComponent', () => {
   let component: MarketHarborComponent;

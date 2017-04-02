@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-market-harbor',
-  templateUrl: './market-harbor.component.html',
-  styleUrls: ['./market-harbor.component.css']
+  selector: 'app-market-harbour',
+  templateUrl: 'market-harbour.component.html',
+  styleUrls: ['market-harbour.component.css']
 })
 
-export class MarketHarborComponent {
+export class MarketHarbourComponent {
 
   allowDrop(ev) {
     ev.preventDefault();

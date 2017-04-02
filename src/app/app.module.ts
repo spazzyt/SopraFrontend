@@ -1,15 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {HttpModule, JsonpModule} from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import {AuthGuardService} from "./shared/services/auth-guard.service";
-import {UserService} from "./shared/services/user.service";
-import {routing} from "./app.routing";
-import {AuthenticationService} from "./shared/services/authentication.service";
-import {LoginComponent} from "./login/login.component";
-import {GameComponent} from "./game/game.component";
+import { AuthGuardService } from "./shared/services/auth-guard.service";
+import { UserService } from "./shared/services/user.service";
+import { routing } from "./app.routing";
+import { AuthenticationService } from "./shared/services/authentication.service";
+import { LoginComponent} from "./login/login.component";
+import { GameComponent} from "./game/game.component";
 import { HomeComponent } from './home/home.component';
 import { LobbyComponent } from './lobby/lobby.component';
 import { PlayerComponent } from './game/player/player.component';
@@ -42,7 +42,7 @@ import { PopoverBootstrapComponent } from './demo-temp/popover-bootstrap/popover
 
 import * as $ from 'jquery';
 import { ModalsComponent } from './demo-temp/modals/modals.component';
-import { MarketHarborComponent } from './game/market-harbor/market-harbor.component';
+import { MarketHarbourComponent} from './game/market-harbour/market-harbour.component';
 import { ScrollbarComponent } from './demo-temp/scrollbar/scrollbar.component';
 import { DragulaDemoComponent } from './demo-temp/dragula-demo/dragula-demo.component';
 
@@ -79,7 +79,7 @@ import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
     DynamicChangesComponent,
     PopoverBootstrapComponent,
     ModalsComponent,
-    MarketHarborComponent,
+    MarketHarbourComponent,
     ScrollbarComponent,
     DragulaDemoComponent,
   ],
