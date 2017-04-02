@@ -5,11 +5,51 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './top-right.component.html',
   styleUrls: ['./top-right.component.css']
 })
+
+//===========
+// Component
+//===========
 export class TopRightComponent implements OnInit {
 
-  constructor() { }
+
+  //===============
+  //Class Variables
+  //===============
+
+
+
+
+  //===============
+  //Constructor
+  //===============
+
+  constructor() {
+
+  }
+
+
+  //==========
+  // ngOnInit
+  //==========
 
   ngOnInit() {
+
+    this.initializePopovers();
+
+  }
+
+  //===============
+  // Other-Methods
+  //===============
+
+
+
+
+  //================
+  // Popover-Methods
+  //================
+
+  initializePopovers(){
 
     //From bottom-left-left
     (<any>$('#bll_3')).popover({
@@ -111,6 +151,7 @@ export class TopRightComponent implements OnInit {
       html: true,
       content : '<img height="150px" width="250px" src="../../../../assets/images/cards/obeliskdec.png"/>'
     });
+
 
   }
 
