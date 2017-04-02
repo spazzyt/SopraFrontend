@@ -15,7 +15,6 @@
   border: 1px solid violet;/*border: 1px solid violet;*/
   width:20%;
   height: 100%;
-  position: relative;
   float: left;
 }
 
@@ -23,7 +22,6 @@
   border: 1px solid blueviolet;/*border: 1px solid blueviolet;*/
   width:60%;
   height: 100%;
-  position: relative;
   float: left;
 }
 
@@ -31,7 +29,6 @@
   border: 1px solid aliceblue;/*border: 1px solid aliceblue;*/
   width:20%;
   height: 100%;
-  position: relative;
   float: left;
 }
 
@@ -56,6 +53,9 @@ Styling for the user list
 .user_list{
   font-family: 'Lithos Pro';
   border: 1px solid red;
+  height:290px;
+  width: 100%;
+  overflow-y:auto;
 }
 
 
@@ -148,6 +148,24 @@ Styling for the game table
 
 .btn:hover{
   box-shadow: 1px 1px 10px #d4bd88;
+}
+
+/*Scrollbar styling*/
+
+::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background-color: #edcd98;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background-color: #867558;
 }
 
 

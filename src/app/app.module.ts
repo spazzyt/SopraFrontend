@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {HttpModule, JsonpModule} from '@angular/http';
 
-
 import { AppComponent } from './app.component';
 import {AuthGuardService} from "./shared/services/auth-guard.service";
 import {UserService} from "./shared/services/user.service";
