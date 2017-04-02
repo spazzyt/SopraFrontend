@@ -75,6 +75,7 @@ export class GameComponent  implements OnInit {
   //==========
   // ngOnInit
   //==========
+
   ngOnInit() {
 
 
@@ -84,28 +85,65 @@ export class GameComponent  implements OnInit {
   // Major Tasks of Game Component
   //==============================
 
-  // Current Game state ( current-game-state package from backend sent to all players)
-  //----------------------------------------------------------------------------------
+  // Current Game state
+  // ( current-game-state package from backend sent to all players)
+  //---------------------------------------------------------------
   //1. pull current-target-game-state package from game-service,
   //   store it into object of class current-game-state.ts
 
-  //2.
+  //2. make current-actual-game-state package from frontend,
+  //   store it into object of class current-game-state.ts
 
-  // Last players move/action/decision ( decision package from backend sent to not active players)
-  //----------------------------------------------------------------------------------------------
+  //3. compare actual/target game-state,
+  //   delegate differences to ancestors to fix
 
+  // Last players move/action/decision
+  // ( decision package from backend sent to not active players)
+  //------------------------------------------------------------
+  //1. pull last players decision from game-service,
+  //   store it into object of class decision.ts
+
+  //2. Simulate last decision to other players
+  //   delegate task to ancestors
 
   // Current active Player
   //----------------------
+  //1. pull active Player information from game-service
+  //   store it into object of class user
+
+  //2. Delegate information to descendant,
+  //   to visually highlight active player field
+
+  // Allowed moves/actions/decisions
+  // ( decision package from backend sent to active player,
+  // (to not active players as info))
+  //-------------------------------------------------------
+  //1. pull allowed players decisions from game-service,
+  //   store it into object of class decision.ts
+
+  //2. Delegate information to descendants,
+  //   to activate allowed actions/moves and invalidate all others.
+
+  // Active player move/action/decision
+  // (decision package from active player sent to backend)
+  //------------------------------------------------------
+  //1. pull active player's decision from ancestor components
+
+  //2. store active player's decision into object of class decision.ts
+
+  //3. push active player decision to game-service
 
 
-  // Allowed moves/actions/decisions ( decision package from backend sent to active player, (to not active players as info))
-  //------------------------------------------------------------------------------------------------------------------------
 
+  //===========================================================
+  // Test-Data: Instantiate fake data as input for test-methods
+  //===========================================================
 
-  // Active player move/action/decision (decision package from active player sent to backend)
-  //-----------------------------------------------------------------------------------------
-
+  //will later be fields of defined class variables above
+  marketCards_target:number[]=[1,0,2,0,1,1,0,0,4];
+  score_target:number=12;
+  sledStones_target:number=3;
+  quarryStones_target:number=25;
 
 
 
@@ -113,58 +151,39 @@ export class GameComponent  implements OnInit {
   // Test-Methods: Communication with Child Components
   //==================================================
 
-
-  // Communication with PlayerComponent
-
+  // Communication with PlayerComponent or Players ButtomLeftComponent etc. directly
+  //--------------------------------------------------------------------------------
+  trigger_setMarketCard(){
+    this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+  }
+  trigger_setScore(){
+    this.bottomLeftComponent.setScore(this.score_target); //(click)="trigger_setScore()"
+  }
+  trigger_setStonesInSled(){
+    this.bottomLeftComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
+  }
+  trigger_setStonesInQuarry(){
+    this.bottomLeftComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
+  }
 
   // Communication with active player component BottomLeftComponent
+  //---------------------------------------------------------------
 
 
   // Communication with not active player component BottomLeftComponent
+  //-------------------------------------------------------------------
 
 
   // Communication with not active player component BottomLeftComponent
+  //-------------------------------------------------------------------
 
 
   // Communication with not active player component BottomLeftComponent
+  //-------------------------------------------------------------------
 
 
   // Communication with DepartingHarbour
-
-
-  // Communication with SiteHarbour
-
-
-  // Communication with MaketHarbour
-
-
-  // Communication with PyramidComponent
-
-
-  // Communication with TempleComponent
-
-
-  // Communication with MarketComponent
-
-
-  // Communication with MarketComponent
-
-
-  // Communication with MarketComponent
-
-
-  // Communication with MarketComponent
-
-
-  // communicate with MarketComponent
-  trigger_removeUnusedMarketCards(){
-    this.marketComponent.removeUnusedMarketCards(); //(click)="trigger_removeUnusedMarketCards()"
-  }
-  trigger_generateFourMarketCards(){
-    this.marketComponent.generateFourMarketCards(); //(click)="trigger_generateFourMarketCards()"
-  }
-
-  // communicate with DepartingHarbourComponent
+  //------------------------------------
   trigger_removeShips(){
     this.departingHarbourComponent.removeShips(); //(click)="trigger_removeShips()"
   }
@@ -173,19 +192,46 @@ export class GameComponent  implements OnInit {
     this.departingHarbourComponent.generateFourShips(); //(click)="trigger_generateFourShips()"
   }
 
-  // communicate with Player
-  trigger_setMarketCard(){
-    //this.playerComponent.setMarketCards(); //(click)="trigger_setMarketCards()"
+
+  // Communication with SiteHarbour
+  //-------------------------------
+
+
+  // Communication with MaketHarbour
+  //--------------------------------
+
+
+  // Communication with PyramidComponent
+  //------------------------------------
+
+
+  // Communication with TempleComponent
+  //-----------------------------------
+
+
+  // Communication with BurialChamberComponent
+  //------------------------------------------
+
+
+  // Communication with ObeliskComponent
+  //------------------------------------
+
+
+  // Communication with MarketComponent
+  //-----------------------------------
+  trigger_removeUnusedMarketCards(){
+    this.marketComponent.removeUnusedMarketCards(); //(click)="trigger_removeUnusedMarketCards()"
   }
-  trigger_setScore(){
-    //this.playerComponent.setScore(); //(click)="trigger_setScore()"
+  trigger_generateFourMarketCards(){
+    this.marketComponent.generateFourMarketCards(); //(click)="trigger_generateFourMarketCards()"
   }
-  trigger_setStonesInSled(){
-    //this.playerComponent.setStonesInSled(); //(click)="trigger_setStonesInSled()"
-  }
-  trigger_setStonesInQuarry(){
-    //this.playerComponent.setStonesInQuarry(); //(click)="trigger_setStonesInQuarry()"
-  }
+
+
+  // Communication with ShipComponent
+  //---------------------------------
+
+
+
 
 
   //================
@@ -464,16 +510,16 @@ export class GameComponent  implements OnInit {
   // Enable communication with TempleComponent
   @ViewChild(TempleComponent) templeComponent:TempleComponent;
 
-  // Enable communication with MarketComponent
+  // Enable communication with BurialChamberComponent
   @ViewChild(BurialChamberComponent) burialChamberComponent:BurialChamberComponent;
 
-  // Enable communication with MarketComponent
+  // Enable communication with ObeliskComponent
   @ViewChild(ObeliskComponent) obeliskComponent:ObeliskComponent;
 
   // Enable communication with MarketComponent
   @ViewChild(MarketComponent) marketComponent:MarketComponent;
 
-  // Enable communication with MarketComponent
+  // Enable communication with ShipComponent
   @ViewChild(ShipComponent) shipComponent:ShipComponent;
 
 
