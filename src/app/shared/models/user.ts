@@ -1,6 +1,8 @@
 import {Decision} from "./decision";
+
 export class User {
 
+  //==================
   //Backend attributes
   //==================
 
@@ -22,6 +24,7 @@ export class User {
   public oldGames: number[]; // data type check with backend
 
 
+  //===============================
   // Additional Frontend attributes
   //===============================
 

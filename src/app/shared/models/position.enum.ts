@@ -1,4 +1,4 @@
-export enum CurrentPosition {
+export enum Position {
   market,
   pyramid,
   temple,

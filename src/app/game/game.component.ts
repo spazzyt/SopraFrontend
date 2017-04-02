@@ -15,6 +15,9 @@ import {ShipComponent} from "./ship/ship.component";
 import {BottomRightComponent} from "./player/bottom-right/bottom-right.component";
 import {TopRightComponent} from "./player/top-right/top-right.component";
 import {TopLeftComponent} from "./player/top-left/top-left.component";
+import {CurrentGameState} from "../shared/models/current-game-state";
+import {Decision} from "../shared/models/decision";
+import {User} from "../shared/models/user";
 
 @Component({
   selector: 'app-game',
@@ -30,6 +33,29 @@ export class GameComponent  implements OnInit {
   //===============
   //Class Variables
   //===============
+
+  // Current Target (Soll) Game state
+  // ( current-game-state package from backend sent to all players)
+  currentTargetGameState:CurrentGameState;
+
+  // Current Actual (Ist) Game state
+  // ( current-game-state package from backend sent to all players)
+  currentActualGameState:CurrentGameState;
+
+  // Last players move/action/decision
+  // ( decision package from backend sent to not active players)
+  lastPlayerDecision:Decision;
+
+  // Current active Player
+  currentActivePlayer:User;
+
+  // Allowed moves/actions/decisions
+  // ( decision package from backend sent to active player, (to not active players as info))
+  allowedActivePlayerDecisions:Decision;
+
+  // Active player move/action/decision
+  // (decision package from active player sent to backend)
+  chosenActivePlayerDecision:Decision;
 
 
 
@@ -54,56 +80,81 @@ export class GameComponent  implements OnInit {
 
   }
 
-  //===========================================
-  // Enable Communication with Child Components
-  //===========================================
+  //==============================
+  // Major Tasks of Game Component
+  //==============================
 
-  // Enable communication with PlayerComponent
-  @ViewChild(PlayerComponent) playerComponent:PlayerComponent;
+  // Current Game state ( current-game-state package from backend sent to all players)
+  //----------------------------------------------------------------------------------
+  //1. pull current-target-game-state package from game-service,
+  //   store it into object of class current-game-state.ts
 
-  // Enable communication with active player component BottomLeftComponent
-  @ViewChild(BottomLeftComponent) bottomLeftComponent:BottomLeftComponent;
+  //2.
 
-  // Enable communication with not active player component BottomLeftComponent
-  @ViewChild(TopLeftComponent) topLeftComponent:TopLeftComponent;
+  // Last players move/action/decision ( decision package from backend sent to not active players)
+  //----------------------------------------------------------------------------------------------
 
-  // Enable communication with not active player component BottomLeftComponent
-  @ViewChild(TopRightComponent) topRightComponent:TopRightComponent;
 
-  // Enable communication with not active player component BottomLeftComponent
-  @ViewChild(BottomRightComponent) bottomRightComponent:BottomRightComponent;
+  // Current active Player
+  //----------------------
 
-  // Enable communication with DepartingHarbour
-  @ViewChild(DepartingHarbourComponent) departingHarbourComponent:DepartingHarbourComponent;
 
-  // Enable communication with SiteHarbour
-  @ViewChild(SiteHarbourComponent) siteHarbourComponent:SiteHarbourComponent;
+  // Allowed moves/actions/decisions ( decision package from backend sent to active player, (to not active players as info))
+  //------------------------------------------------------------------------------------------------------------------------
 
-  // Enable communication with MaketHarbour
-  @ViewChild(MarketHarbourComponent) maketHarbourComponent:MarketHarbourComponent;
 
-  // Enable communication with PyramidComponent
-  @ViewChild(PyramidComponent) pyramidComponent:PyramidComponent;
+  // Active player move/action/decision (decision package from active player sent to backend)
+  //-----------------------------------------------------------------------------------------
 
-  // Enable communication with TempleComponent
-  @ViewChild(TempleComponent) templeComponent:TempleComponent;
 
-  // Enable communication with MarketComponent
-  @ViewChild(BurialChamberComponent) burialChamberComponent:BurialChamberComponent;
-
-  // Enable communication with MarketComponent
-  @ViewChild(ObeliskComponent) obeliskComponent:ObeliskComponent;
-
-  // Enable communication with MarketComponent
-  @ViewChild(MarketComponent) marketComponent:MarketComponent;
-
-  // Enable communication with MarketComponent
-  @ViewChild(ShipComponent) shipComponent:ShipComponent;
 
 
   //==================================================
   // Test-Methods: Communication with Child Components
   //==================================================
+
+
+  // Communication with PlayerComponent
+
+
+  // Communication with active player component BottomLeftComponent
+
+
+  // Communication with not active player component BottomLeftComponent
+
+
+  // Communication with not active player component BottomLeftComponent
+
+
+  // Communication with not active player component BottomLeftComponent
+
+
+  // Communication with DepartingHarbour
+
+
+  // Communication with SiteHarbour
+
+
+  // Communication with MaketHarbour
+
+
+  // Communication with PyramidComponent
+
+
+  // Communication with TempleComponent
+
+
+  // Communication with MarketComponent
+
+
+  // Communication with MarketComponent
+
+
+  // Communication with MarketComponent
+
+
+  // Communication with MarketComponent
+
 
   // communicate with MarketComponent
   trigger_removeUnusedMarketCards(){
@@ -379,7 +430,51 @@ export class GameComponent  implements OnInit {
   }
 
 
+  //===========================================
+  // Enable Communication with Child Components
+  //===========================================
 
+  // Enable communication with PlayerComponent
+  @ViewChild(PlayerComponent) playerComponent:PlayerComponent;
+
+  // Enable communication with active player component BottomLeftComponent
+  @ViewChild(BottomLeftComponent) bottomLeftComponent:BottomLeftComponent;
+
+  // Enable communication with not active player component BottomLeftComponent
+  @ViewChild(TopLeftComponent) topLeftComponent:TopLeftComponent;
+
+  // Enable communication with not active player component BottomLeftComponent
+  @ViewChild(TopRightComponent) topRightComponent:TopRightComponent;
+
+  // Enable communication with not active player component BottomLeftComponent
+  @ViewChild(BottomRightComponent) bottomRightComponent:BottomRightComponent;
+
+  // Enable communication with DepartingHarbour
+  @ViewChild(DepartingHarbourComponent) departingHarbourComponent:DepartingHarbourComponent;
+
+  // Enable communication with SiteHarbour
+  @ViewChild(SiteHarbourComponent) siteHarbourComponent:SiteHarbourComponent;
+
+  // Enable communication with MaketHarbour
+  @ViewChild(MarketHarbourComponent) maketHarbourComponent:MarketHarbourComponent;
+
+  // Enable communication with PyramidComponent
+  @ViewChild(PyramidComponent) pyramidComponent:PyramidComponent;
+
+  // Enable communication with TempleComponent
+  @ViewChild(TempleComponent) templeComponent:TempleComponent;
+
+  // Enable communication with MarketComponent
+  @ViewChild(BurialChamberComponent) burialChamberComponent:BurialChamberComponent;
+
+  // Enable communication with MarketComponent
+  @ViewChild(ObeliskComponent) obeliskComponent:ObeliskComponent;
+
+  // Enable communication with MarketComponent
+  @ViewChild(MarketComponent) marketComponent:MarketComponent;
+
+  // Enable communication with MarketComponent
+  @ViewChild(ShipComponent) shipComponent:ShipComponent;
 
 
 
