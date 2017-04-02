@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MarketCard} from "../../shared/models/market-card";
-import {CurrentPosition} from "../../shared/models/current-position.enum"
+import {CurrentPosition} from "../../shared/models/position.enum"
 
 @Component({
   selector: 'app-market',
