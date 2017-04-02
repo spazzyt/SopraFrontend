@@ -4,13 +4,13 @@
   <div class="container_side container_left">
     <!-- Top Left Player Field -->
     <div class="player_field player_top_left">
-        <app-top-left></app-top-left>
+      <app-top-left></app-top-left>
     </div>
 
 
     <!-- Departing Harbours -->
     <div class="departing_harbours">
-        <app-departing-harbour></app-departing-harbour>
+      <app-departing-harbour></app-departing-harbour>
     </div>
 
 
@@ -25,17 +25,17 @@
 
   <!-- Main Middle game container -->
   <div class="container_middle">
+
     <div class="game_header">
 
     </div>
 
-    <div class="game_board">
 
+    <div class="game_board">
 
       <div class="site_harbours">
         <app-site-harbour></app-site-harbour>
       </div>
-
 
       <div class="site_boards">
 
@@ -64,12 +64,74 @@
     </div>
 
 
-    <div class="game_footer">
+    <div style="border: 10px solid orange;" class="game_footer">
+
+      <!-- Rolands, test buttons: remove them later -->
+
+      <div class="row">
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_removeUnusedMarketCards()">
+            removeUnusedMarketCards
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_generateFourMarketCards()">
+            generateFourMarketCards
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_removeShips()">
+            removeShips
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_generateFourShips()">
+            generateFourShips
+          </button>
+        </div>
+      </div>
+
+      <!-- Rolands, test buttons: remove them later-->
+      <div class="row">
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setMarketCards()">
+            setMarketCards</button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setScores()">
+            setScores</button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setStonesInSled()">
+            setStonesInSled</button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setStonesInQuarry()">
+            setStonesInQuarry</button>
+        </div>
+
+      </div>
+
+      <!-- Rolands, test buttons: remove them later -->
+
 
     </div>
 
   </div>
-
 
 
   <!-- Right Menu Border -->

@@ -16,10 +16,12 @@ import {AuthenticationService} from "../shared/services/authentication.service";
   styleUrls: ['lobby.component.css']
 })
 
+//===========
 // Component
 //===========
 export class LobbyComponent implements OnInit {
 
+  //============
   // Attributes
   //============
 
@@ -43,7 +45,7 @@ export class LobbyComponent implements OnInit {
   public game: string; //??
 
 
-
+  //=============
   // Constructor
   //=============
   constructor(private router:Router,
@@ -53,7 +55,7 @@ export class LobbyComponent implements OnInit {
 
   }
 
-
+  //==========
   // ngOnInit
   //==========
   ngOnInit() {
@@ -73,6 +75,7 @@ export class LobbyComponent implements OnInit {
 
   }
 
+  //===================
   // Subscribe-Methods
   //===================
 
@@ -131,6 +134,7 @@ export class LobbyComponent implements OnInit {
       });
   }
 
+  //===============
   // Other-Methods
   //===============
 
@@ -163,7 +167,7 @@ export class LobbyComponent implements OnInit {
   }
 
 
-/*directly with event binding
+/*Roland: directly with event binding
   changeGameVariable_2(){
     this.nrOfGames = 2;
     console.log("Glückwunsch, Sie haben erfolgreich 2 Spieler ausgewählt!");

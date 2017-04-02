@@ -53,12 +53,13 @@ export class MarketComponent implements OnInit {
   //Class Methods
   //===============
 
-
   //User chooses a market card
   chooseMarketCardOnClick(){}
 
   //Unused market cards will be removed after each round
-  removeUnusedMarketCards(){}
+  removeUnusedMarketCards(){
+
+  }
 
 
   //Generate four new market cards

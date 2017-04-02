@@ -15,7 +15,6 @@ export class DepartingHarbourComponent {
   //Class Variables
   //===============
   ships:Ship[] = [];
-  roundCard:RoundCard;
   changeStyleFlag: boolean=false;  //jQuery
 
   //===============
@@ -31,9 +30,6 @@ export class DepartingHarbourComponent {
 
   ngOnInit() {
 
-    //get new round card from getNewRoundCardService (and backend)
-    this.getNewRoundCard();
-
     //generate this.ships array with four ship objects
     this.generateFourShips();
 
@@ -43,12 +39,12 @@ export class DepartingHarbourComponent {
   //Class Methods
   //===============
 
-  //New Round Card
-  getNewRoundCard(){
-    //getNewRoundCardService()
+  // Remove Ships
+  removeShips(){
+
   }
 
-  //New Ships
+  // New Ships
   generateFourShips(){
 
     //Fake Ships
