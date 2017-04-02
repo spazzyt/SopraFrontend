@@ -1,10 +1,12 @@
 <div class="container_lobby_screen">
 
+
+  <!-- Left -->
   <div class="column_left">
 
     <!-- User List for debugging purposes -->
     <h3>For debugging purposes</h3>
-    <p>Howdy {{myself.username}} your user id is {{myself.id}}</p>
+    <p>Howdy {{mySelf.username}}, your user id is {{mySelf.id}}</p>
 
     <div class="user_list">
       <h2>List of Players</h2>
@@ -24,20 +26,18 @@
             type="submit" (click)="Logout()">Logout</button>
   </div>
 
+
+  <!-- Middle -->
   <div class="column_middle">
 
     <p class="lobby_title">Lobby</p>
 
-
     <div class="game_table">
-      <!--<div id="greeting">Howdy {{myself.username}} your user id is {{myself.id}}</div>-->
-
       <div class="container">
-
         <h2 id="list_of_games">List of Games</h2>
 
+        <!-- Game Table -->
         <table class="table table-hover">
-
           <tbody class="tbody">
           <tr class="game-row" *ngFor="let game of games">
             <td id="td1">{{game.name}}</td>
@@ -52,50 +52,51 @@
             </td>
           </tr>
           </tbody>
-
         </table>
-      </div>
 
+      </div>
     </div>
 
-    <!--<button class="btn btn-sm btn-primary btn-block" type="submit" (click)="navigateToGame()">To-Game-tmp</button>-->
 
-
+    <!-- Call Modal Button -->
     <div class="new_game_screen">
 
       <h1 id="new_game">Add a New Game</h1>
 
       <div id="new_game_button">
-        <button type="button" class="btn btn-primary" id="ngButton" (click)="staticModal.show()">New Game</button>
+        <button type="button" class="btn btn-primary" id="ngButton"
+                (click)="staticModal.show()">New Game</button>
       </div>
     </div>
 
+
+    <!-- Modal: New Game -->
     <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
          tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
+
           <div class="modal-header">
             <h4 class="modal-title pull-left">New Game</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+
           <div class="modal-body">
-            Choose the number of players
+            <p>Choose the number of players</p>
+
+            <!--choose nr of players-->
             <div class="row" id="button_row">
               <button type="button" class="number_button"
-                      id="btn2" (click)="changeGameVariable_2()">2</button>
-
+                      id="btn2" (click)="numberOfGames=2">2</button>
               <button type="button" class="number_button"
-                      id="btn3" (click)="changeGameVariable_3()">3</button>
-
+                      id="btn3" (click)="numberOfGames=3">3</button>
               <button type="button" class="number_button"
-                      id="btn4" (click)="changeGameVariable_4()">4</button>
-
+                      id="btn4" (click)="numberOfGames=4">4</button>
             </div>
 
             <div class="row" id="btn_row_lower">
-
               <!--leave modal-->
               <div id="backToLobby">
                 <button type="button" class="newgame_btn btn btn-primary"
@@ -107,15 +108,15 @@
                 <button type="button" class="newgame_btn btn btn-primary"
                         id="ngButton2" (click)="staticModal.hide()" (click)="addGames()">Create</button>
               </div>
-
             </div>
-
           </div>
+
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Right -->
   <div class="column_right">
 
   </div>

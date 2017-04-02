@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
-import {LoginComponent} from "../login/login.component";
 import {User} from "../shared/models/user";
 import {Game} from "../shared/models/game";
 
-
 import {UserService} from "../shared/services/user.service";
 import {GameService} from "../shared/services/game.service";
+import {LoginComponent} from "../login/login.component";
+import {AuthenticationService} from "../shared/services/authentication.service";
 
 
 @Component({
@@ -16,60 +16,90 @@ import {GameService} from "../shared/services/game.service";
   styleUrls: ['lobby.component.css']
 })
 
+// Component
+//===========
 export class LobbyComponent implements OnInit {
 
-  //Attributes
-  //==========
-  private users: User[]=[];
-  private games: Game[]=[];
-  private game: string;
-  private joinedGame : number=-1;
-  private myself:any;
-  private nrOfGames: number = -1;
-  private requestIntervalTime = 5000 // set to 5000 during development, for production set to 500
+  // Attributes
+  //============
 
-  //Constructor
-  //===========
+  //to show list in lobby
+  public users: User[] = []; //fetched with: this.userService.getUsers()
+  public games: Game[] = []; //fetched with: this.gameService.getGames()
+
+  //request interval time to get data from backend
+  public requestIntervalTime = 20000; // set to 20000 ms during development, for production set to 500 ms
+
+  //who am I
+  public mySelf:User; //fetched with: this.userService.meMyselfAndI()
+
+  // helper property to add a new game
+  public nrOfGames: number = -1;
+
+  // number of players that joined a game
+  public joinedGame : number=-1; //??
+
+  // game name
+  public game: string; //??
+
+
+
+  // Constructor
+  //=============
   constructor(private router:Router,
               private userService: UserService,
-              private gameService: GameService) { }
-
-
-  //ngOnInit
-  //==========
-  ngOnInit() {
-
-    // subscribe to service: get users from userService (from backend)
-    this.loadUserList();
-
-    // subscribe to service: get games from gameService (from backend)
-    this.loadGameList();
-
-    //
-    this.myself = this.userService.meMyselfAndI();
-
-    // interval to update game list (every X ms a request is made to the frontend)
-    setInterval(()=>this.loadGameList(), this.requestIntervalTime)
+              private gameService: GameService,
+              private authenticationService: AuthenticationService) {
 
   }
 
-  //Methods
-  //=======
+
+  // ngOnInit
+  //==========
+  ngOnInit() {
+
+    // subscribe to service: this.userService.getUsers()
+    this.loadUserList();
+
+    // subscribe to service: this.gameService.getGames()
+    this.loadGameList();
+
+    // interval to update game list (every X ms a request is made to the frontend)
+    setInterval(()=>this.loadUserList(), this.requestIntervalTime);
+    setInterval(()=>this.loadGameList(), this.requestIntervalTime);
+
+    // subscribe to service: this.userService.meMyselfAndI()
+    this.whoAmI();
+
+  }
+
+  // Subscribe-Methods
+  //===================
+
+  // fetch list of users
   loadUserList(){
     this.userService.getUsers()
       .subscribe(users => {
         this.users = users;
+        console.log("fetch users: ", this.users);
       });
   }
 
+  // fetch list of games
   loadGameList(){
     this.gameService.getGames()
       .subscribe(games => {
         this.games = games;
+        console.log("fetch games: ", this.games);
       });
   }
 
-  // get games from secure api end point
+  //fetch my user name from localStorage
+  whoAmI(){
+    this.mySelf=this.userService.meMyselfAndI()
+  }
+
+  // add a new game to table
   addGame(numPlayers){
   this.gameService.addGameService(numPlayers)
     .subscribe(game => {
@@ -101,23 +131,25 @@ export class LobbyComponent implements OnInit {
       });
   }
 
+  // Other-Methods
+  //===============
+
   navigateToGame(){
     this.router.navigate(['/game']);
   }
 
   Logout(){
-    //tell backend about it
-    //....
+
+    // tell backend about it ??
+
+    // tell localStorage about it
+    this.authenticationService.logout();
+
     //and navigate to home screen
     this.router.navigate(['']);
 
-
   }
 
-
-
-
-  // helper functions from modal screen (can be done more direct with ng)
   addGames() {
     if(this.nrOfGames == 2){
       this.addGame(2);
@@ -130,6 +162,8 @@ export class LobbyComponent implements OnInit {
     }
   }
 
+
+/*directly with event binding
   changeGameVariable_2(){
     this.nrOfGames = 2;
     console.log("Glückwunsch, Sie haben erfolgreich 2 Spieler ausgewählt!");
@@ -144,8 +178,7 @@ export class LobbyComponent implements OnInit {
     this.nrOfGames = 4;
     console.log("Glückwunsch, Sie haben erfolgreich 4 Spieler ausgewählt!");
   }
-
-
+*/
 
 
 

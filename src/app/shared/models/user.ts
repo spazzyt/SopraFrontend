@@ -4,28 +4,29 @@ export class User {
   //Backend attributes
   //==================
 
-  //Identification
+  // Identification
   public id:number=-1;
-  public username:string;
+  public username:string; //added in: login.component.html
 
-  //Active Game
+  // Active Game
   public token: string=""; //??
+
+  // active user
   public status: string=""; //??
   public isCurrentPlayer:boolean=false;
-  public decisions: Decision[]=[]; //container with allowable actions/moves;
 
-  //Old Games
-  public oldGames: number[]; //list of past games played; data type check with backend
+  // container with allowable actions/moves;
+  public decisions: Decision[]=[];
 
-
-  //Additional Frontend attributes
-  //==============================
+  //list of past games played
+  public oldGames: number[]; // data type check with backend
 
 
+  // Additional Frontend attributes
+  //===============================
 
-  constructor(){
 
-    //
 
-  }
+  constructor(){} //instantiated in login.component.ts
+
 }
