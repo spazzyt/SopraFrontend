@@ -536,7 +536,7 @@ export class GameComponent  implements OnInit {
     let jsonFile =  `{
            "size" : 1,
            "id" : 32,
-           "dockedPosition" : 1,
+           "dockedPosition" : 4,
            "minStones" : false,
            "imageURL" : false,
            "slots": [
@@ -552,7 +552,7 @@ export class GameComponent  implements OnInit {
     let jsonFile2 =  `{
            "size" : 2,
            "id" : 2,
-           "dockedPosition" : 2,
+           "dockedPosition" : 3,
            "minStones" : false,
            "imageURL" : false,
            "slots": [
@@ -573,7 +573,7 @@ export class GameComponent  implements OnInit {
     let jsonFile3 =  `{
            "size" : 3,
            "id" : 3,
-           "dockedPosition" : 3,
+           "dockedPosition" : 2,
            "minStones" : false,
            "imageURL" : false,
            "slots": [
@@ -598,7 +598,7 @@ export class GameComponent  implements OnInit {
     let jsonFile4 =  `{
            "size" : 4,
            "id" : 4,
-           "dockedPosition" : 4,
+           "dockedPosition" : 1,
            "minStones" : false,
            "imageURL" : false,
            "slots": [
