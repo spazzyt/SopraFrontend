@@ -71,8 +71,10 @@ Styling for the game table
   /*border: 1px solid orange;*/
   font-family: 'Lithos Pro';
   height:50%;
+  border: 1px solid red;
 
 }
+
 
 #list_of_games{
   font: 200 40px/1.2 'Lithos Pro', Helvetica, sans-serif;
@@ -102,6 +104,7 @@ Styling for the game table
 }
 
 .table-hover tbody{
+  border: 1px solid green;
   /*border: 1px solid green;*/
   height:290px;
   width: 100%;
@@ -129,14 +132,22 @@ Styling for the game table
 #td1{
   clear:left;
   width:35%;
-  padding-top:5%;
+  height: 50%;
+  padding-top: 3.5%;
+  padding-bottom: 3.5%;
+  display: table-row;
 }
 #td2{
   width:30%;
-  padding-top:5%;
+  padding-top: 3.5%;
+  padding-bottom: 3.5%;
+  display: table-row;
 }
+
 #td3{
   width:35%;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
 .btn{
@@ -162,6 +173,12 @@ Styling for the game table
 btn:focus{
   background-color: #867558;
   outline: none;
+}
+
+#btn_leave{
+  background-color: #867558;
+  color: #d4bd88;
+
 }
 
 /*Scrollbar styling*/
@@ -268,6 +285,7 @@ Styling for the new game modal
   margin-top: 3%;
   margin-bottom: 3%;
   margin-bottom: 6%;
+  margin-left: -14%;
 }
 
 .number_button{
