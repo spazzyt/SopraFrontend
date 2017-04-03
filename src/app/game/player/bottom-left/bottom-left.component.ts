@@ -15,6 +15,9 @@ export class BottomLeftComponent implements OnInit {
   //Class Variables
   //===============
 
+  // the player's name
+  playerName:string;
+
   // the player's score
   score:number;
 
@@ -54,14 +57,29 @@ export class BottomLeftComponent implements OnInit {
 
   }
 
+  //================
+  // ngAfterViewInit
+  //================
+
+  ngAfterViewInit() {
+
+  }
+
   //===============
   // Other-Methods
   //===============
 
+  setPlayerName(playerName_target:string){
+
+    //update attribute: score
+    this.playerName=playerName_target;
+
+  }
+
   setMarketCards(marketCards_target:number[]){
 
     // define protocol: which market card
-  // corresponds to which array index
+    // corresponds to which array index
 
     this.marketCardIcon_0=marketCards_target[0];
     this.marketCardIcon_1=marketCards_target[1];
@@ -93,6 +111,17 @@ export class BottomLeftComponent implements OnInit {
     // update attribute:
     this.quarryStones=quarryStones_target;
 
+  }
+
+  show_hide_label(){
+    (<any>$(document)).ready(function(){
+      (<any>$("#stone_img_1")).mouseover(function(){
+        (<any>$("#stone_label")).hide();
+      });
+      (<any>$("#stone_img_1")).mouseleave(function(){
+        (<any>$("#stone_label")).show();
+      });
+    });
   }
 
 

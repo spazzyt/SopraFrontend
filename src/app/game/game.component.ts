@@ -140,6 +140,7 @@ export class GameComponent  implements OnInit {
   //===========================================================
 
   //will later be fields of defined class variables above
+  playerName_target:string="Player 1";
   marketCards_target:number[]=[1,0,2,0,1,1,0,0,4];
   score_target:number=12;
   sledStones_target:number=3;
@@ -153,6 +154,9 @@ export class GameComponent  implements OnInit {
 
   // Communication with PlayerComponent or Players ButtomLeftComponent etc. directly
   //--------------------------------------------------------------------------------
+  trigger_setPlayerName(){
+    this.bottomLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
+  }
   trigger_setMarketCard(){
     this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
   }
