@@ -144,16 +144,23 @@ Styling for the game table
   border: 3px solid #d4bd88;
   color: #867558;
   width: 55%;
+  outline: none;
 }
 
 .btn:active{
   background-color: #867558;
   border: 3px solid #867558;
   color: #edcd98;
+  outline: none;
 }
 
 .btn:hover{
   box-shadow: 1px 1px 10px #d4bd88;
+  outline: none;
+}
+
+btn:focus{
+    outline: none;
 }
 
 /*Scrollbar styling*/
@@ -203,12 +210,14 @@ Styling for the new game modal
   text-align: center;
   font-family: 'Lithos Pro';
   /*border: 1px solid black;*/
+  outline: none;
 }
 
 #ngButton{
   display: inline-block;
   width: 40%;
   font-size: 150%;
+  outline: none;
 }
 
 .modal {
@@ -275,6 +284,7 @@ Styling for the new game modal
   background-color: #edcd98;
   border: 3px solid #d4bd88;
   color: #867558;
+  outline: none;
 }
 
 .number_button:hover{
@@ -283,26 +293,31 @@ Styling for the new game modal
   cursor: pointer;
   filter:alpha(opacity=50);
   opacity:.5;
+  outline: none;
 
 }
 
 .number_button:focus{
   background-color: #867558;
   color: #edcd98;
+  outline: none;
 }
 
 #btn2{
   width: 20%;
+  outline: none;
 }
 
 
 #btn3{
   width: 20%;
+  outline: none;
 }
 
 
 #btn4{
   width: 20%;
+  outline: none;
 }
 
 .modal-footer {
