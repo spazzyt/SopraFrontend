@@ -160,7 +160,8 @@ Styling for the game table
 }
 
 btn:focus{
-    outline: none;
+  background-color: #867558;
+  outline: none;
 }
 
 /*Scrollbar styling*/
@@ -288,11 +289,7 @@ Styling for the new game modal
 }
 
 .number_button:hover{
-  color:#000;
-  text-decoration: none;
-  cursor: pointer;
-  filter:alpha(opacity=50);
-  opacity:.5;
+  box-shadow: 1px 1px 10px #d4bd88;
   outline: none;
 
 }
