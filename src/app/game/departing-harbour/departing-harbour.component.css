@@ -8,6 +8,7 @@
 .departing_harbour{
   width: 100%;
   height:25%;
+  border: 1px solid red;
 }
 
 /* Ship 1 is on the bottom, ship 4 on top */
