@@ -15,19 +15,20 @@ const USERS: User[] = [
   {"oldGames":null,"decisions":null,"id":6,"username":"Zulsdao","token":"b3a4af45-5578-4d70-8df8-26d4f40031da","status":"OFFLINE","games":[],"moves":[]}
   ];
 
-const GAMES: Game[] = [{"id":1,"name":"sgfsdg","owner":"sgfsdg","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]},
-  {"id":2,"name":"sgfsdg","owner":"sgfsdg","status":null,"currentPlayer":null,"numPlayers":2,"moves":[],"players":[]},
-  {"id":3,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":3,"moves":[],"players":[]},
-  {"id":4,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":2,"moves":[],"players":[]},
-  {"id":5,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]},
-  {"id":6,"name":"hsdosdf","owner":"hsdosdf","status":null,"currentPlayer":null,"numPlayers":3,"moves":[],"players":[]},
-  {"id":7,"name":"hsdosdf","owner":"hsdosdf","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]},
-  {"id":2,"name":"sgfsdg","owner":"sgfsdg","status":null,"currentPlayer":null,"numPlayers":2,"moves":[],"players":[]},
-  {"id":3,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":3,"moves":[],"players":[]},
-  {"id":4,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":2,"moves":[],"players":[]},
-  {"id":5,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]},
-  {"id":6,"name":"hsdosdf","owner":"hsdosdf","status":null,"currentPlayer":null,"numPlayers":3,"moves":[],"players":[]},
-  {"id":7,"name":"hsdosdf","owner":"hsdosdf","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]}
+const GAMES: Game[] = [
+  {"ships": null,"id":1,"name":"sgfsdg","owner":"sgfsdg","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]},
+  {"ships": null,"id":2,"name":"sgfsdg","owner":"sgfsdg","status":null,"currentPlayer":null,"numPlayers":2,"moves":[],"players":[]},
+  {"ships": null,"id":3,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":3,"moves":[],"players":[]},
+  {"ships": null,"id":4,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":2,"moves":[],"players":[]},
+  {"ships": null,"id":5,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]},
+  {"ships": null,"id":6,"name":"hsdosdf","owner":"hsdosdf","status":null,"currentPlayer":null,"numPlayers":3,"moves":[],"players":[]},
+  {"ships": null,"id":7,"name":"hsdosdf","owner":"hsdosdf","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]},
+  {"ships": null,"id":2,"name":"sgfsdg","owner":"sgfsdg","status":null,"currentPlayer":null,"numPlayers":2,"moves":[],"players":[]},
+  {"ships": null,"id":3,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":3,"moves":[],"players":[]},
+  {"ships": null,"id":4,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":2,"moves":[],"players":[]},
+  {"ships": null,"id":5,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]},
+  {"ships": null,"id":6,"name":"hsdosdf","owner":"hsdosdf","status":null,"currentPlayer":null,"numPlayers":3,"moves":[],"players":[]},
+  {"ships": null,"id":7,"name":"hsdosdf","owner":"hsdosdf","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]}
 
 ];
 

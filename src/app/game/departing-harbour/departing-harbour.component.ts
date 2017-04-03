@@ -32,9 +32,9 @@ export class DepartingHarbourComponent {
   //===============
 
   ngOnInit() {
-    this.gameService.getShips();
+    //this.gameService.getShips();
     //generate this.ships array with four ship objects
-    this.generateFourShips();
+    //this.generateFourShips();
 
   }
 

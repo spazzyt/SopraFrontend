@@ -534,28 +534,25 @@ export class GameComponent  implements OnInit {
     let ships:Ship[] = [];
 
     let jsonFile =  `{
-           "size" : 2,
+           "size" : 1,
            "id" : 32,
-           "dockPosition" : 1,
+           "dockedPosition" : 1,
            "minStones" : false,
            "imageURL" : false,
            "slots": [
             {
                 "id": "1",
                 "hasStone": "false"
-            },
-            {
-                "id": "2",
-                "hasStone": "true"
             }
                     ]
            }`;
     let mockShip1 = JSON.parse(jsonFile);
+    ships.push(mockShip1);
 
     let jsonFile2 =  `{
            "size" : 2,
-           "id" : 32,
-           "dockPosition" : 1,
+           "id" : 2,
+           "dockedPosition" : 2,
            "minStones" : false,
            "imageURL" : false,
            "slots": [
@@ -565,13 +562,68 @@ export class GameComponent  implements OnInit {
             },
             {
                 "id": "2",
-                "hasStone": "true"
+                "hasStone": "false"
             }
                     ]
            }`;
-    let mockShip2 = JSON.parse(jsonFile);
-    ships.push(mockShip1);
+    let mockShip2 = JSON.parse(jsonFile2);
+
     ships.push(mockShip2);
+
+    let jsonFile3 =  `{
+           "size" : 3,
+           "id" : 3,
+           "dockedPosition" : 3,
+           "minStones" : false,
+           "imageURL" : false,
+           "slots": [
+            {
+                "id": "1",
+                "hasStone": "false"
+            },
+            {
+                "id": "2",
+                "hasStone": "false"
+            },
+            {
+                "id": "3",
+                "hasStone": "false"
+            }
+                    ]
+           }`;
+    let mockShip3 = JSON.parse(jsonFile3);
+
+    ships.push(mockShip3);
+
+    let jsonFile4 =  `{
+           "size" : 4,
+           "id" : 4,
+           "dockedPosition" : 4,
+           "minStones" : false,
+           "imageURL" : false,
+           "slots": [
+            {
+                "id": "1",
+                "hasStone": "false"
+            },
+            {
+                "id": "2",
+                "hasStone": "false"
+            },
+            {
+                "id": "3",
+                "hasStone": "false"
+            },
+            {
+                "id": "4",
+                "hasStone": "false"
+            }
+                    ]
+           }`;
+    let mockShip4 = JSON.parse(jsonFile4);
+
+    ships.push(mockShip4);
+
     return ships
   }
 }
