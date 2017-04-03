@@ -18,6 +18,7 @@ import {TopLeftComponent} from "./player/top-left/top-left.component";
 import {CurrentGameState} from "../shared/models/current-game-state";
 import {Decision} from "../shared/models/decision";
 import {User} from "../shared/models/user";
+import {Ship} from "../shared/models/ship";
 
 @Component({
   selector: 'app-game',
@@ -140,11 +141,18 @@ export class GameComponent  implements OnInit {
   //===========================================================
 
   //will later be fields of defined class variables above
-  playerName_target:string="Player 1";
+  playerName_target:string="P1: Roland";
   marketCards_target:number[]=[1,0,2,0,1,1,0,0,4];
   score_target:number=12;
   sledStones_target:number=3;
   quarryStones_target:number=25;
+
+  //Fake Ships
+  ship1 = new Ship(1, 4);
+  ship2 = new Ship(2, 3);
+  ship3 = new Ship(3, 2);
+  ship4 = new Ship(4, 1);
+
 
 
 
@@ -157,7 +165,7 @@ export class GameComponent  implements OnInit {
   trigger_setPlayerName(){
     this.bottomLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
   }
-  trigger_setMarketCard(){
+  trigger_setMarketCards(){
     this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
   }
   trigger_setScore(){
@@ -192,8 +200,16 @@ export class GameComponent  implements OnInit {
     this.departingHarbourComponent.removeShips(); //(click)="trigger_removeShips()"
   }
 
-  trigger_generateFourShips(){
-    this.departingHarbourComponent.generateFourShips(); //(click)="trigger_generateFourShips()"
+  trigger_generateFourShips(ship1,ship2,ship3,ship4){
+    this.departingHarbourComponent.generateFourShips(this.ship1,this.ship2,this.ship3,this.ship4); //(click)="trigger_generateFourShips()"
+  }
+
+  trigger_generateShip(){
+    this.departingHarbourComponent.generateShip(this.ship1); //(click)="trigger_generateShip()"
+  }
+
+  trigger_removeShip(id:number){
+    this.departingHarbourComponent.removeShip(this.ship4); //(click)="trigger_removeShip()"
   }
 
 
