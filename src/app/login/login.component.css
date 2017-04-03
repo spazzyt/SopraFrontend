@@ -45,7 +45,8 @@
 
 .form-signin .form-control:focus {
   z-index: 2;
-  outline: none !important;
+  outline: none;
+  box-shadow: 1px 1px 10px #d4bd88;
 }
 
 .form-signin input{
@@ -70,16 +71,20 @@
   font-family: "Lithos Pro", Serif;
   font-size: 25px;
   padding: 2px;
+  outline: none;
 }
 
 .btn:active{
   background-color: #867558;
+
   border: 3px solid #867558;
   color: #edcd98;
+  outline: none;
 }
 
 .btn:hover{
   box-shadow: 1px 1px 10px #d4bd88;
+  outline: none;
 }
 
 .login-footer {

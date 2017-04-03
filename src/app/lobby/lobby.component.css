@@ -12,21 +12,21 @@
 }
 
 .column_left{
-  border: 1px solid violet;/*border: 1px solid violet;*/
+  /*border: 1px solid violet;*/
   width:20%;
   height: 100%;
   float: left;
 }
 
 .column_middle{
-  border: 1px solid blueviolet;/*border: 1px solid blueviolet;*/
+ /*border: 1px solid blueviolet;*/
   width:60%;
   height: 100%;
   float: left;
 }
 
 .column_right{
-  border: 1px solid aliceblue;/*border: 1px solid aliceblue;*/
+  /*border: 1px solid aliceblue;*/
   width:20%;
   height: 100%;
   float: left;
@@ -38,7 +38,8 @@
   color: #867558;
   text-shadow: 3px 3px 2px #d4bd88;
   text-align: center;
-  padding-top:10%
+  padding-top:15%;
+  padding-bottom:2%;
 }
 
 
@@ -52,7 +53,7 @@ Styling for the user list
 
 .user_list{
   font-family: 'Lithos Pro';
-  border: 1px solid red;
+ /*border: 1px solid red;*/
   height:290px;
   width: 100%;
   overflow-y:auto;
@@ -71,19 +72,11 @@ Styling for the game table
   /*border: 1px solid orange;*/
   font-family: 'Lithos Pro';
   height:50%;
-  border: 1px solid red;
-
+  /*border: 1px solid red;*/
 }
 
+.game-row{
 
-#list_of_games{
-  font: 200 40px/1.2 'Lithos Pro', Helvetica, sans-serif;
-  color: #867558;
-  text-shadow: 3px 3px 2px #d4bd88;
-  text-align: center;
-  margin-top: 0%;
-  margin-bottom: 0%;
-  text-align: center;
 }
 
 .container{
@@ -95,8 +88,16 @@ Styling for the game table
 .table{
   /*border: 1px solid yellow;*/
   font-family: 'Lithos Pro';
-
 }
+
+/*
+.tbody{
+  border: 2px solid blue;
+  height: 350px;
+  width:500px;
+}
+*/
+
 
 .table-hover{
   /*border: 1px solid red;*/
@@ -104,7 +105,6 @@ Styling for the game table
 }
 
 .table-hover tbody{
-  border: 1px solid green;
   /*border: 1px solid green;*/
   height:290px;
   width: 100%;
@@ -127,6 +127,7 @@ Styling for the game table
 
 .table-hover thead, .table-hover tbody, .table-hover tr, .table-hover td, .table-hover th{
   display:block;
+
 }
 
 #td1{
@@ -220,8 +221,8 @@ Styling for the new game modal
   text-shadow: 3px 3px 2px #d4bd88;
   /*border: 1px solid black;*/
   text-align: center;
-  margin-top: 0%;
-  margin-bottom: 0%;
+  margin-top: -15%;
+  margin-bottom: 5%;
 }
 
 #new_game_button{
