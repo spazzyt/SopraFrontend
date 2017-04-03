@@ -1,4 +1,6 @@
 import {Decision} from "./decision";
+import {Game} from "./game";
+import {Move} from "./move";
 
 export class User {
 
@@ -15,7 +17,7 @@ export class User {
 
   // active user
   public status: string=""; //??
-  public isCurrentPlayer:boolean=false;
+  //public isCurrentPlayer:boolean=false; //makes problem in lobby-demo components when compiling
 
   // container with allowable actions/moves;
   public decisions: Decision[]=[];
@@ -27,7 +29,8 @@ export class User {
   //===============================
   // Additional Frontend attributes
   //===============================
-
+  public games:Game[];
+  public moves:Move[];
 
 
   constructor(){} //instantiated in login.component.ts

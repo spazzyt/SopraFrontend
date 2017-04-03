@@ -31,7 +31,7 @@ export class Game {
   public currentPlayer: string;
 
   // check if necessary
-  //public moves: string[]; //data type: check with backend
+  public moves: string[]; //data type: check with backend
   //public moves: Move[]; //data type: check with backend
 
 
