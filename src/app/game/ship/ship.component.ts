@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {Ship} from "../../shared/models/ship";
 
 @Component({
   selector: 'app-ship',
@@ -7,7 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShipComponent implements OnInit {
 
-  constructor() { }
+  //===============
+  //Class Variables
+  //===============
+
+  //input from parent: departing-harbour.component.html
+  @Input() ship:Ship;
+
+
+  //===============
+  //Constructor
+  //===============
+
+  constructor() {
+
+  }
+
+
+  //===============
+  //ngOnInit
+  //===============
 
   ngOnInit() {
   }

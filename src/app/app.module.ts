@@ -93,7 +93,15 @@ import {ShipService} from "./shared/services/ship.service";
     AlertModule.forRoot(), ModalModule.forRoot(), TooltipModule,
     DragulaModule
   ],
-  providers: [AuthenticationService,AuthGuardService,UserService,GameService, DragulaService, ShipService],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthenticationService,
+    AuthGuardService,
+    UserService,
+    GameService,
+    DragulaService,
+    ShipService],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
