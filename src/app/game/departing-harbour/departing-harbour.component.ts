@@ -17,7 +17,11 @@ export class DepartingHarbourComponent {
   //===============
   //Class Variables
   //===============
+
+  //input from parent: game.component.html
   @Input() ships:Ship[];
+
+  //not used yet
   changeStyleFlag: boolean=false;  //jQuery
 
   //===============
