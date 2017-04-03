@@ -18,6 +18,8 @@ import {TopLeftComponent} from "./player/top-left/top-left.component";
 import {CurrentGameState} from "../shared/models/current-game-state";
 import {Decision} from "../shared/models/decision";
 import {User} from "../shared/models/user";
+import {Game} from "../shared/models/game";
+import {Ship} from "../shared/models/ship";
 
 @Component({
   selector: 'app-game',
@@ -58,6 +60,7 @@ export class GameComponent  implements OnInit {
   chosenActivePlayerDecision:Decision;
 
 
+  currentGame:Game = new Game;
 
   //===============
   //Constructor
@@ -286,7 +289,7 @@ export class GameComponent  implements OnInit {
        */
 
       // Custom code here
-
+     //this.gameService.setShipToDockingStation(ship)
     });
   }
 
@@ -527,6 +530,48 @@ export class GameComponent  implements OnInit {
   @ViewChild(ShipComponent) shipComponent:ShipComponent;
 
 
+  getShips():Ship[] {
+    let ships:Ship[] = [];
 
+    let jsonFile =  `{
+           "size" : 2,
+           "id" : 32,
+           "dockPosition" : 1,
+           "minStones" : false,
+           "imageURL" : false,
+           "slots": [
+            {
+                "id": "1",
+                "hasStone": "false"
+            },
+            {
+                "id": "2",
+                "hasStone": "true"
+            }
+                    ]
+           }`;
+    let mockShip1 = JSON.parse(jsonFile);
 
+    let jsonFile2 =  `{
+           "size" : 2,
+           "id" : 32,
+           "dockPosition" : 1,
+           "minStones" : false,
+           "imageURL" : false,
+           "slots": [
+            {
+                "id": "1",
+                "hasStone": "false"
+            },
+            {
+                "id": "2",
+                "hasStone": "true"
+            }
+                    ]
+           }`;
+    let mockShip2 = JSON.parse(jsonFile);
+    ships.push(mockShip1);
+    ships.push(mockShip2);
+    return ships
+  }
 }

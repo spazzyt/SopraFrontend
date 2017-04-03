@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Ship} from "../../shared/models/ship";
 import {RoundCard} from "../../shared/models/round-card";
+import {GameService} from "../../shared/services/game.service";
+import {Response} from "@angular/http";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -14,13 +17,13 @@ export class DepartingHarbourComponent {
   //===============
   //Class Variables
   //===============
-  ships:Ship[] = [];
+  @Input() ships:Ship[];
   changeStyleFlag: boolean=false;  //jQuery
 
   //===============
   //Constructor
   //===============
-  constructor() {
+  constructor(private gameService: GameService) {
 
   }
 
@@ -29,7 +32,7 @@ export class DepartingHarbourComponent {
   //===============
 
   ngOnInit() {
-
+    this.gameService.getShips();
     //generate this.ships array with four ship objects
     this.generateFourShips();
 
@@ -44,6 +47,8 @@ export class DepartingHarbourComponent {
 
   }
 
+
+
   // New Ships
   generateFourShips(){
 
@@ -54,10 +59,10 @@ export class DepartingHarbourComponent {
     let ship4 = new Ship(4, 1);
 
     //fill ships array
-    this.ships.push(ship1);
-    this.ships.push(ship2);
-    this.ships.push(ship3);
-    this.ships.push(ship4);
+   // this.ships.push(ship1);
+   // this.ships.push(ship2);
+   // this.ships.push(ship3);
+   // this.ships.push(ship4);
   }
 
   //change Style

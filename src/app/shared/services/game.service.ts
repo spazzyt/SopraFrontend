@@ -3,13 +3,17 @@ import {Http, Headers, RequestOptions, Response, URLSearchParams} from "@angular
 import {AuthenticationService} from "./authentication.service";
 import {Observable} from "rxjs";
 import {Game} from "../models/game";
+import {ShipService} from "./ship.service";
+import {Ship} from "../models/ship";
 
 @Injectable()
 export class GameService {
   private apiUrl: string;
 
   constructor(private http: Http,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private shipService: ShipService,
+  ) {
 
     //TODO fill in your heroku-backend URL
     //this.apiUrl = 'https://sopra-fs17-group13.herokuapp.com';
@@ -23,9 +27,59 @@ export class GameService {
 
     // get users from api
     return this.http.get(this.apiUrl + '/game', options)
-      .map((response: Response) => response.json());
+      .map((response: Response) => {
+        return response.json()});
   }
 
+  getShips(): Observable<Ship[]> {
+    let ships:Ship[] = [];
+    let jsonFile =  `{
+           "size" : 2,
+           "id" : 32,
+           "dockPosition" : 1,
+           "minStones" : false,
+           "imageURL" : false,
+           "slots": [
+            {
+                "id": "1",
+                "hasStone": "false"
+            },
+            {
+                "id": "2",
+                "hasStone": "true"
+            }
+                    ]
+           }`;
+    let mockShip1 = JSON.parse(jsonFile);
+   // let mockShip2 = this.parse(jsonFile);
+    ships.push(mockShip1);
+    return Observable.of(ships);
+  }
+
+  setShipToDockingStation(ship:Ship){
+    return this.http.post(this.apiUrl + '/game/{id}`/ships', ship) // ...using post request
+      .map((response: Response) => {
+        // login successful if there's a jwt token in the response
+        let ships = response//.json() && response.json();
+        if (ships) {
+          console.log(ships)
+        } else {
+          // return false to indicate failed login
+          return null;
+        }
+      }) // ...and calling .json() on the response to return data
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+
+  }
+
+
+  parse(jsonStr: string):Ship {
+    let jsonObj: any = JSON.parse(jsonStr);
+    for (let prop in jsonObj) {
+      this[prop] = jsonObj[prop];
+    }
+    return jsonObj;
+  }
 
   addGameService(numPlayers): Observable<Game> {
     let bodyString = JSON.stringify({numPlayers: numPlayers}); // Stringify payload
@@ -34,7 +88,7 @@ export class GameService {
       'Authorization': 'Bearer ' + this.authenticationService.token
     });// ... Set content type to JSON
     let params = new URLSearchParams();
-    params.set("token", this.authenticationService.token)
+    params.set("token", this.authenticationService.token);
     let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
     return this.http.post(this.apiUrl + '/game', bodyString, options) // ...using post request
