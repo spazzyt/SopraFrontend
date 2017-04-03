@@ -115,11 +115,13 @@ export class BottomLeftComponent implements OnInit {
 
   show_hide_label(){
     (<any>$(document)).ready(function(){
-      (<any>$("#stone_img_1")).mouseover(function(){
-        (<any>$("#stone_label")).hide();
+      (<any>$(".supply_sled")).mouseover(function(){
+        (<any>$("#stone_img_1")).show();
+        (<any>$(".stone_label")).hide();
       });
-      (<any>$("#stone_img_1")).mouseleave(function(){
-        (<any>$("#stone_label")).show();
+      (<any>$(".supply_sled")).mouseleave(function(){
+        (<any>$("#stone_img_1")).hide();
+        (<any>$(".stone_label")).show();
       });
     });
   }
