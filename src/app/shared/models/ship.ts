@@ -16,6 +16,9 @@ export class Ship {
   //number of slots
   public size:number=-1;
 
+  //ship position
+  public dockedPosition:number=-1;
+
   //minimum number of stones needed to sail
   public minStones:number=-1;
 
@@ -24,6 +27,7 @@ export class Ship {
 
   //ship image
   public imageUrl:string="";
+
 
   constructor(id_:number, size_:number, minStones_?:number){
     //initialize attributes

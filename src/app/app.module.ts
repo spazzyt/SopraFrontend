@@ -47,6 +47,7 @@ import { ScrollbarComponent } from './demo-temp/scrollbar/scrollbar.component';
 import { DragulaDemoComponent } from './demo-temp/dragula-demo/dragula-demo.component';
 
 import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
+import {ShipService} from "./shared/services/ship.service";
 
 
 @NgModule({
@@ -92,7 +93,7 @@ import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
     AlertModule.forRoot(), ModalModule.forRoot(), TooltipModule,
     DragulaModule
   ],
-  providers: [AuthenticationService,AuthGuardService,UserService,GameService, DragulaService],
+  providers: [AuthenticationService,AuthGuardService,UserService,GameService, DragulaService, ShipService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
