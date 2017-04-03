@@ -47,7 +47,7 @@
               <button *ngIf="joinedGame!=game.id" class="btn btn-sm btn-primary btn-block"
                       type="submit" (click)="joinGame(game.id)">Join</button>
 
-              <button *ngIf="joinedGame==game.id" class="btn btn-sm btn-primary btn-block"
+              <button *ngIf="joinedGame==game.id" id="btn_leave" class="btn btn-sm btn-primary btn-block"
                       type="submit" (click)="leaveGame(game.id)">Leave</button>
             </td>
           </tr>
