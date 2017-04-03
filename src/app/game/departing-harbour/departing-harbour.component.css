@@ -11,6 +11,7 @@
   border: 1px solid red;
 }
 
+
 /* Ship 1 is on the bottom, ship 4 on top */
 .ship_1{
   position:relative; top:20%; width:225px; height:70px;
