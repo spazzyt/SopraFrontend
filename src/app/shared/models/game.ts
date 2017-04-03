@@ -1,5 +1,6 @@
 import {User} from "./user";
 import {Move} from "./move";
+import {Ship} from "./ship";
 /**
  * Created by benzro on 23.03.17.
  */
@@ -37,6 +38,8 @@ export class Game {
 
   //Additional Frontend attributes
   //==============================
+
+  public ships:Ship[] = [];
 
     constructor(){
     }
