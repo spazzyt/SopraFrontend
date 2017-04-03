@@ -2,24 +2,24 @@
 <div id="departing_harbours" class="departing_harbours">
 
   <!--add departing harbour_i-->
-    <div *ngFor="let ship of ships; let i = index"
-         id="departing_harbour_{{i+1}}" class="departing_harbour"
+    <div *ngFor="let dep of [1,2,3,4]; let k = index;"
+         id="departing_harbour_{{k+1}}" class="departing_harbour"
          [dragula]="'harbours_bag'">
 
       <!--add ship_i to departing harbour-->
-      <div id="ship_{{i+1}}" class="ship_{{ship.size}}">
+      <div *ngFor="let ship of ships; let i = index;">
+        <div *ngIf="ship.dockedPosition === dep;">
+          <div id="ship_{{i+1}}" class="ship_{{ship.size}}">
 
-        <!--add image of ship
-        <img [src]="ship.imageUrl"/>
-        Roland: replaced by background image in div id=ship_i-->
+            <!--add slots container-->
+            <div id="ship_{{i+1}}_slots" class="ship_slots">
 
-        <!--add slots container-->
-        <div id="ship_{{i+1}}_slots" class="ship_slots">
-
-          <!--add slots to slots container of ship_i-->
-          <div *ngFor="let slots of ship.slots; let j= index"
-               id="ship_{{i+1}}_slot_{{j+1}}" class="ship_slot"
-               [dragula]="'stone_slots_bag'"></div><!-- innerHTML no space, no new line allowed-->
+              <!--add slots to slots container of ship_i-->
+              <div *ngFor="let slots of ship.slots; let j= index"
+                   id="ship_{{i+1}}_slot_{{j+1}}" class="ship_slot"
+                   [dragula]="'stone_slots_bag'"></div><!-- innerHTML no space, no new line allowed-->
+            </div>
+          </div>
         </div>
       </div>
 
