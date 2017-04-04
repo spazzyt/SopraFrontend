@@ -575,7 +575,7 @@ export class GameComponent  implements OnInit {
 
         /*elements are copied or moved*/
 
-        console.log("stone_slots_bag:copy ", `el: ${el}`);
+        console.log("stone_slots_bag:copy ", `el: ${el.id}`);
         console.log("stone_slots_bag:copy ", `source: ${source}`);
 
 
