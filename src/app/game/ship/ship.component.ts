@@ -16,8 +16,8 @@ export class ShipComponent implements OnInit {
   //Class Variables
   //===============
   //input from parent: departing-harbour.component.html
-  //@Input() ship:Ship;
-  ship:Ship;
+  @Input() ship:Ship;
+  //ship:Ship;
 
   //===============
   //Constructor
