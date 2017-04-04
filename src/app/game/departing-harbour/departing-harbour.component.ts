@@ -36,25 +36,6 @@ export class DepartingHarbourComponent {
   //===============
 
   ngOnInit() {
-    //this.gameService.getShips();
-    //generate this.ships array with four ship objects
-    //this.generateFourShips();
-
-  }
-
-  //===============
-  //Class Methods
-  //===============
-
-  // Remove Ships
-  removeShips(){
-
-  }
-
-
-
-  // New Ships
-  generateFourShips(){
 
     //Fake Ships
     let ship1 = new Ship(1, 4);
@@ -62,11 +43,40 @@ export class DepartingHarbourComponent {
     let ship3 = new Ship(3, 2);
     let ship4 = new Ship(4, 1);
 
+    this.generateFourShips(ship1, ship2, ship3, ship4);
+
+  }
+
+  //===============
+  //Class Methods
+  //===============
+
+  // Generate Ship
+  generateShip(ship:Ship){
+
+  }
+
+  // Remove Ship
+  removeShip(ship:Ship){
+
+  }
+
+
+
+  // Generate Ships
+  generateFourShips(ship1, ship2, ship3, ship4){
+
     //fill ships array
-   // this.ships.push(ship1);
-   // this.ships.push(ship2);
-   // this.ships.push(ship3);
-   // this.ships.push(ship4);
+    this.ships.push(ship1);
+    this.ships.push(ship2);
+    this.ships.push(ship3);
+    this.ships.push(ship4);
+
+  }
+
+  // Remove Ships
+  removeShips(){
+
   }
 
   //change Style

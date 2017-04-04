@@ -7,14 +7,8 @@
        class="departing_harbour"
        [dragula]="'harbours_bag'">
 
-    <!--add ship_i to departing harbour-->
-    <div *ngFor="let ship of ships;">
-
-      <div *ngIf="ship.dockedPosition === departing_harbour_Id;">
-
-        <app-ship [ship]="ship"></app-ship>
-
-      </div>
+      <!--add ship_i to departing harbour-->
+      <app-ship [ship]="ship"></app-ship>
 
     </div>
 

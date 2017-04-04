@@ -21,8 +21,6 @@
   background-position: center;
 }
 
-
-
 /* Ship Slots */
 
 .ship_slots{
@@ -49,5 +47,4 @@
 #ship_4_slot_2{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
 #ship_4_slot_3{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
 #ship_4_slot_4{ margin-top: 10%; margin-left: 2.3%;  width: 19.5%; height:51%; float:right; border: 1px solid #0c0c0c; }
-
 
