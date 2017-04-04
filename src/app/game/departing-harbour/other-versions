@@ -1,5 +1,81 @@
 <!--drag and drop zone-->
 <div id="departing_harbours" class="departing_harbours">
+
+  <!--add departing harbour_i-->
+    <div *ngFor="let ship of ships; let i = index"
+         id="departing_harbour_{{i+1}}" class="departing_harbour"
+         [dragula]="'harbours_bag'">
+
+      <!--add ship_i to departing harbour-->
+      <div id="ship_{{i+1}}" class="ship_{{ship.size}}">
+
+        <!--add slots container-->
+        <div id="ship_{{i+1}}_slots" class="ship_slots">
+
+          <!--add slots to slots container of ship_i-->
+          <div *ngFor="let slots of ship.slots; let j= index"
+               id="ship_{{i+1}}_slot_{{j+1}}" class="ship_slot"
+               [dragula]="'stone_slots_bag'"></div><!-- innerHTML no space, no new line allowed-->
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+
+
+
+ <!--Example
+  <h1>departing harbours</h1>
+  <div id="departing_harbour_1" class="row departing_harbour_1" [dragula]="'harbours_bag'">
+    <div id="ship_1" class="ship_1">
+      <div id="ship_1_slots" class="col-md-12 ship_slots">
+        <div id="ship_1_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+        <div id="ship_1_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+      </div>
+    </div>
+  </div>
+  <div id="departing_harbour_2" class="row departing_harbour_2" [dragula]="'harbours_bag'">
+    <div id="ship_2" class="ship_2">
+      <div id="ship_2_slots" class="col-md-12 ship_slots">
+        <div id="ship_2_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+        <div id="ship_2_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+      </div>
+    </div>
+  </div>
+  <div id="departing_harbour_3" class="row departing_harbour_3" [dragula]="'harbours_bag'">
+    <div id="ship_3" class="ship_3">
+      <div id="ship_3_slots" class="col-md-12 ship_slots">
+        <div id="ship_3_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+        <div id="ship_3_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+      </div>
+    </div>
+  </div>
+  <div id="departing_harbour_4" class="row departing_harbour_4" [dragula]="'harbours_bag'">
+    <div id="ship_4" class="ship_4">
+      <div id="ship_4_slots" class="col-md-12 ship_slots">
+        <div id="ship_4_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+        <div id="ship_4_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
+      </div>
+    </div>
+  </div>
+  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--drag and drop zone-->
+<div id="departing_harbours" class="departing_harbours">
   <!--add departing harbour_i-->
   <div *ngFor="let departing_harbour_Id of [1,2,3,4];"
        id="departing_harbour_{{departing_harbour_Id}}"
@@ -94,3 +170,7 @@ export class DepartingHarbourComponent {
     { return "blue"; }
   }
 }
+
+
+
+

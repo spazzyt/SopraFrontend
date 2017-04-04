@@ -1,0 +1,39 @@
+Create own branch and commit to own project on GitHub
+
+
+benzro@benzro-eMachines-E625:~/WebstormProjects/Sopra/sopra-fs17-group13-client$
+git log
+
+benzro@benzro-eMachines-E625:~/WebstormProjects/Sopra/sopra-fs17-group13-client$
+git reset --hard
+HEAD is now at bc5a91b moved ship html and css from departing harbour into own ship component
+
+benzro@benzro-eMachines-E625:~/WebstormProjects/Sopra/sopra-fs17-group13-client$
+git checkout -b old-project-state-1 e176b2a150d1d6bf5ee888de0f1a41c1897e0e18
+Switched to a new branch 'old-project-state-1'
+
+benzro@benzro-eMachines-E625:~/WebstormProjects/Sopra/sopra-fs17-group13-client$ git branch
+  master
+* old-project-state-1
+
+benzro@benzro-eMachines-E625:~/WebstormProjects/Sopra/sopra-fs17-group13-client$
+git checkout old-project-state-1
+
+benzro@benzro-eMachines-E625:~/WebstormProjects/Sopra/sopra-fs17-group13-client$
+git branch
+  master
+* old-project-state-1
+
+benzro@benzro-eMachines-E625:~/WebstormProjects/Sopra/sopra-fs17-group13-client$
+git push https://github.com/since4/Sopra_Own_Branch.git old-project-state-1:master
+Username for 'https://github.com': since4
+Password for 'https://since4@github.com':
+Counting objects: 2097, done.
+Compressing objects: 100% (1472/1472), done.
+Writing objects: 100% (2097/2097), 13.03 MiB | 59.00 KiB/s, done.
+Total 2097 (delta 1497), reused 786 (delta 576)
+remote: Resolving deltas: 100% (1497/1497), done.
+To https://github.com/since4/Sopra_Own_Branch.git
+ * [new branch]      old-project-state-1 -> master
+
+
