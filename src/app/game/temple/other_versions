@@ -20,154 +20,108 @@ import {Decision} from "../shared/models/decision";
 import {User} from "../shared/models/user";
 import {Game} from "../shared/models/game";
 import {Ship} from "../shared/models/ship";
-
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-
 //===========
 // Component
 //===========
 export class GameComponent  implements OnInit {
-
   //===============
   //Class Variables
   //===============
-
   // Current Target (Soll) Game state
   // ( current-game-state package from backend sent to all players)
   currentTargetGameState:CurrentGameState;
-
   // Current Actual (Ist) Game state
   // ( current-game-state package from backend sent to all players)
   currentActualGameState:CurrentGameState;
-
   // Last players move/action/decision
   // ( decision package from backend sent to not active players)
   lastPlayerDecision:Decision;
-
   // Current active Player
   currentActivePlayer:User;
-
   // Allowed moves/actions/decisions
   // ( decision package from backend sent to active player, (to not active players as info))
   allowedActivePlayerDecisions:Decision;
-
   // Active player move/action/decision
   // (decision package from active player sent to backend)
   chosenActivePlayerDecision:Decision;
-
-
   currentGame:Game = new Game;
-
   //===============
   //Constructor
   //===============
   constructor(private dragulaService: DragulaService,
               private gameService: GameService) {
-
     this.dragulaShipMovement_setOptions();
     this.dragulaStoneMovement_setOptions();
     this.dragula_subscribeDragEvent();
     this.dragula_subscribeDropEvent();
-
   }
-
   //==========
   // ngOnInit
   //==========
-
   ngOnInit() {
-
-
   }
-
   //==============================
   // Major Tasks of Game Component
   //==============================
-
   // Current Game state
   // ( current-game-state package from backend sent to all players)
   //---------------------------------------------------------------
   //1. pull current-target-game-state package from game-service,
   //   store it into object of class current-game-state.ts
-
   //2. make current-actual-game-state package from frontend,
   //   store it into object of class current-game-state.ts
-
   //3. compare actual/target game-state,
   //   delegate differences to ancestors to fix
-
   // Last players move/action/decision
   // ( decision package from backend sent to not active players)
   //------------------------------------------------------------
   //1. pull last players decision from game-service,
   //   store it into object of class decision.ts
-
   //2. Simulate last decision to other players
   //   delegate task to ancestors
-
   // Current active Player
   //----------------------
   //1. pull active Player information from game-service
   //   store it into object of class user
-
   //2. Delegate information to descendant,
   //   to visually highlight active player field
-
   // Allowed moves/actions/decisions
   // ( decision package from backend sent to active player,
   // (to not active players as info))
   //-------------------------------------------------------
   //1. pull allowed players decisions from game-service,
   //   store it into object of class decision.ts
-
   //2. Delegate information to descendants,
   //   to activate allowed actions/moves and invalidate all others.
-
   // Active player move/action/decision
   // (decision package from active player sent to backend)
   //------------------------------------------------------
   //1. pull active player's decision from ancestor components
-
   //2. store active player's decision into object of class decision.ts
-
   //3. push active player decision to game-service
-
-
-
   //===========================================================
   // Test-Data: Instantiate fake data as input for test-methods
   //===========================================================
-
   //will later be fields of defined class variables above
-  playerName_target:string="P1: Roland";
+  playerName_target:string="Player 1";
   marketCards_target:number[]=[1,0,2,0,1,1,0,0,4];
   score_target:number=12;
   sledStones_target:number=3;
   quarryStones_target:number=25;
-
-  //Fake Ships
-  ship1 = new Ship(1, 4);
-  ship2 = new Ship(2, 3);
-  ship3 = new Ship(3, 2);
-  ship4 = new Ship(4, 1);
-
-
-
-
   //==================================================
   // Test-Methods: Communication with Child Components
   //==================================================
-
   // Communication with PlayerComponent or Players ButtomLeftComponent etc. directly
   //--------------------------------------------------------------------------------
   trigger_setPlayerName(){
     this.bottomLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
   }
-  trigger_setMarketCards(){
+  trigger_setMarketCard(){
     this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
   }
   trigger_setScore(){
@@ -179,66 +133,34 @@ export class GameComponent  implements OnInit {
   trigger_setStonesInQuarry(){
     this.bottomLeftComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
   }
-
   // Communication with active player component BottomLeftComponent
   //---------------------------------------------------------------
-
-
   // Communication with not active player component BottomLeftComponent
   //-------------------------------------------------------------------
-
-
   // Communication with not active player component BottomLeftComponent
   //-------------------------------------------------------------------
-
-
   // Communication with not active player component BottomLeftComponent
   //-------------------------------------------------------------------
-
-
   // Communication with DepartingHarbour
   //------------------------------------
   trigger_removeShips(){
     this.departingHarbourComponent.removeShips(); //(click)="trigger_removeShips()"
   }
-
-  trigger_generateFourShips(ship1,ship2,ship3,ship4){
-    this.departingHarbourComponent.generateFourShips(this.ship1,this.ship2,this.ship3,this.ship4); //(click)="trigger_generateFourShips()"
+  trigger_generateFourShips(){
+    this.departingHarbourComponent.generateFourShips(); //(click)="trigger_generateFourShips()"
   }
-
-  trigger_generateShip(){
-    this.departingHarbourComponent.generateShip(this.ship1); //(click)="trigger_generateShip()"
-  }
-
-  trigger_removeShip(id:number){
-    this.departingHarbourComponent.removeShip(this.ship4); //(click)="trigger_removeShip()"
-  }
-
-
   // Communication with SiteHarbour
   //-------------------------------
-
-
   // Communication with MaketHarbour
   //--------------------------------
-
-
   // Communication with PyramidComponent
   //------------------------------------
-
-
   // Communication with TempleComponent
   //-----------------------------------
-
-
   // Communication with BurialChamberComponent
   //------------------------------------------
-
-
   // Communication with ObeliskComponent
   //------------------------------------
-
-
   // Communication with MarketComponent
   //-----------------------------------
   trigger_removeUnusedMarketCards(){
@@ -247,324 +169,224 @@ export class GameComponent  implements OnInit {
   trigger_generateFourMarketCards(){
     this.marketComponent.generateFourMarketCards(); //(click)="trigger_generateFourMarketCards()"
   }
-
-
   // Communication with ShipComponent
   //---------------------------------
-
-
-
-
-
   //================
   // ngAfterViewInit
   //================
-
   ngAfterViewInit() {
-
   }
-
-
   //===================
   // Subscribe-Methods
   //===================
-
-
-
   //===============
   // Other-Methods
   //===============
-
-
-
-
   //================
   // Dragula-Methods
   //================
   dragula_subscribeDragEvent() {
     this.dragulaService.drag.subscribe((value) => {
-
       /*Debugging
        console.log("6.1.1.1 ", `drag: ${value}`);
        console.log("6.1.1.2 ", `drag: ${value[0]}`);
        console.log("6.1.1.3 ", `drag: ${value.slice(1)}`);
        */
-
       //custom code
     });
   }
-
   dragula_subscribeDropEvent() {
     this.dragulaService.drop.subscribe((value) => {
-
       /*Debugging
        console.log("6.2.1.1 ", `drop: ${value}`);
        console.log("6.2.1.2 ", `drop: ${value[0]}`);
        console.log("6.2.1.3 ", `drop: ${value.slice(1)}`);
        */
-
       // Custom code here
      //this.gameService.setShipToDockingStation(ship)
     });
   }
-
   dragulaShipMovement_setOptions(){
     this.dragulaService.setOptions('harbours_bag', {
       accepts: function (el, target, source, sibling) {
-
-        if (target){
-
-          let isEmpty = target.innerHTML === "";
-          let isArrivingHarbour = target.parentElement.id === "arriving_harbours";
-
-
-          /*Debugging
-           console.log("10.1.1 ", `el: ${el}`); //moved element
-           console.log("10.1.2 ", `el.id: ${el.id}`); //its id
-           console.log("10.2.1 ", `source: ${source}`); //source element
-           console.log("10.2.2 ", `source.id: ${source.id}`); //its id
-           console.log("10.2.1 ", `sibling: ${sibling}`);
-           console.log("10.3.1 ", `target: ${target}`); //target element
-           console.log("10.3.2 ", `target.id: ${target.id}`); //its id
-           console.log("10.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
-           console.log("10.4.1 ", `target.parentElement: ${target.parentElement}`);
-           console.log("10.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
-           console.log("10.5.1 ", "isEmpty: " ,isEmpty);
-           console.log("10.5.2 ", "isArrivingHarbour: " ,isArrivingHarbour);
-           */
-
-          if (isEmpty && isArrivingHarbour) {
-            console.log("10.6.1 ", "====HARBOUR=TRUE=====");
-            return true;
-          }
-          else {
-            console.log("10.6.2 ", "====HARBOUR=FALSE=====");
-            return false;
-          }
+        let isEmpty = target.innerHTML === "";
+        let isArrivingHarbour = target.parentElement.id === "arriving_harbours";
+        /*Debugging
+         console.log("10.1.1 ", `el: ${el}`); //moved element
+         console.log("10.1.2 ", `el.id: ${el.id}`); //its id
+         console.log("10.2.1 ", `source: ${source}`); //source element
+         console.log("10.2.2 ", `source.id: ${source.id}`); //its id
+         console.log("10.2.1 ", `sibling: ${sibling}`);
+         console.log("10.3.1 ", `target: ${target}`); //target element
+         console.log("10.3.2 ", `target.id: ${target.id}`); //its id
+         console.log("10.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
+         console.log("10.4.1 ", `target.parentElement: ${target.parentElement}`);
+         console.log("10.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
+         console.log("10.5.1 ", "isEmpty: " ,isEmpty);
+         console.log("10.5.2 ", "isArrivingHarbour: " ,isArrivingHarbour);
+         */
+        if (isEmpty && isArrivingHarbour) {
+          console.log("10.6.1 ", "====HARBOUR=TRUE=====");
+          return true;
+        }
+        else {
+          console.log("10.6.2 ", "====HARBOUR=FALSE=====");
+          return false;
         }
       },
-
       moves: function (el, source, handle, sibling) {
         return true; //rue: elements are always draggable by default
       },
-
       isContainer: function (el) {
         return false;  //only elements in drake.containers will be taken into account
       },
-
       invalid: function (el, handle) {
-
-        if (el) {
-
-          let isArrivingHarbour = el.parentElement.parentElement.id === "arriving_harbours";
-          let isInvalid = isArrivingHarbour;
-
-          if (isInvalid) {
-            console.log("10.10.1 ", "-----TRUE-----");
-            return true;
-          }
-          else {
-            console.log("10.10.2 ", "-----FALSE-----");
-            return false; //false: don't prevent any drags from initiating by default
-          }
+        let isArrivingHarbour = el.parentElement.parentElement.id === "arriving_harbours";
+        let isInvalid = isArrivingHarbour;
+        if (isInvalid) {
+          console.log("10.10.1 ", "-----TRUE-----");
+          return true;
         }
-
+        else {
+          console.log("10.10.2 ", "-----FALSE-----");
+          return false; //false: don't prevent any drags from initiating by default
+        }
       },
-
       direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
-
       copy: function (el, source) {
-
-        if (el) {
-
-          let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
-          let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
-
-          /*Debugging
-           console.log("10.15.1 ", `el.id: ${el.id}`); //moved element
-           console.log("10.15.2 ", `el.className: ${el.className}`);
-           console.log("10.15.1 ", `el.isCopyClass: ${isCopyClass}`);
-           console.log("10.15.2 ", `el.isCopyId: ${isCopyId}`);
-           */
-
-          if (isCopyClass || isCopyId) {
-            console.log("10.16.1 ", "-----TRUE-----");
-            return true;
-          }
-          else {
-            console.log("10.16.2 ", "-----FALSE-----");
-            return false;
-          }
+        let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
+        let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
+        /*Debugging
+         console.log("10.15.1 ", `el.id: ${el.id}`); //moved element
+         console.log("10.15.2 ", `el.className: ${el.className}`);
+         console.log("10.15.1 ", `el.isCopyClass: ${isCopyClass}`);
+         console.log("10.15.2 ", `el.isCopyId: ${isCopyId}`);
+         */
+        if (isCopyClass || isCopyId) {
+          console.log("10.16.1 ", "-----TRUE-----");
+          return true;
         }
-
+        else {
+          console.log("10.16.2 ", "-----FALSE-----");
+          return false;
+        }
       },
-
       revertOnSpill: false, //spilling will put the element back where it was dragged from, if this is true
-
       removeOnSpill: false, //spilling will `.remove` the element, if this is true
-
     });
   }
-
   dragulaStoneMovement_setOptions(){
     this.dragulaService.setOptions('stone_slots_bag', {
-
       accepts: function (el, target, source, sibling) {
-
-        if (target) {
-
-          let isEmpty = target.innerHTML === "";
-          let isStoneSlot_1 = target.parentElement.id === "ship_1_slots";
-          let isStoneSlot_2 = target.parentElement.id === "ship_2_slots";
-          let isStoneSlot_3 = target.parentElement.id === "ship_3_slots";
-          let isStoneSlot_4 = target.parentElement.id === "ship_4_slots";
-
-          /*Debugging:
-           console.log("11.1.1 ", `el: ${el}`); //moved element
-           console.log("11.1.2 ", `el.id: ${el.id}`); //its id
-           console.log("11.2.1 ", `source: ${source}`); //source element
-           console.log("11.2.2 ", `source.id: ${source.id}`); //its id
-           console.log("11.2.1 ", `sibling: ${sibling}`);
-           console.log("11.3.1 ", `target: ${target}`); //target element
-           console.log("11.3.2 ", `target.id: ${target.id}`); //its id
-           console.log("11.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
-           console.log("11.4.1 ", `target.parentElement: ${target.parentElement}`);
-           console.log("11.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
-           console.log("11.5.1 ", "isEmpty: " ,isEmpty);
-           console.log("11.5.2 ", "isStoneSlot_1: " ,isStoneSlot_1);
-           console.log("11.5.3 ", "isStoneSlot_2: " ,isStoneSlot_2);
-           console.log("11.5.4 ", "isStoneSlot_3: " ,isStoneSlot_3);
-           console.log("11.5.5 ", "isStoneSlot_4: " ,isStoneSlot_4);
-           */
-
-          if (isEmpty && (isStoneSlot_1 || isStoneSlot_2 || isStoneSlot_3 || isStoneSlot_4 )) {
-            console.log("11.6.1 ", "====SLOT=TRUE=====");
-            return true;
-          }
-          else {
-            console.log("11.6.2 ", "====SLOT=FALSE=====");
-            return false;
-          }
+        let isEmpty = target.innerHTML === "";
+        let isStoneSlot_1 = target.parentElement.id === "ship_1_slots";
+        let isStoneSlot_2 = target.parentElement.id === "ship_2_slots";
+        let isStoneSlot_3 = target.parentElement.id === "ship_3_slots";
+        let isStoneSlot_4 = target.parentElement.id === "ship_4_slots";
+        /*Debugging:
+         console.log("11.1.1 ", `el: ${el}`); //moved element
+         console.log("11.1.2 ", `el.id: ${el.id}`); //its id
+         console.log("11.2.1 ", `source: ${source}`); //source element
+         console.log("11.2.2 ", `source.id: ${source.id}`); //its id
+         console.log("11.2.1 ", `sibling: ${sibling}`);
+         console.log("11.3.1 ", `target: ${target}`); //target element
+         console.log("11.3.2 ", `target.id: ${target.id}`); //its id
+         console.log("11.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
+         console.log("11.4.1 ", `target.parentElement: ${target.parentElement}`);
+         console.log("11.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
+         console.log("11.5.1 ", "isEmpty: " ,isEmpty);
+         console.log("11.5.2 ", "isStoneSlot_1: " ,isStoneSlot_1);
+         console.log("11.5.3 ", "isStoneSlot_2: " ,isStoneSlot_2);
+         console.log("11.5.4 ", "isStoneSlot_3: " ,isStoneSlot_3);
+         console.log("11.5.5 ", "isStoneSlot_4: " ,isStoneSlot_4);
+         */
+        if (isEmpty && (isStoneSlot_1 || isStoneSlot_2 || isStoneSlot_3 || isStoneSlot_4 )) {
+          console.log("11.6.1 ", "====SLOT=TRUE=====");
+          return true;
         }
-
+        else {
+          console.log("11.6.2 ", "====SLOT=FALSE=====");
+          return false;
+        }
+        ;
       },
-
       moves: function (el, source, handle, sibling) {
         return true; //true: elements are always draggable by default
       },
-
       isContainer: function (el) {
         return false;  //only elements in drake.containers will be taken into account
       },
-
       invalid: function (el, handle) {
-
-        if (el) {
-
-          let isStoneSlot = el.parentElement.parentElement.classList.contains('ship_slots');
-          let isInvalid = isStoneSlot;
-
-          if (isInvalid) {
-            console.log("10.10.1 ", "-----TRUE-----");
-            /**/
-            return true;
-          }
-          else {
-            console.log("10.10.2 ", "-----FALSE-----");
-            /**/
-            return false; //false: don't prevent any drags from initiating by default
-          }
+        let isStoneSlot = el.parentElement.parentElement.classList.contains('ship_slots');
+        let isInvalid = isStoneSlot;
+        if (isInvalid) {
+          console.log("10.10.1 ", "-----TRUE-----");
+          /**/
+          return true;
         }
-
+        else {
+          console.log("10.10.2 ", "-----FALSE-----");
+          /**/
+          return false; //false: don't prevent any drags from initiating by default
+        }
       },
-
       direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
-
       //copy: true, //false: elements are moved by default, not copied. true: copies el to target and leaves it in source
       copy: function (el, source) {
-
-        if (el) {
-
-          let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
-          let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
-
-          /*Debugging
-           console.log("11.15.1 ", `el.id: ${el.id}`); //moved element
-           console.log("11.15.2 ", `el.className: ${el.className}`);
-           console.log("11.15.1 ", `el.isCopyClass: ${isCopyClass}`);
-           console.log("11.15.2 ", `el.isCopyId: ${isCopyId}`);
-           */
-
-          if (isCopyClass || isCopyId) {
-            console.log("11.16.1 ", "----COPY-TRUE-----");
-            return true;
-          }
-          else {
-            console.log("11.16.2 ", "----COPY-FALSE-----");
-            return false;
-          }
+        let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
+        let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
+        /*Debugging
+         console.log("11.15.1 ", `el.id: ${el.id}`); //moved element
+         console.log("11.15.2 ", `el.className: ${el.className}`);
+         console.log("11.15.1 ", `el.isCopyClass: ${isCopyClass}`);
+         console.log("11.15.2 ", `el.isCopyId: ${isCopyId}`);
+         */
+        if (isCopyClass || isCopyId) {
+          console.log("11.16.1 ", "----COPY-TRUE-----");
+          return true;
         }
-
+        else {
+          console.log("11.16.2 ", "----COPY-FALSE-----");
+          return false;
+        }
       },
-
       revertOnSpill: false, //spilling will put the element back where it was dragged from, if this is true
-
       removeOnSpill: false, // spilling will `.remove` the element, if this is true
-
     });
   }
-
-
   //===========================================
   // Enable Communication with Child Components
   //===========================================
-
   // Enable communication with PlayerComponent
   @ViewChild(PlayerComponent) playerComponent:PlayerComponent;
-
   // Enable communication with active player component BottomLeftComponent
   @ViewChild(BottomLeftComponent) bottomLeftComponent:BottomLeftComponent;
-
   // Enable communication with not active player component BottomLeftComponent
   @ViewChild(TopLeftComponent) topLeftComponent:TopLeftComponent;
-
   // Enable communication with not active player component BottomLeftComponent
   @ViewChild(TopRightComponent) topRightComponent:TopRightComponent;
-
   // Enable communication with not active player component BottomLeftComponent
   @ViewChild(BottomRightComponent) bottomRightComponent:BottomRightComponent;
-
   // Enable communication with DepartingHarbour
   @ViewChild(DepartingHarbourComponent) departingHarbourComponent:DepartingHarbourComponent;
-
   // Enable communication with SiteHarbour
   @ViewChild(SiteHarbourComponent) siteHarbourComponent:SiteHarbourComponent;
-
   // Enable communication with MaketHarbour
   @ViewChild(MarketHarbourComponent) maketHarbourComponent:MarketHarbourComponent;
-
   // Enable communication with PyramidComponent
   @ViewChild(PyramidComponent) pyramidComponent:PyramidComponent;
-
   // Enable communication with TempleComponent
   @ViewChild(TempleComponent) templeComponent:TempleComponent;
-
   // Enable communication with BurialChamberComponent
   @ViewChild(BurialChamberComponent) burialChamberComponent:BurialChamberComponent;
-
   // Enable communication with ObeliskComponent
   @ViewChild(ObeliskComponent) obeliskComponent:ObeliskComponent;
-
   // Enable communication with MarketComponent
   @ViewChild(MarketComponent) marketComponent:MarketComponent;
-
   // Enable communication with ShipComponent
   @ViewChild(ShipComponent) shipComponent:ShipComponent;
-
-
   getShips():Ship[] {
     let ships:Ship[] = [];
-
     let jsonFile =  `{
            "size" : 1,
            "id" : 32,
@@ -580,7 +402,6 @@ export class GameComponent  implements OnInit {
            }`;
     let mockShip1 = JSON.parse(jsonFile);
     ships.push(mockShip1);
-
     let jsonFile2 =  `{
            "size" : 2,
            "id" : 2,
@@ -599,9 +420,7 @@ export class GameComponent  implements OnInit {
                     ]
            }`;
     let mockShip2 = JSON.parse(jsonFile2);
-
     ships.push(mockShip2);
-
     let jsonFile3 =  `{
            "size" : 3,
            "id" : 3,
@@ -624,9 +443,7 @@ export class GameComponent  implements OnInit {
                     ]
            }`;
     let mockShip3 = JSON.parse(jsonFile3);
-
     ships.push(mockShip3);
-
     let jsonFile4 =  `{
            "size" : 4,
            "id" : 4,
@@ -653,9 +470,259 @@ export class GameComponent  implements OnInit {
                     ]
            }`;
     let mockShip4 = JSON.parse(jsonFile4);
-
     ships.push(mockShip4);
-
     return ships
   }
+}
+
+
+<div class="container_game_screen">
+  <!-- Left Menu Border -->
+  <div class="container_side container_left">
+    <!-- Top Left Player Field -->
+    <div class="player_field player_top_left">
+      <app-top-left></app-top-left>
+    </div>
+    <!-- Departing Harbours -->
+    <div class="departing_harbours">
+      <app-departing-harbour [ships]="getShips()"></app-departing-harbour>
+    </div>
+    <!-- Bottom Left Player Field -->
+    <div class="player_field player_bottom_left">
+      <app-bottom-left></app-bottom-left>
+    </div>
+  </div>
+  <div class="spacing_left"></div>
+  <!-- Main Middle game container -->
+  <div class="container_middle">
+    <div class="game_header">
+    </div>
+    <div class="game_board">
+      <div class="site_harbours">
+        <app-site-harbour></app-site-harbour>
+      </div>
+      <div class="site_boards">
+        <div class="site_board">
+          <app-pyramid></app-pyramid>
+        </div>
+        <div class="site_board">
+          <app-temple></app-temple>
+        </div>
+        <div class="site_board">
+          <app-burial-chamber></app-burial-chamber>
+        </div>
+        <div class="site_board">
+          <app-obelisk></app-obelisk>
+        </div>
+      </div>
+      <div class="market_site">
+        <app-market></app-market>
+      </div>
+      <div class="market_harbour">
+        <app-market-harbour></app-market-harbour>
+      </div>
+    </div>
+    <div style="border: 10px solid orange;" class="game_footer">
+      <!-- Rolands, test buttons: remove them later -->
+      <div class="row">
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_removeUnusedMarketCards()">
+            removeUnusedMarketCards
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_generateFourMarketCards()">
+            generateFourMarketCards
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_removeShips()">
+            removeShips
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_generateFourShips()">
+            generateFourShips
+          </button>
+        </div>
+      </div>
+      <!-- Rolands, test buttons: remove them later-->
+      <div class="row">
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setMarketCard()">
+            setMarketCards</button>
+        </div>
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setScore()">
+            setScores</button>
+        </div>
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setStonesInSled()">
+            setStonesInSled</button>
+        </div>
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setStonesInQuarry()">
+            setStonesInQuarry</button>
+        </div>
+      </div>
+      <!-- Rolands, test buttons: remove them later -->
+    </div>
+  </div>
+  <!-- Right Menu Border -->
+  <div class="container_side container_right">
+    <!-- Top Right Player Field -->
+    <div class="player_field player_top_right">
+      <app-top-right></app-top-right>
+    </div>
+    <!-- Departing Harbours -->
+    <div class="info_box">
+      <app-info-box></app-info-box>
+    </div>
+    <!-- Bottom Right Player Field -->
+    <div class="player_field player_bottom_right">
+      <app-bottom-right></app-bottom-right>
+    </div>
+  </div>
+</div>
+
+
+
+
+@font-face {
+  font-family: 'Lithos Pro';
+  src: url("../../fonts/LithosPro-Regular.otf") format("opentype");
+  font-style: normal;
+}
+.container_game_screen {
+  width: 1366px;
+  height: 768px;
+  background-image: url(../../assets/images/water_background.png);
+  background-size:cover;
+}
+.water_animation{
+  float: none;
+  width: 100%;
+  height: 100%;
+}
+.container_side {
+  width: 20%;
+  height: 100%;
+  position: relative;
+  background-size:cover;
+  float: left;
+}
+.spacing_left{
+  height: 100%;
+  width: 1%;
+  float: left;
+}
+.container_middle {
+  width: 59%;
+  height: 100%;
+  position: relative;
+  float: left;
+  background-image: url(../../assets/images/island_background.png);
+  background-size:cover;
+  background-position: center;
+}
+.player_field{
+  width: 100%;
+  height: 20%;
+  position: relative;
+  background-image: url(../../assets/images/top_left.png);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  float: left;
+  float: top;
+}
+.info_box{
+  /* Uses a workaround at the moment to overflow background image into the top and bottom playerfields */
+  width: 184px;
+  height: 521px;
+  background-image: url(../../assets/images/infobox.png);
+  float: right;
+  float: top;
+  padding-top: 30px;
+  margin-top: -30px;
+  padding-bottom: 30px;
+  margin-bottom: -30px;
+  font: 400 25px "Lithos Pro", Helvetica, SansSerif;
+  text-align: center;
+  padding: 15px;
+  padding-left: 35px;
+  padding-top: 50px;
+  color: #867558;
+}
+.departing_harbours{
+  width: 100%;
+  height: 60%;
+  float: left;
+  float: top;
+}
+.player_top_left {
+  background-image: url(../../assets/images/top_left.png);
+}
+.player_bottom_left {
+  background-image: url(../../assets/images/bottom_left.png);
+}
+.player_top_right {
+  background-image: url(../../assets/images/top_right.png);
+}
+.player_bottom_right {
+  background-image: url(../../assets/images/bottom_right.png);
+}
+/* Main Game Board */
+.game_header{
+  height: 13%;
+  width: 100%;
+  background-image: url("../../assets/images/title.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+  margin-left: -2%;
+}
+.game_board{
+  height: 74%;
+  width: 100%;
+}
+.game_footer{
+  height: 13%;
+  width: 100%;
+  /*background-color: rgba(50, 200, 50, 0.4);*/
+}
+/* Sub-Structure of Game_board */
+.site_harbours{
+  height: 100%;
+  width: 15%;
+  float: left;
+}
+.site_boards{
+  height: 100%;
+  width: 52%;
+  float: left;
+}
+.market_site{
+  height: 100%;
+  width: 25%;
+  float: left;
+}
+.market_harbour{
+  height: 100%;
+  width: 8%;
+  float: left;
+}
+/* Sub-Structure of Site_boards */
+.site_board{
+  height: 25%;
+  width: 100%;
+  float: left;
+  float: top;
 }

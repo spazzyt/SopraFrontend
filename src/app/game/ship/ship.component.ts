@@ -6,6 +6,10 @@ import {Ship} from "../../shared/models/ship";
   templateUrl: './ship.component.html',
   styleUrls: ['./ship.component.css']
 })
+
+//===========
+// Component
+//===========
 export class ShipComponent implements OnInit {
 
   //===============
@@ -14,22 +18,17 @@ export class ShipComponent implements OnInit {
 
   //input from parent: departing-harbour.component.html
   @Input() ship:Ship;
-
+  //ship:Ship;
 
   //===============
   //Constructor
   //===============
-
   constructor() {
-
   }
-
 
   //===============
   //ngOnInit
   //===============
-
   ngOnInit() {
   }
-
 }

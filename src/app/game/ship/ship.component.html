@@ -1,10 +1,8 @@
 <!--expects ship.id from 1 to 4 to match a style in ship.component.css-->
 
 <div id="ship_{{ship.id}}" class="ship_{{ship.size}}">
-
   <!--add slots container-->
   <div id="ship_{{ship.id}}_slots" class="ship_slots">
-
     <!--add slots to slots container of ship_i-->
     <div *ngFor="let slots of ship.slots; let j= index"
          id="ship_{{ship.id}}_slot_{{j+1}}" class="ship_slot"

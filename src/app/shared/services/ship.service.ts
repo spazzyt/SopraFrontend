@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Ship} from "../models/ship";
 
+
 @Injectable()
 export class ShipService {
 
@@ -11,4 +12,5 @@ export class ShipService {
   setShips(ships: Ship[]){
     this.ships = ships;
   }
+
 }
