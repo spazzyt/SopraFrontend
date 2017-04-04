@@ -333,7 +333,7 @@ export class GameComponent  implements OnInit {
         console.log("harbours_bag:accepts ", `target: ${target}`);
         console.log("harbours_bag:accepts ", `sibling: ${sibling}`);
 
-        if (el && target && source && sibling){
+        if (el && target && source){
 
           let isEmpty = target.innerHTML === "";
           let isArrivingHarbour = target.parentElement.id === "arriving_harbours";
@@ -372,10 +372,13 @@ export class GameComponent  implements OnInit {
         console.log("harbours_bag:moves ", `el: ${el}`);
         console.log("harbours_bag:moves ", `source: ${source}`);
         console.log("harbours_bag:moves ", `handle: ${handle}`);
-        console.log("harbours_bag:moves ", `sibling: ${sibling}`);
+        //console.log("harbours_bag:moves ", `sibling: ${sibling}`);
 
-        if (el && source && handle && sibling){
+        if (el && source && handle){
           return true; //rue: elements are always draggable by default
+        }
+        else{
+          return false;
         }
       },
 
@@ -467,7 +470,7 @@ export class GameComponent  implements OnInit {
         console.log("stone_slots_bag:accepts ", `target: ${target}`);
         console.log("stone_slots_bag:accepts ", `sibling: ${sibling}`);
 
-        if (el && target && source && sibling){
+        if (el && target && source){
 
           let isEmpty = target.innerHTML === "";
           let isStoneSlot_1 = target.parentElement.id === "ship_1_slots";
@@ -510,10 +513,13 @@ export class GameComponent  implements OnInit {
         console.log("stone_slots_bag:moves ", `el: ${el}`);
         console.log("stone_slots_bag:moves ", `source: ${source}`);
         console.log("stone_slots_bag:moves ", `handle: ${handle}`);
-        console.log("stone_slots_bag:moves ", `sibling: ${sibling}`);
+        //console.log("stone_slots_bag:moves ", `sibling: ${sibling}`);
 
-        if (el && source && handle && sibling) {
+        if (el && source && handle) {
           return true; //true: elements are always draggable by default
+        }
+        else{
+          return false;
         }
       },
 
@@ -523,6 +529,9 @@ export class GameComponent  implements OnInit {
 
         if (el) {
           return false;  //only elements in drake.containers will be taken into account
+        }
+        else{
+          return true;
         }
       },
 
