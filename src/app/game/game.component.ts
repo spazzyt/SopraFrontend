@@ -19,6 +19,7 @@ import {CurrentGameState} from "../shared/models/current-game-state";
 import {Decision} from "../shared/models/decision";
 import {User} from "../shared/models/user";
 import {Ship} from "../shared/models/ship";
+import {Stone} from "../shared/models/stone";
 
 @Component({
   selector: 'app-game',
@@ -146,6 +147,7 @@ export class GameComponent  implements OnInit {
   score_target:number=12;
   sledStones_target:number=3;
   quarryStones_target:number=25;
+  fakeStones:Stone[]=[this.stone1, this.stone2, this.stone3, this.stone4]
 
   //Fake Ships
   ship1 = new Ship(1, 4);
@@ -153,6 +155,11 @@ export class GameComponent  implements OnInit {
   ship3 = new Ship(3, 2);
   ship4 = new Ship(4, 1);
 
+  //Fake Stones
+  stone1 = new Stone(1, 'brown');
+  stone2 = new Stone(2, 'brown');
+  stone3 = new Stone(3, 'brown');
+  stone4 = new Stone(4, 'brown');
 
 
 
@@ -231,7 +238,9 @@ export class GameComponent  implements OnInit {
 
   // Communication with BurialChamberComponent
   //------------------------------------------
-
+  trigger_placeStones(){
+    this.burialChamberComponent.placeStones(this.fakeStones); //(click)="trigger_setMarketCards()"
+  }
 
   // Communication with ObeliskComponent
   //------------------------------------
