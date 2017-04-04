@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Stone} from "../../shared/models/stone";
 
 @Component({
   selector: 'app-burial-chamber',
@@ -7,6 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BurialChamberComponent implements OnInit {
 
+  //===============
+  //Class Variables
+  //===============
+
+  stones:Stone[] = [];
+
+  //===============
+  //Constructor
+  //===============
   constructor() { }
 
   ngOnInit() {
@@ -26,6 +36,12 @@ export class BurialChamberComponent implements OnInit {
     });
 
 
+  }
+
+  placeStones(stonesToAdd: Stone[]){
+
+    //fill stone array
+    this.stones = stonesToAdd;
   }
 
 }
