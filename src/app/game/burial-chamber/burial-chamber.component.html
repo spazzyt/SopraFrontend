@@ -2,32 +2,24 @@
   <div class="points_assignment" id="burial"></div>
 </div>
 <div id="space_top"></div>
+
 <div id="fields">
-  <div class="field" id="field_1"></div>
-  <div class="field" id="field_2"></div>
-  <div class="field" id="field_3"></div>
-  <div class="field" id="field_4"></div>
-  <div class="field" id="field_5"></div>
-  <div class="field" id="field_6"></div>
-  <div class="field" id="field_7"></div>
-  <div class="field" id="field_8"></div>
-  <div class="field" id="field_9"></div>
-  <div class="field" id="field_10"></div>
-  <div class="field" id="field_11"></div>
-  <div class="field" id="field_12"></div>
-  <div class="field" id="field_13"></div>
-  <div class="field" id="field_14"></div>
-  <div class="field" id="field_15"></div>
-  <div class="field" id="field_16"></div>
-  <div class="field" id="field_17"></div>
-  <div class="field" id="field_18"></div>
-  <div class="field" id="field_19"></div>
-  <div class="field" id="field_20"></div>
-  <div class="field" id="field_21"></div>
-  <div class="field" id="field_22"></div>
-  <div class="field" id="field_23"></div>
-  <div class="field" id="field_24"></div>
-  <div class="field" id="field_25"></div>
-  <div class="field" id="field_26"></div>
-  <div class="field" id="field_27"></div>
+  <div *ngFor="let k of [1,4,7,10,13,16,19,22,25]; let i = index"
+       id="field_{{k}}" class="field">
+
+  </div>
+
+  <div *ngFor="let l of [2,5,8,11,14,17,20,23,26]; let i = index"
+       id="field_{{l}}" class="field">
+  </div>
+
+  <div *ngFor="let m of [3,6,9,12,15,18,21,24,27]; let i = index"
+       id="field_{{m}}" class="field">
+  </div>
 </div>
+
+
+
+
+
+
