@@ -30,6 +30,13 @@ export class DepartingHarbourComponent {
 
   ngOnInit() {
 
+    //Fake Ships
+    let ship1 = new Ship(1, 4);
+    let ship2 = new Ship(2, 3);
+    let ship3 = new Ship(3, 2);
+    let ship4 = new Ship(4, 1);
+
+    this.generateFourShips(ship1, ship2, ship3, ship4);
 
   }
 
@@ -58,6 +65,7 @@ export class DepartingHarbourComponent {
     this.ships.push(ship2);
     this.ships.push(ship3);
     this.ships.push(ship4);
+
   }
 
   // Remove Ships
