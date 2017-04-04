@@ -2,19 +2,17 @@
 <div id="departing_harbours" class="departing_harbours">
 
   <!--add departing harbour_i-->
-  <div *ngFor="let departing_harbour_Id of [1,2,3,4];"
-       id="departing_harbour_{{departing_harbour_Id}}"
-       class="departing_harbour"
+  <div *ngFor="let ship of ships; let i = index"
+       id="departing_harbour_{{i+1}}" class="departing_harbour"
        [dragula]="'harbours_bag'">
 
-      <!--add ship_i to departing harbour-->
-      <app-ship [ship]="ship"></app-ship>
-
-    </div>
+    <!--add ship_i to departing harbour-->
+    <app-ship [ship]="ship"></app-ship>
 
   </div>
 
 </div>
+
 
 
 <!--Example
