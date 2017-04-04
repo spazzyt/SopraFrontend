@@ -48,6 +48,7 @@ import { DragulaDemoComponent } from './demo-temp/dragula-demo/dragula-demo.comp
 
 import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
 import {ShipService} from "./shared/services/ship.service";
+import { StoneComponent } from './game/stone/stone.component';
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import {ShipService} from "./shared/services/ship.service";
     MarketHarbourComponent,
     ScrollbarComponent,
     DragulaDemoComponent,
+    StoneComponent,
   ],
   imports: [
     BrowserModule,

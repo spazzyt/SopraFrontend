@@ -65,11 +65,13 @@ p{
 }
 
 .supply_sled{
+  border: 1px solid #ff1e1a;/*border: 1px solid #44ff62;*/
   background-image: url("../../../../assets/images/supply_sled.png");
   background-repeat: no-repeat;
   background-position: center;
-  border: 1px solid #ff1e1a;/*border: 1px solid #44ff62;*/
+  z-index: 100;/*Roland: do not change, used for jquery logic*/
 }
+
 
 .quarry{
   background-image: url("../../../../assets/images/quarry.png");
@@ -255,19 +257,30 @@ p{
 
 
 #stone_label{
-  z-index:1;
-  position:absolute;
+  z-index:200;/*Roland: do not change, used for jquery logic*/
   top:0px;
   left:0px;
+  margin-bottom:50px;
+  border: 1px solid #ff19c7;/*border: 1px solid #44ff62;*/
+  position:relative;
 }
 
-#stone_img_1{
-  z-index: 100;
-  position:absolute;
-  top:0px; left:30%;
+
+.stones_1{
+  border: 1px solid #0e40ff;/*border: 1px solid #44ff62;*/
+  z-index: 10; /*Roland: do not change, used for jquery logic*/
+  margin:auto;
+  position:relative;
+  margin-top:2%;
+  left:0px;
   height:30px;
   width:30px;
+  background-image: url("../../../../assets/images/stone.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
+
 
 
 

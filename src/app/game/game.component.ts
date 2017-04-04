@@ -306,14 +306,11 @@ export class GameComponent  implements OnInit {
 
       if (value) {
 
-        /*Debugging
          console.log("6.2.1.1 ", `drop: ${value}`);
          console.log("6.2.1.2 ", `drop: ${value[0]}`);
          console.log("6.2.1.3 ", `drop: ${value.slice(1)}`);
-         */
 
         // Custom code here
-        console.log("10.1.1 dragula-subscribe-drop");
 
       }
 
