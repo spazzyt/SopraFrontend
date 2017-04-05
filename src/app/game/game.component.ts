@@ -79,7 +79,9 @@ export class GameComponent  implements OnInit {
   //==========
 
   ngOnInit() {
-
+    this.templeStones_target.push(this.stone1);
+    this.templeStones_target.push(this.stone2);
+    this.templeStones_target.push(this.stone3);
 
   }
 
@@ -147,8 +149,10 @@ export class GameComponent  implements OnInit {
   score_target:number=12;
   sledStones_target:number=3;
   quarryStones_target:number=25;
-  fakeStones:Stone[]=[this.stone1, this.stone2, this.stone3, this.stone4]
+
+
   obeliskStones_target:number[]=[1,2,3,4];
+
 
   //Fake Ships
   ship1 = new Ship(1, 4);
@@ -158,9 +162,10 @@ export class GameComponent  implements OnInit {
 
   //Fake Stones
   stone1 = new Stone(1, 'brown');
-  stone2 = new Stone(2, 'brown');
-  stone3 = new Stone(3, 'brown');
-  stone4 = new Stone(4, 'brown');
+  stone2 = new Stone(2, 'white');
+  stone3 = new Stone(3, 'gray');
+  stone4 = new Stone(4, 'black');
+  templeStones_target = new Array<Stone>();
 
 
 
@@ -235,12 +240,14 @@ export class GameComponent  implements OnInit {
 
   // Communication with TempleComponent
   //-----------------------------------
-
+  trigger_placeOnTemple(){
+    this.templeComponent.addStones(this.templeStones_target); //(click)="trigger_setMarketCards()"
+  }
 
   // Communication with BurialChamberComponent
   //------------------------------------------
   trigger_placeStones(){
-    this.burialChamberComponent.placeStones(this.fakeStones); //(click)="trigger_setMarketCards()"
+    this.burialChamberComponent.placeStones(this.templeStones_target); //(click)="trigger_setMarketCards()"
   }
 
   // Communication with ObeliskComponent
