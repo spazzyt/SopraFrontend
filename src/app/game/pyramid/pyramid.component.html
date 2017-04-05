@@ -1,16 +1,17 @@
 <div class="space_left"><div class="points_assignment" id="pyramid"></div></div>
 <div class="level_1">
-  <div id="level1_space"></div>
+  <div id="level1_space">Total: {{totalStones}}</div>
   <div id="level1_fields">
-    <div class="field" id="field_1"></div>
-    <div class="field" id="field_2"></div>
-    <div class="field" id="field_3"></div>
-    <div class="field" id="field_4"></div>
-    <div class="field" id="field_5"></div>
-    <div class="field" id="field_6"></div>
-    <div class="field" id="field_7"></div>
-    <div class="field" id="field_8"></div>
-    <div class="field" id="field_9"></div>
+
+    <div *ngFor="let field_id1 of [1,4,7,2,5,8,3,6,9]"
+         id="field_{{field_id1}}" class="field">
+
+      <div *ngIf="stones[field_id1-1] != null">
+        <app-stone [stone]="stones[field_id1-1]"></app-stone>
+      </div>
+
+    </div>
+
   </div>
 </div>
 
@@ -19,10 +20,16 @@
 <div class="level_2">
   <div id="level2_space"></div>
   <div id="level2_fields">
-    <div class="field" id="field_10"></div>
-    <div class="field" id="field_11"></div>
-    <div class="field" id="field_12"></div>
-    <div class="field" id="field_13"></div>
+
+    <div *ngFor="let field_id1 of [10, 12, 11, 13]"
+         id="field_{{field_id1}}" class="field">
+
+      <div *ngIf="stones[field_id1-1] != null">
+        <app-stone [stone]="stones[field_id1-1]"></app-stone>
+      </div>
+
+    </div>
+
   </div>
 </div>
 
@@ -30,5 +37,11 @@
 
 <div class="level_3">
   <div id="level3_space"></div>
-  <div class="field" id="field_14"></div>
+  <div class="field" id="field_14">
+
+    <div *ngIf="stones[13] != null">
+      <app-stone [stone]="stones[13]"></app-stone>
+    </div>
+
+  </div>
 </div>
