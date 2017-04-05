@@ -234,12 +234,14 @@ export class GameComponent  implements OnInit {
 
   // Communication with PyramidComponent
   //------------------------------------
-
+  trigger_placeOnPyramid(){
+    this.pyramidComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
+  }
 
   // Communication with TempleComponent
   //-----------------------------------
   trigger_placeOnTemple(){
-    this.templeComponent.addStones(this.stones_target); //(click)="trigger_setMarketCards()"
+    this.templeComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
   }
 
   // Communication with BurialChamberComponent

@@ -34,7 +34,7 @@ export class TempleComponent implements OnInit {
   }
 
 
-  addStones(targetStones: Stone[]){
+  placeStones(targetStones: Stone[]){
     for (var i = 0; i < targetStones.length; i++) {
       if(targetStones[i] != null) //only do this for stones that exist in the input array
       {
