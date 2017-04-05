@@ -148,6 +148,7 @@ export class GameComponent  implements OnInit {
   sledStones_target:number=3;
   quarryStones_target:number=25;
   fakeStones:Stone[]=[this.stone1, this.stone2, this.stone3, this.stone4]
+  obeliskStones_target:number[]=[1,2,3,4];
 
   //Fake Ships
   ship1 = new Ship(1, 4);
@@ -244,7 +245,9 @@ export class GameComponent  implements OnInit {
 
   // Communication with ObeliskComponent
   //------------------------------------
-
+  trigger_placeOnObelisk(){
+    this.obeliskComponent.increaseStones(this.obeliskStones_target); //(click)="trigger_setMarketCards()"
+  }
 
   // Communication with MarketComponent
   //-----------------------------------

@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ObeliskComponent implements OnInit {
 
-  constructor() { }
+
+
+
+  stones:number[] = [0,0,0,0];
+
+  constructor() {}
 
   ngOnInit() {
     //styles in styles.css at the end under popover, to style:
@@ -26,6 +31,12 @@ export class ObeliskComponent implements OnInit {
     });
 
 
+  }
+
+  increaseStones(targetStones: number[]){
+    for (let i of [0,1,2,3]) {
+      this.stones[i] += targetStones[i];
+    }
   }
 
 }
