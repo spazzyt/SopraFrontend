@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Stone} from "../../../shared/models/stone";
 
 @Component({
   selector: 'app-bottom-left',
@@ -20,6 +21,9 @@ export class BottomLeftComponent implements OnInit {
 
   // the player's score
   score:number;
+
+  // the player's colour
+  playerFieldStone:Stone;
 
   // the player's stones in supply-sled
   sledStones:number;
@@ -54,7 +58,7 @@ export class BottomLeftComponent implements OnInit {
   ngOnInit() {
 
     this.initializePopovers();
-
+    this.playerFieldStone = new Stone(0, 'brown')
   }
 
   //================
