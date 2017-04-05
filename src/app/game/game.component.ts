@@ -82,6 +82,7 @@ export class GameComponent  implements OnInit {
     this.templeStones_target.push(this.stone1);
     this.templeStones_target.push(this.stone2);
     this.templeStones_target.push(this.stone3);
+    this.templeStones_target.push(this.stone4);
 
   }
 
@@ -246,7 +247,7 @@ export class GameComponent  implements OnInit {
 
   // Communication with BurialChamberComponent
   //------------------------------------------
-  trigger_placeStones(){
+  trigger_placeOnBurial(){
     this.burialChamberComponent.placeStones(this.templeStones_target); //(click)="trigger_setMarketCards()"
   }
 
