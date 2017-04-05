@@ -79,10 +79,10 @@ export class GameComponent  implements OnInit {
   //==========
 
   ngOnInit() {
-    this.templeStones_target.push(this.stone1);
-    this.templeStones_target.push(this.stone2);
-    this.templeStones_target.push(this.stone3);
-    this.templeStones_target.push(this.stone4);
+    this.stones_target.push(this.stone1);
+    this.stones_target.push(this.stone2);
+    this.stones_target.push(this.stone3);
+    this.stones_target.push(this.stone4);
 
   }
 
@@ -152,9 +152,6 @@ export class GameComponent  implements OnInit {
   quarryStones_target:number=25;
 
 
-  obeliskStones_target:number[]=[1,2,3,4];
-
-
   //Fake Ships
   ship1 = new Ship(1, 4);
   ship2 = new Ship(2, 3);
@@ -166,7 +163,7 @@ export class GameComponent  implements OnInit {
   stone2 = new Stone(2, 'white');
   stone3 = new Stone(3, 'gray');
   stone4 = new Stone(4, 'black');
-  templeStones_target = new Array<Stone>();
+  stones_target = new Array<Stone>();
 
 
 
@@ -242,19 +239,19 @@ export class GameComponent  implements OnInit {
   // Communication with TempleComponent
   //-----------------------------------
   trigger_placeOnTemple(){
-    this.templeComponent.addStones(this.templeStones_target); //(click)="trigger_setMarketCards()"
+    this.templeComponent.addStones(this.stones_target); //(click)="trigger_setMarketCards()"
   }
 
   // Communication with BurialChamberComponent
   //------------------------------------------
   trigger_placeOnBurial(){
-    this.burialChamberComponent.placeStones(this.templeStones_target); //(click)="trigger_setMarketCards()"
+    this.burialChamberComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
   }
 
   // Communication with ObeliskComponent
   //------------------------------------
   trigger_placeOnObelisk(){
-    this.obeliskComponent.increaseStones(this.obeliskStones_target); //(click)="trigger_setMarketCards()"
+    this.obeliskComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
   }
 
   // Communication with MarketComponent
