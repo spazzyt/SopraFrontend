@@ -58,7 +58,7 @@ export class MarketComponent implements OnInit {
 
   //Unused market cards will be removed after each round
   removeUnusedMarketCards(){
-
+    this.marketCards = [];
   }
 
 
