@@ -32,6 +32,29 @@ export class TempleComponent implements OnInit {
       html: true,
       content : 'Assess points at the end of every round' + '<br />' + 'Earn one point for each stone visible from above'
     });
+    /* Stones total explanation */
+    (<any>$('#total')).popover({
+      placement: 'top',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      show: 5500,
+      hide: 5500,
+      html: true,
+      content : 'The number indicates the total amount of stones.'
+    });
+
+    /* Level of stones explanation */
+     (<any>$('#bottom')).popover({
+     placement: 'top',
+     trigger : 'hover',
+     toggle: 'popover',
+     title: '',
+     show: 5500,
+     hide: 5500,
+     html: true,
+     content : 'The numbers indicate how many stones' + '<br>' + 'are stacked on each other.'
+     });
 
     if(this.numberOfPlayers > 2){       //if there are more than two players, a fifth field is added
       this.fieldArray = [1,2,3,4,5];
