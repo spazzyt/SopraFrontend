@@ -62,7 +62,7 @@ p{
   background-position: center;
 }
 
-.supply_sled{
+.supply_sled_3{
   background-image: url("../../../../assets/images/supply_sled.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -248,7 +248,7 @@ p{
 }
 
 
-#stone_label_4{
+#stone_label_3{
   z-index:200;
   top:0px;
   left:0px;

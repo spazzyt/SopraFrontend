@@ -87,6 +87,19 @@ export class GameComponent  implements OnInit {
 
   }
 
+
+  //================
+  // ngAfterViewInit
+  //================
+
+  ngAfterViewInit() {
+
+
+
+  }
+
+
+
   //==============================
   // Major Tasks of Game Component
   //==============================
@@ -311,17 +324,6 @@ export class GameComponent  implements OnInit {
   // Communication with ShipComponent
   //---------------------------------
 
-
-
-
-
-  //================
-  // ngAfterViewInit
-  //================
-
-  ngAfterViewInit() {
-
-  }
 
 
   //===================
