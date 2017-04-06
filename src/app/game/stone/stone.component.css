@@ -1,6 +1,7 @@
+
 .stones_1 {
   border: 1px solid #0e40ff; /*border: 1px solid #44ff62;*/
-  z-index: 10; /*Roland: do not change, used for jquery logic*/
+  z-index: 10;
   margin: auto;
   position: relative;
   margin-top: 2%;
@@ -15,7 +16,7 @@
 
 .stones_2{
   border: 1px solid #0e40ff;/*border: 1px solid #44ff62;*/
-  z-index: 10; /*Roland: do not change, used for jquery logic*/
+  z-index: 10;
   margin:auto;
   position:relative;
   margin-top:2%;
@@ -31,7 +32,7 @@
 
 .stones_3 {
   border: 1px solid #0e40ff; /*border: 1px solid #44ff62;*/
-  z-index: 10; /*Roland: do not change, used for jquery logic*/
+  z-index: 10;
   margin: auto;
   position: relative;
   margin-top: 2%;
@@ -46,7 +47,7 @@
 
 .stones_4{
   border: 1px solid #0e40ff;/*border: 1px solid #44ff62;*/
-  z-index: 10; /*Roland: do not change, used for jquery logic*/
+  z-index: 10;
   margin:auto;
   position:relative;
   margin-top:2%;
@@ -57,4 +58,18 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+
+
+.stone_brown{
+  background-image: url("../../../assets/images/stone_brown.png");
+}
+.stone_black{
+  background-image: url("../../../assets/images/stone_black.png");
+}
+.stone_white{
+  background-image: url("../../../assets/images/stone_white.png");
+}
+.stone_gray{
+  background-image: url("../../../assets/images/stone_gray.png");
 }

@@ -30,14 +30,27 @@
       <span class="s8"></span>
       <span class="s9"></span>
     </div>
+
+    <!-- Remove or style this later-->
+    Total stones: {{totalStones}}
+
+
   </div>
   <div class="section" id="temple">
-    <div class="field" id="field_1"></div>
-    <div class="field" id="field_2"></div>
-    <div class="field" id="field_3"></div>
-    <div class="field" id="field_4"></div>
-    <div class="field" id="field_5"></div>
-  </div>
+    <!--add stone fields-->
+    <div *ngFor="let field_id of [1,2,3,4,5]" id="field_{{field_id}}" class="field">
+      <div *ngIf="stones[field_id-1] != null">
+        <app-stone [stone]="stones[field_id-1]"></app-stone>
+      </div>
+      {{fieldHeight[field_id-1]}}
   <div class="section" id="spacing_right"></div>
 </div>
 <div class="third" id="bottom"></div>
+
+
+  <!--
+    <div *ngFor="let stone of stones; let i = index" id="field_{{i+1}}" class="field">
+
+  <app-stone [stone]="stone"></app-stone>
+</div>
+-->
