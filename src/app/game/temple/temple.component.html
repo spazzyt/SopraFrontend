@@ -2,7 +2,7 @@
   <div class="half" id="left">
     <div class="points_assignment" id="temple_points"></div>
   </div>
-  <div class="half" id="right"></div>
+  <div class="half" id="right"><div id="total">Stones: {{totalStones}}</div></div>
 </div>
 <div class="third" id="main">
   <div class="section" id="spacing_left">
@@ -30,11 +30,6 @@
       <span class="s8"></span>
       <span class="s9"></span>
     </div>
-
-    <!-- Remove or style this later-->
-    Total stones: {{totalStones}}
-
-
   </div>
   <div class="section" id="temple">
     <!--add stone fields-->
@@ -42,10 +37,9 @@
       <div *ngIf="stones[field_id-1] != null">
         <app-stone [stone]="stones[field_id-1]"></app-stone>
       </div>
-      {{fieldHeight[field_id-1]}}
   <div class="section" id="spacing_right"></div>
 </div>
-<div class="third" id="bottom"></div>
+    <div class="third" id="bottom"><div *ngFor="let field_id_lvl of fieldArray" id="field_{{field_id_lvl}}" class="field">{{fieldHeight[field_id_lvl-1]}}</div></div>
 
 
   <!--
