@@ -89,7 +89,7 @@
 /* All fields are formatted here */
 
 .field{
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   float: left;
   float: top;
 }
