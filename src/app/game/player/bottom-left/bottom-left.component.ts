@@ -145,6 +145,7 @@ export class BottomLeftComponent implements OnInit {
   //================
 
   initializePopovers(){
+
     //From bottom-left-left
     (<any>$('#bll_1')).popover({
       placement: 'top',
