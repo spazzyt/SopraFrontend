@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Lithos Pro';
+  src: url("../../../fonts/LithosPro-Regular.otf") format("opentype");
+  font-style: normal;
+}
+
 .third{
   width: 100%;
   float: left;
@@ -15,6 +21,16 @@
   height: 100%;
 }
 
+#right{
+  margin-left: -6%;
+  font: 600 20px "Lithos Pro", Helvetica, Sans-Serif;
+  padding-top: 7%;
+  width: 30%;
+}
+
+#total{
+}
+
 .points_assignment{
   height: 60%;
   margin-top: 10%;
@@ -27,7 +43,7 @@
 }
 
 #bottom{
-  height: 29%;
+  height: 80%;
 }
 
 .section{
@@ -58,6 +74,8 @@
   float: top;
   height: 100%;
   width: 20%;
+  text-align: right;
+  font: 600 20px "Lithos Pro", Helvetica, Sans-Serif;
 }
 
 
