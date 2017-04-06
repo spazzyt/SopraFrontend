@@ -70,4 +70,9 @@ export class ObeliskComponent implements OnInit {
     }
   }
 
+
+  removeStones(){
+    this.stones = [0,0,0,0];
+  }
+
 }

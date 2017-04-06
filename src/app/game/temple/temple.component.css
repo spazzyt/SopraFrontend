@@ -53,7 +53,7 @@
 /* Field Formatting */
 
 .field{
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   float: left;
   float: top;
   height: 100%;
