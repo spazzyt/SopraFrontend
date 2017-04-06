@@ -10,8 +10,10 @@ export class TempleComponent implements OnInit {
 
 
   stones:Stone[] = [];
-  fieldHeight:number[] = [0,0,0,0,0];
+  fieldHeight:number[] = [0,0,0,0];
   totalStones:number = 0;
+  numberOfPlayers:number = 4;
+  fieldArray:number[] = [1,2,3,4]
 
   constructor() { }
 
@@ -31,24 +33,29 @@ export class TempleComponent implements OnInit {
       content : 'Assess points at the end of every round' + '<br />' + 'Earn one point for each stone visible from above'
     });
 
+    if(this.numberOfPlayers > 2){       //if there are more than two players, a fifth field is added
+      this.fieldArray = [1,2,3,4,5];
+      this.fieldHeight = [0,0,0,0,0];
+    }
+
   }
 
 
   placeStones(targetStones: Stone[]){
-    for (var i = 0; i < targetStones.length; i++) {
-      if(targetStones[i] != null) //only do this for stones that exist in the input array
-      {
-        //this function determines in which column the stone needs to be placed
-        var x = this.totalStones % 5;
-        this.stones[x] = targetStones[i];
+      for (var i = 0; i < targetStones.length; i++) {
+        if (targetStones[i] != null)                          //only do this for stones that exist in the input array
+        {
+                                                              //this function determines in which column the stone needs to be placed
+          var x = this.totalStones % this.fieldHeight.length; //modulo calculates into which column to fill in the stone
+          this.stones[x] = targetStones[i];
 
-        //increase the total stone counter by one
-        this.totalStones += 1;
+          //increase the total stone counter by one
+          this.totalStones += 1;
 
-        //increase the height display for each column where a new stone has been placed
-        this.fieldHeight[x] += 1;
+          //increase the height display for each column where a new stone has been placed
+          this.fieldHeight[x] += 1;
+        }
       }
-    }
   }
 
   removeStones(){
