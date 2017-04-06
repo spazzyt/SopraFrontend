@@ -57,4 +57,9 @@ export class BurialChamberComponent implements OnInit {
     }
   }
 
+  removeStones(){
+    this.stones = [];
+    this.totalStones = 0;
+  }
+
 }

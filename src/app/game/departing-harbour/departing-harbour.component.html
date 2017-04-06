@@ -15,44 +15,18 @@
 </div>
 
 
+<!-- WORK IN PROGRESS DYNAMIC VERSION
 
+<div id="departing_harbours" class="departing_harbours">
+  <div *ngFor="let num of [1,2,3,4]"
+       id="departing_harbour_{{num}}" class="departing_harbour" [dragula]="'harbours_bag'">
 
-
-
-
-  <!--Example
-  <h1>departing harbours</h1>
-  <div id="departing_harbour_1" class="row departing_harbour_1" [dragula]="'harbours_bag'">
-    <div id="ship_1" class="ship_1">
-      <div id="ship_1_slots" class="col-md-12 ship_slots">
-        <div id="ship_1_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
-        <div id="ship_1_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
-      </div>
+    <div *ngIf="ships[num-1] != null">
+      <app-ship [ship]="ship[num-1]"></app-ship>
     </div>
-  </div>
-  <div id="departing_harbour_2" class="row departing_harbour_2" [dragula]="'harbours_bag'">
-    <div id="ship_2" class="ship_2">
-      <div id="ship_2_slots" class="col-md-12 ship_slots">
-        <div id="ship_2_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
-        <div id="ship_2_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
-      </div>
-    </div>
-  </div>
-  <div id="departing_harbour_3" class="row departing_harbour_3" [dragula]="'harbours_bag'">
-    <div id="ship_3" class="ship_3">
-      <div id="ship_3_slots" class="col-md-12 ship_slots">
-        <div id="ship_3_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
-        <div id="ship_3_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
-      </div>
-    </div>
-  </div>
-  <div id="departing_harbour_4" class="row departing_harbour_4" [dragula]="'harbours_bag'">
-    <div id="ship_4" class="ship_4">
-      <div id="ship_4_slots" class="col-md-12 ship_slots">
-        <div id="ship_4_slot_1" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
-        <div id="ship_4_slot_2" class="ship_slot" [dragula]="'stone_slots_bag'"></div>
-      </div>
-    </div>
-  </div>
-  -->
 
+  </div>
+</div>
+
+
+-->

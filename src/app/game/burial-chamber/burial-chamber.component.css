@@ -29,7 +29,7 @@
 /* Field Formatting */
 
 .field{
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   float: left;
   width: 11.111%;
   height: 33.333%;

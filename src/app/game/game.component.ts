@@ -245,10 +245,18 @@ export class GameComponent  implements OnInit {
     this.pyramidComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
   }
 
+  trigger_removeFromPyramid(){
+    this.pyramidComponent.removeStones(); //(click)="trigger_setMarketCards()"
+  }
+
   // Communication with TempleComponent
   //-----------------------------------
   trigger_placeOnTemple(){
     this.templeComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
+  }
+
+  trigger_removeFromTemple(){
+    this.templeComponent.removeStones(); //(click)="trigger_setMarketCards()"
   }
 
   // Communication with BurialChamberComponent
@@ -257,10 +265,18 @@ export class GameComponent  implements OnInit {
     this.burialChamberComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
   }
 
+  trigger_removeFromBurial(){
+    this.burialChamberComponent.removeStones(); //(click)="trigger_setMarketCards()"
+  }
+
   // Communication with ObeliskComponent
   //------------------------------------
   trigger_placeOnObelisk(){
     this.obeliskComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
+  }
+
+  trigger_removeFromObelisk(){
+    this.obeliskComponent.removeStones(); //(click)="trigger_setMarketCards()"
   }
 
   // Communication with MarketComponent
@@ -297,8 +313,14 @@ export class GameComponent  implements OnInit {
 
   //===============
   // Other-Methods
-  //===============
 
+  //===============
+  trigger_removeAllStones(){
+    this.pyramidComponent.removeStones();
+    this.templeComponent.removeStones();
+    this.burialChamberComponent.removeStones();
+    this.obeliskComponent.removeStones();
+  }
 
 
 
