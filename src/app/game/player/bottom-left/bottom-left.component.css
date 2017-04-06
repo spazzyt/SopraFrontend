@@ -257,7 +257,7 @@ p{
 
 
 #stone_label{
-  z-index:200;/*Roland: do not change, used for jquery logic*/
+  z-index:200;
   top:0px;
   left:0px;
   margin-bottom:50px;

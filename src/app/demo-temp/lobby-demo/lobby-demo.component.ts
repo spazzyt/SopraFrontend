@@ -6,7 +6,7 @@ import {Game} from "../../shared/models/game";
 
 
 //Dummy data USERS, GAMES, MYSELF
-const USERS: User[] = [
+const USERS: any = [
   {"oldGames":null,"decisions":null,"id":1,"username":"sgfsdg","token":"20532346-150d-460f-829c-041f6fe1da2a","status":"OFFLINE","games":[],"moves":[]},
   {"oldGames":null,"decisions":null,"id":2,"username":"rtwet","token":"7fb9330f-9ebe-4d6d-b182-679c875b43aa","status":"OFFLINE","games":[],"moves":[]},
   {"oldGames":null,"decisions":null,"id":3,"username":"dfjoie","token":"704b639d-3d9e-4e61-a780-f7ee5f898e55","status":"OFFLINE","games":[],"moves":[]},
@@ -15,7 +15,7 @@ const USERS: User[] = [
   {"oldGames":null,"decisions":null,"id":6,"username":"Zulsdao","token":"b3a4af45-5578-4d70-8df8-26d4f40031da","status":"OFFLINE","games":[],"moves":[]}
   ];
 
-const GAMES: Game[] = [{"id":1,"name":"sgfsdg","owner":"sgfsdg","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]},
+const GAMES: any = [{"id":1,"name":"sgfsdg","owner":"sgfsdg","status":null,"currentPlayer":null,"numPlayers":4,"moves":[],"players":[]},
   {"id":2,"name":"sgfsdg","owner":"sgfsdg","status":null,"currentPlayer":null,"numPlayers":2,"moves":[],"players":[]},
   {"id":3,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":3,"moves":[],"players":[]},
   {"id":4,"name":"dfjoie","owner":"dfjoie","status":null,"currentPlayer":null,"numPlayers":2,"moves":[],"players":[]},
@@ -43,8 +43,8 @@ const MYSELF: any=
 export class LobbyDemoComponent implements OnInit {
 
 
-  private users: User[]=USERS;
-  private games: Game[]=GAMES;
+  private users: any=USERS;
+  private games: any=GAMES;
   private game: string;
   private joinedGame : number=-1;
   private myself:any=MYSELF;
