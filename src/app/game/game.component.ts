@@ -439,7 +439,7 @@ export class GameComponent  implements OnInit {
   dragula_subscribeDragEvent() {
     this.dragulaService.drag.subscribe((value) => {
 
-      if(0)console.log("10.1.0 dragula-subscribe-drag");}
+      if(0){console.log("10.1.0 dragula-subscribe-drag");}
 
       if (value){
 
