@@ -29,10 +29,24 @@ export class User {
   //===============================
   // Additional Frontend attributes
   //===============================
+
   public games:Game[];
   public moves:Move[];
+  public playerField:number;
+  public colour:string;
 
 
-  constructor(){} //instantiated in login.component.ts
+
+  //===============
+  //Constructor
+  //===============
+
+  constructor(id_?:number, username_?:string, colour_?:string, playerField_?:number){
+    //instantiated in login.component.ts
+    this.id=id_;
+    this.username=username_;
+    this.colour=colour_;
+    this.playerField=playerField_;
+  }
 
 }

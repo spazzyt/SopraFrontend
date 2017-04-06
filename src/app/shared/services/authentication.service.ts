@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions, Jsonp} from "@angular/http";
 import {User} from "../models/user";
 import {Observable} from 'rxjs/Rx';
@@ -6,12 +6,24 @@ import {Observable} from 'rxjs/Rx';
 @Injectable()
 export class AuthenticationService {
 
+  //============
   // Attributes
   //============
-  public mySelf: User=null;
-  public token: string="";
-  private apiUrl:string="";
 
+  //My User Object:
+  // set from local storage (if page only reloaded) or
+  // set with this.login() (if logged in)
+  public mySelf: User = null;
+
+  //My User Token:
+  // set from local storage (if page only reloaded) or
+  // set with this.login() (if logged in)
+  public token: string = "";
+
+  //Backend address (localhost or heroku)
+  private apiUrl: string = "";
+
+  //============
   // Constructor
   //=============
   constructor(private http: Http,
@@ -19,59 +31,87 @@ export class AuthenticationService {
 
     // set token if saved in local storage
     // (assumes local user always logs in with the same name)
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
-    this.mySelf=currentUser;
+    this.mySelf = currentUser;
 
     //TODO fill in your heroku-backend URL
     //this.apiUrl = 'https://sopra-fs17-group13.herokuapp.com';
-    this.apiUrl='http://localhost:8080'
+    this.apiUrl = 'http://localhost:8080'
   }
 
+
+  //==============
   // Http-Methods
   //==============
 
-  // login in backend: refresh localStorage
-  login(user:User): Observable<User> {
+  // send http post request to backend: username:user.username
+  // receive from backend: user:User
+  // refresh localStorage-currentUser with: user:User
+  login(user: User): Observable<User> {
 
-    let bodyString = JSON.stringify({ username: user.username }); // Stringify payload
-    let headers      = new Headers({ 'Content-Type': 'application/json'});// ... Set content type to JSON
-    let options       = new RequestOptions({ headers: headers }); // Create a request option
+    // Stringify payload
+    let bodyString = JSON.stringify({username: user.username});
 
-    return this.http.post(this.apiUrl+'/user', bodyString, options) // ...using post request
+    // Set content type to JSON
+    let headers = new Headers({'Content-Type': 'application/json'});
+
+    // Create a request option
+    let options = new RequestOptions({headers: headers});
+
+    // Post request: send bodyString and options to '/user'
+    let httpPost = this.http.post(this.apiUrl + '/user', bodyString, options)
+
+      //map response from json string to User object
       .map((response: Response) => {
 
         // login successful if there's a jwt token in the response
-        let user = response.json() && response.json();
+        //let user = response.json() && response.json();
+        let user = response.json()
+
+        console.log("authentication.service.ts-login()-response: ", response)
+        console.log("authentication.service.ts-login()-response.json: ", response.json)
+        console.log("authentication.service.ts-login()-user: ", user)
+        console.log("authentication.service.ts-login()-user.token: ", user.token)
 
         if (user) {
 
           // set token property
           this.token = user.token;
 
-          // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({ username: user.username, id: user.id, token: this.token }));
+          // store username and jwt token in local storage
+          // to keep user logged in between page refreshes
+          localStorage.setItem('currentUser',
+            JSON.stringify({username: user.username, id: user.id, token: this.token})
+          );
 
-          // return true to indicate successful login
+          // return user to indicate successful login
           return user;
 
         } else {
 
-          // return false to indicate failed login
+          // return null to indicate failed login
           return null;
 
         }
 
-    }) // ...and calling .json() on the response to return data
+      }) // ...and calling .json() on the response to return data
 
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+      .catch((error: any) =>
+        Observable.throw(error.json().error || 'Server error')); //...errors if
+
+    console.log("authentication.service.ts-login()-httpPost: ", httpPost)
+    return httpPost;
 
   }
 
+  //===============
   // Other-Methods
   //===============
 
-  // logout: clear token remove user from local storage to log user out
+  // logout:
+  // clear token remove user from local storage to log user out
+  // TODO?? inform backend
   logout(): void {
     this.token = null;
     localStorage.removeItem('currentUser');

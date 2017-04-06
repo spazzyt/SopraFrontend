@@ -8,6 +8,7 @@ import {UserService} from "../shared/services/user.service";
 import {GameService} from "../shared/services/game.service";
 import {LoginComponent} from "../login/login.component";
 import {AuthenticationService} from "../shared/services/authentication.service";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -44,9 +45,6 @@ export class LobbyComponent implements OnInit {
   // game name
   public game: string; //??
 
-  // local storage (workaround1: used to reload lobby, prevent infinit reloading)
-  private tokenKey:string = 'justOnce';
-
 
   //=============
   // Constructor
@@ -64,23 +62,6 @@ export class LobbyComponent implements OnInit {
   //==========
   ngOnInit() {
 
-    // local storage (workaround1: used to reload lobby, prevent infinit reloading)
-    this._ngZone.runOutsideAngular(() => {
-
-      let storedToken:string = localStorage.getItem(this.tokenKey);
-      console.log("storedToken: ", storedToken);
-
-      if (storedToken=="false") {
-
-        //prevent infinite reloading
-        localStorage.setItem(this.tokenKey, "true");
-        console.log("storedToken: ", storedToken);
-
-        //reload page
-        location.reload();
-      }
-
-    });
 
     // subscribe to service: this.userService.getUsers()
     this.loadUserList();
@@ -92,9 +73,8 @@ export class LobbyComponent implements OnInit {
     setInterval(()=>this.loadUserList(), this.requestIntervalTime);
     setInterval(()=>this.loadGameList(), this.requestIntervalTime);
 
-    // subscribe to service: this.userService.meMyselfAndI()
-    this.whoAmI();
-
+    // get username from userService
+    this.mySelf=this.userService.mySelf();
 
   }
 
@@ -116,10 +96,10 @@ export class LobbyComponent implements OnInit {
 
   // fetch list of users
   loadUserList(){
-    this.userService.getUsers()
+    return this.userService.getUsers()
       .subscribe(users => {
+        console.log("fetch users: ", users);
         this.users = users;
-        console.log("fetch users: ", this.users);
       });
   }
 
@@ -127,14 +107,9 @@ export class LobbyComponent implements OnInit {
   loadGameList(){
     this.gameService.getGames()
       .subscribe(games => {
-        this.games = games;
         console.log("fetch games: ", this.games);
+        this.games = games;
       });
-  }
-
-  //fetch my user name from localStorage
-  whoAmI(){
-    this.mySelf=this.userService.meMyselfAndI()
   }
 
   // add a new game to table
@@ -143,7 +118,7 @@ export class LobbyComponent implements OnInit {
     .subscribe(game => {
       //this.game = game;
       console.log("add game ");
-      this.loadGameList();
+      return this.loadGameList();
     });
   }
 
@@ -153,8 +128,8 @@ export class LobbyComponent implements OnInit {
       .subscribe(game => {
         //this.game = game;
         console.log("leave game ");
-        this.loadGameList();
         this.joinedGame=-1;
+        return this.loadGameList();
       });
   }
 
@@ -164,8 +139,8 @@ export class LobbyComponent implements OnInit {
       .subscribe(game => {
         //this.game = game;
         console.log("join game ");
-        this.loadGameList();
         this.joinedGame=gameId;
+        return this.loadGameList();
       });
   }
 
@@ -185,7 +160,7 @@ export class LobbyComponent implements OnInit {
     this.authenticationService.logout();
 
     //and navigate to home screen
-    this.router.navigate(['']);
+    return this.router.navigate(['']);
 
   }
 
@@ -200,24 +175,6 @@ export class LobbyComponent implements OnInit {
       this.addGame(4);
     }
   }
-
-
-/*Roland: directly with event binding
-  changeGameVariable_2(){
-    this.nrOfGames = 2;
-    console.log("Glückwunsch, Sie haben erfolgreich 2 Spieler ausgewählt!");
-  }
-
-  changeGameVariable_3(){
-    this.nrOfGames = 3;
-    console.log("Glückwunsch, Sie haben erfolgreich 3 Spieler ausgewählt!");
-  }
-
-  changeGameVariable_4(){
-    this.nrOfGames = 4;
-    console.log("Glückwunsch, Sie haben erfolgreich 4 Spieler ausgewählt!");
-  }
-*/
 
 
 

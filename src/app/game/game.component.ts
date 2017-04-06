@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, NgZone} from '@angular/core';
 import {DragulaService} from "ng2-dragula";
 import {GameService} from "../shared/services/game.service";
 import {MarketComponent} from "./market/market.component";
@@ -60,17 +60,18 @@ export class GameComponent  implements OnInit {
   chosenActivePlayerDecision:Decision;
 
 
-
   //===============
   //Constructor
   //===============
   constructor(private dragulaService: DragulaService,
-              private gameService: GameService) {
+              private gameService: GameService,
+              private _ngZone: NgZone) {
 
     this.dragulaShipMovement_setOptions();
     this.dragulaStoneMovement_setOptions();
     this.dragula_subscribeDragEvent();
     this.dragula_subscribeDropEvent();
+
 
   }
 
@@ -161,6 +162,12 @@ export class GameComponent  implements OnInit {
   stone3 = new Stone(3, 'brown');
   stone4 = new Stone(4, 'brown');
 
+  //Fake Players
+  //1: white, 2:gray, 3:black, 4:brown
+  Player1_myself= new User(1);
+  player2= new User(2);
+  player3= new User(3);
+  player4= new User(4);
 
 
   //==================================================

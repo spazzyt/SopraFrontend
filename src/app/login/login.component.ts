@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, NgZone, ViewChild} from '@angular/core';
 import {AuthenticationService} from "../shared/services/authentication.service";
 import {Router} from "@angular/router";
 import {User} from "../shared/models/user";
+import {LobbyComponent} from "../lobby/lobby.component";
 
 @Component({
   selector: 'app-login',
@@ -28,17 +29,13 @@ export class LoginComponent implements OnInit {
   // no idea what this is
   model: any = {}; //??
 
-  // local storage (workaround1: used to reload lobby, prevent infinit reloading)
-  private tokenKey:string = 'justOnce';
 
   //=============
   // Constructor
   //=============
   constructor(private router: Router,
-              private service: AuthenticationService) {
-
-    // local storage (workaround1: used to reload lobby, prevent infinit reloading)
-    localStorage.setItem(this.tokenKey, "false");
+              private authenticationService: AuthenticationService,
+              private _ngZone: NgZone) {
 
   }
 
@@ -48,9 +45,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     // logout: reset login status
-    this.service.logout();
+    this.authenticationService.logout();
 
-    //Instantiate myself as user
+    //Instantiate mySelf as User
     this.mySelf = new User();
 
   }
@@ -59,16 +56,21 @@ export class LoginComponent implements OnInit {
   // Subscribe-Methods
   //===================
 
-  // send login request to backend in html-view: (click)="login()"
+  // send login request to backend in login.component.html: (click)="login()"
+  // subscribe for backend response
   login() {
-    this.service.login(this.mySelf)
+    this.authenticationService.login(this.mySelf)
       .subscribe(result => {
+
         if (result) {
+          console.log("login:authenticationService.login(): ", result);
           this.router.navigate(['/lobby']);
-        } else {
+        }
+        else {
           this.error = 'Username exists';
           this.loading = false;
         }
+
       });
   }
 
@@ -80,5 +82,13 @@ export class LoginComponent implements OnInit {
   clearfields() {
     this.mySelf.username = '';
   }
+
+
+  //===========================================
+  // Enable Communication with Child Components
+  //===========================================
+
+  // Enable communication with ShipComponent
+  @ViewChild(LobbyComponent) lobbyComponent:LobbyComponent;
 
 }
