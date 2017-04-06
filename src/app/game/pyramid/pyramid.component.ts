@@ -49,4 +49,10 @@ export class PyramidComponent implements OnInit {
     }
   }
 
+
+  removeStones(){
+    this.stones = [];
+    this.totalStones = 0;
+  }
+
 }

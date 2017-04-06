@@ -51,4 +51,10 @@ export class TempleComponent implements OnInit {
     }
   }
 
+  removeStones(){
+    this.stones = [];
+    this.totalStones = 0;
+    this.fieldHeight = [0,0,0,0,0];
+  }
+
 }
