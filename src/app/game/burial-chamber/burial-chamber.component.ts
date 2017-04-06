@@ -13,6 +13,8 @@ export class BurialChamberComponent implements OnInit {
   //===============
 
   stones:Stone[] = [];
+  totalStones:number = 0;
+
 
   //===============
   //Constructor
@@ -38,10 +40,21 @@ export class BurialChamberComponent implements OnInit {
 
   }
 
-  placeStones(stonesToAdd: Stone[]){
+  placeStones(targetStones: Stone[]){
+    for (var i = 0; i < targetStones.length; i++) {
 
-    //fill stone array
-    this.stones = stonesToAdd;
+      if(this.totalStones < 27) {
+
+        if (targetStones[i] != null) //only do this for stones that exist in the input array
+        {
+          //this function determines in which column the stone needs to be placed
+          this.stones[this.totalStones] = targetStones[i];
+
+          //increase the total stone counter by one
+          this.totalStones += 1;
+        }
+      }
+    }
   }
 
 }

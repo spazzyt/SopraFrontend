@@ -80,7 +80,10 @@ export class GameComponent  implements OnInit {
   //==========
 
   ngOnInit() {
-
+    this.stones_target.push(this.stone1);
+    this.stones_target.push(this.stone2);
+    this.stones_target.push(this.stone3);
+    this.stones_target.push(this.stone4);
 
   }
 
@@ -148,7 +151,7 @@ export class GameComponent  implements OnInit {
   score_target:number=12;
   sledStones_target:number=3;
   quarryStones_target:number=25;
-  fakeStones:Stone[]=[this.stone1, this.stone2, this.stone3, this.stone4]
+
 
   //Fake Ships
   ship1 = new Ship(1, 4);
@@ -158,9 +161,10 @@ export class GameComponent  implements OnInit {
 
   //Fake Stones
   stone1 = new Stone(1, 'brown');
-  stone2 = new Stone(2, 'brown');
-  stone3 = new Stone(3, 'brown');
-  stone4 = new Stone(4, 'brown');
+  stone2 = new Stone(2, 'white');
+  stone3 = new Stone(3, 'gray');
+  stone4 = new Stone(4, 'black');
+  stones_target = new Array<Stone>();
 
   //Fake Players
   //1: white, 2:gray, 3:black, 4:brown
@@ -237,21 +241,27 @@ export class GameComponent  implements OnInit {
 
   // Communication with PyramidComponent
   //------------------------------------
-
+  trigger_placeOnPyramid(){
+    this.pyramidComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
+  }
 
   // Communication with TempleComponent
   //-----------------------------------
-
+  trigger_placeOnTemple(){
+    this.templeComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
+  }
 
   // Communication with BurialChamberComponent
   //------------------------------------------
-  trigger_placeStones(){
-    this.burialChamberComponent.placeStones(this.fakeStones); //(click)="trigger_setMarketCards()"
+  trigger_placeOnBurial(){
+    this.burialChamberComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
   }
 
   // Communication with ObeliskComponent
   //------------------------------------
-
+  trigger_placeOnObelisk(){
+    this.obeliskComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
+  }
 
   // Communication with MarketComponent
   //-----------------------------------
