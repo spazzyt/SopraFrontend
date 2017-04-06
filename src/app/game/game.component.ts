@@ -164,6 +164,10 @@ export class GameComponent  implements OnInit {
   score_target:number=12;
   sledStones_target:number=3;
   quarryStones_target:number=25;
+  playerIconsStatus_target:boolean[]=[false, false, true, true, true, false, false, false];
+  playerStoneQuarryStatus_target:boolean=false;
+  playerStoneSledStatus_target:boolean=false;
+  playerPlayerFieldStatus_target:boolean=false;
 
 
   //Fake Ships
@@ -203,7 +207,7 @@ export class GameComponent  implements OnInit {
     this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
     this.bottomRightComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
     this.topLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
-    this.topLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+    this.topRightComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
 
   }
   trigger_setScore(){
@@ -227,21 +231,62 @@ export class GameComponent  implements OnInit {
 
   }
 
+  trigger_deactivateOrActivateIcons(){
+    this.bottomLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
+    this.bottomRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
+    this.topLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
+    this.topRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
+  }
 
-  // Communication with active player component BottomLeftComponent
-  //---------------------------------------------------------------
+  trigger_deactivateOrActivateStoneQuarry(){
+
+    this.bottomLeftComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.bottomRightComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topLeftComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topRightComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+
+  }
+
+  trigger_deactivateOrActivateStoneSled(){
+
+    this.bottomLeftComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.bottomRightComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topLeftComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topRightComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+
+  }
+
+  trigger_deactivateOrActivatePlayerField(){
+
+    this.bottomLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.bottomRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+
+  }
 
 
-  // Communication with not active player component BottomLeftComponent
-  //-------------------------------------------------------------------
+
+  // Communication with active player component BottomLeftComponent usw.
+  // no delegation to children
+  //--------------------------------------------------------------------
+  trigger_TemplateFunction(){}/*used to compile*/
 
 
-  // Communication with not active player component BottomLeftComponent
-  //-------------------------------------------------------------------
+  trigger_showSnackbarMessenger() {
+    this.generateSnackbarDiv();
+    this.showSnackbarMessenger("hello",3000);
+  }
 
 
-  // Communication with not active player component BottomLeftComponent
-  //-------------------------------------------------------------------
+  trigger_showLastMoveOfOtherPlayer(){
+
+  }
+
+
+  trigger_collectLastMoveOfActivePlayer(){
+
+  }
 
 
   // Communication with DepartingHarbour
@@ -321,14 +366,29 @@ export class GameComponent  implements OnInit {
   }
 
 
+  trigger_deactivateOrActivateMarketCards(){
+
+    //gray out and make unclickable
+    this.marketComponent.deactivateOrActivateMarketCards(); //(click)="trigger_deactivateOrActivateMarketCards()"
+  }
+
+
   // Communication with ShipComponent
   //---------------------------------
+  trigger_deactivateOrActivateShips(){
+
+    this.shipComponent.deactivateOrActivateShips();//(click)="trigger_deactivateOrActivateShips()"
+
+  }
 
 
 
   //===================
   // Subscribe-Methods
   //===================
+
+
+
 
 
 
@@ -343,6 +403,32 @@ export class GameComponent  implements OnInit {
     this.obeliskComponent.removeStones();
   }
 
+  generateSnackbarDiv(){
+
+    jQuery('<div/>', {
+      id: 'snackbar',
+    }).appendTo('.game_footer');
+
+  }
+
+
+  showSnackbarMessenger(textMessage, timeMilliSeconds) {
+
+    //get element
+    let x = document.getElementById("snackbar");
+
+    //set text
+    x.innerHTML=textMessage;
+
+    //set class
+    x.className = "show";
+
+    //set timeout to replace class "show" with "";
+    setTimeout(function(){
+      x.className = x.className.replace("show", ""); },
+      timeMilliSeconds);
+
+}
 
 
   //================
