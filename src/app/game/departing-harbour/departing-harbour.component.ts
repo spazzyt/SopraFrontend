@@ -70,7 +70,7 @@ export class DepartingHarbourComponent {
 
   // Remove Ships
   removeShips(){
-
+    this.ships = [];
   }
 
   //change Style
