@@ -76,6 +76,8 @@ export class LobbyComponent implements OnInit {
     // get username from userService
     this.mySelf=this.userService.mySelf();
 
+
+
   }
 
   //================
@@ -83,6 +85,7 @@ export class LobbyComponent implements OnInit {
   //================
 
   ngAfterViewInit() {
+
 
 
 
