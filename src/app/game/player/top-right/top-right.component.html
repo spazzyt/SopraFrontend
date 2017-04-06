@@ -1,16 +1,23 @@
 <div class="bottom_part">
 
   <div class="low score">
-    <p>15</p>
+    <p>{{score}}</p>
   </div>
+  <!--drag and drop zone
+  <div id="supply_sled_3" class="low supply_sled_3"
+       (mouseover)=show_hide_stone_onMouseOver()
+       (mouseleave)=show_hide_stone_onMouseLeave()
+       [dragula]="'stone_slots_bag'">-->
+  <div id="supply_sled_3" class="low supply_sled_3">
+    <div >
+      <p id="stone_label_3">{{sledStones}}/5</p>
+    </div>
 
-  <!--drag and drop zone-->
-  <div id="supply_sled_3" class="low supply_sled you-may-copy-us" [dragula]="'stone_slots_bag'">
-    <div id="stones_3" class="item_stone you-may-copy-us"><p>3/5</p></div>
+    <!--<app-stone [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>-->
+
   </div>
-
   <div class="low quarry">
-    <p>27</p>
+    <p>{{quarryStones}}</p>
   </div>
 
 </div>
@@ -23,22 +30,22 @@
 
     <div class="left_part">
       <div class="upper_quarter">
-        <div class="card top_left_left"><div id="tll_3"><img class="tll_icon" src="../../../../assets/images/icons/pyramiddec.png"></div></div>
-        <div class="card top_middle_left"><div id="tml_3"><img class="tml_icon" src="../../../../assets/images/icons/templedec.png"></div></div>
-        <div class="card top_middle_right"><div id="tmr_3"><img class="tmr_icon" src="../../../../assets/images/icons/burialdec.png"></div></div>
-        <div class="card top_right_right"><div id="trr_3"><img class="trr_icon" src="../../../../assets/images/icons/obeliskdec.png"></div></div>
+        <div class="card top_left_left"><div id="tll_3" class="tll_icon"><p style="position:absolute;">{{marketCardIcon_1}}</p></div></div>
+        <div class="card top_middle_left"><div id="tml_3" class="tml_icon"><p style="position:absolute;">{{marketCardIcon_2}}</p></div></div>
+        <div class="card top_middle_right"><div id="tmr_3" class="tmr_icon"><p style="position:absolute;">{{marketCardIcon_3}}</p></div></div>
+        <div class="card top_right_right"><div id="trr_3" class="trr_icon"><p style="position:absolute;">{{marketCardIcon_4}}</p></div></div>
       </div>
 
       <div class="lower_quarter">
-        <div class="card bottom_left_left"><div id="bll_3"><img class="bll_icon" src="../../../../assets/images/icons/chisel.png"></div></div>
-        <div class="card bottom_middle_left"><div id="bml_3"><img class="bml_icon" src="../../../../assets/images/icons/hammer.png"></div></div>
-        <div class="card bottom_middle_right"><div id="bmr_3"><img class="bmr_icon" src="../../../../assets/images/icons/sail.png"></div></div>
-        <div class="card bottom_right_right"><div id="brr_3"><img class="brr_icon" src="../../../../assets/images/icons/lever.png"></div></div>
+        <div class="card bottom_left_left"><div id="bll_3" class="bll_icon"><p style="position:absolute;">{{marketCardIcon_5}}</p></div></div>
+        <div class="card bottom_middle_left"><div id="bml_3" class="bml_icon"><p style="position:absolute;">{{marketCardIcon_6}}</p></div></div>
+        <div class="card bottom_middle_right"><div id="bmr_3" class="bmr_icon"><p style="position:absolute;">{{marketCardIcon_7}}</p></div></div>
+        <div class="card bottom_right_right"><div id="brr_3" class="brr_icon"><p style="position:absolute;">{{marketCardIcon_8}}</p></div></div>
       </div>
     </div>
 
     <div class="right_part">
-      <div class="purple_card"><div id="purple_3"><img class="purple_icon" src="../../../../assets/images/icons/statue.png"></div></div>
+      <div class="purple_card"><div id="purple_3" class="purple_icon"><p style="position:absolute; margin-top:20%;">{{marketCardIcon_0}}</p></div></div>
     </div>
 
 
@@ -47,7 +54,7 @@
   <!-- copied from cards.component.html -->
 
   <div class="player_name">
-    <p class="name_text">Player 3</p>
+    <p class = name_text>{{playerName}}</p>
   </div>
 
 </div>
