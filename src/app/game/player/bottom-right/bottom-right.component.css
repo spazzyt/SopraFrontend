@@ -112,6 +112,7 @@ p{
   width: 20%;
   height: 100%;
   float: right;
+  border: 1px solid #88a3ff;/*border: 1px solid #44ff62;*/
 }
 
 .upper_quarter{
@@ -130,12 +131,10 @@ p{
 }
 
 .purple_card{
-  width: 100%;
-  height: 50%;
-  background-repeat: no-repeat;
-  background-position: left;
-  background-size: contain;
-  float: left;
+  height:65%;
+  width:65%;
+  float:right;
+  margin-top:20%;
 }
 
 .card{
@@ -252,7 +251,7 @@ p{
 }
 
 
-#stone_label{
+#stone_label_2{
   z-index:200;
   top:0px;
   left:0px;

@@ -58,6 +58,7 @@ export class TopRightComponent implements OnInit {
   ngOnInit() {
 
     this.initializePopovers();
+    this.playerFieldStone = new Stone(0, 'brown')
 
   }
 

@@ -107,6 +107,7 @@ export class TopLeftComponent implements OnInit {
 
     // update attribute:
     this.quarryStones=quarryStones_target;
+    this.playerFieldStone = new Stone(0, 'brown')
 
   }
 
