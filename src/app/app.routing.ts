@@ -12,12 +12,14 @@ import {DemoTempComponent} from "./demo-temp/demo-temp.component";
 const appRoutes: Routes = [
     { path: 'lobby', component: LobbyComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'game', component: GameComponent},
+    { path: 'game', component: GameComponent },
     //{ path: 'game', component: GameComponent, canActivate: [AuthGuardService] },
-    { path: '', component: HomeComponent },
+    { path: 'home', component: HomeComponent },
 
     //Demo screen
     { path: 'demo', component: DemoTempComponent },
+
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

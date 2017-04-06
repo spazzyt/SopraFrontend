@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, NgZone} from '@angular/core';
 import {DragulaService} from "ng2-dragula";
 import {GameService} from "../shared/services/game.service";
 import {MarketComponent} from "./market/market.component";
@@ -60,17 +60,18 @@ export class GameComponent  implements OnInit {
   chosenActivePlayerDecision:Decision;
 
 
-
   //===============
   //Constructor
   //===============
   constructor(private dragulaService: DragulaService,
-              private gameService: GameService) {
+              private gameService: GameService,
+              private _ngZone: NgZone) {
 
     this.dragulaShipMovement_setOptions();
     this.dragulaStoneMovement_setOptions();
     this.dragula_subscribeDragEvent();
     this.dragula_subscribeDropEvent();
+
 
   }
 
@@ -85,6 +86,19 @@ export class GameComponent  implements OnInit {
     this.stones_target.push(this.stone4);
 
   }
+
+
+  //================
+  // ngAfterViewInit
+  //================
+
+  ngAfterViewInit() {
+
+
+
+  }
+
+
 
   //==============================
   // Major Tasks of Game Component
@@ -165,29 +179,54 @@ export class GameComponent  implements OnInit {
   stone4 = new Stone(4, 'black');
   stones_target = new Array<Stone>();
 
+  //Fake Players
+  //1: white, 2:gray, 3:black, 4:brown
+  Player1_myself= new User(1);
+  player2= new User(2);
+  player3= new User(3);
+  player4= new User(4);
 
 
   //==================================================
   // Test-Methods: Communication with Child Components
   //==================================================
 
-  // Communication with PlayerComponent or Players ButtomLeftComponent etc. directly
+  // Communication with PlayerComponent or Players BottomLeftComponent etc. directly
   //--------------------------------------------------------------------------------
   trigger_setPlayerName(){
     this.bottomLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
+    this.bottomRightComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
+    this.topLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
+    this.topRightComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
   }
   trigger_setMarketCards(){
     this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+    this.bottomRightComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+    this.topLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+    this.topLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+
   }
   trigger_setScore(){
     this.bottomLeftComponent.setScore(this.score_target); //(click)="trigger_setScore()"
+    this.bottomRightComponent.setScore(this.score_target); //(click)="trigger_setScore()"
+    this.topLeftComponent.setScore(this.score_target); //(click)="trigger_setScore()"
+    this.topRightComponent.setScore(this.score_target); //(click)="trigger_setScore()"
   }
   trigger_setStonesInSled(){
     this.bottomLeftComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
+    this.bottomRightComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
+    this.topLeftComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
+    this.topRightComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
+
   }
   trigger_setStonesInQuarry(){
     this.bottomLeftComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
+    this.bottomRightComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
+    this.topLeftComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
+    this.topRightComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
+
   }
+
 
   // Communication with active player component BottomLeftComponent
   //---------------------------------------------------------------
@@ -285,17 +324,6 @@ export class GameComponent  implements OnInit {
   // Communication with ShipComponent
   //---------------------------------
 
-
-
-
-
-  //================
-  // ngAfterViewInit
-  //================
-
-  ngAfterViewInit() {
-
-  }
 
 
   //===================

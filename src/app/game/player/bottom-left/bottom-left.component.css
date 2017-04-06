@@ -64,14 +64,13 @@ p{
   border: 1px solid #ff1e1a;/*border: 1px solid #44ff62;*/
 }
 
-.supply_sled{
+.supply_sled_1{
   border: 1px solid #ff1e1a;/*border: 1px solid #44ff62;*/
   background-image: url("../../../../assets/images/supply_sled.png");
   background-repeat: no-repeat;
   background-position: center;
-  z-index: 100;/*Roland: do not change, used for jquery logic*/
+  z-index: 100;
 }
-
 
 .quarry{
   background-image: url("../../../../assets/images/quarry.png");
@@ -256,11 +255,11 @@ p{
 }
 
 
-#stone_label{
-  z-index:200;/*Roland: do not change, used for jquery logic*/
+#stone_label_1{
+  z-index:200;
   top:0px;
   left:0px;
-  margin-bottom:50px;
+  margin-bottom:150px;
   border: 1px solid #ff19c7;/*border: 1px solid #44ff62;*/
   position:relative;
 }

@@ -7,11 +7,13 @@ import {User} from "../models/user";
 @Injectable()
 export class UserService {
 
+  //============
   // Attributes
   //============
   private apiUrl:string;
 
 
+  //=============
   // Constructor
   //=============
 
@@ -25,19 +27,37 @@ export class UserService {
   }
 
 
+  //==============
   // Http-Methods
   //==============
 
+  // send http post request to backend: user:User
+  // receive from backend: user:User[]
+  // refresh localStorage-currentUser with: user:User
   getUsers(): Observable<User[]> {
 
     // add authorization header with token
-    let headers = new Headers({ 'Authorization': 'Bearer ' +
-                                this.authenticationService.token });
+    let headers = new Headers({ 'Authorization':
+          'Bearer ' + this.authenticationService.token });
+
+    // create a request option
     let options = new RequestOptions({ headers: headers });
 
-    // get users from api
+    // get users from backend
     return this.http.get(this.apiUrl +'/user', options)
-      .map((response: Response) => response.json());
+
+      //map response from json string to User[] object
+      .map((response: Response) => {
+        let users=response.json()
+
+        console.log("user.service.ts-login()-response: ", response)
+        console.log("user.service.ts-login()-response.json: ", response.json)
+        console.log("user.service.ts-login()-user: ", users)
+
+        return users;
+
+    });
+
 
   }
 
@@ -45,11 +65,13 @@ export class UserService {
   // Other-Methods
   //===============
 
-  meMyselfAndI(){
+  mySelf(){
 
-    // return my name from localStorage
+    // get mySelf from authenticationService
     let mySelf = this.authenticationService.mySelf;
+
     console.log(mySelf);
+
     return mySelf;
 
   }

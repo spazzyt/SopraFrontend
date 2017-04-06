@@ -121,20 +121,20 @@ export class BottomLeftComponent implements OnInit {
   show_hide_stone_at_init() {
     (<any>$(document)).ready(function () {
       (<any>$("#stones_1")).hide();
-      (<any>$("#stone_label")).show();
+      (<any>$("#stone_label_1")).show();
     });
   }
 
   show_hide_stone_onMouseOver(){
     (<any>$(document)).ready(function () {
       (<any>$("#stones_1")).show();
-      (<any>$("#stone_label")).hide();
+      (<any>$("#stone_label_1")).hide();
     });
   }
 
   show_hide_stone_onMouseLeave(){
     (<any>$(document)).ready(function () {
-      (<any>$("#stone_label")).show();
+      (<any>$("#stone_label_1")).show();
     });
   }
 
@@ -145,6 +145,7 @@ export class BottomLeftComponent implements OnInit {
   //================
 
   initializePopovers(){
+
     //From bottom-left-left
     (<any>$('#bll_1')).popover({
       placement: 'top',
