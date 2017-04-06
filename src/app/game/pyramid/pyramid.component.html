@@ -21,11 +21,11 @@
   <div id="level2_space"></div>
   <div id="level2_fields">
 
-    <div *ngFor="let field_id1 of [10, 12, 11, 13]"
-         id="field_{{field_id1}}" class="field">
+    <div *ngFor="let field_id2 of [10, 12, 11, 13]"
+         id="field_{{field_id2}}" class="field">
 
-      <div *ngIf="stones[field_id1-1] != null">
-        <app-stone [stone]="stones[field_id1-1]"></app-stone>
+      <div *ngIf="stones[field_id2-1] != null">
+        <app-stone [stone]="stones[field_id2-1]"></app-stone>
       </div>
 
     </div>
