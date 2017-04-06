@@ -38,7 +38,7 @@
   </div>
   <div class="section" id="temple">
     <!--add stone fields-->
-    <div *ngFor="let field_id of [1,2,3,4,5]" id="field_{{field_id}}" class="field">
+    <div *ngFor="let field_id of fieldArray" id="field_{{field_id}}" class="field">
       <div *ngIf="stones[field_id-1] != null">
         <app-stone [stone]="stones[field_id-1]"></app-stone>
       </div>
