@@ -30,4 +30,11 @@ export class ShipComponent implements OnInit {
   //===============
   ngOnInit() {
   }
+
+  //===============
+  //Class Methods
+  //===============
+
+
+  deactivateOrActivateShips(){}
 }

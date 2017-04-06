@@ -78,6 +78,12 @@ export class MarketComponent implements OnInit {
     this.marketCards.push(marketCard4);
   }
 
+
+
+  deactivateOrActivateMarketCards(){
+
+  }
+
 }
 
 
