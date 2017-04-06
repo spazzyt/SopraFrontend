@@ -178,23 +178,42 @@ export class GameComponent  implements OnInit {
   // Test-Methods: Communication with Child Components
   //==================================================
 
-  // Communication with PlayerComponent or Players ButtomLeftComponent etc. directly
+  // Communication with PlayerComponent or Players BottomLeftComponent etc. directly
   //--------------------------------------------------------------------------------
   trigger_setPlayerName(){
     this.bottomLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
+    this.bottomRightComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
+    this.topLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
+    this.topRightComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
   }
   trigger_setMarketCards(){
     this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+    this.bottomRightComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+    this.topLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+    this.topLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+
   }
   trigger_setScore(){
     this.bottomLeftComponent.setScore(this.score_target); //(click)="trigger_setScore()"
+    this.bottomRightComponent.setScore(this.score_target); //(click)="trigger_setScore()"
+    this.topLeftComponent.setScore(this.score_target); //(click)="trigger_setScore()"
+    this.topRightComponent.setScore(this.score_target); //(click)="trigger_setScore()"
   }
   trigger_setStonesInSled(){
     this.bottomLeftComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
+    this.bottomRightComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
+    this.topLeftComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
+    this.topRightComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
+
   }
   trigger_setStonesInQuarry(){
     this.bottomLeftComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
+    this.bottomRightComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
+    this.topLeftComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
+    this.topRightComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
+
   }
+
 
   // Communication with active player component BottomLeftComponent
   //---------------------------------------------------------------
