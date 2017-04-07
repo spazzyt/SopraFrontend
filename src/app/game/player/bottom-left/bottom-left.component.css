@@ -211,25 +211,35 @@ p{
 }
 
 .tll_icon{
+  margin-left: 10%;
   height: 100%;
-  width: 100%;
+  width: 80%;
   background-image: url("../../../../assets/images/icons/pyramiddec.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   position:relative;
   display:block;
+  /*border: 1px solid #44ff62;*/
+  border-radius: 50%;
+  /*background-color: #c6c6c6;
+  opacity: 0.5; */
+
+
 }
 
 .tml_icon{
+  margin-left: 10%;
   height: 100%;
-  width: 100%;
+  width: 80%;
   background-image: url("../../../../assets/images/icons/templedec.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   position:relative;
   display:block;
+  /*border-radius: 50%;*/
+  /*border: 1px solid #44ff62;*/
 }
 
 .tmr_icon{
@@ -262,6 +272,10 @@ p{
   margin-bottom:150px;
   border: 1px solid #ff19c7;/*border: 1px solid #44ff62;*/
   position:relative;
+}
+
+.top_part{
+  border: 2px solid black;
 }
 
 
