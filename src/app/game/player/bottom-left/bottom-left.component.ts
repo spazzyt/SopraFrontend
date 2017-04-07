@@ -142,45 +142,57 @@ export class BottomLeftComponent implements OnInit {
   //deactivates at the moment the icon top-left-left, this function cannot reactivate icon
   deactivateOrActivateIcons(playerIconsStatus_target){
 
-    console.log("deactivateOrActivateIcons: false", playerIconsStatus_target)
+    console.log("deactivateOrActivateIcons: false", playerIconsStatus_target);
 
     if (playerIconsStatus_target[0] == false) {
-      (<any>$(document)).ready(function (){
+      (<any>$(document)).ready(function () {
         (<any>$("#bll_1")).css("opacity", "0.3");
+        (<any>$("button")).click(function () {
+          (<any>$("p")).off("click")
+        })
       });
-      console.log("deactivateOrActivateIcons: false")
+      console.log("deactivateOrActivateIcons: false");
     }
+
     if (playerIconsStatus_target[0] == true){
       (<any>$(document)).ready(function (){
-        (<any>$("#bll_1")).css("opacity", "1.0");
-      });
-      console.log("deactivateOrActivateIcons: true")
+        (<any>$("#bll_1")).css("opacity", "1.0")
+      })
+      (<any>$(document)).ready(function (){
+        (<any>$("button")).click(function(){
+          (<any>$("p")).on("click")
+        })});
+      console.log("deactivateOrActivateIcons: true");
     }
+
+
+
+
 
     if (playerIconsStatus_target[1] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#bml_1")).css("opacity", "0.3");
       });
-      console.log("deactivateOrActivateIcons: false")
+      console.log("deactivateOrActivateIcons: false");
     }
     if (playerIconsStatus_target[1] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bml_1")).css("opacity", "1.0");
       });
-      console.log("deactivateOrActivateIcons: true")
+      console.log("deactivateOrActivateIcons: true");
     }
 
     if (playerIconsStatus_target[2] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#bmr_1")).css("opacity", "0.3");
       });
-      console.log("deactivateOrActivateIcons: false")
+      console.log("deactivateOrActivateIcons: false");
     }
     if (playerIconsStatus_target[2] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bmr_1")).css("opacity", "1.0");
       });
-      console.log("deactivateOrActivateIcons: true")
+      console.log("deactivateOrActivateIcons: true");
     }
 
 
@@ -188,13 +200,13 @@ export class BottomLeftComponent implements OnInit {
       (<any>$(document)).ready(function (){
         (<any>$("#brr_1")).css("opacity", "0.3");
       });
-      console.log("deactivateOrActivateIcons: false")
+      console.log("deactivateOrActivateIcons: false");
     }
     if (playerIconsStatus_target[3] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#brr_1")).css("opacity", "1.0");
       });
-      console.log("deactivateOrActivateIcons: true")
+      console.log("deactivateOrActivateIcons: true");
     }
 }
 
