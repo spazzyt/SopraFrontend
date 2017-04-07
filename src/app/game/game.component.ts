@@ -168,7 +168,7 @@ export class GameComponent  implements OnInit {
   score_target:number=12;
   sledStones_target:number=3;
   quarryStones_target:number=25;
-  playerIconsStatus_target:boolean[]=[false, false, false, false];
+  playerIconsStatus_target:boolean[]=[false, false, false, false, false, false, false, false, false];
   playerStoneQuarryStatus_target:boolean=false;
   playerStoneSledStatus_target:boolean=false;
   playerPlayerFieldStatus_target:boolean=false;
@@ -237,14 +237,12 @@ export class GameComponent  implements OnInit {
 
   trigger_deactivateOrActivateIcons(){
 
-    console.log("trigger_deactivateOrActivateIcons", this.playerIconsStatus_target);
-
     this.bottomLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
     this.bottomRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
     this.topLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
     this.topRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
 
-
+    //used to toggle boolean array this.playerIconsStatus_target
     for(var i = 0; i < this.playerIconsStatus_target.length; i++){
       this.playerIconsStatus_target[i] = !this.playerIconsStatus_target[i];
     }
@@ -277,6 +275,24 @@ export class GameComponent  implements OnInit {
 
   }
 
+
+  trigger_setClickHandlerOnBlueMarketCards(){
+
+    this.bottomLeftComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
+    this.bottomRightComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
+    this.topLeftComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
+    this.topRightComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
+
+  }
+
+  trigger_removeClickHandlerOnBlueMarketCards(){
+
+    this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
+    this.bottomRightComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
+    this.topLeftComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
+    this.topRightComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
+
+  }
 
 
   // Communication with active player component BottomLeftComponent usw.
@@ -423,14 +439,6 @@ export class GameComponent  implements OnInit {
     jQuery('<div/>', {
       id: 'snackbar',
     }).appendTo('.game_footer');
-
-    /**(<any>$('.game_footer')).append(
-      (<any>$('<div/>'))
-        .attr("id", "snackbar")
-        .text("hi")
-        .addClass('show')
-        .css({'visibility': 'hidden','in-width': '250px','margin-left': '-125px','background-color': '#333','color': '#fff','text-align': 'center','border-radius': '2px','padding': '16px','position': 'fixed','z-index': '10000','left': '40%','top': '10%','font-size': '17px'})
-    );*/
 
     if(1){console.log((<any>$('#snackbar')))};
   }
