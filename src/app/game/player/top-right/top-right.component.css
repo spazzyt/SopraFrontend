@@ -5,13 +5,14 @@
 }
 
 p{
-  font: 400 27px "Lithos Pro", Helvetica, Sans-Serif;
   vertical-align: bottom;
   color: white;
   text-align: center;
   display: inline-block;
   vertical-align: -50%;
-  padding-left: 25%
+  padding-left: 25%;
+  font: 500 20px "Lithos Pro", Helvetica, Sans-Serif;
+  text-shadow: 1px 1px 2px black;
 }
 
 .name_text{
