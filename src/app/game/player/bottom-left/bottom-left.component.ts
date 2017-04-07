@@ -138,10 +138,35 @@ export class BottomLeftComponent implements OnInit {
     });
   }
 
+  /*
 
+ deactivateOrActivateIcons(playerIconsStatus_target){
+    (<any>$(document)).ready(function (){
+      (<any>$("#tll_1")).css("background-color", "#c6c6c6").css("opacity", "0.5");
+    });
+}
+*/
+
+
+
+  //deactivates at the moment the icon top-left-left, this function cannot reactivate icon
   deactivateOrActivateIcons(playerIconsStatus_target){
+    playerIconsStatus_target = false;
 
-  }
+    if (playerIconsStatus_target == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#tll_1")).css("background-color", "#c6c6c6 ").css("opacity", "0.5");
+        playerIconsStatus_target = true;
+      });
+    }
+    if (playerIconsStatus_target == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#tll_1")).css("background-color", " ").css("opacity", "1.0");
+        playerIconsStatus_target = false;
+      });
+    }
+}
+
 
   deactivateOrActivateStoneQuarry(playerStoneQuarryStatus_target){
 
