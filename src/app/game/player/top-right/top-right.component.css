@@ -5,13 +5,15 @@
 }
 
 p{
-  font: 400 27px "Lithos Pro", Helvetica, Sans-Serif;
   vertical-align: bottom;
   color: white;
   text-align: center;
   display: inline-block;
   vertical-align: -50%;
-  padding-left: 25%
+  padding-left: 28%;
+  padding-top: 5%;
+  font: 500 20px "Lithos Pro", Helvetica, Sans-Serif;
+  text-shadow: 1px 1px 2px black;
 }
 
 .name_text{
@@ -103,13 +105,14 @@ p{
   width: 20%;
   height: 100%;
   float: right;
-  border: 1px solid #88a3ff;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
 }
 
 .left_part{
   width: 60%;
   height: 100%;
   float: right;
+  /*border: 1px solid red;*/
 }
 
 .upper_quarter{
@@ -253,6 +256,6 @@ p{
   top:0px;
   left:0px;
   margin-bottom:50px;
-  border: 1px solid #ff19c7;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
   position:relative;
 }

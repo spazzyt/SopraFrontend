@@ -129,22 +129,26 @@ export class BottomLeftComponent implements OnInit {
 
     //set click handler for  bll_1
     (<any>$(document)).ready(function () {
-      (<any>$("#bll_1_")).on("click", function(){alert("The chisel was clicked.")});
+      (<any>$("#bll_1_")).on("click", function(){
+        alert("The chisel was clicked.");this.marketCards[5]-=1;});
     });
 
     //set click handler for  bml_1
     (<any>$(document)).ready(function () {
-      (<any>$("#bml_1_")).on("click", function(){alert("The hammer was clicked.")})
+      (<any>$("#bml_1_")).on("click", function(){
+        alert("The hammer was clicked.");this.marketCards[6]-=1;})
     });
 
     //set click handler for  bmr_1
     (<any>$(document)).ready(function () {
-      (<any>$("#bmr_1_")).on("click", function(){alert("The sail was clicked.")})
+      (<any>$("#bmr_1_")).on("click", function(){
+        alert("The sail was clicked.");this.marketCards[7]-=1;})
     });
 
     //set click handler for  brr_1
     (<any>$(document)).ready(function () {
-      (<any>$("#brr_1_")).on("click", function(){alert("The lever was clicked.")})
+      (<any>$("#brr_1_")).on("click", function(){
+        alert("The lever was clicked.");this.marketCards[8]-=1;})
     });
   }
 
@@ -175,8 +179,6 @@ export class BottomLeftComponent implements OnInit {
   //deactivates at the moment the icon top-left-left, this function cannot reactivate icon
   deactivateOrActivateIcons(playerIconsStatus_target){
 
-    console.log("deactivateOrActivateIcons: false", playerIconsStatus_target)
-
     if (playerIconsStatus_target[0] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#bll_1")).css("opacity", "0.3");
@@ -196,12 +198,15 @@ export class BottomLeftComponent implements OnInit {
     if (playerIconsStatus_target[1] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#bml_1")).css("opacity", "0.3");
+
       });
+
       console.log("deactivateOrActivateIcons: false")
     }
     if (playerIconsStatus_target[1] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bml_1")).css("opacity", "1.0");
+
       });
       console.log("deactivateOrActivateIcons: true")
     }
@@ -209,26 +214,31 @@ export class BottomLeftComponent implements OnInit {
     if (playerIconsStatus_target[2] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#bmr_1")).css("opacity", "0.3");
+
       });
+
       console.log("deactivateOrActivateIcons: false")
     }
     if (playerIconsStatus_target[2] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bmr_1")).css("opacity", "1.0");
+
       });
       console.log("deactivateOrActivateIcons: true")
     }
 
-
     if (playerIconsStatus_target[3] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#brr_1")).css("opacity", "0.3");
+
       });
+
       console.log("deactivateOrActivateIcons: false")
     }
     if (playerIconsStatus_target[3] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#brr_1")).css("opacity", "1.0");
+
       });
       console.log("deactivateOrActivateIcons: true")
     }

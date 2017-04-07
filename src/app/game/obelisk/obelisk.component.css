@@ -79,5 +79,6 @@ p{
   color: white;
   text-align: center;
   padding: 27%;
-  font: 400 20px "Lithos Pro", Helvetica, SansSerif;
+  font: 500 20px "Lithos Pro", Helvetica, Sans-Serif;
+  text-shadow: 2px 2px 2px black;
 }
