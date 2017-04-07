@@ -1,7 +1,6 @@
 
 .stones_1 {
-  border: 1px solid #0e40ff; /*border: 1px solid #44ff62;*/
-  z-index: 10;
+    z-index: 10;
   margin: auto;
   position: relative;
   margin-top: 2%;
@@ -15,8 +14,7 @@
 }
 
 .stones_2{
-  border: 1px solid #0e40ff;/*border: 1px solid #44ff62;*/
-  z-index: 10;
+    z-index: 10;
   margin:auto;
   margin-top:2%;
   left:0px;
@@ -30,8 +28,7 @@
 
 
 .stones_3 {
-  border: 1px solid #0e40ff; /*border: 1px solid #44ff62;*/
-  z-index: 10;
+    z-index: 10;
   margin: auto;
   position: relative;
   margin-top: 2%;
@@ -45,8 +42,7 @@
 }
 
 .stones_4{
-  border: 1px solid #0e40ff;/*border: 1px solid #44ff62;*/
-  z-index: 10;
+    z-index: 10;
   margin:auto;
   position:relative;
   margin-top:2%;
