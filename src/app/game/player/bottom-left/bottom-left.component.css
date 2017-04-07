@@ -164,6 +164,7 @@ p{
   background-size: contain;
   position:relative;
   display:block;
+  border-radius: 100%;
 }
 
 .bml_icon{
@@ -175,6 +176,7 @@ p{
   background-size: contain;
   position:relative;
   display:block;
+  border-radius: 100%;
 }
 
 .bmr_icon{
@@ -186,6 +188,7 @@ p{
   background-size: contain;
   position:relative;
   display:block;
+  border-radius: 100%;
 }
 
 .brr_icon{
@@ -197,6 +200,7 @@ p{
   background-size: contain;
   position:relative;
   display:block;
+  border-radius: 100%;
 }
 
 .purple_icon{

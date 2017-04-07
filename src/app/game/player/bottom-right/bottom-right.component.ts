@@ -34,15 +34,7 @@ export class BottomRightComponent implements OnInit {
   quarryStones:number;
 
   // the player's nine market card icons
-  marketCardIcon_0:number;
-  marketCardIcon_1:number;
-  marketCardIcon_2:number;
-  marketCardIcon_3:number;
-  marketCardIcon_4:number;
-  marketCardIcon_5:number;
-  marketCardIcon_6:number;
-  marketCardIcon_7:number;
-  marketCardIcon_8:number;
+  marketCards:number[] = [0,0,0,0,0,0,0,0,0];
 
 
   //===============
@@ -79,15 +71,9 @@ export class BottomRightComponent implements OnInit {
     // define protocol: which market card
     // corresponds to which array index
 
-    this.marketCardIcon_0=marketCards_target[0];
-    this.marketCardIcon_1=marketCards_target[1];
-    this.marketCardIcon_2=marketCards_target[2];
-    this.marketCardIcon_3=marketCards_target[3];
-    this.marketCardIcon_4=marketCards_target[4];
-    this.marketCardIcon_5=marketCards_target[5];
-    this.marketCardIcon_6=marketCards_target[6];
-    this.marketCardIcon_7=marketCards_target[7];
-    this.marketCardIcon_8=marketCards_target[8];
+    for(var i = 0; i < marketCards_target.length; i++){
+      this.marketCards[i] = marketCards_target[i];
+    }
   }
 
   setScore(score_target:number){
