@@ -20,6 +20,7 @@ import {Decision} from "../shared/models/decision";
 import {User} from "../shared/models/user";
 import {Ship} from "../shared/models/ship";
 import {Stone} from "../shared/models/stone";
+import {childOfKind} from "tslint";
 
 @Component({
   selector: 'app-game',
@@ -285,6 +286,8 @@ export class GameComponent  implements OnInit {
 
   trigger_showLastMoveOfOtherPlayer(){
 
+
+
   }
 
 
@@ -436,10 +439,7 @@ export class GameComponent  implements OnInit {
         (<any>$('#snackbar'))
           .addClass('hide')
           .css({'visibility': 'hidden'});
-        if (1) {
-          console.log("showSnackbarMessenger_callback")
-        }
-        ;
+        if (1) {console.log("showSnackbarMessenger_callback")};
       },
       timeMilliSeconds);
 
@@ -469,6 +469,9 @@ export class GameComponent  implements OnInit {
 
         //custom code
 
+
+
+
       }
     });
   }
@@ -480,11 +483,65 @@ export class GameComponent  implements OnInit {
 
       if (value) {
 
-        if(0){console.log("6.2.1.1 ", `drop: ${value}`);
+        if(1){console.log("6.2.1.1 ", `drop: ${value}`);
          console.log("6.2.1.2 ", `drop: ${value[0]}`);
-         console.log("6.2.1.3 ", `drop: ${value.slice(1)}`);}
+          console.log("6.2.1.3 ", `drop: ${value[0].id}`);
+          console.log("6.2.1.4 ", `drop: ${value[0].classNames}`);
+          console.log("6.2.1.5 ", `drop: ${value[1].id}`);
+          console.log("6.2.1.6 ", `drop: ${value[1].classNames}`);
+          console.log("6.2.1.7 ", `drop: ${value[2].id}`);
+          console.log("6.2.1.8 ", `drop: ${value[2].classNames}`);
+         console.log("6.2.1.9 ", `drop: ${value.slice(1)}`);}
 
         // Custom code here
+
+
+        //get id of arriving harbour
+        if(value[0] === 'harbours_bag'){
+          let arriving_harbour_id=value[2].id;
+
+        }
+
+        //get id of ship
+        if(value[0] === 'harbours_bag'){
+          let arriving_harbour_id=value[2].id;
+          let childNodes=document.getElementById(arriving_harbour_id).childNodes;
+          let children=document.getElementById(arriving_harbour_id).children;
+          console.log("6.2.1.10 ", `drop: ${childNodes}`);
+          console.log("6.2.1.11 ", `drop: ${children}`);
+          console.log("6.2.1.12 ", `drop: ${childNodes[0].childNodes[0]}`);
+          console.log("6.2.1.13 ", `drop: ${children[0].children[0]}`);
+          console.log("6.2.1.14 ", `drop: ${childNodes[0].childNodes[0]}`);
+          console.log("6.2.1.15 ", `drop: ${children[0].children[0].className}`);
+          console.log("6.2.1.16 ", `drop: ${children[0].children[0].id}`);
+
+        }
+
+
+
+
+        //set id of stone
+        if(value[0] === 'stone_slots_bag'){
+
+
+        }
+
+
+        //get id of stone slot
+        if(value[0] === 'stone_slots_bag'){
+          let stone_slot_id=value[2].id;
+
+        }
+
+
+        //get id of stone
+        if(value[0] === 'stone_slots_bag'){
+
+
+        }
+
+
+
 
       }
 
