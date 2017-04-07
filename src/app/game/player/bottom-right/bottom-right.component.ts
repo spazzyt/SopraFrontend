@@ -111,6 +111,22 @@ export class BottomRightComponent implements OnInit {
 
   }
 
+  deactivateOrActivateIcons(playerIconsStatus_target){
+
+  }
+
+  deactivateOrActivateStoneQuarry(playerStoneQuarryStatus_target){
+
+  }
+
+  deactivateOrActivateStoneSled(playerStoneSledStatus_target){
+
+  }
+
+  deactivateOrActivatePlayerField(playerPlayerFieldStatus_target){
+
+  }
+
 
   //================
   // Popover-Methods

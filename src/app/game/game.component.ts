@@ -20,6 +20,7 @@ import {Decision} from "../shared/models/decision";
 import {User} from "../shared/models/user";
 import {Ship} from "../shared/models/ship";
 import {Stone} from "../shared/models/stone";
+import {childOfKind} from "tslint";
 
 @Component({
   selector: 'app-game',
@@ -84,6 +85,9 @@ export class GameComponent  implements OnInit {
     this.stones_target.push(this.stone2);
     this.stones_target.push(this.stone3);
     this.stones_target.push(this.stone4);
+
+    //snackbar
+    this.generateSnackbarDiv();
 
   }
 
@@ -164,6 +168,10 @@ export class GameComponent  implements OnInit {
   score_target:number=12;
   sledStones_target:number=3;
   quarryStones_target:number=25;
+  playerIconsStatus_target:boolean[]=[false, false, true, true];
+  playerStoneQuarryStatus_target:boolean=false;
+  playerStoneSledStatus_target:boolean=false;
+  playerPlayerFieldStatus_target:boolean=false;
 
 
   //Fake Ships
@@ -203,7 +211,7 @@ export class GameComponent  implements OnInit {
     this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
     this.bottomRightComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
     this.topLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
-    this.topLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
+    this.topRightComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
 
   }
   trigger_setScore(){
@@ -227,21 +235,67 @@ export class GameComponent  implements OnInit {
 
   }
 
+  trigger_deactivateOrActivateIcons(){
 
-  // Communication with active player component BottomLeftComponent
-  //---------------------------------------------------------------
+    console.log("trigger_deactivateOrActivateIcons", this.playerIconsStatus_target);
+    this.bottomLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
+    this.bottomRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
+    this.topLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
+    this.topRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
+  }
+
+  trigger_deactivateOrActivateStoneQuarry(){
+
+    this.bottomLeftComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.bottomRightComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topLeftComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topRightComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+
+  }
+
+  trigger_deactivateOrActivateStoneSled(){
+
+    this.bottomLeftComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.bottomRightComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topLeftComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topRightComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+
+  }
+
+  trigger_deactivateOrActivatePlayerField(){
+
+    this.bottomLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.bottomRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.topRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+
+  }
 
 
-  // Communication with not active player component BottomLeftComponent
-  //-------------------------------------------------------------------
+
+  // Communication with active player component BottomLeftComponent usw.
+  // no delegation to children
+  //--------------------------------------------------------------------
+  trigger_TemplateFunction(){}/*used to compile*/
 
 
-  // Communication with not active player component BottomLeftComponent
-  //-------------------------------------------------------------------
+  trigger_showSnackbarMessenger() {
+    this.showSnackbarMessenger("Hi Player 1,  Player 2  has moved Ship 2 to the Temple, " +
+      "be informed, that you have exactly 10 seconds to read this information. After that " +
+      "the snackbar will be closed.",10000);
+  }
 
 
-  // Communication with not active player component BottomLeftComponent
-  //-------------------------------------------------------------------
+  trigger_showLastMoveOfOtherPlayer(){
+
+
+
+  }
+
+
+  trigger_collectLastMoveOfActivePlayer(){
+
+  }
 
 
   // Communication with DepartingHarbour
@@ -321,14 +375,29 @@ export class GameComponent  implements OnInit {
   }
 
 
+  trigger_deactivateOrActivateMarketCards(){
+
+    //gray out and make unclickable
+    this.marketComponent.deactivateOrActivateMarketCards(); //(click)="trigger_deactivateOrActivateMarketCards()"
+  }
+
+
   // Communication with ShipComponent
   //---------------------------------
+  trigger_deactivateOrActivateShips(){
+
+    this.shipComponent.deactivateOrActivateShips();//(click)="trigger_deactivateOrActivateShips()"
+
+  }
 
 
 
   //===================
   // Subscribe-Methods
   //===================
+
+
+
 
 
 
@@ -343,6 +412,44 @@ export class GameComponent  implements OnInit {
     this.obeliskComponent.removeStones();
   }
 
+  generateSnackbarDiv(){
+
+    jQuery('<div/>', {
+      id: 'snackbar',
+    }).appendTo('.game_footer');
+
+    /**(<any>$('.game_footer')).append(
+      (<any>$('<div/>'))
+        .attr("id", "snackbar")
+        .text("hi")
+        .addClass('show')
+        .css({'visibility': 'hidden','in-width': '250px','margin-left': '-125px','background-color': '#333','color': '#fff','text-align': 'center','border-radius': '2px','padding': '16px','position': 'fixed','z-index': '10000','left': '40%','top': '10%','font-size': '17px'})
+    );*/
+
+    if(1){console.log((<any>$('#snackbar')))};
+  }
+
+
+  showSnackbarMessenger(textMessage, timeMilliSeconds) {
+
+    (<any>$('#snackbar'))
+      .text(textMessage)
+      .addClass('show')
+      .css({'visibility': 'visible'});
+
+    setTimeout(() => {
+        (<any>$('#snackbar'))
+          .addClass('hide')
+          .css({'visibility': 'hidden'});
+        if (1) {console.log("showSnackbarMessenger_callback")};
+      },
+      timeMilliSeconds);
+
+    if(1){console.log("showSnackbarMessenger")};
+
+
+
+}
 
 
   //================
@@ -351,18 +458,21 @@ export class GameComponent  implements OnInit {
   dragula_subscribeDragEvent() {
     this.dragulaService.drag.subscribe((value) => {
 
-      console.log("10.1.0 dragula-subscribe-drag");
+      if(0){console.log("10.1.0 dragula-subscribe-drag");}
 
       if (value){
 
-        /*Debugging
-         console.log("6.1.1.1 ", `drag: ${value}`);
+
+        if(0){console.log("6.1.1.1 ", `drag: ${value}`);
          console.log("6.1.1.2 ", `drag: ${value[0]}`);
-         console.log("6.1.1.3 ", `drag: ${value.slice(1)}`);
-         */
+         console.log("6.1.1.3 ", `drag: ${value.slice(1)}`);}
+
+        if(0){console.log("10.1.1 dragula-subscribe-drag");}
 
         //custom code
-        console.log("10.1.1 dragula-subscribe-drag");
+
+
+
 
       }
     });
@@ -375,11 +485,65 @@ export class GameComponent  implements OnInit {
 
       if (value) {
 
-         console.log("6.2.1.1 ", `drop: ${value}`);
+        if(1){console.log("6.2.1.1 ", `drop: ${value}`);
          console.log("6.2.1.2 ", `drop: ${value[0]}`);
-         console.log("6.2.1.3 ", `drop: ${value.slice(1)}`);
+          console.log("6.2.1.3 ", `drop: ${value[0].id}`);
+          console.log("6.2.1.4 ", `drop: ${value[0].classNames}`);
+          console.log("6.2.1.5 ", `drop: ${value[1].id}`);
+          console.log("6.2.1.6 ", `drop: ${value[1].classNames}`);
+          console.log("6.2.1.7 ", `drop: ${value[2].id}`);
+          console.log("6.2.1.8 ", `drop: ${value[2].classNames}`);
+         console.log("6.2.1.9 ", `drop: ${value.slice(1)}`);}
 
         // Custom code here
+
+
+        //get id of arriving harbour
+        if(value[0] === 'harbours_bag'){
+          let arriving_harbour_id=value[2].id;
+
+        }
+
+        //get id of ship
+        if(value[0] === 'harbours_bag'){
+          let arriving_harbour_id=value[2].id;
+          let childNodes=document.getElementById(arriving_harbour_id).childNodes;
+          let children=document.getElementById(arriving_harbour_id).children;
+          console.log("6.2.1.10 ", `drop: ${childNodes}`);
+          console.log("6.2.1.11 ", `drop: ${children}`);
+          console.log("6.2.1.12 ", `drop: ${childNodes[0].childNodes[0]}`);
+          console.log("6.2.1.13 ", `drop: ${children[0].children[0]}`);
+          console.log("6.2.1.14 ", `drop: ${childNodes[0].childNodes[0]}`);
+          console.log("6.2.1.15 ", `drop: ${children[0].children[0].className}`);
+          console.log("6.2.1.16 ", `drop: ${children[0].children[0].id}`);
+
+        }
+
+
+
+
+        //set id of stone
+        if(value[0] === 'stone_slots_bag'){
+
+
+        }
+
+
+        //get id of stone slot
+        if(value[0] === 'stone_slots_bag'){
+          let stone_slot_id=value[2].id;
+
+        }
+
+
+        //get id of stone
+        if(value[0] === 'stone_slots_bag'){
+
+
+        }
+
+
+
 
       }
 
@@ -394,10 +558,10 @@ export class GameComponent  implements OnInit {
 
         /*where drop is allowed*/
 
-        console.log("harbours_bag:accepts ", `el: ${el}`);
+        if(0){console.log("harbours_bag:accepts ", `el: ${el}`);
         console.log("harbours_bag:accepts ", `source: ${source}`);
         console.log("harbours_bag:accepts ", `target: ${target}`);
-        console.log("harbours_bag:accepts ", `sibling: ${sibling}`);
+        console.log("harbours_bag:accepts ", `sibling: ${sibling}`);}
 
         if (el && target && source){
 
@@ -405,8 +569,7 @@ export class GameComponent  implements OnInit {
           let isArrivingHarbour = target.parentElement.id === "arriving_harbours";
 
 
-          /*Debugging
-           console.log("10.1.1 ", `el: ${el}`); //moved element
+          if(0){console.log("10.1.1 ", `el: ${el}`); //moved element
            console.log("10.1.2 ", `el.id: ${el.id}`); //its id
            console.log("10.2.1 ", `source: ${source}`); //source element
            console.log("10.2.2 ", `source.id: ${source.id}`); //its id
@@ -417,15 +580,15 @@ export class GameComponent  implements OnInit {
            console.log("10.4.1 ", `target.parentElement: ${target.parentElement}`);
            console.log("10.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
            console.log("10.5.1 ", "isEmpty: " ,isEmpty);
-           console.log("10.5.2 ", "isArrivingHarbour: " ,isArrivingHarbour);
-           */
+           console.log("10.5.2 ", "isArrivingHarbour: " ,isArrivingHarbour);}
+
 
           if (isEmpty && isArrivingHarbour) {
-            console.log("10.6.1 dragula-accepts:", "---ArrivingHarbour (True=drop allowed)---");
+            if(0){console.log("10.6.1 dragula-accepts:", "---ArrivingHarbour (True=drop allowed)---");}
             return true;
           }
           else {
-            console.log("10.6.2 dragula-accepts", "---ArrivingHarbour (False=drop disallowed)---");
+              if(0){console.log("10.6.2 dragula-accepts", "---ArrivingHarbour (False=drop disallowed)---");}
             return false;
           }
         }
@@ -435,10 +598,9 @@ export class GameComponent  implements OnInit {
 
         /*element draggable*/
 
-        console.log("harbours_bag:moves ", `el: ${el}`);
+        if(0){console.log("harbours_bag:moves ", `el: ${el}`);
         console.log("harbours_bag:moves ", `source: ${source}`);
-        console.log("harbours_bag:moves ", `handle: ${handle}`);
-        //console.log("harbours_bag:moves ", `sibling: ${sibling}`);
+        console.log("harbours_bag:moves ", `handle: ${handle}`);}
 
         if (el && source && handle){
           return true; //rue: elements are always draggable by default
@@ -450,7 +612,7 @@ export class GameComponent  implements OnInit {
 
       isContainer: function (el) {
 
-        console.log("harbours_bag:iscontainer ", `el: ${el}`);
+        if(0){console.log("harbours_bag:iscontainer ", `el: ${el}`);}
 
         if (el) {
           return false;  //only elements in drake.containers will be taken into account
@@ -461,9 +623,9 @@ export class GameComponent  implements OnInit {
 
         /*where drag is disallowed*/
 
-        console.log("harbours_bag:invalid ", `el: ${el}`);
+        if(0){console.log("harbours_bag:invalid ", `el: ${el}`);
         console.log("harbours_bag:invalid ", `handle: ${handle}`);
-        console.log("harbours_bag:invalid ", `el.parent.parent: ${el.parentElement.parentElement}`);
+        console.log("harbours_bag:invalid ", `el.parent.parent: ${el.parentElement.parentElement}`);}
 
         if (el && handle && el.parentElement.parentElement) {
 
@@ -471,11 +633,11 @@ export class GameComponent  implements OnInit {
           let isInvalid = isArrivingHarbour;
 
           if (isInvalid) {
-            console.log("10.10.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");
+            if(0){console.log("10.10.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
             return true;
           }
           else {
-            console.log("10.10.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");
+              if(0){console.log("10.10.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
             return false; //false: don't prevent any drags from initiating by default
           }
         }
@@ -488,27 +650,26 @@ export class GameComponent  implements OnInit {
 
         /*elements are copied or moved*/
 
-        console.log("harbours_bag:copy ", `el: ${el}`);
-        console.log("harbours_bag:copy ", `source: ${source}`);
+        if(0){console.log("harbours_bag:copy ", `el: ${el}`);
+        console.log("harbours_bag:copy ", `source: ${source}`);}
 
         if (el && source) {
 
           let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
           let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
 
-          /*Debugging
-           console.log("10.15.1 ", `el.id: ${el.id}`); //moved element
+
+          if(0){console.log("10.15.1 ", `el.id: ${el.id}`); //moved element
            console.log("10.15.2 ", `el.className: ${el.className}`);
            console.log("10.15.1 ", `el.isCopyClass: ${isCopyClass}`);
-           console.log("10.15.2 ", `el.isCopyId: ${isCopyId}`);
-           */
+           console.log("10.15.2 ", `el.isCopyId: ${isCopyId}`);}
 
           if (isCopyClass || isCopyId) {
-            console.log("10.16.1 dragula-accepts", "---ArrivingHarbour (True=copy disallowed)---");
+            if(0){console.log("10.16.1 dragula-accepts", "---ArrivingHarbour (True=copy disallowed)---");}
             return true;
           }
           else {
-            console.log("10.16.2 dragula-accepts", "---ArrivingHarbour (False=copy disallowed)---");
+              if(0){console.log("10.16.2 dragula-accepts", "---ArrivingHarbour (False=copy disallowed)---");}
             return false;
           }
         }
@@ -531,10 +692,10 @@ export class GameComponent  implements OnInit {
 
         /*where drop is allowed*/
 
-        console.log("stone_slots_bag:accepts ", `el: ${el}`);
+        if(0){console.log("stone_slots_bag:accepts ", `el: ${el}`);
         console.log("stone_slots_bag:accepts ", `source: ${source}`);
         console.log("stone_slots_bag:accepts ", `target: ${target}`);
-        console.log("stone_slots_bag:accepts ", `sibling: ${sibling}`);
+        console.log("stone_slots_bag:accepts ", `sibling: ${sibling}`);}
 
         if (el && target && source){
 
@@ -544,8 +705,8 @@ export class GameComponent  implements OnInit {
           let isStoneSlot_3 = target.parentElement.id === "ship_3_slots";
           let isStoneSlot_4 = target.parentElement.id === "ship_4_slots";
 
-          /*Debugging:
-           console.log("11.1.1 ", `el: ${el}`); //moved element
+
+          if(0){console.log("11.1.1 ", `el: ${el}`); //moved element
            console.log("11.1.2 ", `el.id: ${el.id}`); //its id
            console.log("11.2.1 ", `source: ${source}`); //source element
            console.log("11.2.2 ", `source.id: ${source.id}`); //its id
@@ -559,15 +720,15 @@ export class GameComponent  implements OnInit {
            console.log("11.5.2 ", "isStoneSlot_1: " ,isStoneSlot_1);
            console.log("11.5.3 ", "isStoneSlot_2: " ,isStoneSlot_2);
            console.log("11.5.4 ", "isStoneSlot_3: " ,isStoneSlot_3);
-           console.log("11.5.5 ", "isStoneSlot_4: " ,isStoneSlot_4);
-           */
+           console.log("11.5.5 ", "isStoneSlot_4: " ,isStoneSlot_4);}
+
 
           if (isEmpty && (isStoneSlot_1 || isStoneSlot_2 || isStoneSlot_3 || isStoneSlot_4 )) {
-            console.log("11.6.1 dragula-accepts:", "---ship slots (True=drop allowed)---");
+            if(0){console.log("11.6.1 dragula-accepts:", "---ship slots (True=drop allowed)---");}
             return true;
           }
           else {
-            console.log("11.6.2 dragula-accepts:", "---ship slots (True=drop allowed)---");
+              if(0){console.log("11.6.2 dragula-accepts:", "---ship slots (True=drop allowed)---");}
             return false;
           }
         }
@@ -576,10 +737,10 @@ export class GameComponent  implements OnInit {
 
       moves: function (el, source, handle, sibling) {
 
-        console.log("stone_slots_bag:moves ", `el: ${el}`);
+        if(0){console.log("stone_slots_bag:moves ", `el: ${el}`);
         console.log("stone_slots_bag:moves ", `source: ${source}`);
-        console.log("stone_slots_bag:moves ", `handle: ${handle}`);
-        //console.log("stone_slots_bag:moves ", `sibling: ${sibling}`);
+        console.log("stone_slots_bag:moves ", `handle: ${handle}`);}
+
 
         if (el && source && handle) {
           return true; //true: elements are always draggable by default
@@ -591,7 +752,7 @@ export class GameComponent  implements OnInit {
 
       isContainer: function (el) {
 
-        console.log("stone_slots_bag:iscontainer ", `el: ${el}`);
+        if(0){console.log("stone_slots_bag:iscontainer ", `el: ${el}`);}
 
         if (el) {
           return false;  //only elements in drake.containers will be taken into account
@@ -605,9 +766,9 @@ export class GameComponent  implements OnInit {
 
         /*where drag is disallowed*/
 
-        console.log("stone_slots_bag:invalid ", `el: ${el}`);
+        if(0){console.log("stone_slots_bag:invalid ", `el: ${el}`);
         console.log("stone_slots_bag:invalid ", `handle: ${handle}`);
-        console.log("stone_slots_bag:invalid ", `el.parent.parent: ${el.parentElement.parentElement}`);
+        console.log("stone_slots_bag:invalid ", `el.parent.parent: ${el.parentElement.parentElement}`);}
 
         if (el && handle && el.parentElement.parentElement) {
 
@@ -615,13 +776,13 @@ export class GameComponent  implements OnInit {
           let isInvalid = isStoneSlot;
 
           if (isInvalid) {
-            console.log("10.10.1 dragula-invalid:", "---ship slots (True=drag disallowed)---");
-            /**/
+            if(0){console.log("10.10.1 dragula-invalid:", "---ship slots (True=drag disallowed)---");}
+
             return true;
           }
           else {
-            console.log("10.10.2 dragula-invalid:", "---ship slots (False=drag allowed)---");
-            /**/
+            if(0){console.log("10.10.2 dragula-invalid:", "---ship slots (False=drag allowed)---");}
+
             return false; //false: don't prevent any drags from initiating by default
           }
         }
@@ -635,8 +796,8 @@ export class GameComponent  implements OnInit {
 
         /*elements are copied or moved*/
 
-        console.log("stone_slots_bag:copy ", `el: ${el.id}`);
-        console.log("stone_slots_bag:copy ", `source: ${source}`);
+        if(0){console.log("stone_slots_bag:copy ", `el: ${el.id}`);
+        console.log("stone_slots_bag:copy ", `source: ${source}`);}
 
 
         if (el && source) {
@@ -644,19 +805,18 @@ export class GameComponent  implements OnInit {
           let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
           let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
 
-          /*Debugging
-           console.log("11.15.1 ", `el.id: ${el.id}`); //moved element
+
+          if(0){console.log("11.15.1 ", `el.id: ${el.id}`); //moved element
            console.log("11.15.2 ", `el.className: ${el.className}`);
            console.log("11.15.1 ", `el.isCopyClass: ${isCopyClass}`);
-           console.log("11.15.2 ", `el.isCopyId: ${isCopyId}`);
-           */
+           console.log("11.15.2 ", `el.isCopyId: ${isCopyId}`);}
 
           if (isCopyClass || isCopyId) {
-            console.log("11.16.1 dragula-copy:", "---stones (True=copy allowed)---");
+            if(0){console.log("11.16.1 dragula-copy:", "---stones (True=copy allowed)---");}
             return true;
           }
           else {
-            console.log("11.16.2 dragula-copy:", "---stones (False=copy disallowed)---");
+              if(0){console.log("11.16.2 dragula-copy:", "---stones (False=copy disallowed)---");}
             return false;
           }
         }
