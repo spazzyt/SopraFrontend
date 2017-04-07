@@ -277,7 +277,9 @@ export class GameComponent  implements OnInit {
 
 
   trigger_showSnackbarMessenger() {
-    this.showSnackbarMessenger("hello",3000);
+    this.showSnackbarMessenger("Hi Player 1,  Player 2  has moved Ship 2 to the Temple, " +
+      "be informed, that you have exactly 10 seconds to read this information. After that " +
+      "the snackbar will be closed.",10000);
   }
 
 
@@ -411,24 +413,39 @@ export class GameComponent  implements OnInit {
       id: 'snackbar',
     }).appendTo('.game_footer');
 
+    /**(<any>$('.game_footer')).append(
+      (<any>$('<div/>'))
+        .attr("id", "snackbar")
+        .text("hi")
+        .addClass('show')
+        .css({'visibility': 'hidden','in-width': '250px','margin-left': '-125px','background-color': '#333','color': '#fff','text-align': 'center','border-radius': '2px','padding': '16px','position': 'fixed','z-index': '10000','left': '40%','top': '10%','font-size': '17px'})
+    );*/
+
+    if(1){console.log((<any>$('#snackbar')))};
   }
 
 
   showSnackbarMessenger(textMessage, timeMilliSeconds) {
 
-    //get element
-    let x = document.getElementById("snackbar");
+    (<any>$('#snackbar'))
+      .text(textMessage)
+      .addClass('show')
+      .css({'visibility': 'visible'});
 
-    //set text
-    x.innerHTML=textMessage;
-
-    //set class
-    x.className = "show";
-
-    //set timeout to replace class "show" with "";
-    setTimeout(function(){
-      x.className = x.className.replace("show", ""); },
+    setTimeout(() => {
+        (<any>$('#snackbar'))
+          .addClass('hide')
+          .css({'visibility': 'hidden'});
+        if (1) {
+          console.log("showSnackbarMessenger_callback")
+        }
+        ;
+      },
       timeMilliSeconds);
+
+    if(1){console.log("showSnackbarMessenger")};
+
+
 
 }
 
