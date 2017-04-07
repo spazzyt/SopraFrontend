@@ -105,6 +105,7 @@ p{
   height: 100%;
   float: left;
   float: top;
+  /*border: 1px solid #44ff62;*/
 }
 
 .right_part{
@@ -112,7 +113,7 @@ p{
   height: 100%;
   float: left;
   float: top;
-  border: 1px solid #88a3ff;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
 }
 
 .upper_quarter{
@@ -255,6 +256,6 @@ p{
   top:0px;
   left:0px;
   margin-bottom:50px;
-  border: 1px solid #ff19c7;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
   position:relative;
 }
