@@ -28,14 +28,14 @@ p{
 .top_part{
   width: 100%;
   height: 70%;
-  border: 1px solid orange;/*border: 1px solid orange;*/
+  /*border: 1px solid orange;*/
 }
 
 .bottom_part{
   margin-left: 8%;
   width: 90%;
   height: 30%;
-  border: 1px solid #5b94ff;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
 }
 
 .lower_left{
@@ -75,7 +75,7 @@ p{
   background-repeat: no-repeat;
   background-position: center;
   margin-left: 5%;
-  border: 1px solid #ff1e1a;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
 }
 
 .low{
@@ -99,7 +99,7 @@ p{
   height: 65%;
   width: 100%;
   float: right;
-  border: 1px solid #44ff62;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
 }
 
 .left_part{
@@ -112,7 +112,7 @@ p{
   width: 20%;
   height: 100%;
   float: right;
-  border: 1px solid #88a3ff;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
 }
 
 .upper_quarter{
@@ -256,6 +256,6 @@ p{
   top:0px;
   left:0px;
   margin-bottom:50px;
-  border: 1px solid #ff19c7;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
   position:relative;
 }
