@@ -82,6 +82,7 @@ export class BottomLeftComponent implements OnInit {
 
     // define protocol: which market card
     // corresponds to which array index
+
     for(var i = 0; i < marketCards_target.length; i++){
       this.marketCards[i] = marketCards_target[i];
     }
@@ -141,34 +142,25 @@ export class BottomLeftComponent implements OnInit {
 
   //deactivates at the moment the icon top-left-left, this function cannot reactivate icon
   deactivateOrActivateIcons(playerIconsStatus_target){
-
     console.log("deactivateOrActivateIcons: false", playerIconsStatus_target);
-
     if (playerIconsStatus_target[0] == false) {
-      (<any>$(document)).ready(function () {
-        (<any>$("#bll_1")).css("opacity", "0.3");
-        (<any>$("button")).click(function () {
-          (<any>$("p")).off("click")
-        })
+      (<any>$("#bll_1")).css("opacity", "0.3")
+      (<any>$("#bll_1")).click(function () {
+        (<any>$("#bll_1")).off("click");
+
+        console.log("deactivateOrActivateIcons: false");
+
       });
-      console.log("deactivateOrActivateIcons: false");
-    }
 
     if (playerIconsStatus_target[0] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_1")).css("opacity", "1.0")
-      })
-      (<any>$(document)).ready(function (){
-        (<any>$("button")).click(function(){
-          (<any>$("p")).on("click")
-        })});
-      console.log("deactivateOrActivateIcons: true");
-    }
+      (<any>$("#bll_1")).css("opacity", "1.0")
+      (<any>$("#bll_1")).click(function () {
+        (<any>$("#bll_1")).on("click");
 
+        console.log("deactivateOrActivateIcons: true");
+    });
 
-
-
-
+  /*
     if (playerIconsStatus_target[1] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#bml_1")).css("opacity", "0.3");
@@ -208,6 +200,8 @@ export class BottomLeftComponent implements OnInit {
       });
       console.log("deactivateOrActivateIcons: true");
     }
+
+    */
 }
 
 
