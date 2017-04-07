@@ -23,9 +23,10 @@
 
 #right{
   margin-left: -6%;
-  font: 600 20px "Lithos Pro", Helvetica, Sans-Serif;
+  font: 500 20px "Lithos Pro", Helvetica, Sans-Serif;
   padding-top: 7%;
   width: 30%;
+  color: white;
 }
 
 #total{
@@ -74,8 +75,10 @@
   float: top;
   height: 100%;
   width: 20%;
-  text-align: right;
-  font: 600 20px "Lithos Pro", Helvetica, Sans-Serif;
+  text-align: center;
+  color: white;
+  font: 500 20px "Lithos Pro", Helvetica, Sans-Serif;
+  text-shadow: 2px 2px 2px black;
 }
 
 

@@ -243,6 +243,11 @@ export class GameComponent  implements OnInit {
     this.bottomRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
     this.topLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
     this.topRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
+
+
+    for(var i = 0; i < this.playerIconsStatus_target.length; i++){
+      this.playerIconsStatus_target[i] = !this.playerIconsStatus_target[i];
+    }
   }
 
   trigger_deactivateOrActivateStoneQuarry(){
