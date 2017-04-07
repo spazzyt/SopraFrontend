@@ -35,6 +35,11 @@ export class BottomLeftComponent implements OnInit {
   marketCards:number[] = [0,0,0,0,0,0,0,0,0]
 
 
+  //when player clicks on the chisel card icon to play it, this function gets triggered
+  playChisel(){
+    this.marketCards[5]+=1;
+  }
+
   //===============
   //Constructor
   //===============
