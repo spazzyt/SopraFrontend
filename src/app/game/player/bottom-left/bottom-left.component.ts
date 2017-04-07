@@ -129,26 +129,30 @@ export class BottomLeftComponent implements OnInit {
 
     //set click handler for  bll_1
     (<any>$(document)).ready(function () {
-      (<any>$("#bll_1_")).on("click", function(){
-        alert("The chisel was clicked.");this.marketCards[5]-=1;});
+      (<any>$("#bll_1_")).on("click", function(marketCards){
+        alert("The chisel was clicked.");marketCards[5]-=1;
+      });
     });
 
     //set click handler for  bml_1
     (<any>$(document)).ready(function () {
-      (<any>$("#bml_1_")).on("click", function(){
-        alert("The hammer was clicked.");this.marketCards[6]-=1;})
+      (<any>$("#bml_1_")).on("click", function(marketCards){
+        alert("The hammer was clicked."); marketCards[6]-=1;
+      })
     });
 
     //set click handler for  bmr_1
     (<any>$(document)).ready(function () {
-      (<any>$("#bmr_1_")).on("click", function(){
-        alert("The sail was clicked.");this.marketCards[7]-=1;})
+      (<any>$("#bmr_1_")).on("click", function(marketCards){
+        alert("The sail was clicked.");marketCards[7]-=1;
+      })
     });
 
     //set click handler for  brr_1
     (<any>$(document)).ready(function () {
-      (<any>$("#brr_1_")).on("click", function(){
-        alert("The lever was clicked.");this.marketCards[8]-=1;})
+      (<any>$("#brr_1_")).on("click", function(marketCards){
+        alert("The lever was clicked."); marketCards[8]-=1;
+      })
     });
   }
 
@@ -176,7 +180,8 @@ export class BottomLeftComponent implements OnInit {
 
   }
 
-  //deactivates at the moment the icon top-left-left, this function cannot reactivate icon
+  //deactivates at the moment the icon top-left-left,
+  // this function cannot reactivate icon
   deactivateOrActivateIcons(playerIconsStatus_target){
 
     if (playerIconsStatus_target[0] == false) {

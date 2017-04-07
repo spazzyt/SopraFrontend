@@ -243,7 +243,7 @@ export class GameComponent  implements OnInit {
     this.topRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
 
     //used to toggle boolean array this.playerIconsStatus_target
-    for(var i = 0; i < this.playerIconsStatus_target.length; i++){
+    for(let i = 0; i < this.playerIconsStatus_target.length; i++){
       this.playerIconsStatus_target[i] = !this.playerIconsStatus_target[i];
     }
   }
