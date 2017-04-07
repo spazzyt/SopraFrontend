@@ -6,6 +6,11 @@
   font-style: normal;
 }
 
+p{
+  -webkit-user-select: none;
+  cursor: pointer !important;
+}
+
 /* Popover*/
 .popover {
   background: black;
@@ -25,6 +30,7 @@
   padding: 5px;
   font: 400 14px "Lithos Pro", Helvetica, SansSerif;
   text-align: center;
+  -webkit-user-select: none;
 }
 /* Popover Arrow */
 .arrow {
