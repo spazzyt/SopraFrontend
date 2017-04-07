@@ -151,19 +151,20 @@ export class BottomLeftComponent implements OnInit {
 
   //deactivates at the moment the icon top-left-left, this function cannot reactivate icon
   deactivateOrActivateIcons(playerIconsStatus_target){
-    playerIconsStatus_target = false;
 
-    if (playerIconsStatus_target == false) {
+    console.log("deactivateOrActivateIcons: false", playerIconsStatus_target)
+
+    if (playerIconsStatus_target[0] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#tll_1")).css("background-color", "#c6c6c6 ").css("opacity", "0.5");
-        playerIconsStatus_target = true;
       });
+      console.log("deactivateOrActivateIcons: false")
     }
-    if (playerIconsStatus_target == true){
+    if (playerIconsStatus_target[0] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#tll_1")).css("background-color", " ").css("opacity", "1.0");
-        playerIconsStatus_target = false;
       });
+      console.log("deactivateOrActivateIcons: true")
     }
 }
 
