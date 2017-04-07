@@ -8,6 +8,8 @@ import {Router} from "@angular/router";
 })
 export class InfoBoxComponent implements OnInit {
 
+  roundNumber:number=4;
+
   constructor(private router:Router) { }
 
   ngOnInit() {
