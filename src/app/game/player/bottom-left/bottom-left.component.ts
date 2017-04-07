@@ -156,13 +156,53 @@ export class BottomLeftComponent implements OnInit {
 
     if (playerIconsStatus_target[0] == false) {
       (<any>$(document)).ready(function (){
-        (<any>$("#tll_1")).css("background-color", "#c6c6c6 ").css("opacity", "0.5");
+        (<any>$("#bll_1")).css("opacity", "0.3");
       });
       console.log("deactivateOrActivateIcons: false")
     }
     if (playerIconsStatus_target[0] == true){
       (<any>$(document)).ready(function (){
-        (<any>$("#tll_1")).css("background-color", " ").css("opacity", "1.0");
+        (<any>$("#bll_1")).css("opacity", "1.0");
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[1] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bml_1")).css("opacity", "0.3");
+      });
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[1] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bml_1")).css("opacity", "1.0");
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[2] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bmr_1")).css("opacity", "0.3");
+      });
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[2] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bmr_1")).css("opacity", "1.0");
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+
+    if (playerIconsStatus_target[3] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#brr_1")).css("opacity", "0.3");
+      });
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[3] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#brr_1")).css("opacity", "1.0");
       });
       console.log("deactivateOrActivateIcons: true")
     }
