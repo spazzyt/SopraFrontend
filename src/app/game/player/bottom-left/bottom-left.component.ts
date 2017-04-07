@@ -59,7 +59,8 @@ export class BottomLeftComponent implements OnInit {
 
   ngAfterViewInit() {
 
-    this.show_hide_stone_at_init()
+    this.show_hide_stone_at_init();
+
   }
 
   //===============
@@ -77,7 +78,7 @@ export class BottomLeftComponent implements OnInit {
 
     // define protocol: which market card
     // corresponds to which array index
-    for(var i = 0; i < marketCards_target.length; i++){
+    for(let i = 0; i < marketCards_target.length; i++){
       this.marketCards[i] = marketCards_target[i];
     }
 }
@@ -123,16 +124,53 @@ export class BottomLeftComponent implements OnInit {
     });
   }
 
-  /*
 
- deactivateOrActivateIcons(playerIconsStatus_target){
-    (<any>$(document)).ready(function (){
-      (<any>$("#tll_1")).css("background-color", "#c6c6c6").css("opacity", "0.5");
+  setClickHandlerOnBlueMarketCards() {
+
+    //set click handler for  bll_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#bll_1_")).on("click", function(){alert("The chisel was clicked.")});
     });
-}
-*/
 
+    //set click handler for  bml_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#bml_1_")).on("click", function(){alert("The hammer was clicked.")})
+    });
 
+    //set click handler for  bmr_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#bmr_1_")).on("click", function(){alert("The sail was clicked.")})
+    });
+
+    //set click handler for  brr_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#brr_1_")).on("click", function(){alert("The lever was clicked.")})
+    });
+  }
+
+  removeClickHandlerOnBlueMarketCards(){
+
+    //remove click handler for  bll_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#bll_1_")).off("click");
+    });
+
+    //remove click handler for  bml_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#bml_1_")).off("click");
+    });
+
+    //remove click handler for  bmr_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#bmr_1_")).off("click");
+    });
+
+    //remove click handler for  brr_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#brr_1_")).off("click");
+    });
+
+  }
 
   //deactivates at the moment the icon top-left-left, this function cannot reactivate icon
   deactivateOrActivateIcons(playerIconsStatus_target){
@@ -142,12 +180,15 @@ export class BottomLeftComponent implements OnInit {
     if (playerIconsStatus_target[0] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#bll_1")).css("opacity", "0.3");
+
       });
+
       console.log("deactivateOrActivateIcons: false")
     }
     if (playerIconsStatus_target[0] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bll_1")).css("opacity", "1.0");
+
       });
       console.log("deactivateOrActivateIcons: true")
     }

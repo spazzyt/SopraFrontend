@@ -111,6 +111,58 @@ export class BottomRightComponent implements OnInit {
 
   }
 
+  show_hide_stone_at_init() {
+    (<any>$(document)).ready(function () {
+      (<any>$("#stones_4")).hide();
+      (<any>$("#stone_label_4")).show();
+    });
+  }
+
+  show_hide_stone_onMouseOver(){
+    (<any>$(document)).ready(function () {
+      (<any>$("#stones_4")).show();
+      (<any>$("#stone_label_4")).hide();
+    });
+  }
+
+  show_hide_stone_onMouseLeave(){
+    (<any>$(document)).ready(function () {
+      (<any>$("#stone_label_4")).show();
+    });
+  }
+
+
+  setClickHandlerOnBlueMarketCards() {
+
+    //set click handler for  bll_4
+
+
+    //set click handler for  bml_4
+
+
+    //set click handler for  bmr_4
+
+
+    //set click handler for  brr_4
+
+  }
+
+  removeClickHandlerOnBlueMarketCards(){
+
+    //remove click handler for  bll_4
+
+
+    //remove click handler for  bml_4
+
+
+    //remove click handler for  bmr_4
+
+
+    //remove click handler for  brr_4
+
+  }
+
+
   deactivateOrActivateIcons(playerIconsStatus_target){
 
   }

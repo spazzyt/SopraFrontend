@@ -112,6 +112,58 @@ export class TopLeftComponent implements OnInit {
   }
 
 
+  show_hide_stone_at_init() {
+    (<any>$(document)).ready(function () {
+      (<any>$("#stones_2")).hide();
+      (<any>$("#stone_label_2")).show();
+    });
+  }
+
+  show_hide_stone_onMouseOver(){
+    (<any>$(document)).ready(function () {
+      (<any>$("#stones_2")).show();
+      (<any>$("#stone_label_2")).hide();
+    });
+  }
+
+  show_hide_stone_onMouseLeave(){
+    (<any>$(document)).ready(function () {
+      (<any>$("#stone_label_2")).show();
+    });
+  }
+
+
+  setClickHandlerOnBlueMarketCards() {
+
+    //set click handler for  bll_2
+
+
+    //set click handler for  bml_2
+
+
+    //set click handler for  bmr_2
+
+
+    //set click handler for  brr_2
+
+  }
+
+  removeClickHandlerOnBlueMarketCards(){
+
+    //remove click handler for  bll_2
+
+
+    //remove click handler for  bml_2
+
+
+    //remove click handler for  bmr_2
+
+
+    //remove click handler for  brr_2
+
+  }
+
+
   deactivateOrActivateIcons(playerIconsStatus_target){
 
   }
