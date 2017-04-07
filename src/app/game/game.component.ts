@@ -327,7 +327,7 @@ export class GameComponent  implements OnInit {
   //-------------------------------
 
 
-  // Communication with MaketHarbour
+  // Communication with MarketHarbour
   //--------------------------------
 
 
@@ -538,6 +538,12 @@ export class GameComponent  implements OnInit {
         //get id of stone slot
         if(value[0] === 'stone_slots_bag'){
           let stone_slot_id=value[2].id;
+          let shipnumber = this.departingHarbourComponent.ships[Number(stone_slot_id.substring(5, 6))-1];
+          let slotnumber = this.departingHarbourComponent.ships[Number(stone_slot_id.substring(12, 13))-1];
+          let targetSlot = this.departingHarbourComponent.ships[shipnumber].slots[slotnumber];
+
+          //let stone = targetSlot.
+          //addStoneToShip(stone, stone_slot_id)
 
         }
 
