@@ -53,7 +53,8 @@ export class BottomRightComponent implements OnInit {
   ngOnInit() {
 
     this.initializePopovers();
-    this.playerFieldStone = new Stone(0, ColourEnum.brown)
+    this.playerFieldStone = new Stone(0, ColourEnum.black)
+    console.log("ColourEnum: ", ColourEnum.black);
   }
 
   //===============
@@ -72,7 +73,7 @@ export class BottomRightComponent implements OnInit {
     // define protocol: which market card
     // corresponds to which array index
 
-    for(var i = 0; i < marketCards_target.length; i++){
+    for(let i = 0; i < marketCards_target.length; i++){
       this.marketCards[i] = marketCards_target[i];
     }
   }
