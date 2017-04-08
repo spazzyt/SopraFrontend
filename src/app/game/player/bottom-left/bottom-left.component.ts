@@ -52,6 +52,7 @@ export class BottomLeftComponent implements OnInit {
 
     this.initializePopovers();
     this.playerFieldStone = new Stone(0, ColourEnum.brown);
+    console.log("ColourEnum: ", ColourEnum.brown);
   }
 
   //================
