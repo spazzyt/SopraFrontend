@@ -84,6 +84,62 @@ export class MarketComponent implements OnInit {
 
   }
 
+
+  setClickHandlerOnMarketCards() {
+
+    //set click handler for  bll_1
+    (<any>$(document)).ready(() =>{
+      (<any>$("#market_card_1")).on("click", () =>{
+        alert("You clicked market card in slot 1.");
+      });
+    });
+
+    //set click handler for  bml_1
+    (<any>$(document)).ready(() =>{
+      (<any>$("#market_card_2")).on("click", () =>{
+        alert("You clicked market card in slot 2.");
+      })
+    });
+
+    //set click handler for  bmr_1
+    (<any>$(document)).ready(() =>{
+      (<any>$("#market_card_3")).on("click", () =>{
+        alert("You clicked market card in slot 3.");
+      })
+    });
+
+    //set click handler for  brr_1
+    (<any>$(document)).ready(() =>{
+      (<any>$("#market_card_4")).on("click", () =>{
+        alert("You clicked market card in slot 4.");
+      })
+    });
+  }
+
+  removeClickHandlerOnMarketCards(){
+
+    //remove click handler for  bll_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#market_card_1")).off("click");
+    });
+
+    //remove click handler for  bml_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#market_card_2")).off("click");
+    });
+
+    //remove click handler for  bmr_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#market_card_3")).off("click");
+    });
+
+    //remove click handler for  brr_1
+    (<any>$(document)).ready(function () {
+      (<any>$("#market_card_4")).off("click");
+    });
+
+  }
+
 }
 
 
