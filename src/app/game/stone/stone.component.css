@@ -1,8 +1,9 @@
 
 .stones_1 {
     z-index: 10;
-  margin: auto;
-  position: relative;
+  /*margin: auto;
+  position: relative;*/
+  float:left;
   margin-top: 2%;
   left: 0px;
   height: 30px;
