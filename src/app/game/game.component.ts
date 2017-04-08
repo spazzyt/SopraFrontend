@@ -506,6 +506,18 @@ export class GameComponent  implements OnInit {
 
   }
 
+  trigger_setClickHandlerOnSlot() {
+    //only works via parent, DepatingHarbourComponent or GameComponent
+    let slot="ship_3_slot_1";
+    this.departingHarbourComponent.setClickHandlerOnSlot(slot);
+  }
+
+  trigger_removeClickHandlerOnSlot() {
+    //only works via parent, DepatingHarbourComponent or GameComponent
+    let slot="ship_3_slot_1";
+    this.departingHarbourComponent.removeClickHandlerOnSlot(slot);
+  }
+
 
   // Communication with InfoBoxComponent
   //---------------------------------
@@ -519,14 +531,16 @@ export class GameComponent  implements OnInit {
   // Communication with Stones
   //---------------------------------
 
-  stoneHtmlId="stone_0";
+  stoneHtmlId="stone_dragulaId_2";
 
   trigger_setClickHandlerOnStone(){
-    this.stoneComponent.setClickHandlerOnStone(this.stoneHtmlId); //(click)="trigger_setClickHandlerOnStone()"
+    //only works via parent, DepatingHarbourComponent or GameComponent
+    this.departingHarbourComponent.setClickHandlerOnStone(this.stoneHtmlId); //(click)="trigger_setClickHandlerOnStone()"
   }
 
   trigger_removeClickHandlerOnStone(){
-    this.stoneComponent.removeClickHandlerOnStone(this.stoneHtmlId); //(click)="trigger_removeClickHandlerOnStone()"
+    //only works via parent, DepatingHarbourComponent or GameComponent
+    this.departingHarbourComponent.removeClickHandlerOnStone(this.stoneHtmlId); //(click)="trigger_removeClickHandlerOnStone()"
   }
 
 
