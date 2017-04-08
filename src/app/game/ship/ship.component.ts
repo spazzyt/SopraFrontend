@@ -41,7 +41,7 @@ export class ShipComponent implements OnInit {
 
   addStoneToShip(stone:Stone, positionOnShip:string){
 
-    var pos = Number(positionOnShip.substring(12, 13));
+    let pos = Number(positionOnShip.substring(12, 13));
 
     this.stonesOnShip[pos-1] = stone;
   }
@@ -53,9 +53,9 @@ export class ShipComponent implements OnInit {
 
   //Returns the array of stones in the ship (but removes all null values)
   passStonesToSite(){
-    var returnStones;
+    let returnStones;
 
-    for(var i = 0; i < 4; i++){
+    for(let i = 0; i < 4; i++){
       if(this.stonesOnShip[i] != null){
         returnStones.append(this.stonesOnShip[i]);
     }

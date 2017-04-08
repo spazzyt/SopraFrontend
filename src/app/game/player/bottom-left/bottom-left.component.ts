@@ -23,7 +23,7 @@ export class BottomLeftComponent implements OnInit {
   // the player's score
   score:number;
 
-  // the player's colour
+  // stone generated in supply sled
   playerFieldStone:Stone;
 
   // the player's stones in supply-sled
