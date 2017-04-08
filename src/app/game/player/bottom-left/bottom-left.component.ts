@@ -185,6 +185,7 @@ export class BottomLeftComponent implements OnInit {
 
   //deactivates at the moment the icon top-left-left,
   // this function cannot reactivate icon
+
   deactivateOrActivateIcons(playerIconsStatus_target){
 
 
