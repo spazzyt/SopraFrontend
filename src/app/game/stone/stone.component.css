@@ -1,5 +1,5 @@
 
-.stones_1 {
+.stones_brown {
     z-index: 10;
   margin: auto;
   position: relative;
@@ -13,7 +13,7 @@
   background-size: contain;
 }
 
-.stones_2{
+.stones_black{
     z-index: 10;
   margin:auto;
   margin-top:2%;
@@ -27,7 +27,7 @@
 }
 
 
-.stones_3 {
+.stones_white {
     z-index: 10;
   margin: auto;
   position: relative;
@@ -41,7 +41,7 @@
   background-size: contain;
 }
 
-.stones_4{
+.stones_gray{
     z-index: 10;
   margin:auto;
   position:relative;
@@ -55,6 +55,7 @@
   background-size: contain;
 }
 
+
 .stone_brown{
   background-image: url("../../../assets/images/stone_brown.png");
 }
@@ -67,3 +68,4 @@
 .stone_gray{
   background-image: url("../../../assets/images/stone_gray.png");
 }
+

@@ -30,6 +30,7 @@ import {Market} from "../shared/models/market";
 import {Temple} from "../shared/models/temple";
 import {ColourEnum} from "../shared/models/colour.enum";
 import {InfoBoxComponent} from "./info-box/info-box.component";
+import {StoneComponent} from "./stone/stone.component";
 
 @Component({
   selector: 'app-game',
@@ -513,6 +514,21 @@ export class GameComponent  implements OnInit {
     this.infoBoxComponent.increaseRoundInInfoBox(this.roundNumber);//(click)="trigger_increaseRoundInInfoBox()"
 
   }
+
+
+  // Communication with Stones
+  //---------------------------------
+
+  stoneHtmlId="stone_0";
+
+  trigger_setClickHandlerOnStone(){
+    this.stoneComponent.setClickHandlerOnStone(this.stoneHtmlId); //(click)="trigger_setClickHandlerOnStone()"
+  }
+
+  trigger_removeClickHandlerOnStone(){
+    this.stoneComponent.removeClickHandlerOnStone(this.stoneHtmlId); //(click)="trigger_removeClickHandlerOnStone()"
+  }
+
 
 
 
@@ -1025,15 +1041,10 @@ export class GameComponent  implements OnInit {
   // Enable communication with ShipComponent
   @ViewChild(ShipComponent) shipComponent:ShipComponent;
 
-  // Enable communication with StoneComponent
-  @ViewChild(ShipComponent) stoneComponent:ShipComponent;
-
   // Enable communication with InfoBoxComponent
   @ViewChild(InfoBoxComponent) infoBoxComponent:InfoBoxComponent;
 
-
-
-
-
+  // Enable communication with StoneComponent
+  @ViewChild(StoneComponent) stoneComponent:StoneComponent;
 
 }
