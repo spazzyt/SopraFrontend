@@ -21,6 +21,14 @@ import {User} from "../shared/models/user";
 import {Ship} from "../shared/models/ship";
 import {Stone} from "../shared/models/stone";
 import {childOfKind} from "tslint";
+import {StoneQuarry} from "../shared/models/stone-quarry";
+import {SupplySled} from "../shared/models/supply-sled";
+import {Pyramid} from "../shared/models/pyramid";
+import {Obelisk} from "../shared/models/obelisk";
+import {BurialChamber} from "../shared/models/burial-chamber";
+import {Market} from "../shared/models/market";
+import {Temple} from "../shared/models/temple";
+import {ColourEnum} from "../shared/models/colour.enum";
 
 @Component({
   selector: 'app-game',
@@ -168,7 +176,7 @@ export class GameComponent  implements OnInit {
   score_target:number=12;
   sledStones_target:number=3;
   quarryStones_target:number=25;
-  playerIconsStatus_target:boolean[]=[false, false, false, false, false, false, false, false, false];
+  playerIconsStatus_target:boolean[]=[false, false, false, true, false, true, false, false, false];
   playerStoneQuarryStatus_target:boolean=false;
   playerStoneSledStatus_target:boolean=false;
   playerPlayerFieldStatus_target:boolean=false;
@@ -181,11 +189,22 @@ export class GameComponent  implements OnInit {
   ship4 = new Ship(4, 1);
 
   //Fake Stones
-  stone1 = new Stone(1, 'brown');
-  stone2 = new Stone(2, 'white');
-  stone3 = new Stone(3, 'gray');
-  stone4 = new Stone(4, 'black');
+  stone1 = new Stone(1, ColourEnum.brown);
+  stone2 = new Stone(2, ColourEnum.white);
+  stone3 = new Stone(3, ColourEnum.gray);
+  stone4 = new Stone(4, ColourEnum.black);
   stones_target = new Array<Stone>();
+
+  //-----------
+  //stones flow (do not generate stones outside of quarry and sled at game init!)
+  //-----------
+  //1. stone quarry (source 1)
+  //2. supply sled (source2)
+  //3. to ship slot
+  //4. to site slot
+  //5. back to quarry
+  //-----------
+
 
   //Fake Players
   //1: white, 2:gray, 3:black, 4:brown
@@ -193,6 +212,63 @@ export class GameComponent  implements OnInit {
   player2= new User(2);
   player3= new User(3);
   player4= new User(4);
+
+
+  //==================================================
+  // Initialize Game
+  //==================================================
+
+  initGame(){
+
+    //Game id
+    let id_:number=1;
+
+    //Game name
+    let name_:string= "Roland_David_Kenny_Vincent"
+
+    //Number of players
+    let numPlayers_:number=4;
+    let player1:User= new User(1, "Roland", "brown");
+    let player2:User= new User(2, "David", "white");
+    let player3:User= new User(3, "Kenny", "gray");
+    let player4:User= new User(4, "Vincent", "black");
+    let players_:User[];
+    players_.push(player1);
+    players_.push(player2);
+    players_.push(player3);
+    players_.push(player4);
+
+    //current active player
+    let currentPlayer_:string=player1.username;
+
+    //Stone quarry with stone objects (do not generate more stones elsewhere)
+    let stoneQuarry1:StoneQuarry = new StoneQuarry(27,3,ColourEnum.brown,player1);
+    let stoneQuarry2:StoneQuarry = new StoneQuarry(26,34,ColourEnum.brown,player2);
+    let stoneQuarry3:StoneQuarry = new StoneQuarry(25,65,ColourEnum.brown,player3);
+    let stoneQuarry4:StoneQuarry = new StoneQuarry(24,96,ColourEnum.brown,player4);
+
+    //Stone quarry with stone objects (do not generate more stones elsewhere)
+    let stoneSled1:SupplySled = new SupplySled(2,1,ColourEnum.brown,player1);
+    let stoneSled2:SupplySled = new SupplySled(3,31,ColourEnum.white,player2);
+    let stoneSled3:SupplySled = new SupplySled(4,61,ColourEnum.gray,player3);
+    let stoneSled4:SupplySled = new SupplySled(5,91,ColourEnum.black,player4);
+
+    // sites
+    let obelisk:Obelisk;
+    let pyramid:Pyramid;
+    let temple:Temple;
+    let market:Market;
+    let burialChamber:BurialChamber;
+
+  }
+
+
+  //==================================================
+  // Initialize New Round
+  //==================================================
+
+
+
 
 
   //==================================================
@@ -302,9 +378,11 @@ export class GameComponent  implements OnInit {
 
 
   trigger_showSnackbarMessenger() {
-    this.showSnackbarMessenger("Hi Player 1,  Player 2  has moved Ship 2 to the Temple, " +
+    let text_="Hi Player 1,  Player 2  has moved Ship 2 to the Temple, " +
       "be informed, that you have exactly 10 seconds to read this information. After that " +
-      "the snackbar will be closed.",10000);
+      "the snackbar will be closed."
+    let time_=10000
+    this.showSnackbarMessenger(text_,time_);
   }
 
 
@@ -460,10 +538,18 @@ export class GameComponent  implements OnInit {
       timeMilliSeconds);
 
     if(1){console.log("showSnackbarMessenger")};
+  }
 
+  //------------------
+  //stone id generator
+  //------------------
+  stoneId:number=1;
 
+  generateStoneId(){
+    this.stoneId+=1;
+    return this.stoneId.toString()
+  }
 
-}
 
 
   //================
@@ -497,65 +583,88 @@ export class GameComponent  implements OnInit {
 
       console.log("10.1.0 dragula-subscribe-drop");
 
+      //-------------------------------------------
+      //value object not null; otherwise do nothing
+      //-------------------------------------------
       if (value) {
 
-        if(1){console.log("6.2.1.1 ", `drop: ${value}`);
-         console.log("6.2.1.2 ", `drop: ${value[0]}`);
-          console.log("6.2.1.3 ", `drop: ${value[0].id}`);
-          console.log("6.2.1.4 ", `drop: ${value[0].classNames}`);
-          console.log("6.2.1.5 ", `drop: ${value[1].id}`);
-          console.log("6.2.1.6 ", `drop: ${value[1].classNames}`);
-          console.log("6.2.1.7 ", `drop: ${value[2].id}`);
-          console.log("6.2.1.8 ", `drop: ${value[2].classNames}`);
-         console.log("6.2.1.9 ", `drop: ${value.slice(1)}`);}
 
-        // Custom code here
-
-
-        //get id of arriving harbour
-        if(value[0] === 'harbours_bag'){
-          let arriving_harbour_id=value[2].id;
-
-        }
-
-        //get id of ship
-        if(value[0] === 'harbours_bag'){
-          let arriving_harbour_id=value[2].id;
-          let childNodes=document.getElementById(arriving_harbour_id).childNodes;
-          let children=document.getElementById(arriving_harbour_id).children;
-          console.log("6.2.1.10 ", `drop: ${childNodes}`);
-          console.log("6.2.1.11 ", `drop: ${children}`);
-          console.log("6.2.1.12 ", `drop: ${childNodes[0].childNodes[0]}`);
-          console.log("6.2.1.13 ", `drop: ${children[0].children[0]}`);
-          console.log("6.2.1.14 ", `drop: ${childNodes[0].childNodes[0]}`);
-          console.log("6.2.1.15 ", `drop: ${children[0].children[0].className}`);
-          console.log("6.2.1.16 ", `drop: ${children[0].children[0].id}`);
-
-        }
-
-
-
-
-        //set id of stone
-        if(value[0] === 'stone_slots_bag'){
-
-
-        }
-
-
+        //--------------------
         //get id of stone slot
+        //--------------------
         if(value[0] === 'stone_slots_bag'){
+          if(1){console.log("6.1.1 ", `drop: ${value[0]}`);}
+
+          //stone slot id
           let stone_slot_id=value[2].id;
+          if(1){console.log("6.1.2 ", `drop: ${value[2].id}`);}
 
         }
 
-
-        //get id of stone
+        //---------------
+        //set id of stone
+        //---------------
         if(value[0] === 'stone_slots_bag'){
+          if(1){console.log("6.2.1 ", `drop: ${value[0]}`);}
+
+          //<app-ship>-tag as html string; there should only be one child [0]
+          //id is wrongly set as stone_0 for all stones
+          if(1){console.log("6.2.2 ", `drop: ${value[1].children[0].className}`);}
+          if(1){console.log("6.2.3 ", `drop: ${value[1].children[0].id}`);}
+
+          //set stone id in DOM (unique id, starting from 1)
+          let newStoneId:string=this.generateStoneId();
+          value[1].children[0].setAttribute("id",newStoneId)
+
+          //generate stone in Angular model
 
 
         }
 
+
+        //--------------------------
+        //get id of arriving harbour
+        //--------------------------
+        if(value[0] === 'harbours_bag'){
+          if(1){console.log("6.3.1 ", `drop: ${value[0]}`);}
+
+          //id of harbour
+          let arriving_harbour_id=value[2].id;
+          if(1){console.log("6.3.2 ", `drop: ${value[2].id}`);}
+
+
+          //do something with it
+
+
+        }
+
+        //--------------
+        //get id of ship
+        //--------------
+        if(value[0] === 'harbours_bag'){
+          if(1){console.log("6.4.1 ", `drop: ${value[0]}`);}
+
+          //id of site harbour
+          let arriving_harbour_id=value[2].id;
+
+          //what is it?
+          if(1){console.log("6.4.2 ", `drop: ${value[1].childNodes[0]}`);}
+
+          //<app-ship>-tag as DOM node; there should only be one child [0]
+          let childNodes=document.getElementById(arriving_harbour_id).childNodes;
+          if(1){console.log("6.4.3 ", `drop: ${childNodes}`);}
+          if(1){console.log("6.4.4 ", `drop: ${childNodes[0].childNodes[0]}`);}
+
+          //<app-ship>-tag as html string; there should only be one child [0]
+          let children=document.getElementById(arriving_harbour_id).children;
+          if(1){console.log("6.4.5 ", `drop: ${children}`);}
+          if(1){console.log("6.4.6 ", `drop: ${children[0].children[0]}`);}
+
+          //
+          if(1){console.log("6.4.7 ", `drop: ${children[0].children[0].className}`);}
+          if(1){console.log("6.4.8 ", `drop: ${children[0].children[0].id}`);}
+
+        }
 
 
 
@@ -891,6 +1000,10 @@ export class GameComponent  implements OnInit {
 
   // Enable communication with ShipComponent
   @ViewChild(ShipComponent) shipComponent:ShipComponent;
+
+  // Enable communication with StoneComponent
+  @ViewChild(ShipComponent) stoneComponent:ShipComponent;
+
 
 
 
