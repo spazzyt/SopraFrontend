@@ -178,7 +178,7 @@ export class GameComponent  implements OnInit {
   score_target:number=12;
   sledStones_target:number=3;
   quarryStones_target:number=25;
-  playerIconsStatus_target:boolean[]=[false, false, false, false, false, false, false, false, false];
+  playerIconsStatus_target:boolean[]=[true, false, true, false, false, true, false, true, false];
   playerStoneQuarryStatus_target:boolean=false;
   playerStoneSledStatus_target:boolean=false;
   playerPlayerFieldStatus_target:boolean=false;
