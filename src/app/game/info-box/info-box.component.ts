@@ -6,17 +6,40 @@ import {Router} from "@angular/router";
   templateUrl: './info-box.component.html',
   styleUrls: ['./info-box.component.css']
 })
+
+//===========
+// Component
+//===========
 export class InfoBoxComponent implements OnInit {
 
-  roundNumber:number=4;
+  //============
+  // Attributes
+  //============
+  roundNumber:number=1;
 
+  //=============
+  // Constructor
+  //=============
   constructor(private router:Router) { }
 
+
+  //==========
+  // ngOnInit
+  //==========
   ngOnInit() {
   }
 
+  //===============
+  // Other-Methods
+  //===============
   navigateToLobby(){
     this.router.navigate(['/game']);
+  }
+
+  increaseRoundInInfoBox(roundNumber_:number){
+
+    this.roundNumber=roundNumber_;
+
   }
 
 }

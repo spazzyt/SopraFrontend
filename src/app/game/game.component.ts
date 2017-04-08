@@ -29,6 +29,7 @@ import {BurialChamber} from "../shared/models/burial-chamber";
 import {Market} from "../shared/models/market";
 import {Temple} from "../shared/models/temple";
 import {ColourEnum} from "../shared/models/colour.enum";
+import {InfoBoxComponent} from "./info-box/info-box.component";
 
 @Component({
   selector: 'app-game',
@@ -180,6 +181,7 @@ export class GameComponent  implements OnInit {
   playerStoneQuarryStatus_target:boolean=false;
   playerStoneSledStatus_target:boolean=false;
   playerPlayerFieldStatus_target:boolean=false;
+  roundNumber:number=3;
 
 
   //Fake Ships
@@ -267,7 +269,10 @@ export class GameComponent  implements OnInit {
   // Initialize New Round
   //==================================================
 
+  initRound(){
 
+
+  }
 
 
 
@@ -398,6 +403,7 @@ export class GameComponent  implements OnInit {
   }
 
 
+
   // Communication with DepartingHarbour
   //------------------------------------
   trigger_removeShips(){
@@ -423,6 +429,7 @@ export class GameComponent  implements OnInit {
 
   // Communication with MaketHarbour
   //--------------------------------
+
 
 
   // Communication with PyramidComponent
@@ -474,6 +481,14 @@ export class GameComponent  implements OnInit {
     this.marketComponent.generateFourMarketCards(); //(click)="trigger_generateFourMarketCards()"
   }
 
+  trigger_setClickHandlerOnMarketCards(){
+    this.marketComponent.setClickHandlerOnMarketCards(); //(click)="trigger_setClickHandlerOnMarketCards()"
+  }
+
+  trigger_removeClickHandlerOnMarketCards(){
+    this.marketComponent.removeClickHandlerOnMarketCards(); //(click)="trigger_setClickHandlerOnMarketCards()"
+  }
+
 
   trigger_deactivateOrActivateMarketCards(){
 
@@ -487,6 +502,15 @@ export class GameComponent  implements OnInit {
   trigger_deactivateOrActivateShips(){
 
     this.shipComponent.deactivateOrActivateShips();//(click)="trigger_deactivateOrActivateShips()"
+
+  }
+
+
+  // Communication with InfoBoxComponent
+  //---------------------------------
+  trigger_increaseRoundInInfoBox(){
+
+    this.infoBoxComponent.increaseRoundInInfoBox(this.roundNumber);//(click)="trigger_increaseRoundInInfoBox()"
 
   }
 
@@ -518,7 +542,7 @@ export class GameComponent  implements OnInit {
       id: 'snackbar',
     }).appendTo('.game_footer');
 
-    if(1){console.log((<any>$('#snackbar')))};
+    if(0){console.log((<any>$('#snackbar')))};
   }
 
 
@@ -1003,6 +1027,10 @@ export class GameComponent  implements OnInit {
 
   // Enable communication with StoneComponent
   @ViewChild(ShipComponent) stoneComponent:ShipComponent;
+
+  // Enable communication with InfoBoxComponent
+  @ViewChild(InfoBoxComponent) infoBoxComponent:InfoBoxComponent;
+
 
 
 
