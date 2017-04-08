@@ -42,9 +42,9 @@ export class ObeliskComponent implements OnInit {
     // 2: brown
     // 3: gray
 
-    var stoneNumbers:number[] = [0,0,0,0];    //temporary array for storing the number of stones in each color
+    let stoneNumbers:number[] = [0,0,0,0];    //temporary array for storing the number of stones in each color
 
-    for (var i = 0; i < targetStones.length; i++){
+    for (let i = 0; i < targetStones.length; i++){
       if(targetStones[i] != null)
       {
         if(targetStones[i].colour === 'black'){
