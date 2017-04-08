@@ -61,7 +61,7 @@ export class BottomLeftComponent implements OnInit {
 
   ngAfterViewInit() {
 
-    this.show_hide_stone_at_init();
+    //this.show_hide_stone_at_init();
 
   }
 
@@ -114,17 +114,17 @@ export class BottomLeftComponent implements OnInit {
   }
 
   show_hide_stone_onMouseOver(){
-    (<any>$(document)).ready(function () {
+    /**(<any>$(document)).ready(function () {
       (<any>$("#stones_1")).show();
       (<any>$("#stone_label_1")).hide();
-    });
+    });*/
   }
 
   show_hide_stone_onMouseLeave(){
-    (<any>$(document)).ready(function () {
+    /**(<any>$(document)).ready(function () {
       (<any>$("#stone_label_1")).show();
 
-    });
+    });*/
   }
 
 
