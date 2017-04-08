@@ -56,10 +56,11 @@ export class StoneComponent implements OnInit {
 
   //
   setClickHandlerOnStone(stoneHtmlId:string) {
+    console.log("setClickHanlerOnStone:stoneHtmlId ",stoneHtmlId);
 
     //set click handler for  ship_slot
     (<any>$(document)).ready(() => {
-      (<any>$("#stone_1")).on("click", () => {
+      (<any>$("#"+stoneHtmlId)).on("click", () => {
         alert("You clicked market card in slot 1.");
       });
     });
@@ -69,7 +70,7 @@ export class StoneComponent implements OnInit {
 
     //remove click handler for  ship_slot
     (<any>$(document)).ready(function () {
-      (<any>$("#stone_1")).off("click");
+      (<any>$("#"+stoneHtmlId)).off("click");
     });
   }
 

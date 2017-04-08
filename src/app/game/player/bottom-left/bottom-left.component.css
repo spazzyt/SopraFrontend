@@ -63,11 +63,11 @@ p{
   background-image: url("../../../../assets/images/score.png");
   background-repeat: no-repeat;
   background-position: center;
-  /*border: 1px solid #44ff62;*/
+  border: 1px solid #4afffa;/*border: 1px solid #44ff62;*/
 }
 
 .supply_sled_1{
-  /*border: 1px solid #44ff62;*/
+  border: 1px solid #ff5765;/*border: 1px solid #44ff62;*/
   background-image: url("../../../../assets/images/supply_sled.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -78,7 +78,7 @@ p{
   background-image: url("../../../../assets/images/quarry.png");
   background-repeat: no-repeat;
   background-position: center;
-  /*border: 1px solid #44ff62;*/
+  border: 1px solid #4e76ff;/*border: 1px solid #44ff62;*/
 }
 
 .low{
@@ -275,8 +275,8 @@ p{
   z-index:200;
   top:0px;
   left:0px;
-  margin-bottom:5px;
-  /*border: 1px solid #44ff62;*/
+  margin-bottom:0px;
+  border: 1px solid #44ff62;/*border: 1px solid #44ff62;*/
   position:relative;
 }
 

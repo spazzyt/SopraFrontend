@@ -1,5 +1,5 @@
 
-.stones_brown {
+.stones_1 {
     z-index: 10;
   margin: auto;
   position: relative;
@@ -13,7 +13,7 @@
   background-size: contain;
 }
 
-.stones_black{
+.stones_2{
     z-index: 10;
   margin:auto;
   margin-top:2%;
@@ -27,7 +27,7 @@
 }
 
 
-.stones_white {
+.stones_3 {
     z-index: 10;
   margin: auto;
   position: relative;
@@ -41,7 +41,7 @@
   background-size: contain;
 }
 
-.stones_gray{
+.stones_4{
     z-index: 10;
   margin:auto;
   position:relative;

@@ -654,9 +654,8 @@ export class GameComponent  implements OnInit {
 
           //set stone id in DOM (unique id, starting from 1)
           let newStoneId:string=this.generateStoneId();
-          value[1].children[0].setAttribute("id",newStoneId)
-
-          //generate stone in Angular model
+          value[1].children[0].setAttribute("id","stone_dragulaId_"+newStoneId)
+          if(1){console.log("6.2.4 ", `drop: ${value[1].children[0].id}`);}
 
 
         }
@@ -685,24 +684,100 @@ export class GameComponent  implements OnInit {
           if(1){console.log("6.4.1 ", `drop: ${value[0]}`);}
 
           //id of site harbour
-          let arriving_harbour_id=value[2].id;
+          let arriving_harbour=value[2];
 
-          //what is it?
-          if(1){console.log("6.4.2 ", `drop: ${value[1].childNodes[0]}`);}
-
-          //<app-ship>-tag as DOM node; there should only be one child [0]
-          let childNodes=document.getElementById(arriving_harbour_id).childNodes;
-          if(1){console.log("6.4.3 ", `drop: ${childNodes}`);}
-          if(1){console.log("6.4.4 ", `drop: ${childNodes[0].childNodes[0]}`);}
+          //what is it? the <app-ship>
+          if(1){console.log("6.4.2 ", `drop: ${value[1].id}`);}
 
           //<app-ship>-tag as html string; there should only be one child [0]
-          let children=document.getElementById(arriving_harbour_id).children;
-          if(1){console.log("6.4.5 ", `drop: ${children}`);}
-          if(1){console.log("6.4.6 ", `drop: ${children[0].children[0]}`);}
+          let appShip=document.getElementById(arriving_harbour.id).children[0];
+          if(1){console.log("6.4.3 app-ship", `drop: ${appShip}`);}
 
-          //
-          if(1){console.log("6.4.7 ", `drop: ${children[0].children[0].className}`);}
-          if(1){console.log("6.4.8 ", `drop: ${children[0].children[0].id}`);}
+          //ship <div>-tag as html string
+          let shipDiv=document.getElementById(appShip.children[0].id);
+          if(1){console.log("6.4.4 shipDiv className ", `drop: ${shipDiv.className}`);}
+          if(1){console.log("6.4.5 shipDiv id ", `drop: ${shipDiv.id}`);}
+
+          //ship slots <div>-tag as html string
+          let shipSlotsDiv=document.getElementById(shipDiv.children[0].id);
+          if(1){console.log("6.4.5 shipSlotsDiv className ", `drop: ${shipSlotsDiv.className}`);}
+          if(1){console.log("6.4.6 shipSlotsDiv id ", `drop: ${shipSlotsDiv.id}`);}
+
+          //ship slot_i <div>-tag as html string
+          if(shipSlotsDiv.children[0]) {
+            let shipSlotDiv_1 = document.getElementById(shipSlotsDiv.children[0].id);
+            if (1) {console.log("6.4.7 shipSlotDiv_1 className ", `drop: ${shipSlotDiv_1.className}`);}
+            if (1) {console.log("6.4.8 shipSlotDiv_1 id ", `drop: ${shipSlotDiv_1.id}`);}
+
+            //ship slot_i Stone <app-stone>-tag as html string
+            if(shipSlotDiv_1.children[0]) {
+              let shipSlotDiv_1_AppStone = document.getElementById(shipSlotDiv_1.children[0].id);
+              if (1) {console.log("6.4.9 shipSlotDiv_1_AppStone className ", `drop: ${shipSlotDiv_1_AppStone.className}`);}
+              if (1) {console.log("6.4.10 shipSlotDiv_1_AppStone id ", `drop: ${shipSlotDiv_1_AppStone.id}`);}
+
+              //ship slot_i Stone <div>-tag as html string
+              let shipSlotDiv_1_Stone = document.getElementById(shipSlotDiv_1_AppStone.children[0].id);
+              if (1) {console.log("6.4.11 shipSlotDiv_1_Stone className ", `drop: ${shipSlotDiv_1_Stone.className}`);}
+              if (1) {console.log("6.4.12 shipSlotDiv_1_Stone id ", `drop: ${shipSlotDiv_1_Stone.id}`);}
+            }
+          }
+
+          //ship slot_i <div>-tag as html string
+          if(shipSlotsDiv.children[1]){
+            let shipSlotDiv_2=document.getElementById(shipSlotsDiv.children[1].id);
+            if(1){console.log("6.4.13 shipSlotDiv_2 className ", `drop: ${shipSlotDiv_2.className}`);}
+            if(1){console.log("6.4.14 shipSlotDiv_2 id ", `drop: ${shipSlotDiv_2.id}`);}
+
+            //ship slot_i Stone <app-stone>-tag as html string
+            if(shipSlotDiv_2.children[0]) {
+              let shipSlotDiv_2_AppStone = document.getElementById(shipSlotDiv_2.children[0].id);
+              if (1) {console.log("6.4.15 shipSlotDiv_2_AppStone className ", `drop: ${shipSlotDiv_2_AppStone.className}`);}
+              if (1) {console.log("6.4.16 shipSlotDiv_2_AppStone id ", `drop: ${shipSlotDiv_2_AppStone.id}`);}
+
+              //ship slot_i Stone <div>-tag as html string
+              let shipSlotDiv_2_Stone = document.getElementById(shipSlotDiv_2_AppStone.children[0].id);
+              if (1) {console.log("6.4.17 shipSlotDiv_2_Stone className ", `drop: ${shipSlotDiv_2_Stone.className}`);}
+              if (1) {console.log("6.4.18 shipSlotDiv_2_Stone id ", `drop: ${shipSlotDiv_2_Stone.id}`);}
+            }
+          }
+
+          //ship slot_i <div>-tag as html string
+          if(shipSlotsDiv.children[2]){
+            let shipSlotDiv_3=document.getElementById(shipSlotsDiv.children[2].id);
+            if(1){console.log("6.4.19 shipSlotDiv_3 className ", `drop: ${shipSlotDiv_3.className}`);}
+            if(1){console.log("6.4.20 shipSlotDiv_3 id ", `drop: ${shipSlotDiv_3.id}`);}
+
+            //ship slot_i Stone <app-stone>-tag as html string
+            if(shipSlotDiv_3.children[0]) {
+              let shipSlotDiv_3_AppStone = document.getElementById(shipSlotDiv_3.children[0].id);
+              if (1) {console.log("6.4.21 shipSlotDiv_3_AppStone className ", `drop: ${shipSlotDiv_3_AppStone.className}`);}
+              if (1) {console.log("6.4.22 shipSlotDiv_3_AppStone id ", `drop: ${shipSlotDiv_3_AppStone.id}`);}
+
+              //ship slot_i Stone <div>-tag as html string
+              let shipSlotDiv_3_Stone = document.getElementById(shipSlotDiv_3_AppStone.children[0].id);
+              if (1) {console.log("6.4.23 shipSlotDiv_3_Stone className ", `drop: ${shipSlotDiv_3_Stone.className}`);}
+              if (1) {console.log("6.4.24 shipSlotDiv_3_Stone id ", `drop: ${shipSlotDiv_3_Stone.id}`);}
+            }
+          }
+
+          //ship slot_i <div>-tag as html string
+          if(shipSlotsDiv.children[3]){
+            let shipSlotDiv_4=document.getElementById(shipSlotsDiv.children[3].id);
+            if(1){console.log("6.4.25 shipSlotDiv_4 className ", `drop: ${shipSlotDiv_4.className}`);}
+            if(1){console.log("6.4.26 shipSlotDiv_4 id ", `drop: ${shipSlotDiv_4.id}`);}
+
+            //ship slot_i Stone <app-stone>-tag as html string
+            if(shipSlotDiv_4.children[0]) {
+              let shipSlotDiv_4_AppStone = document.getElementById(shipSlotDiv_4.children[0].id);
+              if (1) {console.log("6.4.27 shipSlotDiv_4_AppStone className ", `drop: ${shipSlotDiv_4_AppStone.className}`);}
+              if (1) {console.log("6.4.28 shipSlotDiv_4_AppStone id ", `drop: ${shipSlotDiv_4_AppStone.id}`);}
+
+              //ship slot_i Stone <div>-tag as html string
+              let shipSlotDiv_4_Stone = document.getElementById(shipSlotDiv_4_AppStone.children[0].id);
+              if (1) {console.log("6.4.29 shipSlotDiv_4_Stone className ", `drop: ${shipSlotDiv_4_Stone.className}`);}
+              if (1) {console.log("6.4.30 shipSlotDiv_4_Stone id ", `drop: ${shipSlotDiv_4_Stone.id}`);}
+            }
+          }
 
         }
 
