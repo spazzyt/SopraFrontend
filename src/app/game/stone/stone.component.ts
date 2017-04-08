@@ -35,6 +35,7 @@ export class StoneComponent implements OnInit {
   //ngOnInit
   //===============
   ngOnInit() {
+    this.showStoneInfo();
   }
 
 
@@ -42,10 +43,35 @@ export class StoneComponent implements OnInit {
   // Other-Methods
   //===============
 
+  showStoneInfo(){
+    console.log(this.stone.colour)
+    console.log(this.stone.id)
+  }
+
   setPlayerId(playerId:number){
 
     //1: white, 2:gray, 3:black, 4:brown
     this.playerId=playerId;
   }
+
+  //
+  setClickHandlerOnStone(stoneHtmlId:string) {
+
+    //set click handler for  ship_slot
+    (<any>$(document)).ready(() => {
+      (<any>$("#stone_1")).on("click", () => {
+        alert("You clicked market card in slot 1.");
+      });
+    });
+  }
+
+  removeClickHandlerOnStone(stoneHtmlId) {
+
+    //remove click handler for  ship_slot
+    (<any>$(document)).ready(function () {
+      (<any>$("#stone_1")).off("click");
+    });
+  }
+
 
 }
