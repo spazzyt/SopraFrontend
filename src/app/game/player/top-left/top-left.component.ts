@@ -52,6 +52,8 @@ export class TopLeftComponent implements OnInit {
   ngOnInit() {
 
     this.initializePopovers();
+    this.playerFieldStone = new Stone(0, ColourEnum.white);
+    console.log("ColourEnum: ", ColourEnum.white);
 
   }
 
@@ -71,7 +73,7 @@ export class TopLeftComponent implements OnInit {
     // define protocol: which market card
     // corresponds to which array index
 
-    for(var i = 0; i < marketCards_target.length; i++){
+    for(let i = 0; i < marketCards_target.length; i++){
       this.marketCards[i] = marketCards_target[i];
     }
   }
@@ -94,7 +96,7 @@ export class TopLeftComponent implements OnInit {
 
     // update attribute:
     this.quarryStones=quarryStones_target;
-    this.playerFieldStone = new Stone(0, ColourEnum.brown)
+    //this.playerFieldStone = new Stone(0, ColourEnum.white)
 
   }
 
