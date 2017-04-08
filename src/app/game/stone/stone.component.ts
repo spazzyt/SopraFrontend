@@ -54,25 +54,5 @@ export class StoneComponent implements OnInit {
     this.playerId=playerId;
   }
 
-  //
-  setClickHandlerOnStone(stoneHtmlId:string) {
-    console.log("setClickHanlerOnStone:stoneHtmlId ",stoneHtmlId);
-
-    //set click handler for  ship_slot
-    (<any>$(document)).ready(() => {
-      (<any>$("#"+stoneHtmlId)).on("click", () => {
-        alert("You clicked market card in slot 1.");
-      });
-    });
-  }
-
-  removeClickHandlerOnStone(stoneHtmlId) {
-
-    //remove click handler for  ship_slot
-    (<any>$(document)).ready(function () {
-      (<any>$("#"+stoneHtmlId)).off("click");
-    });
-  }
-
 
 }

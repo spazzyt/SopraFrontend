@@ -85,4 +85,43 @@ export class DepartingHarbourComponent {
     { return "blue"; }
   }
 
+
+  setClickHandlerOnSlot(slotHtmlId) {
+
+    //set click handler for  ship_slot
+    (<any>$(document)).ready(() => {
+      (<any>$("#"+slotHtmlId)).on("click", () => {
+        alert("You clicked ship slot:" + slotHtmlId);
+      });
+    });
+  }
+
+  removeClickHandlerOnSlot(slotHtmlId) {
+
+    //remove click handler for  ship_slot
+    (<any>$(document)).ready(() =>  {
+      (<any>$("#"+slotHtmlId)).off("click");
+    });
+  }
+
+
+  setClickHandlerOnStone(stoneHtmlId:string) {
+
+    //set click handler for  ship_slot
+    (<any>$(document)).ready(() => {
+      (<any>$("#"+stoneHtmlId)).on("click", () => {
+        alert("You clicked stone: " + stoneHtmlId);
+      });
+    });
+  }
+
+  removeClickHandlerOnStone(stoneHtmlId) {
+
+    //remove click handler for  ship_slot
+    (<any>$(document)).ready(() =>  {
+      (<any>$("#"+stoneHtmlId)).off("click");
+    });
+  }
+
+
 }
