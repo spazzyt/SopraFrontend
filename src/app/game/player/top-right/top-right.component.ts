@@ -150,7 +150,166 @@ export class TopRightComponent implements OnInit {
 
 
 
+  //deactivates at the moment the icon top-left-left,
+  // this function cannot reactivate icon
+
   deactivateOrActivateIcons(playerIconsStatus_target){
+
+
+    //deactivates icons at the bottom of player bottom-left
+
+
+    if (playerIconsStatus_target[0] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bll_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[0] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bll_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[1] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bml_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[1] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bml_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[2] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bmr_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[2] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bmr_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[3] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#brr_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[3] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#brr_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+
+    //deactivates icons at the top of player bottom-left
+
+
+    if (playerIconsStatus_target[4] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#tll_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[4] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#tll_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[5] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#tml_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[5] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#tml_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[6] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#tmr_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[6] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#tmr_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[7] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#trr_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[7] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#trr_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+
+    //deactivates purple icon of player bottom-left
+
+
+    if (playerIconsStatus_target[8] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#purple_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[8] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#purple_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
 
   }
 
