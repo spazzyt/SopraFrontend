@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Stone} from "../../../shared/models/stone";
+import {ColourEnum} from "../../../shared/models/colour.enum";
 
 @Component({
   selector: 'app-bottom-right',
@@ -52,7 +53,7 @@ export class BottomRightComponent implements OnInit {
   ngOnInit() {
 
     this.initializePopovers();
-    this.playerFieldStone = new Stone(0, 'brown')
+    this.playerFieldStone = new Stone(0, ColourEnum.brown)
   }
 
   //===============

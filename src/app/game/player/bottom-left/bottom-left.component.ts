@@ -123,6 +123,7 @@ export class BottomLeftComponent implements OnInit {
   show_hide_stone_onMouseLeave(){
     (<any>$(document)).ready(function () {
       (<any>$("#stone_label_1")).show();
+      (<any>$("#stones_1_")).hide();
     });
   }
 
