@@ -674,6 +674,7 @@ export class GameComponent  implements OnInit {
     });
   }
 
+
   //--------------------------------
   //Draguala Drop Event Subscription
   //--------------------------------
@@ -688,41 +689,90 @@ export class GameComponent  implements OnInit {
       if (value) {
 
 
-        //--------------------
-        //get id of stone slot
-        //--------------------
+        //----------------------------------------
+        //get id of stone slot ('stone_slots_bag')
+        //----------------------------------------
         if(value[0] === 'stone_slots_bag'){
           if(1){console.log("6.1.1 ", `drop: ${value[0]}`);}
 
           //stone slot id
-          let stone_slot_id=value[2].id;
-          if(0){console.log("6.1.2 ", `drop: ${value[2].id}`);}
+          let stoneSlot=value[2];
+          if(1){console.log("6.1.2 ", `drop: ${value[2].id}`);}
 
         }
 
-        //---------------
-        //set id of stone
-        //---------------
+
+        //-----------------------------------
+        //set id of stone ('stone_slots_bag')
+        //-----------------------------------
         if(value[0] === 'stone_slots_bag'){
           if(1){console.log("6.2.1 ", `drop: ${value[0]}`);}
 
-          //<app-ship>-tag as html string; there should only be one child [0]
-          //id is wrongly set as stone_0 for all stones
-          if(0){console.log("6.2.2 ", `drop: ${value[1].children[0].className}`);}
-          if(0){console.log("6.2.3 ", `drop: ${value[1].children[0].id}`);}
+          //<app-stone>-tag as html string; there should only be one child [0]
+          let appStone=value[1];
+          if(1){console.log("6.2.2 ", `drop: ${value[1].children[0].className}`);}
+          if(1){console.log("6.2.3 ", `drop: ${value[1].children[0].id}`);}
+
+          //stoneDiv-tag
+          let stoneDiv=value[1].children[0];
+          if(1){console.log("6.2.4 ", `drop: ${value[1].children[0].className}`);}
+          if(1){console.log("6.2.5 ", `drop: ${value[1].children[0].id}`);}
 
           //set stone id in DOM (unique id, starting from 1)
+          //------------------------------------------------
+
+          //call function in GameComponent
           let newStoneId:string=this.generateStoneId();
-          value[1].children[0].setAttribute("id","stone_dragulaId_"+newStoneId)
-          if(1){console.log("6.2.4 ", `drop: ${value[1].children[0].id}`);}
+
+          //determine ship and slot
+          let stoneSlotId=value[2].id
+
+          //determine stone colour
+          let stoneClass=value[1].children[0].className;
+          let stoneColour=stoneClass.trim().substring(9,20);
+
+          //set attribute id in Dom
+          stoneDiv.setAttribute("id", stoneSlotId+"_"+stoneColour+"_dragulaId_"+newStoneId)
+          if(1){console.log("6.2.6 ", `drop: ${value[1].children[0].id}`);}
+
+        }
+
+        //----------------------------------------
+        //(Buggy Dragula Fix)
+        //If this drop event is triggered
+        // make sure the stone is placed into the slot
+        // even if it falls back into the sled
+        // ('stone_slots_bag')
+        //----------------------------------------
+        if(value[0] === 'stone_slots_bag'){
+          if(1){console.log("6.3.1 ", `drop: ${value[0]}`);}
+
+          //stone slot id
+          let stoneSlot=value[2];
+          if(1){console.log("6.3.2 ", `drop: ${value[2].id}`);}
+
+          //<app-stone>-tag
+          let appStone=value[1];
+          let stoneDiv=value[1].children[0];
+          if(1){console.log("6.3.3 ", `drop: ${value[1].children[0].id}`);}
+
+          if(stoneSlot.hasChildNodes()){
+            if(1){console.log("6.3.4 ", `drop: stone is in slot`);}
+          }else{
+            if(1){console.log("6.3.5 ", `drop: stone is back in sled`);}
+            stoneSlot.appendChild(appStone);
+          }
+
 
 
         }
 
 
-        //--------------------------
-        //get id of arriving harbour
-        //--------------------------
+
+
+        //-------------------------------------------
+        //get id of arriving harbour ('harbours_bag')
+        //-------------------------------------------
         if(value[0] === 'harbours_bag'){
           if(1){console.log("6.3.1 ", `drop: ${value[0]}`);}
 
@@ -736,9 +786,9 @@ export class GameComponent  implements OnInit {
 
         }
 
-        //----------------------------
-        //get id of ship /slot /stone
-        //----------------------------
+        //--------------------------------------------
+        //get id of ship /slot /stone ('harbours_bag')
+        //--------------------------------------------
         if(value[0] === 'harbours_bag'){
           if(1){console.log("6.4.1 ", `drop: ${value[0]}`);}
 
@@ -936,7 +986,7 @@ export class GameComponent  implements OnInit {
 
           let isDepartingHarbour = el.parentElement.parentElement.id === "departing_harbours";
 
-          if(1){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
+          if(0){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
             if(isDepartingHarbour){
 
               //<app-ship>
@@ -952,7 +1002,7 @@ export class GameComponent  implements OnInit {
               if(0){console.log("10.11.4 dragula-invalid", `divShip_divSlots_id: ${divShip_divSlots_id}`);};
 
               let divShip_divSlots_divSlot_id = el.children[0].children[0].children[0].id;
-              if(1){console.log("10.11.5 dragula-invalid", `divShip_divSlots_divSlot_id: ${divShip_divSlots_divSlot_id}`);};
+              if(0){console.log("10.11.5 dragula-invalid", `divShip_divSlots_divSlot_id: ${divShip_divSlots_divSlot_id}`);};
 
 
               //has ship enough stones
@@ -991,7 +1041,7 @@ export class GameComponent  implements OnInit {
               if(divShip_divSlots.children[3]){
                 if(divShip_divSlots.children[3].children[0]){countStones+=1;}
               }
-              if(1){console.log("10.11.7 dragula-invalid", `countStones: ${countStones}`);};
+              if(0){console.log("10.11.7 dragula-invalid", `countStones: ${countStones}`);};
 
 
               //check if it can move
@@ -1008,12 +1058,12 @@ export class GameComponent  implements OnInit {
               if(countSlots==4){
                 if(countStones>=3){hasNotEnoughStones=false;}
               }
-              if(1){console.log("10.11.8 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
+              if(0){console.log("10.11.8 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
 
 
               let isInvalid = hasNotEnoughStones;
 
-              if(1){console.log("10.11.9 dragula-invalid", `isInvalid : ${isInvalid}`);};
+              if(0){console.log("10.11.9 dragula-invalid", `isInvalid : ${isInvalid}`);};
               if (isInvalid) {
                 if(1){console.log("10.11.10 dragula-invalid", "---DepartingHarbour (True=drag disallowed)---");}
                 return true;
@@ -1031,14 +1081,14 @@ export class GameComponent  implements OnInit {
 
           let isArrivingHarbour = el.parentElement.parentElement.id === "arriving_harbours";
           let isInvalid = isArrivingHarbour;
-          if(1){console.log("10.11.0 dragula-invalid", `isArrivingHarbour: ${isArrivingHarbour}`);}
+          if(0){console.log("10.12.0 dragula-invalid", `isArrivingHarbour: ${isArrivingHarbour}`);}
 
           if (isInvalid) {
-            if(1){console.log("10.10.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
+            if(1){console.log("10.12.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
             return true;
           }
           else {
-              if(1){console.log("10.10.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
+              if(1){console.log("10.12.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
             return false; //false: don't prevent any drags from initiating by default
           }
         }
