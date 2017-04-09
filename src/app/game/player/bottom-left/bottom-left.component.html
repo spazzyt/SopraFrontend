@@ -30,11 +30,11 @@
 
 
 <div class="bottom_part">
-  <div class="low score">
+  <div class="low_l score">
     <p>{{score}}</p>
   </div>
   <!--drag and drop zone-->
-  <div id="supply_sled_1" class="low supply_sled_1"
+  <div id="supply_sled_1" class="low_m supply_sled_1"
        (mouseover)=show_hide_stone_onMouseOver()
        (mouseleave)=show_hide_stone_onMouseLeave()
        [dragula]="'stone_slots_bag'">
@@ -45,11 +45,10 @@
         <p id="stone_label_1">{{sledStones}}/5</p>
       </div>
 
+  </div>
 
-
-</div>
-<div class="low quarry">
-  <p>{{quarryStones}}</p>
-</div>
+  <div class="low_r quarry">
+    <p>{{quarryStones}}</p>
+  </div>
 </div>
 
