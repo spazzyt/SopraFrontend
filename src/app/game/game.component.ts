@@ -624,6 +624,10 @@ export class GameComponent  implements OnInit {
   //================
   // Dragula-Methods
   //================
+
+  //--------------------------------
+  //Draguala Drag Event Subscription
+  //--------------------------------
   dragula_subscribeDragEvent() {
     this.dragulaService.drag.subscribe((value) => {
 
@@ -631,20 +635,34 @@ export class GameComponent  implements OnInit {
 
       if (value){
 
+        //--------------------------
+        //get id of arriving harbour
+        //--------------------------
+        if(value[0] === 'departing_bag'){
+          if(1){console.log("5.2.1 ", `drop: ${value[0]}`);}
+
+          //id of harbour
+          let departing_harbour_id=value[2].id;
+          if(1){console.log("5.2.2 ", `drop: ${value[2].id}`);}
+
+
+          //do something with it
+
+
+        }
+
         //--------------
         //get id of ship
         //--------------
         if(value[0] === 'harbours_bag') {
 
           //id of site harbour
-          let arriving_harbour = value[2];
+          let departing_harbour = value[2];
 
-          if(1){console.log("5.1.1 ", `drag: ${value}`);}
-          if(1){console.log("5.1.1 ", `drag: ${value[0]}`);}
-          if(1){console.log("5.1.3 dragula-subscribe-drag");}
+          if(1){console.log("5.3.1 ", `drag: ${value[0]}`);}
 
 
-          //change options on drag (pandora's box)
+          //change options on drag (pandora's box, TO TEST FIRST)
           if (0) {
             this.dragulaService.setOptions('harbours_bag', {
               invalid: function (el, handle) {}
@@ -656,6 +674,9 @@ export class GameComponent  implements OnInit {
     });
   }
 
+  //--------------------------------
+  //Draguala Drop Event Subscription
+  //--------------------------------
   dragula_subscribeDropEvent() {
     this.dragulaService.drop.subscribe((value) => {
 
@@ -675,7 +696,7 @@ export class GameComponent  implements OnInit {
 
           //stone slot id
           let stone_slot_id=value[2].id;
-          if(1){console.log("6.1.2 ", `drop: ${value[2].id}`);}
+          if(0){console.log("6.1.2 ", `drop: ${value[2].id}`);}
 
         }
 
@@ -687,8 +708,8 @@ export class GameComponent  implements OnInit {
 
           //<app-ship>-tag as html string; there should only be one child [0]
           //id is wrongly set as stone_0 for all stones
-          if(1){console.log("6.2.2 ", `drop: ${value[1].children[0].className}`);}
-          if(1){console.log("6.2.3 ", `drop: ${value[1].children[0].id}`);}
+          if(0){console.log("6.2.2 ", `drop: ${value[1].children[0].className}`);}
+          if(0){console.log("6.2.3 ", `drop: ${value[1].children[0].id}`);}
 
           //set stone id in DOM (unique id, starting from 1)
           let newStoneId:string=this.generateStoneId();
@@ -725,95 +746,95 @@ export class GameComponent  implements OnInit {
           let arriving_harbour=value[2];
 
           //what is it? the <app-ship>
-          if(1){console.log("6.4.2 ", `drop: ${value[1].id}`);}
+          if(0){console.log("6.4.2 ", `drop: ${value[1].id}`);}
 
           //<app-ship>-tag as html string; there should only be one child [0]
           let appShip=document.getElementById(arriving_harbour.id).children[0];
-          if(1){console.log("6.4.3 app-ship", `drop: ${appShip}`);}
+          if(0){console.log("6.4.3 app-ship", `drop: ${appShip}`);}
 
           //ship <div>-tag as html string
           let shipDiv=document.getElementById(appShip.children[0].id);
-          if(1){console.log("6.4.4 shipDiv className ", `drop: ${shipDiv.className}`);}
-          if(1){console.log("6.4.5 shipDiv id ", `drop: ${shipDiv.id}`);}
+          if(0){console.log("6.4.4 shipDiv className ", `drop: ${shipDiv.className}`);}
+          if(0){console.log("6.4.5 shipDiv id ", `drop: ${shipDiv.id}`);}
 
           //ship slots <div>-tag as html string
           let shipSlotsDiv=document.getElementById(shipDiv.children[0].id);
-          if(1){console.log("6.4.5 shipSlotsDiv className ", `drop: ${shipSlotsDiv.className}`);}
-          if(1){console.log("6.4.6 shipSlotsDiv id ", `drop: ${shipSlotsDiv.id}`);}
+          if(0){console.log("6.4.5 shipSlotsDiv className ", `drop: ${shipSlotsDiv.className}`);}
+          if(0){console.log("6.4.6 shipSlotsDiv id ", `drop: ${shipSlotsDiv.id}`);}
 
           //ship slot_i <div>-tag as html string
           if(shipSlotsDiv.children[0]) {
             let shipSlotDiv_1 = document.getElementById(shipSlotsDiv.children[0].id);
-            if (1) {console.log("6.4.7 shipSlotDiv_1 className ", `drop: ${shipSlotDiv_1.className}`);}
+            if (0) {console.log("6.4.7 shipSlotDiv_1 className ", `drop: ${shipSlotDiv_1.className}`);}
             if (1) {console.log("6.4.8 shipSlotDiv_1 id ", `drop: ${shipSlotDiv_1.id}`);}
 
             //ship slot_i Stone <app-stone>-tag as html string
             if(shipSlotDiv_1.children[0]) {
               let shipSlotDiv_1_AppStone = document.getElementById(shipSlotDiv_1.children[0].id);
-              if (1) {console.log("6.4.9 shipSlotDiv_1_AppStone className ", `drop: ${shipSlotDiv_1_AppStone.className}`);}
-              if (1) {console.log("6.4.10 shipSlotDiv_1_AppStone id ", `drop: ${shipSlotDiv_1_AppStone.id}`);}
+              if (0) {console.log("6.4.9 shipSlotDiv_1_AppStone className ", `drop: ${shipSlotDiv_1_AppStone.className}`);}
+              if (0) {console.log("6.4.10 shipSlotDiv_1_AppStone id ", `drop: ${shipSlotDiv_1_AppStone.id}`);}
 
               //ship slot_i Stone <div>-tag as html string
               let shipSlotDiv_1_Stone = document.getElementById(shipSlotDiv_1_AppStone.children[0].id);
-              if (1) {console.log("6.4.11 shipSlotDiv_1_Stone className ", `drop: ${shipSlotDiv_1_Stone.className}`);}
-              if (1) {console.log("6.4.12 shipSlotDiv_1_Stone id ", `drop: ${shipSlotDiv_1_Stone.id}`);}
+              if (0) {console.log("6.4.11 shipSlotDiv_1_Stone className ", `drop: ${shipSlotDiv_1_Stone.className}`);}
+              if (0) {console.log("6.4.12 shipSlotDiv_1_Stone id ", `drop: ${shipSlotDiv_1_Stone.id}`);}
             }
           }
 
           //ship slot_i <div>-tag as html string
           if(shipSlotsDiv.children[1]){
             let shipSlotDiv_2=document.getElementById(shipSlotsDiv.children[1].id);
-            if(1){console.log("6.4.13 shipSlotDiv_2 className ", `drop: ${shipSlotDiv_2.className}`);}
+            if(0){console.log("6.4.13 shipSlotDiv_2 className ", `drop: ${shipSlotDiv_2.className}`);}
             if(1){console.log("6.4.14 shipSlotDiv_2 id ", `drop: ${shipSlotDiv_2.id}`);}
 
             //ship slot_i Stone <app-stone>-tag as html string
             if(shipSlotDiv_2.children[0]) {
               let shipSlotDiv_2_AppStone = document.getElementById(shipSlotDiv_2.children[0].id);
-              if (1) {console.log("6.4.15 shipSlotDiv_2_AppStone className ", `drop: ${shipSlotDiv_2_AppStone.className}`);}
-              if (1) {console.log("6.4.16 shipSlotDiv_2_AppStone id ", `drop: ${shipSlotDiv_2_AppStone.id}`);}
+              if (0) {console.log("6.4.15 shipSlotDiv_2_AppStone className ", `drop: ${shipSlotDiv_2_AppStone.className}`);}
+              if (0) {console.log("6.4.16 shipSlotDiv_2_AppStone id ", `drop: ${shipSlotDiv_2_AppStone.id}`);}
 
               //ship slot_i Stone <div>-tag as html string
               let shipSlotDiv_2_Stone = document.getElementById(shipSlotDiv_2_AppStone.children[0].id);
-              if (1) {console.log("6.4.17 shipSlotDiv_2_Stone className ", `drop: ${shipSlotDiv_2_Stone.className}`);}
-              if (1) {console.log("6.4.18 shipSlotDiv_2_Stone id ", `drop: ${shipSlotDiv_2_Stone.id}`);}
+              if (0) {console.log("6.4.17 shipSlotDiv_2_Stone className ", `drop: ${shipSlotDiv_2_Stone.className}`);}
+              if (0) {console.log("6.4.18 shipSlotDiv_2_Stone id ", `drop: ${shipSlotDiv_2_Stone.id}`);}
             }
           }
 
           //ship slot_i <div>-tag as html string
           if(shipSlotsDiv.children[2]){
             let shipSlotDiv_3=document.getElementById(shipSlotsDiv.children[2].id);
-            if(1){console.log("6.4.19 shipSlotDiv_3 className ", `drop: ${shipSlotDiv_3.className}`);}
+            if(0){console.log("6.4.19 shipSlotDiv_3 className ", `drop: ${shipSlotDiv_3.className}`);}
             if(1){console.log("6.4.20 shipSlotDiv_3 id ", `drop: ${shipSlotDiv_3.id}`);}
 
             //ship slot_i Stone <app-stone>-tag as html string
             if(shipSlotDiv_3.children[0]) {
               let shipSlotDiv_3_AppStone = document.getElementById(shipSlotDiv_3.children[0].id);
-              if (1) {console.log("6.4.21 shipSlotDiv_3_AppStone className ", `drop: ${shipSlotDiv_3_AppStone.className}`);}
-              if (1) {console.log("6.4.22 shipSlotDiv_3_AppStone id ", `drop: ${shipSlotDiv_3_AppStone.id}`);}
+              if (0) {console.log("6.4.21 shipSlotDiv_3_AppStone className ", `drop: ${shipSlotDiv_3_AppStone.className}`);}
+              if (0) {console.log("6.4.22 shipSlotDiv_3_AppStone id ", `drop: ${shipSlotDiv_3_AppStone.id}`);}
 
               //ship slot_i Stone <div>-tag as html string
               let shipSlotDiv_3_Stone = document.getElementById(shipSlotDiv_3_AppStone.children[0].id);
-              if (1) {console.log("6.4.23 shipSlotDiv_3_Stone className ", `drop: ${shipSlotDiv_3_Stone.className}`);}
-              if (1) {console.log("6.4.24 shipSlotDiv_3_Stone id ", `drop: ${shipSlotDiv_3_Stone.id}`);}
+              if (0) {console.log("6.4.23 shipSlotDiv_3_Stone className ", `drop: ${shipSlotDiv_3_Stone.className}`);}
+              if (0) {console.log("6.4.24 shipSlotDiv_3_Stone id ", `drop: ${shipSlotDiv_3_Stone.id}`);}
             }
           }
 
           //ship slot_i <div>-tag as html string
           if(shipSlotsDiv.children[3]){
             let shipSlotDiv_4=document.getElementById(shipSlotsDiv.children[3].id);
-            if(1){console.log("6.4.25 shipSlotDiv_4 className ", `drop: ${shipSlotDiv_4.className}`);}
+            if(0){console.log("6.4.25 shipSlotDiv_4 className ", `drop: ${shipSlotDiv_4.className}`);}
             if(1){console.log("6.4.26 shipSlotDiv_4 id ", `drop: ${shipSlotDiv_4.id}`);}
 
             //ship slot_i Stone <app-stone>-tag as html string
             if(shipSlotDiv_4.children[0]) {
               let shipSlotDiv_4_AppStone = document.getElementById(shipSlotDiv_4.children[0].id);
-              if (1) {console.log("6.4.27 shipSlotDiv_4_AppStone className ", `drop: ${shipSlotDiv_4_AppStone.className}`);}
-              if (1) {console.log("6.4.28 shipSlotDiv_4_AppStone id ", `drop: ${shipSlotDiv_4_AppStone.id}`);}
+              if (0) {console.log("6.4.27 shipSlotDiv_4_AppStone className ", `drop: ${shipSlotDiv_4_AppStone.className}`);}
+              if (0) {console.log("6.4.28 shipSlotDiv_4_AppStone id ", `drop: ${shipSlotDiv_4_AppStone.id}`);}
 
               //ship slot_i Stone <div>-tag as html string
               let shipSlotDiv_4_Stone = document.getElementById(shipSlotDiv_4_AppStone.children[0].id);
-              if (1) {console.log("6.4.29 shipSlotDiv_4_Stone className ", `drop: ${shipSlotDiv_4_Stone.className}`);}
-              if (1) {console.log("6.4.30 shipSlotDiv_4_Stone id ", `drop: ${shipSlotDiv_4_Stone.id}`);}
+              if (0) {console.log("6.4.29 shipSlotDiv_4_Stone className ", `drop: ${shipSlotDiv_4_Stone.className}`);}
+              if (0) {console.log("6.4.30 shipSlotDiv_4_Stone id ", `drop: ${shipSlotDiv_4_Stone.id}`);}
             }
           }
 
@@ -826,6 +847,10 @@ export class GameComponent  implements OnInit {
     });
   }
 
+
+  //-----------------------------------
+  //Draguala Ship Movement Set Options
+  //-----------------------------------
   dragulaShipMovement_setOptions(){
 
     this.dragulaService.setOptions('harbours_bag', {
@@ -879,7 +904,7 @@ export class GameComponent  implements OnInit {
         console.log("harbours_bag:moves ", `handle: ${handle}`);}
 
         if (el && source && handle){
-          return true; //rue: elements are always draggable by default
+          return true; //true: elements are always draggable by default
         }
         else{
           return false;
@@ -901,42 +926,122 @@ export class GameComponent  implements OnInit {
 
         if(0){console.log("harbours_bag:invalid ", `el: ${el}`);
         console.log("harbours_bag:invalid ", `handle: ${handle}`);
-        console.log("harbours_bag:invalid ", `el.parent.parent: ${el.parentElement.parentElement}`);}
+        console.log("harbours_bag:invalid ", `el.id: ${el.id}`);
+        console.log("harbours_bag:invalid ", `el.parent.parent.id: ${el.parentElement.parentElement.id}`);}
+
+
+        /*departing harbour check: if isDepartingHarbour then set invalid*/
+        /* BUT if enoughStones then set valid */
+        if (el && handle && el.parentElement.parentElement) {
+
+          let isDepartingHarbour = el.parentElement.parentElement.id === "departing_harbours";
+
+          if(1){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
+            if(isDepartingHarbour){
+
+              //<app-ship>
+              let appShip_id=el.id;
+              if(0){console.log("10.11.2 dragula-invalid", `appShip_id: ${appShip_id}`);};
+
+              //ship-<div>
+              let divShip_id=el.children[0].id;
+              if(0){console.log("10.11.3 dragula-invalid", `divShip_id: ${divShip_id}`);};
+
+              //ship-slots<div>
+              let divShip_divSlots_id = el.children[0].children[0].id;
+              if(0){console.log("10.11.4 dragula-invalid", `divShip_divSlots_id: ${divShip_divSlots_id}`);};
+
+              let divShip_divSlots_divSlot_id = el.children[0].children[0].children[0].id;
+              if(1){console.log("10.11.5 dragula-invalid", `divShip_divSlots_divSlot_id: ${divShip_divSlots_divSlot_id}`);};
+
+
+              //has ship enough stones
+              //----------------------
+              //(no helper functions allowed: this.hasShipEnoughStones(ship_i_slots_id);)
+
+              //count slots
+              let divShip_divSlots = el.children[0].children[0];
+              let countSlots:number=0;
+              if(divShip_divSlots.children[0]){
+                countSlots+=1;
+              }
+              if(divShip_divSlots.children[1]){
+                countSlots+=1;
+              }
+              if(divShip_divSlots.children[2]){
+                countSlots+=1;
+              }
+              if(divShip_divSlots.children[3]){
+                countSlots+=1;
+              }
+              if(1){console.log("10.11.6 dragula-invalid", `countSlots: ${countSlots}`);};
+
+
+              //count stones
+              let countStones:number=0;
+              if(divShip_divSlots.children[0]){
+                if(divShip_divSlots.children[0].children[0]){countStones+=1;}
+              }
+              if(divShip_divSlots.children[1]){
+                if(divShip_divSlots.children[1].children[0]){countStones+=1;}
+              }
+              if(divShip_divSlots.children[2]){
+                if(divShip_divSlots.children[2].children[0]){countStones+=1;}
+              }
+              if(divShip_divSlots.children[3]){
+                if(divShip_divSlots.children[3].children[0]){countStones+=1;}
+              }
+              if(1){console.log("10.11.7 dragula-invalid", `countStones: ${countStones}`);};
+
+
+              //check if it can move
+              let hasNotEnoughStones=true;
+              if(countSlots==1){
+                if(countStones==1){hasNotEnoughStones=false;}
+              }
+              if(countSlots==2){
+                if(countStones==1){hasNotEnoughStones=false;}
+              }
+              if(countSlots==3){
+                if(countStones>=2){hasNotEnoughStones=false;}
+              }
+              if(countSlots==4){
+                if(countStones>=3){hasNotEnoughStones=false;}
+              }
+              if(1){console.log("10.11.8 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
+
+
+              let isInvalid = hasNotEnoughStones;
+
+              if(1){console.log("10.11.9 dragula-invalid", `isInvalid : ${isInvalid}`);};
+              if (isInvalid) {
+                if(1){console.log("10.11.10 dragula-invalid", "---DepartingHarbour (True=drag disallowed)---");}
+                return true;
+              }
+              else {
+                if(1){console.log("10.11.11 dragula-invalid", "---DepartingHarbour (False=drag allowed)---");}
+                return false; //false: don't prevent any drags from initiating by default
+              }
+            }
+        }
+
 
         /*arriving harbour check: if isArrivingHarbour then set invalid*/
         if (el && handle && el.parentElement.parentElement) {
 
           let isArrivingHarbour = el.parentElement.parentElement.id === "arriving_harbours";
           let isInvalid = isArrivingHarbour;
+          if(1){console.log("10.11.0 dragula-invalid", `isArrivingHarbour: ${isArrivingHarbour}`);}
 
           if (isInvalid) {
-            if(0){console.log("10.10.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
+            if(1){console.log("10.10.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
             return true;
           }
           else {
-              if(0){console.log("10.10.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
+              if(1){console.log("10.10.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
             return false; //false: don't prevent any drags from initiating by default
           }
         }
-
-        /*departing harbour check: if isDepartingHarbour AND notEnoughStones then set invalid*/
-        if (el && handle && el.parentElement.parentElement) {
-
-          let isDepartingHarbour = el.parentElement.parentElement.id === "departing_harbours";
-          let isInvalid = isDepartingHarbour;
-
-          if (isInvalid) {
-            if(0){console.log("10.11.1 dragula-invalid", "---DepartingHarbour (True=drag disallowed)---");}
-            return true;
-          }
-          else {
-            if(0){console.log("10.11.2 dragula-invalid", "---DeparingHarbour (False=drag allowed)---");}
-            return false; //false: don't prevent any drags from initiating by default
-          }
-        }
-
-
-
 
       },
 
@@ -980,6 +1085,11 @@ export class GameComponent  implements OnInit {
 
     });
   }
+
+
+  //-----------------------------------
+  //Draguala Stone Movement Set Options
+  //-----------------------------------
 
   dragulaStoneMovement_setOptions(){
     this.dragulaService.setOptions('stone_slots_bag', {
