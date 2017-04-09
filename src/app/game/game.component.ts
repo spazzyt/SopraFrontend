@@ -686,7 +686,7 @@ export class GameComponent  implements OnInit {
       //-------------------------------------------
       //value object not null; otherwise do nothing
       //-------------------------------------------
-      if (value) {
+      if (value[0] && value[1] && value[2]) {
 
 
         //----------------------------------------
