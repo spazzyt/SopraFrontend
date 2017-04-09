@@ -123,30 +123,55 @@ export class BottomRightComponent implements OnInit {
   setClickHandlerOnBlueMarketCards() {
 
     //set click handler for  bll_4
-
+    (<any>$(document)).ready(() =>{
+      (<any>$("#bll_4_")).on("click", () =>{
+        alert("The chisel was clicked."); this.marketCards[5]-=1;
+      });
+    });
 
     //set click handler for  bml_4
-
+    (<any>$(document)).ready(() =>{
+      (<any>$("#bml_4_")).on("click", () =>{
+        alert("The hammer was clicked."); this.marketCards[6]-=1;
+      })
+    });
 
     //set click handler for  bmr_4
-
+    (<any>$(document)).ready(() =>{
+      (<any>$("#bmr_4_")).on("click", () =>{
+        alert("The sail was clicked."); this.marketCards[7]-=1;
+      })
+    });
 
     //set click handler for  brr_4
-
+    (<any>$(document)).ready(() =>{
+      (<any>$("#brr_4_")).on("click", () =>{
+        alert("The lever was clicked."); this.marketCards[8]-=1;
+      })
+    });
   }
 
   removeClickHandlerOnBlueMarketCards(){
 
     //remove click handler for  bll_4
-
+    (<any>$(document)).ready(function () {
+      (<any>$("#bll_4_")).off("click");
+    });
 
     //remove click handler for  bml_4
-
+    (<any>$(document)).ready(function () {
+      (<any>$("#bml_4_")).off("click");
+    });
 
     //remove click handler for  bmr_4
-
+    (<any>$(document)).ready(function () {
+      (<any>$("#bmr_4_")).off("click");
+    });
 
     //remove click handler for  brr_4
+    (<any>$(document)).ready(function () {
+      (<any>$("#brr_4_")).off("click");
+    });
 
   }
 
