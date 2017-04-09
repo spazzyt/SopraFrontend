@@ -100,23 +100,23 @@ export class BottomRightComponent implements OnInit {
   }
 
   show_hide_stone_at_init() {
-    (<any>$(document)).ready(function () {
+    /**(<any>$(document)).ready(function () {
       (<any>$("#stones_4")).hide();
       (<any>$("#stone_label_4")).show();
-    });
+    });*/
   }
 
   show_hide_stone_onMouseOver(){
-    (<any>$(document)).ready(function () {
+    /**(<any>$(document)).ready(function () {
       (<any>$("#stones_4")).show();
       (<any>$("#stone_label_4")).hide();
-    });
+    });*/
   }
 
   show_hide_stone_onMouseLeave(){
-    (<any>$(document)).ready(function () {
+    /*(<any>$(document)).ready(function () {
       (<any>$("#stone_label_4")).show();
-    });
+    });*/
   }
 
 

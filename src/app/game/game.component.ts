@@ -691,9 +691,9 @@ export class GameComponent  implements OnInit {
 
         }
 
-        //--------------
-        //get id of ship
-        //--------------
+        //----------------------------
+        //get id of ship /slot /stone
+        //----------------------------
         if(value[0] === 'harbours_bag'){
           if(1){console.log("6.4.1 ", `drop: ${value[0]}`);}
 

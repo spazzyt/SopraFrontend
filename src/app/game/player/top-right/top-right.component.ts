@@ -99,23 +99,23 @@ export class TopRightComponent implements OnInit {
   }
 
   show_hide_stone_at_init() {
-    (<any>$(document)).ready(function () {
+    /**(<any>$(document)).ready(function () {
       (<any>$("#stones_3")).hide();
       (<any>$("#stone_label_3")).show();
-    });
+    });*/
   }
 
   show_hide_stone_onMouseOver(){
-    (<any>$(document)).ready(function () {
+    /**(<any>$(document)).ready(function () {
       (<any>$("#stones_3")).show();
       (<any>$("#stone_label_3")).hide();
-    });
+    });*/
   }
 
   show_hide_stone_onMouseLeave(){
-    (<any>$(document)).ready(function () {
+    /**(<any>$(document)).ready(function () {
       (<any>$("#stone_label_3")).show();
-    });
+    });*/
   }
 
 
