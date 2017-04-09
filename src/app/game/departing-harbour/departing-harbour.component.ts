@@ -124,4 +124,20 @@ export class DepartingHarbourComponent {
   }
 
 
+  deactivateShipOnDepartingHarbour(ship:Ship){
+
+
+  }
+
+
+  ractivateShipOnDepartingHarbour(ship:Ship){
+
+  }
+
+
+  countStonesOnShip(ship:Ship){
+
+  }
+
+
 }

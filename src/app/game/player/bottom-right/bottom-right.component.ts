@@ -343,7 +343,7 @@ export class BottomRightComponent implements OnInit {
 
   }
 
-  deactivateOrActivateStoneSled(playerStoneSledStatus_target){
+  deactivateOrActivateSupplySled(playerStoneSledStatus_target){
 
   }
 
