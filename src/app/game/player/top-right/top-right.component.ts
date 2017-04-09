@@ -343,7 +343,7 @@ export class TopRightComponent implements OnInit {
 
   }
 
-  deactivateOrActivateStoneSled(playerStoneSledStatus_target){
+  deactivateOrActivateSupplySled(playerStoneSledStatus_target){
 
   }
 

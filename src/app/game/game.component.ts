@@ -180,7 +180,7 @@ export class GameComponent  implements OnInit {
   quarryStones_target:number=25;
   playerIconsStatus_target:boolean[]=[true, false, true, false, false, true, false, true, false];
   playerStoneQuarryStatus_target:boolean=false;
-  playerStoneSledStatus_target:boolean=false;
+  playerSupplySledStatus_target:boolean=false;
   playerPlayerFieldStatus_target:boolean=false;
   roundNumber:number=3;
 
@@ -341,19 +341,19 @@ export class GameComponent  implements OnInit {
 
   trigger_deactivateOrActivateStoneSled(){
 
-    this.bottomLeftComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.bottomRightComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.topLeftComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.topRightComponent.deactivateOrActivateStoneSled(this.playerStoneSledStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.bottomLeftComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
+    this.bottomRightComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
+    this.topLeftComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
+    this.topRightComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
 
   }
 
   trigger_deactivateOrActivatePlayerField(){
 
-    this.bottomLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.bottomRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.topLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.topRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
+    this.bottomLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
+    this.bottomRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
+    this.topLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
+    this.topRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
 
   }
 
@@ -421,6 +421,21 @@ export class GameComponent  implements OnInit {
 
   trigger_removeShip(id:number){
     this.departingHarbourComponent.removeShip(this.ship4); //(click)="trigger_removeShip()"
+  }
+
+  trigger_deactivateShipOnDepartingHarbour(){
+    this.departingHarbourComponent.deactivateShipOnDepartingHarbour(this.ship1);//(click)="trigger_deactivateShipOnDepartingHarbour()"
+
+  }
+
+  trigger_activateShipOnDepartingHarbour(){
+    this.departingHarbourComponent.ractivateShipOnDepartingHarbour(this.ship1);//(click)="trigger_activateShipOnDepartingHarbour()"
+
+  }
+
+  trigger_countStonesOnShip(){
+    this.departingHarbourComponent.countStonesOnShip(this.ship1);//click)="trigger_countStonesOnShip()"
+
   }
 
 
@@ -612,22 +627,31 @@ export class GameComponent  implements OnInit {
   dragula_subscribeDragEvent() {
     this.dragulaService.drag.subscribe((value) => {
 
-      if(0){console.log("10.1.0 dragula-subscribe-drag");}
+      if(1){console.log("5.1.0 dragula-subscribe-drag");}
 
       if (value){
 
+        //--------------
+        //get id of ship
+        //--------------
+        if(value[0] === 'harbours_bag') {
 
-        if(0){console.log("6.1.1.1 ", `drag: ${value}`);
-         console.log("6.1.1.2 ", `drag: ${value[0]}`);
-         console.log("6.1.1.3 ", `drag: ${value.slice(1)}`);}
+          //id of site harbour
+          let arriving_harbour = value[2];
 
-        if(0){console.log("10.1.1 dragula-subscribe-drag");}
-
-        //custom code
-
+          if(1){console.log("5.1.1 ", `drag: ${value}`);}
+          if(1){console.log("5.1.1 ", `drag: ${value[0]}`);}
+          if(1){console.log("5.1.3 dragula-subscribe-drag");}
 
 
+          //change options on drag (pandora's box)
+          if (0) {
+            this.dragulaService.setOptions('harbours_bag', {
+              invalid: function (el, handle) {}
+            });
+          }
 
+        }
       }
     });
   }
@@ -635,7 +659,7 @@ export class GameComponent  implements OnInit {
   dragula_subscribeDropEvent() {
     this.dragulaService.drop.subscribe((value) => {
 
-      console.log("10.1.0 dragula-subscribe-drop");
+      console.log("6.1.0 dragula-subscribe-drop");
 
       //-------------------------------------------
       //value object not null; otherwise do nothing
@@ -879,6 +903,7 @@ export class GameComponent  implements OnInit {
         console.log("harbours_bag:invalid ", `handle: ${handle}`);
         console.log("harbours_bag:invalid ", `el.parent.parent: ${el.parentElement.parentElement}`);}
 
+        /*arriving harbour check: if isArrivingHarbour then set invalid*/
         if (el && handle && el.parentElement.parentElement) {
 
           let isArrivingHarbour = el.parentElement.parentElement.id === "arriving_harbours";
@@ -893,6 +918,25 @@ export class GameComponent  implements OnInit {
             return false; //false: don't prevent any drags from initiating by default
           }
         }
+
+        /*departing harbour check: if isDepartingHarbour AND notEnoughStones then set invalid*/
+        if (el && handle && el.parentElement.parentElement) {
+
+          let isDepartingHarbour = el.parentElement.parentElement.id === "departing_harbours";
+          let isInvalid = isDepartingHarbour;
+
+          if (isInvalid) {
+            if(0){console.log("10.11.1 dragula-invalid", "---DepartingHarbour (True=drag disallowed)---");}
+            return true;
+          }
+          else {
+            if(0){console.log("10.11.2 dragula-invalid", "---DeparingHarbour (False=drag allowed)---");}
+            return false; //false: don't prevent any drags from initiating by default
+          }
+        }
+
+
+
 
       },
 

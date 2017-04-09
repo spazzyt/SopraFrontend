@@ -349,13 +349,62 @@ export class BottomLeftComponent implements OnInit {
 
   deactivateOrActivateStoneQuarry(playerStoneQuarryStatus_target){
 
+    if (playerStoneQuarryStatus_target == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#quarry_1")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateStoneQuarry: false")
+    }
+    if (playerStoneQuarryStatus_target == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#quarry_1")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateStoneQuarry: true")
+    }
+
   }
 
-  deactivateOrActivateStoneSled(playerStoneSledStatus_target){
+  deactivateOrActivateSupplySled(playerSupplySledStatus_target){
+
+    if (playerSupplySledStatus_target == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#supply_sled_1")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateSupplySled: false")
+    }
+    if (playerSupplySledStatus_target == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#supply_sled_1")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateSupplySled: true")
+    }
 
   }
 
   deactivateOrActivatePlayerField(playerPlayerFieldStatus_target){
+
+    if (playerPlayerFieldStatus_target == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#playerField_1")).css("opacity", "0.3");
+
+      });
+
+      console.log("playerPlayerFieldStatus: false")
+    }
+    if (playerPlayerFieldStatus_target == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#playerField_1")).css("opacity", "1.0");
+
+      });
+      console.log("playerPlayerFieldStatus: true")
+    }
+
 
   }
 
