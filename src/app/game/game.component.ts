@@ -184,6 +184,9 @@ export class GameComponent  implements OnInit {
   playerPlayerFieldStatus_target:boolean=false;
   roundNumber:number=3;
 
+  //used in dragula drop
+  playedBlueMarketCard_lever=false;
+
 
   //Fake Ships
   ship1 = new Ship(1, 4);
@@ -763,6 +766,13 @@ export class GameComponent  implements OnInit {
             stoneSlot.appendChild(appStone);
           }
 
+          //--------------------------------------------
+          //call add stone to ship (angular 2 style)
+          //--------------------------------------------
+
+          //this.gameComponent.removeStoneFromSled(shipSlotDiv_1_Stone.id);
+          //this.shipComponent.addStoneToShip(shipSlotDiv_1_Stone.id);
+
 
 
         }
@@ -788,6 +798,7 @@ export class GameComponent  implements OnInit {
 
         //--------------------------------------------
         //get id of ship /slot /stone ('harbours_bag')
+        // (for informational purposes)
         //--------------------------------------------
         if(value[0] === 'harbours_bag'){
           if(1){console.log("6.4.1 ", `drop: ${value[0]}`);}
@@ -812,6 +823,7 @@ export class GameComponent  implements OnInit {
           if(0){console.log("6.4.5 shipSlotsDiv className ", `drop: ${shipSlotsDiv.className}`);}
           if(0){console.log("6.4.6 shipSlotsDiv id ", `drop: ${shipSlotsDiv.id}`);}
 
+
           //ship slot_i <div>-tag as html string
           if(shipSlotsDiv.children[0]) {
             let shipSlotDiv_1 = document.getElementById(shipSlotsDiv.children[0].id);
@@ -828,6 +840,25 @@ export class GameComponent  implements OnInit {
               let shipSlotDiv_1_Stone = document.getElementById(shipSlotDiv_1_AppStone.children[0].id);
               if (0) {console.log("6.4.11 shipSlotDiv_1_Stone className ", `drop: ${shipSlotDiv_1_Stone.className}`);}
               if (0) {console.log("6.4.12 shipSlotDiv_1_Stone id ", `drop: ${shipSlotDiv_1_Stone.id}`);}
+
+              //--------------------------------------------
+              //call add stone to site
+              //--------------------------------------------
+
+              let leverPlayed = this.playedBlueMarketCard_lever;
+
+              if (leverPlayed) {
+                if (1) {console.log("6.5.1 add stone to site manually", `drop: leverPlayed:  ${leverPlayed}`);}
+
+              }
+              else {
+                if (1) {console.log("6.5.2 add stone to site automatically", `drop: lever Played: ${leverPlayed}`);}
+
+                //this.shipComponent.removeStoneFromShip(shipSlotDiv_1_Stone.id);
+                //this.shipComponent.addStoneToSite(shipSlotDiv_1_Stone.id);
+              }
+              //End: call add stone to site
+
             }
           }
 
@@ -888,9 +919,16 @@ export class GameComponent  implements OnInit {
             }
           }
 
+
+
+
+
+
+
+
+
+
         }
-
-
 
       }
 
