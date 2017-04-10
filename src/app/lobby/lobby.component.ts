@@ -179,6 +179,11 @@ export class LobbyComponent implements OnInit {
     }
   }
 
+  quickStart(){
 
+    //ask backend for new game
+    this.gameService.quickStart();
+
+  }
 
 }
