@@ -14,11 +14,10 @@
       </div>
 
       <div class="lower_quarter">
-
-        <div class="card bottom_left_left" (click)="playChisel()" ><div id="bll_1" class="bll_icon"><p style="position:absolute;">{{marketCards[5]}}</p></div></div>
-        <div class="card bottom_middle_left"><div id="bml_1" class="bml_icon"><p style="position:absolute;">{{marketCards[6]}}</p></div></div>
-        <div class="card bottom_middle_right"><div id="bmr_1" class="bmr_icon"><p style="position:absolute;">{{marketCards[7]}}</p></div></div>
-        <div class="card bottom_right_right"><div id="brr_1" class="brr_icon"><p style="position:absolute;">{{marketCards[8]}}</p></div></div>
+        <div id="bll_1_" class="card bottom_left_left"><div id="bll_1" class="bll_icon"><p style="position:absolute;">{{marketCards[5]}}</p></div></div>
+        <div id="bml_1_" class="card bottom_middle_left"><div id="bml_1" class="bml_icon"><p style="position:absolute;">{{marketCards[6]}}</p></div></div>
+        <div id="bmr_1_" class="card bottom_middle_right"><div id="bmr_1" class="bmr_icon"><p style="position:absolute;">{{marketCards[7]}}</p></div></div>
+        <div id="brr_1_" class="card bottom_right_right"><div id="brr_1" class="brr_icon"><p style="position:absolute;">{{marketCards[8]}}</p></div></div>
       </div>
     </div>
 
@@ -29,23 +28,26 @@
   <!-- copied from cards.component.html -->
 </div>
 
+
 <div class="bottom_part">
-  <div class="low score">
+  <div class="low_l score">
     <p>{{score}}</p>
   </div>
   <!--drag and drop zone-->
-  <div id="supply_sled_1" class="low supply_sled_1"
+  <div id="supply_sled_1" class="low_m supply_sled_1"
        (mouseover)=show_hide_stone_onMouseOver()
        (mouseleave)=show_hide_stone_onMouseLeave()
        [dragula]="'stone_slots_bag'">
+
+      <app-stone id="stones_1" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
+
       <div >
         <p id="stone_label_1">{{sledStones}}/5</p>
       </div>
 
-      <app-stone [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
-
   </div>
-  <div class="low quarry">
+
+  <div id="quarry_1" class="low_r quarry">
     <p>{{quarryStones}}</p>
   </div>
 </div>

@@ -14,7 +14,10 @@ p{
   padding-top: 5%;
   font: 500 20px "Lithos Pro", Helvetica, Sans-Serif;
   text-shadow: 1px 1px 2px black;
+  /**border: 1px solid #6167ff;/*border: 1px solid orange;*/
 }
+
+
 
 .name_text{
   font: 400 20px "Lithos Pro", Helvetica, Sans-Serif;
@@ -34,9 +37,9 @@ p{
 }
 
 .bottom_part{
-  width: 100%;
+  width: 130%;
   height: 30%;
-  /*border: 1px solid #44ff62;*/
+  /**border: 1px solid #ffbdfa;/*border: 1px solid #44ff62;*/
 }
 
 .lower_left{
@@ -50,6 +53,7 @@ p{
   -webkit-box-pack: center;
   -webkit-box-align: center;
   padding: 15px;
+  /**border: 10px solid #7462ff;/*border: 1px solid #44ff62;*/
 }
 
 .lower_right{
@@ -57,43 +61,59 @@ p{
   height: 100%;
   float: left;
   float: top;
+  /**border: 10px solid #ff3e83;/*border: 1px solid #44ff62;*/
 }
 
 .score{
   background-image: url("../../../../assets/images/score.png");
   background-repeat: no-repeat;
   background-position: center;
-  /*border: 1px solid #44ff62;*/
+  /**border: 1px solid #ff56e9;/*border: 1px solid #44ff62;*/
 }
 
 .supply_sled_1{
-  /*border: 1px solid #44ff62;*/
   background-image: url("../../../../assets/images/supply_sled.png");
   background-repeat: no-repeat;
   background-position: center;
   z-index: 100;
+  border: 1px solid #44ff62;/*border: 1px solid #44ff62;*/
 }
 
 .quarry{
   background-image: url("../../../../assets/images/quarry.png");
   background-repeat: no-repeat;
   background-position: center;
-  /*border: 1px solid #44ff62;*/
+  /**border: 1px solid #ffef5c;/*border: 1px solid #44ff62;*/
 }
 
-.low{
-  width: 30%;
+.low_l{
+  width: 20%;
   height: 100%;
-  float: top;
+  float: bottom;
   float: left;
 }
+
+.low_m{
+  width: 35%;
+  height: 100%;
+  float: bottom;
+  float: left;
+}
+
+.low_r{
+  width: 20%;
+  height: 100%;
+  float: bottom;
+  float: left;
+}
+
 
 .player_name{
   height: 30%;
   float: left;
   padding-top: 1%;
   vertical-align: bottom;
-  border: 1px solid #87cbff;/*border: 1px solid #87cbff;;*/
+  /*border: 1px solid #87cbff;;*/
 }
 
 
@@ -151,7 +171,7 @@ p{
   background-size: contain;
   float: left;
   float: top;
-  border: 2px solid transparent;
+  /**border: 2px solid transparent;*/
 }
 
 /*Roland: Replaced html images with css background images*/
@@ -226,8 +246,8 @@ p{
   background-size: contain;
   position:relative;
   display:block;
-  /*border: 1px solid #44ff62;*/
   border-radius: 50%;
+  /*border: 1px solid #44ff62;*/
   /*background-color: #c6c6c6;
   opacity: 0.5; */
 
@@ -273,11 +293,14 @@ p{
 
 #stone_label_1{
   z-index:200;
-  top:0px;
-  left:0px;
-  margin-bottom:150px;
+  top:15px;
+  right:0px;
   /*border: 1px solid #44ff62;*/
-  position:relative;
+  /*position:relative;*/
+  float:right;
+  float:top;
+  margin-right:15%;
+  border: 1px solid #ff2f39;/*border: 1px solid #44ff62;*/
 }
 
 .top_part{

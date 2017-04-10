@@ -1,9 +1,3 @@
-@font-face {
-  font-family: 'Lithos Pro';
-  src: url("../../fonts/LithosPro-Regular.otf") format("opentype");
-  font-style: normal;
-}
-
 .container_game_screen {
   width: 1366px;
   height: 768px;

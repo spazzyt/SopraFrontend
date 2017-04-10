@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Stone} from "../../../shared/models/stone";
+import {ColourEnum} from "../../../shared/models/colour.enum";
 
 @Component({
   selector: 'app-top-right',
@@ -50,7 +51,8 @@ export class TopRightComponent implements OnInit {
   ngOnInit() {
 
     this.initializePopovers();
-    this.playerFieldStone = new Stone(0, 'brown')
+    this.playerFieldStone = new Stone(0, ColourEnum.gray)
+    console.log("ColourEnum: ", ColourEnum.gray);
 
   }
 
@@ -70,7 +72,7 @@ export class TopRightComponent implements OnInit {
     // define protocol: which market card
     // corresponds to which array index
 
-    for(var i = 0; i < marketCards_target.length; i++){
+    for(let i = 0; i < marketCards_target.length; i++){
       this.marketCards[i] = marketCards_target[i];
     }
   }
@@ -96,8 +98,244 @@ export class TopRightComponent implements OnInit {
 
   }
 
+  show_hide_stone_at_init() {
+    /**(<any>$(document)).ready(function () {
+      (<any>$("#stones_3")).hide();
+      (<any>$("#stone_label_3")).show();
+    });*/
+  }
+
+  show_hide_stone_onMouseOver(){
+    /**(<any>$(document)).ready(function () {
+      (<any>$("#stones_3")).show();
+      (<any>$("#stone_label_3")).hide();
+    });*/
+  }
+
+  show_hide_stone_onMouseLeave(){
+    /**(<any>$(document)).ready(function () {
+      (<any>$("#stone_label_3")).show();
+    });*/
+  }
+
+
+  setClickHandlerOnBlueMarketCards() {
+
+    //set click handler for  bll_3
+    (<any>$(document)).ready(() =>{
+      (<any>$("#bll_3_")).on("click", () =>{
+        alert("The chisel was clicked."); this.marketCards[5]-=1;
+      });
+    });
+
+    //set click handler for  bml_3
+    (<any>$(document)).ready(() =>{
+      (<any>$("#bml_3_")).on("click", () =>{
+        alert("The hammer was clicked."); this.marketCards[6]-=1;
+      })
+    });
+
+    //set click handler for  bmr_3
+    (<any>$(document)).ready(() =>{
+      (<any>$("#bmr_3_")).on("click", () =>{
+        alert("The sail was clicked."); this.marketCards[7]-=1;
+      })
+    });
+
+    //set click handler for  brr_3
+    (<any>$(document)).ready(() =>{
+      (<any>$("#brr_3_")).on("click", () =>{
+        alert("The lever was clicked."); this.marketCards[8]-=1;
+      })
+    });
+  }
+
+  removeClickHandlerOnBlueMarketCards(){
+
+    //remove click handler for  bll_3
+    (<any>$(document)).ready(function () {
+      (<any>$("#bll_3_")).off("click");
+    });
+
+    //remove click handler for  bml_3
+    (<any>$(document)).ready(function () {
+      (<any>$("#bml_3_")).off("click");
+    });
+
+    //remove click handler for  bmr_3
+    (<any>$(document)).ready(function () {
+      (<any>$("#bmr_3_")).off("click");
+    });
+
+    //remove click handler for  brr_3
+    (<any>$(document)).ready(function () {
+      (<any>$("#brr_3_")).off("click");
+    });
+
+  }
+
+
+
+  //deactivates at the moment the icon top-left-left,
+  // this function cannot reactivate icon
 
   deactivateOrActivateIcons(playerIconsStatus_target){
+
+
+    //deactivates icons at the bottom of player bottom-left
+
+
+    if (playerIconsStatus_target[0] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bll_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[0] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bll_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[1] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bml_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[1] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bml_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[2] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bmr_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[2] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bmr_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[3] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#brr_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[3] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#brr_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+
+    //deactivates icons at the top of player bottom-left
+
+
+    if (playerIconsStatus_target[4] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#tll_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[4] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#tll_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[5] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#tml_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[5] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#tml_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[6] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#tmr_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[6] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#tmr_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+    if (playerIconsStatus_target[7] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#trr_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[7] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#trr_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
+
+
+    //deactivates purple icon of player bottom-left
+
+
+    if (playerIconsStatus_target[8] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#purple_3")).css("opacity", "0.3");
+
+      });
+
+      console.log("deactivateOrActivateIcons: false")
+    }
+    if (playerIconsStatus_target[8] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#purple_3")).css("opacity", "1.0");
+
+      });
+      console.log("deactivateOrActivateIcons: true")
+    }
 
   }
 
@@ -105,7 +343,7 @@ export class TopRightComponent implements OnInit {
 
   }
 
-  deactivateOrActivateStoneSled(playerStoneSledStatus_target){
+  deactivateOrActivateSupplySled(playerStoneSledStatus_target){
 
   }
 

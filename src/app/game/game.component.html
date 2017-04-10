@@ -4,7 +4,7 @@
   <div class="container_side container_left">
     <!-- Top Left Player Field -->
     <div class="player_field player_top_left">
-      <app-top-left></app-top-left>
+      <app-top-left id="playerField_2"></app-top-left>
     </div>
 
 
@@ -16,7 +16,7 @@
 
     <!-- Bottom Left Player Field -->
     <div class="player_field player_bottom_left">
-      <app-bottom-left></app-bottom-left>
+      <app-bottom-left id="playerField_1"></app-bottom-left>
     </div>
   </div>
 
@@ -211,8 +211,8 @@
 
         <div class="col-md-3">
           <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
-                  type="submit" (click)="trigger_deactivateOrActivateStoneSled()">
-            deactivateOrActivateStoneSled
+                  type="submit" (click)="trigger_deactivateOrActivateSupplySled()">
+            deactivateOrActivateSupplySled
           </button>
         </div>
 
@@ -244,7 +244,107 @@
 
         <div class="col-md-3">
           <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
-                  type="submit" (click)="trigger_TemplateFunction()">
+                  type="submit" (click)="trigger_setClickHandlerOnBlueMarketCards()">
+            setClickHandlerOnBlueMarketCards
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_removeClickHandlerOnBlueMarketCards()">
+            removeClickHandlerOnBlueMarketCards
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Rolands, test buttons: remove them later -->
+
+      <div class="row">
+          <div class="col-md-3">
+            <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                    type="submit" (click)="trigger_increaseRoundInInfoBox()">
+              increaseRoundInInfoBox
+            </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setClickHandlerOnMarketCards()">
+            setClickHandlerOnMarketCards
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_removeClickHandlerOnMarketCards()">
+            removeClickHandlerOnMarketCards
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setClickHandlerOnStone()">
+            setClickHandlerOnStone
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Rolands, test buttons: remove them later -->
+
+      <div class="row">
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_removeClickHandlerOnStone()">
+            removeClickHandlerOnStone
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setClickHandlerOnSlot()">
+            setClickHandlerOnSlot
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_removeClickHandlerOnSlot()">
+            removeClickHandlerOnSlot
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_setPlayerName()">
+            setPlayerName
+          </button>
+        </div>
+      </div>
+
+
+
+      <!-- Rolands, test buttons: remove them later -->
+
+      <div class="row">
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_deactivateShipOnDepartingHarbour()">
+            TemplateFunction
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_activateShipOnDepartingHarbour()">
+            TemplateFunction
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_countStonesOnShip()">
             TemplateFunction
           </button>
         </div>
@@ -261,11 +361,11 @@
       <!-- Rolands, test buttons: remove them later -->
 
       <div class="row">
-          <div class="col-md-3">
-            <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
-                    type="submit" (click)="trigger_TemplateFunction()">
-              TemplateFunction
-            </button>
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="trigger_TemplateFunction()">
+            TemplateFunction
+          </button>
         </div>
 
         <div class="col-md-3">
@@ -290,15 +390,6 @@
         </div>
       </div>
 
-
-
-
-
-
-
-
-
-
     </div>
 
   </div>
@@ -308,7 +399,7 @@
   <div class="container_side container_right">
     <!-- Top Right Player Field -->
     <div class="player_field player_top_right">
-      <app-top-right></app-top-right>
+      <app-top-right id="playerField_3"></app-top-right>
     </div>
     <!-- Departing Harbours -->
     <div class="info_box">
@@ -316,7 +407,7 @@
     </div>
     <!-- Bottom Right Player Field -->
     <div class="player_field player_bottom_right">
-      <app-bottom-right></app-bottom-right>
+      <app-bottom-right id="playerField_4"></app-bottom-right>
     </div>
   </div>
 </div>

@@ -3,6 +3,7 @@
   height: 768px;
   background-size:cover;
   background-image: url(../../assets/images/login_background.png);
+  font-family: 'Lithos Pro', Helvetica, sans-serif;
 }
 
 .form-signin {
