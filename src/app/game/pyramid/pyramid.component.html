@@ -1,4 +1,8 @@
-<div class="space_left"><div class="points_assignment" id="pyramid"></div><div class="level_continuous"></div></div>
+<div class="space_left"><div class="points_assignment" id="pyramid"></div><div class="level_continuous">
+  <div *ngIf="stones[14] != null">
+    <app-stone [stone]="stones[14]"></app-stone>
+  </div>
+</div></div>
 <div class="level_1">
   <div id="level1_space"></div>
   <div id="level1_fields">
