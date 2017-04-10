@@ -1,10 +1,10 @@
 .container_login_screen {
   width: 1366px;
   height: 768px;
-  background-size:cover;
+  background-size: cover;
   background-image: url(../../assets/images/login_background.png);
   font-family: 'Lithos Pro', Helvetica, sans-serif;
-
+}
 
 .form-signin {
   padding-top: 180px;
