@@ -79,6 +79,11 @@
 
 .player_bottom_left {
   background-image: url(../../assets/images/bottom_left.png);
+  /* for glowing effect, still under construction
+  border-radius:         0%  80%  0%  0%;
+  border: 1px solid green;
+  box-shadow: 0px 0px 15px 15px rgba(255, 255, 190, .75);
+  */
 }
 
 .player_top_right {
