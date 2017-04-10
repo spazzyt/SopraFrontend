@@ -1,11 +1,12 @@
 import {Move} from "./move";
+import {ActionEnum} from "./action.enum";
 
 export class Action {
 
   //Backend attributes
   //==================
   public id:number=-1;
-  public actionName:string="";
+  public actionName:ActionEnum;
   public moves: Move[]=[];
 
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Stone} from "../../../shared/models/stone";
 import {ColourEnum} from "../../../shared/models/colour.enum";
+import {SupplySled} from "../../../shared/models/supply-sled";
+import {StoneQuarry} from "../../../shared/models/stone-quarry";
 
 @Component({
   selector: 'app-bottom-right',
@@ -18,6 +20,12 @@ export class BottomRightComponent implements OnInit {
   //===============
   //Class Variables
   //===============
+
+  //stone quarry
+  stoneQuarry: StoneQuarry;
+
+  //supply sled
+  supplySled: SupplySled;
 
   // the player's name
   playerName:string;
