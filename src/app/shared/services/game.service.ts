@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers, RequestOptions, Response, URLSearchParams} from "@angular/http";
 import {AuthenticationService} from "./authentication.service";
+import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {Observable} from "rxjs";
 import {Game} from "../models/game";
 
@@ -9,7 +10,8 @@ export class GameService {
   private apiUrl: string;
 
   constructor(private http: Http,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private location: Location) {
 
     //TODO fill in your heroku-backend URL
     //this.apiUrl = 'https://sopra-fs17-group13.herokuapp.com';
@@ -107,4 +109,31 @@ export class GameService {
     return  dummy;
   }
 
+
+  quickStart(){
+    //TODO finish quickstart
+
+    this.location.go('game');
+    let bodyString = JSON.stringify({}); // Stringify payload
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.authenticationService.token
+    });// ... Set content type to JSON
+    let params = new URLSearchParams();
+    params.set("token", this.authenticationService.token)
+    let options = new RequestOptions({headers: headers, search: params}); // Create a request option
+
+    return this.http.post(this.apiUrl + '/pepe', bodyString, options) // ...using post request
+      .map((response: Response) => {
+        // login successful if there's a jwt token in the response
+        let game = response//.json() && response.json();
+        if (game) {
+          console.log(game)
+        } else {
+          // return false to indicate failed login
+          return null;
+        }
+      }) // ...and calling .json() on the response to return data
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+  }
 }
