@@ -1,6 +1,6 @@
 import {SiteSlot} from "./site-slot";
 
-export class Tempel {
+export class Temple {
 
   //Backend attributes
   //==================

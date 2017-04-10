@@ -1,3 +1,5 @@
+import {ColourEnum} from "./colour.enum";
+import {PositionEnum} from "./position.enum";
 export class Stone {
 
   //Backend attributes
@@ -12,15 +14,15 @@ export class Stone {
   public id:number=-1;
 
   //player colour
-  public colour:string="";
+  public colour:ColourEnum;
 
   //where it is
-  public currentPosition:string="";
+  public currentPosition:PositionEnum;
 
   //stone image
   public imageUrl:string="";
 
-  constructor(id_:number, colour_:string, currentPosition_?:string){
+  constructor(id_:number, colour_:ColourEnum, currentPosition_?:PositionEnum){
 
     //initialize attributes
     this.id=id_;

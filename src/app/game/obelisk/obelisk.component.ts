@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Stone} from "../../shared/models/stone";
+import {ColourEnum} from "../../shared/models/colour.enum";
 
 @Component({
   selector: 'app-obelisk',
@@ -42,24 +43,24 @@ export class ObeliskComponent implements OnInit {
     // 2: brown
     // 3: gray
 
-    var stoneNumbers:number[] = [0,0,0,0];    //temporary array for storing the number of stones in each color
+    let stoneNumbers:number[] = [0,0,0,0];    //temporary array for storing the number of stones in each color
 
-    for (var i = 0; i < targetStones.length; i++){
+    for (let i = 0; i < targetStones.length; i++){
       if(targetStones[i] != null)
       {
-        if(targetStones[i].colour === 'black'){
+        if(targetStones[i].colour === ColourEnum.black){
           stoneNumbers[0] += 1;
         }
         else
-        if(targetStones[i].colour === 'white'){
+        if(targetStones[i].colour === ColourEnum.white){
           stoneNumbers[1] += 1;
         }
         else
-        if(targetStones[i].colour === 'brown'){
+        if(targetStones[i].colour === ColourEnum.brown){
           stoneNumbers[2] += 1;
         }
         else
-        if(targetStones[i].colour === 'gray'){
+        if(targetStones[i].colour === ColourEnum.gray){
           stoneNumbers[3] += 1;
         }
       }

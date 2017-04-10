@@ -1,5 +1,5 @@
-/* Ships */
-.ship_1{
+/* Ships of size (no of slots) 1, 2, 3 or 4*/
+.ship_size_1{
   width:225px;
   height:70px;
   background-image:url("../../../assets/images/ship_1.png"); background-repeat: no-repeat;
@@ -7,7 +7,7 @@
   border: 1px solid #0726aa;/*border: 1px solid #44ff62;*/
   margin-top:7%;
 }
-.ship_2{
+.ship_size_2{
   width:225px;
   height:70px;
   background-image:url("../../../assets/images/ship_2.png"); background-repeat: no-repeat;
@@ -15,7 +15,7 @@
   border: 1px solid #0613aa;/*border: 1px solid #44ff62;*/
   margin-top:7%;
 }
-.ship_3{
+.ship_size_3{
   width:225px;
   height:70px;
   background-image:url("../../../assets/images/ship_3.png"); background-repeat: no-repeat;
@@ -23,7 +23,7 @@
   border: 1px solid #0909aa;/*border: 1px solid #44ff62;*/
   margin-top:7%;
 }
-.ship_4{
+.ship_size_4{
   width:225px;
   height:70px;
   background-image:url("../../../assets/images/ship_4.png"); background-repeat: no-repeat;
@@ -38,8 +38,11 @@
   height:100%;
   border: 5px solid #33aa35;/*border: 1px solid #44ff62;*/
 }
+
+/*ship_id_slot_x; x= 4 | 3 | 2 | 1 ;
+ not all slots may be needed for smaller ships*/
 #ship_1_slot_1{ margin-top: 2.5%; margin-right: 1%;  margin-left: 1.3%;
-  width: 23%; height:90%; float:right; padding-top:20%; border: 3px solid #0c0c0c; }
+  width: 23%; height:90%; float:right; padding-top:2%; border: 3px solid #0c0c0c; }
 #ship_1_slot_2{ margin-top: 2.5%; padding-top:2%;margin-left: 1.3%;
   width: 23%; height:90%; float:right; border: 3px solid #0c0c0c; }
 #ship_1_slot_3{ margin-top: 2.5%; padding-top:2%;margin-left: 1.3%;

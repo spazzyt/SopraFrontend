@@ -38,6 +38,15 @@ export class Game {
   //Additional Frontend attributes
   //==============================
 
-    constructor(){
+    constructor(id_:number, name_:string,
+                numPlayers_:number, players_:User[],
+                currentPlayer_:string){
+
+      this.id=id_;
+      this.name=name_;
+      this.numPlayers=numPlayers_;
+      this.players=players_;
+      this.currentPlayer=currentPlayer_;
+
     }
 }

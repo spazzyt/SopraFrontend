@@ -1,5 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {LobbyComponent} from "./lobby/lobby.component";
+import {Position, PositionEnum} from "./shared/models/position.enum";
+import {Colour, ColourEnum} from "./shared/models/colour.enum";
+
+
 
 @Component({
   selector: 'app-root',
@@ -7,20 +10,29 @@ import {LobbyComponent} from "./lobby/lobby.component";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  //===============
+  //Class Variables
+  //===============
   title = 'Sopra FS17';
+
+  position : typeof Position = Position;
+  colour : typeof Colour = Colour;
+
 
   //===========================================
   // Enable Communication with Child Components
   //===========================================
 
-  // Enable communication with MarketComponent
-  @ViewChild(LobbyComponent) lobbyComponent:LobbyComponent;
+
 
   //================
   // ngAfterViewInit
   //================
 
   ngAfterViewInit() {
+
+
 
   }
 

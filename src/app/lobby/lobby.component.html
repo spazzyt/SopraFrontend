@@ -38,20 +38,24 @@
         <!-- Game Table -->
         <table class="table table-hover">
           <tbody class="tbody">
-          <tr class="game-row" *ngFor="let game of games">
-            <td id="td1">{{game?.name}}</td>
-            <td id="td2">{{game?.players.length}} / {{game?.numPlayers}}</td>
-            <td id="td3">
+          <div *ngIf="games">
+            <tr class="game-row" *ngFor="let game of games">
+              <td id="td1">{{game?.name}}</td>
+              <td id="td2">{{game?.players.length}} / {{game?.numPlayers}}</td>
+              <td id="td3">
 
-              <button *ngIf="joinedGame!=game?.id"
-                      class="btn btn-sm btn-primary btn-block btn_joinleave"
-                      type="submit" (click)="joinGame(game?.id)">Join</button>
+                <button *ngIf="joinedGame!=game?.id"
+                        class="btn btn-sm btn-primary btn-block btn_joinleave"
+                        type="submit" (click)="joinGame(game?.id)">Join</button>
 
-              <button *ngIf="joinedGame==game?.id" id="btn_leave"
-                      class="btn btn-sm btn-primary btn-block btn_joinleave"
-                      type="submit" (click)="leaveGame(game?.id)">Leave</button>
-            </td>
-          </tr>
+                <button *ngIf="joinedGame==game?.id" id="btn_leave"
+                        class="btn btn-sm btn-primary btn-block btn_joinleave"
+                        type="submit" (click)="leaveGame(game?.id)">Leave</button>
+              </td>
+            </tr>
+
+          </div>
+
           </tbody>
         </table>
 
