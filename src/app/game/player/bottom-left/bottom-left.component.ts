@@ -76,6 +76,13 @@ export class BottomLeftComponent implements OnInit {
 
   }
 
+  playerNameGlow(playerName_target:string) {
+    this.playerName = playerName_target;
+      (<any>$(document)).ready(function () {
+        (<any>$("#glow")).css();
+      });
+  }
+
   setMarketCards(marketCards_target:number[]){
 
     // define protocol: which market card
