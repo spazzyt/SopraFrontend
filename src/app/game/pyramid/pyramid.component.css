@@ -15,6 +15,15 @@
   margin-top: -10%;
 }
 
+.level_continuous{
+  border: 1px solid red;
+  height: 30%;
+  float: bottom;
+  margin-top: 55%;
+  margin-left: 33%;
+  margin-right: 33%;
+}
+
 .space_1{
   height: 100%;
   width: 5%;
