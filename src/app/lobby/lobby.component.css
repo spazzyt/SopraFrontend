@@ -353,3 +353,10 @@ Styling for the new game modal
 }
 
 
+.pepe_btn{
+  height: 130px;
+  width: 170px;
+  background-image: url(../../assets/images/hypnotoad.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
