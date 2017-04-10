@@ -449,7 +449,7 @@ export class GameComponent  implements OnInit {
   //-------------------------------
 
 
-  // Communication with MaketHarbour
+  // Communication with MarketHarbour
   //--------------------------------
 
 
