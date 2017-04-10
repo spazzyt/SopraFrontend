@@ -87,8 +87,6 @@ export class LobbyComponent implements OnInit {
   ngAfterViewInit() {
 
 
-
-
   }
 
 
@@ -147,6 +145,8 @@ export class LobbyComponent implements OnInit {
       });
   }
 
+
+
   //===============
   // Other-Methods
   //===============
@@ -178,6 +178,10 @@ export class LobbyComponent implements OnInit {
       this.addGame(4);
     }
   }
+
+  //========================
+  // Backend starts new game
+  //========================
 
   quickStart(){
 

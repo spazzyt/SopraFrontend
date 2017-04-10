@@ -31,6 +31,8 @@ import {Temple} from "../shared/models/temple";
 import {ColourEnum} from "../shared/models/colour.enum";
 import {InfoBoxComponent} from "./info-box/info-box.component";
 import {StoneComponent} from "./stone/stone.component";
+import {Game} from "../shared/models/game";
+import {MarketCard} from "../shared/models/market-card";
 
 @Component({
   selector: 'app-game',
@@ -109,62 +111,174 @@ export class GameComponent  implements OnInit {
   ngAfterViewInit() {
 
 
+  }
+
+
+
+  //===========================================================
+  // Backend starts new game
+  //===========================================================
+
+  generateNewGame(game_backend:Game){
+
+    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
+    this.initializeMarketComponent(game_backend.marketCards);
+    this.initializeObeliskComponent();
+    this.initializePyramidComponent();
+    this.initializeTempleComponent();
+    this.initializeBurialChamberComponent();
+    this.initializeDepartingHarbourComponent(game_backend.ships);
+    this.initializeActivePlayer(game_backend.currentActivePlayer);
+
+  }
+
+
+  initializePlayerComponents(players_:User[], numPlayers_:number) {
+
+    for (let i = 0; i < numPlayers_; i++) {
+
+      if(i==0){
+        this.bottomLeftComponent.setMarketCards(this.marketCards_target);
+        this.bottomLeftComponent.setScore(this.score_target);
+
+        let stoneQuarry1 = new StoneQuarry(27,3,ColourEnum.brown,players_[i]);
+        let supplySled1 = new SupplySled(2,1,ColourEnum.brown,players_[i]);
+
+        this.bottomLeftComponent.stoneQuarry=stoneQuarry1;
+        this.bottomLeftComponent.supplySled=supplySled1;
+
+        this.bottomLeftComponent.setStonesInQuarry(stoneQuarry1.stones.length);
+        this.bottomLeftComponent.setStonesInSled(supplySled1.stones.length);
+
+        this.bottomLeftComponent.setPlayerName(this.playerName_target);
+
+      }
+      else if(i==1){
+        this.bottomRightComponent.setMarketCards(this.marketCards_target);
+        this.bottomRightComponent.setScore(this.score_target);
+
+        let stoneQuarry2 = new StoneQuarry(26,34,ColourEnum.brown,players_[i]);
+        let supplySled2 = new SupplySled(3,31,ColourEnum.white,players_[i]);
+
+        this.bottomRightComponent.stoneQuarry=stoneQuarry2;
+        this.bottomRightComponent.supplySled=supplySled2;
+
+        this.bottomRightComponent.setStonesInQuarry(stoneQuarry2.stones.length);
+        this.bottomRightComponent.setStonesInSled(supplySled2.stones.length);
+
+        this.bottomRightComponent.setPlayerName(this.playerName_target);
+
+
+      }
+      else if(i==2){
+        this.topLeftComponent.setMarketCards(this.marketCards_target);
+        this.topLeftComponent.setScore(this.score_target);
+
+        let stoneQuarry3 = new StoneQuarry(25,65,ColourEnum.brown,players_[i]);
+        let supplySled3 = new SupplySled(4,61,ColourEnum.gray,players_[i]);
+
+        this.topLeftComponent.stoneQuarry=stoneQuarry3;
+        this.topLeftComponent.supplySled=supplySled3;
+
+        this.topLeftComponent.setStonesInQuarry(stoneQuarry3.stones.length);
+        this.topLeftComponent.setStonesInSled(supplySled3.stones.length);
+
+        this.topLeftComponent.setPlayerName(this.playerName_target);
+
+      }
+      else if(i==3){
+        this.topRightComponent.setMarketCards(this.marketCards_target);
+        this.topRightComponent.setScore(this.score_target);
+
+        let stoneQuarry4 = new StoneQuarry(24,96,ColourEnum.brown,players_[i]);
+        let supplySled4 = new SupplySled(5,91,ColourEnum.black,players_[i]);
+
+        this.topRightComponent.stoneQuarry=stoneQuarry4;
+        this.topRightComponent.supplySled=supplySled4;
+
+        this.topRightComponent.setStonesInQuarry(stoneQuarry4.stones.length);
+        this.topRightComponent.setStonesInSled(supplySled4.stones.length);
+
+        this.topRightComponent.setPlayerName(this.playerName_target);
+
+      }
+
+
+    }
+
+  }
+
+
+  initializeMarketComponent(marketCards:MarketCard[]){
+
+    //market card objects
+
+
+  }
+
+
+  initializeObeliskComponent(){
+    // sites
+    let obelisk:Obelisk;
+
+  }
+
+  initializePyramidComponent(){
+    let pyramid:Pyramid;
+
+  }
+
+  initializeTempleComponent(){
+    let temple:Temple;
+
+  }
+
+  initializeBurialChamberComponent(){
+    let burialChamber:BurialChamber;
 
   }
 
 
 
-  //==============================
-  // Major Tasks of Game Component
-  //==============================
+  initializeMarketCards(marketCards:MarketCard[]){
 
-  // Current Game state
-  // ( current-game-state package from backend sent to all players)
-  //---------------------------------------------------------------
-  //1. pull current-target-game-state package from game-service,
-  //   store it into object of class current-game-state.ts
 
-  //2. make current-actual-game-state package from frontend,
-  //   store it into object of class current-game-state.ts
+  }
 
-  //3. compare actual/target game-state,
-  //   delegate differences to ancestors to fix
+  initializeDepartingHarbourComponent(ships:Ship[]){
 
-  // Last players move/action/decision
-  // ( decision package from backend sent to not active players)
-  //------------------------------------------------------------
-  //1. pull last players decision from game-service,
-  //   store it into object of class decision.ts
 
-  //2. Simulate last decision to other players
-  //   delegate task to ancestors
 
-  // Current active Player
-  //----------------------
-  //1. pull active Player information from game-service
-  //   store it into object of class user
+  }
 
-  //2. Delegate information to descendant,
-  //   to visually highlight active player field
+  initializeActivePlayer(currentActivePlayer){
 
-  // Allowed moves/actions/decisions
-  // ( decision package from backend sent to active player,
-  // (to not active players as info))
-  //-------------------------------------------------------
-  //1. pull allowed players decisions from game-service,
-  //   store it into object of class decision.ts
+    currentActivePlayer.
 
-  //2. Delegate information to descendants,
-  //   to activate allowed actions/moves and invalidate all others.
+    this.bottomLeftComponent.playerNameGlow(this.playerName_target);
 
-  // Active player move/action/decision
-  // (decision package from active player sent to backend)
-  //------------------------------------------------------
-  //1. pull active player's decision from ancestor components
+  }
 
-  //2. store active player's decision into object of class decision.ts
 
-  //3. push active player decision to game-service
+
+
+  //==================================================
+  // Initialize New Round
+  //==================================================
+
+  initRound(){
+
+
+  }
+
+
+
+
+  //===========================================================
+  // Backend starts new round
+  //===========================================================
+
+
 
 
 
@@ -218,65 +332,6 @@ export class GameComponent  implements OnInit {
   player2= new User(2);
   player3= new User(3);
   player4= new User(4);
-
-
-  //==================================================
-  // Initialize Game
-  //==================================================
-
-  initGame(){
-
-    //Game id
-    let id_:number=1;
-
-    //Game name
-    let name_:string= "Roland_David_Kenny_Vincent"
-
-    //Number of players
-    let numPlayers_:number=4;
-    let player1:User= new User(1, "Roland", "brown");
-    let player2:User= new User(2, "David", "white");
-    let player3:User= new User(3, "Kenny", "gray");
-    let player4:User= new User(4, "Vincent", "black");
-    let players_:User[];
-    players_.push(player1);
-    players_.push(player2);
-    players_.push(player3);
-    players_.push(player4);
-
-    //current active player
-    let currentPlayer_:string=player1.username;
-
-    //Stone quarry with stone objects (do not generate more stones elsewhere)
-    let stoneQuarry1:StoneQuarry = new StoneQuarry(27,3,ColourEnum.brown,player1);
-    let stoneQuarry2:StoneQuarry = new StoneQuarry(26,34,ColourEnum.brown,player2);
-    let stoneQuarry3:StoneQuarry = new StoneQuarry(25,65,ColourEnum.brown,player3);
-    let stoneQuarry4:StoneQuarry = new StoneQuarry(24,96,ColourEnum.brown,player4);
-
-    //Stone quarry with stone objects (do not generate more stones elsewhere)
-    let stoneSled1:SupplySled = new SupplySled(2,1,ColourEnum.brown,player1);
-    let stoneSled2:SupplySled = new SupplySled(3,31,ColourEnum.white,player2);
-    let stoneSled3:SupplySled = new SupplySled(4,61,ColourEnum.gray,player3);
-    let stoneSled4:SupplySled = new SupplySled(5,91,ColourEnum.black,player4);
-
-    // sites
-    let obelisk:Obelisk;
-    let pyramid:Pyramid;
-    let temple:Temple;
-    let market:Market;
-    let burialChamber:BurialChamber;
-
-  }
-
-
-  //==================================================
-  // Initialize New Round
-  //==================================================
-
-  initRound(){
-
-
-  }
 
 
 

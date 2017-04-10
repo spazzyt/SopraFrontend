@@ -1,4 +1,5 @@
 import {ShipSlot} from "./ship-slot";
+import {PositionEnum} from "./position.enum";
 
 export class Ship {
 
@@ -24,6 +25,9 @@ export class Ship {
 
   //ship image
   public imageUrl:string="";
+
+  //current position
+  public currentPosition:PositionEnum;
 
   constructor(id_:number, size_:number, minStones_?:number){
     //initialize attributes
