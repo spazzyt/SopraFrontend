@@ -8,7 +8,7 @@ export class SupplySled {
 
   //Backend attributes
   //==================
-  stones:Stone[];
+  stones:Stone[]=[];
   colour:ColourEnum;
   player:User;
 

@@ -159,7 +159,7 @@ export class GameComponent  implements OnInit {
     this.generateNewGame(this.getFakeGame());
 
     // Test for activating/deactivating functions
-    this.deactivateInactivePlayerInteractions(this.game.players);
+    //this.deactivateInactivePlayerInteractions(this.game.players);
     this.activateEverything(this.game.currentActivePlayer);
 
   }
@@ -197,7 +197,7 @@ export class GameComponent  implements OnInit {
     this.players_target.push(this.player4,);
 
 
-    let returnGame = new Game(0, 'token', 'owner', 'name', 2,
+    let returnGame = new Game(0, 'token', 'owner', 'name', 4,
       this.players_target, this.ships_target, this.marketCards,
       this.player1, null);
     return returnGame;
@@ -206,10 +206,9 @@ export class GameComponent  implements OnInit {
 
   generateNewGame(game_backend:Game){
 
-    //this.game = game_backend;
     this.game = game_backend;
 
-    //this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
+    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
 
     this.initializeMarketComponent(game_backend.marketCards);
     this.initializeObeliskComponent();
@@ -232,6 +231,7 @@ export class GameComponent  implements OnInit {
 
       //bottomLeftComponent
       if(i==1){
+        if(1){console.log("initialize BottomLeftComponent");}
 
         // set market card icon number to zero
         this.bottomLeftComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
@@ -264,6 +264,7 @@ export class GameComponent  implements OnInit {
 
       //topLeftComponent
       else if(i==2){
+        if(1){console.log("initialize TopLeftComponent");}
 
         // set market card icon number to zero
         this.topLeftComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
@@ -296,6 +297,7 @@ export class GameComponent  implements OnInit {
 
       //topRightComponent
       else if(i==3){
+        if(1){console.log("initialize TopRightComponent");}
 
         // set market card icon number to zero
         this.topRightComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
@@ -328,6 +330,7 @@ export class GameComponent  implements OnInit {
 
       //bottomRightComponent
       else if(i==4){
+        if(1){console.log("initialize BottomRightComponent");}
 
         // set market card icon number to zero
         this.bottomRightComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);

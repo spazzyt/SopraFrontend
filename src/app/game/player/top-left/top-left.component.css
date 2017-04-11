@@ -74,7 +74,10 @@ p{
   background-image: url("../../../../assets/images/supply_sled.png");
   background-repeat: no-repeat;
   background-position: center;
-  border: 1px solid #44ff62;/*border: 1px solid #44ff62;*/
+  width:70%;
+  height:100%;
+  float:right;
+  /*border: 1px solid #44ff62;*/
 }
 
 .quarry{
@@ -283,5 +286,5 @@ p{
   float:top;
   margin-right:15%;
   /*position:relative;*/
-  border: 1px solid #ff5b49;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
 }

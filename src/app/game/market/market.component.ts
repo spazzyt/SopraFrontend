@@ -37,7 +37,8 @@ export class MarketComponent implements OnInit {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<p>For each stone delivered here, the owner of the stone can immediately take any 1 face-up market card.</p>'
+      content : '<p>For each stone delivered here, ' +
+                    'the owner of the stone can immediately take any 1 face-up market card.</p>'
     });
 
   }
