@@ -98,6 +98,13 @@ export class GameComponent  implements OnInit {
     this.stones_target.push(this.stone3);
     this.stones_target.push(this.stone4);
 
+    this.ships_target.push(this.ship1);
+    this.ships_target.push(this.ship2);
+    this.ships_target.push(null);
+    this.ships_target.push(this.ship4)
+
+    this.departingHarbourComponent.generateFourShips(this.ships_target);
+
     //snackbar
     this.generateSnackbarDiv();
 
@@ -399,6 +406,7 @@ export class GameComponent  implements OnInit {
   stone3 = new Stone(3, ColourEnum.gray);
   stone4 = new Stone(4, ColourEnum.black);
   stones_target = new Array<Stone>();
+  ships_target = new Array<Ship>();
 
   //-----------
   //stones flow (do not generate stones outside of quarry and sled at game init!)
@@ -558,7 +566,7 @@ export class GameComponent  implements OnInit {
   }
 
   trigger_generateFourShips(ship1,ship2,ship3,ship4){
-    this.departingHarbourComponent.generateFourShips(this.ship1,this.ship2,this.ship3,this.ship4); //(click)="trigger_generateFourShips()"
+    this.departingHarbourComponent.generateFourShips(this.ships_target); //(click)="trigger_generateFourShips()"
   }
 
   trigger_generateShip(){
