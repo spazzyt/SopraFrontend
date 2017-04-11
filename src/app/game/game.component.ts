@@ -299,17 +299,32 @@ export class GameComponent  implements OnInit {
   // Main Task 1: Deactivate everything for inactive players
   //===========================================================
 
+
   deactivateInactivePlayerInteractions(players_){
 
     //loop through players and check not active players
 
       //switch off all click handlers
 
+    this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
+    this.bottomRightComponent.removeClickHandlerOnBlueMarketCards();
+    this.topLeftComponent.removeClickHandlerOnBlueMarketCards();
+    this.topRightComponent.removeClickHandlerOnBlueMarketCards();
+    this.marketComponent.removeClickHandlerOnMarketCards();
+
+
+    let stoneHtmlId="stone_dragulaId_2";
+    this.departingHarbourComponent.removeClickHandlerOnStone(stoneHtmlId);
+
+
+
       //switch off drag event for stones
 
       //switch off drag event for ships
 
   }
+
+
 
   //=============================================================
   // Main Task 2: Activate allowed interactions for activePlayer
@@ -319,6 +334,17 @@ export class GameComponent  implements OnInit {
   activateEverything(activePlayer_){
 
     //switch on all click handlers
+
+    this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
+    this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
+    this.topLeftComponent.setClickHandlerOnBlueMarketCards();
+    this.topRightComponent.setClickHandlerOnBlueMarketCards();
+    this.marketComponent.setClickHandlerOnMarketCards();
+    let stoneHtmlId="stone_dragulaId_2";
+    this.departingHarbourComponent.setClickHandlerOnStone(stoneHtmlId);
+
+
+
 
     //switch on drag event for stones
 
@@ -677,7 +703,7 @@ export class GameComponent  implements OnInit {
 
   trigger_setClickHandlerOnSlot() {
     //only works via parent, DepatingHarbourComponent or GameComponent
-    let slot="ship_3_slot_1";
+    let slot="ship_2_slot_1";
     this.departingHarbourComponent.setClickHandlerOnSlot(slot);
   }
 
