@@ -408,6 +408,18 @@ export class GameComponent  implements OnInit {
 
 
   //===========================================================
+  // Websocket/REST Input
+  //===========================================================
+
+
+    setScore(websocketInput){
+    this.bottomLeftComponent.setScore(websocketInput);
+    this.bottomRightComponent.setScore(websocketInput);
+    this.topLeftComponent.setScore(websocketInput);
+    this.topRightComponent.setScore(websocketInput);
+  }
+
+  //===========================================================
   // Main Action 1: take stones from Quarry to Sled
   //===========================================================
 
@@ -421,29 +433,53 @@ export class GameComponent  implements OnInit {
 
   }
 
-  getBroadcastFromQuarryToSledAction(){
+  getBroadcastFromQuarryToSledAction() {
 
     //update sled
+    this.bottomLeftComponent.setStonesInSled(this.sledStones_target);
+    this.bottomRightComponent.setStonesInSled(this.sledStones_target);
+    this.topLeftComponent.setStonesInSled(this.sledStones_target);
+    this.topRightComponent.setStonesInSled(this.sledStones_target);
 
     //update quarry
+    this.bottomLeftComponent.setStonesInQuarry(this.quarryStones_target);
+    this.bottomRightComponent.setStonesInQuarry(this.quarryStones_target);
+    this.topLeftComponent.setStonesInQuarry(this.quarryStones_target);
+    this.topRightComponent.setStonesInQuarry(this.quarryStones_target);
+  }
+
+
+  //===========================================================
+  // Main Action 2: move stone from sled to shipslot
+  //===========================================================
+
+
+
+  //===========================================================
+  // Main Action 3: move ship to site
+  //===========================================================
+
+
+
+  //===========================================================
+  // Main Action 4: take market card
+  //===========================================================
+
+  takeMarketCardFromMarket(){
 
   }
 
-  //===========================================================
-  // Main Action 2:
-  //===========================================================
-
-
-
-  //===========================================================
-  // Main Action 3:
-  //===========================================================
-
-
+  getBroadcastTakeMarketCardFromMarket(websocketInput) {
+    this.bottomLeftComponent.setMarketCards(websocketInput);
+    this.bottomRightComponent.setMarketCards(websocketInput);
+    this.topLeftComponent.setMarketCards(websocketInput);
+    this.topRightComponent.setMarketCards(websocketInput);
+  }
 
   //===========================================================
-  // Main Action 4:
+  // Main Action 5: play blue market card (inclusive order-function)
   //===========================================================
+
 
 
 
