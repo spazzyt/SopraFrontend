@@ -101,11 +101,8 @@ export class GameComponent  implements OnInit {
 
     this.ships_target.push(this.ship1);
     this.ships_target.push(this.ship2);
-    this.ships_target.push(null);
+    this.ships_target.push(this.ship3);
     this.ships_target.push(this.ship4)
-
-    this.departingHarbourComponent.generateFourShips(this.ships_target);
-
 
     //Generate the new game
     this.generateNewGame(this.getFakeGame());
@@ -148,7 +145,7 @@ export class GameComponent  implements OnInit {
     //this.initializePyramidComponent();
     this.initializeTempleComponent();
     //this.initializeBurialChamberComponent();
-    //this.initializeDepartingHarbourComponent(game_backend.ships);
+    this.initializeDepartingHarbourComponent(game_backend.ships);
 
     //this.initializeActivePlayer(game_backend.currentActivePlayer);
     //this.switchOnActivePlayer(game_backend.currentActivePlayer);
@@ -276,9 +273,7 @@ export class GameComponent  implements OnInit {
   }
 
   initializeDepartingHarbourComponent(ships:Ship[]){
-
-
-
+    this.departingHarbourComponent.generateFourShips(ships);
   }
 
   initializeActivePlayer(currentActivePlayer){
