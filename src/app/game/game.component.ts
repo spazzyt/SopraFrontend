@@ -48,6 +48,7 @@ export class GameComponent  implements OnInit {
   //===============
   //Class Variables
   //===============
+  game: Game;
 
   // Current Target (Soll) Game state
   // ( current-game-state package from backend sent to all players)
@@ -98,8 +99,29 @@ export class GameComponent  implements OnInit {
     this.stones_target.push(this.stone3);
     this.stones_target.push(this.stone4);
 
+    this.ships_target.push(this.ship1);
+    this.ships_target.push(this.ship2);
+    this.ships_target.push(this.ship3);
+    this.ships_target.push(this.ship4)
+
+
+    //fill market cards array
+    this.marketCards.push(this.marketCard1);
+    this.marketCards.push(this.marketCard2);
+    this.marketCards.push(this.marketCard3);
+    this.marketCards.push(this.marketCard4);
+
+    //Generate the new game
+    this.generateNewGame(this.getFakeGame());
+
+
     //snackbar
     this.generateSnackbarDiv();
+
+
+    // Test for activating/deactivating functions
+    this.deactivateInactivePlayerInteractions("hello");
+    //this.activateEverything("hello");
 
   }
 
@@ -109,7 +131,6 @@ export class GameComponent  implements OnInit {
   //================
 
   ngAfterViewInit() {
-
 
   }
 
@@ -121,7 +142,10 @@ export class GameComponent  implements OnInit {
 
   generateNewGame(game_backend:Game){
 
-    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
+    //this.game = game_backend;
+    this.game = game_backend;
+
+    //this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
 
     this.initializeMarketComponent(game_backend.marketCards);
     this.initializeObeliskComponent();
@@ -130,14 +154,18 @@ export class GameComponent  implements OnInit {
     this.initializeBurialChamberComponent();
     this.initializeDepartingHarbourComponent(game_backend.ships);
 
-    this.initializeActivePlayer(game_backend.currentActivePlayer);
-    this.switchOnActivePlayer(game_backend.currentActivePlayer);
+    //this.initializeActivePlayer(game_backend.currentActivePlayer);
+    //this.switchOnActivePlayer(game_backend.currentActivePlayer);
 
-    this.initializeInactivePlayers(game_backend.players);
-    this.switchOffInactivePlayers(game_backend.players);
+    //this.initializeInactivePlayers(game_backend.players);
+    //this.switchOffInactivePlayers(game_backend.players);
 
   }
 
+  getFakeGame(){
+    let returnGame = new Game(0, 'test', 'Failtest', 'TestGame', 2, [null, null], this.ships_target, this.marketCards, null, null);
+    return returnGame;
+  }
 
   initializePlayerComponents(players_:User[], numPlayers_:number) {
 
@@ -215,33 +243,34 @@ export class GameComponent  implements OnInit {
   }
 
 
+
+
   initializeMarketComponent(marketCards:MarketCard[]){
-
-    //market card objects
-
-
+    this.marketComponent.removeUnusedMarketCards();
+    this.marketComponent.generateFourMarketCards(marketCards);
   }
 
 
   initializeObeliskComponent(){
-    // sites
     let obelisk:Obelisk;
-
+    this.obeliskComponent.setAttributes(this.game.numPlayers);
+    this.obeliskComponent.removeStones();
   }
 
   initializePyramidComponent(){
     let pyramid:Pyramid;
-
+    this.pyramidComponent.removeStones();
   }
 
   initializeTempleComponent(){
     let temple:Temple;
-
+    this.templeComponent.setAttributes(this.game.numPlayers);
+    this.templeComponent.removeStones();
   }
 
   initializeBurialChamberComponent(){
     let burialChamber:BurialChamber;
-
+    this.burialChamberComponent.removeStones();
   }
 
   initializeMarketCards(marketCards:MarketCard[]){
@@ -250,9 +279,7 @@ export class GameComponent  implements OnInit {
   }
 
   initializeDepartingHarbourComponent(ships:Ship[]){
-
-
-
+    this.departingHarbourComponent.generateFourShips(ships);
   }
 
   initializeActivePlayer(currentActivePlayer){
@@ -292,17 +319,48 @@ export class GameComponent  implements OnInit {
   // Main Task 1: Deactivate everything for inactive players
   //===========================================================
 
+
   deactivateInactivePlayerInteractions(players_){
 
     //loop through players and check not active players
 
       //switch off all click handlers
 
-      //switch off drag event for stones
+    this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
+    this.bottomRightComponent.removeClickHandlerOnBlueMarketCards();
+    this.topLeftComponent.removeClickHandlerOnBlueMarketCards();
+    this.topRightComponent.removeClickHandlerOnBlueMarketCards();
+    this.marketComponent.removeClickHandlerOnMarketCards();
+
+    // TODO!!!
+
+    let stoneHtmlId="stone_dragulaId_2";
+    this.departingHarbourComponent.removeClickHandlerOnStone(stoneHtmlId);
+
+      //switch off icon colors
+
+    this.bottomLeftComponent.deactivateOrActivateIcons(false);
+    this.bottomRightComponent.deactivateOrActivateIcons(false);
+    this.topLeftComponent.deactivateOrActivateIcons(false);
+    this.topRightComponent.deactivateOrActivateIcons(false);
+
+    this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
+    this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
+    this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
+    this.topRightComponent.deactivateOrActivateStoneQuarry(false);
+
+    this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
+    this.bottomRightComponent.deactivateOrActivateSupplySled(false);
+    this.topLeftComponent.deactivateOrActivateSupplySled(false);
+    this.topRightComponent.deactivateOrActivateSupplySled(false);
+
+
+    //switch off drag event for stones
 
       //switch off drag event for ships
 
   }
+
 
   //=============================================================
   // Main Task 2: Activate allowed interactions for activePlayer
@@ -312,6 +370,34 @@ export class GameComponent  implements OnInit {
   activateEverything(activePlayer_){
 
     //switch on all click handlers
+
+    this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
+    this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
+    this.topLeftComponent.setClickHandlerOnBlueMarketCards();
+    this.topRightComponent.setClickHandlerOnBlueMarketCards();
+    this.marketComponent.setClickHandlerOnMarketCards();
+
+    // TODO!!!
+
+    let stoneHtmlId="stone_dragulaId_2";
+    this.departingHarbourComponent.setClickHandlerOnStone(stoneHtmlId);
+
+    //switch on icon colors
+
+    this.bottomLeftComponent.deactivateOrActivateIcons(true);
+    this.bottomRightComponent.deactivateOrActivateIcons(true);
+    this.topLeftComponent.deactivateOrActivateIcons(true);
+    this.topRightComponent.deactivateOrActivateIcons(true);
+
+    this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
+    this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
+    this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
+    this.topRightComponent.deactivateOrActivateStoneQuarry(true);
+
+    this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
+    this.bottomRightComponent.deactivateOrActivateSupplySled(true);
+    this.topLeftComponent.deactivateOrActivateSupplySled(true);
+    this.topRightComponent.deactivateOrActivateSupplySled(true);
 
     //switch on drag event for stones
 
@@ -328,6 +414,18 @@ export class GameComponent  implements OnInit {
 
 
   //===========================================================
+  // Websocket/REST Input
+  //===========================================================
+
+
+    setScore(websocketInput){
+    this.bottomLeftComponent.setScore(websocketInput);
+    this.bottomRightComponent.setScore(websocketInput);
+    this.topLeftComponent.setScore(websocketInput);
+    this.topRightComponent.setScore(websocketInput);
+  }
+
+  //===========================================================
   // Main Action 1: take stones from Quarry to Sled
   //===========================================================
 
@@ -341,29 +439,53 @@ export class GameComponent  implements OnInit {
 
   }
 
-  getBroadcastFromQuarryToSledAction(){
+  getBroadcastFromQuarryToSledAction() {
 
     //update sled
+    this.bottomLeftComponent.setStonesInSled(this.sledStones_target);
+    this.bottomRightComponent.setStonesInSled(this.sledStones_target);
+    this.topLeftComponent.setStonesInSled(this.sledStones_target);
+    this.topRightComponent.setStonesInSled(this.sledStones_target);
 
     //update quarry
+    this.bottomLeftComponent.setStonesInQuarry(this.quarryStones_target);
+    this.bottomRightComponent.setStonesInQuarry(this.quarryStones_target);
+    this.topLeftComponent.setStonesInQuarry(this.quarryStones_target);
+    this.topRightComponent.setStonesInQuarry(this.quarryStones_target);
+  }
+
+
+  //===========================================================
+  // Main Action 2: move stone from sled to shipslot
+  //===========================================================
+
+
+
+  //===========================================================
+  // Main Action 3: move ship to site
+  //===========================================================
+
+
+
+  //===========================================================
+  // Main Action 4: take market card
+  //===========================================================
+
+  takeMarketCardFromMarket(){
 
   }
 
-  //===========================================================
-  // Main Action 2:
-  //===========================================================
-
-
-
-  //===========================================================
-  // Main Action 3:
-  //===========================================================
-
-
+  getBroadcastTakeMarketCardFromMarket(websocketInput) {
+    this.bottomLeftComponent.setMarketCards(websocketInput);
+    this.bottomRightComponent.setMarketCards(websocketInput);
+    this.topLeftComponent.setMarketCards(websocketInput);
+    this.topRightComponent.setMarketCards(websocketInput);
+  }
 
   //===========================================================
-  // Main Action 4:
+  // Main Action 5: play blue market card (inclusive order-function)
   //===========================================================
+
 
 
 
@@ -393,12 +515,25 @@ export class GameComponent  implements OnInit {
   ship3 = new Ship(3, 2);
   ship4 = new Ship(4, 1);
 
+  ships_target = new Array<Ship>();
+
   //Fake Stones
   stone1 = new Stone(1, ColourEnum.brown);
   stone2 = new Stone(2, ColourEnum.white);
   stone3 = new Stone(3, ColourEnum.gray);
   stone4 = new Stone(4, ColourEnum.black);
+
   stones_target = new Array<Stone>();
+
+
+  //Fake maket cards
+  marketCard1 = new MarketCard(1);
+  marketCard2 = new MarketCard(2);
+  marketCard3 = new MarketCard(3);
+  marketCard4 = new MarketCard(4);
+
+  marketCards = new Array<MarketCard>();
+
 
   //-----------
   //stones flow (do not generate stones outside of quarry and sled at game init!)
@@ -558,7 +693,7 @@ export class GameComponent  implements OnInit {
   }
 
   trigger_generateFourShips(ship1,ship2,ship3,ship4){
-    this.departingHarbourComponent.generateFourShips(this.ship1,this.ship2,this.ship3,this.ship4); //(click)="trigger_generateFourShips()"
+    this.departingHarbourComponent.generateFourShips(this.ships_target); //(click)="trigger_generateFourShips()"
   }
 
   trigger_generateShip(){
@@ -640,7 +775,7 @@ export class GameComponent  implements OnInit {
     this.marketComponent.removeUnusedMarketCards(); //(click)="trigger_removeUnusedMarketCards()"
   }
   trigger_generateFourMarketCards(){
-    this.marketComponent.generateFourMarketCards(); //(click)="trigger_generateFourMarketCards()"
+    this.marketComponent.generateFourMarketCards(this.marketCards); //(click)="trigger_generateFourMarketCards()"
   }
 
   trigger_setClickHandlerOnMarketCards(){
@@ -669,7 +804,7 @@ export class GameComponent  implements OnInit {
 
   trigger_setClickHandlerOnSlot() {
     //only works via parent, DepatingHarbourComponent or GameComponent
-    let slot="ship_3_slot_1";
+    let slot="ship_2_slot_1";
     this.departingHarbourComponent.setClickHandlerOnSlot(slot);
   }
 

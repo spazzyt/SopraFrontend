@@ -1,32 +1,32 @@
 
-<!--drag and drop zone-->
-<div id="departing_harbours" class="departing_harbours">
-
-  <!--add departing harbour_i-->
-    <div *ngFor="let ship of ships; let i = index"
-         id="departing_harbour_{{i+1}}" class="departing_harbour"
-         [dragula]="'harbours_bag'">
-
-      <!--add ship_i to departing harbour-->
-      <app-ship [ship]="ship"></app-ship>
-
-    </div>
-
-</div>
 
 
-<!-- WORK IN PROGRESS DYNAMIC VERSION
+<!-- DYNAMIC VERSION-->
 
 <div id="departing_harbours" class="departing_harbours">
+
   <div *ngFor="let num of [1,2,3,4]"
        id="departing_harbour_{{num}}" class="departing_harbour" [dragula]="'harbours_bag'">
 
     <div *ngIf="ships[num-1] != null">
-      <app-ship [ship]="ship[num-1]"></app-ship>
+      <app-ship [ship]="ships[num-1]"></app-ship>
     </div>
 
   </div>
+
 </div>
 
 
+<!--drag and drop zone, old version:
+<div id="departing_harbours" class="departing_harbours">
+
+  <div *ngFor="let ship of ships; let i = index"
+       id="departing_harbour_{{i+1}}" class="departing_harbour"
+       [dragula]="'harbours_bag'">
+
+    <app-ship [ship]="ship"></app-ship>
+
+  </div>
+
+</div>
 -->

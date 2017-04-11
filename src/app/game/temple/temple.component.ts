@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Stone} from "../../shared/models/stone";
+import {Game} from "../../shared/models/game";
 
 @Component({
   selector: 'app-temple',
@@ -13,7 +14,7 @@ export class TempleComponent implements OnInit {
   fieldHeight:number[] = [0,0,0,0];
   totalStones:number = 0;
   numberOfPlayers:number = 4;
-  fieldArray:number[] = [1,2,3,4]
+  fieldArray:number[] = [1,2,3,4];
 
   constructor() { }
 
@@ -56,6 +57,7 @@ export class TempleComponent implements OnInit {
      content : 'The numbers indicate how many stones' + '<br>' + 'are stacked on each other.'
      });
 
+
     if(this.numberOfPlayers > 2){       //if there are more than two players, a fifth field is added
       this.fieldArray = [1,2,3,4,5];
       this.fieldHeight = [0,0,0,0,0];
@@ -85,6 +87,10 @@ export class TempleComponent implements OnInit {
     this.stones = [];
     this.totalStones = 0;
     this.fieldHeight = [0,0,0,0,0];
+  }
+
+  setAttributes(playerNumber: number){
+    this.numberOfPlayers = playerNumber;
   }
 
 }
