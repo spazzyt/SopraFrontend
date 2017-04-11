@@ -148,7 +148,7 @@ export class GameComponent  implements OnInit {
     //this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
 
     this.initializeMarketComponent(game_backend.marketCards);
-    //this.initializeObeliskComponent();
+    this.initializeObeliskComponent();
     //this.initializePyramidComponent();
     this.initializeTempleComponent();
     //this.initializeBurialChamberComponent();
@@ -251,9 +251,8 @@ export class GameComponent  implements OnInit {
 
 
   initializeObeliskComponent(){
-    // sites
     let obelisk:Obelisk;
-
+    this.obeliskComponent.setAttributes(this.game.numPlayers);
   }
 
   initializePyramidComponent(){
@@ -263,7 +262,7 @@ export class GameComponent  implements OnInit {
 
   initializeTempleComponent(){
     let temple:Temple;
-    this.templeComponent.setAttributes(this.game.numPlayers)
+    this.templeComponent.setAttributes(this.game.numPlayers);
   }
 
   initializeBurialChamberComponent(){
