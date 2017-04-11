@@ -9,5 +9,6 @@
 .departing_harbour{
   width: 100%;
   height:25%;
+  border: 1px solid transparent;
 }
 
