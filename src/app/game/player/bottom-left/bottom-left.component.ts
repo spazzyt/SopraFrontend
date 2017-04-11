@@ -60,8 +60,8 @@ export class BottomLeftComponent implements OnInit {
   ngOnInit() {
 
     this.initializePopovers();
-    this.playerFieldStone = new Stone(0, ColourEnum.brown);
-    console.log("ColourEnum: ", ColourEnum.brown);
+    this.playerFieldStone = new Stone(0, ColourEnum.black);
+    console.log("ColourEnum: ", ColourEnum.black);
   }
 
   //================

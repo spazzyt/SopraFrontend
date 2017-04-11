@@ -34,19 +34,14 @@
 </div>
 
 <div class="space_2">
-  <div class="level_continuous">
-    <div *ngIf="stones[14] != null">
-      <app-stone [stone]="stones[14]"></app-stone>
-    </div>
-  </div>
 </div>
 
 <div class="level_3">
   <div id="level3_space"></div>
   <div class="field" id="field_14">
 
-    <div *ngIf="stones[13] != null">
-      <app-stone [stone]="stones[13]"></app-stone>
+    <div *ngIf="stones.length > 13 && stones[stones.length-1] != null">
+      <app-stone [stone]="stones[stones.length-1]"></app-stone>
     </div>
 
   </div>

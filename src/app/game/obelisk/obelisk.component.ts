@@ -13,6 +13,7 @@ export class ObeliskComponent implements OnInit {
 
 
   stones:number[] = [0,0,0,0];
+  numberOfPlayers:number = 4;
 
   constructor() {}
 
@@ -66,7 +67,7 @@ export class ObeliskComponent implements OnInit {
       }
     }
 
-    for (let i of [0,1,2,3]) {
+    for (let i = 0; i < this.numberOfPlayers; i++) {
       this.stones[i] += stoneNumbers[i];
     }
   }
@@ -75,5 +76,10 @@ export class ObeliskComponent implements OnInit {
   removeStones(){
     this.stones = [0,0,0,0];
   }
+
+  setAttributes(playerNumber: number){
+    this.numberOfPlayers = playerNumber;
+  }
+
 
 }
