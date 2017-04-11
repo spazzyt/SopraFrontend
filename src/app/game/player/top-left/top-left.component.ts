@@ -20,29 +20,30 @@ export class TopLeftComponent implements OnInit {
   //Class Variables
   //===============
 
-  //stone quarry
-  stoneQuarry: StoneQuarry;
+  // stone quarry object: contains stone objects
+  public stoneQuarry: StoneQuarry;
 
-  //supply sled
-  supplySled: SupplySled;
+  // supply sled object: contains stone objects
+  public supplySled: SupplySled;
 
   // the player's name
-  playerName:string;
+  public playerName:string;
 
   // the player's score
-  score:number;
+  public score:number;
 
-  // the player's colour
-  playerFieldStone:Stone;
+  // stone generated in supply sled
+  // (used by dragula to copy)
+  public playerFieldStone:Stone;
 
   // the player's stones in supply-sled
-  sledStones:number;
+  public sledStones:number;
 
   // the player's stones in quarry
-  quarryStones:number;
+  public quarryStones:number;
 
   // the player's nine market card icons
-  marketCards:number[] = [0,0,0,0,0,0,0,0,0];
+  public marketCards:number[] = [];
 
 
   //===============
@@ -59,8 +60,12 @@ export class TopLeftComponent implements OnInit {
 
   ngOnInit() {
 
+    //Popovers must be initialized in ngOnInit()
     this.initializePopovers();
-    this.playerFieldStone = new Stone(0, ColourEnum.white);
+
+    // stone generated in supply sled
+    // (used by dragula to copy)
+    this.playerFieldStone = new Stone(30, ColourEnum.white);
     console.log("ColourEnum: ", ColourEnum.white);
 
   }
