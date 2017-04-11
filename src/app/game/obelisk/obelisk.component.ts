@@ -67,7 +67,7 @@ export class ObeliskComponent implements OnInit {
       }
     }
 
-    for (let i of [0,1,2,3]) {
+    for (let i = 0; i < this.numberOfPlayers; i++) {
       this.stones[i] += stoneNumbers[i];
     }
   }

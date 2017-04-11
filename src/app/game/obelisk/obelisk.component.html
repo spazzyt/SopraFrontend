@@ -1,4 +1,5 @@
 <div id="spacing_left">
+  {{numberOfPlayers}}
   <div class="points_assignment" id="obelisk"></div>
 </div>
 <div id="fields">
@@ -23,7 +24,7 @@
   <div class="field_bar">
     <div id="f3_space"></div>
     <div class="field" id="field_3">
-      <p>
+      <p *ngIf="numberOfPlayers > 2">
         {{stones[2]}}
       </p>
     </div>
@@ -32,7 +33,7 @@
   <div class="field_bar">
     <div id="f4_space"></div>
     <div class="field" id="field_4">
-      <p>
+      <p *ngIf="numberOfPlayers > 3">
         {{stones[3]}}
       </p>
     </div>
