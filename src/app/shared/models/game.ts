@@ -43,10 +43,6 @@ export class Game {
   // active player
   public currentActivePlayer: User;
 
-  // check if necessary
-  //public moves: string[]; //data type: check with backend
-  //public moves: Move[]; //data type: check with backend
-
   // decision
   public decision:Decision;
 
@@ -54,7 +50,12 @@ export class Game {
   //Additional Frontend attributes
   //==============================
 
-    constructor(id_:number, token_:string,
+
+  //Constructor
+  //===========
+
+
+  constructor(id_:number, token_:string,
                 owner_:string, name_:string, numPlayers_:number, players_:User[],
                 ships_:Ship[], marketCards_:MarketCard[],
                 currentActivePlayer_:User, decision_:Decision){
@@ -72,3 +73,9 @@ export class Game {
 
     }
 }
+
+
+
+
+
+
