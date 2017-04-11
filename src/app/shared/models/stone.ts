@@ -13,6 +13,9 @@ export class Stone {
   //unique identifier
   public id:number=-1;
 
+  //unique htmlDom identifier
+  public idHtlm:string="";
+
   //player colour
   public colour:ColourEnum;
 

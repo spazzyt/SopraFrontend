@@ -3,16 +3,16 @@ export class Colour {
 
 //protocol:
 //---------
-//player1, bottom-left: brown
+//player1, bottom-left: black
 //player2: top-left: white
-//player3: top-right: gray
-//player4: bottom-right: black
+//player3: top-right: brown
+//player4: bottom-right: gray
 
 export enum ColourEnum {
-  brown=<any>"brown",
+  black=<any>"black",
   white=<any>"white",
-  gray=<any>"gray",
-  black=<any>"black"
+  brown=<any>"brown",
+  gray=<any>"gray"
 }
 
 interface IColourEnum{

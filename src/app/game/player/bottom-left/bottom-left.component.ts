@@ -20,29 +20,30 @@ export class BottomLeftComponent implements OnInit {
   //===============
 
 
-  //stone quarry
-  stoneQuarry: StoneQuarry;
+  // stone quarry object: contains stone objects
+  public stoneQuarry: StoneQuarry;
 
-  //supply sled
-  supplySled: SupplySled;
+  // supply sled object: contains stone objects
+  public supplySled: SupplySled;
 
   // the player's name
-  playerName:string;
+  public playerName:string;
 
   // the player's score
-  score:number;
+  public score:number;
 
   // stone generated in supply sled
-  playerFieldStone:Stone;
+  // (used by dragula to copy)
+  public playerFieldStone:Stone;
 
   // the player's stones in supply-sled
-  sledStones:number;
+  public sledStones:number;
 
   // the player's stones in quarry
-  quarryStones:number;
+  public quarryStones:number;
 
   // the player's nine market card icons
-  marketCards:number[] = [0,0,0,0,0,0,0,0,0]
+  public marketCards:number[] = [];
 
 
   //===============
@@ -59,9 +60,12 @@ export class BottomLeftComponent implements OnInit {
 
   ngOnInit() {
 
+    //Popovers must be initialized in ngOnInit()
     this.initializePopovers();
+
+    // stone generated in supply sled
+    // (used by dragula to copy)
     this.playerFieldStone = new Stone(0, ColourEnum.black);
-    console.log("ColourEnum: ", ColourEnum.black);
   }
 
   //================
@@ -123,10 +127,10 @@ export class BottomLeftComponent implements OnInit {
   }
 
   show_hide_stone_at_init() {
-    (<any>$(document)).ready(function () {
+    /**(<any>$(document)).ready(function () {
       (<any>$("#stones_1")).hide();
       (<any>$("#stone_label_1")).show();
-    });
+    });*/
   }
 
   show_hide_stone_onMouseOver(){

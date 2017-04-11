@@ -89,56 +89,120 @@ export class GameComponent  implements OnInit {
 
   }
 
+
+  //===========================================================
+  // Test-Data: Instantiate fake data as input for test-methods
+  //===========================================================
+
+  //will later be fields of defined class variables above
+  playerName_target:string="P1: Roland";
+  marketCards_target:number[]=[1,0,2,0,1,1,0,0,4];
+  score_target:number=12;
+  sledStones_target:number=3;
+  quarryStones_target:number=25;
+  playerIconsStatus_target:boolean[]=[true, false, true, false, false, true, false, true, false];
+  playerStoneQuarryStatus_target:boolean=false;
+  playerSupplySledStatus_target:boolean=false;
+  playerPlayerFieldStatus_target:boolean=false;
+  roundNumber:number=3;
+
+  //used in dragula drop
+  playedBlueMarketCard_lever=false;
+
+
+  //Fake Ships
+  ship1 = new Ship(1, 4);
+  ship2 = new Ship(2, 3);
+  ship3 = new Ship(3, 2);
+  ship4 = new Ship(4, 1);
+
+  ships_target = new Array<Ship>();
+
+  //Fake Stones
+  stone1 = new Stone(1, ColourEnum.brown);
+  stone2 = new Stone(2, ColourEnum.white);
+  stone3 = new Stone(3, ColourEnum.gray);
+  stone4 = new Stone(4, ColourEnum.black);
+
+  stones_target = new Array<Stone>();
+
+
+  //Fake market cards
+  marketCard1 = new MarketCard(1);
+  marketCard2 = new MarketCard(2);
+  marketCard3 = new MarketCard(3);
+  marketCard4 = new MarketCard(4);
+
+  marketCards = new Array<MarketCard>();
+
+
+  //Fake Players
+  player1= new User(1, "Username 1", ColourEnum.black);
+  player2= new User(2, "Username 2", ColourEnum.white);
+  player3= new User(3, "Username 3", ColourEnum.brown);
+  player4= new User(4, "Username 4", ColourEnum.gray);
+
+  players_target = new Array<User>();
+
+
+
   //==========
   // ngOnInit
   //==========
 
   ngOnInit() {
-    this.stones_target.push(this.stone1);
-    this.stones_target.push(this.stone2);
-    this.stones_target.push(this.stone3);
-    this.stones_target.push(this.stone4);
 
-    this.ships_target.push(this.ship1);
-    this.ships_target.push(this.ship2);
-    this.ships_target.push(this.ship3);
-    this.ships_target.push(this.ship4)
-
-
-    //fill market cards array
-    this.marketCards.push(this.marketCard1);
-    this.marketCards.push(this.marketCard2);
-    this.marketCards.push(this.marketCard3);
-    this.marketCards.push(this.marketCard4);
+    //snackbar: needs to be initialized in ngOnInit()
+    this.generateSnackbarDiv();
 
     //Generate the new game
     this.generateNewGame(this.getFakeGame());
 
-
-    //snackbar
-    this.generateSnackbarDiv();
-
-
     // Test for activating/deactivating functions
-    this.deactivateInactivePlayerInteractions("hello");
-    //this.activateEverything("hello");
+    this.deactivateInactivePlayerInteractions(this.game.players);
+    this.activateEverything(this.game.currentActivePlayer);
 
   }
-
-
-  //================
-  // ngAfterViewInit
-  //================
-
-  ngAfterViewInit() {
-
-  }
-
 
 
   //===========================================================
   // Backend starts new game
   //===========================================================
+
+  //Fake Game
+  getFakeGame(){
+
+    //fill fake stone array
+    this.stones_target.push(this.stone1);
+    this.stones_target.push(this.stone2);
+    this.stones_target.push(this.stone3);
+    this.stones_target.push(this.stone4);
+
+    //fill fake ship array
+    this.ships_target.push(this.ship1);
+    this.ships_target.push(this.ship2);
+    this.ships_target.push(this.ship3);
+    this.ships_target.push(this.ship4);
+
+    //fill fake market cards array
+    this.marketCards.push(this.marketCard1);
+    this.marketCards.push(this.marketCard2);
+    this.marketCards.push(this.marketCard3);
+    this.marketCards.push(this.marketCard4);
+
+    //fill fake player array
+    this.players_target.push(this.player1,);
+    this.players_target.push(this.player2,);
+    this.players_target.push(this.player3,);
+    this.players_target.push(this.player4,);
+
+
+    let returnGame = new Game(0, 'token', 'owner', 'name', 2,
+      this.players_target, this.ships_target, this.marketCards,
+      this.player1, null);
+    return returnGame;
+  }
+
 
   generateNewGame(game_backend:Game){
 
@@ -162,87 +226,138 @@ export class GameComponent  implements OnInit {
 
   }
 
-  getFakeGame(){
-    let returnGame = new Game(0, 'test', 'Failtest', 'TestGame', 2, [null, null], this.ships_target, this.marketCards, null, null);
-    return returnGame;
-  }
-
   initializePlayerComponents(players_:User[], numPlayers_:number) {
 
-    for (let i = 0; i < numPlayers_; i++) {
+    for (let i = 1; i <= numPlayers_; i++) {
 
-      if(i==0){
-        this.bottomLeftComponent.setMarketCards(this.marketCards_target);
-        this.bottomLeftComponent.setScore(this.score_target);
+      //bottomLeftComponent
+      if(i==1){
 
-        let stoneQuarry1 = new StoneQuarry(27,3,ColourEnum.brown,players_[i]);
-        let supplySled1 = new SupplySled(2,1,ColourEnum.brown,players_[i]);
+        // set market card icon number to zero
+        this.bottomLeftComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
 
+        // set score to zero
+        this.bottomLeftComponent.setScore(0);
+
+        //instantiate Quarry objects, internally instantiate 27 stones Objects
+        let stoneQuarry1 = new StoneQuarry(27, 3, ColourEnum.black, players_[i]);
+
+        //instantiate Sled objects, internally instantiate 2 stones Objects
+        let supplySled1 = new SupplySled(2, 1, ColourEnum.black, players_[i]);
+
+        // initialize stone quarry object in Player 1 Component
         this.bottomLeftComponent.stoneQuarry=stoneQuarry1;
+
+        // initialize supply sled object in Player 1 Component
         this.bottomLeftComponent.supplySled=supplySled1;
 
+        //
         this.bottomLeftComponent.setStonesInQuarry(stoneQuarry1.stones.length);
+
+        //
         this.bottomLeftComponent.setStonesInSled(supplySled1.stones.length);
 
-        this.bottomLeftComponent.setPlayerName(this.playerName_target);
+        //
+        this.bottomLeftComponent.setPlayerName(players_[0].username);
 
       }
-      else if(i==1){
-        this.bottomRightComponent.setMarketCards(this.marketCards_target);
+
+      //topLeftComponent
+      else if(i==2){
+
+        // set market card icon number to zero
+        this.topLeftComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
+
+        // set score to zero
+        this.topLeftComponent.setScore(0);
+
+        //instantiate Quarry objects, internally instantiate 26 stones Objects
+        let stoneQuarry2 = new StoneQuarry(26, 34, ColourEnum.white, players_[i]);
+
+        //instantiate Sled objects, internally instantiate 3 stones Objects
+        let supplySled2 = new SupplySled(3, 31, ColourEnum.white, players_[i]);
+
+        // initialize stone quarry object in Player 2 Component
+        this.topLeftComponent.stoneQuarry=stoneQuarry2;
+
+        // initialize supply sled object in Player 2 Component
+        this.topLeftComponent.supplySled=supplySled2;
+
+        //
+        this.topLeftComponent.setStonesInQuarry(stoneQuarry2.stones.length);
+
+        //
+        this.topLeftComponent.setStonesInSled(supplySled2.stones.length);
+
+        //
+        this.topLeftComponent.setPlayerName(players_[1].username);
+
+      }
+
+      //topRightComponent
+      else if(i==3){
+
+        // set market card icon number to zero
+        this.topRightComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
+
+        // set score to zero
+        this.topRightComponent.setScore(0);
+
+        //instantiate Quarry objects, internally instantiate 25 stones Objects
+        let stoneQuarry3 = new StoneQuarry(25, 65, ColourEnum.brown, players_[i]);
+
+        //instantiate Sled objects, internally instantiate 4 stones Objects
+        let supplySled3 = new SupplySled(4, 61, ColourEnum.brown, players_[i]);
+
+        // initialize stone quarry object in Player 3 Component
+        this.topRightComponent.stoneQuarry=stoneQuarry3;
+
+        // initialize supply sled object in Player 3 Component
+        this.topRightComponent.supplySled=supplySled3;
+
+        //
+        this.topRightComponent.setStonesInQuarry(stoneQuarry3.stones.length);
+
+        //
+        this.topRightComponent.setStonesInSled(supplySled3.stones.length);
+
+        //
+        this.topRightComponent.setPlayerName(players_[2].username);
+
+      }
+
+      //bottomRightComponent
+      else if(i==4){
+
+        // set market card icon number to zero
+        this.bottomRightComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
+
+        // set score to zero
         this.bottomRightComponent.setScore(this.score_target);
 
-        let stoneQuarry2 = new StoneQuarry(26,34,ColourEnum.brown,players_[i]);
-        let supplySled2 = new SupplySled(3,31,ColourEnum.white,players_[i]);
+        //instantiate Quarry objects, internally instantiate 24 stones Objects
+        let stoneQuarry4 = new StoneQuarry(24, 96, ColourEnum.gray, players_[i]);
 
-        this.bottomRightComponent.stoneQuarry=stoneQuarry2;
-        this.bottomRightComponent.supplySled=supplySled2;
+        // instantiate Sled objects, internally instantiate 5 stones Objects
+        let supplySled4 = new SupplySled(5, 91, ColourEnum.gray, players_[i]);
 
-        this.bottomRightComponent.setStonesInQuarry(stoneQuarry2.stones.length);
-        this.bottomRightComponent.setStonesInSled(supplySled2.stones.length);
+        // initialize stone quarry object in Player 4 Component
+        this.bottomRightComponent.stoneQuarry=stoneQuarry4;
 
-        this.bottomRightComponent.setPlayerName(this.playerName_target);
+        // initialize supply sled object in Player 4 Component
+        this.bottomRightComponent.supplySled=supplySled4;
 
+        //
+        this.bottomRightComponent.setStonesInQuarry(stoneQuarry4.stones.length);
 
+        //
+        this.bottomRightComponent.setStonesInSled(supplySled4.stones.length);
+
+        //
+        this.bottomRightComponent.setPlayerName(players_[3].username);
       }
-      else if(i==2){
-        this.topLeftComponent.setMarketCards(this.marketCards_target);
-        this.topLeftComponent.setScore(this.score_target);
-
-        let stoneQuarry3 = new StoneQuarry(25,65,ColourEnum.brown,players_[i]);
-        let supplySled3 = new SupplySled(4,61,ColourEnum.gray,players_[i]);
-
-        this.topLeftComponent.stoneQuarry=stoneQuarry3;
-        this.topLeftComponent.supplySled=supplySled3;
-
-        this.topLeftComponent.setStonesInQuarry(stoneQuarry3.stones.length);
-        this.topLeftComponent.setStonesInSled(supplySled3.stones.length);
-
-        this.topLeftComponent.setPlayerName(this.playerName_target);
-
-      }
-      else if(i==3){
-        this.topRightComponent.setMarketCards(this.marketCards_target);
-        this.topRightComponent.setScore(this.score_target);
-
-        let stoneQuarry4 = new StoneQuarry(24,96,ColourEnum.brown,players_[i]);
-        let supplySled4 = new SupplySled(5,91,ColourEnum.black,players_[i]);
-
-        this.topRightComponent.stoneQuarry=stoneQuarry4;
-        this.topRightComponent.supplySled=supplySled4;
-
-        this.topRightComponent.setStonesInQuarry(stoneQuarry4.stones.length);
-        this.topRightComponent.setStonesInSled(supplySled4.stones.length);
-
-        this.topRightComponent.setPlayerName(this.playerName_target);
-
-      }
-
-
     }
-
   }
-
-
 
 
   initializeMarketComponent(marketCards:MarketCard[]){
@@ -273,18 +388,11 @@ export class GameComponent  implements OnInit {
     this.burialChamberComponent.removeStones();
   }
 
-  initializeMarketCards(marketCards:MarketCard[]){
-
-
-  }
-
   initializeDepartingHarbourComponent(ships:Ship[]){
     this.departingHarbourComponent.generateFourShips(ships);
   }
 
   initializeActivePlayer(currentActivePlayer){
-
-    currentActivePlayer.
 
     this.bottomLeftComponent.playerNameGlow(this.playerName_target);
 
@@ -316,6 +424,16 @@ export class GameComponent  implements OnInit {
 
 
   //===========================================================
+  // Backend starts fast forward at the end of the game
+  //===========================================================
+
+  initFastForward(){
+
+
+  }
+
+
+  //===========================================================
   // Main Task 1: Deactivate everything for inactive players
   //===========================================================
 
@@ -324,8 +442,8 @@ export class GameComponent  implements OnInit {
 
     //loop through players and check not active players
 
-      //switch off all click handlers
 
+    //switch off all click handlers
     this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
     this.bottomRightComponent.removeClickHandlerOnBlueMarketCards();
     this.topLeftComponent.removeClickHandlerOnBlueMarketCards();
@@ -333,22 +451,22 @@ export class GameComponent  implements OnInit {
     this.marketComponent.removeClickHandlerOnMarketCards();
 
     // TODO!!!
-
     let stoneHtmlId="stone_dragulaId_2";
     this.departingHarbourComponent.removeClickHandlerOnStone(stoneHtmlId);
 
-      //switch off icon colors
-
+    //switch off Market Icon colors
     this.bottomLeftComponent.deactivateOrActivateIcons(false);
     this.bottomRightComponent.deactivateOrActivateIcons(false);
     this.topLeftComponent.deactivateOrActivateIcons(false);
     this.topRightComponent.deactivateOrActivateIcons(false);
 
+    //switch off Quarry colors
     this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
     this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
     this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
     this.topRightComponent.deactivateOrActivateStoneQuarry(false);
 
+    //switch off Sled colors
     this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
     this.bottomRightComponent.deactivateOrActivateSupplySled(false);
     this.topLeftComponent.deactivateOrActivateSupplySled(false);
@@ -357,7 +475,8 @@ export class GameComponent  implements OnInit {
 
     //switch off drag event for stones
 
-      //switch off drag event for ships
+    //switch off drag event for ships
+
 
   }
 
@@ -378,22 +497,22 @@ export class GameComponent  implements OnInit {
     this.marketComponent.setClickHandlerOnMarketCards();
 
     // TODO!!!
-
     let stoneHtmlId="stone_dragulaId_2";
     this.departingHarbourComponent.setClickHandlerOnStone(stoneHtmlId);
 
-    //switch on icon colors
-
+    //switch on Market Icon colors
     this.bottomLeftComponent.deactivateOrActivateIcons(true);
     this.bottomRightComponent.deactivateOrActivateIcons(true);
     this.topLeftComponent.deactivateOrActivateIcons(true);
     this.topRightComponent.deactivateOrActivateIcons(true);
 
+    //switch on Quarry colors
     this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
     this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
     this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
     this.topRightComponent.deactivateOrActivateStoneQuarry(true);
 
+    //switch on Sled colors
     this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
     this.bottomRightComponent.deactivateOrActivateSupplySled(true);
     this.topLeftComponent.deactivateOrActivateSupplySled(true);
@@ -401,28 +520,77 @@ export class GameComponent  implements OnInit {
 
     //switch on drag event for stones
 
+
     //switch on drag event for ships
 
   }
 
-  //build in switch statements
-  activateActivePlayerInteractions(){
+    //build in switch statements
+    activateActivePlayerInteractions(){
 
 
 
   }
 
+  //===========================================================
+  // SnackBar / Toast
+  //===========================================================
+
+
+  //Needs to be called in GameComponent.ngOnInit()
+  generateSnackbarDiv(){
+
+    jQuery('<div/>', {
+      id: 'snackbar',
+    }).appendTo('.game_footer');
+
+    if(0){console.log((<any>$('#snackbar')))};
+  }
+
+  showSnackbarMessenger(textMessage, timeMilliSeconds) {
+
+    (<any>$('#snackbar'))
+      .text(textMessage)
+      .addClass('show')
+      .css({'visibility': 'visible'});
+
+    setTimeout(() => {
+        (<any>$('#snackbar'))
+          .addClass('hide')
+          .css({'visibility': 'hidden'});
+        if (1) {console.log("showSnackbarMessenger_callback")};
+      },
+      timeMilliSeconds);
+
+    if(1){console.log("showSnackbarMessenger")};
+  }
+
+
+  showLastMoveOfOtherPlayer(){
+
+  }
+
+
+  collectLastMoveOfActivePlayer(){
+
+  }
 
   //===========================================================
-  // Websocket/REST Input
+  // WebSocket / REST Input
   //===========================================================
 
 
-    setScore(websocketInput){
-    this.bottomLeftComponent.setScore(websocketInput);
-    this.bottomRightComponent.setScore(websocketInput);
-    this.topLeftComponent.setScore(websocketInput);
-    this.topRightComponent.setScore(websocketInput);
+    setScore(webSocketInput){
+    this.bottomLeftComponent.setScore(webSocketInput);
+    this.bottomRightComponent.setScore(webSocketInput);
+    this.topLeftComponent.setScore(webSocketInput);
+    this.topRightComponent.setScore(webSocketInput);
+    }
+
+  showSnackbarMessage(webSocketinput) {
+    let text_="Player 2  has moved Ship 2 to the Temple"
+    let time_=10000
+    this.showSnackbarMessenger(text_,time_);
   }
 
   //===========================================================
@@ -467,6 +635,7 @@ export class GameComponent  implements OnInit {
 
 
 
+
   //===========================================================
   // Main Action 4: take market card
   //===========================================================
@@ -475,11 +644,11 @@ export class GameComponent  implements OnInit {
 
   }
 
-  getBroadcastTakeMarketCardFromMarket(websocketInput) {
-    this.bottomLeftComponent.setMarketCards(websocketInput);
-    this.bottomRightComponent.setMarketCards(websocketInput);
-    this.topLeftComponent.setMarketCards(websocketInput);
-    this.topRightComponent.setMarketCards(websocketInput);
+  getBroadcastTakeMarketCardFromMarket(webSocketInput) {
+    this.bottomLeftComponent.setMarketCards(webSocketInput);
+    this.bottomRightComponent.setMarketCards(webSocketInput);
+    this.topLeftComponent.setMarketCards(webSocketInput);
+    this.topRightComponent.setMarketCards(webSocketInput);
   }
 
   //===========================================================
@@ -489,69 +658,6 @@ export class GameComponent  implements OnInit {
 
 
 
-  //===========================================================
-  // Test-Data: Instantiate fake data as input for test-methods
-  //===========================================================
-
-  //will later be fields of defined class variables above
-  playerName_target:string="P1: Roland";
-  marketCards_target:number[]=[1,0,2,0,1,1,0,0,4];
-  score_target:number=12;
-  sledStones_target:number=3;
-  quarryStones_target:number=25;
-  playerIconsStatus_target:boolean[]=[true, false, true, false, false, true, false, true, false];
-  playerStoneQuarryStatus_target:boolean=false;
-  playerSupplySledStatus_target:boolean=false;
-  playerPlayerFieldStatus_target:boolean=false;
-  roundNumber:number=3;
-
-  //used in dragula drop
-  playedBlueMarketCard_lever=false;
-
-
-  //Fake Ships
-  ship1 = new Ship(1, 4);
-  ship2 = new Ship(2, 3);
-  ship3 = new Ship(3, 2);
-  ship4 = new Ship(4, 1);
-
-  ships_target = new Array<Ship>();
-
-  //Fake Stones
-  stone1 = new Stone(1, ColourEnum.brown);
-  stone2 = new Stone(2, ColourEnum.white);
-  stone3 = new Stone(3, ColourEnum.gray);
-  stone4 = new Stone(4, ColourEnum.black);
-
-  stones_target = new Array<Stone>();
-
-
-  //Fake maket cards
-  marketCard1 = new MarketCard(1);
-  marketCard2 = new MarketCard(2);
-  marketCard3 = new MarketCard(3);
-  marketCard4 = new MarketCard(4);
-
-  marketCards = new Array<MarketCard>();
-
-
-  //-----------
-  //stones flow (do not generate stones outside of quarry and sled at game init!)
-  //-----------
-  //1. stone quarry (source 1)
-  //2. supply sled (source2)
-  //3. to ship slot
-  //4. to site slot
-  //5. back to quarry
-  //-----------
-
-
-  //Fake Players
-  //1: white, 2:gray, 3:black, 4:brown
-  Player1_myself= new User(1);
-  player2= new User(2);
-  player3= new User(3);
-  player4= new User(4);
 
 
 
@@ -840,7 +946,12 @@ export class GameComponent  implements OnInit {
   }
 
 
-
+  trigger_removeAllStones(){
+    this.pyramidComponent.removeStones();
+    this.templeComponent.removeStones();
+    this.burialChamberComponent.removeStones();
+    this.obeliskComponent.removeStones();
+  }
 
   //===================
   // Subscribe-Methods
@@ -850,45 +961,17 @@ export class GameComponent  implements OnInit {
 
 
 
-
   //===============
   // Other-Methods
 
   //===============
-  trigger_removeAllStones(){
-    this.pyramidComponent.removeStones();
-    this.templeComponent.removeStones();
-    this.burialChamberComponent.removeStones();
-    this.obeliskComponent.removeStones();
-  }
-
-  generateSnackbarDiv(){
-
-    jQuery('<div/>', {
-      id: 'snackbar',
-    }).appendTo('.game_footer');
-
-    if(0){console.log((<any>$('#snackbar')))};
-  }
 
 
-  showSnackbarMessenger(textMessage, timeMilliSeconds) {
 
-    (<any>$('#snackbar'))
-      .text(textMessage)
-      .addClass('show')
-      .css({'visibility': 'visible'});
 
-    setTimeout(() => {
-        (<any>$('#snackbar'))
-          .addClass('hide')
-          .css({'visibility': 'hidden'});
-        if (1) {console.log("showSnackbarMessenger_callback")};
-      },
-      timeMilliSeconds);
-
-    if(1){console.log("showSnackbarMessenger")};
-  }
+  //================
+  // Dragula-Methods
+  //================
 
   //------------------
   //stone id generator
@@ -899,12 +982,6 @@ export class GameComponent  implements OnInit {
     this.stoneId+=1;
     return this.stoneId.toString()
   }
-
-
-
-  //================
-  // Dragula-Methods
-  //================
 
   //--------------------------------
   //Draguala Drag Event Subscription

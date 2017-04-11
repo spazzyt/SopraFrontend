@@ -1,6 +1,7 @@
 import {Decision} from "./decision";
 import {Game} from "./game";
 import {Move} from "./move";
+import {ColourEnum} from "./colour.enum";
 
 export class User {
 
@@ -10,7 +11,9 @@ export class User {
 
   // Identification
   public id:number=-1;
-  public username:string; //added in: login.component.html
+
+  // Username added in: login.component.html
+  public username:string;
 
   // Active Game
   public token: string=""; //??
@@ -33,7 +36,7 @@ export class User {
   public games:Game[];
   public moves:Move[];
   public playerField:number;
-  public colour:string;
+  public colour:ColourEnum;
 
 
 
@@ -41,7 +44,7 @@ export class User {
   //Constructor
   //===============
 
-  constructor(id_?:number, username_?:string, colour_?:string, playerField_?:number){
+  constructor(id_:number, username_:string, colour_:ColourEnum, playerField_?:number){
     //instantiated in login.component.ts
     this.id=id_;
     this.username=username_;

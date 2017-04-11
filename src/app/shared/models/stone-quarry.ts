@@ -26,7 +26,7 @@ export class StoneQuarry {
   generateStones(numberOfStones_, startId_){
 
     for(let i=0; i<numberOfStones_; i++){
-      this.stones.push(new Stone(startId_+i, this.colour, PositionEnum.supplySled));
+      this.stones.push(new Stone(startId_+i, this.colour, PositionEnum.stoneQuarry));
     }
   }
 

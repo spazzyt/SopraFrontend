@@ -28,6 +28,7 @@ export class SupplySled {
 
     for(let i=0; i<numberOfStones_; i++){
       this.stones.push(new Stone(startId_+i, this.colour, PositionEnum.supplySled));
+
     }
   }
 
