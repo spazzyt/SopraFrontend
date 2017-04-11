@@ -35,7 +35,7 @@ export class PyramidComponent implements OnInit {
   placeStones(targetStones: Stone[]){
     for (var i = 0; i < targetStones.length; i++) {
 
-      if(this.totalStones < 15) {
+      if(this.totalStones < 120) {  //hacker check
 
         if (targetStones[i] != null) //only do this for stones that exist in the input array
         {

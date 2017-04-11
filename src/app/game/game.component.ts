@@ -48,6 +48,7 @@ export class GameComponent  implements OnInit {
   //===============
   //Class Variables
   //===============
+  game: Game;
 
   // Current Target (Soll) Game state
   // ( current-game-state package from backend sent to all players)
@@ -105,6 +106,11 @@ export class GameComponent  implements OnInit {
 
     this.departingHarbourComponent.generateFourShips(this.ships_target);
 
+
+    //Generate the new game
+    this.generateNewGame(this.getFakeGame());
+
+
     //snackbar
     this.generateSnackbarDiv();
 
@@ -128,23 +134,30 @@ export class GameComponent  implements OnInit {
 
   generateNewGame(game_backend:Game){
 
-    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
+    //this.game = game_backend;
+    this.game = game_backend;
 
-    this.initializeMarketComponent(game_backend.marketCards);
-    this.initializeObeliskComponent();
-    this.initializePyramidComponent();
+    //this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
+
+    //this.initializeMarketComponent(game_backend.marketCards);
+    //this.initializeObeliskComponent();
+    //this.initializePyramidComponent();
     this.initializeTempleComponent();
-    this.initializeBurialChamberComponent();
-    this.initializeDepartingHarbourComponent(game_backend.ships);
+    //this.initializeBurialChamberComponent();
+    //this.initializeDepartingHarbourComponent(game_backend.ships);
 
-    this.initializeActivePlayer(game_backend.currentActivePlayer);
-    this.switchOnActivePlayer(game_backend.currentActivePlayer);
+    //this.initializeActivePlayer(game_backend.currentActivePlayer);
+    //this.switchOnActivePlayer(game_backend.currentActivePlayer);
 
-    this.initializeInactivePlayers(game_backend.players);
-    this.switchOffInactivePlayers(game_backend.players);
+    //this.initializeInactivePlayers(game_backend.players);
+    //this.switchOffInactivePlayers(game_backend.players);
 
   }
 
+  getFakeGame(){
+    let returnGame = new Game(0, 'test', 'Failtest', 'TestGame', 2, [null, null], this.ships_target, [null, null], null, null);
+    return returnGame;
+  }
 
   initializePlayerComponents(players_:User[], numPlayers_:number) {
 
@@ -222,6 +235,8 @@ export class GameComponent  implements OnInit {
   }
 
 
+
+
   initializeMarketComponent(marketCards:MarketCard[]){
 
     //market card objects
@@ -243,7 +258,7 @@ export class GameComponent  implements OnInit {
 
   initializeTempleComponent(){
     let temple:Temple;
-
+    this.templeComponent.setAttributes(this.game.numPlayers)
   }
 
   initializeBurialChamberComponent(){
