@@ -246,6 +246,7 @@ export class GameComponent  implements OnInit {
 
 
   initializeMarketComponent(marketCards:MarketCard[]){
+    this.marketComponent.removeUnusedMarketCards();
     this.marketComponent.generateFourMarketCards(marketCards);
   }
 
@@ -253,6 +254,7 @@ export class GameComponent  implements OnInit {
   initializeObeliskComponent(){
     let obelisk:Obelisk;
     this.obeliskComponent.setAttributes(this.game.numPlayers);
+    this.obeliskComponent.removeStones();
   }
 
   initializePyramidComponent(){
@@ -263,6 +265,7 @@ export class GameComponent  implements OnInit {
   initializeTempleComponent(){
     let temple:Temple;
     this.templeComponent.setAttributes(this.game.numPlayers);
+    this.templeComponent.removeStones();
   }
 
   initializeBurialChamberComponent(){
