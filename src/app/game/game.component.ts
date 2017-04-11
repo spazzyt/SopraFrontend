@@ -104,6 +104,13 @@ export class GameComponent  implements OnInit {
     this.ships_target.push(this.ship3);
     this.ships_target.push(this.ship4)
 
+
+    //fill market cards array
+    this.marketCards.push(this.marketCard1);
+    this.marketCards.push(this.marketCard2);
+    this.marketCards.push(this.marketCard3);
+    this.marketCards.push(this.marketCard4);
+
     //Generate the new game
     this.generateNewGame(this.getFakeGame());
 
@@ -136,7 +143,7 @@ export class GameComponent  implements OnInit {
 
     //this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
 
-    //this.initializeMarketComponent(game_backend.marketCards);
+    this.initializeMarketComponent(game_backend.marketCards);
     //this.initializeObeliskComponent();
     //this.initializePyramidComponent();
     this.initializeTempleComponent();
@@ -152,7 +159,7 @@ export class GameComponent  implements OnInit {
   }
 
   getFakeGame(){
-    let returnGame = new Game(0, 'test', 'Failtest', 'TestGame', 2, [null, null], this.ships_target, [null, null], null, null);
+    let returnGame = new Game(0, 'test', 'Failtest', 'TestGame', 2, [null, null], this.ships_target, this.marketCards, null, null);
     return returnGame;
   }
 
@@ -235,10 +242,7 @@ export class GameComponent  implements OnInit {
 
 
   initializeMarketComponent(marketCards:MarketCard[]){
-
-    //market card objects
-
-
+    this.marketComponent.generateFourMarketCards(marketCards);
   }
 
 
@@ -436,13 +440,25 @@ export class GameComponent  implements OnInit {
   ship3 = new Ship(3, 2);
   ship4 = new Ship(4, 1);
 
+  ships_target = new Array<Ship>();
+
   //Fake Stones
   stone1 = new Stone(1, ColourEnum.brown);
   stone2 = new Stone(2, ColourEnum.white);
   stone3 = new Stone(3, ColourEnum.gray);
   stone4 = new Stone(4, ColourEnum.black);
+
   stones_target = new Array<Stone>();
-  ships_target = new Array<Ship>();
+
+
+  //Fake maket cards
+  marketCard1 = new MarketCard(1);
+  marketCard2 = new MarketCard(2);
+  marketCard3 = new MarketCard(3);
+  marketCard4 = new MarketCard(4);
+
+  marketCards = new Array<MarketCard>();
+
 
   //-----------
   //stones flow (do not generate stones outside of quarry and sled at game init!)
@@ -684,7 +700,7 @@ export class GameComponent  implements OnInit {
     this.marketComponent.removeUnusedMarketCards(); //(click)="trigger_removeUnusedMarketCards()"
   }
   trigger_generateFourMarketCards(){
-    this.marketComponent.generateFourMarketCards(); //(click)="trigger_generateFourMarketCards()"
+    this.marketComponent.generateFourMarketCards(this.marketCards); //(click)="trigger_generateFourMarketCards()"
   }
 
   trigger_setClickHandlerOnMarketCards(){
