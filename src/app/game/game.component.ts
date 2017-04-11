@@ -151,7 +151,7 @@ export class GameComponent  implements OnInit {
     //this.initializeObeliskComponent();
     this.initializePyramidComponent();
     this.initializeTempleComponent();
-    //this.initializeBurialChamberComponent();
+    this.initializeBurialChamberComponent();
     this.initializeDepartingHarbourComponent(game_backend.ships);
 
     //this.initializeActivePlayer(game_backend.currentActivePlayer);
@@ -268,7 +268,7 @@ export class GameComponent  implements OnInit {
 
   initializeBurialChamberComponent(){
     let burialChamber:BurialChamber;
-
+    this.burialChamberComponent.removeStones();
   }
 
   initializeMarketCards(marketCards:MarketCard[]){
