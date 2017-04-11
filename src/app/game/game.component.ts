@@ -1231,7 +1231,7 @@ export class GameComponent  implements OnInit {
                 if(countStones==1){hasNotEnoughStones=false;}
               }
               if(countSlots==2){
-                if(countStones==1){hasNotEnoughStones=false;}
+                if(countStones>=1){hasNotEnoughStones=false;}
               }
               if(countSlots==3){
                 if(countStones>=2){hasNotEnoughStones=false;}
