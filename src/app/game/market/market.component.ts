@@ -40,12 +40,6 @@ export class MarketComponent implements OnInit {
       content : '<p>For each stone delivered here, the owner of the stone can immediately take any 1 face-up market card.</p>'
     });
 
-    //RemoveOldMarketCards
-    this.removeUnusedMarketCards();
-
-    //generate this.ships array with four ship objects
-    this.generateFourMarketCards();
-
   }
 
 
@@ -63,19 +57,9 @@ export class MarketComponent implements OnInit {
 
 
   //Generate four new market cards
-  generateFourMarketCards(){
+  generateFourMarketCards(cards: MarketCard[]){
+    this.marketCards = cards;
 
-    //Fake maket cards
-    let marketCard1 = new MarketCard(1);
-    let marketCard2 = new MarketCard(2);
-    let marketCard3 = new MarketCard(3);
-    let marketCard4 = new MarketCard(4);
-
-    //fill market cards array
-    this.marketCards.push(marketCard1);
-    this.marketCards.push(marketCard2);
-    this.marketCards.push(marketCard3);
-    this.marketCards.push(marketCard4);
   }
 
 
