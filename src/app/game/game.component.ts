@@ -114,6 +114,11 @@ export class GameComponent  implements OnInit {
     //snackbar
     this.generateSnackbarDiv();
 
+
+    // Test for activating/deactivating functions
+    this.deactivateInactivePlayerInteractions("hello");
+    //this.activateEverything("hello");
+
   }
 
 
@@ -122,7 +127,6 @@ export class GameComponent  implements OnInit {
   //================
 
   ngAfterViewInit() {
-
 
   }
 
@@ -327,18 +331,34 @@ export class GameComponent  implements OnInit {
     this.topRightComponent.removeClickHandlerOnBlueMarketCards();
     this.marketComponent.removeClickHandlerOnMarketCards();
 
+    // TODO!!!
 
     let stoneHtmlId="stone_dragulaId_2";
     this.departingHarbourComponent.removeClickHandlerOnStone(stoneHtmlId);
 
+      //switch off icon colors
+
+    this.bottomLeftComponent.deactivateOrActivateIcons(false);
+    this.bottomRightComponent.deactivateOrActivateIcons(false);
+    this.topLeftComponent.deactivateOrActivateIcons(false);
+    this.topRightComponent.deactivateOrActivateIcons(false);
+
+    this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
+    this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
+    this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
+    this.topRightComponent.deactivateOrActivateStoneQuarry(false);
+
+    this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
+    this.bottomRightComponent.deactivateOrActivateSupplySled(false);
+    this.topLeftComponent.deactivateOrActivateSupplySled(false);
+    this.topRightComponent.deactivateOrActivateSupplySled(false);
 
 
-      //switch off drag event for stones
+    //switch off drag event for stones
 
       //switch off drag event for ships
 
   }
-
 
 
   //=============================================================
@@ -355,11 +375,28 @@ export class GameComponent  implements OnInit {
     this.topLeftComponent.setClickHandlerOnBlueMarketCards();
     this.topRightComponent.setClickHandlerOnBlueMarketCards();
     this.marketComponent.setClickHandlerOnMarketCards();
+
+    // TODO!!!
+
     let stoneHtmlId="stone_dragulaId_2";
     this.departingHarbourComponent.setClickHandlerOnStone(stoneHtmlId);
 
+    //switch on icon colors
 
+    this.bottomLeftComponent.deactivateOrActivateIcons(true);
+    this.bottomRightComponent.deactivateOrActivateIcons(true);
+    this.topLeftComponent.deactivateOrActivateIcons(true);
+    this.topRightComponent.deactivateOrActivateIcons(true);
 
+    this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
+    this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
+    this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
+    this.topRightComponent.deactivateOrActivateStoneQuarry(true);
+
+    this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
+    this.bottomRightComponent.deactivateOrActivateSupplySled(true);
+    this.topLeftComponent.deactivateOrActivateSupplySled(true);
+    this.topRightComponent.deactivateOrActivateSupplySled(true);
 
     //switch on drag event for stones
 
