@@ -122,13 +122,19 @@ export class GameComponent  implements OnInit {
   generateNewGame(game_backend:Game){
 
     this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
+
     this.initializeMarketComponent(game_backend.marketCards);
     this.initializeObeliskComponent();
     this.initializePyramidComponent();
     this.initializeTempleComponent();
     this.initializeBurialChamberComponent();
     this.initializeDepartingHarbourComponent(game_backend.ships);
+
     this.initializeActivePlayer(game_backend.currentActivePlayer);
+    this.switchOnActivePlayer(game_backend.currentActivePlayer);
+
+    this.initializeInactivePlayers(game_backend.players);
+    this.switchOffInactivePlayers(game_backend.players);
 
   }
 
@@ -238,8 +244,6 @@ export class GameComponent  implements OnInit {
 
   }
 
-
-
   initializeMarketCards(marketCards:MarketCard[]){
 
 
@@ -260,17 +264,17 @@ export class GameComponent  implements OnInit {
   }
 
 
-
-
-  //==================================================
-  // Initialize New Round
-  //==================================================
-
-  initRound(){
-
+  switchOnActivePlayer(activePlayer_){
 
   }
 
+  initializeInactivePlayers(players_){
+
+  }
+
+  switchOffInactivePlayers(players_){
+
+  }
 
 
 
@@ -278,7 +282,88 @@ export class GameComponent  implements OnInit {
   // Backend starts new round
   //===========================================================
 
+  initRound(){
 
+
+  }
+
+
+  //===========================================================
+  // Main Task 1: Deactivate everything for inactive players
+  //===========================================================
+
+  deactivateInactivePlayerInteractions(players_){
+
+    //loop through players and check not active players
+
+      //switch off all click handlers
+
+      //switch off drag event for stones
+
+      //switch off drag event for ships
+
+  }
+
+  //=============================================================
+  // Main Task 2: Activate allowed interactions for activePlayer
+  //=============================================================
+
+  //start simple
+  activateEverything(activePlayer_){
+
+    //switch on all click handlers
+
+    //switch on drag event for stones
+
+    //switch on drag event for ships
+
+  }
+
+  //build in switch statements
+  activateActivePlayerInteractions(){
+
+
+
+  }
+
+
+  //===========================================================
+  // Main Action 1: take stones from Quarry to Sled
+  //===========================================================
+
+  takeStonesFromQuarryToSled(){
+
+    //register click to quarry
+
+    //generate decision object
+
+    //send decision object to backend
+
+  }
+
+  getBroadcastFromQuarryToSledAction(){
+
+    //update sled
+
+    //update quarry
+
+  }
+
+  //===========================================================
+  // Main Action 2:
+  //===========================================================
+
+
+
+  //===========================================================
+  // Main Action 3:
+  //===========================================================
+
+
+
+  //===========================================================
+  // Main Action 4:
+  //===========================================================
 
 
 
