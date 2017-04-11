@@ -75,8 +75,11 @@ p{
   background-image: url("../../../../assets/images/supply_sled.png");
   background-repeat: no-repeat;
   background-position: center;
+  width:70%;
+  height:100%;
   z-index: 100;
-  border: 1px solid #44ff62;/*border: 1px solid #44ff62;*/
+  float:right;
+  /*border: 1px solid #44ff62;*/
 }
 
 .quarry{
@@ -123,6 +126,8 @@ p{
   height: 65%;
   width: 100%;
   float: left;
+  margin-bottom:0;
+  bottom:0;
   /*border: 1px solid #44ff62;*/
 }
 
@@ -300,7 +305,7 @@ p{
   float:right;
   float:top;
   margin-right:15%;
-  border: 1px solid #ff2f39;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #44ff62;*/
 }
 
 .top_part{

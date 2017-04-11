@@ -34,21 +34,16 @@
   <div class="low_r score">
     <p>{{score}}</p>
   </div>
-  <!--drag and drop zone
-  <div id="supply_sled_4" class="low supply_sled_4"
+
+  <div id="supply_sled_4" class="low_m "
        (mouseover)=show_hide_stone_onMouseOver()
-       (mouseleave)=show_hide_stone_onMouseLeave()
-       [dragula]="'stone_slots_bag'">-->
-  <div id="supply_sled_4" class="low_m supply_sled_4"
-       (mouseover)=show_hide_stone_onMouseOver()
-       (mouseleave)=show_hide_stone_onMouseLeave()
-       [dragula]="'stone_slots_bag'">
-    <div >
+       (mouseleave)=show_hide_stone_onMouseLeave()>
+    <div class="supply_sled_4">
       <p id="stone_label_4">{{sledStones}}/5</p>
     </div>
-
-    <app-stone id="stones_4" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
-
+    <div [dragula]="'stone_slots_bag'">
+      <app-stone id="stones_4" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
+    </div>
   </div>
   <div id="quarry_4" class="low_l quarry">
     <p>{{quarryStones}}</p>

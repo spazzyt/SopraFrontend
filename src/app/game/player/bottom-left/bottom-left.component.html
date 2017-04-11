@@ -34,16 +34,17 @@
     <p>{{score}}</p>
   </div>
   <!--drag and drop zone-->
-  <div id="supply_sled_1" class="low_m supply_sled_1"
+  <div id="supply_sled_1" class="low_m"
        (mouseover)=show_hide_stone_onMouseOver()
-       (mouseleave)=show_hide_stone_onMouseLeave()
-       [dragula]="'stone_slots_bag'">
+       (mouseleave)=show_hide_stone_onMouseLeave()>
 
+
+    <div [dragula]="'stone_slots_bag'">
       <app-stone id="stones_1" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
-
-      <div >
-        <p id="stone_label_1">{{sledStones}}/5</p>
-      </div>
+    </div>
+    <div class="supply_sled_1">
+      <p id="stone_label_1">{{sledStones}}/5</p>
+    </div>
 
   </div>
 
