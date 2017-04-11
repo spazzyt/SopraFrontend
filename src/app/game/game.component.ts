@@ -149,7 +149,7 @@ export class GameComponent  implements OnInit {
 
     this.initializeMarketComponent(game_backend.marketCards);
     this.initializeObeliskComponent();
-    //this.initializePyramidComponent();
+    this.initializePyramidComponent();
     this.initializeTempleComponent();
     //this.initializeBurialChamberComponent();
     this.initializeDepartingHarbourComponent(game_backend.ships);
@@ -257,7 +257,7 @@ export class GameComponent  implements OnInit {
 
   initializePyramidComponent(){
     let pyramid:Pyramid;
-
+    this.pyramidComponent.removeStones();
   }
 
   initializeTempleComponent(){
