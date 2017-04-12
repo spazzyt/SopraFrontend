@@ -33,6 +33,7 @@ import {InfoBoxComponent} from "./info-box/info-box.component";
 import {StoneComponent} from "./stone/stone.component";
 import {Game} from "../shared/models/game";
 import {MarketCard} from "../shared/models/market-card";
+import {UserService} from "../shared/services/user.service";
 
 @Component({
   selector: 'app-game',
@@ -48,7 +49,14 @@ export class GameComponent  implements OnInit {
   //===============
   //Class Variables
   //===============
+
+
+  // initial Game object received from Backend
   game: Game;
+
+  // my username entered in login screen
+  // get username from userService
+  myUserName:string=this.userService.mySelf().username;
 
   // Current Target (Soll) Game state
   // ( current-game-state package from backend sent to all players)
@@ -79,6 +87,7 @@ export class GameComponent  implements OnInit {
   //===============
   constructor(private dragulaService: DragulaService,
               private gameService: GameService,
+              private userService: UserService,
               private _ngZone: NgZone) {
 
     let isCurrentActivePlayer=false;
@@ -210,7 +219,8 @@ export class GameComponent  implements OnInit {
 
     this.game = game_backend;
 
-    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
+    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers,
+      game_backend.currentActivePlayer);
 
     this.initializeMarketComponent(game_backend.marketCards);
     this.initializeObeliskComponent();
@@ -227,7 +237,7 @@ export class GameComponent  implements OnInit {
 
   }
 
-  initializePlayerComponents(players_:User[], numPlayers_:number) {
+  initializePlayerComponents(players_:User[], numPlayers_:number, currentActivePlayer:User) {
 
     for (let i = 1; i <= numPlayers_; i++) {
 
@@ -253,14 +263,23 @@ export class GameComponent  implements OnInit {
         // initialize supply sled object in Player 1 Component
         this.bottomLeftComponent.supplySled=supplySled1;
 
-        //
+        // set the attribute number shown in PlayerField
         this.bottomLeftComponent.setStonesInQuarry(stoneQuarry1.stones.length);
 
-        //
+        // set the attribute number shown in PlayerField
         this.bottomLeftComponent.setStonesInSled(supplySled1.stones.length);
 
-        //
+        // set playerName shown in PlayerField
         this.bottomLeftComponent.setPlayerName(players_[0].username);
+
+        //undraggable: hide stones of other players OR hide stones of inactive players
+        //if(players_[0].username===this.myUserName){
+        if(players_[0].username===currentActivePlayer.username){
+          this.topLeftComponent.hideStone();
+          this.topRightComponent.hideStone();
+          this.bottomRightComponent.hideStone();
+        }
+
 
       }
 
@@ -286,14 +305,22 @@ export class GameComponent  implements OnInit {
         // initialize supply sled object in Player 2 Component
         this.topLeftComponent.supplySled=supplySled2;
 
-        //
+        // set the attribute number shown in PlayerField
         this.topLeftComponent.setStonesInQuarry(stoneQuarry2.stones.length);
 
-        //
+        // set the attribute number shown in PlayerField
         this.topLeftComponent.setStonesInSled(supplySled2.stones.length);
 
-        //
+        // set playerName shown in PlayerField
         this.topLeftComponent.setPlayerName(players_[1].username);
+
+        //undraggable: hide stones of other players OR hide stones of inactive players
+        //if(players_[1].username===this.myUserName){
+        if(players_[1].username===currentActivePlayer.username){
+          this.bottomLeftComponent.hideStone();
+          this.topRightComponent.hideStone();
+          this.bottomRightComponent.hideStone();
+        }
 
       }
 
@@ -319,14 +346,21 @@ export class GameComponent  implements OnInit {
         // initialize supply sled object in Player 3 Component
         this.topRightComponent.supplySled=supplySled3;
 
-        //
+        // set the attribute number shown in PlayerField
         this.topRightComponent.setStonesInQuarry(stoneQuarry3.stones.length);
 
-        //
+        // set the attribute number shown in PlayerField
         this.topRightComponent.setStonesInSled(supplySled3.stones.length);
 
-        //
+        // set playerName shown in PlayerField
         this.topRightComponent.setPlayerName(players_[2].username);
+
+        //if(players_[2].username===this.myUserName){
+        if(players_[2].username===currentActivePlayer.username){
+          this.bottomLeftComponent.hideStone();
+          this.topLeftComponent.hideStone();
+          this.bottomRightComponent.hideStone();
+        }
 
       }
 
@@ -352,14 +386,20 @@ export class GameComponent  implements OnInit {
         // initialize supply sled object in Player 4 Component
         this.bottomRightComponent.supplySled=supplySled4;
 
-        //
+        // set the attribute number shown in PlayerField
         this.bottomRightComponent.setStonesInQuarry(stoneQuarry4.stones.length);
 
-        //
+        // set the attribute number shown in PlayerField
         this.bottomRightComponent.setStonesInSled(supplySled4.stones.length);
 
-        //
+        // set playerName shown in PlayerField
         this.bottomRightComponent.setPlayerName(players_[3].username);
+
+        //if(players_[3].username===this.myUserName){
+        if(players_[3].username===currentActivePlayer.username){
+          this.topLeftComponent.hideStone();
+          this.topRightComponent.hideStone();
+        }
       }
     }
   }
@@ -961,6 +1001,14 @@ export class GameComponent  implements OnInit {
     this.templeComponent.removeStones();
     this.burialChamberComponent.removeStones();
     this.obeliskComponent.removeStones();
+  }
+
+
+  trigger_makeStoneInSledUndraggable(){
+    this.bottomLeftComponent.hideStone()
+  }
+  trigger_makeStoneInSledDraggable(){
+    this.bottomLeftComponent.showStone()
   }
 
   //===================

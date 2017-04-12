@@ -128,26 +128,20 @@ export class BottomLeftComponent implements OnInit {
 
   }
 
-  show_hide_stone_at_init() {
-    /**(<any>$(document)).ready(function () {
-      (<any>$("#stones_1")).hide();
-      (<any>$("#stone_label_1")).show();
-    });*/
+
+  hideStone(){
+    (<any>$(document)).ready(function (){
+      (<any>$("#bag_1")).hide();
+    });
+
   }
 
-  show_hide_stone_onMouseOver(){
-    /**(<any>$(document)).ready(function () {
-      (<any>$("#stones_1")).show();
-      (<any>$("#stone_label_1")).hide();
-    });*/
+  showStone(){
+    (<any>$(document)).ready(function (){
+      (<any>$("#bag_1")).show();
+    });
   }
 
-  show_hide_stone_onMouseLeave(){
-    /**(<any>$(document)).ready(function () {
-      (<any>$("#stone_label_1")).show();
-
-    });*/
-  }
 
 
   setClickHandlerOnBlueMarketCards() {
@@ -408,6 +402,33 @@ export class BottomLeftComponent implements OnInit {
     }
 
   }
+
+
+  deactivateOrActivateDraggingSupplySled(playerSupplySledStatus_target){
+
+    if (playerSupplySledStatus_target == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#stones_1")).css({"user-drag":"none",
+            "-moz-user-select": "none", "-webkit-user-drag": "none",
+            "pointer-events": "none"});
+
+      });
+
+      if(0){console.log("deactivateOrActivateDraggingSupplySled: false")}
+    }
+    if (playerSupplySledStatus_target == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#stones_1")).css({"user-drag":"true",
+          "-moz-user-select": "true", "-webkit-user-drag": "true"});
+
+      });
+
+      if(0){console.log("deactivateOrActivateDraggingSupplySled: true")}
+    }
+
+  }
+
+
 
   deactivateOrActivatePlayerField(playerPlayerFieldStatus_target){
 

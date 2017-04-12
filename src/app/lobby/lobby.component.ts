@@ -34,7 +34,7 @@ export class LobbyComponent implements OnInit {
   public requestIntervalTime = 20000; // set to 20000 ms during development, for production set to 500 ms
 
   //who am I
-  public mySelf:User; //fetched with: this.userService.meMyselfAndI()
+  public mySelf:User; //fetched with: this.userService.MySelf()
 
   // helper property to add a new game
   public nrOfGames: number = -1;
@@ -74,6 +74,7 @@ export class LobbyComponent implements OnInit {
 
     // get username from userService
     this.mySelf=this.userService.mySelf();
+    if(1){console.log("lobbyComponent:mySelf: ", this.mySelf);};
 
 
 
@@ -98,7 +99,7 @@ export class LobbyComponent implements OnInit {
   loadUserList(){
     return this.userService.getUsers()
       .subscribe(users => {
-        console.log("fetch users: ", users);
+        if(1){console.log("fetch users: ", users);}
         this.users = users;
       });
   }
@@ -107,7 +108,7 @@ export class LobbyComponent implements OnInit {
   loadGameList(){
     this.gameService.getGames()
       .subscribe(games => {
-        console.log("fetch games: ", this.games);
+        if(1){console.log("fetch games: ", this.games);}
         this.games = games;
       });
   }
@@ -117,7 +118,7 @@ export class LobbyComponent implements OnInit {
   this.gameService.addGameService(numPlayers)
     .subscribe(game => {
       //this.game = game;
-      console.log("add game ");
+      if(1){console.log("add game ");}
       return this.loadGameList();
     });
   }
@@ -127,7 +128,7 @@ export class LobbyComponent implements OnInit {
     this.gameService.leaveGameService(gameId)
       .subscribe(game => {
         //this.game = game;
-        console.log("leave game ");
+        if(1){console.log("leave game ");}
         this.joinedGame=-1;
         return this.loadGameList();
       });
@@ -138,7 +139,7 @@ export class LobbyComponent implements OnInit {
     this.gameService.joinGameService(gameId)
       .subscribe(game => {
         //this.game = game;
-        console.log("join game ");
+        if(1){console.log("join game ");}
         this.joinedGame=gameId;
         return this.loadGameList();
       });

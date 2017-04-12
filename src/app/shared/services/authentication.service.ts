@@ -29,11 +29,11 @@ export class AuthenticationService {
   constructor(private http: Http,
               private jsonp: Jsonp) {
 
-    // set token if saved in local storage
+    // set mySelf, if saved in local storage
     // (assumes local user always logs in with the same name)
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
-    this.mySelf = currentUser;
+    let mySelf = JSON.parse(localStorage.getItem('mySelf'));
+    this.token = mySelf && mySelf.token;
+    this.mySelf = mySelf;
 
     //TODO fill in your heroku-backend URL
     //this.apiUrl = 'https://sopra-fs17-group13.herokuapp.com';
@@ -81,7 +81,7 @@ export class AuthenticationService {
 
           // store username and jwt token in local storage
           // to keep user logged in between page refreshes
-          localStorage.setItem('currentUser',
+          localStorage.setItem('mySelf',
             JSON.stringify({username: user.username, id: user.id, token: this.token})
           );
 
@@ -114,7 +114,7 @@ export class AuthenticationService {
   // TODO?? inform backend
   logout(): void {
     this.token = null;
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('mySelf');
   }
 
 }
