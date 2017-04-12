@@ -79,6 +79,15 @@ export class TopRightComponent implements OnInit {
 
   }
 
+  playerFieldGlow(status: boolean) {
+    (<any>$(document)).ready(function () {
+      if(status)
+        (<any>$("#glow")).css("background-image", "url(../../assets/images/top_right_active.png)");
+      else
+        (<any>$("#glow")).css("background-image", "url(../../assets/images/top_right.png)");
+    });
+  }
+
   setMarketCards(marketCards_target:number[]){
 
     // define protocol: which market card
