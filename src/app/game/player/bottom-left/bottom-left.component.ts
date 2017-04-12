@@ -89,10 +89,12 @@ export class BottomLeftComponent implements OnInit {
 
   }
 
-  playerNameGlow(playerName_target:string) {
-    this.playerName = playerName_target;
+  playerFieldGlow(status: boolean) {
       (<any>$(document)).ready(function () {
-        (<any>$("#glow")).css();
+        if(status)
+          (<any>$("#glow1")).css("background-image", "url(../../assets/images/bottom_left_active.png)");
+        else
+          (<any>$("#glow1")).css("background-image", "url(../../assets/images/bottom_left.png)");
       });
   }
 

@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.logout();
 
     //Instantiate mySelf as User
-    this.mySelf = new User();
+    this.mySelf = new User(null, null, null);
 
   }
 
