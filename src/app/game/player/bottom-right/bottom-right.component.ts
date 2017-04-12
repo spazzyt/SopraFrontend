@@ -388,7 +388,7 @@ export class BottomRightComponent implements OnInit {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/chisel.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/chisel.png"/>'
     });
 
 
@@ -400,7 +400,7 @@ export class BottomRightComponent implements OnInit {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/hammer.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/hammer.png"/>'
     });
 
 
@@ -412,7 +412,7 @@ export class BottomRightComponent implements OnInit {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/sail.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/sail.png"/>'
     });
 
     //From bottom-right-right
@@ -423,7 +423,7 @@ export class BottomRightComponent implements OnInit {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/lever.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/lever.png"/>'
     });
 
     //From purple-card
@@ -434,7 +434,7 @@ export class BottomRightComponent implements OnInit {
       title: '',
       sdelay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/statues.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statues.png"/>'
     });
 
     //From top-left-left
@@ -445,7 +445,7 @@ export class BottomRightComponent implements OnInit {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/pyramiddec.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/pyramiddec.png"/>'
     });
 
     //From top-middle-left
@@ -456,7 +456,7 @@ export class BottomRightComponent implements OnInit {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/templedec.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/templedec.png"/>'
     });
 
     //From top-middle-right
@@ -467,7 +467,7 @@ export class BottomRightComponent implements OnInit {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/burialdec.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/burialdec.png"/>'
     });
 
     //From top-right-right
@@ -478,7 +478,7 @@ export class BottomRightComponent implements OnInit {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/obeliskdec.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/obeliskdec.png"/>'
     });
   }
 
