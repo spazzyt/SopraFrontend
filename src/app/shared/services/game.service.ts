@@ -4,12 +4,14 @@ import {AuthenticationService} from "./authentication.service";
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {Observable} from "rxjs";
 import {Game} from "../models/game";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class GameService {
   private apiUrl: string;
 
   constructor(private http: Http,
+              private router: Router,
               private authenticationService: AuthenticationService,
               private location: Location) {
 
@@ -39,7 +41,7 @@ export class GameService {
     params.set("token", this.authenticationService.token)
     let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
-    return this.http.post(this.apiUrl + '/game', bodyString, options) // ...using post request
+    return this.http.post(this.apiUrl + '/pepe', bodyString, options) // ...using post request
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         let game = response//.json() && response.json();
@@ -110,10 +112,10 @@ export class GameService {
   }
 
 
-  quickStart(){
+  quickStart() {
     //TODO finish quickstart
+  console.log("quickstart init");
 
-    this.location.go('game');
     let bodyString = JSON.stringify({}); // Stringify payload
     let headers = new Headers({
       'Content-Type': 'application/json',
@@ -123,17 +125,23 @@ export class GameService {
     params.set("token", this.authenticationService.token)
     let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
-    return this.http.post(this.apiUrl + '/pepe', bodyString, options) // ...using post request
-      .map((response: Response) => {
-        // login successful if there's a jwt token in the response
-        let game = response//.json() && response.json();
-        if (game) {
-          console.log(game)
-        } else {
-          // return false to indicate failed login
-          return null;
-        }
-      }) // ...and calling .json() on the response to return data
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+    this.http.post(this.apiUrl + '/pepe', bodyString, options) // ...using post request
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error')) //...errors if
+      .subscribe(response => {
+        let gameId = response.text();
+        console.log("quick starting game: ", gameId, response);
+
+        this.router.navigate(['/game', gameId]);
+      });
+  }
+
+  getGame(gameId): Observable<Game> {
+    // add authorization header with token
+    let headers = new Headers({'Authorization': 'Bearer ' + this.authenticationService.token});
+    let options = new RequestOptions({headers: headers});
+
+    // get users from api
+    return this.http.get(this.apiUrl + '/game/' + gameId, options)
+      .map((response: Response) => response.json());
   }
 }
