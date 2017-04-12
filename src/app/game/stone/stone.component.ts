@@ -35,7 +35,7 @@ export class StoneComponent implements OnInit {
   //ngOnInit
   //===============
   ngOnInit() {
-    this.showStoneInfo();
+    //this.showStoneInfo();
   }
 
 
@@ -44,8 +44,8 @@ export class StoneComponent implements OnInit {
   //===============
 
   showStoneInfo(){
-    console.log(this.stone.colour)
-    console.log(this.stone.id)
+    console.log("drag stone on playerField added:colour: ",this.stone.colour)
+    console.log("drag stone on playerField added:id: ",this.stone.id)
   }
 
   setPlayerId(playerId:number){
