@@ -1028,11 +1028,11 @@ export class GameComponent  implements OnInit {
   }
 
 
-  trigger_makeStoneInSledUndraggable(){
-    this.bottomLeftComponent.hideStone()
-  }
-  trigger_makeStoneInSledDraggable(){
+  trigger_showStonesInSled(){
     this.bottomLeftComponent.showStone()
+    this.topLeftComponent.showStone()
+    this.topRightComponent.showStone()
+    this.bottomRightComponent.showStone()
   }
 
   //===================
