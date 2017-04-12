@@ -89,8 +89,7 @@ export class BottomLeftComponent implements OnInit {
 
   }
 
-  playerNameGlow(playerName_target:string) {
-    this.playerName = playerName_target;
+  playerFieldGlow() {
       (<any>$(document)).ready(function () {
         (<any>$("#glow")).css();
       });
