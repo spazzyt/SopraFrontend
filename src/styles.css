@@ -73,6 +73,12 @@ p{
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
+
+
+.non-draggable{
+  pointer-events: none !important;
+}
+
 @-webkit-keyframes fadein {
   from {bottom: 0; opacity: 0;}
   to {top: 10%;; opacity: 1;}

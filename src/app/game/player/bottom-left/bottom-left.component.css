@@ -20,7 +20,7 @@ p{
 
 .background{
   background-image: url(/../../../../assets/images/bottom_left.png);
-  background-size: 100% auto;
+  background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
@@ -319,8 +319,6 @@ p{
 .top_part{
   /*border: 2px solid black;*/
 }
-
-
 
 
 
