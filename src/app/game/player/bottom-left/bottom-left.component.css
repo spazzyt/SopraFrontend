@@ -76,25 +76,27 @@ p{
   background-image: url("../../../../assets/images/score.png");
   background-repeat: no-repeat;
   background-position: center;
-  /**border: 1px solid #ff56e9;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #ff56e9;*/
 }
 
 .supply_sled_1{
-  background-image: url("../../../../assets/images/supply_sled.png");
+  /*background-image: url("../../../../assets/images/supply_sled.png");*/
   background-repeat: no-repeat;
   background-position: center;
-  width:70%;
+  width:50%;
   height:100%;
   z-index: 100;
-  float:right;
+  float:left;
   /*border: 1px solid #44ff62;*/
+  margin-right: -35%;
+  pointer-events: none !important;
 }
 
 .quarry{
   background-image: url("../../../../assets/images/quarry.png");
   background-repeat: no-repeat;
   background-position: center;
-  /**border: 1px solid #ffef5c;/*border: 1px solid #44ff62;*/
+  /*border: 1px solid #ffef5c;*/
 }
 
 .low_l{
@@ -311,18 +313,32 @@ p{
   /*border: 1px solid #44ff62;*/
   /*position:relative;*/
   float:right;
-  float:top;
-  margin-right:15%;
-  /*border: 1px solid #44ff62;*/
+  text-align: center;
+  float: right;
+  /*border: 1px solid red;*/
+  pointer-events: none !important;
+  margin-right: -30%;
+  padding-top: 16%;
 }
 
 .top_part{
   /*border: 2px solid black;*/
 }
 
+#supply_sled_1{
+  /*border: 1px solid black;*/
+  width: 30%;
+}
 
+.stone_icon{
+  float:right;
+  /*border: 1px solid blue;*/
+  padding-right: 38%;
+  padding-top: 6%;
+}
 
-
-
+.low_l{
+  padding-top: 0.5%;
+}
 
 
