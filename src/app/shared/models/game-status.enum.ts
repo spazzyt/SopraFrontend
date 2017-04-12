@@ -10,7 +10,7 @@ export enum GameStatusEnum {
   round4=<any>"round4",
   round5=<any>"round5",
   round6=<any>"round6",
-  terminated=<any>"black"
+  terminated=<any>"terminated"
 }
 
 interface IGameStatusEnum{
