@@ -32,7 +32,7 @@ export class StoneQuarry {
 
     for(let i=0; i<numberOfStones_; i++){
 
-      if(1){console.log("instantiate stone quarry, instantiate stones: ",
+      if(0){console.log("instantiate stone quarry, instantiate stones: ",
                           numberOfStones_, startId_, this.stones);}
 
       this.stones.push(new Stone(startId_+i, this.colour, PositionEnum.stoneQuarry));
