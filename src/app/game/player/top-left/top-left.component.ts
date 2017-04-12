@@ -81,6 +81,15 @@ export class TopLeftComponent implements OnInit {
 
   }
 
+  playerFieldGlow(status: boolean) {
+    (<any>$(document)).ready(function () {
+      if(status)
+        (<any>$("#glow2")).css("background-image", "url(../../assets/images/top_left_active.png)");
+      else
+        (<any>$("#glow2")).css("background-image", "url(../../assets/images/top_left.png)");
+    });
+  }
+
   setMarketCards(marketCards_target:number[]){
 
     // define protocol: which market card

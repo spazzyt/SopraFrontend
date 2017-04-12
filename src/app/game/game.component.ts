@@ -679,6 +679,10 @@ export class GameComponent  implements OnInit {
   }
   trigger_FieldGlow(){
     this.bottomLeftComponent.playerFieldGlow(this.glow_target);
+    this.topLeftComponent.playerFieldGlow(this.glow_target);
+    this.bottomRightComponent.playerFieldGlow(this.glow_target);
+    this.topRightComponent.playerFieldGlow(this.glow_target);
+
     this.glow_target = !this.glow_target;
   }
   trigger_setMarketCards(){
