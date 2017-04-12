@@ -105,6 +105,7 @@ export class GameComponent  implements OnInit {
   playerSupplySledStatus_target:boolean=false;
   playerPlayerFieldStatus_target:boolean=false;
   roundNumber:number=3;
+  glow_target:boolean=true;
 
   //used in dragula drop
   playedBlueMarketCard_lever=false;
@@ -397,7 +398,7 @@ export class GameComponent  implements OnInit {
 
   initializeActivePlayer(currentActivePlayer){
 
-    this.bottomLeftComponent.playerFieldGlow();
+    this.bottomLeftComponent.playerFieldGlow(true);
 
   }
 
@@ -677,7 +678,8 @@ export class GameComponent  implements OnInit {
     this.topRightComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
   }
   trigger_FieldGlow(){
-    this.bottomLeftComponent.playerFieldGlow();
+    this.bottomLeftComponent.playerFieldGlow(this.glow_target);
+    this.glow_target = !this.glow_target;
   }
   trigger_setMarketCards(){
     this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
