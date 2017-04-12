@@ -20,7 +20,7 @@ export class StoneQuarry {
 
   constructor(numberOfStones_:number, startId_:number, colour_:ColourEnum, player_:User){
 
-    if(1){console.log("instantiate stone quarry: ", numberOfStones_, startId_, colour_, player_);}
+    if(0){console.log("instantiate stone quarry: ", numberOfStones_, startId_, colour_, player_);}
 
     this.colour=colour_;
     this.player=player_;

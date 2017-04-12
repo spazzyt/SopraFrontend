@@ -66,7 +66,7 @@ export class TopLeftComponent implements OnInit {
     // stone generated in supply sled
     // (used by dragula to copy)
     this.playerFieldStone = new Stone(30, ColourEnum.white);
-    console.log("ColourEnum: ", ColourEnum.white);
+    if(0){console.log("ColourEnum: ", ColourEnum.white);}
 
   }
 

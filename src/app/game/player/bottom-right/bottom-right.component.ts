@@ -67,7 +67,7 @@ export class BottomRightComponent implements OnInit {
     // stone generated in supply sled
     // (used by dragula to copy)
     this.playerFieldStone = new Stone(90, ColourEnum.gray)
-    console.log("ColourEnum: ", ColourEnum.gray);
+    if(0){console.log("ColourEnum: ", ColourEnum.gray);}
   }
 
   //===============

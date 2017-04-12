@@ -81,8 +81,9 @@ export class GameComponent  implements OnInit {
               private gameService: GameService,
               private _ngZone: NgZone) {
 
-    this.dragulaShipMovement_setOptions();
-    this.dragulaStoneMovement_setOptions();
+    let isCurrentActivePlayer=false;
+    this.dragulaShipMovement_setOptions(isCurrentActivePlayer);
+    this.dragulaStoneMovement_setOptions(isCurrentActivePlayer);
     this.dragula_subscribeDragEvent();
     this.dragula_subscribeDropEvent();
 
@@ -1302,94 +1303,344 @@ export class GameComponent  implements OnInit {
   //-----------------------------------
   //Draguala Ship Movement Set Options
   //-----------------------------------
-  dragulaShipMovement_setOptions(){
+  dragulaShipMovement_setOptions(isCurrentActivePlayer:boolean){
 
-    this.dragulaService.setOptions('harbours_bag', {
+    //-----------------------------------
+    //Options for the currentActivePlayer
+    //-----------------------------------
+    if (isCurrentActivePlayer){
 
-      accepts: function (el, target, source, sibling) {
+      this.dragulaService.setOptions('harbours_bag', {
 
-        /*where drop is allowed*/
+        accepts: function (el, target, source, sibling) {
 
-        if(0){console.log("harbours_bag:accepts ", `el: ${el}`);
-        console.log("harbours_bag:accepts ", `source: ${source}`);
-        console.log("harbours_bag:accepts ", `target: ${target}`);
-        console.log("harbours_bag:accepts ", `sibling: ${sibling}`);}
+          /*where drop is allowed*/
 
-        if (el && target && source){
+          console.log("testString", this.testString);
 
-          let isEmpty = target.innerHTML === "";
-          let isArrivingHarbour = target.parentElement.id === "arriving_harbours";
+          if(0){console.log("harbours_bag:accepts ", `el: ${el}`);
+          console.log("harbours_bag:accepts ", `source: ${source}`);
+          console.log("harbours_bag:accepts ", `target: ${target}`);
+          console.log("harbours_bag:accepts ", `sibling: ${sibling}`);}
 
+          if (el && target && source){
 
-          if(0){console.log("10.1.1 ", `el: ${el}`); //moved element
-           console.log("10.1.2 ", `el.id: ${el.id}`); //its id
-           console.log("10.2.1 ", `source: ${source}`); //source element
-           console.log("10.2.2 ", `source.id: ${source.id}`); //its id
-           console.log("10.2.1 ", `sibling: ${sibling}`);
-           console.log("10.3.1 ", `target: ${target}`); //target element
-           console.log("10.3.2 ", `target.id: ${target.id}`); //its id
-           console.log("10.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
-           console.log("10.4.1 ", `target.parentElement: ${target.parentElement}`);
-           console.log("10.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
-           console.log("10.5.1 ", "isEmpty: " ,isEmpty);
-           console.log("10.5.2 ", "isArrivingHarbour: " ,isArrivingHarbour);}
+            let isEmpty = target.innerHTML === "";
+            let isArrivingHarbour = target.parentElement.id === "arriving_harbours";
 
 
-          if (isEmpty && isArrivingHarbour) {
-            if(0){console.log("10.6.1 dragula-accepts:", "---ArrivingHarbour (True=drop allowed)---");}
-            return true;
+            if(0){console.log("10.1.1 ", `el: ${el}`); //moved element
+             console.log("10.1.2 ", `el.id: ${el.id}`); //its id
+             console.log("10.2.1 ", `source: ${source}`); //source element
+             console.log("10.2.2 ", `source.id: ${source.id}`); //its id
+             console.log("10.2.1 ", `sibling: ${sibling}`);
+             console.log("10.3.1 ", `target: ${target}`); //target element
+             console.log("10.3.2 ", `target.id: ${target.id}`); //its id
+             console.log("10.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
+             console.log("10.4.1 ", `target.parentElement: ${target.parentElement}`);
+             console.log("10.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
+             console.log("10.5.1 ", "isEmpty: " ,isEmpty);
+             console.log("10.5.2 ", "isArrivingHarbour: " ,isArrivingHarbour);}
+
+
+            if (isEmpty && isArrivingHarbour) {
+              if(0){console.log("10.6.1 dragula-accepts:", "---ArrivingHarbour (True=drop allowed)---");}
+              return true;
+            }
+            else {
+                if(0){console.log("10.6.2 dragula-accepts", "---ArrivingHarbour (False=drop disallowed)---");}
+              return false;
+            }
           }
-          else {
-              if(0){console.log("10.6.2 dragula-accepts", "---ArrivingHarbour (False=drop disallowed)---");}
+        },
+
+        moves: function (el, source, handle, sibling) {
+
+          /*element draggable*/
+
+          if(0){console.log("harbours_bag:moves ", `el: ${el}`);
+          console.log("harbours_bag:moves ", `source: ${source}`);
+          console.log("harbours_bag:moves ", `handle: ${handle}`);}
+
+          if (el && source && handle){
+            return true; //true: elements are always draggable by default
+          }
+          else{
             return false;
           }
-        }
-      },
+        },
 
-      moves: function (el, source, handle, sibling) {
+        isContainer: function (el) {
 
-        /*element draggable*/
+          if(0){console.log("harbours_bag:iscontainer ", `el: ${el}`);}
 
-        if(0){console.log("harbours_bag:moves ", `el: ${el}`);
-        console.log("harbours_bag:moves ", `source: ${source}`);
-        console.log("harbours_bag:moves ", `handle: ${handle}`);}
+          if (el) {
+            return false;  //only elements in drake.containers will be taken into account
+          }
+        },
 
-        if (el && source && handle){
-          return true; //true: elements are always draggable by default
-        }
-        else{
-          return false;
-        }
-      },
+        invalid: function (el, handle) {
 
-      isContainer: function (el) {
+          /*where drag is disallowed*/
 
-        if(0){console.log("harbours_bag:iscontainer ", `el: ${el}`);}
-
-        if (el) {
-          return false;  //only elements in drake.containers will be taken into account
-        }
-      },
-
-      invalid: function (el, handle) {
-
-        /*where drag is disallowed*/
-
-        if(0){console.log("harbours_bag:invalid ", `el: ${el}`);
-        console.log("harbours_bag:invalid ", `handle: ${handle}`);
-        console.log("harbours_bag:invalid ", `el.id: ${el.id}`);
-        console.log("harbours_bag:invalid ", `el.parent.parent.id: ${el.parentElement.parentElement.parentElement.id}`);}
+          if(0){console.log("harbours_bag:invalid ", `el: ${el}`);
+          console.log("harbours_bag:invalid ", `handle: ${handle}`);
+          console.log("harbours_bag:invalid ", `el.id: ${el.id}`);
+          console.log("harbours_bag:invalid ", `el.parent.parent.id: ${el.parentElement.parentElement.parentElement.id}`);}
 
 
-        /*departing harbour check: if isDepartingHarbour then set invalid*/
-        if (el && handle && el.parentElement && el.parentElement.parentElement
-          && el.parentElement.parentElement.parentElement) {
+          /*departing harbour check: if isDepartingHarbour then set invalid*/
+          if (el && handle && el.parentElement && el.parentElement.parentElement
+            && el.parentElement.parentElement.parentElement) {
 
-          /* BUT if enoughStones then set valid */
+            /* BUT if enoughStones then set valid */
 
-          let isDepartingHarbour = el.parentElement.parentElement.parentElement.id === "departing_harbours";
+            let isDepartingHarbour = el.parentElement.parentElement.parentElement.id === "departing_harbours";
 
-          if(1){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
+            if(1){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
+              if(isDepartingHarbour){
+
+                //<app-ship>
+                let appShip_id=el.id;
+                if(0){console.log("10.11.2 dragula-invalid", `appShip_id: ${appShip_id}`);};
+
+                //ship-<div>
+                let divShip_id=el.children[0].id;
+                if(0){console.log("10.11.3 dragula-invalid", `divShip_id: ${divShip_id}`);};
+
+                //ship-slots<div>
+                let divShip_divSlots_id = el.children[0].children[0].id;
+                if(0){console.log("10.11.4 dragula-invalid", `divShip_divSlots_id: ${divShip_divSlots_id}`);};
+
+                let divShip_divSlots_divSlot_id = el.children[0].children[0].children[0].id;
+                if(0){console.log("10.11.5 dragula-invalid", `divShip_divSlots_divSlot_id: ${divShip_divSlots_divSlot_id}`);};
+
+
+                //has ship enough stones
+                //----------------------
+                //(no helper functions allowed: this.hasShipEnoughStones(ship_i_slots_id);)
+
+                //count slots
+                let divShip_divSlots = el.children[0].children[0];
+                let countSlots:number=0;
+                if(divShip_divSlots.children[0]){
+                  countSlots+=1;
+                }
+                if(divShip_divSlots.children[1]){
+                  countSlots+=1;
+                }
+                if(divShip_divSlots.children[2]){
+                  countSlots+=1;
+                }
+                if(divShip_divSlots.children[3]){
+                  countSlots+=1;
+                }
+                if(0){console.log("10.11.6 dragula-invalid", `countSlots: ${countSlots}`);};
+
+
+                //count stones
+                let countStones:number=0;
+                if(divShip_divSlots.children[0]){
+                  if(divShip_divSlots.children[0].children[0]){countStones+=1;}
+                }
+                if(divShip_divSlots.children[1]){
+                  if(divShip_divSlots.children[1].children[0]){countStones+=1;}
+                }
+                if(divShip_divSlots.children[2]){
+                  if(divShip_divSlots.children[2].children[0]){countStones+=1;}
+                }
+                if(divShip_divSlots.children[3]){
+                  if(divShip_divSlots.children[3].children[0]){countStones+=1;}
+                }
+                if(0){console.log("10.11.7 dragula-invalid", `countStones: ${countStones}`);};
+
+
+                //check if it can move
+                let hasNotEnoughStones=true;
+                if(countSlots==1){
+                  if(countStones==1){hasNotEnoughStones=false;}
+                }
+                if(countSlots==2){
+                  if(countStones>=1){hasNotEnoughStones=false;}
+                }
+                if(countSlots==3){
+                  if(countStones>=2){hasNotEnoughStones=false;}
+                }
+                if(countSlots==4){
+                  if(countStones>=3){hasNotEnoughStones=false;}
+                }
+                if(1){console.log("10.11.8 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
+
+
+                let isInvalid = hasNotEnoughStones;
+
+                if(0){console.log("10.11.9 dragula-invalid", `isInvalid : ${isInvalid}`);};
+                if (isInvalid) {
+                  if(1){console.log("10.11.10 dragula-invalid", "---DepartingHarbour (True=drag disallowed)---");}
+                  return true;
+                }
+                else {
+                  if(1){console.log("10.11.11 dragula-invalid", "---DepartingHarbour (False=drag allowed)---");}
+                  return false; //false: don't prevent any drags from initiating by default
+                }
+              }
+          }
+
+
+          /*arriving harbour check: if isArrivingHarbour then set invalid*/
+          if (el && handle && el.parentElement && el.parentElement.parentElement) {
+
+            let isArrivingHarbour = el.parentElement.parentElement.id === "arriving_harbours";
+            let isInvalid = isArrivingHarbour;
+            if(0){console.log("10.12.0 dragula-invalid", `isArrivingHarbour: ${isArrivingHarbour}`);}
+
+            if (isInvalid) {
+              if(1){console.log("10.12.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
+              return true;
+            }
+            else {
+                if(1){console.log("10.12.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
+              return false; //false: don't prevent any drags from initiating by default
+            }
+          }
+
+        },
+
+        direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
+
+        copy: function (el, source) {
+
+          /*elements are copied or moved*/
+
+          if(0){console.log("harbours_bag:copy ", `el: ${el}`);
+          console.log("harbours_bag:copy ", `source: ${source}`);}
+
+          if (el && source) {
+
+            let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
+            let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
+
+
+            if(0){console.log("10.15.1 ", `el.id: ${el.id}`); //moved element
+             console.log("10.15.2 ", `el.className: ${el.className}`);
+             console.log("10.15.1 ", `el.isCopyClass: ${isCopyClass}`);
+             console.log("10.15.2 ", `el.isCopyId: ${isCopyId}`);}
+
+            if (isCopyClass || isCopyId) {
+              if(0){console.log("10.16.1 dragula-accepts", "---ArrivingHarbour (True=copy disallowed)---");}
+              return true;
+            }
+            else {
+                if(0){console.log("10.16.2 dragula-accepts", "---ArrivingHarbour (False=copy disallowed)---");}
+              return false;
+            }
+          }
+
+        },
+
+        //spilling will put the element back where it was dragged from, if this is true
+        revertOnSpill: false,
+
+        //spilling will `.remove` the element, if this is true
+        removeOnSpill: false,
+
+      });
+
+    }
+
+    //--------------------------------------
+    //Options for the currentInActivePlayers
+    //--------------------------------------
+    else{
+
+      this.dragulaService.setOptions('harbours_bag', {
+
+        accepts: function (el, target, source, sibling) {
+
+          /*where drop is allowed*/
+
+          console.log("testString", this.testString);
+
+          if(0){console.log("harbours_bag:accepts ", `el: ${el}`);
+            console.log("harbours_bag:accepts ", `source: ${source}`);
+            console.log("harbours_bag:accepts ", `target: ${target}`);
+            console.log("harbours_bag:accepts ", `sibling: ${sibling}`);}
+
+          if (el && target && source){
+
+            let isEmpty = target.innerHTML === "";
+            let isArrivingHarbour = target.parentElement.id === "arriving_harbours";
+
+
+            if(0){console.log("10.1.1 ", `el: ${el}`); //moved element
+              console.log("10.1.2 ", `el.id: ${el.id}`); //its id
+              console.log("10.2.1 ", `source: ${source}`); //source element
+              console.log("10.2.2 ", `source.id: ${source.id}`); //its id
+              console.log("10.2.1 ", `sibling: ${sibling}`);
+              console.log("10.3.1 ", `target: ${target}`); //target element
+              console.log("10.3.2 ", `target.id: ${target.id}`); //its id
+              console.log("10.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
+              console.log("10.4.1 ", `target.parentElement: ${target.parentElement}`);
+              console.log("10.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
+              console.log("10.5.1 ", "isEmpty: " ,isEmpty);
+              console.log("10.5.2 ", "isArrivingHarbour: " ,isArrivingHarbour);}
+
+
+            if (isEmpty && isArrivingHarbour) {
+              if(0){console.log("10.6.1 dragula-accepts:", "---ArrivingHarbour (True=drop allowed)---");}
+              return true;
+            }
+            else {
+              if(0){console.log("10.6.2 dragula-accepts", "---ArrivingHarbour (False=drop disallowed)---");}
+              return false;
+            }
+          }
+        },
+
+        moves: function (el, source, handle, sibling) {
+
+          /*element draggable*/
+
+          if(0){console.log("harbours_bag:moves ", `el: ${el}`);
+            console.log("harbours_bag:moves ", `source: ${source}`);
+            console.log("harbours_bag:moves ", `handle: ${handle}`);}
+
+          if (el && source && handle){
+            return true; //true: elements are always draggable by default
+          }
+          else{
+            return false;
+          }
+        },
+
+        isContainer: function (el) {
+
+          if(0){console.log("harbours_bag:iscontainer ", `el: ${el}`);}
+
+          if (el) {
+            return false;  //only elements in drake.containers will be taken into account
+          }
+        },
+
+        invalid: function (el, handle) {
+
+          /*where drag is disallowed*/
+
+          if(0){console.log("harbours_bag:invalid ", `el: ${el}`);
+            console.log("harbours_bag:invalid ", `handle: ${handle}`);
+            console.log("harbours_bag:invalid ", `el.id: ${el.id}`);
+            console.log("harbours_bag:invalid ", `el.parent.parent.id: ${el.parentElement.parentElement.parentElement.id}`);}
+
+
+          /*departing harbour check: if isDepartingHarbour then set invalid*/
+          if (el && handle && el.parentElement && el.parentElement.parentElement
+            && el.parentElement.parentElement.parentElement) {
+
+            /* BUT if enoughStones then set valid */
+
+            let isDepartingHarbour = el.parentElement.parentElement.parentElement.id === "departing_harbours";
+
+            if(1){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
             if(isDepartingHarbour){
 
               //<app-ship>
@@ -1476,67 +1727,70 @@ export class GameComponent  implements OnInit {
                 return false; //false: don't prevent any drags from initiating by default
               }
             }
-        }
-
-
-        /*arriving harbour check: if isArrivingHarbour then set invalid*/
-        if (el && handle && el.parentElement && el.parentElement.parentElement) {
-
-          let isArrivingHarbour = el.parentElement.parentElement.id === "arriving_harbours";
-          let isInvalid = isArrivingHarbour;
-          if(0){console.log("10.12.0 dragula-invalid", `isArrivingHarbour: ${isArrivingHarbour}`);}
-
-          if (isInvalid) {
-            if(1){console.log("10.12.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
-            return true;
           }
-          else {
+
+
+          /*arriving harbour check: if isArrivingHarbour then set invalid*/
+          if (el && handle && el.parentElement && el.parentElement.parentElement) {
+
+            let isArrivingHarbour = el.parentElement.parentElement.id === "arriving_harbours";
+            let isInvalid = isArrivingHarbour;
+            if(0){console.log("10.12.0 dragula-invalid", `isArrivingHarbour: ${isArrivingHarbour}`);}
+
+            if (isInvalid) {
+              if(1){console.log("10.12.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
+              return true;
+            }
+            else {
               if(1){console.log("10.12.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
-            return false; //false: don't prevent any drags from initiating by default
+              return false; //false: don't prevent any drags from initiating by default
+            }
           }
-        }
 
-      },
+        },
 
-      direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
+        direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
 
-      copy: function (el, source) {
+        copy: function (el, source) {
 
-        /*elements are copied or moved*/
+          /*elements are copied or moved*/
 
-        if(0){console.log("harbours_bag:copy ", `el: ${el}`);
-        console.log("harbours_bag:copy ", `source: ${source}`);}
+          if(0){console.log("harbours_bag:copy ", `el: ${el}`);
+            console.log("harbours_bag:copy ", `source: ${source}`);}
 
-        if (el && source) {
+          if (el && source) {
 
-          let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
-          let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
+            let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
+            let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
 
 
-          if(0){console.log("10.15.1 ", `el.id: ${el.id}`); //moved element
-           console.log("10.15.2 ", `el.className: ${el.className}`);
-           console.log("10.15.1 ", `el.isCopyClass: ${isCopyClass}`);
-           console.log("10.15.2 ", `el.isCopyId: ${isCopyId}`);}
+            if(0){console.log("10.15.1 ", `el.id: ${el.id}`); //moved element
+              console.log("10.15.2 ", `el.className: ${el.className}`);
+              console.log("10.15.1 ", `el.isCopyClass: ${isCopyClass}`);
+              console.log("10.15.2 ", `el.isCopyId: ${isCopyId}`);}
 
-          if (isCopyClass || isCopyId) {
-            if(0){console.log("10.16.1 dragula-accepts", "---ArrivingHarbour (True=copy disallowed)---");}
-            return true;
-          }
-          else {
+            if (isCopyClass || isCopyId) {
+              if(0){console.log("10.16.1 dragula-accepts", "---ArrivingHarbour (True=copy disallowed)---");}
+              return true;
+            }
+            else {
               if(0){console.log("10.16.2 dragula-accepts", "---ArrivingHarbour (False=copy disallowed)---");}
-            return false;
+              return false;
+            }
           }
-        }
 
-      },
+        },
 
-      //spilling will put the element back where it was dragged from, if this is true
-      revertOnSpill: false,
+        //spilling will put the element back where it was dragged from, if this is true
+        revertOnSpill: false,
 
-      //spilling will `.remove` the element, if this is true
-      removeOnSpill: false,
+        //spilling will `.remove` the element, if this is true
+        removeOnSpill: false,
 
-    });
+      });
+
+
+    }
   }
 
 
@@ -1544,150 +1798,309 @@ export class GameComponent  implements OnInit {
   //Draguala Stone Movement Set Options
   //-----------------------------------
 
-  dragulaStoneMovement_setOptions(){
-    this.dragulaService.setOptions('stone_slots_bag', {
+  dragulaStoneMovement_setOptions(isCurrentActivePlayer:boolean){
 
-      accepts: function (el, target, source, sibling) {
+    //-----------------------------------
+    //Options for the currentActivePlayer
+    //-----------------------------------
+    if (isCurrentActivePlayer){
 
-        /*where drop is allowed*/
+      this.dragulaService.setOptions('stone_slots_bag', {
 
-        if(0){console.log("stone_slots_bag:accepts ", `el: ${el}`);
-        console.log("stone_slots_bag:accepts ", `source: ${source}`);
-        console.log("stone_slots_bag:accepts ", `target: ${target}`);
-        console.log("stone_slots_bag:accepts ", `sibling: ${sibling}`);}
+        accepts: function (el, target, source, sibling) {
 
-        if (el && target && source){
+          /*where drop is allowed*/
 
-          let isEmpty = target.innerHTML === "";
-          let isStoneSlot_1 = target.parentElement.id === "ship_1_slots";
-          let isStoneSlot_2 = target.parentElement.id === "ship_2_slots";
-          let isStoneSlot_3 = target.parentElement.id === "ship_3_slots";
-          let isStoneSlot_4 = target.parentElement.id === "ship_4_slots";
+          if(0){console.log("stone_slots_bag:accepts ", `el: ${el}`);
+          console.log("stone_slots_bag:accepts ", `source: ${source}`);
+          console.log("stone_slots_bag:accepts ", `target: ${target}`);
+          console.log("stone_slots_bag:accepts ", `sibling: ${sibling}`);}
 
+          if (el && target && source){
 
-          if(0){console.log("11.1.1 ", `el: ${el}`); //moved element
-           console.log("11.1.2 ", `el.id: ${el.id}`); //its id
-           console.log("11.2.1 ", `source: ${source}`); //source element
-           console.log("11.2.2 ", `source.id: ${source.id}`); //its id
-           console.log("11.2.1 ", `sibling: ${sibling}`);
-           console.log("11.3.1 ", `target: ${target}`); //target element
-           console.log("11.3.2 ", `target.id: ${target.id}`); //its id
-           console.log("11.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
-           console.log("11.4.1 ", `target.parentElement: ${target.parentElement}`);
-           console.log("11.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
-           console.log("11.5.1 ", "isEmpty: " ,isEmpty);
-           console.log("11.5.2 ", "isStoneSlot_1: " ,isStoneSlot_1);
-           console.log("11.5.3 ", "isStoneSlot_2: " ,isStoneSlot_2);
-           console.log("11.5.4 ", "isStoneSlot_3: " ,isStoneSlot_3);
-           console.log("11.5.5 ", "isStoneSlot_4: " ,isStoneSlot_4);}
+            let isEmpty = target.innerHTML === "";
+            let isStoneSlot_1 = target.parentElement.id === "ship_1_slots";
+            let isStoneSlot_2 = target.parentElement.id === "ship_2_slots";
+            let isStoneSlot_3 = target.parentElement.id === "ship_3_slots";
+            let isStoneSlot_4 = target.parentElement.id === "ship_4_slots";
 
 
-          if (isEmpty && (isStoneSlot_1 || isStoneSlot_2 || isStoneSlot_3 || isStoneSlot_4 )) {
-            if(0){console.log("11.6.1 dragula-accepts:", "---ship slots (True=drop allowed)---");}
+            if(0){console.log("11.1.1 ", `el: ${el}`); //moved element
+             console.log("11.1.2 ", `el.id: ${el.id}`); //its id
+             console.log("11.2.1 ", `source: ${source}`); //source element
+             console.log("11.2.2 ", `source.id: ${source.id}`); //its id
+             console.log("11.2.1 ", `sibling: ${sibling}`);
+             console.log("11.3.1 ", `target: ${target}`); //target element
+             console.log("11.3.2 ", `target.id: ${target.id}`); //its id
+             console.log("11.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
+             console.log("11.4.1 ", `target.parentElement: ${target.parentElement}`);
+             console.log("11.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
+             console.log("11.5.1 ", "isEmpty: " ,isEmpty);
+             console.log("11.5.2 ", "isStoneSlot_1: " ,isStoneSlot_1);
+             console.log("11.5.3 ", "isStoneSlot_2: " ,isStoneSlot_2);
+             console.log("11.5.4 ", "isStoneSlot_3: " ,isStoneSlot_3);
+             console.log("11.5.5 ", "isStoneSlot_4: " ,isStoneSlot_4);}
+
+
+            if (isEmpty && (isStoneSlot_1 || isStoneSlot_2 || isStoneSlot_3 || isStoneSlot_4 )) {
+              if(0){console.log("11.6.1 dragula-accepts:", "---ship slots (True=drop allowed)---");}
+              return true;
+            }
+            else {
+                if(0){console.log("11.6.2 dragula-accepts:", "---ship slots (True=drop allowed)---");}
+              return false;
+            }
+          }
+
+        },
+
+        moves: function (el, source, handle, sibling) {
+
+          if(0){console.log("stone_slots_bag:moves ", `el: ${el}`);
+          console.log("stone_slots_bag:moves ", `source: ${source}`);
+          console.log("stone_slots_bag:moves ", `handle: ${handle}`);}
+
+
+          if (el && source && handle) {
+            return true; //true: elements are always draggable by default
+          }
+          else{
+            return false;
+          }
+        },
+
+        isContainer: function (el) {
+
+          if(0){console.log("stone_slots_bag:iscontainer ", `el: ${el}`);}
+
+          if (el) {
+            return false;  //only elements in drake.containers will be taken into account
+          }
+          else{
             return true;
           }
-          else {
+        },
+
+        invalid: function (el, handle) {
+
+          /*where drag is disallowed*/
+
+          if(0){console.log("stone_slots_bag:invalid ", `el: ${el}`);
+          console.log("stone_slots_bag:invalid ", `handle: ${handle}`);
+          console.log("stone_slots_bag:invalid ", `el.parent.parent: ${el.parentElement.parentElement}`);}
+
+          if (el && handle && el.parentElement.parentElement) {
+
+            let isStoneSlot = el.parentElement.parentElement.classList.contains('ship_slots');
+            let isInvalid = isStoneSlot;
+
+            if (isInvalid) {
+              if(0){console.log("10.10.1 dragula-invalid:", "---ship slots (True=drag disallowed)---");}
+
+              return true;
+            }
+            else {
+              if(0){console.log("10.10.2 dragula-invalid:", "---ship slots (False=drag allowed)---");}
+
+              return false; //false: don't prevent any drags from initiating by default
+            }
+          }
+
+        },
+
+        direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
+
+        //copy: true, //false: elements are moved by default, not copied. true: copies el to target and leaves it in source
+        copy: function (el, source) {
+
+          /*elements are copied or moved*/
+
+          if(0){console.log("stone_slots_bag:copy ", `el: ${el.id}`);
+          console.log("stone_slots_bag:copy ", `source: ${source}`);}
+
+
+          if (el && source) {
+
+            let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
+            let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
+
+
+            if(0){console.log("11.15.1 ", `el.id: ${el.id}`); //moved element
+             console.log("11.15.2 ", `el.className: ${el.className}`);
+             console.log("11.15.1 ", `el.isCopyClass: ${isCopyClass}`);
+             console.log("11.15.2 ", `el.isCopyId: ${isCopyId}`);}
+
+            if (isCopyClass || isCopyId) {
+              if(0){console.log("11.16.1 dragula-copy:", "---stones (True=copy allowed)---");}
+              return true;
+            }
+            else {
+                if(0){console.log("11.16.2 dragula-copy:", "---stones (False=copy disallowed)---");}
+              return false;
+            }
+          }
+
+        },
+
+        //spilling will put the element back where it was dragged from, if this is true
+        revertOnSpill: false,
+
+        // spilling will `.remove` the element, if this is true
+        removeOnSpill: false,
+      });
+    }
+
+    //--------------------------------------
+    //Options for the currentInActivePlayers
+    //--------------------------------------
+    else{
+
+      this.dragulaService.setOptions('stone_slots_bag', {
+
+        accepts: function (el, target, source, sibling) {
+
+          /*where drop is allowed*/
+
+          if(0){console.log("stone_slots_bag:accepts ", `el: ${el}`);
+            console.log("stone_slots_bag:accepts ", `source: ${source}`);
+            console.log("stone_slots_bag:accepts ", `target: ${target}`);
+            console.log("stone_slots_bag:accepts ", `sibling: ${sibling}`);}
+
+          if (el && target && source){
+
+            let isEmpty = target.innerHTML === "";
+            let isStoneSlot_1 = target.parentElement.id === "ship_1_slots";
+            let isStoneSlot_2 = target.parentElement.id === "ship_2_slots";
+            let isStoneSlot_3 = target.parentElement.id === "ship_3_slots";
+            let isStoneSlot_4 = target.parentElement.id === "ship_4_slots";
+
+
+            if(0){console.log("11.1.1 ", `el: ${el}`); //moved element
+              console.log("11.1.2 ", `el.id: ${el.id}`); //its id
+              console.log("11.2.1 ", `source: ${source}`); //source element
+              console.log("11.2.2 ", `source.id: ${source.id}`); //its id
+              console.log("11.2.1 ", `sibling: ${sibling}`);
+              console.log("11.3.1 ", `target: ${target}`); //target element
+              console.log("11.3.2 ", `target.id: ${target.id}`); //its id
+              console.log("11.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
+              console.log("11.4.1 ", `target.parentElement: ${target.parentElement}`);
+              console.log("11.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
+              console.log("11.5.1 ", "isEmpty: " ,isEmpty);
+              console.log("11.5.2 ", "isStoneSlot_1: " ,isStoneSlot_1);
+              console.log("11.5.3 ", "isStoneSlot_2: " ,isStoneSlot_2);
+              console.log("11.5.4 ", "isStoneSlot_3: " ,isStoneSlot_3);
+              console.log("11.5.5 ", "isStoneSlot_4: " ,isStoneSlot_4);}
+
+
+            if (isEmpty && (isStoneSlot_1 || isStoneSlot_2 || isStoneSlot_3 || isStoneSlot_4 )) {
+              if(0){console.log("11.6.1 dragula-accepts:", "---ship slots (True=drop allowed)---");}
+              return true;
+            }
+            else {
               if(0){console.log("11.6.2 dragula-accepts:", "---ship slots (True=drop allowed)---");}
+              return false;
+            }
+          }
+
+        },
+
+        moves: function (el, source, handle, sibling) {
+
+          if(0){console.log("stone_slots_bag:moves ", `el: ${el}`);
+            console.log("stone_slots_bag:moves ", `source: ${source}`);
+            console.log("stone_slots_bag:moves ", `handle: ${handle}`);}
+
+
+          if (el && source && handle) {
+            return true; //true: elements are always draggable by default
+          }
+          else{
             return false;
           }
-        }
+        },
 
-      },
+        isContainer: function (el) {
 
-      moves: function (el, source, handle, sibling) {
+          if(0){console.log("stone_slots_bag:iscontainer ", `el: ${el}`);}
 
-        if(0){console.log("stone_slots_bag:moves ", `el: ${el}`);
-        console.log("stone_slots_bag:moves ", `source: ${source}`);
-        console.log("stone_slots_bag:moves ", `handle: ${handle}`);}
-
-
-        if (el && source && handle) {
-          return true; //true: elements are always draggable by default
-        }
-        else{
-          return false;
-        }
-      },
-
-      isContainer: function (el) {
-
-        if(0){console.log("stone_slots_bag:iscontainer ", `el: ${el}`);}
-
-        if (el) {
-          return false;  //only elements in drake.containers will be taken into account
-        }
-        else{
-          return true;
-        }
-      },
-
-      invalid: function (el, handle) {
-
-        /*where drag is disallowed*/
-
-        if(0){console.log("stone_slots_bag:invalid ", `el: ${el}`);
-        console.log("stone_slots_bag:invalid ", `handle: ${handle}`);
-        console.log("stone_slots_bag:invalid ", `el.parent.parent: ${el.parentElement.parentElement}`);}
-
-        if (el && handle && el.parentElement.parentElement) {
-
-          let isStoneSlot = el.parentElement.parentElement.classList.contains('ship_slots');
-          let isInvalid = isStoneSlot;
-
-          if (isInvalid) {
-            if(0){console.log("10.10.1 dragula-invalid:", "---ship slots (True=drag disallowed)---");}
-
+          if (el) {
+            return false;  //only elements in drake.containers will be taken into account
+          }
+          else{
             return true;
           }
-          else {
-            if(0){console.log("10.10.2 dragula-invalid:", "---ship slots (False=drag allowed)---");}
+        },
 
-            return false; //false: don't prevent any drags from initiating by default
+        invalid: function (el, handle) {
+
+          /*where drag is disallowed*/
+
+          if(0){console.log("stone_slots_bag:invalid ", `el: ${el}`);
+            console.log("stone_slots_bag:invalid ", `handle: ${handle}`);
+            console.log("stone_slots_bag:invalid ", `el.parent.parent: ${el.parentElement.parentElement}`);}
+
+          if (el && handle && el.parentElement.parentElement) {
+
+            let isStoneSlot = el.parentElement.parentElement.classList.contains('ship_slots');
+            let isInvalid = isStoneSlot;
+
+            if (isInvalid) {
+              if(0){console.log("10.10.1 dragula-invalid:", "---ship slots (True=drag disallowed)---");}
+
+              return true;
+            }
+            else {
+              if(0){console.log("10.10.2 dragula-invalid:", "---ship slots (False=drag allowed)---");}
+
+              return false; //false: don't prevent any drags from initiating by default
+            }
           }
-        }
 
-      },
+        },
 
-      direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
+        direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
 
-      //copy: true, //false: elements are moved by default, not copied. true: copies el to target and leaves it in source
-      copy: function (el, source) {
+        //copy: true, //false: elements are moved by default, not copied. true: copies el to target and leaves it in source
+        copy: function (el, source) {
 
-        /*elements are copied or moved*/
+          /*elements are copied or moved*/
 
-        if(0){console.log("stone_slots_bag:copy ", `el: ${el.id}`);
-        console.log("stone_slots_bag:copy ", `source: ${source}`);}
-
-
-        if (el && source) {
-
-          let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
-          let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
+          if(0){console.log("stone_slots_bag:copy ", `el: ${el.id}`);
+            console.log("stone_slots_bag:copy ", `source: ${source}`);}
 
 
-          if(0){console.log("11.15.1 ", `el.id: ${el.id}`); //moved element
-           console.log("11.15.2 ", `el.className: ${el.className}`);
-           console.log("11.15.1 ", `el.isCopyClass: ${isCopyClass}`);
-           console.log("11.15.2 ", `el.isCopyId: ${isCopyId}`);}
+          if (el && source) {
 
-          if (isCopyClass || isCopyId) {
-            if(0){console.log("11.16.1 dragula-copy:", "---stones (True=copy allowed)---");}
-            return true;
-          }
-          else {
+            let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
+            let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
+
+
+            if(0){console.log("11.15.1 ", `el.id: ${el.id}`); //moved element
+              console.log("11.15.2 ", `el.className: ${el.className}`);
+              console.log("11.15.1 ", `el.isCopyClass: ${isCopyClass}`);
+              console.log("11.15.2 ", `el.isCopyId: ${isCopyId}`);}
+
+            if (isCopyClass || isCopyId) {
+              if(0){console.log("11.16.1 dragula-copy:", "---stones (True=copy allowed)---");}
+              return true;
+            }
+            else {
               if(0){console.log("11.16.2 dragula-copy:", "---stones (False=copy disallowed)---");}
-            return false;
+              return false;
+            }
           }
-        }
 
-      },
+        },
 
-      //spilling will put the element back where it was dragged from, if this is true
-      revertOnSpill: false,
+        //spilling will put the element back where it was dragged from, if this is true
+        revertOnSpill: false,
 
-      // spilling will `.remove` the element, if this is true
-      removeOnSpill: false,
-    });
+        // spilling will `.remove` the element, if this is true
+        removeOnSpill: false,
+      });
+    }
+
+
   }
 
 

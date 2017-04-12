@@ -218,14 +218,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[0] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bll_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[1] == false) {
@@ -234,14 +234,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[1] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bml_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[2] == false) {
@@ -250,14 +250,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[2] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bmr_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[3] == false) {
@@ -266,14 +266,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[3] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#brr_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
 
@@ -286,14 +286,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[4] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#tll_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[5] == false) {
@@ -302,14 +302,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[5] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#tml_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[6] == false) {
@@ -318,14 +318,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[6] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#tmr_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[7] == false) {
@@ -334,14 +334,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[7] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#trr_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
 
@@ -354,14 +354,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[8] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#purple_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
 }
@@ -375,14 +375,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateStoneQuarry: false")
+      if(0){console.log("deactivateOrActivateStoneQuarry: false")}
     }
     if (playerStoneQuarryStatus_target == true){
       (<any>$(document)).ready(function (){
         (<any>$("#quarry_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateStoneQuarry: true")
+      if(0){console.log("deactivateOrActivateStoneQuarry: true")}
     }
 
   }
@@ -395,14 +395,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateSupplySled: false")
+      if(0){console.log("deactivateOrActivateSupplySled: false")}
     }
     if (playerSupplySledStatus_target == true){
       (<any>$(document)).ready(function (){
         (<any>$("#supply_sled_1")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateSupplySled: true")
+      if(0){console.log("deactivateOrActivateSupplySled: true")}
     }
 
   }
@@ -415,14 +415,14 @@ export class BottomLeftComponent implements OnInit {
 
       });
 
-      console.log("playerPlayerFieldStatus: false")
+      if(0){console.log("playerPlayerFieldStatus: false")}
     }
     if (playerPlayerFieldStatus_target == true){
       (<any>$(document)).ready(function (){
         (<any>$("#playerField_1")).css("opacity", "1.0");
 
       });
-      console.log("playerPlayerFieldStatus: true")
+      if(0){console.log("playerPlayerFieldStatus: true")}
     }
 
 
