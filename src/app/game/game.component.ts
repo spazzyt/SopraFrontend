@@ -62,6 +62,16 @@ export class GameComponent  implements OnInit {
   // get username from userService
   myUserName:string=this.userService.mySelf().username;
 
+  // am I the current active player
+  amI_CurrentActivePlayer;
+
+  // my player field (bottom-left, top-left, top-right, bottom-right)
+  myPlayerField;
+
+  // player field of current active player
+  currentActivePlayerField;
+
+
   // Current Target (Soll) Game state
   // ( current-game-state package from backend sent to all players)
   currentTargetGameState:CurrentGameState;
@@ -95,12 +105,8 @@ export class GameComponent  implements OnInit {
               private route: ActivatedRoute,
               private _ngZone: NgZone) {
 
-    let isCurrentActivePlayer=false;
-    this.dragulaShipMovement_setOptions(isCurrentActivePlayer);
-    this.dragulaStoneMovement_setOptions(isCurrentActivePlayer);
     this.dragula_subscribeDragEvent();
     this.dragula_subscribeDropEvent();
-
 
   }
 
@@ -153,10 +159,10 @@ export class GameComponent  implements OnInit {
 
 
   //Fake Players
-  player1= new User(1, "Username 1", ColourEnum.black);
-  player2= new User(2, "Username 2", ColourEnum.white);
-  player3= new User(3, "Username 3", ColourEnum.brown);
-  player4= new User(4, "Username 4", ColourEnum.gray);
+  player1= new User(1, "DAVID", ColourEnum.black);
+  player2= new User(2, "VINCENT", ColourEnum.white);
+  player3= new User(3, "KENNY", ColourEnum.brown);
+  player4= new User(4, "ROLAND", ColourEnum.gray);
 
   players_target = new Array<User>();
 
@@ -186,16 +192,9 @@ export class GameComponent  implements OnInit {
         });
     }
 
+    //Initialize the new game
+    this.initializeNewGame(this.getFakeGame());
 
-    //snackbar: needs to be initialized in ngOnInit()
-    this.generateSnackbarDiv();
-
-    //Generate the new game
-    this.generateNewGame(this.getFakeGame());
-
-    // Test for activating/deactivating functions
-    //this.deactivateInactivePlayerInteractions(this.game.players);
-    this.activateEverything(this.game.currentActivePlayer);
 
   }
 
@@ -239,29 +238,58 @@ export class GameComponent  implements OnInit {
   }
 
 
-  generateNewGame(game_backend:Game){
+  //===========================================================
+  // Initialize the new game:
+  // All components, MySelf (either active or inactive player)
+  //===========================================================
 
+  initializeNewGame(game_backend:Game){
+
+    //set class variable
     this.game = game_backend;
 
-    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers,
-      game_backend.currentActivePlayer);
-
+    //Site Board Components: the island
     this.initializeMarketComponent(game_backend.marketCards);
     this.initializeObeliskComponent();
     this.initializePyramidComponent();
     this.initializeTempleComponent();
     this.initializeBurialChamberComponent();
+
+    //Departing Harbour: the ships
     this.initializeDepartingHarbourComponent(game_backend.ships);
 
-    //this.initializeActivePlayer(game_backend.currentActivePlayer);
-    //this.switchOnActivePlayer(game_backend.currentActivePlayer);
+    //Determine whether you are the active player
+    let amI_CurrentActivePlayer=game_backend.currentActivePlayer.username===this.myUserName;
+    this.amI_CurrentActivePlayer=amI_CurrentActivePlayer;
 
-    //this.initializeInactivePlayers(game_backend.players);
-    //this.switchOffInactivePlayers(game_backend.players);
+    //Determine player field of current active player
+    let currentActivePlayerField=this.determineCurrentActivePlayerField(
+      game_backend.currentActivePlayer.username,
+      game_backend.players
+    );
+    this.currentActivePlayerField=currentActivePlayerField;
+
+    //Player Component: the four player fields (what everyone concerns)
+    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers,
+      currentActivePlayerField);
+
+    //Initialize Myself
+    //Depending on whether you are the active or inactive player
+    this.initializeMySelf(amI_CurrentActivePlayer, currentActivePlayerField);
+
+    // set Dragula Options (Depending on whether you are the active or inactive player)
+    //---------------------------------------------------------------------------------
+    this.dragulaShipMovement_setOptions(amI_CurrentActivePlayer);
+    this.dragulaStoneMovement_setOptions(amI_CurrentActivePlayer);
+
+    //snackbar
+    this.generateSnackbarDiv();
 
   }
 
-  initializePlayerComponents(players_:User[], numPlayers_:number, currentActivePlayer:User) {
+  // Init Player Components (what everyone concerns)
+  //------------------------------------------------
+  initializePlayerComponents(players_:User[], numPlayers_:number, currentActivePlayerField:string) {
 
     for (let i = 1; i <= numPlayers_; i++) {
 
@@ -296,15 +324,16 @@ export class GameComponent  implements OnInit {
         // set playerName shown in PlayerField
         this.bottomLeftComponent.setPlayerName(players_[0].username);
 
-        //undraggable: hide stones of other players OR hide stones of inactive players
-        //if(players_[0].username===this.myUserName){
-        if(players_[0].username===currentActivePlayer.username){
-          this.topLeftComponent.hideStone();
-          this.topRightComponent.hideStone();
-          this.bottomRightComponent.hideStone();
+        //Determine which playerField you have
+        if(players_[0].username===this.myUserName){
+          this.myPlayerField="bottom-left"
         }
 
-
+        //let active player field glow
+        this.bottomLeftComponent.playerFieldGlow(true);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(false);
       }
 
       //topLeftComponent
@@ -338,13 +367,11 @@ export class GameComponent  implements OnInit {
         // set playerName shown in PlayerField
         this.topLeftComponent.setPlayerName(players_[1].username);
 
-        //undraggable: hide stones of other players OR hide stones of inactive players
-        //if(players_[1].username===this.myUserName){
-        if(players_[1].username===currentActivePlayer.username){
-          this.bottomLeftComponent.hideStone();
-          this.topRightComponent.hideStone();
-          this.bottomRightComponent.hideStone();
-        }
+        //let active player field glow
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(true);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(false);
 
       }
 
@@ -379,12 +406,11 @@ export class GameComponent  implements OnInit {
         // set playerName shown in PlayerField
         this.topRightComponent.setPlayerName(players_[2].username);
 
-        //if(players_[2].username===this.myUserName){
-        if(players_[2].username===currentActivePlayer.username){
-          this.bottomLeftComponent.hideStone();
-          this.topLeftComponent.hideStone();
-          this.bottomRightComponent.hideStone();
-        }
+        //let active player field glow
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(true);
+        this.bottomRightComponent.playerFieldGlow(false);
 
       }
 
@@ -419,21 +445,22 @@ export class GameComponent  implements OnInit {
         // set playerName shown in PlayerField
         this.bottomRightComponent.setPlayerName(players_[3].username);
 
-        //if(players_[3].username===this.myUserName){
-        if(players_[3].username===currentActivePlayer.username){
-          this.topLeftComponent.hideStone();
-          this.topRightComponent.hideStone();
-        }
+        //let active player field glow
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(true);
+
       }
     }
   }
 
-
+  // Init Sites
+  //-----------
   initializeMarketComponent(marketCards:MarketCard[]){
     this.marketComponent.removeUnusedMarketCards();
     this.marketComponent.generateFourMarketCards(marketCards);
   }
-
 
   initializeObeliskComponent(){
     let obelisk:Obelisk;
@@ -457,13 +484,96 @@ export class GameComponent  implements OnInit {
     this.burialChamberComponent.removeStones();
   }
 
+
+  // Init Departing Harbour and Ships
+  //---------------------------------
   initializeDepartingHarbourComponent(ships:Ship[]){
     this.departingHarbourComponent.generateFourShips(ships);
   }
 
-  initializeActivePlayer(currentActivePlayer){
+  // Determine the current active player field
+  //------------------------------------------
+  determineCurrentActivePlayerField(activePlayer_, players_):string{
 
-    this.bottomLeftComponent.playerFieldGlow(true);
+    let currentActivePlayerField;
+
+    if(activePlayer_===players_[0].username){
+      currentActivePlayerField="bottom-left";
+    }
+    else if(activePlayer_===players_[1].username){
+      currentActivePlayerField="top-left";
+    }
+    else if(activePlayer_===players_[2].username){
+      currentActivePlayerField="top-right";
+    }
+    else if(activePlayer_===players_[3].username){
+      currentActivePlayerField="bottom-right";
+    }
+
+    return currentActivePlayerField;
+  }
+
+
+  // Init MySelf ( depending on whether you are the active or inactive player)
+  //--------------------------------------------------------------------------
+  initializeMySelf(amI_CurrentActivePlayer, currentActivePlayerField){
+
+
+    //I am the active player
+    //----------------------
+    if (amI_CurrentActivePlayer){
+
+      //show my stone in sled, hide the others
+      if(currentActivePlayerField=="bottom-left"){
+        this.bottomLeftComponent.showStone();
+        this.topLeftComponent.hideStone();
+        this.topRightComponent.hideStone();
+        this.bottomRightComponent.hideStone();
+      }
+      if(this.myPlayerField=="top-left"){
+        this.bottomLeftComponent.hideStone();
+        this.topLeftComponent.showStone();
+        this.topRightComponent.hideStone();
+        this.bottomRightComponent.hideStone();
+      }
+      if(this.myPlayerField=="top-right"){
+        this.bottomLeftComponent.hideStone();
+        this.topLeftComponent.hideStone();
+        this.topRightComponent.showStone();
+        this.bottomRightComponent.hideStone();
+      }
+      if(this.myPlayerField=="bottom-right"){
+        this.bottomLeftComponent.hideStone();
+        this.topLeftComponent.hideStone();
+        this.topRightComponent.hideStone();
+        this.bottomRightComponent.showStone();
+      }
+
+      //add all click handlers (start easy)
+      this.activateEverything(this.game.currentActivePlayer);
+
+      //add the right click handlers
+      this.activateActivePlayerInteractions(this.game.currentActivePlayer);
+
+
+    }
+
+    //I am an inactive player
+    //-----------------------
+    else{
+
+      //remove all stones in sleds
+      this.bottomLeftComponent.hideStone();
+      this.topLeftComponent.hideStone();
+      this.topRightComponent.hideStone();
+      this.bottomRightComponent.hideStone;
+
+      //remove all click handlers
+      this.deactivateInactivePlayerInteractions(this.game.players);
+
+
+    }
+
 
   }
 
@@ -472,9 +582,6 @@ export class GameComponent  implements OnInit {
 
   }
 
-  initializeInactivePlayers(players_){
-
-  }
 
   switchOffInactivePlayers(players_){
 
@@ -595,7 +702,7 @@ export class GameComponent  implements OnInit {
   }
 
     //build in switch statements
-    activateActivePlayerInteractions(){
+    activateActivePlayerInteractions(currentActivePlayer:User){
 
 
 
@@ -1385,6 +1492,7 @@ export class GameComponent  implements OnInit {
 
     //-----------------------------------
     //Options for the currentActivePlayer
+    //he has all options acc. to the rules
     //-----------------------------------
     if (isCurrentActivePlayer){
 
@@ -1626,9 +1734,10 @@ export class GameComponent  implements OnInit {
 
     }
 
-    //--------------------------------------
-    //Options for the currentInActivePlayers
-    //--------------------------------------
+    //------------------------------------------
+    //Options for all the currentInActivePlayers
+    // they cannot drag anything
+    //------------------------------------------
     else{
 
       this.dragulaService.setOptions('harbours_bag', {
@@ -1636,8 +1745,6 @@ export class GameComponent  implements OnInit {
         accepts: function (el, target, source, sibling) {
 
           /*where drop is allowed*/
-
-          console.log("testString", this.testString);
 
           if(0){console.log("harbours_bag:accepts ", `el: ${el}`);
             console.log("harbours_bag:accepts ", `source: ${source}`);
@@ -1665,8 +1772,8 @@ export class GameComponent  implements OnInit {
 
 
             if (isEmpty && isArrivingHarbour) {
-              if(0){console.log("10.6.1 dragula-accepts:", "---ArrivingHarbour (True=drop allowed)---");}
-              return true;
+              if(0){console.log("10.6.1 dragula-accepts:", "---ArrivingHarbour (False=drop disallowed)---");}
+              return false;
             }
             else {
               if(0){console.log("10.6.2 dragula-accepts", "---ArrivingHarbour (False=drop disallowed)---");}
@@ -1684,7 +1791,7 @@ export class GameComponent  implements OnInit {
             console.log("harbours_bag:moves ", `handle: ${handle}`);}
 
           if (el && source && handle){
-            return true; //true: elements are always draggable by default
+            return false; //true: elements are always draggable by default
           }
           else{
             return false;
@@ -1721,79 +1828,9 @@ export class GameComponent  implements OnInit {
             if(1){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
             if(isDepartingHarbour){
 
-              //<app-ship>
-              let appShip_id=el.id;
-              if(0){console.log("10.11.2 dragula-invalid", `appShip_id: ${appShip_id}`);};
-
-              //ship-<div>
-              let divShip_id=el.children[0].id;
-              if(0){console.log("10.11.3 dragula-invalid", `divShip_id: ${divShip_id}`);};
-
-              //ship-slots<div>
-              let divShip_divSlots_id = el.children[0].children[0].id;
-              if(0){console.log("10.11.4 dragula-invalid", `divShip_divSlots_id: ${divShip_divSlots_id}`);};
-
-              let divShip_divSlots_divSlot_id = el.children[0].children[0].children[0].id;
-              if(0){console.log("10.11.5 dragula-invalid", `divShip_divSlots_divSlot_id: ${divShip_divSlots_divSlot_id}`);};
 
 
-              //has ship enough stones
-              //----------------------
-              //(no helper functions allowed: this.hasShipEnoughStones(ship_i_slots_id);)
-
-              //count slots
-              let divShip_divSlots = el.children[0].children[0];
-              let countSlots:number=0;
-              if(divShip_divSlots.children[0]){
-                countSlots+=1;
-              }
-              if(divShip_divSlots.children[1]){
-                countSlots+=1;
-              }
-              if(divShip_divSlots.children[2]){
-                countSlots+=1;
-              }
-              if(divShip_divSlots.children[3]){
-                countSlots+=1;
-              }
-              if(0){console.log("10.11.6 dragula-invalid", `countSlots: ${countSlots}`);};
-
-
-              //count stones
-              let countStones:number=0;
-              if(divShip_divSlots.children[0]){
-                if(divShip_divSlots.children[0].children[0]){countStones+=1;}
-              }
-              if(divShip_divSlots.children[1]){
-                if(divShip_divSlots.children[1].children[0]){countStones+=1;}
-              }
-              if(divShip_divSlots.children[2]){
-                if(divShip_divSlots.children[2].children[0]){countStones+=1;}
-              }
-              if(divShip_divSlots.children[3]){
-                if(divShip_divSlots.children[3].children[0]){countStones+=1;}
-              }
-              if(0){console.log("10.11.7 dragula-invalid", `countStones: ${countStones}`);};
-
-
-              //check if it can move
-              let hasNotEnoughStones=true;
-              if(countSlots==1){
-                if(countStones==1){hasNotEnoughStones=false;}
-              }
-              if(countSlots==2){
-                if(countStones>=1){hasNotEnoughStones=false;}
-              }
-              if(countSlots==3){
-                if(countStones>=2){hasNotEnoughStones=false;}
-              }
-              if(countSlots==4){
-                if(countStones>=3){hasNotEnoughStones=false;}
-              }
-              if(1){console.log("10.11.8 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
-
-
-              let isInvalid = hasNotEnoughStones;
+              let isInvalid = true;
 
               if(0){console.log("10.11.9 dragula-invalid", `isInvalid : ${isInvalid}`);};
               if (isInvalid) {
@@ -1802,7 +1839,7 @@ export class GameComponent  implements OnInit {
               }
               else {
                 if(1){console.log("10.11.11 dragula-invalid", "---DepartingHarbour (False=drag allowed)---");}
-                return false; //false: don't prevent any drags from initiating by default
+                return true; //false: don't prevent any drags from initiating by default
               }
             }
           }
@@ -1821,7 +1858,7 @@ export class GameComponent  implements OnInit {
             }
             else {
               if(1){console.log("10.12.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
-              return false; //false: don't prevent any drags from initiating by default
+              return true; //false: don't prevent any drags from initiating by default
             }
           }
 
@@ -2072,7 +2109,7 @@ export class GameComponent  implements OnInit {
 
             if (isEmpty && (isStoneSlot_1 || isStoneSlot_2 || isStoneSlot_3 || isStoneSlot_4 )) {
               if(0){console.log("11.6.1 dragula-accepts:", "---ship slots (True=drop allowed)---");}
-              return true;
+              return false;
             }
             else {
               if(0){console.log("11.6.2 dragula-accepts:", "---ship slots (True=drop allowed)---");}
@@ -2090,7 +2127,7 @@ export class GameComponent  implements OnInit {
 
 
           if (el && source && handle) {
-            return true; //true: elements are always draggable by default
+            return false; //true: elements are always draggable by default
           }
           else{
             return false;
@@ -2130,7 +2167,7 @@ export class GameComponent  implements OnInit {
             else {
               if(0){console.log("10.10.2 dragula-invalid:", "---ship slots (False=drag allowed)---");}
 
-              return false; //false: don't prevent any drags from initiating by default
+              return true; //false: don't prevent any drags from initiating by default
             }
           }
 
