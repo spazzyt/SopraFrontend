@@ -33,6 +33,7 @@ import {InfoBoxComponent} from "./info-box/info-box.component";
 import {StoneComponent} from "./stone/stone.component";
 import {Game} from "../shared/models/game";
 import {MarketCard} from "../shared/models/market-card";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-game',
@@ -79,6 +80,7 @@ export class GameComponent  implements OnInit {
   //===============
   constructor(private dragulaService: DragulaService,
               private gameService: GameService,
+              private route: ActivatedRoute,
               private _ngZone: NgZone) {
 
     this.dragulaShipMovement_setOptions();
@@ -152,6 +154,25 @@ export class GameComponent  implements OnInit {
   //==========
 
   ngOnInit() {
+
+    // (+) converts string 'id' to a number
+    let id = +this.route.snapshot.params['id'];
+
+    // if the game component is loaded without an :id parameter in the url (the original state,
+    // we continue with the "old fake game"
+    // otherwise load the real "fake" game from the backend
+    if(!isNaN(id)) {
+
+      this.gameService.getGame(id)
+        .subscribe((game: Game) => {
+          this.game = game;
+          console.log("Initializing game with id: ", id, game);
+
+          // Now we need to connect via websockets and listen for gamestate updates
+          
+        });
+    }
+
 
     //snackbar: needs to be initialized in ngOnInit()
     this.generateSnackbarDiv();
