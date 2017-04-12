@@ -231,7 +231,7 @@ export class GameComponent  implements OnInit {
 
       //bottomLeftComponent
       if(i==1){
-        if(1){console.log("initialize BottomLeftComponent");}
+        if(0){console.log("initialize BottomLeftComponent");}
 
         // set market card icon number to zero
         this.bottomLeftComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
@@ -264,7 +264,7 @@ export class GameComponent  implements OnInit {
 
       //topLeftComponent
       else if(i==2){
-        if(1){console.log("initialize TopLeftComponent");}
+        if(0){console.log("initialize TopLeftComponent");}
 
         // set market card icon number to zero
         this.topLeftComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
@@ -297,7 +297,7 @@ export class GameComponent  implements OnInit {
 
       //topRightComponent
       else if(i==3){
-        if(1){console.log("initialize TopRightComponent");}
+        if(0){console.log("initialize TopRightComponent");}
 
         // set market card icon number to zero
         this.topRightComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
@@ -330,7 +330,7 @@ export class GameComponent  implements OnInit {
 
       //bottomRightComponent
       else if(i==4){
-        if(1){console.log("initialize BottomRightComponent");}
+        if(0){console.log("initialize BottomRightComponent");}
 
         // set market card icon number to zero
         this.bottomRightComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
@@ -1091,15 +1091,16 @@ export class GameComponent  implements OnInit {
           //determine stone colour
           let stoneClass=value[1].children[0].className;
           let stoneColour=stoneClass.trim().substring(9,20);
+          let stoneColourSub=stoneColour.substring(0,2)
 
           //set attribute id in Dom
-          stoneDiv.setAttribute("id", stoneSlotId+"_"+stoneColour+"_dragulaId_"+newStoneId)
+          stoneDiv.setAttribute("id", stoneSlotId+"_"+stoneColourSub+"_dragulaId_"+newStoneId)
           if(1){console.log("6.2.6 ", `drop: ${value[1].children[0].id}`);}
 
         }
 
         //----------------------------------------
-        //(Buggy Dragula Fix)
+        //(Buggy-Dragula Fix)
         //If this drop event is triggered
         // make sure the stone is placed into the slot
         // even if it falls back into the sled
@@ -1165,21 +1166,25 @@ export class GameComponent  implements OnInit {
           let arriving_harbour=value[2];
 
           //what is it? the <app-ship>
-          if(0){console.log("6.4.2 ", `drop: ${value[1].id}`);}
+          if(1){console.log("6.4.2 ", `drop: ${value[1].id}`);}
+
+          //ngifShip <div-tag>
+          let ngifShip=document.getElementById(arriving_harbour.id).children[0];
+          if(1){console.log("6.4.2-neu ngifShip", `drop: ${ngifShip}`);}
 
           //<app-ship>-tag as html string; there should only be one child [0]
-          let appShip=document.getElementById(arriving_harbour.id).children[0];
-          if(0){console.log("6.4.3 app-ship", `drop: ${appShip}`);}
+          let appShip=document.getElementById(ngifShip.id).children[0];
+          if(1){console.log("6.4.3 app-ship", `drop: ${appShip}`);}
 
           //ship <div>-tag as html string
           let shipDiv=document.getElementById(appShip.children[0].id);
           if(0){console.log("6.4.4 shipDiv className ", `drop: ${shipDiv.className}`);}
-          if(0){console.log("6.4.5 shipDiv id ", `drop: ${shipDiv.id}`);}
+          if(1){console.log("6.4.5 shipDiv id ", `drop: ${shipDiv.id}`);}
 
           //ship slots <div>-tag as html string
           let shipSlotsDiv=document.getElementById(shipDiv.children[0].id);
           if(0){console.log("6.4.5 shipSlotsDiv className ", `drop: ${shipSlotsDiv.className}`);}
-          if(0){console.log("6.4.6 shipSlotsDiv id ", `drop: ${shipSlotsDiv.id}`);}
+          if(1){console.log("6.4.6 shipSlotsDiv id ", `drop: ${shipSlotsDiv.id}`);}
 
 
           //ship slot_i <div>-tag as html string
@@ -1373,16 +1378,18 @@ export class GameComponent  implements OnInit {
         if(0){console.log("harbours_bag:invalid ", `el: ${el}`);
         console.log("harbours_bag:invalid ", `handle: ${handle}`);
         console.log("harbours_bag:invalid ", `el.id: ${el.id}`);
-        console.log("harbours_bag:invalid ", `el.parent.parent.id: ${el.parentElement.parentElement.id}`);}
+        console.log("harbours_bag:invalid ", `el.parent.parent.id: ${el.parentElement.parentElement.parentElement.id}`);}
 
 
         /*departing harbour check: if isDepartingHarbour then set invalid*/
-        /* BUT if enoughStones then set valid */
-        if (el && handle && el.parentElement.parentElement) {
+        if (el && handle && el.parentElement && el.parentElement.parentElement
+          && el.parentElement.parentElement.parentElement) {
 
-          let isDepartingHarbour = el.parentElement.parentElement.id === "departing_harbours";
+          /* BUT if enoughStones then set valid */
 
-          if(0){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
+          let isDepartingHarbour = el.parentElement.parentElement.parentElement.id === "departing_harbours";
+
+          if(1){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
             if(isDepartingHarbour){
 
               //<app-ship>
@@ -1420,7 +1427,7 @@ export class GameComponent  implements OnInit {
               if(divShip_divSlots.children[3]){
                 countSlots+=1;
               }
-              if(1){console.log("10.11.6 dragula-invalid", `countSlots: ${countSlots}`);};
+              if(0){console.log("10.11.6 dragula-invalid", `countSlots: ${countSlots}`);};
 
 
               //count stones
@@ -1454,7 +1461,7 @@ export class GameComponent  implements OnInit {
               if(countSlots==4){
                 if(countStones>=3){hasNotEnoughStones=false;}
               }
-              if(0){console.log("10.11.8 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
+              if(1){console.log("10.11.8 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
 
 
               let isInvalid = hasNotEnoughStones;
@@ -1473,7 +1480,7 @@ export class GameComponent  implements OnInit {
 
 
         /*arriving harbour check: if isArrivingHarbour then set invalid*/
-        if (el && handle && el.parentElement.parentElement) {
+        if (el && handle && el.parentElement && el.parentElement.parentElement) {
 
           let isArrivingHarbour = el.parentElement.parentElement.id === "arriving_harbours";
           let isInvalid = isArrivingHarbour;

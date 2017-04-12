@@ -13,6 +13,7 @@ const appRoutes: Routes = [
     { path: 'lobby', component: LobbyComponent },
     { path: 'login', component: LoginComponent },
     { path: 'game', component: GameComponent },
+    { path: 'game/:token', component: GameComponent },
     //{ path: 'game', component: GameComponent, canActivate: [AuthGuardService] },
     { path: 'home', component: HomeComponent },
 

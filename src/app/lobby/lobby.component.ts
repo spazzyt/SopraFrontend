@@ -39,11 +39,11 @@ export class LobbyComponent implements OnInit {
   // helper property to add a new game
   public nrOfGames: number = -1;
 
-  // number of players that joined a game
-  public joinedGame : number=-1; //??
+  // game id of joined game
+  public joinedGame : number=-1;
 
   // game name
-  public game: string; //??
+  public game: string;
 
 
   //=============
@@ -52,8 +52,7 @@ export class LobbyComponent implements OnInit {
   constructor(private router:Router,
               private userService: UserService,
               private gameService: GameService,
-              private authenticationService: AuthenticationService,
-              private _ngZone: NgZone) {
+              private authenticationService: AuthenticationService) {
 
   }
 
@@ -152,7 +151,7 @@ export class LobbyComponent implements OnInit {
   //===============
 
   navigateToGame(){
-    this.router.navigate(['/game']);
+    this.router.navigate(['/game', this.joinedGame]);
   }
 
   Logout(){
