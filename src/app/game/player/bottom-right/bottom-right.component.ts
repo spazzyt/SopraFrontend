@@ -81,6 +81,15 @@ export class BottomRightComponent implements OnInit {
 
   }
 
+  playerFieldGlow(status: boolean) {
+    (<any>$(document)).ready(function () {
+      if(status)
+        (<any>$("#glow4")).css("background-image", "url(../../assets/images/bottom_right_active.png)");
+      else
+        (<any>$("#glow4")).css("background-image", "url(../../assets/images/bottom_right.png)");
+    });
+  }
+
   setMarketCards(marketCards_target:number[]){
 
     // define protocol: which market card
