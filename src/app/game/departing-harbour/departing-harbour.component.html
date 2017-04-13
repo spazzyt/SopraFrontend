@@ -8,8 +8,8 @@
   <div *ngFor="let num of [1,2,3,4]"
        id="departing_harbour_{{num}}" class="departing_harbour" [dragula]="'harbours_bag'">
 
-    <div id="ngifShip" *ngIf="ships[num-1] != null">
-      <app-ship [ship]="ships[num-1]"></app-ship>
+    <div *ngIf="ships[num-1] != null" id="ngifShip">
+      <app-ship class="appShip" [ship]="ships[num-1]"></app-ship>
     </div>
 
   </div>

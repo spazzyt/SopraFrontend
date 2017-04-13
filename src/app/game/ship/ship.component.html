@@ -8,8 +8,8 @@
          [dragula]="'stone_slots_bag'">
 
       <!-- TODO clean up dragula structure-->
-      <div *ngIf="stonesOnShip[j] != null">
-        <app-stone [stone] = stonesOnShip[j] ></app-stone>
+      <div *ngIf="stonesOnShip[j] != null"  id="ngifStone">
+        <app-stone class="appStone" [stone] = stonesOnShip[j] ></app-stone>
       </div>
 
     </div><!-- innerHTML no space, no new line allowed-->
