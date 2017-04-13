@@ -263,10 +263,11 @@ export class GameComponent  implements OnInit {
     this.amI_CurrentActivePlayer=amI_CurrentActivePlayer;
 
     //Determine player field of current active player
-    let currentActivePlayerField=this.determineCurrentActivePlayerField(
+    /**let currentActivePlayerField=this.determineCurrentActivePlayerField(
       game_backend.currentActivePlayer.username,
       game_backend.players
-    );
+    );*/
+    let currentActivePlayerField=game_backend.currentActivePlayer.colour;
     this.currentActivePlayerField=currentActivePlayerField;
 
     //Player Component: the four player fields (what everyone concerns)
