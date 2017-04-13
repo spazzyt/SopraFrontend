@@ -90,7 +90,7 @@ export class BottomLeftComponent implements OnInit {
   }
 
   playerFieldGlow(status: boolean) {
-      (<any>$(document)).ready(function () {
+      (<any>$(document)).ready(() => {
         if(status)
           (<any>$("#glow1")).css("background-image", "url(../../assets/images/bottom_left_active.png)");
         else

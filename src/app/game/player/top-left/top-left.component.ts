@@ -82,7 +82,7 @@ export class TopLeftComponent implements OnInit {
   }
 
   playerFieldGlow(status: boolean) {
-    (<any>$(document)).ready(function () {
+    (<any>$(document)).ready(() => {
       if(status)
         (<any>$("#glow2")).css("background-image", "url(../../assets/images/top_left_active.png)");
       else
@@ -208,14 +208,14 @@ export class TopLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[0] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bll_2")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[1] == false) {
@@ -224,14 +224,14 @@ export class TopLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[1] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bml_2")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[2] == false) {
@@ -240,14 +240,14 @@ export class TopLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[2] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bmr_2")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[3] == false) {
@@ -256,14 +256,14 @@ export class TopLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[3] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#brr_2")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
 
@@ -276,14 +276,14 @@ export class TopLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[4] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#tll_2")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[5] == false) {
@@ -292,14 +292,14 @@ export class TopLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[5] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#tml_2")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[6] == false) {
@@ -308,14 +308,14 @@ export class TopLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[6] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#tmr_2")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
     if (playerIconsStatus_target[7] == false) {
@@ -324,14 +324,14 @@ export class TopLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[7] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#trr_2")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
 
@@ -344,14 +344,14 @@ export class TopLeftComponent implements OnInit {
 
       });
 
-      console.log("deactivateOrActivateIcons: false")
+      if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[8] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#purple_2")).css("opacity", "1.0");
 
       });
-      console.log("deactivateOrActivateIcons: true")
+      if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
   }
