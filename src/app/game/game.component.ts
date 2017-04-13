@@ -106,8 +106,12 @@ export class GameComponent  implements OnInit {
               private route: ActivatedRoute,
               private _ngZone: NgZone) {
 
+    //dragula subscriptions
     this.dragula_subscribeDragEvent();
     this.dragula_subscribeDropEvent();
+
+    //snackbar div in game footer
+    this.generateSnackbarDiv();
 
   }
 
@@ -160,10 +164,10 @@ export class GameComponent  implements OnInit {
 
 
   //Fake Players
-  player1= new User(1, "DAVID", ColourEnum.black);
-  player2= new User(2, "VINCENT", ColourEnum.white);
-  player3= new User(3, "KENNY", ColourEnum.brown);
-  player4= new User(4, "ROLAND", ColourEnum.gray);
+  player1= new User(1, "david", ColourEnum.black);
+  player2= new User(2, "vincent", ColourEnum.white);
+  player3= new User(3, "kenny", ColourEnum.brown);
+  player4= new User(4, "roland", ColourEnum.gray);
 
   players_target = new Array<User>();
 
@@ -231,10 +235,15 @@ export class GameComponent  implements OnInit {
     this.players_target.push(this.player3,);
     this.players_target.push(this.player4,);
 
+    //Fake current active player field
+    this.currentActivePlayerField=ColourEnum.black;
 
-    let returnGame = new Game(0, 'token', 'owner', 'name', 4,
-      this.players_target, this.ships_target, this.marketCards,
-      this.player1, null);
+
+
+    let returnGame = new Game(0, 'token',
+      'name', 4,  this.players_target,
+      1, this.ships_target, this.marketCards,
+      this.currentActivePlayerField, null);
     return returnGame;
   }
 
@@ -259,23 +268,25 @@ export class GameComponent  implements OnInit {
     //Departing Harbour: the ships
     this.initializeDepartingHarbourComponent(game_backend.ships);
 
-    //Determine whether you are the active player
-    let amI_CurrentActivePlayer=game_backend.currentActivePlayer.username===this.myUserName;
-    this.amI_CurrentActivePlayer=amI_CurrentActivePlayer;
-
-    //Determine player field of current active player
-    /**let currentActivePlayerField=this.determineCurrentActivePlayerField(
-      game_backend.currentActivePlayer.username,
-      game_backend.players
-    );*/
-    let currentActivePlayerField=game_backend.currentActivePlayer.colour;
-    this.currentActivePlayerField=currentActivePlayerField;
-
     //Player Component: the four player fields (what everyone concerns)
     this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
 
+    //Determine which player field you have (sets class variable)
+    let myPlayerField:ColourEnum;
+    myPlayerField=this.determineWhichPlayerFieldYouHave(
+      game_backend.players,
+      game_backend.numPlayers);
+
+    //Determine whether you are the active player (set class variable)
+    let amI_CurrentActivePlayer=game_backend.currentActivePlayerField===myPlayerField;
+    this.amI_CurrentActivePlayer=amI_CurrentActivePlayer;
+
+    //Read current active player field (set class variable)
+    let currentActivePlayerField=game_backend.currentActivePlayerField;
+    this.currentActivePlayerField=currentActivePlayerField;
+
     //Initialize Myself
-    //Depending on whether you are the active or inactive player
+    //(depends on whether you are the active or inactive player)
     this.initializeMySelf(amI_CurrentActivePlayer, currentActivePlayerField);
 
     // set Dragula Options (Depending on whether you are the active or inactive player)
@@ -283,19 +294,56 @@ export class GameComponent  implements OnInit {
     this.dragulaShipMovement_setOptions(amI_CurrentActivePlayer);
     this.dragulaStoneMovement_setOptions(amI_CurrentActivePlayer);
 
-    //snackbar
-    this.generateSnackbarDiv();
+  }
 
+  // Init Sites
+  //-----------
+  initializeMarketComponent(marketCards:MarketCard[]){
+    this.marketComponent.removeUnusedMarketCards();
+    this.marketComponent.generateFourMarketCards(marketCards);
+    this.marketComponent.setClickHandlerOnMarketCards();
+  }
+
+  initializeObeliskComponent(){
+    let obelisk:Obelisk; //ToDo: What for?
+    this.obeliskComponent.setAttributes(this.game.numPlayers);
+    this.obeliskComponent.removeStones();
+  }
+
+  initializePyramidComponent(){
+    let pyramid:Pyramid;//ToDo: What for?
+    this.pyramidComponent.removeStones();
+  }
+
+  initializeTempleComponent(){
+    let temple:Temple;//ToDo: What for?
+    this.templeComponent.setAttributes(this.game.numPlayers);
+    this.templeComponent.removeStones();
+  }
+
+  initializeBurialChamberComponent(){
+    let burialChamber:BurialChamber;//ToDo: What for?
+    this.burialChamberComponent.removeStones();
+  }
+
+
+  // Init Departing Harbour and Ships
+  // (no click handlers on stones: only set after blue lever market card was played)
+  //---------------------------------
+  initializeDepartingHarbourComponent(ships:Ship[]){
+    this.departingHarbourComponent.removeShips();
+    this.departingHarbourComponent.generateFourShips(ships);
   }
 
   // Init Player Components (what everyone concerns)
   //------------------------------------------------
   initializePlayerComponents(players_:User[], numPlayers_:number) {
 
-    for (let i = 1; i <= numPlayers_; i++) {
+    for (let i = 0; i < numPlayers_; i++) {
 
       //bottomLeftComponent
-      if(i==1){
+      //-------------------
+      if(i==0){
         if(0){console.log("initialize BottomLeftComponent");}
 
         // set market card icon number to zero
@@ -323,17 +371,13 @@ export class GameComponent  implements OnInit {
         this.bottomLeftComponent.setStonesInSled(supplySled1.stones.length);
 
         // set playerName shown in PlayerField
-        this.bottomLeftComponent.setPlayerName(players_[0].username);
-
-        //Determine which playerField you have
-        if(players_[0].username===this.myUserName){
-          this.myPlayerField="bottom-left"
-        }
+        this.bottomLeftComponent.setPlayerName(players_[i].username);
 
       }
 
       //topLeftComponent
-      else if(i==2){
+      //----------------
+      else if(i==1){
         if(0){console.log("initialize TopLeftComponent");}
 
         // set market card icon number to zero
@@ -361,12 +405,13 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.setStonesInSled(supplySled2.stones.length);
 
         // set playerName shown in PlayerField
-        this.topLeftComponent.setPlayerName(players_[1].username);
+        this.topLeftComponent.setPlayerName(players_[i].username);
 
       }
 
       //topRightComponent
-      else if(i==3){
+      //-----------------
+      else if(i==2){
         if(0){console.log("initialize TopRightComponent");}
 
         // set market card icon number to zero
@@ -394,19 +439,20 @@ export class GameComponent  implements OnInit {
         this.topRightComponent.setStonesInSled(supplySled3.stones.length);
 
         // set playerName shown in PlayerField
-        this.topRightComponent.setPlayerName(players_[2].username);
+        this.topRightComponent.setPlayerName(players_[i].username);
 
       }
 
       //bottomRightComponent
-      else if(i==4){
+      //--------------------
+      else if(i==3){
         if(0){console.log("initialize BottomRightComponent");}
 
         // set market card icon number to zero
         this.bottomRightComponent.setMarketCards([0,0,0,0,0,0,0,0,0]);
 
         // set score to zero
-        this.bottomRightComponent.setScore(this.score_target);
+        this.bottomRightComponent.setScore(0);
 
         //instantiate Quarry objects, internally instantiate 24 stones Objects
         let stoneQuarry4 = new StoneQuarry(24, 96, ColourEnum.gray, players_[i]);
@@ -427,77 +473,54 @@ export class GameComponent  implements OnInit {
         this.bottomRightComponent.setStonesInSled(supplySled4.stones.length);
 
         // set playerName shown in PlayerField
-        this.bottomRightComponent.setPlayerName(players_[3].username);
+        this.bottomRightComponent.setPlayerName(players_[i].username);
 
       }
     }
   }
 
-  // Init Sites
-  //-----------
-  initializeMarketComponent(marketCards:MarketCard[]){
-    this.marketComponent.removeUnusedMarketCards();
-    this.marketComponent.generateFourMarketCards(marketCards);
-    //TODO add click handlers
-  }
-
-  initializeObeliskComponent(){
-    let obelisk:Obelisk;
-    this.obeliskComponent.setAttributes(this.game.numPlayers);
-    this.obeliskComponent.removeStones();
-  }
-
-  initializePyramidComponent(){
-    let pyramid:Pyramid;
-    this.pyramidComponent.removeStones();
-  }
-
-  initializeTempleComponent(){
-    let temple:Temple;
-    this.templeComponent.setAttributes(this.game.numPlayers);
-    this.templeComponent.removeStones();
-  }
-
-  initializeBurialChamberComponent(){
-    let burialChamber:BurialChamber;
-    this.burialChamberComponent.removeStones();
-  }
-
-
-  // Init Departing Harbour and Ships
-  //---------------------------------
-  initializeDepartingHarbourComponent(ships:Ship[]){
-    this.departingHarbourComponent.removeShips();
-    this.departingHarbourComponent.generateFourShips(ships);
-    //TODO add click handlers
-  }
-
-  // Determine the current active player field
-  //------------------------------------------
-  determineCurrentActivePlayerField(activePlayer_, players_):string{
-
-    let currentActivePlayerField;
-
-    if(activePlayer_===players_[0].username){
-      currentActivePlayerField="bottom-left";
+  //Determine which playerField you have
+  //------------------------------------
+  determineWhichPlayerFieldYouHave(players_:User[], numPlayers_:number):ColourEnum{
+    let myPlayerField:ColourEnum;
+    for (let i = 0; i < numPlayers_; i++) {
+      if(i==0){
+        if(players_[i].username===this.myUserName){
+          this.myPlayerField=ColourEnum.black;
+          myPlayerField=  ColourEnum.black;
+        }
+      }
+      else if(i==1){
+        if(players_[i].username===this.myUserName){
+          this.myPlayerField=ColourEnum.white;
+          return ColourEnum.white;
+        }
+      }
+      else if(i==2){
+        if(players_[i].username===this.myUserName){
+          this.myPlayerField=ColourEnum.brown;
+          myPlayerField=  ColourEnum.brown;
+        }
+      }
+      else if(i==3){
+        if(players_[i].username===this.myUserName){
+          this.myPlayerField=ColourEnum.gray;
+          myPlayerField= ColourEnum.gray;
+        }
+      }
+      else{
+        if(1){console.log("initializePlayerComponents: error");
+          alert("initializePlayerComponents:error");}
+      }
     }
-    else if(activePlayer_===players_[1].username){
-      currentActivePlayerField="top-left";
-    }
-    else if(activePlayer_===players_[2].username){
-      currentActivePlayerField="top-right";
-    }
-    else if(activePlayer_===players_[3].username){
-      currentActivePlayerField="bottom-right";
-    }
-
-    return currentActivePlayerField;
+    return myPlayerField;
   }
 
 
   // Init MySelf ( depending on whether you are the active or inactive player)
   //--------------------------------------------------------------------------
-  initializeMySelf(amI_CurrentActivePlayer, currentActivePlayerField){
+  initializeMySelf(amI_CurrentActivePlayer:boolean,
+                   currentActivePlayerField:ColourEnum){
 
 
     //I am the active player
@@ -505,7 +528,9 @@ export class GameComponent  implements OnInit {
     if (amI_CurrentActivePlayer){
 
 
-      if(currentActivePlayerField=="bottom-left"){
+      //I am active player on black field
+      //--------------------------------
+      if(currentActivePlayerField===ColourEnum.black){
 
         //show my stone in sled, hide the others
         this.bottomLeftComponent.showStone();
@@ -513,41 +538,46 @@ export class GameComponent  implements OnInit {
         this.topRightComponent.hideStone();
         this.bottomRightComponent.hideStone();
 
-        //let active player field glow
+        //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(true);
         this.topLeftComponent.playerFieldGlow(false);
         this.topRightComponent.playerFieldGlow(false);
         this.bottomRightComponent.playerFieldGlow(false);
 
-        //switch on click handlers on Blue Market Icons in player fields
+        //switch on click handlers on Blue Market Icons in own player field,
+        // remove the others
         this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
-        this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
-        this.topLeftComponent.setClickHandlerOnBlueMarketCards();
-        this.topRightComponent.setClickHandlerOnBlueMarketCards();
+        this.topLeftComponent.removeClickHandlerOnBlueMarketCards();
+        this.topRightComponent.removeClickHandlerOnBlueMarketCards();
+        this.bottomRightComponent.removeClickHandlerOnBlueMarketCards();
 
-        //switch on Market Icon colors
-        this.bottomLeftComponent.deactivateOrActivateIcons(true);
-        this.bottomRightComponent.deactivateOrActivateIcons(true);
-        this.topLeftComponent.deactivateOrActivateIcons(true);
-        this.topRightComponent.deactivateOrActivateIcons(true);
+        //switch off all Market Icon colors since no one has any
+        this.bottomLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
 
-        //switch on Quarry colors
+
+        //switch on your Quarry colors, switch off the others
         this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
-        this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
-        this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
-        this.topRightComponent.deactivateOrActivateStoneQuarry(true);
+        this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
+        this.topRightComponent.deactivateOrActivateStoneQuarry(false);
+        this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
 
-        //switch on Sled colors
+        //switch on your Sled colors, switch off the others
         this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
-        this.bottomRightComponent.deactivateOrActivateSupplySled(true);
-        this.topLeftComponent.deactivateOrActivateSupplySled(true);
-        this.topRightComponent.deactivateOrActivateSupplySled(true);
+        this.topLeftComponent.deactivateOrActivateSupplySled(false);
+        this.topRightComponent.deactivateOrActivateSupplySled(false);
+        this.bottomRightComponent.deactivateOrActivateSupplySled(false);
 
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
 
       }
-      if(this.myPlayerField=="top-left"){
+
+      //I am active player on white field
+      //--------------------------------
+      else if(this.myPlayerField===ColourEnum.white){
 
         //show my stone in sled, hide the others
         this.bottomLeftComponent.hideStone();
@@ -555,41 +585,45 @@ export class GameComponent  implements OnInit {
         this.topRightComponent.hideStone();
         this.bottomRightComponent.hideStone();
 
-        //let active player field glow
+        //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(true);
         this.topRightComponent.playerFieldGlow(false);
         this.bottomRightComponent.playerFieldGlow(false);
 
-        //switch on click handlers on Blue Market Icons in player fields
-        this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
-        this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
+        //switch on click handlers on Blue Market Icons in own player field
+        this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
         this.topLeftComponent.setClickHandlerOnBlueMarketCards();
-        this.topRightComponent.setClickHandlerOnBlueMarketCards();
+        this.topRightComponent.removeClickHandlerOnBlueMarketCards();
+        this.bottomRightComponent.removeClickHandlerOnBlueMarketCards();
 
-        //switch on Market Icon colors
-        this.bottomLeftComponent.deactivateOrActivateIcons(true);
-        this.bottomRightComponent.deactivateOrActivateIcons(true);
-        this.topLeftComponent.deactivateOrActivateIcons(true);
-        this.topRightComponent.deactivateOrActivateIcons(true);
+        //switch off all Market Icon colors since no one has any
+        this.bottomLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
 
-        //switch on Quarry colors
-        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
-        this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
+
+        //switch on your Quarry colors, switch off the others
+        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
         this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
-        this.topRightComponent.deactivateOrActivateStoneQuarry(true);
+        this.topRightComponent.deactivateOrActivateStoneQuarry(false);
+        this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
 
-        //switch on Sled colors
-        this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
-        this.bottomRightComponent.deactivateOrActivateSupplySled(true);
+        //switch on your Sled colors, switch off the others
+        this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
         this.topLeftComponent.deactivateOrActivateSupplySled(true);
-        this.topRightComponent.deactivateOrActivateSupplySled(true);
+        this.topRightComponent.deactivateOrActivateSupplySled(false);
+        this.bottomRightComponent.deactivateOrActivateSupplySled(false);
 
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
 
       }
-      if(this.myPlayerField=="top-right"){
+
+      //I am active player on brown field
+      //--------------------------------
+      else if(this.myPlayerField===ColourEnum.brown){
 
         //show my stone in sled, hide the others
         this.bottomLeftComponent.hideStone();
@@ -597,41 +631,45 @@ export class GameComponent  implements OnInit {
         this.topRightComponent.showStone();
         this.bottomRightComponent.hideStone();
 
-        //let active player field glow
+        //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(false);
         this.topRightComponent.playerFieldGlow(true);
         this.bottomRightComponent.playerFieldGlow(false);
 
-        //switch on click handlers on Blue Market Icons in player fields
-        this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
-        this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
-        this.topLeftComponent.setClickHandlerOnBlueMarketCards();
+        ///switch on click handlers on Blue Market Icons in own player field
+        this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
+        this.topLeftComponent.removeClickHandlerOnBlueMarketCards();
         this.topRightComponent.setClickHandlerOnBlueMarketCards();
+        this.bottomRightComponent.removeClickHandlerOnBlueMarketCards();
 
-        //switch on Market Icon colors
-        this.bottomLeftComponent.deactivateOrActivateIcons(true);
-        this.bottomRightComponent.deactivateOrActivateIcons(true);
-        this.topLeftComponent.deactivateOrActivateIcons(true);
-        this.topRightComponent.deactivateOrActivateIcons(true);
+        //switch off all Market Icon colors since no one has any
+        this.bottomLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
 
-        //switch on Quarry colors
-        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
-        this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
-        this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
+
+        //switch on your Quarry colors, switch off the others
+        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
+        this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
         this.topRightComponent.deactivateOrActivateStoneQuarry(true);
+        this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
 
-        //switch on Sled colors
-        this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
-        this.bottomRightComponent.deactivateOrActivateSupplySled(true);
-        this.topLeftComponent.deactivateOrActivateSupplySled(true);
+        //switch on your Sled colors, switch off the others
+        this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
+        this.topLeftComponent.deactivateOrActivateSupplySled(false);
         this.topRightComponent.deactivateOrActivateSupplySled(true);
+        this.bottomRightComponent.deactivateOrActivateSupplySled(false);
 
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
 
       }
-      if(this.myPlayerField=="bottom-right"){
+
+      //I am active player on gray field
+      //-------------------------------
+      if(this.myPlayerField===ColourEnum.gray){
 
         //show my stone in sled, hide the others
         this.bottomLeftComponent.hideStone();
@@ -639,41 +677,40 @@ export class GameComponent  implements OnInit {
         this.topRightComponent.hideStone();
         this.bottomRightComponent.showStone();
 
-        //let active player field glow
+        //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(false);
         this.topRightComponent.playerFieldGlow(false);
         this.bottomRightComponent.playerFieldGlow(true);
 
-        //switch on click handlers on Blue Market Icons in player fields
-        this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
+        //switch on click handlers on Blue Market Icons in own player field
+        this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
+        this.topLeftComponent.removeClickHandlerOnBlueMarketCards();
+        this.topRightComponent.removeClickHandlerOnBlueMarketCards();
         this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
-        this.topLeftComponent.setClickHandlerOnBlueMarketCards();
-        this.topRightComponent.setClickHandlerOnBlueMarketCards();
 
-        //switch on Market Icon colors
-        this.bottomLeftComponent.deactivateOrActivateIcons(true);
-        this.bottomRightComponent.deactivateOrActivateIcons(true);
-        this.topLeftComponent.deactivateOrActivateIcons(true);
-        this.topRightComponent.deactivateOrActivateIcons(true);
+        //switch off all Market Icon colors since no one has any
+        this.bottomLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+        this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
 
-        //switch on Quarry colors
-        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
+        //switch on your Quarry colors, switch off the others
+        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
+        this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
+        this.topRightComponent.deactivateOrActivateStoneQuarry(false);
         this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
-        this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
-        this.topRightComponent.deactivateOrActivateStoneQuarry(true);
 
-        //switch on Sled colors
-        this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
+        //switch on your Sled colors, switch off the others
+        this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
+        this.topLeftComponent.deactivateOrActivateSupplySled(false);
+        this.topRightComponent.deactivateOrActivateSupplySled(false);
         this.bottomRightComponent.deactivateOrActivateSupplySled(true);
-        this.topLeftComponent.deactivateOrActivateSupplySled(true);
-        this.topRightComponent.deactivateOrActivateSupplySled(true);
 
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
 
       }
-
 
     }
 
@@ -685,7 +722,7 @@ export class GameComponent  implements OnInit {
       this.bottomLeftComponent.hideStone();
       this.topLeftComponent.hideStone();
       this.topRightComponent.hideStone();
-      this.bottomRightComponent.hideStone;
+      this.bottomRightComponent.hideStone();
 
       //switch off click handlers on Blue Market Icons in player fields
       this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
@@ -694,10 +731,10 @@ export class GameComponent  implements OnInit {
       this.topRightComponent.removeClickHandlerOnBlueMarketCards();
 
       //switch off Market Icon colors
-      this.bottomLeftComponent.deactivateOrActivateIcons(false);
-      this.bottomRightComponent.deactivateOrActivateIcons(false);
-      this.topLeftComponent.deactivateOrActivateIcons(false);
-      this.topRightComponent.deactivateOrActivateIcons(false);
+      this.bottomLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+      this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+      this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
+      this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
 
       //switch off Quarry colors
       this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
@@ -714,9 +751,7 @@ export class GameComponent  implements OnInit {
       // switch off click handlers on market site
       this.marketComponent.removeClickHandlerOnMarketCards();
 
-
     }
-
 
   }
 

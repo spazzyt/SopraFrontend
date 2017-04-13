@@ -4,6 +4,7 @@ import {GameStatusEnum} from "./game-status.enum";
 import {Ship} from "./ship";
 import {MarketCard} from "./market-card";
 import {Decision} from "./decision";
+import {ColourEnum} from "./colour.enum";
 /**
  * Created by benzro on 23.03.17.
  */
@@ -41,7 +42,7 @@ export class Game {
   public marketCards:MarketCard[];
 
   // active player
-  public currentActivePlayer: User;
+  public currentActivePlayerField: ColourEnum;
 
   //round number
   public roundNumber: number;
@@ -57,22 +58,23 @@ export class Game {
   //Constructor
   //===========
 
-
   constructor(id_:number, token_:string,
-                owner_:string, name_:string, numPlayers_:number, players_:User[],
-                ships_:Ship[], marketCards_:MarketCard[],
-                currentActivePlayer_:User, decision_:Decision){
+                name_:string, numPlayers_:number, players_:User[],
+                roundNumber_:number, ships_:Ship[], marketCards_:MarketCard[],
+                currentActivePlayerField_:ColourEnum, decision_:Decision){
 
+      //static info added in lobby
       this.id=id_;
       this.token=token_;
-      this.owner=owner_;
-      this.name=name_;
+      this.name=name_; //gameName
       this.numPlayers=numPlayers_;
       this.players=players_;
+      //changing round info
+      this.roundNumber=roundNumber_;
       this.ships=ships_;
       this.marketCards=marketCards_;
-      this.currentActivePlayer=currentActivePlayer_;
-      this.roundNumber= 1;
+      //changing decision info
+      this.currentActivePlayerField=currentActivePlayerField_;
       this.decision=decision_;
 
     }
