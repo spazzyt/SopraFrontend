@@ -250,7 +250,7 @@ export class GameComponent  implements OnInit {
 
   //===========================================================
   // Initialize the new game:
-  // All components, MySelf (either active or inactive player)
+  // All components, mySelf (either active or inactive player)
   //===========================================================
 
   initializeNewGame(game_backend:Game){
@@ -301,7 +301,7 @@ export class GameComponent  implements OnInit {
   initializeMarketComponent(marketCards:MarketCard[]){
     this.marketComponent.removeUnusedMarketCards();
     this.marketComponent.generateFourMarketCards(marketCards);
-    this.marketComponent.setClickHandlerOnMarketCards();
+    //do not set click handlers here
   }
 
   initializeObeliskComponent(){
@@ -523,12 +523,14 @@ export class GameComponent  implements OnInit {
                    currentActivePlayerField:ColourEnum){
 
 
+    if(1){console.log("initializeMySelf: ", {amI_CurrentActivePlayer, currentActivePlayerField})};
+
     //I am the active player
     //----------------------
     if (amI_CurrentActivePlayer){
 
 
-      //I am active player on black field
+       //I am active player on black field
       //--------------------------------
       if(currentActivePlayerField===ColourEnum.black){
 
@@ -724,6 +726,32 @@ export class GameComponent  implements OnInit {
       this.topRightComponent.hideStone();
       this.bottomRightComponent.hideStone();
 
+      //let active player field glow, not the others
+      if(currentActivePlayerField===ColourEnum.black){
+        this.bottomLeftComponent.playerFieldGlow(true);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(false);
+      }
+      if(currentActivePlayerField===ColourEnum.white){
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(true);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(false);
+      }
+      if(currentActivePlayerField===ColourEnum.brown){
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(true);
+        this.bottomRightComponent.playerFieldGlow(false);
+      }
+      if(currentActivePlayerField===ColourEnum.gray){
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(true);
+      }
+
       //switch off click handlers on Blue Market Icons in player fields
       this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
       this.bottomRightComponent.removeClickHandlerOnBlueMarketCards();
@@ -750,7 +778,6 @@ export class GameComponent  implements OnInit {
 
       // switch off click handlers on market site
       this.marketComponent.removeClickHandlerOnMarketCards();
-
     }
 
   }
@@ -827,7 +854,7 @@ export class GameComponent  implements OnInit {
       }
       if(input[2] != null){   //quarry
         this.bottomLeftComponent.setStonesInQuarry(input[2]);
-      };
+      }
 
       //pass icon data:
 
@@ -850,7 +877,7 @@ export class GameComponent  implements OnInit {
       }
       if(input[2] != null){   //quarry
         this.topLeftComponent.setStonesInQuarry(input[2]);
-      };
+      }
 
       //pass icon data:
 
@@ -872,7 +899,7 @@ export class GameComponent  implements OnInit {
       }
       if(input[2] != null){   //quarry
         this.topRightComponent.setStonesInQuarry(input[2]);
-      };
+      }
 
       //pass icon data:
 
@@ -894,7 +921,7 @@ export class GameComponent  implements OnInit {
       }
       if(input[2] != null){   //quarry
         this.bottomRightComponent.setStonesInQuarry(input[2]);
-      };
+      }
 
       //pass icon data:
 
