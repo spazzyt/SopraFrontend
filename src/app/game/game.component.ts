@@ -37,6 +37,7 @@ import {MarketCard} from "../shared/models/market-card";
 import {UserService} from "../shared/services/user.service";
 
 import {ActivatedRoute} from "@angular/router";
+import {Round} from "../shared/models/round";
 
 
 @Component({
@@ -437,6 +438,7 @@ export class GameComponent  implements OnInit {
   initializeMarketComponent(marketCards:MarketCard[]){
     this.marketComponent.removeUnusedMarketCards();
     this.marketComponent.generateFourMarketCards(marketCards);
+    //TODO add click handlers
   }
 
   initializeObeliskComponent(){
@@ -465,7 +467,9 @@ export class GameComponent  implements OnInit {
   // Init Departing Harbour and Ships
   //---------------------------------
   initializeDepartingHarbourComponent(ships:Ship[]){
+    this.departingHarbourComponent.removeShips();
     this.departingHarbourComponent.generateFourShips(ships);
+    //TODO add click handlers
   }
 
   // Determine the current active player field
@@ -721,8 +725,19 @@ export class GameComponent  implements OnInit {
   // Backend starts new round
   //===========================================================
 
-  initRound(){
+    initRound(round: Round){
 
+    //Update internal data arrays with data from backend:
+    this.game.roundNumber = round.roundNumber;
+    this.game.ships = round.ships;
+    this.game.marketCards = round.marketCards;
+
+
+    //Initialize Market with new cards
+    this.initializeMarketComponent(this.game.marketCards);
+
+    //Initialize Departing Harbour with new ships
+    this.initializeDepartingHarbourComponent(this.game.ships);
 
   }
 
@@ -733,6 +748,129 @@ export class GameComponent  implements OnInit {
 
   initFastForward(){
 
+
+  }
+
+  //===========================================================
+  // Update data for one player field
+  //===========================================================
+
+  //TODO add input, pass input to mapFromServer... function
+  updatePlayerData(){
+
+    let input = this.mapFromServerToUpdatePlayerDataArray();
+    this.updatePlayerDataWithArray(input, ColourEnum.black);
+
+  }
+
+  //TODO add input data format
+  mapFromServerToUpdatePlayerDataArray(){
+
+    let returnArray = [1,2,3,4,5,6,7,8,9,10,11,12];
+    return returnArray;
+
+  }
+
+
+
+  // Input array format:
+  //====================
+  //
+  // [Score, Sled, Quarry, Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
+  //    0      1      2      3        4       5       6      7        8      9      10     11
+  //
+
+  updatePlayerDataWithArray(input: number[], playerField: ColourEnum){
+
+    if(playerField == ColourEnum.black){    //BLACK player field
+
+      if(input[0] != null){   //score
+        this.bottomLeftComponent.setScore(input[0]);
+      }
+      if(input[1] != null){   //sled
+        this.bottomLeftComponent.setStonesInSled(input[1]);
+      }
+      if(input[2] != null){   //quarry
+        this.bottomLeftComponent.setStonesInQuarry(input[2]);
+      };
+
+      //pass icon data:
+
+      let iconArray = new Array<number>();
+
+      for(let i = 3; i < 12; i++){
+        iconArray[i] = input[i];
+      }
+      this.bottomLeftComponent.setMarketCards(iconArray);
+
+
+    }
+    else if(playerField == ColourEnum.white){
+
+      if(input[0] != null){   //score
+        this.topLeftComponent.setScore(input[0]);
+      }
+      if(input[1] != null){   //sled
+        this.topLeftComponent.setStonesInSled(input[1]);
+      }
+      if(input[2] != null){   //quarry
+        this.topLeftComponent.setStonesInQuarry(input[2]);
+      };
+
+      //pass icon data:
+
+      let iconArray = new Array<number>();
+
+      for(let i = 3; i < 12; i++){
+        iconArray[i] = input[i];
+      }
+      this.topLeftComponent.setMarketCards(iconArray);
+
+    }
+    else if(playerField == ColourEnum.brown){
+
+      if(input[0] != null){   //score
+        this.topRightComponent.setScore(input[0]);
+      }
+      if(input[1] != null){   //sled
+        this.topRightComponent.setStonesInSled(input[1]);
+      }
+      if(input[2] != null){   //quarry
+        this.topRightComponent.setStonesInQuarry(input[2]);
+      };
+
+      //pass icon data:
+
+      let iconArray = new Array<number>();
+
+      for(let i = 3; i < 12; i++){
+        iconArray[i] = input[i];
+      }
+      this.topRightComponent.setMarketCards(iconArray);
+
+    }
+    else if(playerField == ColourEnum.gray){
+
+      if(input[0] != null){   //score
+        this.bottomRightComponent.setScore(input[0]);
+      }
+      if(input[1] != null){   //sled
+        this.bottomRightComponent.setStonesInSled(input[1]);
+      }
+      if(input[2] != null){   //quarry
+        this.bottomRightComponent.setStonesInQuarry(input[2]);
+      };
+
+      //pass icon data:
+
+      let iconArray = new Array<number>();
+
+      for(let i = 3; i < 12; i++){
+        iconArray[i] = input[i];
+      }
+      this.bottomRightComponent.setMarketCards(iconArray);
+
+    }
 
   }
 
