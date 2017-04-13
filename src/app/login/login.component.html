@@ -5,15 +5,18 @@
     <h2 class="form-signin-heading">Join a Game!</h2>
 
     <!--input field-->
-    <label for="password" class="sr-only">Username</label>
-    <input id="password" type="text" class="form-control"
-           placeholder="Username"  [(ngModel)]="mySelf.username">
+    <label for="name" class="sr-only">Username</label>
+    <input id="name" type="text" class="form-control" maxlength="10"
+           placeholder="Username"
+           onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('login_btn').click()"
+           [(ngModel)]="mySelf.username">
     <br>
 
     <!--buttons-->
     <div class="row">
       <div class="col-md-6">
-        <button class="btn btn-lg btn-primary btn-block"
+        <button id="login_btn" class="btn btn-lg btn-primary btn-block"
                 type="submit" (click)="login()">Login</button>
       </div>
       <div class="col-md-6">

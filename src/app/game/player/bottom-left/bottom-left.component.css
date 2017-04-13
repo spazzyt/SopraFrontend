@@ -76,6 +76,7 @@ p{
   background-image: url("../../../../assets/images/score.png");
   background-repeat: no-repeat;
   background-position: center;
+  padding-left: 3%;
   /*border: 1px solid #ff56e9;*/
 }
 
