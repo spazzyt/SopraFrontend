@@ -23,7 +23,7 @@ export class ShipComponent implements OnInit {
 
 
   //TODO: What is this for?
-  stonesOnShip = new Array<Stone>(4);
+  stonesOnShip: Stone[] = []; // = [new Stone(1, ColourEnum.brown), null]
 
   //===============
   //Constructor
