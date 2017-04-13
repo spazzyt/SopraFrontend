@@ -6,7 +6,6 @@ import {User} from "./user";
 import {Move} from "./move";
 import {Ship} from "./ship";
 import {MarketCard} from "./market-card";
-import {Decision} from "./decision";
 
 export class Round {
 
@@ -25,9 +24,6 @@ export class Round {
   //market cards in each round
   public marketCards:MarketCard[];
 
-  // decision
-  public decision:Decision;
-
 
   //Additional Frontend attributes
   //==============================
@@ -38,13 +34,12 @@ export class Round {
 
 
   constructor(roundNumber_:number, token_:string,
-              ships_:Ship[], marketCards_:MarketCard[], decision_:Decision){
+              ships_:Ship[], marketCards_:MarketCard[]){
 
     this.roundNumber=roundNumber_;
     this.token=token_;
     this.ships=ships_;
     this.marketCards=marketCards_;
-    this.decision=decision_;
 
   }
 }
