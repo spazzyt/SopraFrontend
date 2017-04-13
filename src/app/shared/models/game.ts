@@ -43,6 +43,9 @@ export class Game {
   // active player
   public currentActivePlayer: User;
 
+  //round number
+  public roundNumber: number;
+
   // decision
   public decision:Decision;
 
@@ -69,6 +72,7 @@ export class Game {
       this.ships=ships_;
       this.marketCards=marketCards_;
       this.currentActivePlayer=currentActivePlayer_;
+      this.roundNumber= 1;
       this.decision=decision_;
 
     }

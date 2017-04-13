@@ -103,7 +103,8 @@ export class BottomLeftComponent implements OnInit {
     // define protocol: which market card
     // corresponds to which array index
     for(let i = 0; i < marketCards_target.length; i++){
-      this.marketCards[i] = marketCards_target[i];
+      if(marketCards_target[i] != null)
+        this.marketCards[i] = marketCards_target[i];
     }
 }
 
