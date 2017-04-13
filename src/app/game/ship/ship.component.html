@@ -7,6 +7,7 @@
          id="ship_{{ship.id}}_slot_{{j+1}}" class="ship_slot"
          [dragula]="'stone_slots_bag'">
 
+      <!-- TODO clean up dragula structure-->
       <div *ngIf="stonesOnShip[j] != null">
         <app-stone [stone] = stonesOnShip[j] ></app-stone>
       </div>
@@ -16,3 +17,4 @@
 
   </div>
 </div>
+

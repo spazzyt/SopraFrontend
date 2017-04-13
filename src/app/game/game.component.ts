@@ -1384,7 +1384,7 @@ export class GameComponent  implements OnInit {
   }
 
   //--------------------------------
-  //Draguala Drag Event Subscription
+  //Dragula Drag Event Subscription
   //--------------------------------
   dragula_subscribeDragEvent() {
     this.dragulaService.drag.subscribe((value) => {
@@ -1405,7 +1405,6 @@ export class GameComponent  implements OnInit {
 
 
           //do something with it
-
 
         }
 
@@ -1481,6 +1480,7 @@ export class GameComponent  implements OnInit {
 
           //call function in GameComponent
           let newStoneId:string=this.generateStoneId();
+
 
           //determine ship and slot
           let stoneSlotId=value[2].id
