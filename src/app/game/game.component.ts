@@ -270,8 +270,7 @@ export class GameComponent  implements OnInit {
     this.currentActivePlayerField=currentActivePlayerField;
 
     //Player Component: the four player fields (what everyone concerns)
-    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers,
-      currentActivePlayerField);
+    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
 
     //Initialize Myself
     //Depending on whether you are the active or inactive player
@@ -289,7 +288,7 @@ export class GameComponent  implements OnInit {
 
   // Init Player Components (what everyone concerns)
   //------------------------------------------------
-  initializePlayerComponents(players_:User[], numPlayers_:number, currentActivePlayerField:string) {
+  initializePlayerComponents(players_:User[], numPlayers_:number) {
 
     for (let i = 1; i <= numPlayers_; i++) {
 
@@ -329,11 +328,6 @@ export class GameComponent  implements OnInit {
           this.myPlayerField="bottom-left"
         }
 
-        //let active player field glow
-        this.bottomLeftComponent.playerFieldGlow(true);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(false);
       }
 
       //topLeftComponent
@@ -366,12 +360,6 @@ export class GameComponent  implements OnInit {
 
         // set playerName shown in PlayerField
         this.topLeftComponent.setPlayerName(players_[1].username);
-
-        //let active player field glow
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(true);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(false);
 
       }
 
@@ -406,12 +394,6 @@ export class GameComponent  implements OnInit {
         // set playerName shown in PlayerField
         this.topRightComponent.setPlayerName(players_[2].username);
 
-        //let active player field glow
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(true);
-        this.bottomRightComponent.playerFieldGlow(false);
-
       }
 
       //bottomRightComponent
@@ -444,12 +426,6 @@ export class GameComponent  implements OnInit {
 
         // set playerName shown in PlayerField
         this.bottomRightComponent.setPlayerName(players_[3].username);
-
-        //let active player field glow
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(true);
 
       }
     }
@@ -523,37 +499,175 @@ export class GameComponent  implements OnInit {
     //----------------------
     if (amI_CurrentActivePlayer){
 
-      //show my stone in sled, hide the others
+
       if(currentActivePlayerField=="bottom-left"){
+
+        //show my stone in sled, hide the others
         this.bottomLeftComponent.showStone();
         this.topLeftComponent.hideStone();
         this.topRightComponent.hideStone();
         this.bottomRightComponent.hideStone();
+
+        //let active player field glow
+        this.bottomLeftComponent.playerFieldGlow(true);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(false);
+
+        //switch on click handlers on Blue Market Icons in player fields
+        this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
+        this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
+        this.topLeftComponent.setClickHandlerOnBlueMarketCards();
+        this.topRightComponent.setClickHandlerOnBlueMarketCards();
+
+        //switch on Market Icon colors
+        this.bottomLeftComponent.deactivateOrActivateIcons(true);
+        this.bottomRightComponent.deactivateOrActivateIcons(true);
+        this.topLeftComponent.deactivateOrActivateIcons(true);
+        this.topRightComponent.deactivateOrActivateIcons(true);
+
+        //switch on Quarry colors
+        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
+        this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
+        this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
+        this.topRightComponent.deactivateOrActivateStoneQuarry(true);
+
+        //switch on Sled colors
+        this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
+        this.bottomRightComponent.deactivateOrActivateSupplySled(true);
+        this.topLeftComponent.deactivateOrActivateSupplySled(true);
+        this.topRightComponent.deactivateOrActivateSupplySled(true);
+
+        // switch on click handlers on market site
+        this.marketComponent.setClickHandlerOnMarketCards();
+
       }
       if(this.myPlayerField=="top-left"){
+
+        //show my stone in sled, hide the others
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.showStone();
         this.topRightComponent.hideStone();
         this.bottomRightComponent.hideStone();
+
+        //let active player field glow
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(true);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(false);
+
+        //switch on click handlers on Blue Market Icons in player fields
+        this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
+        this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
+        this.topLeftComponent.setClickHandlerOnBlueMarketCards();
+        this.topRightComponent.setClickHandlerOnBlueMarketCards();
+
+        //switch on Market Icon colors
+        this.bottomLeftComponent.deactivateOrActivateIcons(true);
+        this.bottomRightComponent.deactivateOrActivateIcons(true);
+        this.topLeftComponent.deactivateOrActivateIcons(true);
+        this.topRightComponent.deactivateOrActivateIcons(true);
+
+        //switch on Quarry colors
+        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
+        this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
+        this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
+        this.topRightComponent.deactivateOrActivateStoneQuarry(true);
+
+        //switch on Sled colors
+        this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
+        this.bottomRightComponent.deactivateOrActivateSupplySled(true);
+        this.topLeftComponent.deactivateOrActivateSupplySled(true);
+        this.topRightComponent.deactivateOrActivateSupplySled(true);
+
+        // switch on click handlers on market site
+        this.marketComponent.setClickHandlerOnMarketCards();
+
       }
       if(this.myPlayerField=="top-right"){
+
+        //show my stone in sled, hide the others
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.hideStone();
         this.topRightComponent.showStone();
         this.bottomRightComponent.hideStone();
+
+        //let active player field glow
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(true);
+        this.bottomRightComponent.playerFieldGlow(false);
+
+        //switch on click handlers on Blue Market Icons in player fields
+        this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
+        this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
+        this.topLeftComponent.setClickHandlerOnBlueMarketCards();
+        this.topRightComponent.setClickHandlerOnBlueMarketCards();
+
+        //switch on Market Icon colors
+        this.bottomLeftComponent.deactivateOrActivateIcons(true);
+        this.bottomRightComponent.deactivateOrActivateIcons(true);
+        this.topLeftComponent.deactivateOrActivateIcons(true);
+        this.topRightComponent.deactivateOrActivateIcons(true);
+
+        //switch on Quarry colors
+        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
+        this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
+        this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
+        this.topRightComponent.deactivateOrActivateStoneQuarry(true);
+
+        //switch on Sled colors
+        this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
+        this.bottomRightComponent.deactivateOrActivateSupplySled(true);
+        this.topLeftComponent.deactivateOrActivateSupplySled(true);
+        this.topRightComponent.deactivateOrActivateSupplySled(true);
+
+        // switch on click handlers on market site
+        this.marketComponent.setClickHandlerOnMarketCards();
+
       }
       if(this.myPlayerField=="bottom-right"){
+
+        //show my stone in sled, hide the others
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.hideStone();
         this.topRightComponent.hideStone();
         this.bottomRightComponent.showStone();
+
+        //let active player field glow
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(true);
+
+        //switch on click handlers on Blue Market Icons in player fields
+        this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
+        this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
+        this.topLeftComponent.setClickHandlerOnBlueMarketCards();
+        this.topRightComponent.setClickHandlerOnBlueMarketCards();
+
+        //switch on Market Icon colors
+        this.bottomLeftComponent.deactivateOrActivateIcons(true);
+        this.bottomRightComponent.deactivateOrActivateIcons(true);
+        this.topLeftComponent.deactivateOrActivateIcons(true);
+        this.topRightComponent.deactivateOrActivateIcons(true);
+
+        //switch on Quarry colors
+        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
+        this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
+        this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
+        this.topRightComponent.deactivateOrActivateStoneQuarry(true);
+
+        //switch on Sled colors
+        this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
+        this.bottomRightComponent.deactivateOrActivateSupplySled(true);
+        this.topLeftComponent.deactivateOrActivateSupplySled(true);
+        this.topRightComponent.deactivateOrActivateSupplySled(true);
+
+        // switch on click handlers on market site
+        this.marketComponent.setClickHandlerOnMarketCards();
+
       }
-
-      //add all click handlers (start easy)
-      this.activateEverything(this.game.currentActivePlayer);
-
-      //add the right click handlers
-      this.activateActivePlayerInteractions(this.game.currentActivePlayer);
 
 
     }
@@ -562,31 +676,44 @@ export class GameComponent  implements OnInit {
     //-----------------------
     else{
 
-      //remove all stones in sleds
+      //hide all stones in sleds
       this.bottomLeftComponent.hideStone();
       this.topLeftComponent.hideStone();
       this.topRightComponent.hideStone();
       this.bottomRightComponent.hideStone;
 
-      //remove all click handlers
-      this.deactivateInactivePlayerInteractions(this.game.players);
+      //switch off click handlers on Blue Market Icons in player fields
+      this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
+      this.bottomRightComponent.removeClickHandlerOnBlueMarketCards();
+      this.topLeftComponent.removeClickHandlerOnBlueMarketCards();
+      this.topRightComponent.removeClickHandlerOnBlueMarketCards();
+
+      //switch off Market Icon colors
+      this.bottomLeftComponent.deactivateOrActivateIcons(false);
+      this.bottomRightComponent.deactivateOrActivateIcons(false);
+      this.topLeftComponent.deactivateOrActivateIcons(false);
+      this.topRightComponent.deactivateOrActivateIcons(false);
+
+      //switch off Quarry colors
+      this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
+      this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
+      this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
+      this.topRightComponent.deactivateOrActivateStoneQuarry(false);
+
+      //switch off Sled colors
+      this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
+      this.bottomRightComponent.deactivateOrActivateSupplySled(false);
+      this.topLeftComponent.deactivateOrActivateSupplySled(false);
+      this.topRightComponent.deactivateOrActivateSupplySled(false);
+
+      // switch off click handlers on market site
+      this.marketComponent.removeClickHandlerOnMarketCards();
 
 
     }
 
 
   }
-
-
-  switchOnActivePlayer(activePlayer_){
-
-  }
-
-
-  switchOffInactivePlayers(players_){
-
-  }
-
 
 
   //===========================================================
@@ -614,45 +741,19 @@ export class GameComponent  implements OnInit {
   //===========================================================
 
 
-  deactivateInactivePlayerInteractions(players_){
+  deactivateInactivePlayerInteractions(amI_CurrentActivePlayer){
 
+    if (!amI_CurrentActivePlayer){
     //loop through players and check not active players
-
-
-    //switch off all click handlers
-    this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
-    this.bottomRightComponent.removeClickHandlerOnBlueMarketCards();
-    this.topLeftComponent.removeClickHandlerOnBlueMarketCards();
-    this.topRightComponent.removeClickHandlerOnBlueMarketCards();
-    this.marketComponent.removeClickHandlerOnMarketCards();
 
     // TODO!!!
     let stoneHtmlId="stone_dragulaId_2";
     this.departingHarbourComponent.removeClickHandlerOnStone(stoneHtmlId);
 
-    //switch off Market Icon colors
-    this.bottomLeftComponent.deactivateOrActivateIcons(false);
-    this.bottomRightComponent.deactivateOrActivateIcons(false);
-    this.topLeftComponent.deactivateOrActivateIcons(false);
-    this.topRightComponent.deactivateOrActivateIcons(false);
-
-    //switch off Quarry colors
-    this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
-    this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
-    this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
-    this.topRightComponent.deactivateOrActivateStoneQuarry(false);
-
-    //switch off Sled colors
-    this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
-    this.bottomRightComponent.deactivateOrActivateSupplySled(false);
-    this.topLeftComponent.deactivateOrActivateSupplySled(false);
-    this.topRightComponent.deactivateOrActivateSupplySled(false);
-
-
     //switch off drag event for stones
 
     //switch off drag event for ships
-
+    }
 
   }
 
@@ -661,50 +762,22 @@ export class GameComponent  implements OnInit {
   // Main Task 2: Activate allowed interactions for activePlayer
   //=============================================================
 
-  //start simple
-  activateEverything(activePlayer_){
 
-    //switch on all click handlers
+  activateActivePlayerInteractions(amI_CurrentActivePlayer, currentActivePlayerField){
 
-    this.bottomLeftComponent.setClickHandlerOnBlueMarketCards();
-    this.bottomRightComponent.setClickHandlerOnBlueMarketCards();
-    this.topLeftComponent.setClickHandlerOnBlueMarketCards();
-    this.topRightComponent.setClickHandlerOnBlueMarketCards();
-    this.marketComponent.setClickHandlerOnMarketCards();
+    if (amI_CurrentActivePlayer) {
+      //switch on all click handlers
 
-    // TODO!!!
-    let stoneHtmlId="stone_dragulaId_2";
-    this.departingHarbourComponent.setClickHandlerOnStone(stoneHtmlId);
+      // TODO!!!
+      let stoneHtmlId = "stone_dragulaId_2";
+      this.departingHarbourComponent.setClickHandlerOnStone(stoneHtmlId);
 
-    //switch on Market Icon colors
-    this.bottomLeftComponent.deactivateOrActivateIcons(true);
-    this.bottomRightComponent.deactivateOrActivateIcons(true);
-    this.topLeftComponent.deactivateOrActivateIcons(true);
-    this.topRightComponent.deactivateOrActivateIcons(true);
-
-    //switch on Quarry colors
-    this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
-    this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
-    this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
-    this.topRightComponent.deactivateOrActivateStoneQuarry(true);
-
-    //switch on Sled colors
-    this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
-    this.bottomRightComponent.deactivateOrActivateSupplySled(true);
-    this.topLeftComponent.deactivateOrActivateSupplySled(true);
-    this.topRightComponent.deactivateOrActivateSupplySled(true);
-
-    //switch on drag event for stones
+      //switch on drag event for stones
 
 
-    //switch on drag event for ships
+      //switch on drag event for ships
 
-  }
-
-    //build in switch statements
-    activateActivePlayerInteractions(currentActivePlayer:User){
-
-
+    }
 
   }
 
