@@ -198,7 +198,7 @@ export class GameComponent  implements OnInit {
 
         });
     }
-    debugger
+
     //Initialize the new game
     this.initializeNewGame(this.getFakeGame());
 
@@ -242,10 +242,7 @@ export class GameComponent  implements OnInit {
 
 
 
-    let returnGame = new Game(0, 'token', 'name', GameStatusEnum.round1,
-      4,  this.players_target,
-      1, this.ships_target, this.marketCards,
-      this.currentActivePlayerField, null);
+    let returnGame = new Game(0, 'token', 'name', GameStatusEnum.round1, 4,  this.players_target, 1, this.ships_target, this.marketCards, this.currentActivePlayerField, null);
     return returnGame;
   }
 
