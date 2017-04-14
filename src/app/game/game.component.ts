@@ -1051,12 +1051,12 @@ export class GameComponent  implements OnInit {
 
       }
 
-
     }
 
   }
 
 
+  //------------------
   //helper functions
   //------------------
 
@@ -1084,7 +1084,12 @@ export class GameComponent  implements OnInit {
   //switch order of stones on ship
   switchOrderOfStonesOnShip(){};
 
-
+  //show Snackbarinfo
+  showSnackbarMessage(text_) {
+    let text= text_;
+    let time_= 10000; //show 10 seconds
+    this.showSnackbarMessenger(text_,time_);
+  }
 
 
   //===========================================================
@@ -1107,8 +1112,6 @@ export class GameComponent  implements OnInit {
     return returnArray;
 
   }
-
-
 
   // Input array format:
   //====================
@@ -1213,54 +1216,8 @@ export class GameComponent  implements OnInit {
 
 
   //===========================================================
-  // Main Task 1: Deactivate everything for inactive players
-  //===========================================================
-
-
-  deactivateInactivePlayerInteractions(amI_CurrentActivePlayer){
-
-    if (!amI_CurrentActivePlayer){
-    //loop through players and check not active players
-
-    // TODO!!!
-    let stoneHtmlId="stone_dragulaId_2";
-    this.departingHarbourComponent.removeClickHandlerOnStone(stoneHtmlId);
-
-    //switch off drag event for stones
-
-    //switch off drag event for ships
-    }
-
-  }
-
-
-  //=============================================================
-  // Main Task 2: Activate allowed interactions for activePlayer
-  //=============================================================
-
-
-  activateActivePlayerInteractions(amI_CurrentActivePlayer, currentActivePlayerField){
-
-    if (amI_CurrentActivePlayer) {
-      //switch on all click handlers
-
-      // TODO!!!
-      let stoneHtmlId = "stone_dragulaId_2";
-      this.departingHarbourComponent.setClickHandlerOnStone(stoneHtmlId);
-
-      //switch on drag event for stones
-
-
-      //switch on drag event for ships
-
-    }
-
-  }
-
-  //===========================================================
   // SnackBar / Toast
   //===========================================================
-
 
   //Needs to be called in GameComponent.ngOnInit()
   generateSnackbarDiv(){
@@ -1290,33 +1247,37 @@ export class GameComponent  implements OnInit {
     if(1){console.log("showSnackbarMessenger")};
   }
 
-
-  showLastMoveOfOtherPlayer(){
-
-  }
-
-
-  collectLastMoveOfActivePlayer(){
-
-  }
-
   //===========================================================
-  // WebSocket / REST Input
+  // Main Task 1: Inactive Players: Make them passive
   //===========================================================
 
 
-    setScore(webSocketInput){
-    this.bottomLeftComponent.setScore(webSocketInput);
-    this.bottomRightComponent.setScore(webSocketInput);
-    this.topLeftComponent.setScore(webSocketInput);
-    this.topRightComponent.setScore(webSocketInput);
+  deactivateInactivePlayerInteractions(amI_CurrentActivePlayer){
+
+    if (!amI_CurrentActivePlayer){
+
     }
 
-  showSnackbarMessage(webSocketinput) {
-    let text_="Player 2  has moved Ship 2 to the Temple"
-    let time_=10000
-    this.showSnackbarMessenger(text_,time_);
   }
+
+
+  //=============================================================
+  // Main Task 2: Active Player receives his Decision Object
+  // Activate allowed interactions
+  //=============================================================
+
+
+  activateActivePlayerInteractions(Decision_:Decision,
+                                   amI_CurrentActivePlayer:boolean,
+                                   currentActivePlayerField:ColourEnum){
+
+    if (amI_CurrentActivePlayer) {
+
+
+    }
+
+  }
+
 
   //===========================================================
   // Main Action 1: take stones from Quarry to Sled
@@ -1324,7 +1285,7 @@ export class GameComponent  implements OnInit {
 
   takeStonesFromQuarryToSled(){
 
-    //register click to quarry
+    //register click on quarry
 
     //generate decision object
 
@@ -1332,57 +1293,174 @@ export class GameComponent  implements OnInit {
 
   }
 
-  getBroadcastFromQuarryToSledAction() {
 
-    //update sled
-    this.bottomLeftComponent.setStonesInSled(this.sledStones_target);
-    this.bottomRightComponent.setStonesInSled(this.sledStones_target);
-    this.topLeftComponent.setStonesInSled(this.sledStones_target);
-    this.topRightComponent.setStonesInSled(this.sledStones_target);
 
-    //update quarry
-    this.bottomLeftComponent.setStonesInQuarry(this.quarryStones_target);
-    this.bottomRightComponent.setStonesInQuarry(this.quarryStones_target);
-    this.topLeftComponent.setStonesInQuarry(this.quarryStones_target);
-    this.topRightComponent.setStonesInQuarry(this.quarryStones_target);
+
+  //===========================================================
+  // Main Action 2: move stone from sled to shipSlot
+  //===========================================================
+
+  moveStoneFromSledToShipSlot(){
+
+    //register drop of stone on ship slot
+
+    //generate decision object
+
+    //send decision object to backend
+
   }
-
-
-  //===========================================================
-  // Main Action 2: move stone from sled to shipslot
-  //===========================================================
-
 
 
   //===========================================================
   // Main Action 3: move ship to site
   //===========================================================
 
+  moveShipToPyramids(){
 
+    //register drop of ship on arriving harbour 1
+
+    //generate decision object
+
+    //send decision object to backend
+
+  }
+
+  moveShipToTemple(){
+
+    //register drop of ship on arriving harbour 2
+
+    //generate decision object
+
+    //send decision object to backend
+
+  }
+
+
+  moveShipToBurialChamber(){
+
+    //register drop of ship on arriving harbour 3
+
+    //generate decision object
+
+    //send decision object to backend
+
+  }
+
+  moveShipToObelisks(){
+
+    //register drop of ship on arriving harbour 4
+
+    //generate decision object
+
+    //send decision object to backend
+
+  }
+
+
+  moveShipToMarket(){
+
+    //register drop of ship on arriving harbour 5
+
+    //generate decision object
+
+    //send decision object to backend
+
+  }
 
 
   //===========================================================
   // Main Action 4: take market card
   //===========================================================
 
-  takeMarketCardFromMarket(){
+  takeRedMarketCardFromMarket(){
+
+    //register click on market card
+
+    //generate decision object
+
+    //send decision object to backend
 
   }
 
-  getBroadcastTakeMarketCardFromMarket(webSocketInput) {
-    this.bottomLeftComponent.setMarketCards(webSocketInput);
-    this.bottomRightComponent.setMarketCards(webSocketInput);
-    this.topLeftComponent.setMarketCards(webSocketInput);
-    this.topRightComponent.setMarketCards(webSocketInput);
+
+  //===========================================================
+  // Main Action 5: play blue market card
+  //===========================================================
+
+  playBlueMarketCardHammer(){
+
+    //register click on market card icon
+
+    //show market card icon in snackbar
+
+    //make move 1
+
+    //generate decision object
+
+    //make move 2
+
+    //generate decision object
+
+    //send decision object to backend
+
   }
 
-  //===========================================================
-  // Main Action 5: play blue market card (inclusive order-function)
-  //===========================================================
+  playBlueMarketCardChisel(){
+
+    //register click on market card icon
+
+    //show market card icon in snackbar
+
+    //make move 1
+
+    //generate decision object
+
+    //make move 2
+
+    //generate decision object
+
+    //send decision object to backend
 
 
+  }
+
+  playBlueMarketCardSail(){
+
+    //register click on market card icon
+
+    //show market card icon in snackbar
+
+    //make move 1
+
+    //generate decision object
+
+    //make move 2
+
+    //generate decision object
+
+    //send decision object to backend
 
 
+  }
+
+  playBlueMarketCardLever(){
+
+    //register click on market card icon
+
+    //show market card icon in snackbar
+
+    //make move 1
+
+    //generate decision object
+
+    //make move 2
+
+    //generate decision object
+
+    //send decision object to backend
+
+
+  }
 
 
 
