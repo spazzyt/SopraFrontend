@@ -16,8 +16,15 @@ export class DepartingHarbourComponent {
   //===============
   //Class Variables
   //===============
+
+  //used to set the ships in a departing harbour slot
   ships: Ship[] = [];
-  changeStyleFlag: boolean=false;  //jQuery
+
+
+  // used to set the stones on a ship slot
+  stonesOnShip:Stone[][]=[[null,null,null,null],[null,null,null,null],
+    [null,null,null,null],[null,null,null,null]];
+
 
   //===============
   //Constructor
@@ -63,18 +70,6 @@ export class DepartingHarbourComponent {
   // Remove Ships
   removeShips(){
     this.ships = [];
-  }
-
-  //change Style
-  toggleStyle(){
-    this.changeStyleFlag =! this.changeStyleFlag;
-  }
-
-  changeBGColourStyle() {
-    if(this.changeStyleFlag)
-    { return "red"; }
-    else
-    { return "blue"; }
   }
 
 
@@ -132,15 +127,12 @@ export class DepartingHarbourComponent {
   }
 
 
-
-  //Test
-  //--------------------
-
   //this function is called from within Dragula drop
   //-----------------------------------------------
   addStoneToShip(htmlId:string){
 
     if(1){console.log("shipComponent:addStoneToShip:htmlId: ", htmlId)}
+
     //extract data from string
     let id=Number(htmlId.substring(htmlId.length-1,htmlId.length));
     let currentShip=Number(htmlId.substring(5,6));
@@ -161,18 +153,17 @@ export class DepartingHarbourComponent {
     }
     else {console.log("shipComponent error")}
 
-    if(1){console.log(": ", htmlId.substring(htmlId.length-1,htmlId.length))}
-    if(1){console.log(": ", htmlId)}
-    if(1){console.log(": ", htmlId.substring(14,16))}
-
     //TODO: New stone object (better, take one from the sled?)
     let stone= new Stone(id, colour);
 
     //fill the array which creates the stone in slot
     this.stonesOnShip[currentShip-1][currentStonePositionOnShip-1] = stone;
-  }
 
-  stonesOnShip:Stone[][]=[[null,null,null,null],[null,null,null,null],[null,null,null,null],[null,null,null,null]];
+    if(1){console.log(": ", htmlId.substring(htmlId.length-1,htmlId.length))}
+    if(1){console.log(": ", htmlId)}
+    if(1){console.log(": ", htmlId.substring(14,16))}
+
+  }
 
 
   //TODO: here again we let Angular 2 add the stones to the site
