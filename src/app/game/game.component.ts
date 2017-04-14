@@ -1443,8 +1443,16 @@ export class GameComponent  implements OnInit {
 
   generateStoneId(){
     this.stoneId+=1;
-    return this.stoneId.toString()
+    let id=""
+    if(this.stoneId<10){
+      id="0"+this.stoneId.toString();
+    }else{
+      id=this.stoneId.toString();
+    }
+    if(1){console.log("stone id generator: ", id)}
+    return id
   }
+
 
   //--------------------------------
   //Dragula Drag Event Subscription
@@ -1452,7 +1460,7 @@ export class GameComponent  implements OnInit {
   dragula_subscribeDragEvent() {
     this.dragulaService.drag.subscribe((value) => {
 
-      if(1){console.log("5.1.0 dragula-subscribe-drag");}
+      if(0){console.log("5.1.0 dragula-subscribe-drag");}
 
       if (value){
 
@@ -1460,11 +1468,11 @@ export class GameComponent  implements OnInit {
         //get id of arriving harbour
         //--------------------------
         if(value[0] === 'departing_bag'){
-          if(1){console.log("5.2.1 ", `drop: ${value[0]}`);}
+          if(0){console.log("5.2.1 ", `drop: ${value[0]}`);}
 
           //id of harbour
           let departing_harbour_id=value[2].id;
-          if(1){console.log("5.2.2 ", `drop: ${value[2].id}`);}
+          if(0){console.log("5.2.2 ", `drop: ${value[2].id}`);}
 
 
           //do something with it
@@ -1479,7 +1487,7 @@ export class GameComponent  implements OnInit {
           //id of site harbour
           let departing_harbour = value[2];
 
-          if(1){console.log("5.3.1 ", `drag: ${value[0]}`);}
+          if(0){console.log("5.3.1 ", `drag: ${value[0]}`);}
 
 
           //change options on drag (pandora's box, TO TEST FIRST)
@@ -1501,7 +1509,8 @@ export class GameComponent  implements OnInit {
   dragula_subscribeDropEvent() {
     this.dragulaService.drop.subscribe((value) => {
 
-      console.log("6.1.0 dragula-subscribe-drop");
+      if(0){console.log("6.1.0 dragula-subscribe-drop");}
+      if(0){console.log(value[0],value[1],value[2])}
 
       //-------------------------------------------
       //value object not null; otherwise do nothing
@@ -1513,11 +1522,11 @@ export class GameComponent  implements OnInit {
         //get id of stone slot ('stone_slots_bag')
         //----------------------------------------
         if(value[0] === 'stone_slots_bag'){
-          if(1){console.log("6.1.1 ", `drop: ${value[0]}`);}
+          if(0){console.log("6.1.1 ", `drop: ${value[0]}`);}
 
           //stone slot id
           let stoneSlot=value[2];
-          if(1){console.log("6.1.2 ", `drop: ${value[2].id}`);}
+          if(0){console.log("6.1.2 ", `drop: ${value[2].id}`);}
 
         }
 
@@ -1526,17 +1535,17 @@ export class GameComponent  implements OnInit {
         //set id of stone ('stone_slots_bag')
         //-----------------------------------
         if(value[0] === 'stone_slots_bag'){
-          if(1){console.log("6.2.1 ", `drop: ${value[0]}`);}
+          if(0){console.log("6.2.1 ", `drop: ${value[0]}`);}
 
           //<app-stone>-tag as html string; there should only be one child [0]
           let appStone=value[1];
-          if(1){console.log("6.2.2 ", `drop: ${value[1].children[0].className}`);}
-          if(1){console.log("6.2.3 ", `drop: ${value[1].children[0].id}`);}
+          if(0){console.log("6.2.2 ", `drop: ${value[1].children[0].className}`);}
+          if(0){console.log("6.2.3 ", `drop: ${value[1].children[0].id}`);}
 
           //stoneDiv-tag
           let stoneDiv=value[1].children[0];
-          if(1){console.log("6.2.4 ", `drop: ${value[1].children[0].className}`);}
-          if(1){console.log("6.2.5 ", `drop: ${value[1].children[0].id}`);}
+          if(0){console.log("6.2.4 ", `drop: ${value[1].children[0].className}`);}
+          if(0){console.log("6.2.5 ", `drop: ${value[1].children[0].id}`);}
 
           //set stone id in DOM (unique id, starting from 1)
           //------------------------------------------------
@@ -1550,12 +1559,11 @@ export class GameComponent  implements OnInit {
 
           //determine stone colour
           let stoneClass=value[1].children[0].className;
-          let stoneColour=stoneClass.trim().substring(9,20);
-          let stoneColourSub=stoneColour.substring(0,2)
+          let stoneColour=stoneClass.trim().substring(15,17);
 
           //set attribute id in Dom
-          stoneDiv.setAttribute("id", stoneSlotId+"_"+stoneColourSub+"_dragulaId_"+newStoneId)
-          if(1){console.log("6.2.6 ", `drop: ${value[1].children[0].id}`);}
+          stoneDiv.setAttribute("id", stoneSlotId+"_"+stoneColour+"_dragulaId_"+newStoneId)
+          if(0){console.log("6.2.6 ", `drop: ${value[1].children[0].id}`);}
 
         }
 
@@ -1564,35 +1572,35 @@ export class GameComponent  implements OnInit {
         //If this drop event is triggered
         // make sure the stone is placed into the slot
         // even if it falls back into the sled
+        //We switched to Angular 2 style
         // ('stone_slots_bag')
         //----------------------------------------
         if(value[0] === 'stone_slots_bag'){
-          if(1){console.log("6.3.1 ", `drop: ${value[0]}`);}
+          if(0){console.log("6.3.1 ", `drop: ${value[0]}`);}
 
           //stone slot id
           let stoneSlot=value[2];
-          if(1){console.log("6.3.2 ", `drop: ${value[2].id}`);}
+          if(0){console.log("6.3.2 ", `drop: ${value[2].id}`);}
 
           //<app-stone>-tag
           let appStone=value[1];
           let stoneDiv=value[1].children[0];
-          if(1){console.log("6.3.3 ", `drop: ${value[1].children[0].id}`);}
+          if(0){console.log("6.3.3 ", `drop: ${value[1].children[0].id}`);}
 
-          if(stoneSlot.hasChildNodes()){
-            if(1){console.log("6.3.4 ", `drop: stone is in slot`);}
+          if(stoneSlot.children[0]){
+            if(0){console.log("6.3.4 ", `drop: stone is in slot`);}
+            if(0){console.log("6.3.5 ", `drop: ${stoneSlot.children[0].id}`);}
+            if(0){console.log("6.3.6 ", `drop: ${stoneSlot.children[0].class}`);}
+            stoneSlot.removeChild(appStone); //added: new version angular 2 style
           }else{
-            if(1){console.log("6.3.5 ", `drop: stone is back in sled`);}
-            stoneSlot.appendChild(appStone);
+            if(0){console.log("6.3.7 ", `drop: stone is back in sled`);}
+            //stoneSlot.appendChild(appStone); //removed: new version angular 2 style
           }
 
           //--------------------------------------------
           //call add stone to ship (angular 2 style)
           //--------------------------------------------
-
-          //this.gameComponent.removeStoneFromSled(shipSlotDiv_1_Stone.id);
-          //this.shipComponent.addStoneToShip(shipSlotDiv_1_Stone.id);
-
-
+          this.departingHarbourComponent.addStoneToShip(stoneDiv.id);
 
         }
 
@@ -1603,11 +1611,11 @@ export class GameComponent  implements OnInit {
         //get id of arriving harbour ('harbours_bag')
         //-------------------------------------------
         if(value[0] === 'harbours_bag'){
-          if(1){console.log("6.3.1 ", `drop: ${value[0]}`);}
+          if(0){console.log("6.3.1 ", `drop: ${value[0]}`);}
 
           //id of harbour
           let arriving_harbour_id=value[2].id;
-          if(1){console.log("6.3.2 ", `drop: ${value[2].id}`);}
+          if(0){console.log("6.3.2 ", `drop: ${value[2].id}`);}
 
 
           //do something with it
@@ -1620,31 +1628,31 @@ export class GameComponent  implements OnInit {
         // (for informational purposes)
         //--------------------------------------------
         if(value[0] === 'harbours_bag'){
-          if(1){console.log("6.4.1 ", `drop: ${value[0]}`);}
+          if(0){console.log("6.4.1 ", `drop: ${value[0]}`);}
 
           //id of site harbour
           let arriving_harbour=value[2];
 
           //what is it? the <app-ship>
-          if(1){console.log("6.4.2 ", `drop: ${value[1].id}`);}
+          if(0){console.log("6.4.2 ", `drop: ${value[1].id}`);}
 
           //ngifShip <div-tag>
           let ngifShip=document.getElementById(arriving_harbour.id).children[0];
-          if(1){console.log("6.4.2-neu ngifShip", `drop: ${ngifShip}`);}
+          if(0){console.log("6.4.2-neu ngifShip", `drop: ${ngifShip}`);}
 
           //<app-ship>-tag as html string; there should only be one child [0]
           let appShip=document.getElementById(ngifShip.id).children[0];
-          if(1){console.log("6.4.3 app-ship", `drop: ${appShip}`);}
+          if(0){console.log("6.4.3 app-ship", `drop: ${appShip}`);}
 
           //ship <div>-tag as html string
           let shipDiv=document.getElementById(appShip.children[0].id);
           if(0){console.log("6.4.4 shipDiv className ", `drop: ${shipDiv.className}`);}
-          if(1){console.log("6.4.5 shipDiv id ", `drop: ${shipDiv.id}`);}
+          if(0){console.log("6.4.5 shipDiv id ", `drop: ${shipDiv.id}`);}
 
           //ship slots <div>-tag as html string
           let shipSlotsDiv=document.getElementById(shipDiv.children[0].id);
           if(0){console.log("6.4.5 shipSlotsDiv className ", `drop: ${shipSlotsDiv.className}`);}
-          if(1){console.log("6.4.6 shipSlotsDiv id ", `drop: ${shipSlotsDiv.id}`);}
+          if(0){console.log("6.4.6 shipSlotsDiv id ", `drop: ${shipSlotsDiv.id}`);}
 
 
           //ship slot_i <div>-tag as html string
@@ -1689,7 +1697,7 @@ export class GameComponent  implements OnInit {
           if(shipSlotsDiv.children[1]){
             let shipSlotDiv_2=document.getElementById(shipSlotsDiv.children[1].id);
             if(0){console.log("6.4.13 shipSlotDiv_2 className ", `drop: ${shipSlotDiv_2.className}`);}
-            if(1){console.log("6.4.14 shipSlotDiv_2 id ", `drop: ${shipSlotDiv_2.id}`);}
+            if(0){console.log("6.4.14 shipSlotDiv_2 id ", `drop: ${shipSlotDiv_2.id}`);}
 
             //ship slot_i Stone <app-stone>-tag as html string
             if(shipSlotDiv_2.children[0]) {
@@ -1708,7 +1716,7 @@ export class GameComponent  implements OnInit {
           if(shipSlotsDiv.children[2]){
             let shipSlotDiv_3=document.getElementById(shipSlotsDiv.children[2].id);
             if(0){console.log("6.4.19 shipSlotDiv_3 className ", `drop: ${shipSlotDiv_3.className}`);}
-            if(1){console.log("6.4.20 shipSlotDiv_3 id ", `drop: ${shipSlotDiv_3.id}`);}
+            if(0){console.log("6.4.20 shipSlotDiv_3 id ", `drop: ${shipSlotDiv_3.id}`);}
 
             //ship slot_i Stone <app-stone>-tag as html string
             if(shipSlotDiv_3.children[0]) {
@@ -1727,7 +1735,7 @@ export class GameComponent  implements OnInit {
           if(shipSlotsDiv.children[3]){
             let shipSlotDiv_4=document.getElementById(shipSlotsDiv.children[3].id);
             if(0){console.log("6.4.25 shipSlotDiv_4 className ", `drop: ${shipSlotDiv_4.className}`);}
-            if(1){console.log("6.4.26 shipSlotDiv_4 id ", `drop: ${shipSlotDiv_4.id}`);}
+            if(0){console.log("6.4.26 shipSlotDiv_4 id ", `drop: ${shipSlotDiv_4.id}`);}
 
             //ship slot_i Stone <app-stone>-tag as html string
             if(shipSlotDiv_4.children[0]) {
@@ -1857,7 +1865,7 @@ export class GameComponent  implements OnInit {
 
             let isDepartingHarbour = el.parentElement.parentElement.parentElement.id === "departing_harbours";
 
-            if(1){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
+            if(0){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
               if(isDepartingHarbour){
 
                 //<app-ship>
@@ -1934,18 +1942,18 @@ export class GameComponent  implements OnInit {
                 if(countSlots==4){
                   if(countStones>=3){hasNotEnoughStones=false;}
                 }
-                if(1){console.log("10.11.10 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
+                if(0){console.log("10.11.10 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
 
 
                 let isInvalid = hasNotEnoughStones;
 
                 if(0){console.log("10.11.11 dragula-invalid", `isInvalid : ${isInvalid}`);};
                 if (isInvalid) {
-                  if(1){console.log("10.11.12 dragula-invalid", "---DepartingHarbour (True=drag disallowed)---");}
+                  if(0){console.log("10.11.12 dragula-invalid", "---DepartingHarbour (True=drag disallowed)---");}
                   return true;
                 }
                 else {
-                  if(1){console.log("10.11.13 dragula-invalid", "---DepartingHarbour (False=drag allowed)---");}
+                  if(0){console.log("10.11.13 dragula-invalid", "---DepartingHarbour (False=drag allowed)---");}
                   return false; //false: don't prevent any drags from initiating by default
                 }
               }
@@ -1960,11 +1968,11 @@ export class GameComponent  implements OnInit {
             if(0){console.log("10.12.0 dragula-invalid", `isArrivingHarbour: ${isArrivingHarbour}`);}
 
             if (isInvalid) {
-              if(1){console.log("10.12.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
+              if(0){console.log("10.12.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
               return true;
             }
             else {
-                if(1){console.log("10.12.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
+                if(0){console.log("10.12.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
               return false; //false: don't prevent any drags from initiating by default
             }
           }
@@ -2111,16 +2119,24 @@ export class GameComponent  implements OnInit {
           console.log("stone_slots_bag:accepts ", `target: ${target}`);
           console.log("stone_slots_bag:accepts ", `sibling: ${sibling}`);}
 
-          if (el && target && source && target.children[0]){
+          if(0){console.log("stone_slots_bag:accepts ", el.id, target.id,
+            source.id, target.children[0])};
+
+          if (el && target && source){
 
             //let isEmpty = target.innerHTML === ""; //old version
+            //let isEmpty = target.children[0]=== null; //does not work out
+
             //target is class ship_slot or id ship_i_slot_j
-            let isEmpty = target.children[0].children[0]=== null; //no stone in slot
+            let isEmpty = target.innerHTML.substring(target.innerHTML.length - 3, target.innerHTML.length)==='-->';
             let isStoneSlot_1 = target.parentElement.id === "ship_1_slots";
             let isStoneSlot_2 = target.parentElement.id === "ship_2_slots";
             let isStoneSlot_3 = target.parentElement.id === "ship_3_slots";
             let isStoneSlot_4 = target.parentElement.id === "ship_4_slots";
 
+
+            if(0){console.log("11.1.0 ",target.innerHTML.substring(target.innerHTML.length - 3, target.innerHTML.length))}
+            if(0){console.log("11.1.0 ",target.innerHTML.substring(target.innerHTML.length - 3, target.innerHTML.length)==='-->')}
 
             if(0){console.log("11.1.1 ", `el: ${el}`); //moved element
              console.log("11.1.2 ", `el.id: ${el.id}`); //its id
@@ -2144,7 +2160,7 @@ export class GameComponent  implements OnInit {
               return true;
             }
             else {
-                if(0){console.log("11.6.2 dragula-accepts:", "---ship slots (True=drop allowed)---");}
+                if(0){console.log("11.6.2 dragula-accepts:", "---ship slots (False=drop disallowed)---");}
               return false;
             }
           }
@@ -2191,7 +2207,11 @@ export class GameComponent  implements OnInit {
             let isStoneSlot = el.parentElement.parentElement.parentElement.classList.contains('ship_slots');
             let isInvalid = isStoneSlot;
 
-            if (isInvalid) {
+            if(0){console.log("stone_slots_bag:invalid ", el.id, el.parentElement.id,
+                    el.parentElement.parentElement.id, el.parentElement.parentElement.parentElement.id)};
+
+
+              if (isInvalid) {
               if(0){console.log("10.10.1 dragula-invalid:", "---ship slots (True=drag disallowed)---");}
 
               return true;
