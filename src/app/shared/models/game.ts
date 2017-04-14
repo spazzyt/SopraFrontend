@@ -40,14 +40,14 @@ export class Game {
   //-------------------
 
   //ships in each round
-  public ships:Ship[];
+  public ships:Ship[]=[];
 
   //round number
   public roundNumber: number;
 
 
   //market cards in each round
-  public marketCards:MarketCard[];
+  public marketCards:MarketCard[]=[];
 
 
   //changing decision info
@@ -58,7 +58,7 @@ export class Game {
 
 
   // decision
-  public decisions:Decision[];
+  public decisions:Decision[]=[];
 
 
   //Additional Frontend attributes
@@ -74,6 +74,7 @@ export class Game {
                 currentActivePlayerField_:ColourEnum, decision_:Decision){
 
       //static info added in lobby
+
       this.id=id_;
       this.token=token_;
       this.name=name_; //gameName
