@@ -33,7 +33,7 @@ export class PyramidComponent implements OnInit {
 
 
   placeStones(targetStones: Stone[]){
-    for (var i = 0; i < targetStones.length; i++) {
+    for (let i = 0; i < targetStones.length; i++) {
 
       if(this.totalStones < 120) {  //hacker check
 
