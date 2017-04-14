@@ -50,7 +50,7 @@ export enum PositionEnum {
   burialChamberSlot18=<any>"burialChamberSlot18",
   burialChamberSlot19=<any>"burialChamberSlot19",
   burialChamberSlot20=<any>"burialChamberSlot20",
-  burialChamberSlot21=<any>"uburialChamberSlot21",
+  burialChamberSlot21=<any>"burialChamberSlot21",
   burialChamberSlot22=<any>"burialChamberSlot22",
   burialChamberSlot23=<any>"burialChamberSlot23",
   burialChamberSlot24=<any>"burialChamberSlot24",

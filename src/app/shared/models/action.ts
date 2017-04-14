@@ -7,6 +7,8 @@ export class Action {
   //==================
   public id:number=-1;
   public actionName:ActionEnum;
+  public actionName2:ActionEnum;
+  public actionName3:ActionEnum;
   public moves: Move[]=[];
 
 

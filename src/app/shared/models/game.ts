@@ -14,14 +14,14 @@ export class Game {
   //Backend attributes
   //==================
 
+  //static info added in lobby
+  //--------------------------
+
   // game id: check with backend
   public id:number;
 
   // check with backend
   public token: string;
-
-  // player who created the game
-  public owner: string;
 
   // name of the game displayed in lobby screen
   public name: string;
@@ -35,20 +35,30 @@ export class Game {
   // users playing
   public players: User[];
 
+
+  //changing round info
+  //-------------------
+
   //ships in each round
   public ships:Ship[];
-
-  //market cards in each round
-  public marketCards:MarketCard[];
-
-  // active player
-  public currentActivePlayerField: ColourEnum;
 
   //round number
   public roundNumber: number;
 
+
+  //market cards in each round
+  public marketCards:MarketCard[];
+
+
+  //changing decision info
+  //----------------------
+
+  // active player
+  public currentActivePlayerField: ColourEnum;
+
+
   // decision
-  public decision:Decision;
+  public decisions:Decision[];
 
 
   //Additional Frontend attributes
@@ -58,8 +68,8 @@ export class Game {
   //Constructor
   //===========
 
-  constructor(id_:number, token_:string,
-                name_:string, numPlayers_:number, players_:User[],
+  constructor(id_:number, token_:string, name_:string, status_: GameStatusEnum,
+                numPlayers_:number, players_:User[],
                 roundNumber_:number, ships_:Ship[], marketCards_:MarketCard[],
                 currentActivePlayerField_:ColourEnum, decision_:Decision){
 
@@ -67,16 +77,24 @@ export class Game {
       this.id=id_;
       this.token=token_;
       this.name=name_; //gameName
+      this.status=status_; //gameStatus pending/active/terminated/RoundNumber1 to 6
       this.numPlayers=numPlayers_;
       this.players=players_;
       //changing round info
-      this.roundNumber=roundNumber_;
+      this.roundNumber=roundNumber_;//or gameStatusEnum.round1
       this.ships=ships_;
       this.marketCards=marketCards_;
       //changing decision info
       this.currentActivePlayerField=currentActivePlayerField_;
-      this.decision=decision_;
+      this.decisions.push(decision_);
 
+    }
+
+    addDecision(decision_){
+      this.decisions.push(decision_);
+    }
+    getLastDecision(){
+      return this.decisions[this.decisions.length];
     }
 }
 

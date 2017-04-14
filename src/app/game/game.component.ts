@@ -38,6 +38,8 @@ import {UserService} from "../shared/services/user.service";
 
 import {ActivatedRoute} from "@angular/router";
 import {Round} from "../shared/models/round";
+import {GameStatusEnum} from "../shared/models/game-status.enum";
+import {ActionEnum} from "../shared/models/action.enum";
 
 
 @Component({
@@ -64,13 +66,13 @@ export class GameComponent  implements OnInit {
   myUserName:string=this.userService.mySelf().username;
 
   // am I the current active player
-  amI_CurrentActivePlayer;
+  amI_CurrentActivePlayer:boolean;
 
-  // my player field (bottom-left, top-left, top-right, bottom-right)
-  myPlayerField;
+  // my player field
+  myPlayerField:ColourEnum;
 
   // player field of current active player
-  currentActivePlayerField;
+  currentActivePlayerField:ColourEnum;
 
 
   // Current Target (Soll) Game state
@@ -196,7 +198,7 @@ export class GameComponent  implements OnInit {
 
         });
     }
-
+    debugger
     //Initialize the new game
     this.initializeNewGame(this.getFakeGame());
 
@@ -240,8 +242,8 @@ export class GameComponent  implements OnInit {
 
 
 
-    let returnGame = new Game(0, 'token',
-      'name', 4,  this.players_target,
+    let returnGame = new Game(0, 'token', 'name', GameStatusEnum.round1,
+      4,  this.players_target,
       1, this.ships_target, this.marketCards,
       this.currentActivePlayerField, null);
     return returnGame;
@@ -814,7 +816,283 @@ export class GameComponent  implements OnInit {
   }
 
   //===========================================================
+  // Update Game UI for one Decision
+  //===========================================================
+  updateGameforOneDecision(newDecision_:Decision){
+
+    //update game object
+    this.game.addDecision(newDecision_);
+
+    //check whether it was your decision
+    let isItMyDecision:boolean=newDecision_.decisionMadeBy===this.myPlayerField;
+
+    //update game UI only, if it was not your decision
+    if (!isItMyDecision) {
+      this.updateUiForOneMove(newDecision_, isItMyDecision);
+    }
+
+  }
+
+  updateUiForOneMove(newDecision_:Decision, isItMyDecision:boolean) {
+
+    //In the hope this is what we get from backend.
+    let lastDecisionActionName = newDecision_.madeAction.actionName;
+    let lastDecisionActionName2 = newDecision_.madeAction.actionName2;
+    let lastDecisionActionName3 = newDecision_.madeAction.actionName3;
+
+    //update game UI only, if it was not your decision
+    if (!isItMyDecision) {
+
+      //Took Stones from Quarry
+      //-----------------------
+      if (lastDecisionActionName === ActionEnum.fillSledWithStonesFromQuarry) {
+
+        //update Numbers on PlayerField: Quarry and Sled
+        this.updatePlayerData();
+
+        //show Snackbarinfo
+        let text="replace this string";
+        this.showSnackbarMessage(text);
+
+      }
+
+      //Placed Stone on Ship
+      //-------------------
+      else if (lastDecisionActionName === ActionEnum.placeStoneFromSledToShip) {
+
+        //update Numbers on PlayerField: Sled
+        this.updatePlayerData();
+
+        //show stone on ship
+        this.updateStoneOnShip();
+
+        //show Snackbarinfo
+        let text="replace this string";
+        this.showSnackbarMessage(text);
+
+      }
+
+      //Sail Ship to left side of island (no blue market card was not played)
+      //-----------------------------------------------------------------------
+      else if (lastDecisionActionName === ActionEnum.sailShip
+          && !(lastDecisionActionName2 === ActionEnum.sailShipToMarket)
+          && !(lastDecisionActionName3 === ActionEnum.playBlueMarketCard)) {
+
+        //update Numbers on PlayerField: Score
+        this.updatePlayerData();
+
+        //remove ship from departing harbour
+        this.removeShipFromDepartingHarbour();
+
+        //add ship to arriving harbour
+        this.addShipToArrivingHarbour();
+
+        //place stones to site
+        this.placeStonesToSite();
+
+        //show Snackbarinfo
+        let text="replace this string";
+        this.showSnackbarMessage(text);
+
+      }
+
+      //Sailed Ship to market (no blue market card was not played)
+      //------------------------------------------------------------
+      else if (lastDecisionActionName === ActionEnum.sailShip
+        && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)
+        && !(lastDecisionActionName3 === ActionEnum.playBlueMarketCard)) {
+
+        //remove ship from departing harbour
+        this.removeShipFromDepartingHarbour();
+
+        //add ship to arriving harbour
+        this.addShipToArrivingHarbour();
+
+        //show Snackbarinfo
+        let text="replace this string";
+        this.showSnackbarMessage(text);
+
+      }
+
+      //Took Red Card from Market
+      //-------------------------
+      else if (lastDecisionActionName === ActionEnum.sailShip
+        && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
+
+        //update Numbers on PlayerField: Quarry
+        this.updatePlayerData();
+
+        //remove Card from Market
+        this.removeCardFromMarket();
+
+        //add stones to Site
+        this.addTwoStonesToSite();
+
+        //show Snackbarinfo
+        let text="replace this string";
+        this.showSnackbarMessage(text);
+
+      }
+
+      //Took NO Red but another Card from Market
+      //----------------------------------------
+      else if (lastDecisionActionName === ActionEnum.sailShip
+        && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
+
+        //update Numbers on PlayerField: MarketCardIcons
+        this.updatePlayerData();
+
+        //remove Card from Market
+        this.removeCardFromMarket();
+
+        //show Snackbarinfo
+        let text="replace this string";
+        this.showSnackbarMessage(text);
+
+      }
+
+      //Played Blue Market Card Hammer
+      //------------------------------
+      else if (lastDecisionActionName === ActionEnum.playBlueMarketCardHammer) {
+
+        //update Numbers on PlayerField: Quarry, Sled
+        this.updatePlayerData();
+
+        //show stone on ship
+        this.updateStoneOnShip();
+
+        //show Snackbarinfo
+        let text="replace this string";
+        this.showSnackbarMessage(text);
+
+      }
+
+      //Played Blue Market Card Sail
+      //----------------------------
+      else if (lastDecisionActionName === ActionEnum.playBlueMarketCardSail) {
+
+        //update Numbers on PlayerField: Sled
+        this.updatePlayerData();
+
+        //show stone on ship
+        this.updateStoneOnShip();
+
+        //remove ship from departing harbour
+        this.removeShipFromDepartingHarbour();
+
+        //add ship to arriving harbour
+        this.addShipToArrivingHarbour();
+
+        //place stones to site
+        this.placeStonesToSite();
+
+        //show Snackbarinfo
+        let text="replace this string";
+        this.showSnackbarMessage(text);
+
+      }
+
+      //Played Blue Market Card Chisel
+      //------------------------------
+      else if (lastDecisionActionName === ActionEnum.playBlueMarketCardChisel) {
+
+        //update Numbers on PlayerField: Sled
+        this.updatePlayerData();
+
+        //show stone on ship
+        this.updateStoneOnShip();
+
+        //show stone on ship
+        this.updateStoneOnShip();
+
+        //show Snackbarinfo
+        let text="replace this string";
+        this.showSnackbarMessage(text);
+
+      }
+
+      //Played Blue Market Card Lever (Sail Ship to left side of island)
+      //----------------------------------------------------------------
+      else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
+          && !(lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
+
+        //update Numbers on PlayerField: Sled
+        this.updatePlayerData();
+
+        //remove ship from departing harbour
+        this.removeShipFromDepartingHarbour();
+
+        //add ship to arriving harbour
+        this.addShipToArrivingHarbour();
+
+        //place stones to site
+        this.placeStonesToSite();
+
+        //show Snackbarinfo
+        let text="replace this string";
+        this.showSnackbarMessage(text);
+
+      }
+
+      //Played Blue Market Card Lever (Sail Ship to market)
+      //---------------------------------------------------
+      else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
+        && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
+
+        //remove ship from departing harbour
+        this.removeShipFromDepartingHarbour();
+
+        //add ship to arriving harbour
+        this.addShipToArrivingHarbour();
+
+        //switch order of stones on ship
+        this.switchOrderOfStonesOnShip
+
+        //show Snackbarinfo
+        let text="replace this string"
+        this.showSnackbarMessage(text);
+
+      }
+
+
+    }
+
+  }
+
+
+  //helper functions
+  //------------------
+
+  //show stone on ship
+  updateStoneOnShip(){}
+
+  //remove ship from departing harbour
+  removeShipFromDepartingHarbour(){}
+
+  //add ship to arriving harbour
+  addShipToArrivingHarbour(){}
+
+  //place stones to site
+  placeStonesToSite(){}
+
+  //remove stone from ship, place it to quarry
+  removeStoneFromShip(){};
+
+  //remove Card from Market
+  removeCardFromMarket(){};
+
+  //add stones to Site
+  addTwoStonesToSite(){};
+
+  //switch order of stones on ship
+  switchOrderOfStonesOnShip(){};
+
+
+
+
+  //===========================================================
   // Update data for one player field
+  // e.g. helper function for updateUiForOneMove()
   //===========================================================
 
   //TODO add input, pass input to mapFromServer... function
@@ -826,7 +1104,7 @@ export class GameComponent  implements OnInit {
   }
 
   //TODO add input data format
-  mapFromServerToUpdatePlayerDataArray(){
+  private mapFromServerToUpdatePlayerDataArray(){
 
     let returnArray = [1,2,3,4,5,6,7,8,9,10,11,12];
     return returnArray;
@@ -842,7 +1120,7 @@ export class GameComponent  implements OnInit {
   //    0      1      2      3        4       5       6      7        8      9      10     11
   //
 
-  updatePlayerDataWithArray(input: number[], playerField: ColourEnum){
+  private updatePlayerDataWithArray(input: number[], playerField: ColourEnum){
 
     if(playerField == ColourEnum.black){    //BLACK player field
 
