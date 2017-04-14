@@ -1928,7 +1928,7 @@ export class GameComponent  implements OnInit {
                 //(no helper functions allowed: this.hasShipEnoughStones(ship_i_slots_id);)
 
                 //count slots
-                let divShip_divSlots = el.children[0].children[0].children[0];
+                let divShip_divSlots = el.children[0].children[0];
                 let countSlots:number=0;
                 if(divShip_divSlots.children[0]){
                   countSlots+=1;
@@ -1942,24 +1942,26 @@ export class GameComponent  implements OnInit {
                 if(divShip_divSlots.children[3]){
                   countSlots+=1;
                 }
-                if(0){console.log("10.11.8 dragula-invalid", `countSlots: ${countSlots}`);};
+                if(1){console.log("10.11.8 dragula-invalid", el)};
+                if(1){console.log("10.11.8 dragula-invalid", el.children[0].children[0])};
+                if(1){console.log("10.11.8 dragula-invalid", `countSlots: ${countSlots}`);}
 
 
                 //count stones
                 let countStones:number=0;
                 if(divShip_divSlots.children[0]){
-                  if(divShip_divSlots.children[0].children[0].children[0]){countStones+=1;}
+                  if(divShip_divSlots.children[0].children[0] && divShip_divSlots.children[0].children[0].children[0]){countStones+=1;}
                 }
                 if(divShip_divSlots.children[1]){
-                  if(divShip_divSlots.children[1].children[0].children[0]){countStones+=1;}
+                  if(divShip_divSlots.children[1].children[0] && divShip_divSlots.children[1].children[0].children[0]){countStones+=1;}
                 }
                 if(divShip_divSlots.children[2]){
-                  if(divShip_divSlots.children[2].children[0].children[0]){countStones+=1;}
+                  if(divShip_divSlots.children[2].children[0] && divShip_divSlots.children[2].children[0].children[0]){countStones+=1;}
                 }
                 if(divShip_divSlots.children[3]){
-                  if(divShip_divSlots.children[3].children[0].children[0]){countStones+=1;}
+                  if(divShip_divSlots.children[3].children[0] && divShip_divSlots.children[3].children[0].children[0]){countStones+=1;}
                 }
-                if(0){console.log("10.11.9 dragula-invalid", `countStones: ${countStones}`);};
+                if(1){console.log("10.11.9 dragula-invalid", `countStones: ${countStones}`);};
 
 
                 //check if it can move
@@ -1976,18 +1978,18 @@ export class GameComponent  implements OnInit {
                 if(countSlots==4){
                   if(countStones>=3){hasNotEnoughStones=false;}
                 }
-                if(0){console.log("10.11.10 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
+                if(1){console.log("10.11.10 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
 
 
                 let isInvalid = hasNotEnoughStones;
 
-                if(0){console.log("10.11.11 dragula-invalid", `isInvalid : ${isInvalid}`);};
+                if(1){console.log("10.11.11 dragula-invalid", `isInvalid : ${isInvalid}`);};
                 if (isInvalid) {
-                  if(0){console.log("10.11.12 dragula-invalid", "---DepartingHarbour (True=drag disallowed)---");}
+                  if(1){console.log("10.11.12 dragula-invalid", "---DepartingHarbour (True=drag disallowed)---");}
                   return true;
                 }
                 else {
-                  if(0){console.log("10.11.13 dragula-invalid", "---DepartingHarbour (False=drag allowed)---");}
+                  if(1){console.log("10.11.13 dragula-invalid", "---DepartingHarbour (False=drag allowed)---");}
                   return false; //false: don't prevent any drags from initiating by default
                 }
               }
