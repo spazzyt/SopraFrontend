@@ -67,11 +67,11 @@ export class TempleComponent implements OnInit {
 
 
   placeStones(targetStones: Stone[]){
-      for (var i = 0; i < targetStones.length; i++) {
+      for (let i = 0; i < targetStones.length; i++) {
         if (targetStones[i] != null)                          //only do this for stones that exist in the input array
         {
                                                               //this function determines in which column the stone needs to be placed
-          var x = this.totalStones % this.fieldHeight.length; //modulo calculates into which column to fill in the stone
+          let x = this.totalStones % this.fieldHeight.length; //modulo calculates into which column to fill in the stone
           this.stones[x] = targetStones[i];
 
           //increase the total stone counter by one

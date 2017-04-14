@@ -166,27 +166,34 @@ export class DepartingHarbourComponent {
   }
 
 
-  //TODO: here again we let Angular 2 add the stones to the site
   //Returns the array of stones in the ship
   // (but removes all null values)
   //---------------------------------------
-  passStonesToSite(){
-    let returnStones;
+  passStonesToSite(whichShip:number){
+    //let returnStones:Stone[]=[null,null,null,null];
+    let returnStones=new Array<Stone>();
 
     for(let i = 0; i < 4; i++){
       if(this.stonesOnShip[i] != null){
-        returnStones.append(this.stonesOnShip[i]);
-      }
 
-      return returnStones;
+        if(1){console.log(whichShip-1)};
+        if(1){console.log(this.stonesOnShip[whichShip-1][i])};
+
+        returnStones.push(this.stonesOnShip[whichShip-1][i]);
+      }
     }
+    if(1){console.log(returnStones)};
+    return returnStones;
   }
 
-  //TODO: here again we let Angular 2 delete the stones from the ship
-  //Deletes the contents of the stonesOnShip array
+  //Deletes the whole contents of the stonesOnShip array
   // (use this after passing the stones to a site)
-  emptyStoneArray(){
-    this.stonesOnShip = [null, null, null, null];
+  emptyStoneArray(whichShip:number){
+    for(let i = 0; i < 4; i++) {
+      if(this.stonesOnShip[i] != null) {
+        this.stonesOnShip[whichShip-1][i] = null;
+      }
+    }
   }
 
 

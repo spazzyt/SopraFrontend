@@ -1509,8 +1509,8 @@ export class GameComponent  implements OnInit {
   dragula_subscribeDropEvent() {
     this.dragulaService.drop.subscribe((value) => {
 
-      if(0){console.log("6.1.0 dragula-subscribe-drop");}
-      if(0){console.log(value[0],value[1],value[2])}
+      if(1){console.log("6.1.0 dragula-subscribe-drop");}
+      if(1){console.log(value[0],value[1],value[2])}
 
       //-------------------------------------------
       //value object not null; otherwise do nothing
@@ -1625,7 +1625,8 @@ export class GameComponent  implements OnInit {
 
         //--------------------------------------------
         //get id of ship /slot /stone ('harbours_bag')
-        // (for informational purposes)
+        // (for informational purposes:
+        // hier läuft nun was schief: shipDiv meldet falsches Schiff!!!!)
         //--------------------------------------------
         if(value[0] === 'harbours_bag'){
           if(0){console.log("6.4.1 ", `drop: ${value[0]}`);}
@@ -1638,7 +1639,7 @@ export class GameComponent  implements OnInit {
 
           //ngifShip <div-tag>
           let ngifShip=document.getElementById(arriving_harbour.id).children[0];
-          if(0){console.log("6.4.2-neu ngifShip", `drop: ${ngifShip}`);}
+          if(1){console.log("6.4.2-neu ngifShip", `drop: ${ngifShip}`);}
 
           //<app-ship>-tag as html string; there should only be one child [0]
           let appShip=document.getElementById(ngifShip.id).children[0];
@@ -1659,7 +1660,7 @@ export class GameComponent  implements OnInit {
           if(shipSlotsDiv.children[0]) {
             let shipSlotDiv_1 = document.getElementById(shipSlotsDiv.children[0].id);
             if (0) {console.log("6.4.7 shipSlotDiv_1 className ", `drop: ${shipSlotDiv_1.className}`);}
-            if (1) {console.log("6.4.8 shipSlotDiv_1 id ", `drop: ${shipSlotDiv_1.id}`);}
+            if (0) {console.log("6.4.8 shipSlotDiv_1 id ", `drop: ${shipSlotDiv_1.id}`);}
 
             //ship slot_i Stone <app-stone>-tag as html string
             if(shipSlotDiv_1.children[0]) {
@@ -1671,24 +1672,6 @@ export class GameComponent  implements OnInit {
               let shipSlotDiv_1_Stone = document.getElementById(shipSlotDiv_1_AppStone.children[0].id);
               if (0) {console.log("6.4.11 shipSlotDiv_1_Stone className ", `drop: ${shipSlotDiv_1_Stone.className}`);}
               if (0) {console.log("6.4.12 shipSlotDiv_1_Stone id ", `drop: ${shipSlotDiv_1_Stone.id}`);}
-
-              //--------------------------------------------
-              //call add stone to site
-              //--------------------------------------------
-
-              let leverPlayed = this.playedBlueMarketCard_lever;
-
-              if (leverPlayed) {
-                if (1) {console.log("6.5.1 add stone to site manually", `drop: leverPlayed:  ${leverPlayed}`);}
-
-              }
-              else {
-                if (1) {console.log("6.5.2 add stone to site automatically", `drop: lever Played: ${leverPlayed}`);}
-
-                //this.shipComponent.removeStoneFromShip(shipSlotDiv_1_Stone.id);
-                //this.shipComponent.addStoneToSite(shipSlotDiv_1_Stone.id);
-              }
-              //End: call add stone to site
 
             }
           }
@@ -1750,15 +1733,57 @@ export class GameComponent  implements OnInit {
             }
           }
 
+        }
 
+        //--------------------------------------------
+        //call move stone from ship to site
+        //--------------------------------------------
+        if(value[0] === 'harbours_bag'){
 
+          let leverPlayed = this.playedBlueMarketCard_lever;
 
+          if (leverPlayed) {
+            if (1) {console.log("6.5.1 add stone to site manually", `drop: leverPlayed:  ${leverPlayed}`);}
 
+          }
+          else {
+            if (1) {console.log("6.5.2 add stone to site automatically", `drop: lever Played: ${leverPlayed}`);}
 
+            let shipDiv_;
+            shipDiv_=value[1].children[0].children[0];
+            let shipId=shipDiv_.id;
+            let whichShip=Number(shipId.substring(5,6));
 
+            if(1){console.log("shipId, whichShip",shipId, whichShip)}
 
+            let arrivingHarbour_;
+            arrivingHarbour_=value[2];
+            let arrivingHarbourId=arrivingHarbour_.id;
+            let whichArrivingHarbour=Number(arrivingHarbourId.substring(17,18));
 
+            if(1){console.log("arrivingHarbourId, whichArrivingHarbour",arrivingHarbourId, whichArrivingHarbour)}
 
+            let stonesToMove=new Array<Stone>();
+            stonesToMove=this.departingHarbourComponent.passStonesToSite(whichShip);
+
+            if (whichArrivingHarbour==1){
+              this.pyramidComponent.placeStones(stonesToMove);
+            }
+            if (whichArrivingHarbour==2){
+              this.templeComponent.placeStones(stonesToMove);
+            }
+            if (whichArrivingHarbour==3){
+              this.burialChamberComponent.placeStones(stonesToMove);
+            }
+            if (whichArrivingHarbour==4){
+              this.obeliskComponent.placeStones(stonesToMove);
+            }
+            if (whichArrivingHarbour==5){
+
+            }
+
+          }
+          //End: call add stone to site
         }
 
       }
@@ -1783,8 +1808,6 @@ export class GameComponent  implements OnInit {
         accepts: function (el, target, source, sibling) {
 
           /*where drop is allowed*/
-
-          console.log("testString", this.testString);
 
           if(0){console.log("harbours_bag:accepts ", `el: ${el}`);
           console.log("harbours_bag:accepts ", `source: ${source}`);
