@@ -1749,6 +1749,8 @@ export class GameComponent  implements OnInit {
           else {
             if (1) {console.log("6.5.2 add stone to site automatically", `drop: lever Played: ${leverPlayed}`);}
 
+            //Determine which ship sailed
+            //---------------------------
             let shipDiv_;
             shipDiv_=value[1].children[0].children[0];
             let shipId=shipDiv_.id;
@@ -1756,6 +1758,8 @@ export class GameComponent  implements OnInit {
 
             if(1){console.log("shipId, whichShip",shipId, whichShip)}
 
+            //Determine which arriving harbour ship sailed to
+            //-----------------------------------------------
             let arrivingHarbour_;
             arrivingHarbour_=value[2];
             let arrivingHarbourId=arrivingHarbour_.id;
@@ -1763,9 +1767,16 @@ export class GameComponent  implements OnInit {
 
             if(1){console.log("arrivingHarbourId, whichArrivingHarbour",arrivingHarbourId, whichArrivingHarbour)}
 
+            //get stone array on ship
+            //-----------------------
             let stonesToMove=new Array<Stone>();
             stonesToMove=this.departingHarbourComponent.passStonesToSite(whichShip);
 
+            //Delete Stones on ship
+            this.departingHarbourComponent.emptyStoneArray(whichShip);
+
+            //Move stones to correct site
+            //---------------------------
             if (whichArrivingHarbour==1){
               this.pyramidComponent.placeStones(stonesToMove);
             }
