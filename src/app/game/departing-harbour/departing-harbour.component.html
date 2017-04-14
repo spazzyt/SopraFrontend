@@ -9,7 +9,7 @@
        id="departing_harbour_{{num}}" class="departing_harbour" [dragula]="'harbours_bag'">
 
     <div *ngIf="ships[num-1] != null" id="ngifShip">
-      <app-ship class="appShip" [ship]="ships[num-1]"></app-ship>
+      <app-ship class="appShip" [ship]="ships[num-1]" [stonesOnShip]="stonesOnShip[num-1]"></app-ship>
     </div>
 
   </div>

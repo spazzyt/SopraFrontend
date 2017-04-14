@@ -21,9 +21,9 @@ export class ShipComponent implements OnInit {
   @Input() ship:Ship;
   //ship:Ship;
 
-
-  //TODO: What is this for?
-  stonesOnShip: Stone[] = []; // = [new Stone(1, ColourEnum.brown), null]
+  //Add stones to ship
+  //stonesOnShip: Stone[] = []; // = [new Stone(1, ColourEnum.brown), null]
+  @Input() stonesOnShip:Stone[][];
 
   //===============
   //Constructor
@@ -41,23 +41,40 @@ export class ShipComponent implements OnInit {
   //Class Methods
   //===============
 
-
-  //TODO: what should this function do? Dragula already place a stone to the Dom!
-  //TODO: What we could do: If dragula drops a stone, I will remove it immediately
-  //TODO: What we could do: Then I call addStoneToShip and let it Angular 2 do
-  //--------------------------------
+  //this function is called from within Dragula drop
+  //-----------------------------------------------
   addStoneToShip(htmlId:string){
 
+    if(1){console.log("shipComponent:addStoneToShip:htmlId: ", htmlId)}
     //extract data from string
-    let id=Number(htmlId.substring(0,1));
-    let currentStonePositionOnShip=0;
-    let colour=ColourEnum.black;
+    let id=Number(htmlId.substring(htmlId.length-1,htmlId.length));
+    let currentShip=Number(htmlId.substring(5,6));
+    let currentStonePositionOnShip=Number(htmlId.substring(12,13));
+    let colour_=htmlId.substring(14,16);
+    let colour:ColourEnum;
+    if(colour_=="bl"){
+      colour=ColourEnum.black;
+    }
+    else if(colour_=="wh"){
+      colour=ColourEnum.white;
+    }
+    else if(colour_=="br"){
+      colour=ColourEnum.brown;
+    }
+    else if(colour_=="gr"){
+      colour=ColourEnum.gray;
+    }
+    else {console.log("shipComponent error")}
+
+    if(1){console.log(": ", htmlId.substring(htmlId.length-1,htmlId.length))}
+    if(1){console.log(": ", htmlId)}
+    if(1){console.log(": ", htmlId.substring(14,16))}
 
     //TODO: New stone object (better, take one from the sled?)
     let stone= new Stone(id, colour);
 
     //fill the array which creates the stone in slot
-    this.stonesOnShip[currentStonePositionOnShip-1] = stone;
+    this.stonesOnShip[1][currentStonePositionOnShip-1] = stone;
   }
 
 
