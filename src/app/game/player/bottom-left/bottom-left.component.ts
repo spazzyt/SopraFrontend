@@ -105,7 +105,7 @@ export class BottomLeftComponent implements OnInit {
     //set click handler for  bll_1
     (<any>$(document)).ready(() =>{
       (<any>$("#quarry_1")).on("click", () =>{
-        alert("The stone quarry 1 was clicked.");
+        //alert("The stone quarry 1 was clicked.");
         this.onEvent_setClickHandlerOnStoneQuarry_sledStones.emit(this.sledStones);
         this.onEvent_setClickHandlerOnStoneQuarry_quarryStones.emit(this.quarryStones);
       });

@@ -41,6 +41,8 @@ import {Round} from "../shared/models/round";
 import {GameStatusEnum} from "../shared/models/game-status.enum";
 import {ActionEnum} from "../shared/models/action.enum";
 import {PositionEnum} from "../shared/models/position.enum";
+import {Action} from "../shared/models/action";
+import {Move} from "../shared/models/move";
 
 
 @Component({
@@ -112,9 +114,6 @@ export class GameComponent  implements OnInit {
     //dragula subscriptions
     this.dragula_subscribeDragEvent();
     this.dragula_subscribeDropEvent();
-
-    //snackbar div in game footer
-    this.generateSnackbarDiv();
 
   }
 
@@ -202,6 +201,9 @@ export class GameComponent  implements OnInit {
 
     //Initialize the new game
     this.initializeNewGame(this.getFakeGame());
+
+    //snackbar div in game footer (has to be in ngOnInit, not in Constructor)
+    this.generateSnackbarDiv();
 
 
   }
@@ -1920,7 +1922,7 @@ export class GameComponent  implements OnInit {
       else if(stonesInQuarry==1 && stonesInSled==3){howMany=1;}
       else if(stonesInQuarry>=1 && stonesInSled==4){howMany=1;}
       else{
-        this.showSnackbarMessage("you can not take stones from the quarry")
+        this.showSnackbarMessage("you can not take stones from the quarry");
         return;
       }
 
@@ -1932,12 +1934,18 @@ export class GameComponent  implements OnInit {
 
     }
 
+    //snackbar message
+    this.showSnackbarMessage("you took "+ howMany+" stones from the quarry");
+
+
     //generate decision object
-    let newDecision:Decision;
+    let newDecision:Decision = new Decision();
     newDecision.decisionMadeBy=this.game.myPlayerField;
     newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
       " took "+ howMany +" stone from quarry.";
+    newDecision.madeAction= new Action();
     newDecision.madeAction.actionName=ActionEnum.fillSledWithStonesFromQuarry;
+    newDecision.madeAction.madeMove= new Move();
     newDecision.madeAction.madeMove.from=PositionEnum.stoneQuarry;
     newDecision.madeAction.madeMove.to=PositionEnum.supplySled;
 
@@ -1947,6 +1955,14 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
+
+
+    if(1){console.log("take stones from Quarry to Sled:howMany ",howMany);}
+
+    if(1){console.log("take stones from Quarry to Sled:game.quarryStones ",this.game.bottomLeft_quarryStones);}
+    if(1){console.log("take stones from Quarry to Sled:game.sledStones ",this.game.bottomLeft_sledStones);}
+    if(1){console.log("take stones from Quarry to Sled:Component.quarryStones ",this.bottomLeftComponent.quarryStones);}
+    if(1){console.log("take stones from Quarry to Sled:Component.sledStones ",this.bottomLeftComponent.sledStones);}
 
   }
 
