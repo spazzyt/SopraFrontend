@@ -82,68 +82,10 @@ export class BottomLeftComponent implements OnInit {
   // Other-Methods
   //===============
 
-  setPlayerName(playerName_target:string){
 
-    //update attribute: score
-    this.playerName=playerName_target;
-
-  }
-
-  playerFieldGlow(status: boolean) {
-      (<any>$(document)).ready(() => {
-        if(status)
-          (<any>$("#glow1")).css("background-image", "url(../../assets/images/bottom_left_active.png)");
-        else
-          (<any>$("#glow1")).css("background-image", "url(../../assets/images/bottom_left.png)");
-      });
-  }
-
-  setMarketCards(marketCards_target:number[]){
-
-    // define protocol: which market card
-    // corresponds to which array index
-    for(let i = 0; i < marketCards_target.length; i++){
-      if(marketCards_target[i] != null)
-        this.marketCards[i] = marketCards_target[i];
-    }
-}
-
-  setScore(score_target:number){
-
-    //update attribute: score
-    this.score=score_target;
-
-  }
-
-  setStonesInSled(sledStones_target:number){
-
-    //update attribute: sledStones
-    this.sledStones=sledStones_target;
-
-  }
-
-  setStonesInQuarry(quarryStones_target:number){
-
-    // update attribute:
-    this.quarryStones=quarryStones_target;
-
-  }
-
-
-  hideStone(){
-    (<any>$(document)).ready(function (){
-      (<any>$("#bag_1")).hide();
-    });
-
-  }
-
-  showStone(){
-    (<any>$(document)).ready(function (){
-      (<any>$("#bag_1")).show();
-    });
-  }
-
-
+  //===========================================================
+  // Click Events
+  //===========================================================
 
   setClickHandlerOnBlueMarketCards() {
 
@@ -200,34 +142,93 @@ export class BottomLeftComponent implements OnInit {
 
   }
 
+
+  //===========================================================
+  // Change Text / Numbers
+  //===========================================================
+
+  setPlayerName(playerName_target:string){
+
+    //update attribute: score
+    this.playerName=playerName_target;
+
+  }
+
+
+  setMarketCards(marketCards_target:number[]){
+
+    // define protocol: which market card
+    // corresponds to which array index
+    //tll..trr, bll..brr, purple
+    for(let i = 0; i < marketCards_target.length; i++){
+      if(marketCards_target[i] != null)
+        this.marketCards[i] = marketCards_target[i];
+    }
+  }
+
+  setScore(score_target:number){
+
+    //update attribute: score
+    this.score=score_target;
+
+  }
+
+  setStonesInSled(sledStones_target:number){
+
+    //update attribute: sledStones
+    this.sledStones=sledStones_target;
+
+  }
+
+  setStonesInQuarry(quarryStones_target:number){
+
+    // update attribute:
+    this.quarryStones=quarryStones_target;
+
+  }
+
+
+  hideStone(){
+    (<any>$(document)).ready(function (){
+      (<any>$("#bag_1")).hide();
+    });
+
+  }
+
+  showStone(){
+    (<any>$(document)).ready(function (){
+      (<any>$("#bag_1")).show();
+    });
+  }
+
+
+  //===========================================================
+  // PlayerField and Icon Colouring / Opacity change
+  //===========================================================
+
+  playerFieldGlow(status: boolean) {
+    (<any>$(document)).ready(() => {
+      if(status)
+        (<any>$("#glow1")).css("background-image", "url(../../assets/images/bottom_left_active.png)");
+      else
+        (<any>$("#glow1")).css("background-image", "url(../../assets/images/bottom_left.png)");
+    });
+  }
+
+
   //deactivates at the moment the icon top-left-left,
   // this function cannot reactivate icon
 
   deactivateOrActivateIcons(playerIconsStatus_target:boolean[]){
 
 
-    //deactivates icons at the bottom of player bottom-left
+    //deactivates market card icons at the top of player bottom-left
+    //--------------------------------------------------------------
 
-
-    if (playerIconsStatus_target[0] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_1")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[0] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_1")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
 
     if (playerIconsStatus_target[1] == false) {
       (<any>$(document)).ready(function (){
-        (<any>$("#bml_1")).css("opacity", "0.3");
+        (<any>$("#tll_1")).css("opacity", "0.3");
 
       });
 
@@ -235,7 +236,7 @@ export class BottomLeftComponent implements OnInit {
     }
     if (playerIconsStatus_target[1] == true){
       (<any>$(document)).ready(function (){
-        (<any>$("#bml_1")).css("opacity", "1.0");
+        (<any>$("#tll_1")).css("opacity", "1.0");
 
       });
       if(0){console.log("deactivateOrActivateIcons: true")}
@@ -243,7 +244,7 @@ export class BottomLeftComponent implements OnInit {
 
     if (playerIconsStatus_target[2] == false) {
       (<any>$(document)).ready(function (){
-        (<any>$("#bmr_1")).css("opacity", "0.3");
+        (<any>$("#tml_1")).css("opacity", "0.3");
 
       });
 
@@ -251,7 +252,7 @@ export class BottomLeftComponent implements OnInit {
     }
     if (playerIconsStatus_target[2] == true){
       (<any>$(document)).ready(function (){
-        (<any>$("#bmr_1")).css("opacity", "1.0");
+        (<any>$("#tml_1")).css("opacity", "1.0");
 
       });
       if(0){console.log("deactivateOrActivateIcons: true")}
@@ -259,13 +260,97 @@ export class BottomLeftComponent implements OnInit {
 
     if (playerIconsStatus_target[3] == false) {
       (<any>$(document)).ready(function (){
-        (<any>$("#brr_1")).css("opacity", "0.3");
+        (<any>$("#tmr_1")).css("opacity", "0.3");
 
       });
 
       if(0){console.log("deactivateOrActivateIcons: false")}
     }
     if (playerIconsStatus_target[3] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#tmr_1")).css("opacity", "1.0");
+
+      });
+      if(0){console.log("deactivateOrActivateIcons: true")}
+    }
+
+    if (playerIconsStatus_target[4] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#trr_1")).css("opacity", "0.3");
+
+      });
+
+      if(0){console.log("deactivateOrActivateIcons: false")}
+    }
+    if (playerIconsStatus_target[4] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#trr_1")).css("opacity", "1.0");
+
+      });
+      if(0){console.log("deactivateOrActivateIcons: true")}
+    }
+
+    //deactivates market card icons at the bottom of player bottom-left
+    //-----------------------------------------------------------------
+
+
+    if (playerIconsStatus_target[5] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bll_1")).css("opacity", "0.3");
+
+      });
+
+      if(0){console.log("deactivateOrActivateIcons: false")}
+    }
+    if (playerIconsStatus_target[5] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bll_1")).css("opacity", "1.0");
+
+      });
+      if(0){console.log("deactivateOrActivateIcons: true")}
+    }
+
+    if (playerIconsStatus_target[6] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bml_1")).css("opacity", "0.3");
+
+      });
+
+      if(0){console.log("deactivateOrActivateIcons: false")}
+    }
+    if (playerIconsStatus_target[6] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bml_1")).css("opacity", "1.0");
+
+      });
+      if(0){console.log("deactivateOrActivateIcons: true")}
+    }
+
+    if (playerIconsStatus_target[7] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#bmr_1")).css("opacity", "0.3");
+
+      });
+
+      if(0){console.log("deactivateOrActivateIcons: false")}
+    }
+    if (playerIconsStatus_target[7] == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#bmr_1")).css("opacity", "1.0");
+
+      });
+      if(0){console.log("deactivateOrActivateIcons: true")}
+    }
+
+    if (playerIconsStatus_target[8] == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#brr_1")).css("opacity", "0.3");
+
+      });
+
+      if(0){console.log("deactivateOrActivateIcons: false")}
+    }
+    if (playerIconsStatus_target[8] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#brr_1")).css("opacity", "1.0");
 
@@ -274,78 +359,11 @@ export class BottomLeftComponent implements OnInit {
     }
 
 
-    //deactivates icons at the top of player bottom-left
+    //deactivates purple market card icon of player bottom-left
+    //---------------------------------------------------------
 
 
-    if (playerIconsStatus_target[4] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tll_1")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[4] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tll_1")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[5] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tml_1")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[5] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tml_1")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[6] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tmr_1")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[6] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tmr_1")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[7] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#trr_1")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[7] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#trr_1")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-
-    //deactivates purple icon of player bottom-left
-
-
-    if (playerIconsStatus_target[8] == false) {
+    if (playerIconsStatus_target[0] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#purple_1")).css("opacity", "0.3");
 
@@ -353,7 +371,7 @@ export class BottomLeftComponent implements OnInit {
 
       if(0){console.log("deactivateOrActivateIcons: false")}
     }
-    if (playerIconsStatus_target[8] == true){
+    if (playerIconsStatus_target[0] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#purple_1")).css("opacity", "1.0");
 
@@ -363,6 +381,25 @@ export class BottomLeftComponent implements OnInit {
 
 }
 
+  deactivateOrActivateScore(playerStoneQuarryStatus_target){
+
+    if (playerStoneQuarryStatus_target == false) {
+      (<any>$(document)).ready(function (){
+        (<any>$("#score_1")).css("opacity", "0.3");
+
+      });
+
+      if(0){console.log("deactivateOrActivateScore: false")}
+    }
+    if (playerStoneQuarryStatus_target == true){
+      (<any>$(document)).ready(function (){
+        (<any>$("#score_1")).css("opacity", "1.0");
+
+      });
+      if(0){console.log("deactivateOrActivateScore: true")}
+    }
+
+  }
 
   deactivateOrActivateStoneQuarry(playerStoneQuarryStatus_target){
 
@@ -404,33 +441,6 @@ export class BottomLeftComponent implements OnInit {
 
   }
 
-
-  deactivateOrActivateDraggingSupplySled(playerSupplySledStatus_target){
-
-    if (playerSupplySledStatus_target == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#stones_1")).css({"user-drag":"none",
-            "-moz-user-select": "none", "-webkit-user-drag": "none",
-            "pointer-events": "none"});
-
-      });
-
-      if(0){console.log("deactivateOrActivateDraggingSupplySled: false")}
-    }
-    if (playerSupplySledStatus_target == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#stones_1")).css({"user-drag":"true",
-          "-moz-user-select": "true", "-webkit-user-drag": "true"});
-
-      });
-
-      if(0){console.log("deactivateOrActivateDraggingSupplySled: true")}
-    }
-
-  }
-
-
-
   deactivateOrActivatePlayerField(playerPlayerFieldStatus_target){
 
     if (playerPlayerFieldStatus_target == false) {
@@ -454,9 +464,9 @@ export class BottomLeftComponent implements OnInit {
 
 
 
-  //================
-  // Popover-Methods
-  //================
+  //===========================================================
+  // Popover Methods
+  //===========================================================
 
   initializePopovers(){
 

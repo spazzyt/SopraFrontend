@@ -77,26 +77,26 @@ export class GameComponent  implements OnInit {
 
   // Current Target (Soll) Game state
   // ( current-game-state package from backend sent to all players)
-  currentTargetGameState:CurrentGameState;
+  //currentTargetGameState:CurrentGameState;
 
   // Current Actual (Ist) Game state
   // ( current-game-state package from backend sent to all players)
-  currentActualGameState:CurrentGameState;
+  //currentActualGameState:CurrentGameState;
 
   // Last players move/action/decision
   // ( decision package from backend sent to not active players)
-  lastPlayerDecision:Decision;
+  //lastPlayerDecision:Decision;
 
   // Current active Player
-  currentActivePlayer:User;
+  //currentActivePlayer:User;
 
   // Allowed moves/actions/decisions
   // ( decision package from backend sent to active player, (to not active players as info))
-  allowedActivePlayerDecisions:Decision;
+  //allowedActivePlayerDecisions:Decision;
 
   // Active player move/action/decision
   // (decision package from active player sent to backend)
-  chosenActivePlayerDecision:Decision;
+  //chosenActivePlayerDecision:Decision;
 
 
   //===============
@@ -558,7 +558,6 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
 
-
         //switch on your Quarry colors, switch off the others
         this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
         this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
@@ -570,6 +569,12 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateSupplySled(false);
         this.topRightComponent.deactivateOrActivateSupplySled(false);
         this.bottomRightComponent.deactivateOrActivateSupplySled(false);
+
+        //switch on your Score colors, switch off the others
+        this.bottomLeftComponent.deactivateOrActivateScore(true);
+        this.topLeftComponent.deactivateOrActivateScore(false);
+        this.topRightComponent.deactivateOrActivateScore(false);
+        this.bottomRightComponent.deactivateOrActivateScore(false);
 
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
@@ -604,7 +609,6 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
 
-
         //switch on your Quarry colors, switch off the others
         this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
         this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
@@ -616,6 +620,12 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateSupplySled(true);
         this.topRightComponent.deactivateOrActivateSupplySled(false);
         this.bottomRightComponent.deactivateOrActivateSupplySled(false);
+
+        //switch on your Score colors, switch off the others
+        this.bottomLeftComponent.deactivateOrActivateScore(false);
+        this.topLeftComponent.deactivateOrActivateScore(true);
+        this.topRightComponent.deactivateOrActivateScore(false);
+        this.bottomRightComponent.deactivateOrActivateScore(false);
 
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
@@ -663,6 +673,12 @@ export class GameComponent  implements OnInit {
         this.topRightComponent.deactivateOrActivateSupplySled(true);
         this.bottomRightComponent.deactivateOrActivateSupplySled(false);
 
+        //switch on your Score colors, switch off the others
+        this.bottomLeftComponent.deactivateOrActivateScore(false);
+        this.topLeftComponent.deactivateOrActivateScore(false);
+        this.topRightComponent.deactivateOrActivateScore(true);
+        this.bottomRightComponent.deactivateOrActivateScore(false);
+
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
 
@@ -707,6 +723,12 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateSupplySled(false);
         this.topRightComponent.deactivateOrActivateSupplySled(false);
         this.bottomRightComponent.deactivateOrActivateSupplySled(true);
+
+        //switch on your Score colors, switch off the others
+        this.bottomLeftComponent.deactivateOrActivateScore(false);
+        this.topLeftComponent.deactivateOrActivateScore(false);
+        this.topRightComponent.deactivateOrActivateScore(false);
+        this.bottomRightComponent.deactivateOrActivateScore(true);
 
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
@@ -775,6 +797,12 @@ export class GameComponent  implements OnInit {
       this.topLeftComponent.deactivateOrActivateSupplySled(false);
       this.topRightComponent.deactivateOrActivateSupplySled(false);
 
+      //switch off your Score colors
+      this.bottomLeftComponent.deactivateOrActivateScore(false);
+      this.topLeftComponent.deactivateOrActivateScore(false);
+      this.topRightComponent.deactivateOrActivateScore(false);
+      this.bottomRightComponent.deactivateOrActivateScore(false);
+
       // switch off click handlers on market site
       this.marketComponent.removeClickHandlerOnMarketCards();
     }
@@ -793,9 +821,9 @@ export class GameComponent  implements OnInit {
     this.game.ships = round.ships;
     this.game.marketCards = round.marketCards;
 
-    //remove stones from ships
+    //remove stones from ships (with JQuery?)
 
-    //remove ships from arriving harbours
+    //remove ships from arriving harbours (with JQuery?)
 
     //Initialize Market with new cards
     this.initializeMarketComponent(this.game.marketCards);
@@ -1258,7 +1286,6 @@ export class GameComponent  implements OnInit {
 
   }
 
-
   //===========================================================
   // SnackBar / Toast
   //===========================================================
@@ -1369,6 +1396,12 @@ export class GameComponent  implements OnInit {
       this.topLeftComponent.deactivateOrActivateSupplySled(false);
       this.topRightComponent.deactivateOrActivateSupplySled(false);
 
+      //switch off your Score colors
+      this.bottomLeftComponent.deactivateOrActivateScore(false);
+      this.topLeftComponent.deactivateOrActivateScore(false);
+      this.topRightComponent.deactivateOrActivateScore(false);
+      this.bottomRightComponent.deactivateOrActivateScore(false);
+
       // switch off click handlers on market site
       this.marketComponent.removeClickHandlerOnMarketCards();
 
@@ -1405,7 +1438,8 @@ export class GameComponent  implements OnInit {
 
   takeStonesFromQuarryToSled(){
 
-    //register click on quarry
+    //listen to click on quarry
+
 
     //generate decision object
 
@@ -1422,7 +1456,7 @@ export class GameComponent  implements OnInit {
 
   moveStoneFromSledToShipSlot(){
 
-    //register drop of stone on ship slot
+    //listen to drop of stone on ship slot
 
     //generate decision object
 
@@ -1437,7 +1471,7 @@ export class GameComponent  implements OnInit {
 
   moveShipToPyramids(){
 
-    //register drop of ship on arriving harbour 1
+    //listen to drop of ship on arriving harbour 1
 
     //generate decision object
 
@@ -1447,7 +1481,7 @@ export class GameComponent  implements OnInit {
 
   moveShipToTemple(){
 
-    //register drop of ship on arriving harbour 2
+    //listen to drop of ship on arriving harbour 2
 
     //generate decision object
 
@@ -1458,7 +1492,7 @@ export class GameComponent  implements OnInit {
 
   moveShipToBurialChamber(){
 
-    //register drop of ship on arriving harbour 3
+    //listen to drop of ship on arriving harbour 3
 
     //generate decision object
 
@@ -1468,7 +1502,7 @@ export class GameComponent  implements OnInit {
 
   moveShipToObelisks(){
 
-    //register drop of ship on arriving harbour 4
+    //listen to drop of ship on arriving harbour 4
 
     //generate decision object
 
@@ -1479,7 +1513,7 @@ export class GameComponent  implements OnInit {
 
   moveShipToMarket(){
 
-    //register drop of ship on arriving harbour 5
+    //listen to drop of ship on arriving harbour 5
 
     //generate decision object
 
@@ -1494,7 +1528,7 @@ export class GameComponent  implements OnInit {
 
   takeRedMarketCardFromMarket(){
 
-    //register click on market card
+    //listen to click on market card
 
     //generate decision object
 
@@ -1509,7 +1543,7 @@ export class GameComponent  implements OnInit {
 
   playBlueMarketCardHammer(){
 
-    //register click on market card icon
+    //listen to click on market card icon
 
     //show market card icon in snackbar
 
@@ -1527,7 +1561,7 @@ export class GameComponent  implements OnInit {
 
   playBlueMarketCardChisel(){
 
-    //register click on market card icon
+    //listen to click on market card icon
 
     //show market card icon in snackbar
 
@@ -1546,7 +1580,7 @@ export class GameComponent  implements OnInit {
 
   playBlueMarketCardSail(){
 
-    //register click on market card icon
+    //listen to click on market card icon
 
     //show market card icon in snackbar
 
@@ -1565,7 +1599,7 @@ export class GameComponent  implements OnInit {
 
   playBlueMarketCardLever(){
 
-    //register click on market card icon
+    //listen to click on market card icon
 
     //show market card icon in snackbar
 
@@ -2281,13 +2315,13 @@ export class GameComponent  implements OnInit {
   //-----------------------------------
   //Draguala Ship Movement Set Options
   //-----------------------------------
-  dragulaShipMovement_setOptions(isCurrentActivePlayer:boolean){
+  dragulaShipMovement_setOptions(amI_CurrentActivePlayer:boolean){
 
     //-----------------------------------
     //Options for the currentActivePlayer
     //he has all options acc. to the rules
     //-----------------------------------
-    if (isCurrentActivePlayer){
+    if (amI_CurrentActivePlayer){
 
       this.dragulaService.setOptions('harbours_bag', {
 
@@ -2612,12 +2646,12 @@ export class GameComponent  implements OnInit {
   //Draguala Stone Movement Set Options
   //-----------------------------------
 
-  dragulaStoneMovement_setOptions(isCurrentActivePlayer:boolean){
+  dragulaStoneMovement_setOptions(amI_CurrentActivePlayer:boolean){
 
     //-----------------------------------
     //Options for the currentActivePlayer
     //-----------------------------------
-    if (isCurrentActivePlayer){
+    if (amI_CurrentActivePlayer){
 
       this.dragulaService.setOptions('stone_slots_bag', {
 
