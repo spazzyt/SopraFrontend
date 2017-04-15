@@ -87,6 +87,28 @@ export class BottomLeftComponent implements OnInit {
   // Click Events
   //===========================================================
 
+
+  setClickHandlerOnStoneQuarry() {
+
+    //set click handler for  bll_1
+    (<any>$(document)).ready(() =>{
+      (<any>$("#quarry_1")).on("click", () =>{
+        alert("The stone quarry 1 was clicked."); this.marketCards[5]-=1;
+      });
+    });
+
+  }
+
+  removeClickHandlerOnStoneQuarry() {
+
+    //set click handler for  bll_1
+    (<any>$(document)).ready(() =>{
+      (<any>$("#quarry_1")).off("click");
+    });
+
+  }
+
+
   setClickHandlerOnBlueMarketCards() {
 
     //set click handler for  bll_1

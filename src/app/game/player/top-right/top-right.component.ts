@@ -76,6 +76,26 @@ export class TopRightComponent implements OnInit {
   // Click Events
   //===========================================================
 
+  setClickHandlerOnStoneQuarry() {
+
+    //set click handler for  bll_1
+    (<any>$(document)).ready(() =>{
+      (<any>$("#quarry_3")).on("click", () =>{
+        alert("The stone quarry 3 was clicked."); this.marketCards[5]-=1;
+      });
+    });
+
+  }
+
+  removeClickHandlerOnStoneQuarry() {
+
+    //set click handler for  bll_1
+    (<any>$(document)).ready(() =>{
+      (<any>$("#quarry_3")).off("click");
+    });
+
+  }
+
   setClickHandlerOnBlueMarketCards() {
 
     //set click handler for  bll_3

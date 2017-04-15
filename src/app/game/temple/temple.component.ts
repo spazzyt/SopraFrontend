@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, EventEmitter, Output} from '@angular/core';
 import {Stone} from "../../shared/models/stone";
 import {Game} from "../../shared/models/game";
 import {GameComponent} from "../game.component";
@@ -18,14 +18,24 @@ export class TempleComponent implements OnInit {
   //Class Variables
   //===============
   stones:Stone[] = [];
-  fieldHeight:number[] = [0,0,0,0];
   totalStones:number = 0;
+  fieldHeight:number[] = [0,0,0,0];
+
   numberOfPlayers:number = 4;
-  fieldArray:number[] = [1,2,3,4];
+  fieldArray:number[] = [1,2,3,4]; //ToDo: Where used?
 
   //==============
   // Event Emitter
   //==============
+
+  @Output() onEvent_placeStones_stones = new EventEmitter<Stone[]>();
+  @Output() onEvent_placeStones_totalStones = new EventEmitter<number>();
+  @Output() onEvent_placeStones_fieldHeight= new EventEmitter<number[]>();
+
+  @Output() onEvent_removeStones_stones = new EventEmitter<Stone[]>();
+  @Output() onEvent_removeStones_totalStones = new EventEmitter<number>();
+  @Output() onEvent_removeStones_fieldHeight= new EventEmitter<number[]>();
+
 
 
   //===============
@@ -106,12 +116,26 @@ export class TempleComponent implements OnInit {
       }
     }
 
+    //inform Game Component about it
+    //------------------------------
+    this.onEvent_placeStones_stones.emit(this.stones);
+    this.onEvent_placeStones_totalStones.emit(this.totalStones);
+    this.onEvent_placeStones_fieldHeight.emit(this.fieldHeight);
+
+
   }
 
   removeStones(){
     this.stones = [];
     this.totalStones = 0;
     this.fieldHeight = [0,0,0,0,0];
+
+    //inform Game Component about it
+    //------------------------------
+    this.onEvent_removeStones_stones.emit(this.stones);
+    this.onEvent_removeStones_totalStones.emit(this.totalStones);
+    this.onEvent_removeStones_fieldHeight.emit(this.fieldHeight);
+
 
   }
 
