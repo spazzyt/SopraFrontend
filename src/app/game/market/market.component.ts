@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {MarketCard} from "../../shared/models/market-card";
 import {Position} from "../../shared/models/position.enum"
 
@@ -13,6 +13,13 @@ export class MarketComponent implements OnInit {
   //Class Variables
   //===============
   marketCards:MarketCard[] = [];
+
+
+  //==============
+  // Event Emitter
+  //==============
+
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards = new EventEmitter<number[]>();
 
   //===============
   //Constructor
@@ -48,6 +55,11 @@ export class MarketComponent implements OnInit {
   //Class Methods
   //===============
 
+
+  //===========================================================
+  // Set / Remove Card(s)
+  //===========================================================
+
   //User chooses a market card
   chooseMarketCardOnClick(){}
 
@@ -63,11 +75,9 @@ export class MarketComponent implements OnInit {
 
   }
 
-
-
-  deactivateOrActivateMarketCards(){
-
-  }
+  //===========================================================
+  // Click Events
+  //===========================================================
 
 
   setClickHandlerOnMarketCards() {
