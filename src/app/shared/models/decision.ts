@@ -24,8 +24,8 @@ export class Decision {
 
   //Constructor
   //==============================
-  constructor(id_:number, decisionMadeBy_:ColourEnum, whoMadeWhatDecisionSnackbarMessage_:string,
-              madeAction_:Action, activePlayer_:User, actions_:Action[]){
+  constructor(id_:number, decisionMadeBy_:ColourEnum, whoMadeWhatDecisionSnackbarMessage_?:string,
+              madeAction_?:Action, activePlayer_?:User, actions_?:Action[]){
     this.id=id_;
     this.decisionMadeBy=decisionMadeBy_;
     this.whoMadeWhatDecisionSnackbarMessage=whoMadeWhatDecisionSnackbarMessage_;

@@ -49,7 +49,9 @@
           <app-burial-chamber></app-burial-chamber>
         </div>
         <div class="site_board">
-          <app-obelisk></app-obelisk>
+          <app-obelisk (onEvent_placeStones_stones)="obeliskComponent_onEvent_placeStones_stones($event)"
+                       (onEvent_removeStones_stones)="obeliskComponent_onEvent_placeStones_stones($event)">
+          </app-obelisk>
         </div>
       </div>
 
