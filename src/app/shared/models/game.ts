@@ -91,23 +91,23 @@ export class Game {
   public stonesInObelisk:number[];
 
   //Player bottom left
-  public bottomLeft_sledStones:number;
-  public bottomLeft_quarryStones:number;
+  public bottomLeft_sledStones:number=2;
+  public bottomLeft_quarryStones:number=27;
   public bottomLeft_marketCards:number[];
 
   //Player top left
-  public topLeft_sledStones:number;
-  public topLeft_quarryStones:number;
+  public topLeft_sledStones:number=3;
+  public topLeft_quarryStones:number=26;
   public topLeft_marketCards:number[];
 
   //Player top right
-  public topRight_sledStones:number;
-  public topRight_quarryStones:number;
+  public topRight_sledStones:number=4;
+  public topRight_quarryStones:number=25;
   public topRight_marketCards:number[];
 
   //Player bottom right
-  public bottomRight_sledStones:number;
-  public bottomRight_quarryStones:number;
+  public bottomRight_sledStones:number=5;
+  public bottomRight_quarryStones:number=24;
   public bottomRight_marketCards:number[];
 
 
