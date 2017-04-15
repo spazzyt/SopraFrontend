@@ -278,7 +278,7 @@ export class GameComponent  implements OnInit {
 
     //Determine whether you are the active player (set class variable)
     let amI_CurrentActivePlayer=game_backend.currentActivePlayerField===myPlayerField;
-    this.amI_CurrentActivePlayer=amI_CurrentActivePlayer;
+    this.amI_CurrentActivePlayer=amI_CurrentActivePlayer; //important for dragula to work
 
     //Read current active player field (set class variable)
     let currentActivePlayerField=game_backend.currentActivePlayerField;
@@ -786,13 +786,16 @@ export class GameComponent  implements OnInit {
   // Backend starts new round
   //===========================================================
 
-    initRound(round: Round){
+  initRound(round: Round){
 
     //Update internal data arrays with data from backend:
     this.game.roundNumber = round.roundNumber;
     this.game.ships = round.ships;
     this.game.marketCards = round.marketCards;
 
+    //remove stones from ships
+
+    //remove ships from arriving harbours
 
     //Initialize Market with new cards
     this.initializeMarketComponent(this.game.marketCards);
@@ -800,7 +803,11 @@ export class GameComponent  implements OnInit {
     //Initialize Departing Harbour with new ships
     this.initializeDepartingHarbourComponent(this.game.ships);
 
+    //increase round in info box
+    this.infoBoxComponent.increaseRoundInInfoBox(this.roundNumber);
+
   }
+
 
 
   //===========================================================
@@ -808,6 +815,8 @@ export class GameComponent  implements OnInit {
   //===========================================================
 
   initFastForward(){
+
+
 
 
   }
@@ -1043,7 +1052,7 @@ export class GameComponent  implements OnInit {
         this.addShipToArrivingHarbour();
 
         //switch order of stones on ship
-        this.switchOrderOfStonesOnShip
+        this.switchOrderOfStonesOnShip();
 
         //show Snackbarinfo
         let text="replace this string"
@@ -1061,28 +1070,45 @@ export class GameComponent  implements OnInit {
   //------------------
 
   //show stone on ship
-  updateStoneOnShip(){}
+  updateStoneOnShip(){
+
+  }
 
   //remove ship from departing harbour
-  removeShipFromDepartingHarbour(){}
+  removeShipFromDepartingHarbour(){
+
+  }
 
   //add ship to arriving harbour
-  addShipToArrivingHarbour(){}
+  addShipToArrivingHarbour(){
+
+  }
 
   //place stones to site
-  placeStonesToSite(){}
+  placeStonesToSite(){
+
+  }
 
   //remove stone from ship, place it to quarry
-  removeStoneFromShip(){};
+  removeStoneFromShip(){
+
+  };
 
   //remove Card from Market
-  removeCardFromMarket(){};
+  removeCardFromMarket(){
+
+  };
 
   //add stones to Site
-  addTwoStonesToSite(){};
+  addTwoStonesToSite(){
+
+  };
 
   //switch order of stones on ship
-  switchOrderOfStonesOnShip(){};
+  switchOrderOfStonesOnShip(){
+
+
+  };
 
   //show Snackbarinfo
   showSnackbarMessage(text_) {
@@ -1090,6 +1116,7 @@ export class GameComponent  implements OnInit {
     let time_= 10000; //show 10 seconds
     this.showSnackbarMessenger(text_,time_);
   }
+
 
 
   //===========================================================
@@ -1119,6 +1146,23 @@ export class GameComponent  implements OnInit {
   // [Score, Sled, Quarry, Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
   //    0      1      2      3        4       5       6      7        8      9      10     11
   //
+
+  private updateGameModel(input_: number[], playerField_: ColourEnum){
+    if(playerField_==ColourEnum.black){
+      this.game.playerFieldIconsBlack=input_;
+    }
+    if(playerField_==ColourEnum.white){
+      this.game.playerFieldIconsWhite=input_;
+    }
+    if(playerField_==ColourEnum.brown){
+      this.game.playerFieldIconsBrown=input_;
+    }
+    if(playerField_==ColourEnum.gray){
+      this.game.playerFieldIconsGray=input_;
+    }
+
+  }
+
 
   private updatePlayerDataWithArray(input: number[], playerField: ColourEnum){
 
@@ -1252,13 +1296,89 @@ export class GameComponent  implements OnInit {
   //===========================================================
 
 
-  deactivateInactivePlayerInteractions(amI_CurrentActivePlayer){
+  deactivateInactivePlayerInteractions(amI_CurrentActivePlayer:boolean,
+                                       currentActivePlayerField:ColourEnum){
 
+    //I am an inactive player
+    //-----------------------
     if (!amI_CurrentActivePlayer){
+
+      //Dragula Options
+      //------------------------------------------
+      //-automatically inactivate all ships
+      //------------------------------------------
+
+      //hide all stones in sleds (no see, no touch)
+      //-------------------------------------------
+      this.bottomLeftComponent.hideStone();
+      this.topLeftComponent.hideStone();
+      this.topRightComponent.hideStone();
+      this.bottomRightComponent.hideStone();
+
+      //let active player field glow, not the others
+      //--------------------------------------------
+      if(currentActivePlayerField===ColourEnum.black){
+        this.bottomLeftComponent.playerFieldGlow(true);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(false);
+      }
+      if(currentActivePlayerField===ColourEnum.white){
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(true);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(false);
+      }
+      if(currentActivePlayerField===ColourEnum.brown){
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(true);
+        this.bottomRightComponent.playerFieldGlow(false);
+      }
+      if(currentActivePlayerField===ColourEnum.gray){
+        this.bottomLeftComponent.playerFieldGlow(false);
+        this.topLeftComponent.playerFieldGlow(false);
+        this.topRightComponent.playerFieldGlow(false);
+        this.bottomRightComponent.playerFieldGlow(true);
+      }
+
+      //switch off click handlers on Blue Market Icons in player fields
+      //---------------------------------------------------------------
+      this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards();
+      this.bottomRightComponent.removeClickHandlerOnBlueMarketCards();
+      this.topLeftComponent.removeClickHandlerOnBlueMarketCards();
+      this.topRightComponent.removeClickHandlerOnBlueMarketCards();
+
+      //only switch on Market Icon colors with numbers in it
+      //----------------------------------------------------
+      if(1){console.log([0,1,2,3,4,5,6,7,8,9,10,11].slice(3,11));}
+      this.bottomLeftComponent.deactivateOrActivateIcons(this.game.playerFieldIconsBlackAsBoolean.slice(3,11));
+      this.bottomRightComponent.deactivateOrActivateIcons(this.game.playerFieldIconsWhiteAsBoolean.slice(3,11));
+      this.topLeftComponent.deactivateOrActivateIcons(this.game.playerFieldIconsBrownAsBoolean.slice(3,11));
+      this.topRightComponent.deactivateOrActivateIcons(this.game.playerFieldIconsGrayAsBoolean.slice(3,11));
+
+      //switch off Quarry colors
+      this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
+      this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
+      this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
+      this.topRightComponent.deactivateOrActivateStoneQuarry(false);
+
+      //switch off Sled colors
+      this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
+      this.bottomRightComponent.deactivateOrActivateSupplySled(false);
+      this.topLeftComponent.deactivateOrActivateSupplySled(false);
+      this.topRightComponent.deactivateOrActivateSupplySled(false);
+
+      // switch off click handlers on market site
+      this.marketComponent.removeClickHandlerOnMarketCards();
+
+      // switch off click handlers on stones on all ship slots
+      this.departingHarbourComponent.removeClickHandlerOnAllShips();
 
     }
 
   }
+
 
 
   //=============================================================
@@ -1449,11 +1569,13 @@ export class GameComponent  implements OnInit {
 
     //show market card icon in snackbar
 
-    //make move 1
+    //make move 1 (sail ship)
 
     //generate decision object
 
-    //make move 2
+    //make move 2 (new stone order)
+    let ship:number=0;
+    this.departingHarbourComponent.setClickHandlerOnStonesOnShip(ship);
 
     //generate decision object
 
@@ -1719,13 +1841,13 @@ export class GameComponent  implements OnInit {
   trigger_setClickHandlerOnSlot() {
     //only works via parent, DepatingHarbourComponent or GameComponent
     let slot="ship_2_slot_1";
-    this.departingHarbourComponent.setClickHandlerOnSlot(slot);
+    this.departingHarbourComponent.setClickHandlerOnStone(slot);
   }
 
   trigger_removeClickHandlerOnSlot() {
     //only works via parent, DepatingHarbourComponent or GameComponent
     let slot="ship_3_slot_1";
-    this.departingHarbourComponent.removeClickHandlerOnSlot(slot);
+    this.departingHarbourComponent.removeClickHandlerOnStone(slot);
   }
 
 

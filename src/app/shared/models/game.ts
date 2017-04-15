@@ -64,6 +64,20 @@ export class Game {
   //Additional Frontend attributes
   //==============================
 
+  // PlayerFieldsIcons
+  // [Score, Sled, Quarry, Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
+  //    0      1      2      3        4       5       6      7        8      9      10     11
+  public playerFieldIconsBlack:number[]=[0,0,0,0,0,0,0,0,0,0,0,0];
+  public playerFieldIconsWhite:number[]=[0,0,0,0,0,0,0,0,0,0,0,0];
+  public playerFieldIconsBrown:number[]=[0,0,0,0,0,0,0,0,0,0,0,0];
+  public playerFieldIconsGray:number[]=[0,0,0,0,0,0,0,0,0,0,0,0];
+
+  public playerFieldIconsBlackAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsBlack);
+  public playerFieldIconsWhiteAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsWhite);
+  public playerFieldIconsBrownAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsBrown);
+  public playerFieldIconsGrayAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsGray);
+
+
 
   //Constructor
   //===========
@@ -96,6 +110,19 @@ export class Game {
     }
     getLastDecision(){
       return this.decisions[this.decisions.length];
+    }
+
+    numberToBoolean(playerFieldIcons):boolean[]{
+      let resultArray:boolean[]=[false,false,false,false,false,false,false,false,false,false,false,false];
+      for (let i=0; i<playerFieldIcons.length;i++){
+        if (playerFieldIcons[i]>0){
+          resultArray[i]=true;
+        }
+        else{
+          resultArray[i]=false;
+        }
+      }
+      return resultArray;
     }
 }
 
