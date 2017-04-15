@@ -1934,10 +1934,6 @@ export class GameComponent  implements OnInit {
 
     }
 
-    //snackbar message
-    this.showSnackbarMessage("you took "+ howMany+" stones from the quarry");
-
-
     //generate decision object
     let newDecision:Decision = new Decision();
     newDecision.decisionMadeBy=this.game.myPlayerField;
@@ -1949,12 +1945,29 @@ export class GameComponent  implements OnInit {
     newDecision.madeAction.madeMove.from=PositionEnum.stoneQuarry;
     newDecision.madeAction.madeMove.to=PositionEnum.supplySled;
 
+    if(this.game.myPlayerField===ColourEnum.black){
+      newDecision.id[1]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.white){
+      newDecision.id[2]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.brown){
+      newDecision.id[3]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.gray){
+      newDecision.id[4]+=1;
+    }
+
     //store own decision object in game model
     this.game.ownDecisions.push(newDecision);
 
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
+
+
+    //snackbar message
+    this.showSnackbarMessage("you took "+ howMany+" stones from the quarry");
 
 
     if(1){console.log("take stones from Quarry to Sled:howMany ",howMany);}
@@ -1983,6 +1996,11 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
 
+
+
+    //snackbar message
+    this.showSnackbarMessage("you moved stone from sled to shipSlot ");
+
   }
 
 
@@ -2001,12 +2019,14 @@ export class GameComponent  implements OnInit {
     if(1){console.log("moveShipToPyramids: whichShip, stonesToMove: ",whichShip, stonesToMove);}
 
     //generate decision object
-    let newDecision:Decision;
+    let newDecision:Decision = new Decision();
     newDecision.decisionMadeBy=this.game.myPlayerField;
     newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField +
       " sailed ship "+ whichShip +" to pyramids.";
+    newDecision.madeAction= new Action();
     newDecision.madeAction.actionName=ActionEnum.sailShip;
     newDecision.madeAction.actionName2=ActionEnum.sailShipToPyramid;
+    newDecision.madeAction.madeMove= new Move();
 
     if(whichShip==1){
       newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
@@ -2043,6 +2063,10 @@ export class GameComponent  implements OnInit {
     //send decision object to backend
     //ToDo: Communication Channel to Backend
 
+
+    //snackbar message
+    this.showSnackbarMessage("you sailed ship "+ whichShip +" to pyramids.");
+
   }
 
 
@@ -2069,12 +2093,14 @@ export class GameComponent  implements OnInit {
     if(1){console.log("moveShipToTemple: whichShip, stonesToMove: ",whichShip, stonesToMove);}
 
     //generate decision object
-    let newDecision:Decision;
+    let newDecision:Decision = new Decision();
     newDecision.decisionMadeBy=this.game.myPlayerField;
     newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
       " sailed ship "+ whichShip +" to temple.";
+    newDecision.madeAction= new Action();
     newDecision.madeAction.actionName=ActionEnum.sailShip;
     newDecision.madeAction.actionName2=ActionEnum.sailShipToTemple;
+    newDecision.madeAction.madeMove= new Move();
 
     if(whichShip==1){
       newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
@@ -2111,6 +2137,10 @@ export class GameComponent  implements OnInit {
     //send decision object to backend
     //ToDo: Communication Channel to Backend
 
+
+    //snackbar message
+    this.showSnackbarMessage("you sailed ship "+ whichShip +" to temple.");
+
   }
 
   //======================
@@ -2123,12 +2153,14 @@ export class GameComponent  implements OnInit {
     if(1){console.log("moveShipToBurialChamber: whichShip, stonesToMove: ",whichShip, stonesToMove);}
 
     //generate decision object
-    let newDecision:Decision;
+    let newDecision:Decision = new Decision();
     newDecision.decisionMadeBy=this.game.myPlayerField;
     newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
       " sailed ship "+ whichShip +" to burial chamber.";
+    newDecision.madeAction= new Action();
     newDecision.madeAction.actionName=ActionEnum.sailShip;
     newDecision.madeAction.actionName2=ActionEnum.sailShipToBurialChamber;
+    newDecision.madeAction.madeMove= new Move();
 
     if(whichShip==1){
       newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
@@ -2164,6 +2196,10 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
+
+    //snackbar message
+    this.showSnackbarMessage("you sailed ship "+ whichShip +" to burial chamber.");
+
   }
 
   //=================
@@ -2187,12 +2223,14 @@ export class GameComponent  implements OnInit {
     if(1){console.log("moveShipToObelisks: whichShip, stonesToMove: ",whichShip, stonesToMove);}
 
     //generate decision object
-    let newDecision:Decision;
+    let newDecision:Decision = new Decision();
     newDecision.decisionMadeBy=this.game.myPlayerField;
     newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
       " sailed ship "+ whichShip +" to obelisks.";
+    newDecision.madeAction= new Action();
     newDecision.madeAction.actionName=ActionEnum.sailShip;
     newDecision.madeAction.actionName2=ActionEnum.sailShipToObelisk;
+    newDecision.madeAction.madeMove= new Move();
 
     if(whichShip==1){
       newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
@@ -2229,6 +2267,10 @@ export class GameComponent  implements OnInit {
     //send decision object to backend
     //ToDo: Communication Channel to Backend
 
+    //snackbar message
+    this.showSnackbarMessage("you sailed ship "+ whichShip +" to obelisks.");
+
+
   }
 
   //=================
@@ -2241,12 +2283,14 @@ export class GameComponent  implements OnInit {
     if(1){console.log("moveShipToMarket: whichShip, stonesToMove: ",whichShip, stonesToMove);}
 
     //generate decision object
-    let newDecision:Decision;
+    let newDecision:Decision = new Decision();
     newDecision.decisionMadeBy=this.game.myPlayerField;
     newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
       " sailed ship "+ whichShip +" to market.";
+    newDecision.madeAction= new Action();
     newDecision.madeAction.actionName=ActionEnum.sailShip;
     newDecision.madeAction.actionName2=ActionEnum.sailShipToMarket;
+    newDecision.madeAction.madeMove= new Move();
 
     if(whichShip==1){
       newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
@@ -2283,12 +2327,18 @@ export class GameComponent  implements OnInit {
     //send decision object to backend
     //ToDo: Communication Channel to Backend
 
+    //snackbar message
+    this.showSnackbarMessage("you sailed ship "+ whichShip +" to market.");
+
+
   }
 
 
   //===========================================================
   // Main Action 4: take market card
   //===========================================================
+
+
 
   takeRedMarketCardFromMarket(){
 
