@@ -6,7 +6,12 @@ export class Decision {
 
   //Backend attributes
   //==================
-  public id:number=-1;
+  //id[0]: reserved for backend
+  //id[1]: reserved for black
+  //id[2]: reserved for white
+  //id[3]: reserved for brown
+  //id[4]: reserved for gray
+  public id:number[]=[];
 
   //frontend sends his made Decision to backend and backend broadcasts decision to all players
   public decisionMadeBy:ColourEnum;
@@ -24,7 +29,7 @@ export class Decision {
 
   //Constructor
   //==============================
-  constructor(id_:number, decisionMadeBy_:ColourEnum, whoMadeWhatDecisionSnackbarMessage_?:string,
+  constructor(id_:number[], decisionMadeBy_:ColourEnum, whoMadeWhatDecisionSnackbarMessage_?:string,
               madeAction_?:Action, activePlayer_?:User, actions_?:Action[]){
     this.id=id_;
     this.decisionMadeBy=decisionMadeBy_;

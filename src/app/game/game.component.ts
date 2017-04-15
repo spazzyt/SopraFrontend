@@ -580,6 +580,12 @@ export class GameComponent  implements OnInit {
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
 
+        // switch on click handlers on your stone quarry, switch off the others
+        this.bottomLeftComponent.setClickHandlerOnStoneQuarry();
+        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topRightComponent.removeClickHandlerOnStoneQuarry();
+        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
+
       }
 
       //I am active player on white field
@@ -630,6 +636,12 @@ export class GameComponent  implements OnInit {
 
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
+
+        // switch on click handlers on your stone quarry, switch off the others
+        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topLeftComponent.setClickHandlerOnStoneQuarry();
+        this.topRightComponent.removeClickHandlerOnStoneQuarry();
+        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
 
       }
 
@@ -683,6 +695,13 @@ export class GameComponent  implements OnInit {
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
 
+        // switch on click handlers on your stone quarry, switch off the others
+        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topRightComponent.setClickHandlerOnStoneQuarry();
+        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
+
+
       }
 
       //I am active player on gray field
@@ -733,6 +752,12 @@ export class GameComponent  implements OnInit {
 
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
+
+        // switch on click handlers on your stone quarry, switch off the others
+        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topRightComponent.removeClickHandlerOnStoneQuarry();
+        this.bottomRightComponent.setClickHandlerOnStoneQuarry();
 
       }
 
@@ -806,6 +831,13 @@ export class GameComponent  implements OnInit {
 
       // switch off click handlers on market site
       this.marketComponent.removeClickHandlerOnMarketCards();
+
+      // switch off click handlers on all stone quarries
+      this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
+      this.topLeftComponent.removeClickHandlerOnStoneQuarry();
+      this.topRightComponent.removeClickHandlerOnStoneQuarry();
+      this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
+
     }
 
   }
@@ -1447,6 +1479,12 @@ export class GameComponent  implements OnInit {
       // switch off click handlers on stones on all ship slots
       this.departingHarbourComponent.removeClickHandlerOnAllShips();
 
+      // switch off click handlers on all stone quarries
+      this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
+      this.topLeftComponent.removeClickHandlerOnStoneQuarry();
+      this.topRightComponent.removeClickHandlerOnStoneQuarry();
+      this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
+
     }
 
   }
@@ -1550,6 +1588,13 @@ export class GameComponent  implements OnInit {
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
 
+        // switch on click handlers on your stone quarry, switch off the others
+        this.bottomLeftComponent.setClickHandlerOnStoneQuarry();
+        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topRightComponent.removeClickHandlerOnStoneQuarry();
+        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
+
+
       }
 
       //I am active player on white field
@@ -1602,6 +1647,13 @@ export class GameComponent  implements OnInit {
 
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
+
+        // switch on click handlers on your stone quarry, switch off the others
+        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topLeftComponent.setClickHandlerOnStoneQuarry();
+        this.topRightComponent.removeClickHandlerOnStoneQuarry();
+        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
+
 
       }
 
@@ -1657,6 +1709,12 @@ export class GameComponent  implements OnInit {
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
 
+        // switch on click handlers on your stone quarry, switch off the others
+        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topRightComponent.setClickHandlerOnStoneQuarry();
+        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
+
       }
 
       //I am active player on gray field
@@ -1710,9 +1768,13 @@ export class GameComponent  implements OnInit {
         // switch on click handlers on market site
         this.marketComponent.setClickHandlerOnMarketCards();
 
+        // switch on click handlers on your stone quarry, switch off the others
+        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
+        this.topRightComponent.removeClickHandlerOnStoneQuarry();
+        this.bottomRightComponent.setClickHandlerOnStoneQuarry();
+
       }
-
-
 
     }
 
@@ -1725,13 +1787,13 @@ export class GameComponent  implements OnInit {
 
   takeStonesFromQuarryToSled(howMany:number){
 
-    //listen to click on quarry
     //ToDo: call this function from event listener
 
     //generate decision object
     let newDecision:Decision;
     newDecision.decisionMadeBy=this.game.myPlayerField;
-    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+" took "+ howMany +" stone from quarry."
+    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
+      " took "+ howMany +" stone from quarry.";
     newDecision.madeAction.actionName=ActionEnum.fillSledWithStonesFromQuarry;
     newDecision.madeAction.madeMove.from=PositionEnum.stoneQuarry;
     newDecision.madeAction.madeMove.to=PositionEnum.supplySled;
@@ -1756,6 +1818,8 @@ export class GameComponent  implements OnInit {
 
     //listen to drop of stone on ship slot
 
+    ActionEnum.placeStoneFromSledToShip
+
     //generate decision object
 
     //send decision object to backend
@@ -1763,10 +1827,15 @@ export class GameComponent  implements OnInit {
   }
 
 
+
   //===========================================================
   // Main Action 3: move ship to site
   //===========================================================
 
+
+  //=================
+  // Sail to Pyramids
+  //=================
   moveShipToPyramids(whichShip:number, stonesToMove:Stone[]){
 
     //called from dragula_subscribeDropEvent()
@@ -1775,14 +1844,36 @@ export class GameComponent  implements OnInit {
     //generate decision object
     let newDecision:Decision;
     newDecision.decisionMadeBy=this.game.myPlayerField;
-    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+" moved ship "+ whichShip +" to pyramids."
+    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField +
+      " sailed ship "+ whichShip +" to pyramids."
     newDecision.madeAction.actionName=ActionEnum.sailShip;
     newDecision.madeAction.actionName2=ActionEnum.sailShipToPyramid;
 
-    if(whichShip==1){newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;}
-    else if(whichShip==2){newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;}
-    else if(whichShip==3){newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;}
-    else if(whichShip==4){newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;}
+    if(whichShip==1){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
+    }
+    else if(whichShip==2){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;
+    }
+    else if(whichShip==3){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;
+    }
+    else if(whichShip==4){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;
+    }
+
+    if(this.game.myPlayerField===ColourEnum.black){
+      newDecision.id[1]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.white){
+      newDecision.id[2]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.brown){
+      newDecision.id[3]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.gray){
+      newDecision.id[4]+=1;
+    }
 
     newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour1;
 
@@ -1796,17 +1887,97 @@ export class GameComponent  implements OnInit {
   }
 
 
+  //=================
+  // Sail to Temple
+  //=================
+
+  templeComponent_onEvent_placeStones_stones(data:Stone[]){
+
+    console.log("data from templeComponent",data);
+
+    //store data into Game Model
+    this.game.stonesInTemple=data;
+
+    console.log("data from Game Model",this.game.stonesInTemple);
+
+  };
+
+  templeComponent_onEvent_placeStones_totalStones(data:number){
+
+    console.log("data from templeComponent",data);
+
+    //store data into Game Model
+    this.game.totalStonesInTemple=data;
+
+    console.log("data from Game Model",this.game.totalStonesInTemple);
+
+  };
+
+  templeComponent_onEvent_placeStones_fieldHeight(data:number[]){
+
+    console.log("data from templeComponent",data);
+
+    //store data into Game Model
+    this.game.fieldHeightInTemple=data;
+
+    console.log("data from Game Model",this.game.fieldHeightInTemple);
+
+  };
+
+
   moveShipToTemple(whichShip:number, stonesToMove:Stone[]){
 
     //called from dragula_subscribeDropEvent()
     if(1){console.log("moveShipToTemple: whichShip, stonesToMove: ",whichShip, stonesToMove);}
 
     //generate decision object
+    let newDecision:Decision;
+    newDecision.decisionMadeBy=this.game.myPlayerField;
+    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
+      " sailed ship "+ whichShip +" to temple."
+    newDecision.madeAction.actionName=ActionEnum.sailShip;
+    newDecision.madeAction.actionName2=ActionEnum.sailShipToTemple;
+
+    if(whichShip==1){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
+    }
+    else if(whichShip==2){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;
+    }
+    else if(whichShip==3){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;
+    }
+    else if(whichShip==4){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;
+    }
+
+    if(this.game.myPlayerField===ColourEnum.black){
+      newDecision.id[1]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.white){
+      newDecision.id[2]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.brown){
+      newDecision.id[3]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.gray){
+      newDecision.id[4]+=1;
+    }
+
+    newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour2;
+
+    //store own decision object in game model
+    this.game.ownDecisions.push(newDecision);
+
 
     //send decision object to backend
+    //ToDo: Communication Channel to Backend
 
   }
 
+  //======================
+  // Sail to BurialChamber
+  //======================
 
   moveShipToBurialChamber(whichShip:number, stonesToMove:Stone[]){
 
@@ -1814,11 +1985,52 @@ export class GameComponent  implements OnInit {
     if(1){console.log("moveShipToBurialChamber: whichShip, stonesToMove: ",whichShip, stonesToMove);}
 
     //generate decision object
+    let newDecision:Decision;
+    newDecision.decisionMadeBy=this.game.myPlayerField;
+    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
+      " sailed ship "+ whichShip +" to burial chamber."
+    newDecision.madeAction.actionName=ActionEnum.sailShip;
+    newDecision.madeAction.actionName2=ActionEnum.sailShipToBurialChamber;
+
+    if(whichShip==1){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
+    }
+    else if(whichShip==2){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;
+    }
+    else if(whichShip==3){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;
+    }
+    else if(whichShip==4){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;
+    }
+
+    if(this.game.myPlayerField===ColourEnum.black){
+      newDecision.id[1]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.white){
+      newDecision.id[2]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.brown){
+      newDecision.id[3]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.gray){
+      newDecision.id[4]+=1;
+    }
+
+    newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour3;
+
+    //store own decision object in game model
+    this.game.ownDecisions.push(newDecision);
+
 
     //send decision object to backend
-
+    //ToDo: Communication Channel to Backend
   }
 
+  //=================
+  // Sail to Obelisk
+  //=================
 
   obeliskComponent_onEvent_placeStones_stones(data:number[]){
 
@@ -1837,16 +2049,115 @@ export class GameComponent  implements OnInit {
     if(1){console.log("moveShipToObelisks: whichShip, stonesToMove: ",whichShip, stonesToMove);}
 
     //generate decision object
+    let newDecision:Decision;
+    newDecision.decisionMadeBy=this.game.myPlayerField;
+    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
+      " sailed ship "+ whichShip +" to obelisks."
+    newDecision.madeAction.actionName=ActionEnum.sailShip;
+    newDecision.madeAction.actionName2=ActionEnum.sailShipToObelisk;
+
+    if(whichShip==1){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
+    }
+    else if(whichShip==2){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;
+    }
+    else if(whichShip==3){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;
+    }
+    else if(whichShip==4){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;
+    }
+
+    if(this.game.myPlayerField===ColourEnum.black){
+      newDecision.id[1]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.white){
+      newDecision.id[2]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.brown){
+      newDecision.id[3]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.gray){
+      newDecision.id[4]+=1;
+    }
+
+    newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour4;
+
+    //store own decision object in game model
+    this.game.ownDecisions.push(newDecision);
+
 
     //send decision object to backend
+    //ToDo: Communication Channel to Backend
 
   }
 
+  //=================
+  // Sail to Market
+  //=================
 
   moveShipToMarket(whichShip:number, stonesToMove:Stone[]){
 
     //called from dragula_subscribeDropEvent()
     if(1){console.log("moveShipToMarket: whichShip, stonesToMove: ",whichShip, stonesToMove);}
+
+    //generate decision object
+    let newDecision:Decision;
+    newDecision.decisionMadeBy=this.game.myPlayerField;
+    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
+      " sailed ship "+ whichShip +" to market."
+    newDecision.madeAction.actionName=ActionEnum.sailShip;
+    newDecision.madeAction.actionName2=ActionEnum.sailShipToMarket;
+
+    if(whichShip==1){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
+    }
+    else if(whichShip==2){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;
+    }
+    else if(whichShip==3){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;
+    }
+    else if(whichShip==4){
+      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;
+    }
+
+    if(this.game.myPlayerField===ColourEnum.black){
+      newDecision.id[1]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.white){
+      newDecision.id[2]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.brown){
+      newDecision.id[3]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.gray){
+      newDecision.id[4]+=1;
+    }
+
+    newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour5;
+
+    //store own decision object in game model
+    this.game.ownDecisions.push(newDecision);
+
+
+    //send decision object to backend
+    //ToDo: Communication Channel to Backend
+
+  }
+
+
+  //===========================================================
+  // Main Action 4: take market card
+  //===========================================================
+
+  takeRedMarketCardFromMarket(){
+
+    //listen to click on market card
+
+  //(lastDecisionActionName === ActionEnum.sailShip
+    //  && (lastDecisionActionName2 === ActionEnum.sailShipToMarket))
 
     //generate decision object
 
@@ -1856,135 +2167,11 @@ export class GameComponent  implements OnInit {
 
 
 
+  /**
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
-
-  //Took Stones from Quarry
-  //-----------------------
-  if (lastDecisionActionName === ActionEnum.fillSledWithStonesFromQuarry) {
-
-  //update Numbers on PlayerField: Quarry and Sled
-  this.updatePlayerData();
-
-  //show Snackbarinfo
-  let text="replace this string";
-  this.showSnackbarMessage(text);
-
-}
-
-//Placed Stone on Ship
-//-------------------
-else if (lastDecisionActionName === ActionEnum.placeStoneFromSledToShip) {
-
-  //update Numbers on PlayerField: Sled
-  this.updatePlayerData();
-
-  //show stone on ship
-  this.updateStoneOnShip();
-
-  //show Snackbarinfo
-  let text="replace this string";
-  this.showSnackbarMessage(text);
-
-}
-
-//Sail Ship to left side of island (no blue market card was not played)
-//-----------------------------------------------------------------------
-else if (lastDecisionActionName === ActionEnum.sailShip
-  && !(lastDecisionActionName2 === ActionEnum.sailShipToMarket)
-  && !(lastDecisionActionName3 === ActionEnum.playBlueMarketCard)) {
-
-  //update Numbers on PlayerField: Score
-  this.updatePlayerData();
-
-  //remove ship from departing harbour
-  this.removeShipFromDepartingHarbour();
-
-  //add ship to arriving harbour
-  this.addShipToArrivingHarbour();
-
-  //place stones to site
-  this.placeStonesToSite();
-
-  //show Snackbarinfo
-  let text="replace this string";
-  this.showSnackbarMessage(text);
-
-}
-
-//Sailed Ship to market (no blue market card was not played)
-//------------------------------------------------------------
-else if (lastDecisionActionName === ActionEnum.sailShip
-  && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)
-  && !(lastDecisionActionName3 === ActionEnum.playBlueMarketCard)) {
-
-  //remove ship from departing harbour
-  this.removeShipFromDepartingHarbour();
-
-  //add ship to arriving harbour
-  this.addShipToArrivingHarbour();
-
-  //show Snackbarinfo
-  let text="replace this string";
-  this.showSnackbarMessage(text);
-
-}
-
-//Took Red Card from Market
-//-------------------------
-else if (lastDecisionActionName === ActionEnum.sailShip
-  && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
-
-  //update Numbers on PlayerField: Quarry
-  this.updatePlayerData();
-
-  //remove Card from Market
-  this.removeCardFromMarket();
-
-  //add stones to Site
-  this.addTwoStonesToSite();
-
-  //show Snackbarinfo
-  let text="replace this string";
-  this.showSnackbarMessage(text);
-
-}
-
-//Took NO Red but another Card from Market
-//----------------------------------------
-else if (lastDecisionActionName === ActionEnum.sailShip
-  && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
-
-  //update Numbers on PlayerField: MarketCardIcons
-  this.updatePlayerData();
-
-  //remove Card from Market
-  this.removeCardFromMarket();
-
-  //show Snackbarinfo
-  let text="replace this string";
-  this.showSnackbarMessage(text);
-
-}
-
-//Played Blue Market Card Hammer
-//------------------------------
-else if (lastDecisionActionName === ActionEnum.playBlueMarketCardHammer) {
+   //Played Blue Market Card Hammer
+   //------------------------------
+   else if (lastDecisionActionName === ActionEnum.playBlueMarketCardHammer) {
 
   //update Numbers on PlayerField: Quarry, Sled
   this.updatePlayerData();
@@ -1998,9 +2185,9 @@ else if (lastDecisionActionName === ActionEnum.playBlueMarketCardHammer) {
 
 }
 
-//Played Blue Market Card Sail
-//----------------------------
-else if (lastDecisionActionName === ActionEnum.playBlueMarketCardSail) {
+   //Played Blue Market Card Sail
+   //----------------------------
+   else if (lastDecisionActionName === ActionEnum.playBlueMarketCardSail) {
 
   //update Numbers on PlayerField: Sled
   this.updatePlayerData();
@@ -2023,9 +2210,9 @@ else if (lastDecisionActionName === ActionEnum.playBlueMarketCardSail) {
 
 }
 
-//Played Blue Market Card Chisel
-//------------------------------
-else if (lastDecisionActionName === ActionEnum.playBlueMarketCardChisel) {
+   //Played Blue Market Card Chisel
+   //------------------------------
+   else if (lastDecisionActionName === ActionEnum.playBlueMarketCardChisel) {
 
   //update Numbers on PlayerField: Sled
   this.updatePlayerData();
@@ -2042,10 +2229,10 @@ else if (lastDecisionActionName === ActionEnum.playBlueMarketCardChisel) {
 
 }
 
-//Played Blue Market Card Lever (Sail Ship to left side of island)
-//----------------------------------------------------------------
-else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
-  && !(lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
+   //Played Blue Market Card Lever (Sail Ship to left side of island)
+   //----------------------------------------------------------------
+   else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
+   && !(lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
 
   //update Numbers on PlayerField: Sled
   this.updatePlayerData();
@@ -2065,10 +2252,10 @@ else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
 
 }
 
-//Played Blue Market Card Lever (Sail Ship to market)
-//---------------------------------------------------
-else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
-  && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
+   //Played Blue Market Card Lever (Sail Ship to market)
+   //---------------------------------------------------
+   else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
+   && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
 
   //remove ship from departing harbour
   this.removeShipFromDepartingHarbour();
@@ -2085,41 +2272,8 @@ else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
 
 }
 
+   */
 
-  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //===========================================================
-  // Main Action 4: take market card
-  //===========================================================
-
-  takeRedMarketCardFromMarket(){
-
-    //listen to click on market card
-
-    //generate decision object
-
-    //send decision object to backend
-
-  }
 
 
   //===========================================================
