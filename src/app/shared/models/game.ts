@@ -78,6 +78,17 @@ export class Game {
   public playerFieldIconsGrayAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsGray);
 
 
+  // my username entered in login screen
+  // get username from userService
+  myUserName:string;
+
+  // my player field
+  myPlayerField:ColourEnum;
+
+  // am I the current active player
+  amI_CurrentActivePlayer:boolean;
+
+
 
   //Constructor
   //===========
@@ -88,7 +99,6 @@ export class Game {
                 currentActivePlayerField_:ColourEnum, decision_:Decision){
 
       //static info added in lobby
-
       this.id=id_;
       this.token=token_;
       this.name=name_; //gameName
@@ -102,6 +112,8 @@ export class Game {
       //changing decision info
       this.currentActivePlayerField=currentActivePlayerField_;
       this.decisions.push(decision_);
+
+
 
     }
 
