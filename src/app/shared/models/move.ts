@@ -12,7 +12,7 @@ export class Move {
   //Additional Frontend attributes
   //==============================
 
-  constructor(id_:number, from_:PositionEnum, to_:PositionEnum, pos_:PositionEnum){
+  constructor(id_?:number, from_?:PositionEnum, to_?:PositionEnum, pos_?:PositionEnum){
 
     this.id=id_;
     this.from=from_;

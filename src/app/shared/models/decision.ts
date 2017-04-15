@@ -16,7 +16,7 @@ export class Decision {
   //frontend sends his made Decision to backend and backend broadcasts decision to all players
   public decisionMadeBy:ColourEnum;
   public whoMadeWhatDecisionSnackbarMessage:string;
-  public madeAction:Action;
+  public madeAction:Action = new Action();
 
   //backend sends allowed actions/moves
   public currentActivePlayer: User;
@@ -29,7 +29,7 @@ export class Decision {
 
   //Constructor
   //==============================
-  constructor(id_:number[], decisionMadeBy_:ColourEnum, whoMadeWhatDecisionSnackbarMessage_?:string,
+  constructor(id_?:number[], decisionMadeBy_?:ColourEnum, whoMadeWhatDecisionSnackbarMessage_?:string,
               madeAction_?:Action, activePlayer_?:User, actions_?:Action[]){
     this.id=id_;
     this.decisionMadeBy=decisionMadeBy_;
