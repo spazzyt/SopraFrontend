@@ -73,42 +73,6 @@ export class DepartingHarbourComponent {
   }
 
 
-  setClickHandlerOnSlot(slotHtmlId) {
-
-    //set click handler for  ship_slot
-    (<any>$(document)).ready(() => {
-      (<any>$("#"+slotHtmlId)).on("click", () => {
-        alert("You clicked ship slot:" + slotHtmlId);
-      });
-    });
-  }
-
-  removeClickHandlerOnSlot(slotHtmlId) {
-
-    //remove click handler for  ship_slot
-    (<any>$(document)).ready(() =>  {
-      (<any>$("#"+slotHtmlId)).off("click");
-    });
-  }
-
-
-  setClickHandlerOnStone(stoneHtmlId:string) {
-
-    //set click handler for  ship_slot
-    (<any>$(document)).ready(() => {
-      (<any>$("#"+stoneHtmlId)).on("click", () => {
-        alert("You clicked stone: " + stoneHtmlId);
-      });
-    });
-  }
-
-  removeClickHandlerOnStone(stoneHtmlId) {
-
-    //remove click handler for  ship_slot
-    (<any>$(document)).ready(() =>  {
-      (<any>$("#"+stoneHtmlId)).off("click");
-    });
-  }
 
 
   deactivateShipOnDepartingHarbour(ship_:Ship){
@@ -195,6 +159,50 @@ export class DepartingHarbourComponent {
       }
     }
   }
+
+
+  //ClickHandlers
+  //-------------
+
+  removeClickHandlerOnAllShips() {
+    this.removeClickHandlerOnStonesOnShip(1);
+    this.removeClickHandlerOnStonesOnShip(2);
+    this.removeClickHandlerOnStonesOnShip(3);
+    this.removeClickHandlerOnStonesOnShip(4);
+  }
+
+  setClickHandlerOnStonesOnShip(shipNumber) {
+    this.setClickHandlerOnStone('ship_'+shipNumber+'_slot_1');
+    this.setClickHandlerOnStone('ship_'+shipNumber+'_slot_2');
+    this.setClickHandlerOnStone('ship_'+shipNumber+'_slot_3');
+    this.setClickHandlerOnStone('ship_'+shipNumber+'_slot_4');
+  }
+
+  removeClickHandlerOnStonesOnShip(shipNumber) {
+    this.removeClickHandlerOnStone('ship_'+shipNumber+'_slot_1');
+    this.removeClickHandlerOnStone('ship_'+shipNumber+'_slot_2');
+    this.removeClickHandlerOnStone('ship_'+shipNumber+'_slot_3');
+    this.removeClickHandlerOnStone('ship_'+shipNumber+'_slot_4');
+  }
+
+  setClickHandlerOnStone(stoneHtmlId:string) {
+
+    //set click handler for  ship_slot
+    (<any>$(document)).ready(() => {
+      (<any>$("#"+stoneHtmlId)).on("click", () => {
+        alert("You clicked stone: " + stoneHtmlId);
+      });
+    });
+  }
+
+  removeClickHandlerOnStone(stoneHtmlId) {
+
+    //remove click handler for  ship_slot
+    (<any>$(document)).ready(() =>  {
+      (<any>$("#"+stoneHtmlId)).off("click");
+    });
+  }
+
 
 
 }
