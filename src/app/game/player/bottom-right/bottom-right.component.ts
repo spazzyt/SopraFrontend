@@ -145,7 +145,7 @@ export class BottomRightComponent implements OnInit {
     //set click handler for  bll_1
     (<any>$(document)).ready(() =>{
       (<any>$("#quarry_4")).on("click", () =>{
-        alert("The stone quarry 4 was clicked."); this.marketCards[5]-=1;
+        alert("The stone quarry 4 was clicked.");
       });
     });
 

@@ -1784,10 +1784,46 @@ export class GameComponent  implements OnInit {
   //===========================================================
   // Main Action 1: take stones from Quarry to Sled
   //===========================================================
+  bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
+    this.game.bottomLeft_sledStones=data;
+  }
+  bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
+    this.game.bottomLeft_quarryStones=data;
+  }
 
-  takeStonesFromQuarryToSled(howMany:number){
 
-    //ToDo: call this function from event listener
+  topLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
+    this.game.topLeft_sledStones=data;
+  }
+  topLeftComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
+    this.game.topLeft_quarryStones=data;
+  }
+
+
+  topRightComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
+    this.game.topRight_sledStones=data;
+  }
+  topRightComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
+    this.game.topRight_quarryStones=data;
+  }
+
+
+  bottomRightComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
+    this.game.bottomRight_sledStones=data;
+  }
+  bottomRightComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
+    this.game.bottomRight_quarryStones=data;
+  }
+
+
+  takeStonesFromQuarryToSled(){
+
+    //called from dragula_subscribeDropEvent()
+    if(1){console.log("take stones from Quarry to Sled");}
+
+    //make calculations
+    let howMany=0;
+
 
     //generate decision object
     let newDecision:Decision;
@@ -2279,6 +2315,62 @@ export class GameComponent  implements OnInit {
   //===========================================================
   // Main Action 5: play blue market card
   //===========================================================
+
+  bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
+    this.game.bottomLeft_marketCards=data;
+  }
+  bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
+    this.game.bottomLeft_marketCards=data;
+  }
+  bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
+    this.game.bottomLeft_marketCards=data;
+  }
+  bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
+    this.game.bottomLeft_marketCards=data;
+  }
+
+
+  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
+    this.game.topLeft_marketCards=data;
+  }
+  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
+    this.game.topLeft_marketCards=data;
+  }
+  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
+    this.game.topLeft_marketCards=data;
+  }
+  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
+    this.game.topLeft_marketCards=data;
+  }
+
+
+  topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
+    this.game.topRight_marketCards=data;
+  }
+  topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
+    this.game.topRight_marketCards=data;
+  }
+  topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
+    this.game.topRight_marketCards=data;
+  }
+  topRighttComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
+    this.game.topRight_marketCards=data;
+  }
+
+
+  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
+    this.game.bottomRight_marketCards=data;
+  }
+  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
+    this.game.bottomRight_marketCards=data;
+  }
+  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
+    this.game.bottomRight_marketCards=data;
+  }
+  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
+    this.game.bottomRight_marketCards=data;
+  }
+
 
   playBlueMarketCardHammer(){
 

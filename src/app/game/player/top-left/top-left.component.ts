@@ -83,7 +83,7 @@ export class TopLeftComponent implements OnInit {
     //set click handler for  bll_1
     (<any>$(document)).ready(() =>{
       (<any>$("#quarry_2")).on("click", () =>{
-        alert("The stone quarry 2 was clicked."); this.marketCards[5]-=1;
+        alert("The stone quarry 2 was clicked.");
       });
     });
 

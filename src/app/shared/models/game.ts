@@ -90,12 +90,38 @@ export class Game {
   //Obelisk
   public stonesInObelisk:number[];
 
+  //Player bottom left
+  public bottomLeft_sledStones:number;
+  public bottomLeft_quarryStones:number;
+  public bottomLeft_marketCards:number[];
+
+  //Player top left
+  public topLeft_sledStones:number;
+  public topLeft_quarryStones:number;
+  public topLeft_marketCards:number[];
+
+  //Player top right
+  public topRight_sledStones:number;
+  public topRight_quarryStones:number;
+  public topRight_marketCards:number[];
+
+  //Player bottom right
+  public bottomRight_sledStones:number;
+  public bottomRight_quarryStones:number;
+  public bottomRight_marketCards:number[];
+
+
+
+  // Own Decisions
+  //--------------
 
   //to store own decisions
   public ownDecisions:Decision[]=[];
 
 
 
+  // Own Player info
+  //------------
 
   // my username entered in login screen
   // get username from userService

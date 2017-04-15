@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {Stone} from "../../../shared/models/stone";
 import {ColourEnum} from "../../../shared/models/colour.enum";
 import {StoneQuarry} from "../../../shared/models/stone-quarry";
@@ -44,6 +44,18 @@ export class BottomLeftComponent implements OnInit {
 
   // the player's nine market card icons
   public marketCards:number[] = [];
+
+
+  //==============
+  // Event Emitter
+  //==============
+
+  @Output() onEvent_setClickHandlerOnStoneQuarry_sledStones = new EventEmitter<number>();
+  @Output() onEvent_setClickHandlerOnStoneQuarry_quarryStones = new EventEmitter<number>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards = new EventEmitter<number[]>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards = new EventEmitter<number[]>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards = new EventEmitter<number[]>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards = new EventEmitter<number[]>();
 
 
   //===============
@@ -93,7 +105,9 @@ export class BottomLeftComponent implements OnInit {
     //set click handler for  bll_1
     (<any>$(document)).ready(() =>{
       (<any>$("#quarry_1")).on("click", () =>{
-        alert("The stone quarry 1 was clicked."); this.marketCards[5]-=1;
+        alert("The stone quarry 1 was clicked.");
+        this.onEvent_setClickHandlerOnStoneQuarry_sledStones.emit(this.sledStones);
+        this.onEvent_setClickHandlerOnStoneQuarry_quarryStones.emit(this.quarryStones);
       });
     });
 
@@ -114,28 +128,32 @@ export class BottomLeftComponent implements OnInit {
     //set click handler for  bll_1
     (<any>$(document)).ready(() =>{
       (<any>$("#bll_1_")).on("click", () =>{
-        alert("The chisel was clicked."); this.marketCards[5]-=1;
+        alert("The chisel was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards.emit(this.marketCards);
       });
     });
 
     //set click handler for  bml_1
     (<any>$(document)).ready(() =>{
       (<any>$("#bml_1_")).on("click", () =>{
-        alert("The hammer was clicked."); this.marketCards[6]-=1;
+        alert("The hammer was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards.emit(this.marketCards);
       })
     });
 
     //set click handler for  bmr_1
     (<any>$(document)).ready(() =>{
       (<any>$("#bmr_1_")).on("click", () =>{
-        alert("The sail was clicked."); this.marketCards[7]-=1;
+        alert("The sail was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards.emit(this.marketCards);
       })
     });
 
     //set click handler for  brr_1
     (<any>$(document)).ready(() =>{
       (<any>$("#brr_1_")).on("click", () =>{
-        alert("The lever was clicked."); this.marketCards[8]-=1;
+        alert("The lever was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards.emit(this.marketCards);
       })
     });
   }
