@@ -1,17 +1,18 @@
+import {PositionEnum} from "./position.enum";
 export class Move {
 
   //Backend attributes
   //==================
   public id:number=-1;
-  public from:string;
-  public to:string;
-  public pos:number; //check with backend about usage
+  public from:PositionEnum;
+  public to:PositionEnum;
+  public pos:PositionEnum; //check with backend about usage
 
 
   //Additional Frontend attributes
   //==============================
 
-  constructor(id_:number, from_:string, to_:string, pos_:number){
+  constructor(id_:number, from_:PositionEnum, to_:PositionEnum, pos_:PositionEnum){
 
     this.id=id_;
     this.from=from_;

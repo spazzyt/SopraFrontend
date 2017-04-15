@@ -1,21 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild, EventEmitter, Output} from '@angular/core';
 import {Stone} from "../../shared/models/stone";
 import {ColourEnum} from "../../shared/models/colour.enum";
+import {GameComponent} from "../game.component";
 
 @Component({
   selector: 'app-obelisk',
   templateUrl: './obelisk.component.html',
   styleUrls: ['./obelisk.component.css']
 })
+
+//===========
+// Component
+//===========
+
 export class ObeliskComponent implements OnInit {
 
-
-
-
+  //===============
+  //Class Variables
+  //===============
   stones:number[] = [0,0,0,0];
   numberOfPlayers:number = 4;
 
+
+  //==============
+  // Event Emitter
+  //==============
+
+  @Output() onEvent_placeStones_stones = new EventEmitter<number[]>();
+  @Output() onEvent_removeStones_stones = new EventEmitter<number[]>();
+
+
+  //===============
+  //Constructor
+  //===============
+
   constructor() {}
+
+
+  //==========
+  // ngOnInit
+  //==========
 
   ngOnInit() {
     //styles in styles.css at the end under popover, to style:
@@ -35,6 +59,10 @@ export class ObeliskComponent implements OnInit {
 
 
   }
+
+  //===============
+  // Other-Methods
+  //===============
 
   placeStones(targetStones: Stone[]){
 
@@ -70,11 +98,20 @@ export class ObeliskComponent implements OnInit {
     for (let i = 0; i < this.numberOfPlayers; i++) {
       this.stones[i] += stoneNumbers[i];
     }
+
+    //inform Game Component about it
+    //------------------------------
+    this.onEvent_placeStones_stones.emit(this.stones);
+
   }
 
 
   removeStones(){
     this.stones = [0,0,0,0];
+
+    //inform Game Component about it
+    //------------------------------
+    this.onEvent_removeStones_stones.emit(this.stones);
   }
 
   setAttributes(playerNumber: number){

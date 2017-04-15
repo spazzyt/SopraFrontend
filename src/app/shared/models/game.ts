@@ -5,6 +5,7 @@ import {Ship} from "./ship";
 import {MarketCard} from "./market-card";
 import {Decision} from "./decision";
 import {ColourEnum} from "./colour.enum";
+import {Stone} from "./stone";
 /**
  * Created by benzro on 23.03.17.
  */
@@ -76,6 +77,24 @@ export class Game {
   public playerFieldIconsWhiteAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsWhite);
   public playerFieldIconsBrownAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsBrown);
   public playerFieldIconsGrayAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsGray);
+
+
+  // Game State
+  //-----------
+
+  //Temple
+  public stonesInTemple:Stone[];
+  public totalStonesInTemple:number;
+  public fieldHeightInTemple:number[];
+
+  //Obelisk
+  public stonesInObelisk:number[];
+
+
+  //to store own decisions
+  public ownDecisions:Decision[]=[];
+
+
 
 
   // my username entered in login screen
