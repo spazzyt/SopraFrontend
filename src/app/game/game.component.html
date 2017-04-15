@@ -16,7 +16,15 @@
 
     <!-- Bottom Left Player Field -->
     <div class="player_field player_bottom_left">
-      <app-bottom-left id="playerField_1"></app-bottom-left>
+      <app-bottom-left id="playerField_1"
+                       (onEvent_setClickHandlerOnStoneQuarry_sledStones)="bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones($event)"
+                       (onEvent_setClickHandlerOnStoneQuarry_quarryStones)="bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones($event)"
+                       (onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards)="bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards($event)"
+                       (onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards)="bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards($event)"
+                       (onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards)="bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards($event)"
+                       (onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards)="bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards($event)">
+
+      </app-bottom-left>
     </div>
   </div>
 
