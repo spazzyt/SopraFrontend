@@ -238,7 +238,6 @@ export class TopLeftComponent implements OnInit {
     if (playerIconsStatus_target[1] == false) {
       (<any>$(document)).ready(function (){
         (<any>$("#tll_2")).css("opacity", "0.3");
-
       });
 
       if(0){console.log("deactivateOrActivateIcons: false")}

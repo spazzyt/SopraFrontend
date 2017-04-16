@@ -2383,41 +2383,51 @@ export class GameComponent  implements OnInit {
   //received data from child components
   //-----------------------------------
 
-  marketComponent_onEvent_setClickHandlerOnMarketCards_1_marketCards(data:MarketCard[]){
-    if(1){console.log("marketCards 1: data: ",data);}
-    if (data[0].colour=="red"){
-      this.takeRedMarketCardFromMarket(data[0], 1);
+  marketComponent_onEvent_setClickHandlerOnMarketCards_1_marketCards(data:MarketCard[]) {
+    if (1) {
+      console.log("marketCards 1: data: ", data);
     }
-    else{
-      this.takeNotRedMarketCardFromMarket(data[0], 1);
+    if (data[0] != null) {
+      if (data[0].colour == "red") {
+        this.takeRedMarketCardFromMarket(data[0], 1);
+      }
+      else {
+        this.takeNotRedMarketCardFromMarket(data[0], 1);
+      }
     }
   }
 
   marketComponent_onEvent_setClickHandlerOnMarketCards_2_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 2: data: ",data);}
-    if (data[1].colour=="red"){
-      this.takeRedMarketCardFromMarket(data[1], 2);
-    }
-    else{
-      this.takeNotRedMarketCardFromMarket(data[1], 2);
+    if (data[1] != null) {
+      if (data[1].colour == "red") {
+        this.takeRedMarketCardFromMarket(data[1], 2);
+      }
+      else {
+        this.takeNotRedMarketCardFromMarket(data[1], 2);
+      }
     }
   }
   marketComponent_onEvent_setClickHandlerOnMarketCards_3_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 3: data: ",data);}
-    if (data[2].colour=="red"){
-      this.takeRedMarketCardFromMarket(data[2], 3);
-    }
-    else{
-      this.takeNotRedMarketCardFromMarket(data[2], 3);
+    if (data[2] != null) {
+      if (data[2].colour == "red") {
+        this.takeRedMarketCardFromMarket(data[2], 3);
+      }
+      else {
+        this.takeNotRedMarketCardFromMarket(data[2], 3);
+      }
     }
   }
   marketComponent_onEvent_setClickHandlerOnMarketCards_4_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 4: data: ",data);}
-    if (data[3].colour=="red"){
-      this.takeRedMarketCardFromMarket(data[3], 4);
-    }
-    else{
-      this.takeNotRedMarketCardFromMarket(data[3], 4);
+    if (data[3] != null) {
+      if (data[3].colour == "red") {
+        this.takeRedMarketCardFromMarket(data[3], 4);
+      }
+      else {
+        this.takeNotRedMarketCardFromMarket(data[3], 4);
+      }
     }
   }
 
@@ -2735,6 +2745,7 @@ export class GameComponent  implements OnInit {
 
     }
 
+
     //delete market card from slot on market board
     //--------------------------------------------
     if (marketCardSlot==1){
@@ -2791,7 +2802,6 @@ export class GameComponent  implements OnInit {
     //snackbar message
     this.showSnackbarMessage("You picked red market card "+ marketCardName +" and placed "+ howMany +
       " stone(s) from quarry to " + place + " .");
-
 
   }
 
