@@ -2344,6 +2344,7 @@ export class GameComponent  implements OnInit {
   //===========================================================
 
   marketComponent_onEvent_setClickHandlerOnMarketCards_1_marketCards(data:MarketCard[]){
+    if(1){console.log("marketCards 1: data: ",data);}
     if (data[0].colour=="red"){
       this.takeRedMarketCardFromMarket(data);
     }
@@ -2353,6 +2354,7 @@ export class GameComponent  implements OnInit {
   }
 
   marketComponent_onEvent_setClickHandlerOnMarketCards_2_marketCards(data:MarketCard[]){
+    if(1){console.log("marketCards 2: data: ",data);}
     if (data[1].colour=="red"){
       this.takeRedMarketCardFromMarket(data);
     }
@@ -2361,6 +2363,7 @@ export class GameComponent  implements OnInit {
     }
   }
   marketComponent_onEvent_setClickHandlerOnMarketCards_3_marketCards(data:MarketCard[]){
+    if(1){console.log("marketCards 3: data: ",data);}
     if (data[2].colour=="red"){
       this.takeRedMarketCardFromMarket(data);
     }
@@ -2369,6 +2372,7 @@ export class GameComponent  implements OnInit {
     }
   }
   marketComponent_onEvent_setClickHandlerOnMarketCards_4_marketCards(data:MarketCard[]){
+    if(1){console.log("marketCards 4: data: ",data);}
     if (data[3].colour=="red"){
       this.takeRedMarketCardFromMarket(data);
     }
