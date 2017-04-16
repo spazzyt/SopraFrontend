@@ -43,6 +43,7 @@ import {ActionEnum} from "../shared/models/action.enum";
 import {PositionEnum} from "../shared/models/position.enum";
 import {Action} from "../shared/models/action";
 import {Move} from "../shared/models/move";
+import {WSService} from "../shared/services/websocket.service";
 
 
 @Component({
@@ -107,6 +108,7 @@ export class GameComponent  implements OnInit {
   //===============
   constructor(private dragulaService: DragulaService,
               private gameService: GameService,
+              private wsService: WSService,
               private userService: UserService,
               private route: ActivatedRoute,
               private _ngZone: NgZone) {
@@ -199,7 +201,7 @@ export class GameComponent  implements OnInit {
           console.log("Initializing game with id: ", id, game);
 
           // Now we need to connect via websockets and listen for gamestate updates
-
+          this.wsService.connectToGame(id);
         });
     }
 
