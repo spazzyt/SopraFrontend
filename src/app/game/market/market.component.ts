@@ -29,6 +29,7 @@ export class MarketComponent implements OnInit {
   //===============
   constructor() {
 
+
   }
 
   //===============
@@ -50,8 +51,6 @@ export class MarketComponent implements OnInit {
       content : '<p>For each stone delivered here, ' +
                     'the owner of the stone can immediately take any 1 face-up market card.</p>'
     });
-
-    //Create Market Cards
 
 
   }
@@ -109,6 +108,7 @@ export class MarketComponent implements OnInit {
     (<any>$(document)).ready(() =>{
       (<any>$("#market_card_1")).on("click", () =>{
         //alert("You clicked market card in slot 1.");
+        this.removeClickHandlerOnMarketCard1();
         this.onEvent_setClickHandlerOnMarketCards_1_marketCards.emit(this.marketCards);
         //this.chooseMarketCard_1_OnClick(); //not here: generates errors
       });
@@ -118,8 +118,9 @@ export class MarketComponent implements OnInit {
     (<any>$(document)).ready(() =>{
       (<any>$("#market_card_2")).on("click", () =>{
         //alert("You clicked market card in slot 2.");
+        this.removeClickHandlerOnMarketCard2();
         this.onEvent_setClickHandlerOnMarketCards_2_marketCards.emit(this.marketCards);
-        //this.chooseMarketCard_2_OnClick();
+        //this.chooseMarketCard_2_OnClick(); //not here: generates errors
       })
     });
 
@@ -127,8 +128,9 @@ export class MarketComponent implements OnInit {
     (<any>$(document)).ready(() =>{
       (<any>$("#market_card_3")).on("click", () =>{
         //alert("You clicked market card in slot 3.");
+        this.removeClickHandlerOnMarketCard3();
         this.onEvent_setClickHandlerOnMarketCards_3_marketCards.emit(this.marketCards);
-        //this.chooseMarketCard_3_OnClick();
+        //this.chooseMarketCard_3_OnClick(); //not here: generates errors
       })
     });
 
@@ -136,8 +138,9 @@ export class MarketComponent implements OnInit {
     (<any>$(document)).ready(() =>{
       (<any>$("#market_card_4")).on("click", () =>{
         //alert("You clicked market card in slot 4.");
+        this.removeClickHandlerOnMarketCard4();
         this.onEvent_setClickHandlerOnMarketCards_4_marketCards.emit(this.marketCards);
-        //this.chooseMarketCard_4_OnClick();
+        //this.chooseMarketCard_4_OnClick(); //not here: generates errors
       })
     });
   }
@@ -158,6 +161,42 @@ export class MarketComponent implements OnInit {
     (<any>$(document)).ready(function () {
       (<any>$("#market_card_3")).off("click");
     });
+
+    //remove click handler for  4
+    (<any>$(document)).ready(function () {
+      (<any>$("#market_card_4")).off("click");
+    });
+
+  }
+
+  removeClickHandlerOnMarketCard1(){
+
+    //remove click handler for  1
+    (<any>$(document)).ready(function () {
+      (<any>$("#market_card_1")).off("click");
+    });
+
+  }
+
+  removeClickHandlerOnMarketCard2(){
+
+    //remove click handler for  2
+    (<any>$(document)).ready(function () {
+      (<any>$("#market_card_2")).off("click");
+    });
+
+  }
+
+  removeClickHandlerOnMarketCard3(){
+
+    //remove click handler for  3
+    (<any>$(document)).ready(function () {
+      (<any>$("#market_card_3")).off("click");
+    });
+
+  }
+
+  removeClickHandlerOnMarketCard4(){
 
     //remove click handler for  4
     (<any>$(document)).ready(function () {

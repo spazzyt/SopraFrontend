@@ -4,13 +4,16 @@
 
 
 <!--add marketCardSlot_i-->
-<div *ngFor="let marketCard of marketCards; let i = index"
-     id="market_card_slot_{{i+1}}" class="market_card_slot card">
+<div *ngFor="let i of [0,1,2,3];"
+     id="market_card_slot_{{i+1}}" class="market_card_slot">
 
   <!--add marketCard_i to market-->
   <div class="left_spacing"></div>
-  <div id="market_card_{{i+1}}" class="market_card_{{i+1}} card_picture"
-       [ngStyle]="{ 'background-image': 'url(' + marketCard.imageUrl + ')' }"></div>
+  <div *ngIf="marketCards[i]" id="ngifMarketCards" class="market_card_slot card">
+    <div id="market_card_{{i+1}}" class="market_card_{{i+1}} card_picture"
+         [ngStyle]="{ 'background-image': 'url(' + marketCards[i].imageUrl + ')' }">
+    </div>
+  </div>
 </div>
 
 
