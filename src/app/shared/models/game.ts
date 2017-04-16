@@ -65,6 +65,13 @@ export class Game {
   //Additional Frontend attributes
   //==============================
 
+
+  //whole set of market cards
+  public wholeMarketCardSet:MarketCard[]=[];
+
+
+
+
   // PlayerFieldsIcons
   // [Score, Sled, Quarry, Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
   //    0      1      2      3        4       5       6      7        8      9      10     11
