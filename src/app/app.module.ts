@@ -49,6 +49,7 @@ import { DragulaDemoComponent } from './demo-temp/dragula-demo/dragula-demo.comp
 import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
 import {ShipService} from "./shared/services/ship.service";
 import { StoneComponent } from './game/stone/stone.component';
+import {WSService} from "./shared/services/websocket.service";
 
 
 @NgModule({
@@ -99,6 +100,7 @@ import { StoneComponent } from './game/stone/stone.component';
     AuthGuardService,
     UserService,
     GameService,
+    WSService,
     DragulaService,
     ShipService
   ],
