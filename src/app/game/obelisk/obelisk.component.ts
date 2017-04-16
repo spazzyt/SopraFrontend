@@ -29,6 +29,8 @@ export class ObeliskComponent implements OnInit {
   @Output() onEvent_placeStones_stones = new EventEmitter<number[]>();
   @Output() onEvent_removeStones_stones = new EventEmitter<number[]>();
 
+  @Output() onEvent_placeStones_withRedMarketCard_stones = new EventEmitter<number[]>();
+
 
   //===============
   //Constructor
@@ -64,6 +66,8 @@ export class ObeliskComponent implements OnInit {
   // Other-Methods
   //===============
 
+  //used for ship movements (with event listener)
+  //---------------------------------------------
   placeStones(targetStones: Stone[]){
 
     // FORMAT FOR stonenumbers Array
@@ -102,6 +106,50 @@ export class ObeliskComponent implements OnInit {
     //inform Game Component about it
     //------------------------------
     this.onEvent_placeStones_stones.emit(this.stones);
+
+  }
+
+  //used red market card (without event listener)
+  //---------------------------------------------
+  placeStones_withRedCard(targetStones: Stone[]){
+
+    // FORMAT FOR stonenumbers Array
+    // 0: black
+    // 1: white
+    // 2: brown
+    // 3: gray
+
+    let stoneNumbers:number[] = [0,0,0,0];    //temporary array for storing the number of stones in each color
+
+    for (let i = 0; i < targetStones.length; i++){
+      if(targetStones[i] != null)
+      {
+        if(targetStones[i].colour === ColourEnum.black){
+          stoneNumbers[0] += 1;
+        }
+        else
+        if(targetStones[i].colour === ColourEnum.white){
+          stoneNumbers[1] += 1;
+        }
+        else
+        if(targetStones[i].colour === ColourEnum.brown){
+          stoneNumbers[2] += 1;
+        }
+        else
+        if(targetStones[i].colour === ColourEnum.gray){
+          stoneNumbers[3] += 1;
+        }
+      }
+    }
+
+    for (let i = 0; i < this.numberOfPlayers; i++) {
+      this.stones[i] += stoneNumbers[i];
+    }
+
+    //inform Game Component about it
+    //------------------------------
+    this.onEvent_placeStones_withRedMarketCard_stones.emit(this.stones);
+
 
   }
 

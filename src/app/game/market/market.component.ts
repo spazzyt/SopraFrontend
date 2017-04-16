@@ -109,8 +109,8 @@ export class MarketComponent implements OnInit {
     (<any>$(document)).ready(() =>{
       (<any>$("#market_card_1")).on("click", () =>{
         //alert("You clicked market card in slot 1.");
-        this.chooseMarketCard_1_OnClick();
         this.onEvent_setClickHandlerOnMarketCards_1_marketCards.emit(this.marketCards);
+        //this.chooseMarketCard_1_OnClick(); //not here: generates errors
       });
     });
 
@@ -118,8 +118,8 @@ export class MarketComponent implements OnInit {
     (<any>$(document)).ready(() =>{
       (<any>$("#market_card_2")).on("click", () =>{
         //alert("You clicked market card in slot 2.");
-        this.chooseMarketCard_2_OnClick();
         this.onEvent_setClickHandlerOnMarketCards_2_marketCards.emit(this.marketCards);
+        //this.chooseMarketCard_2_OnClick();
       })
     });
 
@@ -127,8 +127,8 @@ export class MarketComponent implements OnInit {
     (<any>$(document)).ready(() =>{
       (<any>$("#market_card_3")).on("click", () =>{
         //alert("You clicked market card in slot 3.");
-        this.chooseMarketCard_3_OnClick();
         this.onEvent_setClickHandlerOnMarketCards_3_marketCards.emit(this.marketCards);
+        //this.chooseMarketCard_3_OnClick();
       })
     });
 
@@ -136,8 +136,8 @@ export class MarketComponent implements OnInit {
     (<any>$(document)).ready(() =>{
       (<any>$("#market_card_4")).on("click", () =>{
         //alert("You clicked market card in slot 4.");
-        this.chooseMarketCard_4_OnClick();
         this.onEvent_setClickHandlerOnMarketCards_4_marketCards.emit(this.marketCards);
+        //this.chooseMarketCard_4_OnClick();
       })
     });
   }

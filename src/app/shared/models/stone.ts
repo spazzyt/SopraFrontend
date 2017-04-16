@@ -25,7 +25,7 @@ export class Stone {
   //stone image
   public imageUrl:string="";
 
-  constructor(id_:number, colour_:ColourEnum, currentPosition_?:PositionEnum){
+  constructor(id_?:number, colour_?:ColourEnum, currentPosition_?:PositionEnum){
 
     //initialize attributes
     this.id=id_;

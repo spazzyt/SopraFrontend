@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Stone} from "../../shared/models/stone";
 
 @Component({
@@ -41,7 +41,7 @@ export class BurialChamberComponent implements OnInit {
   }
 
   placeStones(targetStones: Stone[]){
-    for (var i = 0; i < targetStones.length; i++) {
+    for (let i = 0; i < targetStones.length; i++) {
 
       if(this.totalStones < 27) {
 
@@ -56,6 +56,7 @@ export class BurialChamberComponent implements OnInit {
       }
     }
   }
+
 
   removeStones(){
     this.stones = [];
