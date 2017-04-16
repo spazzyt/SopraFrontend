@@ -68,7 +68,11 @@
       </div>
 
       <div class="market_site">
-        <app-market></app-market>
+        <app-market (onEvent_setClickHandlerOnMarketCards_1_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_1_marketCards($event)"
+                    (onEvent_setClickHandlerOnMarketCards_2_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_2_marketCards($event)"
+                    (onEvent_setClickHandlerOnMarketCards_3_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_3_marketCards($event)"
+                    (onEvent_setClickHandlerOnMarketCards_4_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_4_marketCards($event)">
+        </app-market>
       </div>
 
       <div class="market_harbour">
