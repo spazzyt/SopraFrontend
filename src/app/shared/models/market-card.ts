@@ -45,9 +45,9 @@ export class MarketCard {
       case 2:
         return "pavedpath";
       case 3:
-        return "sacophagus";
+        return "sarcophagus";
       case 4:
-        return "sacophagus";
+        return "sarcophagus";
       case 5:
         return "entrance";
       case 6:
