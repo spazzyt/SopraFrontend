@@ -10,6 +10,14 @@ export class Action {
   public actionName2:ActionEnum;
   public actionName3:ActionEnum;
 
+  //additional data to be sent from
+  //active player to inactive players
+  public data:any;
+  public data2:any;
+  public data3:any;
+  public data4:any;
+  public data5:any;
+
   //frontend sends his made Decision to backend and backend broadcasts decision to all players
   public madeMove:Move= new Move();
 

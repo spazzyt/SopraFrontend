@@ -2346,64 +2346,128 @@ export class GameComponent  implements OnInit {
   marketComponent_onEvent_setClickHandlerOnMarketCards_1_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 1: data: ",data);}
     if (data[0].colour=="red"){
-      this.takeRedMarketCardFromMarket(data);
+      this.takeRedMarketCardFromMarket(data[0], 1);
     }
     else{
-      this.takeNotRedMarketCardFromMarket(data);
+      this.takeNotRedMarketCardFromMarket(data[0], 1);
     }
   }
 
   marketComponent_onEvent_setClickHandlerOnMarketCards_2_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 2: data: ",data);}
     if (data[1].colour=="red"){
-      this.takeRedMarketCardFromMarket(data);
+      this.takeRedMarketCardFromMarket(data[1], 2);
     }
     else{
-      this.takeNotRedMarketCardFromMarket(data);
+      this.takeNotRedMarketCardFromMarket(data[1], 2);
     }
   }
   marketComponent_onEvent_setClickHandlerOnMarketCards_3_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 3: data: ",data);}
     if (data[2].colour=="red"){
-      this.takeRedMarketCardFromMarket(data);
+      this.takeRedMarketCardFromMarket(data[2], 3);
     }
     else{
-      this.takeNotRedMarketCardFromMarket(data);
+      this.takeNotRedMarketCardFromMarket(data[2], 3);
     }
   }
   marketComponent_onEvent_setClickHandlerOnMarketCards_4_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 4: data: ",data);}
     if (data[3].colour=="red"){
-      this.takeRedMarketCardFromMarket(data);
+      this.takeRedMarketCardFromMarket(data[3], 4);
     }
     else{
-      this.takeNotRedMarketCardFromMarket(data);
+      this.takeNotRedMarketCardFromMarket(data[3], 4);
     }
   }
 
 
-  takeRedMarketCardFromMarket(data:MarketCard[]){
+  takeRedMarketCardFromMarket(marketCard:MarketCard, marketCardSlot){
 
     //called from click event in market component
     if(1){console.log("take red market card from market");}
 
-    /**
+    //determine which specific market card (id) was taken
+    //according to our market card model
+    //---------------------------------------------------
+    let marketCardId=marketCard.id;
+    let marketCardName:string;
+    let marketCardAction:ActionEnum;
+    let marketCardMoveTo:PositionEnum;
+    let place:string;
+    let additionalDataSent:number[];
 
-    //make calculations
+
+    //choose player field
+    // change numbers in quarry
+    //-------------------------
     let stonesInQuarry:number;
-    let stonesInSled:number;
-    let howMany:number;
+    let playerField=this.game.currentActivePlayerField;
+    let howMany:number=0;
 
+
+    //bottom left
+    //-----------
     if(playerField===ColourEnum.black){
       stonesInQuarry=this.game.bottomLeft_quarryStones;
-      stonesInSled=this.game.bottomLeft_sledStones;
 
-      if(stonesInQuarry>=3 && stonesInSled<=2){howMany=3;}
-      else if(stonesInQuarry==2 && stonesInSled<=2){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled<=2){howMany=1;}
-      else if(stonesInQuarry>=2 && stonesInSled==3){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled==3){howMany=1;}
-      else if(stonesInQuarry>=1 && stonesInSled==4){howMany=1;}
+      if(stonesInQuarry>=1){
+        howMany=1;
+
+        //paved path (one stone from quarry to obelisk)
+        if (marketCardId==1 || marketCardId==2){
+          marketCardName="paved path";
+          place="obelisk";
+          marketCardAction=ActionEnum.takeRedMarketCardPavedPath;
+          marketCardMoveTo=PositionEnum.obelisks;
+
+          //place one black stone on obelisk board
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.black;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.obeliskComponent.placeStones([newStone,null,null,null]);
+
+          //update game model
+          this.game.stonesInObelisk[0]+=1;
+
+          //for other clients
+          additionalDataSent=this.game.stonesInObelisk;
+
+
+        }
+
+        //sarcophargus (one stone from quarry to burial chamber)
+        else if (marketCardId==3 || marketCardId==4){
+          marketCardName="sarcophargus";
+          place="burial chamber";
+          marketCardAction=ActionEnum.takeRedMarketCardSacophargus;
+          marketCardMoveTo=PositionEnum.burialChamber;
+
+          //place one black stone on burial chamber board
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.black;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.burialChamberComponent.placeStones([newStone,null,null,null]);
+
+        }
+
+        //entrance (one stone from quarry to pyramid)
+        else if (marketCardId==5 || marketCardId==6){
+          marketCardName="entrance";
+          place="pyramid";
+          marketCardAction=ActionEnum.takeRedMarketCardEntrance;
+          marketCardMoveTo=PositionEnum.pyramid;
+
+
+          //place one black stone on pyramid board
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.black;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.pyramidComponent.placeStones([newStone,null,null,null]);
+
+        }
+
+      }
       else{
         this.showSnackbarMessage("you can not take stones from the quarry")
         return;
@@ -2411,22 +2475,70 @@ export class GameComponent  implements OnInit {
 
       //change numbers
       this.game.bottomLeft_quarryStones-=howMany;
-      this.game.bottomLeft_sledStones+=howMany;
       this.bottomLeftComponent.quarryStones-=howMany;
-      this.bottomLeftComponent.sledStones+=howMany;
-
-
     }
+
+    //top left
+    //--------
     else if(playerField===ColourEnum.white){
       stonesInQuarry=this.game.topLeft_quarryStones;
-      stonesInSled=this.game.topLeft_sledStones;
 
-      if(stonesInQuarry>=3 && stonesInSled<=2){howMany=3;}
-      else if(stonesInQuarry==2 && stonesInSled<=2){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled<=2){howMany=1;}
-      else if(stonesInQuarry>=2 && stonesInSled==3){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled==3){howMany=1;}
-      else if(stonesInQuarry>=1 && stonesInSled==4){howMany=1;}
+      if(stonesInQuarry>=1){
+        howMany=1;
+
+        //paved path (one stone from quarry to obelisk)
+        if (marketCardId==1 || marketCardId==2){
+          marketCardName="paved path";
+          place="obelisk";
+          marketCardAction=ActionEnum.takeRedMarketCardPavedPath;
+          marketCardMoveTo=PositionEnum.obelisks;
+
+          //place one white stone on obelisk board
+          let stoneId=99999; //unknown
+          let stoneColour=ColourEnum.white;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.obeliskComponent.placeStones([null,newStone,null,null]);
+
+          //update game model
+          this.game.stonesInObelisk[1]+=1;
+
+          //for other clients
+          additionalDataSent=this.game.stonesInObelisk;
+
+        }
+
+        //sarcophargus (one stone from quarry to burial chamber)
+        else if (marketCardId==3 || marketCardId==4){
+          marketCardName="sarcophargus";
+          place="burial chamber";
+          marketCardAction=ActionEnum.takeRedMarketCardSacophargus;
+          marketCardMoveTo=PositionEnum.burialChamber;
+
+
+          //place one white stone on burial chamber board
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.white;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.burialChamberComponent.placeStones([null,newStone,null,null]);
+
+        }
+
+        //entrance (one stone from quarry to pyramid)
+        else if (marketCardId==5 || marketCardId==6){
+          marketCardName="entrance";
+          place="pyramid";
+          marketCardAction=ActionEnum.takeRedMarketCardEntrance;
+          marketCardMoveTo=PositionEnum.pyramid;
+
+          //place one white stone on pyramid board
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.white;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.pyramidComponent.placeStones([null,newStone,null,null]);
+        }
+
+
+      }
       else{
         this.showSnackbarMessage("you can not take stones from the quarry")
         return;
@@ -2434,43 +2546,141 @@ export class GameComponent  implements OnInit {
 
       //change numbers
       this.game.topLeft_quarryStones-=howMany;
-      this.game.topLeft_sledStones+=howMany;
       this.topLeftComponent.quarryStones-=howMany;
-      this.topLeftComponent.sledStones+=howMany;
 
     }
+
+    //top right
+    //---------
     else if(playerField===ColourEnum.brown){
       stonesInQuarry=this.game.topRight_quarryStones;
-      stonesInSled=this.game.topRight_sledStones;
 
-      if(stonesInQuarry>=3 && stonesInSled<=2){howMany=3;}
-      else if(stonesInQuarry==2 && stonesInSled<=2){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled<=2){howMany=1;}
-      else if(stonesInQuarry>=2 && stonesInSled==3){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled==3){howMany=1;}
-      else if(stonesInQuarry>=1 && stonesInSled==4){howMany=1;}
+      if(stonesInQuarry>=1){
+        howMany=1;
+
+        //paved path (one stone from quarry to obelisk)
+        if (marketCardId==1 || marketCardId==2){
+          marketCardName="paved path";
+          place="obelisk";
+          marketCardAction=ActionEnum.takeRedMarketCardPavedPath;
+          marketCardMoveTo=PositionEnum.obelisks;
+
+          //place one brown stone on obelisk board
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.brown;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.obeliskComponent.placeStones([null,null,newStone,null]);
+
+          //update game model
+          this.game.stonesInObelisk[2]+=1;
+
+          //for other clients
+          additionalDataSent=this.game.stonesInObelisk;
+
+        }
+
+        //sarcophargus (one stone from quarry to burial chamber)
+        else if (marketCardId==3 || marketCardId==4){
+          marketCardName="sarcophargus";
+          place="burial chamber";
+          marketCardAction=ActionEnum.takeRedMarketCardSacophargus;
+          marketCardMoveTo=PositionEnum.burialChamber;
+
+
+          //place one brown stone on burial chamber board
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.brown;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.burialChamberComponent.placeStones([null,null,newStone,null]);
+        }
+
+        //entrance (one stone from quarry to pyramid)
+        else if (marketCardId==5 || marketCardId==6){
+          marketCardName="entrance";
+          place="pyramid";
+          marketCardAction=ActionEnum.takeRedMarketCardEntrance;
+          marketCardMoveTo=PositionEnum.pyramid;
+
+          //place one brown stone on pyramid board
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.brown;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.pyramidComponent.placeStones([null,null,newStone,null]);
+        }
+
+      }
       else{
-        this.showSnackbarMessage("you can not take stones from the quarry")
+        this.showSnackbarMessage("you can not take stones from the quarry");
         return;
       }
 
       //change numbers
       this.game.topRight_quarryStones-=howMany;
-      this.game.topRight_sledStones+=howMany;
       this.topRightComponent.quarryStones-=howMany;
-      this.topRightComponent.sledStones+=howMany;
 
     }
+
+    //bottom right
+    //------------
     else if(playerField===ColourEnum.gray){
       stonesInQuarry=this.game.bottomRight_quarryStones;
-      stonesInSled=this.game.bottomRight_sledStones;
 
-      if(stonesInQuarry>=3 && stonesInSled<=2){howMany=3;}
-      else if(stonesInQuarry==2 && stonesInSled<=2){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled<=2){howMany=1;}
-      else if(stonesInQuarry>=2 && stonesInSled==3){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled==3){howMany=1;}
-      else if(stonesInQuarry>=1 && stonesInSled==4){howMany=1;}
+      if(stonesInQuarry>=1){
+        howMany=1;
+
+        //paved path (one stone from quarry to obelisk)
+        if (marketCardId==1 || marketCardId==2){
+          marketCardName="paved path";
+          place="obelisk";
+          marketCardAction=ActionEnum.takeRedMarketCardPavedPath;
+          marketCardMoveTo=PositionEnum.obelisks;
+
+          //place one gray stone on obelisk board
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.gray;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.obeliskComponent.placeStones([null,null,null,newStone]);
+
+          //update game model
+          this.game.stonesInObelisk[3]+=1;
+
+          //for other clients
+          additionalDataSent=this.game.stonesInObelisk;
+
+        }
+
+        //sarcophargus (one stone from quarry to burial chamber)
+        else if (marketCardId==3 || marketCardId==4){
+          marketCardName="sarcophargus";
+          place="burial chamber";
+          marketCardAction=ActionEnum.takeRedMarketCardSacophargus;
+          marketCardMoveTo=PositionEnum.burialChamber;
+
+
+          //place one gray stone on burial chamber board
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.gray;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.burialChamberComponent.placeStones([null,null,null,newStone]);
+
+        }
+
+        //entrance (one stone from quarry to pyramid)
+        else if (marketCardId==5 || marketCardId==6){
+          marketCardName="entrance";
+          place="pyramid";
+          marketCardAction=ActionEnum.takeRedMarketCardEntrance;
+          marketCardMoveTo=PositionEnum.pyramid;
+
+          //place one gray stone on burial pyramid
+          let stoneId=99999;//unknown
+          let stoneColour=ColourEnum.gray;
+          let newStone=new Stone(stoneId,stoneColour);
+          this.pyramidComponent.placeStones([null,null,null,newStone]);
+
+        }
+
+      }
       else{
         this.showSnackbarMessage("you can not take stones from the quarry");
         return;
@@ -2478,22 +2688,40 @@ export class GameComponent  implements OnInit {
 
       //change numbers
       this.game.bottomRight_quarryStones-=howMany;
-      this.game.bottomRight_sledStones+=howMany;
       this.bottomRightComponent.quarryStones-=howMany;
-      this.bottomRightComponent.sledStones+=howMany;
 
     }
 
+    //delete market card from slot on market board
+    //--------------------------------------------
+    if (marketCardSlot==1){
+      this.marketComponent.chooseMarketCard_1_OnClick()
+    }
+    else if (marketCardSlot==2){
+      this.marketComponent.chooseMarketCard_2_OnClick()
+    }
+    else if (marketCardSlot==3){
+      this.marketComponent.chooseMarketCard_3_OnClick()
+    }
+    else if (marketCardSlot==4){
+      this.marketComponent.chooseMarketCard_4_OnClick()
+    }
+
+
     //generate decision object
+    //------------------------
     let newDecision:Decision = new Decision();
     newDecision.decisionMadeBy=this.game.myPlayerField;
     newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
-      " took "+ howMany +" stone from quarry.";
+      this.game.myPlayerField+ " player picked red market card "+ marketCardName +" and placed "+ howMany +
+      " stone(s) from quarry to " + place + " ."
     newDecision.madeAction= new Action();
-    newDecision.madeAction.actionName=ActionEnum.fillSledWithStonesFromQuarry;
+    newDecision.madeAction.actionName=ActionEnum.takeRedMarketCard;
+    newDecision.madeAction.actionName2=marketCardAction;
     newDecision.madeAction.madeMove= new Move();
     newDecision.madeAction.madeMove.from=PositionEnum.stoneQuarry;
-    newDecision.madeAction.madeMove.to=PositionEnum.supplySled;
+    newDecision.madeAction.madeMove.to=marketCardMoveTo;
+    newDecision.madeAction.data=additionalDataSent;
 
     if(this.game.myPlayerField===ColourEnum.black){
       newDecision.id[1]+=1;
@@ -2517,7 +2745,8 @@ export class GameComponent  implements OnInit {
 
 
     //snackbar message
-    this.showSnackbarMessage("you took "+ howMany+" stones from the quarry");
+    this.showSnackbarMessage("You picked red market card "+ marketCardName +" and placed "+ howMany +
+      " stone(s) from quarry to " + place + " .");
 
 
     if(1){console.log("take stones from Quarry to Sled:howMany ",howMany);}
@@ -2527,24 +2756,25 @@ export class GameComponent  implements OnInit {
     if(1){console.log("take stones from Quarry to Sled:Component.quarryStones ",this.bottomLeftComponent.quarryStones);}
     if(1){console.log("take stones from Quarry to Sled:Component.sledStones ",this.bottomLeftComponent.sledStones);}
 
-
-
-    //(lastDecisionActionName === ActionEnum.sailShip
-    //  && (lastDecisionActionName2 === ActionEnum.sailShipToMarket))
-*/
-
-
   }
 
 
-  takeNotRedMarketCardFromMarket(data:MarketCard[]){
+  takeNotRedMarketCardFromMarket(data:MarketCard, marketCardSlot){
 
-    //listen to click on market card
+    //delete market card from slot on market board
+    if (marketCardSlot==1){
+      this.marketComponent.chooseMarketCard_1_OnClick()
+    }
+    else if (marketCardSlot==2){
+      this.marketComponent.chooseMarketCard_2_OnClick()
+    }
+    else if (marketCardSlot==3){
+      this.marketComponent.chooseMarketCard_3_OnClick()
+    }
+    else if (marketCardSlot==4){
+      this.marketComponent.chooseMarketCard_4_OnClick()
+    }
 
-    //(lastDecisionActionName === ActionEnum.sailShip
-    //  && (lastDecisionActionName2 === ActionEnum.sailShipToMarket))
-
-    //generate decision object
 
     //send decision object to backend
 
