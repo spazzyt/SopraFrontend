@@ -156,11 +156,15 @@ export class GameComponent  implements OnInit {
   stones_target = new Array<Stone>();
 
 
-  //Fake market cards
-  marketCard1 = new MarketCard(1);
-  marketCard2 = new MarketCard(2);
-  marketCard3 = new MarketCard(3);
-  marketCard4 = new MarketCard(4);
+  //Fake market cards at random
+  id1=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+  id2=Math.floor(Math.random() * (14 - 7 + 1)) + 7;
+  id3=Math.floor(Math.random() * (25 - 15 + 1)) + 15;
+  id4=Math.floor(Math.random() * (34 - 26 + 1)) + 26;
+  marketCard1 = new MarketCard(this.id1);
+  marketCard2 = new MarketCard(this.id2);
+  marketCard3 = new MarketCard(this.id3);
+  marketCard4 = new MarketCard(this.id4);
 
   marketCards = new Array<MarketCard>();
 
@@ -235,6 +239,11 @@ export class GameComponent  implements OnInit {
     this.ships_target.push(this.ship4);
 
     //fill fake market cards array
+    console.log(this.marketCard1.id);
+    console.log(this.marketCard2.id);
+    console.log(this.marketCard3.id);
+    console.log(this.marketCard4.id);
+
     this.marketCards.push(this.marketCard1);
     this.marketCards.push(this.marketCard2);
     this.marketCards.push(this.marketCard3);
@@ -1804,6 +1813,11 @@ export class GameComponent  implements OnInit {
   //===========================================================
   // Main Action 1: take stones from Quarry to Sled
   //===========================================================
+
+
+  //received data from child components
+  //-----------------------------------
+
   bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
     this.game.bottomLeft_sledStones=data;
     this.takeStonesFromQuarryToSled(ColourEnum.black);
@@ -1970,6 +1984,8 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
 
 
     //snackbar message
@@ -2003,6 +2019,10 @@ export class GameComponent  implements OnInit {
     //send decision object to backend
 
 
+    //send decision object to backend
+    //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
 
     //snackbar message
     this.showSnackbarMessage("you moved stone from sled to shipSlot ");
@@ -2019,6 +2039,7 @@ export class GameComponent  implements OnInit {
   //=================
   // Sail to Pyramids
   //=================
+
   moveShipToPyramids(whichShip:number, stonesToMove:Stone[]){
 
     //called from dragula_subscribeDropEvent()
@@ -2068,6 +2089,8 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
 
 
     //snackbar message
@@ -2079,6 +2102,9 @@ export class GameComponent  implements OnInit {
   //=================
   // Sail to Temple
   //=================
+
+  //received data from child components
+  //-----------------------------------
 
   templeComponent_onEvent_placeStones_stones(data:Stone[]){
     this.game.stonesInTemple=data;
@@ -2142,6 +2168,8 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
 
 
     //snackbar message
@@ -2202,6 +2230,8 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
 
     //snackbar message
     this.showSnackbarMessage("you sailed ship "+ whichShip +" to burial chamber.");
@@ -2211,6 +2241,9 @@ export class GameComponent  implements OnInit {
   //=================
   // Sail to Obelisk
   //=================
+
+  //received data from child components
+  //-----------------------------------
 
   obeliskComponent_onEvent_placeStones_stones(data:number[]){
 
@@ -2272,6 +2305,8 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
 
     //snackbar message
     this.showSnackbarMessage("you sailed ship "+ whichShip +" to obelisks.");
@@ -2332,6 +2367,8 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
 
     //snackbar message
     this.showSnackbarMessage("you sailed ship "+ whichShip +" to market.");
@@ -2342,6 +2379,9 @@ export class GameComponent  implements OnInit {
   //===========================================================
   // Main Action 4: take market card
   //===========================================================
+
+  //received data from child components
+  //-----------------------------------
 
   marketComponent_onEvent_setClickHandlerOnMarketCards_1_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 1: data: ",data);}
@@ -2381,6 +2421,9 @@ export class GameComponent  implements OnInit {
     }
   }
 
+  //================
+  // Main Action 4a: take red market card
+  //================
 
   takeRedMarketCardFromMarket(marketCard:MarketCard, marketCardSlot){
 
@@ -2714,7 +2757,7 @@ export class GameComponent  implements OnInit {
     newDecision.decisionMadeBy=this.game.myPlayerField;
     newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
       this.game.myPlayerField+ " player picked red market card "+ marketCardName +" and placed "+ howMany +
-      " stone(s) from quarry to " + place + " ."
+      " stone(s) from quarry to " + place + " .";
     newDecision.madeAction= new Action();
     newDecision.madeAction.actionName=ActionEnum.takeRedMarketCard;
     newDecision.madeAction.actionName2=marketCardAction;
@@ -2742,6 +2785,7 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
 
 
     //snackbar message
@@ -2749,19 +2793,35 @@ export class GameComponent  implements OnInit {
       " stone(s) from quarry to " + place + " .");
 
 
-    if(1){console.log("take stones from Quarry to Sled:howMany ",howMany);}
-
-    if(1){console.log("take stones from Quarry to Sled:game.quarryStones ",this.game.bottomLeft_quarryStones);}
-    if(1){console.log("take stones from Quarry to Sled:game.sledStones ",this.game.bottomLeft_sledStones);}
-    if(1){console.log("take stones from Quarry to Sled:Component.quarryStones ",this.bottomLeftComponent.quarryStones);}
-    if(1){console.log("take stones from Quarry to Sled:Component.sledStones ",this.bottomLeftComponent.sledStones);}
-
   }
 
+  //================
+  // Main Action 4a: take NOT red market card
+  //================
 
-  takeNotRedMarketCardFromMarket(data:MarketCard, marketCardSlot){
+
+  takeNotRedMarketCardFromMarket(marketCard:MarketCard, marketCardSlot){
+
+    //called from click event in market component
+    if(1){console.log("take NOT red market card from market");}
+
+
+    //determine which specific market card (id) was taken
+    //according to our market card model
+    //---------------------------------------------------
+    let marketCardId=marketCard.id;
+    let marketCardName=marketCard.name;
+    let marketCardAction:ActionEnum;
+
+    //choose player field
+    // change numbers in market icons
+    //-------------------------------
+    let numberInMarketIcon:number;
+    let playerField=this.game.currentActivePlayerField;
+
 
     //delete market card from slot on market board
+    //--------------------------------------------
     if (marketCardSlot==1){
       this.marketComponent.chooseMarketCard_1_OnClick()
     }
@@ -2776,19 +2836,54 @@ export class GameComponent  implements OnInit {
     }
 
 
+    //generate decision object
+    //------------------------
+    let newDecision:Decision = new Decision();
+    newDecision.decisionMadeBy=this.game.myPlayerField;
+    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
+      this.game.myPlayerField+ " player picked market card "+ marketCardName + " .";
+    newDecision.madeAction= new Action();
+    newDecision.madeAction.actionName=ActionEnum.takeRedMarketCard;
+    newDecision.madeAction.actionName2=marketCardAction;
+    newDecision.madeAction.madeMove= new Move();
+
+    if(this.game.myPlayerField===ColourEnum.black){
+      newDecision.id[1]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.white){
+      newDecision.id[2]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.brown){
+      newDecision.id[3]+=1;
+    }
+    else if(this.game.myPlayerField===ColourEnum.gray){
+      newDecision.id[4]+=1;
+    }
+
+    //store own decision object in game model
+    this.game.ownDecisions.push(newDecision);
+
+
     //send decision object to backend
+    //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
+
+    //snackbar message
+    this.showSnackbarMessage("You picked market card " + marketCardName + " .");
+
+
 
   }
-
-
-
-
 
 
 
   //===========================================================
   // Main Action 5: play blue market card
   //===========================================================
+
+  //received data from child components
+  //-----------------------------------
 
   bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
     this.game.bottomLeft_marketCards=data;
@@ -2861,6 +2956,9 @@ export class GameComponent  implements OnInit {
     //generate decision object
 
     //send decision object to backend
+    //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
 
   }
 
@@ -2879,6 +2977,9 @@ export class GameComponent  implements OnInit {
     //generate decision object
 
     //send decision object to backend
+    //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
 
 
   }
@@ -2898,6 +2999,9 @@ export class GameComponent  implements OnInit {
     //generate decision object
 
     //send decision object to backend
+    //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
+
 
 
   }
@@ -2919,118 +3023,10 @@ export class GameComponent  implements OnInit {
     //generate decision object
 
     //send decision object to backend
-
+    //ToDo: Communication Channel to Backend
+    //ToDo: send decision object to backend
 
   }
-
-
-
-  /**
-
-   //Played Blue Market Card Hammer
-   //------------------------------
-   else if (lastDecisionActionName === ActionEnum.playBlueMarketCardHammer) {
-
-  //update Numbers on PlayerField: Quarry, Sled
-  this.updatePlayerData();
-
-  //show stone on ship
-  this.updateStoneOnShip();
-
-  //show Snackbarinfo
-  let text="replace this string";
-  this.showSnackbarMessage(text);
-
-}
-
-   //Played Blue Market Card Sail
-   //----------------------------
-   else if (lastDecisionActionName === ActionEnum.playBlueMarketCardSail) {
-
-  //update Numbers on PlayerField: Sled
-  this.updatePlayerData();
-
-  //show stone on ship
-  this.updateStoneOnShip();
-
-  //remove ship from departing harbour
-  this.removeShipFromDepartingHarbour();
-
-  //add ship to arriving harbour
-  this.addShipToArrivingHarbour();
-
-  //place stones to site
-  this.placeStonesToSite();
-
-  //show Snackbarinfo
-  let text="replace this string";
-  this.showSnackbarMessage(text);
-
-}
-
-   //Played Blue Market Card Chisel
-   //------------------------------
-   else if (lastDecisionActionName === ActionEnum.playBlueMarketCardChisel) {
-
-  //update Numbers on PlayerField: Sled
-  this.updatePlayerData();
-
-  //show stone on ship
-  this.updateStoneOnShip();
-
-  //show stone on ship
-  this.updateStoneOnShip();
-
-  //show Snackbarinfo
-  let text="replace this string";
-  this.showSnackbarMessage(text);
-
-}
-
-   //Played Blue Market Card Lever (Sail Ship to left side of island)
-   //----------------------------------------------------------------
-   else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
-   && !(lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
-
-  //update Numbers on PlayerField: Sled
-  this.updatePlayerData();
-
-  //remove ship from departing harbour
-  this.removeShipFromDepartingHarbour();
-
-  //add ship to arriving harbour
-  this.addShipToArrivingHarbour();
-
-  //place stones to site
-  this.placeStonesToSite();
-
-  //show Snackbarinfo
-  let text="replace this string";
-  this.showSnackbarMessage(text);
-
-}
-
-   //Played Blue Market Card Lever (Sail Ship to market)
-   //---------------------------------------------------
-   else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
-   && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
-
-  //remove ship from departing harbour
-  this.removeShipFromDepartingHarbour();
-
-  //add ship to arriving harbour
-  this.addShipToArrivingHarbour();
-
-  //switch order of stones on ship
-  this.switchOrderOfStonesOnShip();
-
-  //show Snackbarinfo
-  let text="replace this string"
-  this.showSnackbarMessage(text);
-
-}
-
-   */
 
 
 
