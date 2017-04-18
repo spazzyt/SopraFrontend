@@ -3,6 +3,8 @@ import {AuthenticationService} from "./authentication.service";
 import {Round} from "../models/round";
 import {GameComponent} from "../../game/game.component";
 import {Ship} from "../models/ship";
+import {Decision} from "../models/decision";
+import {Move} from "../models/move";
 
 export class WSMessage {
   public type:string;
@@ -20,7 +22,7 @@ export class WSService {
 
      this.webSocket = new WebSocket('ws://localhost:8080/websocket');
 
-    this.webSocket.onmessage = function (event) {
+    this.webSocket.onmessage =  (event) => {
 
        let msg = JSON.parse(event.data);
       console.log(event.data, msg);
@@ -49,6 +51,19 @@ export class WSService {
           //let game know whose turn it is
           console.log('It\'s ' + msg.payload + "'s turn.");
           //gameComponent.setCurrentPlayer(msg.payload);    //TODO add function for telling game component who is the current player
+          break;
+
+
+        case 'PLAYEDMOVE':
+          //TODO do whatever the turn sent to us from the backend tells us to do
+          console.log("The server tells us to do the following:")
+          console.log(msg.payload);
+          //TODO create a decision object based on backend information
+          if(msg.payload.player != this.authenticationService.mySelf.username) //if this move is not from me, update:
+          {
+            let moveToDo = msg.payload.move;
+            gameComponent.updateUiForOneMove2(moveToDo, msg.payload.player);
+          }
           break;
 
       }

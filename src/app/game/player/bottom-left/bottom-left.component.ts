@@ -247,6 +247,10 @@ export class BottomLeftComponent implements OnInit {
 
   }
 
+  update_takeStonesFromQuarry(howMany: number){              //this function is used for telling that the player has taken stones from the quarry
+      this.quarryStones -= howMany;
+      this.sledStones += howMany;
+  }
 
   hideStone(){
     (<any>$(document)).ready(function (){

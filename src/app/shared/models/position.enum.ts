@@ -2,6 +2,15 @@ export class Position {
 }
 
 export enum PositionEnum {
+
+  //NEW enums, as used by backend
+  Sled=<any>"Sled",
+  Pyramid=<any>"Pyramid",
+  Temple=<any>"Temple",
+  BurialChamber=<any>"BurialChamber",
+
+
+  //TODO remove old enums
   unknown=<any>"unknown",
   market=<any>"market",
   marketSlot1=<any>"marketSlot1",
