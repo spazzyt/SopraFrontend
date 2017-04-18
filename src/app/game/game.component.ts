@@ -77,6 +77,7 @@ export class GameComponent  implements OnInit {
 
   // player field of current active player
   currentActivePlayerField:ColourEnum;
+  private playerMap: Map<any, any>;
 
 
   // Current Target (Soll) Game state
@@ -200,15 +201,23 @@ export class GameComponent  implements OnInit {
           this.game = game;
 
 // TODO this still throws errors, but should be added when backend delivers correct data
-/*
+
+          //Map players to colours
+          this.playerMap = new Map();
+
+          this.playerMap[this.game.players[0].username] = this.bottomLeftComponent;
+          this.playerMap[this.game.players[1].username] = this.topLeftComponent;
+          if(this.game.numPlayers > 2) this.playerMap[this.game.players[2].username] = this.topRightComponent;
+          if(this.game.numPlayers > 3) this.playerMap[this.game.players[3].username] = this.bottomRightComponent;
+
           //Initialize the new game
           this.initializeNewGame(this.game);
 
           //Initialize the whole market card set
           for (let i=1; i<=34; i++){
-            this.game.wholeMarketCardSet.push(new MarketCard(i));
+            //this.game.wholeMarketCardSet.push(new MarketCard(i)); //TODO fix this
           }
-*/
+
           console.log("Initializing game with id: ", id, game);
 
           // Now we need to connect via websockets and listen for gamestate updates
@@ -217,12 +226,12 @@ export class GameComponent  implements OnInit {
     }
 
     //Initialize the new game
-    this.initializeNewGame(this.getFakeGame());
+    //this.initializeNewGame(this.getFakeGame());
 
     //Initialize the whole market card set
-    for (let i=1; i<=34; i++){
-      this.game.wholeMarketCardSet.push(new MarketCard(i));
-    }
+    //for (let i=1; i<=34; i++){
+    //  this.game.wholeMarketCardSet.push(new MarketCard(i));
+    //}
 
     //snackbar div in game footer (has to be in ngOnInit, not in Constructor)
     this.generateSnackbarDiv();
@@ -326,8 +335,8 @@ export class GameComponent  implements OnInit {
 
     // set Dragula Options (Depending on whether you are the active or inactive player)
     //---------------------------------------------------------------------------------
-    this.dragulaShipMovement_setOptions(amI_CurrentActivePlayer);
-    this.dragulaStoneMovement_setOptions(amI_CurrentActivePlayer);
+    //this.dragulaShipMovement_setOptions(amI_CurrentActivePlayer); //TODO Fix these
+    //this.dragulaStoneMovement_setOptions(amI_CurrentActivePlayer);
 
   }
 
@@ -933,6 +942,25 @@ export class GameComponent  implements OnInit {
     if (!isItMyDecision) {
       this.updateUiForOneMove(newDecision_, isItMyDecision);
     }
+
+  }
+
+  updateUiForOneMove2(move: Move, username: string){
+
+    console.log('Game component received this move: ', move);
+
+    switch(move.to){
+      case PositionEnum.Sled:
+        this.playerMap[username].update_takeStonesFromQuarry(move.pos); //add the amount of stones determined in the move
+        break;
+
+      case PositionEnum.Pyramid:
+        //TODO finish this shit
+        this.addShipToArrivingHarbour()
+        break;
+    }
+
+    //apply move
 
   }
 
