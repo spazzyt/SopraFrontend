@@ -41,7 +41,7 @@ export class GameService {
     params.set("token", this.authenticationService.token)
     let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
-    return this.http.post(this.apiUrl + '/pepe', bodyString, options) // ...using post request
+    return this.http.post(this.apiUrl + '/game', bodyString, options) // ...using post request
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         let game = response//.json() && response.json();
