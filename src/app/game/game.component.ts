@@ -198,23 +198,36 @@ export class GameComponent  implements OnInit {
       this.gameService.getGame(id)
         .subscribe((game: Game) => {
           this.game = game;
+
+// TODO this still throws errors, but should be added when backend delivers correct data
+/*
+          //Initialize the new game
+          this.initializeNewGame(this.game);
+
+          //Initialize the whole market card set
+          for (let i=1; i<=34; i++){
+            this.game.wholeMarketCardSet.push(new MarketCard(i));
+          }
+*/
           console.log("Initializing game with id: ", id, game);
 
           // Now we need to connect via websockets and listen for gamestate updates
-          this.wsService.connectToGame(id);
+          this.wsService.connectToGame(id, this);
         });
     }
 
     //Initialize the new game
     this.initializeNewGame(this.getFakeGame());
 
-    //snackbar div in game footer (has to be in ngOnInit, not in Constructor)
-    this.generateSnackbarDiv();
-
     //Initialize the whole market card set
     for (let i=1; i<=34; i++){
       this.game.wholeMarketCardSet.push(new MarketCard(i));
     }
+
+    //snackbar div in game footer (has to be in ngOnInit, not in Constructor)
+    this.generateSnackbarDiv();
+
+
 
 
 
@@ -276,19 +289,22 @@ export class GameComponent  implements OnInit {
 
     //set class variable
     this.game = game_backend;
+    let fakegame = this.getFakeGame();               //TODO delete this as soon as the backend passes the necessary arguments
+    this.game.marketCards = fakegame.marketCards;   //TODO delete this
+    this.game.ships = fakegame.ships;               //TODO delete this
 
     //Site Board Components: the island
-    this.initializeMarketComponent(game_backend.marketCards);
+    this.initializeMarketComponent(this.game.marketCards);
     this.initializeObeliskComponent();
     this.initializePyramidComponent();
     this.initializeTempleComponent();
     this.initializeBurialChamberComponent();
 
     //Departing Harbour: the ships
-    this.initializeDepartingHarbourComponent(game_backend.ships);
+    this.initializeDepartingHarbourComponent(this.game.ships);
 
     //Player Component: the four player fields (what everyone concerns)
-    this.initializePlayerComponents(game_backend.players, game_backend.numPlayers);
+    this.initializePlayerComponents(this.game.players, this.game.numPlayers);
 
     //Determine which player field you have (sets class variable)
     let myPlayerField:ColourEnum;
@@ -297,11 +313,11 @@ export class GameComponent  implements OnInit {
       game_backend.numPlayers);
 
     //Determine whether you are the active player (set class variable)
-    let amI_CurrentActivePlayer=game_backend.currentActivePlayerField===myPlayerField;
+    let amI_CurrentActivePlayer=this.game.currentActivePlayerField===myPlayerField;
     this.amI_CurrentActivePlayer=amI_CurrentActivePlayer; //important for dragula to work
 
     //Read current active player field (set class variable)
-    let currentActivePlayerField=game_backend.currentActivePlayerField;
+    let currentActivePlayerField=this.game.currentActivePlayerField;
     this.currentActivePlayerField=currentActivePlayerField;
 
     //Initialize Myself
@@ -872,19 +888,20 @@ export class GameComponent  implements OnInit {
     this.game.roundNumber = round.roundNumber;
     this.game.ships = round.ships;
     this.game.marketCards = round.marketCards;
+    console.log(round);
 
-    //remove stones from ships (with JQuery?)
+    //remove stones from ships (with JQuery?) --> already done in initialize-functions (i think)
 
     //remove ships from arriving harbours (with JQuery?)
 
     //Initialize Market with new cards
-    this.initializeMarketComponent(this.game.marketCards);
+    //this.initializeMarketComponent(this.game.marketCards);    //TODO add when getting correct input
 
     //Initialize Departing Harbour with new ships
     this.initializeDepartingHarbourComponent(this.game.ships);
 
     //increase round in info box
-    this.infoBoxComponent.increaseRoundInInfoBox(this.roundNumber);
+    this.infoBoxComponent.increaseRoundInInfoBox(round.roundNumber);
 
   }
 
@@ -2263,7 +2280,7 @@ export class GameComponent  implements OnInit {
     newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour3;
 
     //store own decision object in game model
-    this.game.ownDecisions.push(newDecision);
+    this.game.ownDecisions.push(newDecision); //TODO fix errors in this step, happening only in new game with real id
 
 
     //send decision object to backend
