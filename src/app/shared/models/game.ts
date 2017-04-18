@@ -89,6 +89,9 @@ export class Game {
   // Game State
   //-----------
 
+  //TODO Remove this
+  /*
+
   //Temple
   public stonesInTemple:Stone[];
   public totalStonesInTemple:number;
@@ -117,7 +120,7 @@ export class Game {
   public bottomRight_quarryStones:number=24;
   public bottomRight_marketCards:number[];
 
-
+*/
 
   // Own Decisions
   //--------------

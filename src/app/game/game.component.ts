@@ -1641,7 +1641,7 @@ export class GameComponent  implements OnInit {
 
         //show my stone in sled, hide the others
         //BUT only if enough stones in sled
-        if(this.game.bottomLeft_sledStones>0){
+        if(this.bottomLeftComponent.sledStones>0){
           this.bottomLeftComponent.showStone();
         }
         this.topLeftComponent.hideStone();
@@ -1706,7 +1706,7 @@ export class GameComponent  implements OnInit {
         //show my stone in sled, hide the others
         //BUT only if enough stones in sled
         this.bottomLeftComponent.hideStone();
-        if(this.game.topLeft_sledStones>0){
+        if(this.topLeftComponent.sledStones>0){
           this.topLeftComponent.showStone();
         }
         this.topRightComponent.hideStone();
@@ -1770,7 +1770,7 @@ export class GameComponent  implements OnInit {
         //BUT only if enough stones in sled
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.hideStone();
-        if(this.game.bottomLeft_sledStones>0){
+        if(this.bottomLeftComponent.sledStones>0){
           this.topRightComponent.showStone();
         }
         this.bottomRightComponent.hideStone();
@@ -1834,7 +1834,7 @@ export class GameComponent  implements OnInit {
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.hideStone();
         this.topRightComponent.hideStone();
-        if(this.game.bottomLeft_sledStones>0){
+        if(this.bottomLeftComponent.sledStones>0){
           this.bottomRightComponent.showStone();
         }
 
@@ -1902,38 +1902,38 @@ export class GameComponent  implements OnInit {
   //-----------------------------------
 
   bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
-    this.game.bottomLeft_sledStones=data;
+    this.bottomLeftComponent.sledStones=data;
     this.takeStonesFromQuarryToSled(ColourEnum.black);
   }
   bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
-    this.game.bottomLeft_quarryStones=data;
+    this.bottomLeftComponent.quarryStones=data;
   }
 
 
   topLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
-    this.game.topLeft_sledStones=data;
+    this.topLeftComponent.sledStones=data;
     this.takeStonesFromQuarryToSled(ColourEnum.white);
   }
   topLeftComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
-    this.game.topLeft_quarryStones=data;
+    this.topLeftComponent.quarryStones=data;
   }
 
 
   topRightComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
-    this.game.topRight_sledStones=data;
+    this.topRightComponent.sledStones=data;
     this.takeStonesFromQuarryToSled(ColourEnum.brown);
   }
   topRightComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
-    this.game.topRight_quarryStones=data;
+    this.topRightComponent.quarryStones=data;
   }
 
 
   bottomRightComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
-    this.game.bottomRight_sledStones=data;
+    this.bottomRightComponent.sledStones=data;
     this.takeStonesFromQuarryToSled(ColourEnum.gray);
   }
   bottomRightComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
-    this.game.bottomRight_quarryStones=data;
+    this.bottomRightComponent.quarryStones=data;
   }
 
 
@@ -1945,140 +1945,46 @@ export class GameComponent  implements OnInit {
     //make calculations
     let stonesInQuarry:number;
     let stonesInSled:number;
-    let howMany:number;
+    let stonesToTake:number;
+
+
+    console.log('This player takes stones from Quarry:', playerField);
 
     if(playerField===ColourEnum.black){
-      stonesInQuarry=this.game.bottomLeft_quarryStones;
-      stonesInSled=this.game.bottomLeft_sledStones;
+      stonesInQuarry=this.bottomLeftComponent.quarryStones;
+      stonesInSled=this.bottomLeftComponent.sledStones;
 
-      if(stonesInQuarry>=3 && stonesInSled<=2){howMany=3;}
-      else if(stonesInQuarry==2 && stonesInSled<=2){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled<=2){howMany=1;}
-      else if(stonesInQuarry>=2 && stonesInSled==3){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled==3){howMany=1;}
-      else if(stonesInQuarry>=1 && stonesInSled==4){howMany=1;}
+      if(stonesInSled < 5){
+        if(stonesInSled < 3){
+          stonesToTake = 3
+        }
+        else{
+          stonesToTake = Math.min(stonesInQuarry, 5-stonesInSled);
+        }
+
+        this.bottomLeftComponent.quarryStones -= stonesToTake;
+        this.bottomLeftComponent.sledStones += stonesToTake;
+
+      }
       else{
         this.showSnackbarMessage("you can not take stones from the quarry")
         return;
       }
-
-      //change numbers
-      this.game.bottomLeft_quarryStones-=howMany;
-      this.game.bottomLeft_sledStones+=howMany;
-      this.bottomLeftComponent.quarryStones-=howMany;
-      this.bottomLeftComponent.sledStones+=howMany;
-
-
-    }
-    else if(playerField===ColourEnum.white){
-      stonesInQuarry=this.game.topLeft_quarryStones;
-      stonesInSled=this.game.topLeft_sledStones;
-
-      if(stonesInQuarry>=3 && stonesInSled<=2){howMany=3;}
-      else if(stonesInQuarry==2 && stonesInSled<=2){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled<=2){howMany=1;}
-      else if(stonesInQuarry>=2 && stonesInSled==3){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled==3){howMany=1;}
-      else if(stonesInQuarry>=1 && stonesInSled==4){howMany=1;}
-      else{
-        this.showSnackbarMessage("you can not take stones from the quarry")
-        return;
-      }
-
-      //change numbers
-      this.game.topLeft_quarryStones-=howMany;
-      this.game.topLeft_sledStones+=howMany;
-      this.topLeftComponent.quarryStones-=howMany;
-      this.topLeftComponent.sledStones+=howMany;
-
-    }
-    else if(playerField===ColourEnum.brown){
-      stonesInQuarry=this.game.topRight_quarryStones;
-      stonesInSled=this.game.topRight_sledStones;
-
-      if(stonesInQuarry>=3 && stonesInSled<=2){howMany=3;}
-      else if(stonesInQuarry==2 && stonesInSled<=2){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled<=2){howMany=1;}
-      else if(stonesInQuarry>=2 && stonesInSled==3){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled==3){howMany=1;}
-      else if(stonesInQuarry>=1 && stonesInSled==4){howMany=1;}
-      else{
-        this.showSnackbarMessage("you can not take stones from the quarry")
-        return;
-      }
-
-      //change numbers
-      this.game.topRight_quarryStones-=howMany;
-      this.game.topRight_sledStones+=howMany;
-      this.topRightComponent.quarryStones-=howMany;
-      this.topRightComponent.sledStones+=howMany;
-
-    }
-    else if(playerField===ColourEnum.gray){
-      stonesInQuarry=this.game.bottomRight_quarryStones;
-      stonesInSled=this.game.bottomRight_sledStones;
-
-      if(stonesInQuarry>=3 && stonesInSled<=2){howMany=3;}
-      else if(stonesInQuarry==2 && stonesInSled<=2){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled<=2){howMany=1;}
-      else if(stonesInQuarry>=2 && stonesInSled==3){howMany=2;}
-      else if(stonesInQuarry==1 && stonesInSled==3){howMany=1;}
-      else if(stonesInQuarry>=1 && stonesInSled==4){howMany=1;}
-      else{
-        this.showSnackbarMessage("you can not take stones from the quarry");
-        return;
-      }
-
-      //change numbers
-      this.game.bottomRight_quarryStones-=howMany;
-      this.game.bottomRight_sledStones+=howMany;
-      this.bottomRightComponent.quarryStones-=howMany;
-      this.bottomRightComponent.sledStones+=howMany;
-
     }
 
-    //generate decision object
-    let newDecision:Decision = new Decision();
-    newDecision.decisionMadeBy=this.game.myPlayerField;
-    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
-      " took "+ howMany +" stone from quarry.";
-    newDecision.madeAction= new Action();
-    newDecision.madeAction.actionName=ActionEnum.fillSledWithStonesFromQuarry;
-    newDecision.madeAction.madeMove= new Move();
-    newDecision.madeAction.madeMove.from=PositionEnum.stoneQuarry;
-    newDecision.madeAction.madeMove.to=PositionEnum.supplySled;
-
-    if(this.game.myPlayerField===ColourEnum.black){
-      newDecision.id[1]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.white){
-      newDecision.id[2]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.brown){
-      newDecision.id[3]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.gray){
-      newDecision.id[4]+=1;
-    }
-
-    //store own decision object in game model
-    this.game.ownDecisions.push(newDecision);
-
-
-    //send decision object to backend
+    //send move object to backend
     //ToDo: Communication Channel to Backend
     //ToDo: send decision object to backend
+    let moveToSend = new Move();
 
 
 
     //snackbar message
-    this.showSnackbarMessage("you took "+ howMany+" stones from the quarry");
+    this.showSnackbarMessage("you took "+ stonesToTake+" stones from the quarry");
 
 
-    if(1){console.log("take stones from Quarry to Sled:howMany ",howMany);}
+    if(1){console.log("take stones from Quarry to Sled:stonesToTake ",stonesToTake);}
 
-    if(1){console.log("take stones from Quarry to Sled:game.quarryStones ",this.game.bottomLeft_quarryStones);}
-    if(1){console.log("take stones from Quarry to Sled:game.sledStones ",this.game.bottomLeft_sledStones);}
     if(1){console.log("take stones from Quarry to Sled:Component.quarryStones ",this.bottomLeftComponent.quarryStones);}
     if(1){console.log("take stones from Quarry to Sled:Component.sledStones ",this.bottomLeftComponent.sledStones);}
 
@@ -2190,15 +2096,15 @@ export class GameComponent  implements OnInit {
   //-----------------------------------
 
   templeComponent_onEvent_placeStones_stones(data:Stone[]){
-    this.game.stonesInTemple=data;
+    this.templeComponent.stones=data;
   };
 
   templeComponent_onEvent_placeStones_totalStones(data:number){
-    this.game.totalStonesInTemple=data;
+    this.templeComponent.totalStones=data;
   };
 
   templeComponent_onEvent_placeStones_fieldHeight(data:number[]){
-    this.game.fieldHeightInTemple=data;
+    this.templeComponent.fieldHeight=data;
   };
 
 
@@ -2333,9 +2239,9 @@ export class GameComponent  implements OnInit {
     console.log("data from obeliskComponent",data);
 
     //store data into Game Model
-    this.game.stonesInObelisk=data;
+    this.obeliskComponent.stones=data;
 
-    console.log("data from Game Model",this.game.stonesInObelisk);
+    console.log("data from Game Model",this.obeliskComponent.stones);
 
   };
 
@@ -2545,7 +2451,7 @@ export class GameComponent  implements OnInit {
     //bottom left
     //-----------
     if(playerField===ColourEnum.black){
-      stonesInQuarry=this.game.bottomLeft_quarryStones;
+      stonesInQuarry=this.bottomLeftComponent.quarryStones;
 
       if(stonesInQuarry>=1){
         howMany=1;
@@ -2564,10 +2470,10 @@ export class GameComponent  implements OnInit {
           this.obeliskComponent.placeStones([newStone,null,null,null]);
 
           //update game model
-          this.game.stonesInObelisk[0]+=1;
+          this.obeliskComponent.stones[0]+=1;
 
           //for other clients
-          additionalDataSent=this.game.stonesInObelisk;
+          additionalDataSent=this.obeliskComponent.stones;
 
 
         }
@@ -2610,14 +2516,13 @@ export class GameComponent  implements OnInit {
       }
 
       //change numbers
-      this.game.bottomLeft_quarryStones-=howMany;
       this.bottomLeftComponent.quarryStones-=howMany;
     }
 
     //top left
     //--------
     else if(playerField===ColourEnum.white){
-      stonesInQuarry=this.game.topLeft_quarryStones;
+      stonesInQuarry=this.topLeftComponent.quarryStones;
 
       if(stonesInQuarry>=1){
         howMany=1;
@@ -2636,10 +2541,10 @@ export class GameComponent  implements OnInit {
           this.obeliskComponent.placeStones([null,newStone,null,null]);
 
           //update game model
-          this.game.stonesInObelisk[1]+=1;
+          this.obeliskComponent.stones[1]+=1;
 
           //for other clients
-          additionalDataSent=this.game.stonesInObelisk;
+          additionalDataSent=this.obeliskComponent.stones;
 
         }
 
@@ -2681,7 +2586,6 @@ export class GameComponent  implements OnInit {
       }
 
       //change numbers
-      this.game.topLeft_quarryStones-=howMany;
       this.topLeftComponent.quarryStones-=howMany;
 
     }
@@ -2689,7 +2593,7 @@ export class GameComponent  implements OnInit {
     //top right
     //---------
     else if(playerField===ColourEnum.brown){
-      stonesInQuarry=this.game.topRight_quarryStones;
+      stonesInQuarry=this.topRightComponent.quarryStones;
 
       if(stonesInQuarry>=1){
         howMany=1;
@@ -2708,10 +2612,10 @@ export class GameComponent  implements OnInit {
           this.obeliskComponent.placeStones([null,null,newStone,null]);
 
           //update game model
-          this.game.stonesInObelisk[2]+=1;
+          this.obeliskComponent[2]+=1;
 
           //for other clients
-          additionalDataSent=this.game.stonesInObelisk;
+          additionalDataSent=this.obeliskComponent.stones;
 
         }
 
@@ -2751,7 +2655,6 @@ export class GameComponent  implements OnInit {
       }
 
       //change numbers
-      this.game.topRight_quarryStones-=howMany;
       this.topRightComponent.quarryStones-=howMany;
 
     }
@@ -2759,7 +2662,7 @@ export class GameComponent  implements OnInit {
     //bottom right
     //------------
     else if(playerField===ColourEnum.gray){
-      stonesInQuarry=this.game.bottomRight_quarryStones;
+      stonesInQuarry=this.bottomRightComponent.quarryStones;
 
       if(stonesInQuarry>=1){
         howMany=1;
@@ -2778,10 +2681,10 @@ export class GameComponent  implements OnInit {
           this.obeliskComponent.placeStones([null,null,null,newStone]);
 
           //update game model
-          this.game.stonesInObelisk[3]+=1;
+          this.obeliskComponent.stones[3]+=1;
 
           //for other clients
-          additionalDataSent=this.game.stonesInObelisk;
+          additionalDataSent=this.obeliskComponent.stones;
 
         }
 
@@ -2823,7 +2726,6 @@ export class GameComponent  implements OnInit {
       }
 
       //change numbers
-      this.game.bottomRight_quarryStones-=howMany;
       this.bottomRightComponent.quarryStones-=howMany;
 
     }
@@ -3145,58 +3047,58 @@ export class GameComponent  implements OnInit {
   //-----------------------------------
 
   bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
-    this.game.bottomLeft_marketCards=data;
+    this.bottomLeftComponent.marketCards=data;
   }
   bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
-    this.game.bottomLeft_marketCards=data;
+    this.bottomLeftComponent.marketCards=data;
   }
   bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
-    this.game.bottomLeft_marketCards=data;
+    this.bottomLeftComponent.marketCards=data;
   }
   bottomLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
-    this.game.bottomLeft_marketCards=data;
+    this.bottomLeftComponent.marketCards=data;
   }
 
 
   topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
-    this.game.topLeft_marketCards=data;
+    this.topLeftComponent.marketCards=data;
   }
   topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
-    this.game.topLeft_marketCards=data;
+    this.topLeftComponent.marketCards=data;
   }
   topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
-    this.game.topLeft_marketCards=data;
+    this.topLeftComponent.marketCards=data;
   }
   topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
-    this.game.topLeft_marketCards=data;
+    this.topLeftComponent.marketCards=data;
   }
 
 
   topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
-    this.game.topRight_marketCards=data;
+    this.topRightComponent.marketCards=data;
   }
   topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
-    this.game.topRight_marketCards=data;
+    this.topRightComponent.marketCards=data;
   }
   topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
-    this.game.topRight_marketCards=data;
+    this.topRightComponent.marketCards=data;
   }
   topRighttComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
-    this.game.topRight_marketCards=data;
+    this.topRightComponent.marketCards=data;
   }
 
 
   bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
-    this.game.bottomRight_marketCards=data;
+    this.bottomRightComponent.marketCards=data;
   }
   bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
-    this.game.bottomRight_marketCards=data;
+    this.bottomRightComponent.marketCards=data;
   }
   bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
-    this.game.bottomRight_marketCards=data;
+    this.bottomRightComponent.marketCards=data;
   }
   bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
-    this.game.bottomRight_marketCards=data;
+    this.bottomRightComponent.marketCards=data;
   }
 
 
@@ -3458,6 +3360,10 @@ export class GameComponent  implements OnInit {
 
   }
 
+  trigger_takeStonesFromQuarryToSled(){
+    this.takeStonesFromQuarryToSled(ColourEnum.black);//click)="trigger_countStonesOnShip()"
+
+  }
 
   // Communication with SiteHarbour
   //-------------------------------
