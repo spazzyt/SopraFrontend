@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AuthenticationService} from "./authentication.service";
 import {Round} from "../models/round";
 import {GameComponent} from "../../game/game.component";
+import {Ship} from "../models/ship";
 
 export class WSMessage {
   public type:string;
@@ -29,9 +30,16 @@ export class WSService {
           console.log(msg.payload + ' connected.');
           break;
 
-        case 'NEWROUND':        //TODO adapt functionality to correct for changing backend input
+        case 'NEWROUND':
+
+          //generate usable ship array from backend input (backend ship model differs from ours; here we create ships based on the data sent to us)
+          let inputships = [null, null, null, null];
+          for(let i = 0; i < 4; i++){
+            inputships[i] = new Ship(i+1, msg.payload.ships[i].numFields);  //ID is needed, otherwise slots don't work
+          }
+
           //create new round
-          let newround = new Round(msg.payload.roundNumber, msg.payload.ships, [null, null, null, null]);
+          let newround = new Round(msg.payload.roundNumber, inputships, [null, null, null, null]);
           console.log(msg.payload.ships);
           console.log('new round created: ' + msg.payload.roundNumber);
           gameComponent.initRound(newround);
