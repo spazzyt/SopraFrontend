@@ -53,8 +53,9 @@ export class DepartingHarbourComponent {
 
 
   // Remove Ship
-  removeShip(ship:Ship){
-
+  removeShip(shipid:number){
+    //removes a ship with a given position from the departing harbour
+    this.ships[shipid] = null;
   }
 
 

@@ -1207,7 +1207,17 @@ export class GameComponent  implements OnInit {
 
   //add ship to arriving harbour
   addShipToArrivingHarbour(target: PositionEnum, shipid: number){
-    this.siteHarbourComponent.addShipToHarbour(target, shipid);
+    let shipToAdd = this.departingHarbourComponent.ships[shipid];
+
+    if(target != PositionEnum.Market) {
+      this.siteHarbourComponent.addShipToHarbour(target, shipToAdd);
+    }
+    else{
+      //this.marketHarbourComponent.addShipToHarbour(shipToAdd); //TODO add ship to market
+    }
+
+    //remove ship from departing harbour
+    this.departingHarbourComponent.removeShip(shipid);
   }
 
   //place stones to site
@@ -3204,6 +3214,17 @@ export class GameComponent  implements OnInit {
     this.topLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
     this.topRightComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
   }
+
+  trigger_moveShipToSite(){
+    this.addShipToArrivingHarbour(PositionEnum.Pyramid, 0);
+
+    this.addShipToArrivingHarbour(PositionEnum.Temple, 1);
+
+    this.addShipToArrivingHarbour(PositionEnum.BurialChamber, 2);
+
+    this.addShipToArrivingHarbour(PositionEnum.Obelisk, 3);
+  }
+
   trigger_FieldGlow(){
     this.bottomLeftComponent.playerFieldGlow(this.glow_target);
     this.topLeftComponent.playerFieldGlow(this.glow_target);
@@ -3343,7 +3364,7 @@ export class GameComponent  implements OnInit {
   }
 
   trigger_removeShip(id:number){
-    this.departingHarbourComponent.removeShip(this.ship4); //(click)="trigger_removeShip()"
+    this.departingHarbourComponent.removeShip(id); //(click)="trigger_removeShip()"
   }
 
   trigger_deactivateShipOnDepartingHarbour(){
