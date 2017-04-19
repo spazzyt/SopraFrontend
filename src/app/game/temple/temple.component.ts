@@ -89,11 +89,6 @@ export class TempleComponent implements OnInit {
      });
 
 
-    if(this.numberOfPlayers > 2){       //if there are more than two players, a fifth field is added
-      this.fieldArray = [1,2,3,4,5];
-      this.fieldHeight = [0,0,0,0,0];
-    }
-
   }
 
   //===============
@@ -141,6 +136,11 @@ export class TempleComponent implements OnInit {
 
   setAttributes(playerNumber: number){
     this.numberOfPlayers = playerNumber;
+
+    if(this.numberOfPlayers > 2){       //if there are more than two players, a fifth field is added
+      this.fieldArray = [1,2,3,4,5];
+      this.fieldHeight = [0,0,0,0,0];
+    }
   }
 
 
