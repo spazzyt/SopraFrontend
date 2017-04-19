@@ -200,7 +200,7 @@ Styling for the new game modal
 }
 .modal-header{
   border-bottom-color: #867558;
-
+  border-radius: 50%;
 }
 
 .modal-header, h4, .close {
@@ -213,6 +213,7 @@ Styling for the new game modal
 .modal-title{
   text-align: center;
   margin-left: 35%;
+  font-weight: bold;
 }
 
 .modal-body {
@@ -222,8 +223,8 @@ Styling for the new game modal
 
 .modal-footer {
   background-color: #edcd98;
-  border-top-color: #867558;
-
+  border-top-color: #edcd98;
+  border-radius: 50%;
 }
 
 
@@ -259,18 +260,21 @@ Styling for the new game modal
 
 
 th{
-  padding-left: 15px;
-  padding-bottom: 5px;
+  padding: 10px;
+  text-align: center;
 }
 
-
 td{
-  padding-top: 5%;
-  padding-left: 10%;
+  text-align: center;
 }
 
 caption{
   text-align: center;
   color: #867558;
+  font-weight: bold;
 }
 
+table{
+  font-size: 30px;
+  width: 100%;
+}
