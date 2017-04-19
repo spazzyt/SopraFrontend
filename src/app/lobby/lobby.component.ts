@@ -6,6 +6,7 @@ import {Game} from "../shared/models/game";
 
 import {UserService} from "../shared/services/user.service";
 import {GameService} from "../shared/services/game.service";
+import {LobbyService} from "../shared/services/lobby.service";
 import {LoginComponent} from "../login/login.component";
 import {AuthenticationService} from "../shared/services/authentication.service";
 import {Observable} from "rxjs";
@@ -57,6 +58,7 @@ export class LobbyComponent implements OnInit {
   constructor(private router:Router,
               private userService: UserService,
               private gameService: GameService,
+              private lobbyService: LobbyService,
               private authenticationService: AuthenticationService) {
 
   }
@@ -111,7 +113,7 @@ export class LobbyComponent implements OnInit {
 
   // fetch list of games
   loadGameList(){
-    this.gameService.getGames()
+    this.lobbyService.getGames()
       .subscribe(games => {
         if(1){console.log("fetch games: ", this.games);}
         this.games = games;
@@ -120,7 +122,7 @@ export class LobbyComponent implements OnInit {
 
   // add a new game to table
   addGame(numPlayers){
-  this.gameService.addGameService(numPlayers)
+  this.lobbyService.addGameService(numPlayers)
     .subscribe(game => {
       //this.game = game;
       if(1){console.log("add game ");}
@@ -130,7 +132,7 @@ export class LobbyComponent implements OnInit {
 
   // leave a game ( seen in game table)
   leaveGame(gameId){
-    this.gameService.leaveGameService(gameId)
+    this.lobbyService.leaveGameService(gameId)
       .subscribe(game => {
         //this.game = game;
         if(1){console.log("leave game ");}
@@ -141,7 +143,7 @@ export class LobbyComponent implements OnInit {
 
   //join a game in game table
   joinGame(gameId){
-    this.gameService.joinGameService(gameId)
+    this.lobbyService.joinGameService(gameId)
       .subscribe(game => {
         //this.game = game;
         if(1){console.log("join game ");}
@@ -209,7 +211,7 @@ export class LobbyComponent implements OnInit {
   quickStart(){
 
     //ask backend for new game
-    this.gameService.quickStart();
+    this.lobbyService.quickStart();
 
   }
 

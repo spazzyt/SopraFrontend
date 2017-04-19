@@ -50,6 +50,7 @@ import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
 import {ShipService} from "./shared/services/ship.service";
 import { StoneComponent } from './game/stone/stone.component';
 import {WSService} from "./shared/services/websocket.service";
+import {LobbyService} from "./shared/services/lobby.service";
 
 
 @NgModule({
@@ -102,7 +103,8 @@ import {WSService} from "./shared/services/websocket.service";
     GameService,
     WSService,
     DragulaService,
-    ShipService
+    ShipService,
+    LobbyService,
   ],
   bootstrap: [AppComponent]
 })
