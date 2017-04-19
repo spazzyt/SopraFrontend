@@ -354,6 +354,11 @@ Styling for the new game modal
 }
 
 
+.close{
+  outline: none;
+}
+
+
 .pepe_btn{
   height: 130px;
   width: 170px;
