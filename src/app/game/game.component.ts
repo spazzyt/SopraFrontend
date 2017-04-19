@@ -940,7 +940,7 @@ export class GameComponent  implements OnInit {
 
     //update game UI only, if it was not your decision
     if (!isItMyDecision) {
-      this.updateUiForOneMove(newDecision_, isItMyDecision);
+      //this.updateUiForOneMove(newDecision_, isItMyDecision);
     }
 
   }
@@ -956,7 +956,7 @@ export class GameComponent  implements OnInit {
 
       case PositionEnum.Pyramid:
         //TODO finish this shit
-        this.addShipToArrivingHarbour()
+        this.addShipToArrivingHarbour(move.to, move.pos)
         break;
     }
 
@@ -964,6 +964,7 @@ export class GameComponent  implements OnInit {
 
   }
 
+  /*
   updateUiForOneMove(newDecision_:Decision, isItMyDecision:boolean) {
 
     //In the hope this is what we get from backend.
@@ -1013,10 +1014,10 @@ export class GameComponent  implements OnInit {
         this.updatePlayerData();
 
         //remove ship from departing harbour
-        this.removeShipFromDepartingHarbour();
+        //this.removeShipFromDepartingHarbour();
 
         //add ship to arriving harbour
-        this.addShipToArrivingHarbour();
+        //this.addShipToArrivingHarbour();
 
         //place stones to site
         this.placeStonesToSite();
@@ -1034,10 +1035,10 @@ export class GameComponent  implements OnInit {
         && !(lastDecisionActionName3 === ActionEnum.playBlueMarketCard)) {
 
         //remove ship from departing harbour
-        this.removeShipFromDepartingHarbour();
+        //this.removeShipFromDepartingHarbour();
 
         //add ship to arriving harbour
-        this.addShipToArrivingHarbour();
+        //this.addShipToArrivingHarbour();
 
         //show Snackbarinfo
         let text="replace this string";
@@ -1109,10 +1110,10 @@ export class GameComponent  implements OnInit {
         this.updateStoneOnShip();
 
         //remove ship from departing harbour
-        this.removeShipFromDepartingHarbour();
+        //this.removeShipFromDepartingHarbour();
 
         //add ship to arriving harbour
-        this.addShipToArrivingHarbour();
+        //this.addShipToArrivingHarbour();
 
         //place stones to site
         this.placeStonesToSite();
@@ -1151,10 +1152,10 @@ export class GameComponent  implements OnInit {
         this.updatePlayerData();
 
         //remove ship from departing harbour
-        this.removeShipFromDepartingHarbour();
+        //this.removeShipFromDepartingHarbour();
 
         //add ship to arriving harbour
-        this.addShipToArrivingHarbour();
+        //this.addShipToArrivingHarbour();
 
         //place stones to site
         this.placeStonesToSite();
@@ -1171,10 +1172,10 @@ export class GameComponent  implements OnInit {
         && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
 
         //remove ship from departing harbour
-        this.removeShipFromDepartingHarbour();
+        //this.removeShipFromDepartingHarbour();
 
         //add ship to arriving harbour
-        this.addShipToArrivingHarbour();
+        //this.addShipToArrivingHarbour();
 
         //switch order of stones on ship
         this.switchOrderOfStonesOnShip();
@@ -1188,7 +1189,7 @@ export class GameComponent  implements OnInit {
     }
 
   }
-
+*/
 
   //------------------
   //helper functions
@@ -1200,13 +1201,13 @@ export class GameComponent  implements OnInit {
   }
 
   //remove ship from departing harbour
-  removeShipFromDepartingHarbour(){
+  removeShipFromDepartingHarbour(shipid: string){
 
   }
 
   //add ship to arriving harbour
-  addShipToArrivingHarbour(){
-
+  addShipToArrivingHarbour(target: PositionEnum, shipid: number){
+    this.siteHarbourComponent.addShipToHarbour(target, shipid);
   }
 
   //place stones to site
@@ -1974,13 +1975,13 @@ export class GameComponent  implements OnInit {
 
     //send move object to backend
     //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
-    let moveToSend = new Move();
-
+    //ToDo: send move object to backend
+    let moveToSend = new Move(1, PositionEnum.Quarry, PositionEnum.Sled, stonesToTake);
+    this.gameService.sendMove(moveToSend, this.game.id); //Send move to backend
 
 
     //snackbar message
-    this.showSnackbarMessage("you took "+ stonesToTake+" stones from the quarry");
+    this.showSnackbarMessage("You took "+ stonesToTake+" stones from the quarry.");
 
 
     if(1){console.log("take stones from Quarry to Sled:stonesToTake ",stonesToTake);}
@@ -2014,7 +2015,7 @@ export class GameComponent  implements OnInit {
 
 
     //snackbar message
-    this.showSnackbarMessage("you moved stone from sled to shipSlot ");
+    this.showSnackbarMessage("You moved a stone from sled to shipSlot ");
 
   }
 

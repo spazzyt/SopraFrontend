@@ -6,13 +6,13 @@ export class Move {
   public id:number=-1;
   public from:PositionEnum;
   public to:PositionEnum;
-  public pos:PositionEnum; //check with backend about usage
+  public pos:number; //check with backend about usage
 
 
   //Additional Frontend attributes
   //==============================
 
-  constructor(id_?:number, from_?:PositionEnum, to_?:PositionEnum, pos_?:PositionEnum){
+  constructor(id_?:number, from_?:PositionEnum, to_?:PositionEnum, pos_?:number){
 
     this.id=id_;
     this.from=from_;

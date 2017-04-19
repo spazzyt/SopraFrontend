@@ -5,6 +5,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 import {Observable} from "rxjs";
 import {Game} from "../models/game";
 import {Router} from "@angular/router";
+import {Move} from "../models/move";
 
 @Injectable()
 export class GameService {
@@ -143,5 +144,22 @@ export class GameService {
     // get users from api
     return this.http.get(this.apiUrl + '/game/' + gameId, options)
       .map((response: Response) => response.json());
+  }
+
+  sendMove(move: Move, gameId: number){
+    let bodyString = JSON.stringify(move); // Stringify payload
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.authenticationService.token
+    });// ... Set content type to JSON
+    let params = new URLSearchParams();
+    params.set("token", this.authenticationService.token)
+    let options = new RequestOptions({headers: headers, search: params}); // Create a request option
+
+    this.http.post(this.apiUrl + '/game/' + gameId + '/move', bodyString, options) // ...using post request
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error')) //...errors if
+      .subscribe(response => {
+        console.log("Sent Move: ", move);
+      });
   }
 }
