@@ -33,6 +33,7 @@ import {InfoBoxComponent} from "./info-box/info-box.component";
 import {StoneComponent} from "./stone/stone.component";
 import {Game} from "../shared/models/game";
 import {MarketCard} from "../shared/models/market-card";
+import {Router} from "@angular/router";
 
 import {UserService} from "../shared/services/user.service";
 
@@ -3365,6 +3366,8 @@ export class GameComponent  implements OnInit {
     this.takeStonesFromQuarryToSled(ColourEnum.black);//click)="trigger_countStonesOnShip()"
 
   }
+
+
 
   // Communication with SiteHarbour
   //-------------------------------

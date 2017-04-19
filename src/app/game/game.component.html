@@ -406,6 +406,54 @@
           </button>
         </div>
 
+
+        <!--  SCORE BOARD BUTTON -->
+
+        <!-- Call Modal Button -->
+        <div class="new_game_screen">
+
+          <div id="new_game_button">
+            <button type="button" class="btn btn-primary" id="ngButton"
+                    (click)="staticModal.show()">showScoreBoard</button>
+          </div>
+        </div>
+
+
+        <!-- Modal: New Game -->
+        <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+             tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">Score Board</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <div class="row" id="btn_row_lower">
+                  <!--leave modal-->
+                  <div id="backToLobby">
+                    <button type="button" class="newgame_btn btn btn-primary"
+                            id="ngButton1" [routerLink]="['/lobby']" >Back to Lobby</button>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
       </div>
 
     </div>
