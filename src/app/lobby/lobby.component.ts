@@ -9,6 +9,7 @@ import {GameService} from "../shared/services/game.service";
 import {LoginComponent} from "../login/login.component";
 import {AuthenticationService} from "../shared/services/authentication.service";
 import {Observable} from "rxjs";
+import {GameStatusEnum} from "../shared/models/game-status.enum";
 
 
 @Component({
@@ -31,7 +32,7 @@ export class LobbyComponent implements OnInit {
   public games: Game[] = []; //fetched with: this.gameService.getGames()
 
   //request interval time to get data from backend
-  public requestIntervalTime = 20000; // set to 20000 ms during development, for production set to 500 ms
+  public requestIntervalTime = 500; // set to 500 ms during development, for production set to 500 ms
 
   //who am I
   public mySelf:User; //fetched with: this.userService.MySelf()
@@ -44,6 +45,10 @@ export class LobbyComponent implements OnInit {
 
   // game name
   public game: string;
+
+  private currentGameChecker;
+  private gameListChecker;
+  private userListChecker;
 
 
   //=============
@@ -69,8 +74,8 @@ export class LobbyComponent implements OnInit {
     this.loadGameList();
 
     // interval to update game list (every X ms a request is made to the frontend)
-    setInterval(()=>this.loadUserList(), this.requestIntervalTime);
-    setInterval(()=>this.loadGameList(), this.requestIntervalTime);
+    this.userListChecker = setInterval(()=>this.loadUserList(), this.requestIntervalTime);
+    this.gameListChecker = setInterval(()=>this.loadGameList(), this.requestIntervalTime);
 
     // get username from userService
     this.mySelf=this.userService.mySelf();
@@ -141,10 +146,28 @@ export class LobbyComponent implements OnInit {
         //this.game = game;
         if(1){console.log("join game ");}
         this.joinedGame=gameId;
+
+        this.currentGameChecker = setInterval(()=>this.waitForGameStart(gameId), this.requestIntervalTime);
+
         return this.loadGameList();
       });
   }
 
+  // n sec, to check if game has started
+  waitForGameStart(gameId: number){
+    this.gameService.getGame(gameId).subscribe((game) => {
+
+      if(game.status == GameStatusEnum.STARTING)
+      {
+        this.gameStart(gameId);     //Start the game as soon as status changes to starting
+        clearInterval(this.gameListChecker);  //stop intervals for getting game & user list
+        clearInterval(this.userListChecker);
+      }
+
+    });
+
+
+  }
 
 
   //===============
@@ -190,4 +213,7 @@ export class LobbyComponent implements OnInit {
 
   }
 
+  gameStart(gameId: number){
+    this.router.navigate(['/game', gameId]);
+  }
 }
