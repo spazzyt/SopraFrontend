@@ -425,14 +425,54 @@
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
 
+              <!--  Score Board title   -->
               <div class="modal-header">
-                <h4 class="modal-title pull-left">Score Board</h4>
+                <h4 class="modal-title pull-left" >Alfredo wins!!!</h4>
                 <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
 
+              <!--  Score Board table   -->
               <div class="modal-body">
+                <table align="center">
+                  <caption>Scoreboard</caption>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Score</th>
+                  </tr>
+
+                  <tr>
+                    <td>1.</td>
+                    <td>Alfredo</td>
+                    <td>20</td>
+                  </tr>
+
+                  <tr>
+                    <td>2.</td>
+                    <td>Fritz</td>
+                    <td>18</td>
+                  </tr>
+
+                  <tr>
+                    <td>3.</td>
+                    <td>Frida</td>
+                    <td>16</td>
+                  </tr>
+
+                  <tr>
+                    <td>4.</td>
+                    <td>Gertrudis</td>
+                    <td>12</td>
+                  </tr>
+                </table>
+
+              </div>
+
+              <!--  Back to Lobby Button    -->
+              <div class="modal-footer">
+
                 <div class="row" id="btn_row_lower">
                   <!--leave modal-->
                   <div id="backToLobby">
@@ -441,7 +481,11 @@
                   </div>
 
                 </div>
+
+
               </div>
+
+
 
             </div>
           </div>
