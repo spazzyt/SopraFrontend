@@ -22,6 +22,19 @@ export class LobbyService {
   }
 
 
+  //Generic option preparation that can be used for all functions
+  getRequestOptions(){
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.authenticationService.token
+    });// ... Set content type to JSON
+    let params = new URLSearchParams();
+    params.set("token", this.authenticationService.token)
+    let options = new RequestOptions({headers: headers, search: params}); // Create a request option
+    return options;
+  }
+
+
 
   getGames(): Observable<Game[]> {
     // add authorization header with token
@@ -36,15 +49,8 @@ export class LobbyService {
 
   addGameService(numPlayers): Observable<Game> {
     let bodyString = JSON.stringify({numPlayers: numPlayers}); // Stringify payload
-    let headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.authenticationService.token
-    });// ... Set content type to JSON
-    let params = new URLSearchParams();
-    params.set("token", this.authenticationService.token)
-    let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
-    return this.http.post(this.apiUrl + '/game', bodyString, options) // ...using post request
+    return this.http.post(this.apiUrl + '/game', bodyString, this.getRequestOptions()) // ...using post request
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         let game = response//.json() && response.json();
@@ -61,15 +67,8 @@ export class LobbyService {
 
   leaveGameService(gameId): Observable<Game> {
     let bodyString = JSON.stringify({}); // Stringify payload
-    let headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.authenticationService.token
-    });// ... Set content type to JSON
-    let params = new URLSearchParams();
-    params.set("token", this.authenticationService.token)
-    let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
-    return this.http.post(this.apiUrl + '/game/' + gameId + '/leave', bodyString, options) // ...using post request
+    return this.http.post(this.apiUrl + '/game/' + gameId + '/leave', bodyString, this.getRequestOptions()) // ...using post request
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         let game = response//.json() && response.json();
@@ -86,15 +85,8 @@ export class LobbyService {
 
   joinGameService(gameId): Observable<Game> {
     let bodyString = JSON.stringify({}); // Stringify payload
-    let headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.authenticationService.token
-    });// ... Set content type to JSON
-    let params = new URLSearchParams();
-    params.set("token", this.authenticationService.token)
-    let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
-    return this.http.post(this.apiUrl + '/game/' + gameId + '/join', bodyString, options) // ...using post request
+    return this.http.post(this.apiUrl + '/game/' + gameId + '/join', bodyString, this.getRequestOptions()) // ...using post request
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         let game = response//.json() && response.json();
@@ -114,15 +106,8 @@ export class LobbyService {
     console.log("quickstart init");
 
     let bodyString = JSON.stringify({}); // Stringify payload
-    let headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.authenticationService.token
-    });// ... Set content type to JSON
-    let params = new URLSearchParams();
-    params.set("token", this.authenticationService.token)
-    let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
-    this.http.post(this.apiUrl + '/pepe', bodyString, options) // ...using post request
+    this.http.post(this.apiUrl + '/pepe', bodyString, this.getRequestOptions()) // ...using post request
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')) //...errors if
       .subscribe(response => {
         let gameId = response.text();
