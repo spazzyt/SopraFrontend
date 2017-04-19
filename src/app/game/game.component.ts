@@ -285,7 +285,7 @@ export class GameComponent  implements OnInit {
 
 
 
-    let returnGame = new Game(0, 'token', 'name', GameStatusEnum.round1, 4,  this.players_target, 1, this.ships_target, this.marketCards, this.currentActivePlayerField, null);
+    let returnGame = new Game(0, 'token', 'name', GameStatusEnum.RUNNING, 4,  this.players_target, 1, this.ships_target, this.marketCards, this.currentActivePlayerField, null);
     return returnGame;
   }
 
@@ -899,8 +899,10 @@ export class GameComponent  implements OnInit {
     this.game.ships = round.ships;
     this.game.marketCards = round.marketCards;
     console.log(round);
+    this.activateActivePlayerInteractions(true, ColourEnum.black);
 
-    //remove stones from ships (with JQuery?) --> already done in initialize-functions (i think)
+
+      //remove stones from ships (with JQuery?) --> already done in initialize-functions (i think)
 
     //remove ships from arriving harbours (with JQuery?)
 
@@ -1607,7 +1609,7 @@ export class GameComponent  implements OnInit {
   //=============================================================
 
 
-  activateActivePlayerInteractions(Decision_:Decision,
+  activateActivePlayerInteractions(
                                    amI_CurrentActivePlayer:boolean,
                                    currentActivePlayerField:ColourEnum){
 
