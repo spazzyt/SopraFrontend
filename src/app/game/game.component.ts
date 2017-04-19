@@ -899,7 +899,7 @@ export class GameComponent  implements OnInit {
     this.game.ships = round.ships;
     this.game.marketCards = round.marketCards;
     console.log(round);
-    this.activateActivePlayerInteractions(true, ColourEnum.black);
+    this.activateActivePlayerInteractions(true, ColourEnum.black);  //TODO add real data here
 
 
       //remove stones from ships (with JQuery?) --> already done in initialize-functions (i think)
