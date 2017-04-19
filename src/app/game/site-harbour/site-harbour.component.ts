@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PositionEnum} from "../../shared/models/position.enum";
 import {Ship} from "../../shared/models/ship";
+import {Stone} from "../../shared/models/stone";
 
 @Component({
   selector: 'app-site-harbour',
@@ -14,7 +15,8 @@ export class SiteHarbourComponent {
   //Class Variables
   //===============
   ships: Ship[] = [];
-
+  stonesOnShip:Stone[][]=[[null,null,null,null],[null,null,null,null],
+    [null,null,null,null],[null,null,null,null]];
 
   //===============
   //Constructor
@@ -35,24 +37,18 @@ export class SiteHarbourComponent {
   //Class Methods
   //===============
 
-  addShipToHarbour(target: PositionEnum, shipid: number){
+  addShipToHarbour(target: PositionEnum, ship: Ship){
       if(target == PositionEnum.Pyramid){
-
-      }
-      else if(target == PositionEnum.Pyramid){
-
+        this.ships[0] = ship;
       }
       else if(target == PositionEnum.Temple){
-
+        this.ships[1] = ship;
       }
       else if(target == PositionEnum.BurialChamber){
-
+        this.ships[2] = ship;
       }
       else if(target == PositionEnum.Obelisk){
-
-      }
-      else if(target == PositionEnum.Market){
-
+        this.ships[3] = ship;
       }
   }
 
