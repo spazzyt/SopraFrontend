@@ -212,7 +212,8 @@ export class LobbyComponent implements OnInit {
 
     //ask backend for new game
     this.lobbyService.quickStart();
-
+    clearInterval(this.gameListChecker);  //stop intervals for getting game & user list
+    clearInterval(this.userListChecker);
   }
 
   gameStart(gameId: number){
