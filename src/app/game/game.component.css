@@ -115,10 +115,12 @@
   float: left;
 }
 
+
 .site_boards{
   height: 100%;
-  width: 52%;
+  width: 67%;
   float: left;
+  border: 1px solid magenta;
 }
 
 .market_site{
