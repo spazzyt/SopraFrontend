@@ -446,7 +446,7 @@
 
                   <tr *ngFor="let player of nameAndScores; let i=index">
                     <td>{{i+1}}.</td>
-                    <td>{{player.username}}</td>
+                    <td>{{player.username.substring(0, 10)}}</td>
                     <td>{{player.score}}</td>
                   </tr>
                 </table>
