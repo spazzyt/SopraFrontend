@@ -429,7 +429,7 @@
 
                   <img class="trophy" id="trophy_left" src="../../assets/images/trophy.png">
 
-                <h4 id="winner_title" class="modal-title" ngIf="nameAndScores[0] != null">{{nameAndScores[0].username}} wins!</h4>
+                <h4 id="winner_title" class="modal-title" *ngIf="nameAndScores[0] != null">{{nameAndScores[0].username}} wins!</h4>
 
                   <img class="trophy" id="trophy_right" src="../../assets/images/trophy.png">
 
