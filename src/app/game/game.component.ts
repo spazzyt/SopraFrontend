@@ -1219,6 +1219,11 @@ export class GameComponent  implements OnInit {
   //helper functions
   //------------------
 
+  //TODO add functionality for showing modal through this function
+  showScoreboard(){
+    this.sortScores();
+  }
+
   sortScores(){
 
     for(let i = 0; i < this.playerNames.length; i++){
