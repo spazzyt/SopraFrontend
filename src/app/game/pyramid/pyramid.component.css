@@ -5,6 +5,20 @@
   float: left;
 }
 
+.harbour_parent{
+  border: 1px solid greenyellow;
+  width: 22%;
+  height: 100%;
+  float: left;
+}
+
+.site_parent{
+  border: 1px solid maroon;
+  width: 78%;
+  height: 100%;
+  float: left;
+}
+
 /*Test for hover over site name --> point assignment*/
 .points_assignment{
   height: 30%;

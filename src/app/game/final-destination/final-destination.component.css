@@ -1,0 +1,12 @@
+.ship_space{
+  height: 100%;
+  width: 100%;
+  float: left;
+}
+
+.arriving_harbour{
+  height: 100%;
+  width: 170%;
+  margin-left: -70%;
+  float: left;
+}
