@@ -11,6 +11,8 @@ export class Ship {
   //Additional Frontend attributes
   //==============================
 
+  isInHarbour: boolean = true;
+
   //unique identifier
   public id:number=-1;
 

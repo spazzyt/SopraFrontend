@@ -10,7 +10,7 @@
 
     <!-- Departing Harbours -->
     <div class="departing_harbours">
-      <app-departing-harbour></app-departing-harbour>
+      <app-departing-harbour [ships]="shipsInDepartingHarbour"></app-departing-harbour>
     </div>
 
 
@@ -41,12 +41,13 @@
     <div class="game_board">
 
       <div class="site_harbours">
-        <app-site-harbour></app-site-harbour>
+        <app-site-harbour [ships]="shipsInSiteHarbour"></app-site-harbour>
       </div>
 
       <div class="site_boards">
 
         <div class="site_board">
+
           <app-pyramid></app-pyramid>
         </div>
         <div class="site_board">
@@ -405,6 +406,12 @@
           </button>
         </div>
 
+        <div class="col-md-3">
+          <button style="width:90%; font-size:10px" class="btn btn-sm btn-primary btn-block"
+                  type="submit" (click)="moveShipById(1,'Pyramid')">
+            moveShipToPyramid
+          </button>
+        </div>
 
         <!--  SCORE BOARD BUTTON -->
 
@@ -413,12 +420,17 @@
 
           <div id="new_game_button">
             <button type="button" class="btn btn-primary" id="ngButton"
-                    (click)="staticModal.show()">showScoreBoard</button>
+                    (click)="staticModal.show(); showScoreboard();">showScoreBoard</button>
           </div>
+
+
+
+
+
         </div>
 
 
-        <!-- Modal: New Game -->
+        <!-- Modal: End Game -->
         <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
              tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm">
@@ -426,12 +438,12 @@
 
               <!--  Score Board title   -->
               <div class="modal-header">
-                  <img class="trophy" id="trophy_left" src="../../assets/images/trophy.png">
 
-                <h4 id="winner_title" class="modal-title" >Alfredo wins!</h4>
+                  <img class="trophy non-draggable" id="trophy_left" src="../../assets/images/trophy.png">
 
-                  <img class="trophy" id="trophy_right" src="../../assets/images/trophy.png">
+                <h4 id="winner_title" class="modal-title" *ngIf="nameAndScores[0] != null">{{nameAndScores[0].username}} wins!</h4>
 
+                  <img class="trophy non-draggable" id="trophy_right" src="../../assets/images/trophy.png">
 
               </div>
 
@@ -444,28 +456,10 @@
                     <th>Score</th>
                   </tr>
 
-                  <tr>
-                    <td>1.</td>
-                    <td>{{playerNames[0]}}</td>
-                    <td>20</td>
-                  </tr>
-
-                  <tr>
-                    <td>2.</td>
-                    <td>{{playerNames[1]}}</td>
-                    <td>18</td>
-                  </tr>
-
-                  <tr>
-                    <td>3.</td>
-                    <td>Frida</td>
-                    <td>16</td>
-                  </tr>
-
-                  <tr>
-                    <td>4.</td>
-                    <td>Gertrudis</td>
-                    <td>12</td>
+                  <tr *ngFor="let player of nameAndScores; let i=index">
+                    <td>{{i+1}}.</td>
+                    <td>{{player.username.substring(0, 10)}}</td>
+                    <td>{{player.score}}</td>
                   </tr>
                 </table>
 
