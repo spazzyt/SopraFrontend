@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {PositionEnum} from "../../shared/models/position.enum";
 import {Ship} from "../../shared/models/ship";
 import {Stone} from "../../shared/models/stone";
+import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
+
 
 @Component({
   selector: 'app-site-harbour',
@@ -14,7 +16,9 @@ export class SiteHarbourComponent {
   //===============
   //Class Variables
   //===============
+  @Input()
   ships: Ship[] = [];
+
   stonesOnShip:Stone[][]=[[null,null,null,null],[null,null,null,null],
     [null,null,null,null],[null,null,null,null]];
 
@@ -24,6 +28,7 @@ export class SiteHarbourComponent {
   constructor() {
 
   }
+
 
   //===============
   //ngOnInit

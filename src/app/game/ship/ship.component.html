@@ -2,7 +2,7 @@
 <div id="ship_{{ship.id}}" class="ship_size_{{ship.size}}">
   <!--add slots container-->
   <div id="ship_{{ship.id}}_slots" class="ship_slots">
-    <!--add slots to slots container of ship_i-->
+    <!--add slots to slots container of ship_i--
     <div *ngFor="let slots of ship.slots; let j= index"
          id="ship_{{ship.id}}_slot_{{j+1}}" class="ship_slot"
          [dragula]="'stone_slots_bag'"><div *ngIf="stonesOnShip[j] != null"  id="ngifStone"><app-stone class="appStone" [stone] = stonesOnShip[j] ></app-stone></div></div><!-- innerHTML no space, no new line allowed-->

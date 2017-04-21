@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {Stone} from "../../shared/models/stone";
+import {Site} from "../../shared/site";
 
 @Component({
   selector: 'app-pyramid',
   templateUrl: './pyramid.component.html',
   styleUrls: ['./pyramid.component.css']
 })
-export class PyramidComponent implements OnInit {
+export class PyramidComponent extends Site implements OnInit  {
 
   stones:Stone[] = [];
   totalStones:number = 0;
 
 
-  constructor() { }
+  constructor() {
+    super("Pyramid");
+  }
 
   ngOnInit() {
     //styles in styles.css at the end under popover, to style:
