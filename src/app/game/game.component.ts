@@ -1981,7 +1981,7 @@ export class GameComponent  implements OnInit {
 
       }
       else{
-        this.showSnackbarMessage("you can not take stones from the quarry")
+        this.showSnackbarMessage("You cannot take stones from the quarry.")
         return;
       }
     }
