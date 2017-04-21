@@ -45,6 +45,7 @@ import {PositionEnum} from "../shared/models/position.enum";
 import {Action} from "../shared/models/action";
 import {Move} from "../shared/models/move";
 import {WSService} from "../shared/services/websocket.service";
+import {UserNameAndScore} from "../shared/models/user-name-and-score";
 
 
 @Component({
@@ -68,6 +69,13 @@ export class GameComponent  implements OnInit {
 
   //player names for scoreboard
   playerNames: string[] = [];
+
+  //player scores for scoreboard
+  playerScores: number[] = [7,4,2,8];
+
+  //array for mapping names to scores
+  nameAndScores: UserNameAndScore[] = [];
+
 
   // my username entered in login screen
   // get username from userService
@@ -218,6 +226,8 @@ export class GameComponent  implements OnInit {
 
           //Initialize the new game
           this.initializeNewGame(this.game);
+
+
 
 
           //Initialize the whole market card set
@@ -1208,6 +1218,17 @@ export class GameComponent  implements OnInit {
   //------------------
   //helper functions
   //------------------
+
+  sortScores(){
+
+    for(let i = 0; i < this.playerNames.length; i++){
+
+      this.nameAndScores.push(new UserNameAndScore(this.playerNames[i], this.playerScores[i]));
+    }
+
+    this.nameAndScores = this.nameAndScores.sort((n1,n2) => n2.score - n1.score);
+
+  }
 
   //show stone on ship
   updateStoneOnShip(){
