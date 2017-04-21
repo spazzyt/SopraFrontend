@@ -66,6 +66,9 @@ export class GameComponent  implements OnInit {
   // initial Game object received from Backend
   game: Game;
 
+  //player names for scoreboard
+  playerNames: string[] = [];
+
   // my username entered in login screen
   // get username from userService
   myUserName:string=this.userService.mySelf().username;
@@ -201,6 +204,8 @@ export class GameComponent  implements OnInit {
         .subscribe((game: Game) => {
           this.game = game;
 
+
+
 // TODO this still throws errors, but should be added when backend delivers correct data
 
           //Map players to colours
@@ -213,6 +218,10 @@ export class GameComponent  implements OnInit {
 
           //Initialize the new game
           this.initializeNewGame(this.game);
+
+          for(let i = 0; i < this.game.players.length; i++){
+            this.playerNames[i] = this.game.players[i].username;
+          }
 
           //Initialize the whole market card set
           for (let i=1; i<=34; i++){
