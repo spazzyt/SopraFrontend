@@ -5,12 +5,17 @@
 
 <div id="departing_harbours" class="departing_harbours">
 
-  <div *ngFor="let num of [1,2,3,4]"
-       id="departing_harbour_{{num}}" class="departing_harbour" [dragula]="'harbours_bag'">
+  <div *ngFor="let ship of ships; let num = index"
+       id="departing_harbour_{{num}}" class="departing_harbour">
 
-    <div *ngIf="ships[num-1] != null" id="ngifShip">
-      <app-ship class="appShip" [ship]="ships[num-1]" [stonesOnShip]="stonesOnShip[num-1]"></app-ship>
-    </div><!--do not change anything-->
+
+    <div dnd-draggable [dragEnabled]="true" [dragData]="ship">
+
+      <app-ship class="appShip"
+                *ngIf="ship.isInHarbour"
+                [ship]="ship" [stonesOnShip]="stonesOnShip[num]"></app-ship>
+
+    </div>
 
   </div>
 

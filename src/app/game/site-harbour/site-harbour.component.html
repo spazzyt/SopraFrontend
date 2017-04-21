@@ -3,6 +3,10 @@
 </div>
 <div class="ship_space">
 
+  <div id="arriving_harbour_1" class="row arriving_harbour_1" dnd-droppable (onDropSuccess)="addTo($event)">
+asd
+</div>
+
 <!--  &lt;!&ndash;drag and drop zone&ndash;&gt;
   <div id="arriving_harbours" class="arriving_harbours">
   <div id="arriving_harbour_1" class="row arriving_harbour_1"
@@ -14,16 +18,38 @@
   <div id="arriving_harbour_4" class="row arriving_harbour_4"
        [dragula]="'harbours_bag'"></div> &lt;!&ndash; innerHTML no space, no new line allowed&ndash;&gt;
 </div>-->
+<!--
+  hm:  {{ships.length}} {{ships}}
 
-  <div *ngFor="let num of [1,2,3,4]"
-       id="arriving_harbour_{{num}}" class="row arriving_harbour_{{num}}" [dragula]="'harbours_bag'">
 
-    <div *ngIf="ships[num-1] != null" id="ngifShip">
-      <app-ship class="appShip" [ship]="ships[num-1]" [stonesOnShip]="stonesOnShip[num-1]"></app-ship>
-    </div><!--do not change anything-->
+  <div [dragula]="'harbours_bag'" [dragulaModel]="ships">
+
+    <div *ngFor="let num of [1,2,3,4]" id="arriving_harbour_{{num}}" class="row arriving_harbour_{{num}}">
+     :  {{num}} : s is {{ships}}
+
+      <div *ngIf="ships[num-1] != null" id="ngifShip">
+        <app-ship class="appShip" [ship]="ships[num-1]" [stonesOnShip]="stonesOnShip[num-1]"></app-ship>
+      </div>
+
+      <div *ngFor="let ship of ships; let n2 = index">
+        {{ship}} - {{n2}}
+      </div>
+
+    </div>
 
   </div>
 
+<!--   <div *ngFor="let num of [1,2,3,4]"
+       id="arriving_harbour_{{num}}" class="row arriving_harbour_{{num}}" >
+
+    <!--
+    <div *ngIf="ships[num-1] != null" id="ngifShip">
+      <app-ship class="appShip" [ship]="ships[num-1]" [stonesOnShip]="stonesOnShip[num-1]"></app-ship>
+    </div><!--do not change anything--
+
+
+  </div>
+-->
 
 </div>
 

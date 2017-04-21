@@ -46,11 +46,14 @@ import { MarketHarbourComponent} from './game/market-harbour/market-harbour.comp
 import { ScrollbarComponent } from './demo-temp/scrollbar/scrollbar.component';
 import { DragulaDemoComponent } from './demo-temp/dragula-demo/dragula-demo.component';
 
+import {DndModule} from 'ng2-dnd';
+
 import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
 import {ShipService} from "./shared/services/ship.service";
 import { StoneComponent } from './game/stone/stone.component';
 import {WSService} from "./shared/services/websocket.service";
 import {LobbyService} from "./shared/services/lobby.service";
+import { FinalDestinationComponent } from './game/final-destination/final-destination.component';
 
 
 @NgModule({
@@ -87,6 +90,7 @@ import {LobbyService} from "./shared/services/lobby.service";
     ScrollbarComponent,
     DragulaDemoComponent,
     StoneComponent,
+    FinalDestinationComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,7 +99,8 @@ import {LobbyService} from "./shared/services/lobby.service";
     JsonpModule,
     routing,
     AlertModule.forRoot(), ModalModule.forRoot(), TooltipModule,
-    DragulaModule
+    DragulaModule,
+    DndModule.forRoot()
   ],
   providers: [AuthenticationService,
     AuthGuardService,

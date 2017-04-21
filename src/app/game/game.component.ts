@@ -45,6 +45,7 @@ import {PositionEnum} from "../shared/models/position.enum";
 import {Action} from "../shared/models/action";
 import {Move} from "../shared/models/move";
 import {WSService} from "../shared/services/websocket.service";
+import {UserNameAndScore} from "../shared/models/user-name-and-score";
 
 
 @Component({
@@ -69,6 +70,13 @@ export class GameComponent  implements OnInit {
   //player names for scoreboard
   playerNames: string[] = [];
 
+  //player scores for scoreboard
+  playerScores: number[] = [7,4,2,8];
+
+  //array for mapping names to scores
+  nameAndScores: UserNameAndScore[] = [];
+
+
   // my username entered in login screen
   // get username from userService
   myUserName:string=this.userService.mySelf().username;
@@ -82,6 +90,14 @@ export class GameComponent  implements OnInit {
   // player field of current active player
   currentActivePlayerField:ColourEnum;
   private playerMap: Map<any, any>;
+
+
+  // store ships via their id
+  ships:Map<number,Ship> = new Map();
+
+
+  // access map for all sites
+  sites:Map<string,any> = new Map();
 
 
   // Current Target (Soll) Game state
@@ -107,6 +123,35 @@ export class GameComponent  implements OnInit {
   // (decision package from active player sent to backend)
   //chosenActivePlayerDecision:Decision;
 
+  // Enable communication with DepartingHarbour
+  @ViewChild(DepartingHarbourComponent) departingHarbourComponent:DepartingHarbourComponent;
+
+  // Enable communication with SiteHarbour
+  @ViewChild(SiteHarbourComponent) siteHarbourComponent:SiteHarbourComponent;
+
+  // Enable communication with MaketHarbour
+  @ViewChild(MarketHarbourComponent) maketHarbourComponent:MarketHarbourComponent;
+
+  // Enable communication with PyramidComponent
+  @ViewChild(PyramidComponent) pyramidComponent:PyramidComponent;
+
+  // Enable communication with TempleComponent
+  @ViewChild(TempleComponent) templeComponent:TempleComponent;
+
+  // Enable communication with BurialChamberComponent
+  @ViewChild(BurialChamberComponent) burialChamberComponent:BurialChamberComponent;
+
+  // Enable communication with ObeliskComponent
+  @ViewChild(ObeliskComponent) obeliskComponent:ObeliskComponent;
+
+  // Enable communication with MarketComponent
+  @ViewChild(MarketComponent) marketComponent:MarketComponent;
+
+
+
+  shipsInDepartingHarbour:Ship[] = [];
+
+  shipsInSiteHarbour:Ship[] = [];
 
   //===============
   //Constructor
@@ -121,6 +166,8 @@ export class GameComponent  implements OnInit {
     //dragula subscriptions
     this.dragula_subscribeDragEvent();
     this.dragula_subscribeDropEvent();
+
+
 
   }
 
@@ -192,6 +239,17 @@ export class GameComponent  implements OnInit {
 
   ngOnInit() {
 
+    // tmp ship stuff
+    this.ships[1] = this.ship1;
+    this.ships[2] = this.ship2;
+    this.ships[3] = this.ship3;
+    this.ships[4] = this.ship4;
+
+
+    this.sites["Pyramid"] = this.pyramidComponent;
+
+
+
     // (+) converts string 'id' to a number
     let id = +this.route.snapshot.params['id'];
 
@@ -218,6 +276,8 @@ export class GameComponent  implements OnInit {
 
           //Initialize the new game
           this.initializeNewGame(this.game);
+
+
 
 
           //Initialize the whole market card set
@@ -249,6 +309,12 @@ export class GameComponent  implements OnInit {
 
   }
 
+  moveShipById(shipId:number, targetSite:string) {
+    let ship:Ship = this.ships[shipId];
+    ship.isInHarbour = false;
+    this.sites[targetSite].setShip(ship);
+    console.log("movedShip ", shipId, targetSite, ship, this.sites[targetSite]);
+  }
 
   //===========================================================
   // Backend starts new game
@@ -315,6 +381,10 @@ export class GameComponent  implements OnInit {
     this.initializePyramidComponent();
     this.initializeTempleComponent();
     this.initializeBurialChamberComponent();
+
+    this.shipsInDepartingHarbour = this.game.ships;
+
+    this.shipsInSiteHarbour = []
 
     //Departing Harbour: the ships
     this.initializeDepartingHarbourComponent(this.game.ships);
@@ -910,7 +980,7 @@ export class GameComponent  implements OnInit {
     this.game.ships = round.ships;
     this.game.marketCards = round.marketCards;
     console.log(round);
-    this.activateActivePlayerInteractions(true, ColourEnum.black);  //TODO add real data here
+    //this.activateActivePlayerInteractions(true, ColourEnum.black);  //TODO add real data here
 
 
       //remove stones from ships (with JQuery?) --> already done in initialize-functions (i think)
@@ -1208,6 +1278,22 @@ export class GameComponent  implements OnInit {
   //------------------
   //helper functions
   //------------------
+
+  //TODO add functionality for showing modal through this function
+  showScoreboard(){
+    this.sortScores();
+  }
+
+  sortScores(){
+
+    for(let i = 0; i < this.playerNames.length; i++){
+
+      this.nameAndScores.push(new UserNameAndScore(this.playerNames[i], this.playerScores[i]));
+    }
+
+    this.nameAndScores = this.nameAndScores.sort((n1,n2) => n2.score - n1.score);
+
+  }
 
   //show stone on ship
   updateStoneOnShip(){
@@ -1657,7 +1743,6 @@ export class GameComponent  implements OnInit {
       //ToDo:--------------
       //ToDo:Client state on ships is what decision object says
       //------------------------------------
-
 
 
       //I am active player on black field
@@ -2177,7 +2262,7 @@ export class GameComponent  implements OnInit {
     newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour2;
 
     //store own decision object in game model
-    this.game.ownDecisions.push(newDecision);
+   // this.game.ownDecisions.push(newDecision);
 
 
     //send decision object to backend
@@ -2239,7 +2324,7 @@ export class GameComponent  implements OnInit {
     newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour3;
 
     //store own decision object in game model
-    this.game.ownDecisions.push(newDecision); //TODO fix errors in this step, happening only in new game with real id
+  //  this.game.ownDecisions.push(newDecision); //TODO fix errors in this step, happening only in new game with real id
 
 
     //send decision object to backend
@@ -3634,6 +3719,9 @@ export class GameComponent  implements OnInit {
       if(1){console.log("6.1.0 dragula-subscribe-drop");}
       if(1){console.log(value[0],value[1],value[2])}
 
+      let comp = value[1];
+
+      console.log("check: ", comp, comp.ship)
       //-------------------------------------------
       //value object not null; otherwise do nothing
       //-------------------------------------------
@@ -4459,29 +4547,6 @@ export class GameComponent  implements OnInit {
   // Enable communication with not active player component BottomLeftComponent
   @ViewChild(BottomRightComponent) bottomRightComponent:BottomRightComponent;
 
-  // Enable communication with DepartingHarbour
-  @ViewChild(DepartingHarbourComponent) departingHarbourComponent:DepartingHarbourComponent;
-
-  // Enable communication with SiteHarbour
-  @ViewChild(SiteHarbourComponent) siteHarbourComponent:SiteHarbourComponent;
-
-  // Enable communication with MaketHarbour
-  @ViewChild(MarketHarbourComponent) maketHarbourComponent:MarketHarbourComponent;
-
-  // Enable communication with PyramidComponent
-  @ViewChild(PyramidComponent) pyramidComponent:PyramidComponent;
-
-  // Enable communication with TempleComponent
-  @ViewChild(TempleComponent) templeComponent:TempleComponent;
-
-  // Enable communication with BurialChamberComponent
-  @ViewChild(BurialChamberComponent) burialChamberComponent:BurialChamberComponent;
-
-  // Enable communication with ObeliskComponent
-  @ViewChild(ObeliskComponent) obeliskComponent:ObeliskComponent;
-
-  // Enable communication with MarketComponent
-  @ViewChild(MarketComponent) marketComponent:MarketComponent;
 
   // Enable communication with ShipComponent
   @ViewChild(ShipComponent) shipComponent:ShipComponent;
