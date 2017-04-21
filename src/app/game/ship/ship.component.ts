@@ -21,6 +21,8 @@ export class ShipComponent implements OnInit {
   @Input() ship:Ship;
   //ship:Ship;
 
+
+
   //Add stones to ship
   //stonesOnShip: Stone[] = []; // = [new Stone(1, ColourEnum.brown), null]
   @Input() stonesOnShip:Stone[][];
