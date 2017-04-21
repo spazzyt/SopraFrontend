@@ -413,12 +413,12 @@
 
           <div id="new_game_button">
             <button type="button" class="btn btn-primary" id="ngButton"
-                    (click)="staticModal.show()">showScoreBoard</button>
+                    (click)="staticModal.show(); sortScores()">showScoreBoard</button>
           </div>
         </div>
 
 
-        <!-- Modal: New Game -->
+        <!-- Modal: End Game -->
         <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
              tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm">
@@ -426,7 +426,7 @@
 
               <!--  Score Board title   -->
               <div class="modal-header">
-                <h4 class="modal-title pull-left" >Alfredo wins!</h4>
+                <h4 class="modal-title pull-left" *ngIf="nameAndScores[0] != null">{{nameAndScores[0].username}} wins!</h4>
               </div>
 
               <!--  Score Board table   -->
@@ -439,28 +439,10 @@
                     <th>Score</th>
                   </tr>
 
-                  <tr>
-                    <td>1.</td>
-                    <td>{{playerNames[0]}}</td>
-                    <td>20</td>
-                  </tr>
-
-                  <tr>
-                    <td>2.</td>
-                    <td>{{playerNames[1]}}</td>
-                    <td>18</td>
-                  </tr>
-
-                  <tr>
-                    <td>3.</td>
-                    <td>Frida</td>
-                    <td>16</td>
-                  </tr>
-
-                  <tr>
-                    <td>4.</td>
-                    <td>Gertrudis</td>
-                    <td>12</td>
+                  <tr *ngFor="let player of nameAndScores; let i=index">
+                    <td>{{i+1}}.</td>
+                    <td>{{player.username}}</td>
+                    <td>{{player.score}}</td>
                   </tr>
                 </table>
 
