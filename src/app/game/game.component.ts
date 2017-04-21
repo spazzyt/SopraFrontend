@@ -1970,7 +1970,7 @@ export class GameComponent  implements OnInit {
 
       if(stonesInSled < 5){
         if(stonesInSled < 3){
-          stonesToTake = 3
+          stonesToTake = Math.min(stonesInQuarry, 3);
         }
         else{
           stonesToTake = Math.min(stonesInQuarry, 5-stonesInSled);
