@@ -219,9 +219,6 @@ export class GameComponent  implements OnInit {
           //Initialize the new game
           this.initializeNewGame(this.game);
 
-          for(let i = 0; i < this.game.players.length; i++){
-            this.playerNames[i] = this.game.players[i].username;
-          }
 
           //Initialize the whole market card set
           for (let i=1; i<=34; i++){
@@ -330,6 +327,11 @@ export class GameComponent  implements OnInit {
     myPlayerField=this.determineWhichPlayerFieldYouHave(
       game_backend.players,
       game_backend.numPlayers);
+
+    //Fill the local player array (used for the scoreboard)
+    for(let i = 0; i < this.game.players.length; i++){
+      this.playerNames[i] = this.game.players[i].username;
+    }
 
     //Determine whether you are the active player (set class variable)
     let amI_CurrentActivePlayer=this.game.currentActivePlayerField===myPlayerField;
