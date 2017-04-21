@@ -45,6 +45,7 @@ import {PositionEnum} from "../shared/models/position.enum";
 import {Action} from "../shared/models/action";
 import {Move} from "../shared/models/move";
 import {WSService} from "../shared/services/websocket.service";
+import {UserNameAndScore} from "../shared/models/user-name-and-score";
 
 
 @Component({
@@ -65,6 +66,16 @@ export class GameComponent  implements OnInit {
 
   // initial Game object received from Backend
   game: Game;
+
+  //player names for scoreboard
+  playerNames: string[] = [];
+
+  //player scores for scoreboard
+  playerScores: number[] = [7,4,2,8];
+
+  //array for mapping names to scores
+  nameAndScores: UserNameAndScore[] = [];
+
 
   // my username entered in login screen
   // get username from userService
@@ -251,6 +262,8 @@ export class GameComponent  implements OnInit {
         .subscribe((game: Game) => {
           this.game = game;
 
+
+
 // TODO this still throws errors, but should be added when backend delivers correct data
 
           //Map players to colours
@@ -263,6 +276,9 @@ export class GameComponent  implements OnInit {
 
           //Initialize the new game
           this.initializeNewGame(this.game);
+
+
+
 
           //Initialize the whole market card set
           for (let i=1; i<=34; i++){
@@ -381,6 +397,11 @@ export class GameComponent  implements OnInit {
     myPlayerField=this.determineWhichPlayerFieldYouHave(
       game_backend.players,
       game_backend.numPlayers);
+
+    //Fill the local player array (used for the scoreboard)
+    for(let i = 0; i < this.game.players.length; i++){
+      this.playerNames[i] = this.game.players[i].username;
+    }
 
     //Determine whether you are the active player (set class variable)
     let amI_CurrentActivePlayer=this.game.currentActivePlayerField===myPlayerField;
@@ -1258,6 +1279,22 @@ export class GameComponent  implements OnInit {
   //helper functions
   //------------------
 
+  //TODO add functionality for showing modal through this function
+  showScoreboard(){
+    this.sortScores();
+  }
+
+  sortScores(){
+
+    for(let i = 0; i < this.playerNames.length; i++){
+
+      this.nameAndScores.push(new UserNameAndScore(this.playerNames[i], this.playerScores[i]));
+    }
+
+    this.nameAndScores = this.nameAndScores.sort((n1,n2) => n2.score - n1.score);
+
+  }
+
   //show stone on ship
   updateStoneOnShip(){
 
@@ -2029,7 +2066,7 @@ export class GameComponent  implements OnInit {
 
       if(stonesInSled < 5){
         if(stonesInSled < 3){
-          stonesToTake = 3
+          stonesToTake = Math.min(stonesInQuarry, 3);
         }
         else{
           stonesToTake = Math.min(stonesInQuarry, 5-stonesInSled);
@@ -2040,7 +2077,7 @@ export class GameComponent  implements OnInit {
 
       }
       else{
-        this.showSnackbarMessage("you can not take stones from the quarry")
+        this.showSnackbarMessage("You cannot take stones from the quarry.")
         return;
       }
     }
