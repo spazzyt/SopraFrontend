@@ -40,6 +40,12 @@ export class AuthenticationService {
     this.apiUrl = 'http://localhost:8080'
   }
 
+  updateCookie(){
+    let mySelf = JSON.parse(localStorage.getItem('mySelf'));
+    this.token = mySelf && mySelf.token;
+    this.mySelf = mySelf;
+  }
+
 
   //==============
   // Http-Methods

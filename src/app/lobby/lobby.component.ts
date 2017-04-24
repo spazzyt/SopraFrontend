@@ -75,6 +75,8 @@ export class LobbyComponent implements OnInit {
     // subscribe to service: this.gameService.getGames()
     this.loadGameList();
 
+    this.authenticationService.updateCookie();
+
     // interval to update game list (every X ms a request is made to the frontend)
     this.userListChecker = setInterval(()=>this.loadUserList(), this.requestIntervalTime);
     this.gameListChecker = setInterval(()=>this.loadGameList(), this.requestIntervalTime);
