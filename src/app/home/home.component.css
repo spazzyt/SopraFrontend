@@ -2,23 +2,52 @@
   width: 1366px;
   height: 768px;
   background-image: url(../../assets/images/background.png);
-  background-size:cover
+  background-size:cover;
+  font-family: 'Lithos Pro', Helvetica, sans-serif;
 }
 
 .container{
   padding-top: 150px;
-  max-width: 450px;
+  max-width: 850px;
   padding-left: 15px;
   padding-right: 15px;
   margin: 0 auto;
+  /*border: 2px solid blue;*/
 }
 
 .button_{
   padding-top: 10px;
   max-width: 400px;
-  padding-left: 35%;
-  margin: 0 auto;}
+  text-align: center;
+  margin: 0 auto;
+  /*border: 2px solid cyan;*/
+}
 
 .jumbotron{
   background-color: beige;
+}
+
+.btn{
+  background-color: #edcd98;
+  border: 3px solid #d4bd88;
+  color: #867558;
+  font-size: 25px;
+  padding: 2px;
+  outline: none;
+}
+
+.btn:active{
+  background-color: #867558;
+  border: 3px solid #867558;
+  color: #edcd98;
+  outline: none;
+}
+
+.btn:hover{
+  box-shadow: 1px 1px 10px #d4bd88;
+  outline: none;
+}
+
+h1, h2, p{
+  text-align: center;
 }
