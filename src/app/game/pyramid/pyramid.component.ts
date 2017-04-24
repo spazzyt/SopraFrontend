@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Stone} from "../../shared/models/stone";
 import {Site} from "../../shared/site";
+import {PositionEnum} from "../../shared/models/position.enum";
+
 
 @Component({
   selector: 'app-pyramid',
@@ -11,6 +13,7 @@ export class PyramidComponent extends Site implements OnInit  {
 
   stones:Stone[] = [];
   totalStones:number = 0;
+  myEnum = PositionEnum.Pyramid;
 
 
   constructor() {
