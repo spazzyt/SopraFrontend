@@ -50,7 +50,9 @@ export class WSService {
         case 'CURRENTTURN':
           //let game know whose turn it is
           console.log('It\'s ' + msg.payload + "'s turn.");
-          //gameComponent.setCurrentPlayer(msg.payload);    //TODO add function for telling game component who is the current player
+          console.log("my name is: ", gameComponent.game.myPlayerField, gameComponent.game.myUserName)
+          gameComponent.setPlayerField(msg.payload);
+          // TODO add function for telling game component who is the current player
           break;
 
 

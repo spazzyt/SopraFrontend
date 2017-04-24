@@ -91,6 +91,7 @@ export class GameComponent  implements OnInit {
   currentActivePlayerField:ColourEnum;
   private playerMap: Map<any, any>;
   private colourMap: Map<any, any>;
+  private nameToColourMap: Map<any, any>;
 
 
   // store ships via their id
@@ -232,7 +233,6 @@ export class GameComponent  implements OnInit {
   players_target = new Array<User>();
 
 
-
   //==========
   // ngOnInit
   //==========
@@ -277,6 +277,14 @@ export class GameComponent  implements OnInit {
           this.colourMap[ColourEnum.white] = this.topLeftComponent;
           if(this.game.numPlayers > 2) this.colourMap[ColourEnum.brown] = this.topRightComponent;
           if(this.game.numPlayers > 3) this.colourMap[ColourEnum.gray] = this.bottomRightComponent;
+
+          //Map player names to colours
+          this.nameToColourMap = new Map();
+
+          this.nameToColourMap[this.game.players[0].username] = ColourEnum.black;
+          this.nameToColourMap[this.game.players[1].username] = ColourEnum.white;
+          if(this.game.numPlayers > 2) this.nameToColourMap[this.game.players[2].username] = ColourEnum.brown;
+          if(this.game.numPlayers > 3) this.nameToColourMap[this.game.players[3].username] = ColourEnum.gray;
 
           //Initialize the new game
           this.initializeNewGame(this.game);
@@ -357,7 +365,7 @@ export class GameComponent  implements OnInit {
     this.players_target.push(this.player4,);
 
     //Fake current active player field
-    this.currentActivePlayerField=ColourEnum.black;
+    //this.game.currentActivePlayerField=ColourEnum.black;
 
 
 
@@ -375,6 +383,9 @@ export class GameComponent  implements OnInit {
 
     //set class variable
     this.game = game_backend;
+
+    //set username in game model
+    this.game.myUserName = this.myUserName;
 
     //pass game information to gameService
     this.gameService.setGame(this.game);
@@ -401,8 +412,7 @@ export class GameComponent  implements OnInit {
     this.initializePlayerComponents(this.game.players, this.game.numPlayers);
 
     //Determine which player field you have (sets class variable)
-    let myPlayerField:ColourEnum;
-    myPlayerField=this.determineWhichPlayerFieldYouHave(
+    this.game.myPlayerField=this.determineWhichPlayerFieldYouHave(
       game_backend.players,
       game_backend.numPlayers);
 
@@ -412,7 +422,7 @@ export class GameComponent  implements OnInit {
     }
 
     //Determine whether you are the active player (set class variable)
-    let amI_CurrentActivePlayer=this.game.currentActivePlayerField===myPlayerField;
+    let amI_CurrentActivePlayer=this.game.currentActivePlayerField===this.game.myPlayerField;
     this.amI_CurrentActivePlayer=amI_CurrentActivePlayer; //important for dragula to work
 
     //Read current active player field (set class variable)
@@ -647,6 +657,8 @@ export class GameComponent  implements OnInit {
           alert("initializePlayerComponents:error");}
       }
     }
+
+    console.log("My player field was determined: ", myPlayerField);
     return myPlayerField;
   }
 
@@ -991,7 +1003,6 @@ export class GameComponent  implements OnInit {
       this.ships[ship.id] = ship;
 
     this.game.marketCards = round.marketCards;
-    console.log("yooo", round, this.ships);
     //this.activateActivePlayerInteractions(true, ColourEnum.black);  //TODO add real data here
 
 
@@ -1026,20 +1037,6 @@ export class GameComponent  implements OnInit {
   //===========================================================
   // Update Game UI for one Decision of another client
   //===========================================================
-  updateGameforOneDecision(newDecision_:Decision){
-
-    //update game object
-    this.game.addDecision(newDecision_);
-
-    //check whether it was your decision
-    let isItMyDecision:boolean=newDecision_.decisionMadeBy===this.myPlayerField;
-
-    //update game UI only, if it was not your decision
-    if (!isItMyDecision) {
-      //this.updateUiForOneMove(newDecision_, isItMyDecision);
-    }
-
-  }
 
   updateUiForOneMove2(move: Move, username: string){
 
@@ -1310,6 +1307,21 @@ export class GameComponent  implements OnInit {
   //------------------
   //helper functions
   //------------------
+
+  setPlayerField(name: string){
+    console.log("target name: ", name);
+    this.game.currentActivePlayerField = this.nameToColourMap[name];
+
+    //Status Update:
+    //Determine whether you are the active player (set class variable)
+    this.game.amI_CurrentActivePlayer=this.game.currentActivePlayerField===this.game.myPlayerField;
+    this.amI_CurrentActivePlayer=this.game.amI_CurrentActivePlayer; //important for dragula to work
+
+
+
+    this.activateActivePlayerInteractions(this.game.amI_CurrentActivePlayer, this.game.currentActivePlayerField);
+    this.deactivateInactivePlayerInteractions(this.game.amI_CurrentActivePlayer, this.game.currentActivePlayerField);
+  }
 
   //TODO add functionality for showing modal through this function
   showScoreboard(){
@@ -1805,12 +1817,16 @@ export class GameComponent  implements OnInit {
 
         //only switch on Market Icon colors with numbers in it
         //----------------------------------------------------
-        if(1){console.log([0,1,2,3,4,5,6,7,8,9,10,11].slice(3,11));}
-        this.bottomLeftComponent.deactivateOrActivateIcons(this.game.playerFieldIconsBlackAsBoolean.slice(3,11));
-        this.bottomRightComponent.deactivateOrActivateIcons(this.game.playerFieldIconsWhiteAsBoolean.slice(3,11));
-        this.topLeftComponent.deactivateOrActivateIcons(this.game.playerFieldIconsBrownAsBoolean.slice(3,11));
-        this.topRightComponent.deactivateOrActivateIcons(this.game.playerFieldIconsGrayAsBoolean.slice(3,11));
+        if(this.game.playerFieldIconsBlack != null){
 
+          if(1){console.log([0,1,2,3,4,5,6,7,8,9,10,11].slice(3,12));}
+          console.log("test: ", this.game.playerFieldIconsBlack, this.game.playerFieldIconsBlackAsBoolean);
+          this.bottomLeftComponent.deactivateOrActivateIcons(this.game.playerFieldIconsBlackAsBoolean.slice(3,12));
+          this.bottomRightComponent.deactivateOrActivateIcons(this.game.playerFieldIconsWhiteAsBoolean.slice(3,12));
+          this.topLeftComponent.deactivateOrActivateIcons(this.game.playerFieldIconsBrownAsBoolean.slice(3,12));
+          this.topRightComponent.deactivateOrActivateIcons(this.game.playerFieldIconsGrayAsBoolean.slice(3,12));
+
+        }
         //switch on your Quarry colors, switch off the others
         this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
         this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
