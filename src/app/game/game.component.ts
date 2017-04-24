@@ -239,11 +239,7 @@ export class GameComponent  implements OnInit {
 
   ngOnInit() {
 
-    // tmp ship stuff
-    this.ships[1] = this.ship1;
-    this.ships[2] = this.ship2;
-    this.ships[3] = this.ship3;
-    this.ships[4] = this.ship4;
+
 
 
     this.sites["Pyramid"] = this.pyramidComponent;
@@ -978,8 +974,12 @@ export class GameComponent  implements OnInit {
     //Update internal data arrays with data from backend:
     this.game.roundNumber = round.roundNumber;
     this.game.ships = round.ships;
+
+    for(let ship of this.game.ships)
+      this.ships[ship.id] = ship;
+
     this.game.marketCards = round.marketCards;
-    console.log(round);
+    console.log("yooo", round, this.ships);
     //this.activateActivePlayerInteractions(true, ColourEnum.black);  //TODO add real data here
 
 
@@ -1040,7 +1040,7 @@ export class GameComponent  implements OnInit {
 
       case PositionEnum.Pyramid:
         //TODO finish this shit
-        this.addShipToArrivingHarbour(move.to, move.pos)
+        this.moveShipById(move.pos, 'Pyramid'); //TODO get site
         break;
     }
 
