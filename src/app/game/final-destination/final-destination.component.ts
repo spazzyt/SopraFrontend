@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import {Ship} from "../../shared/models/ship";
+import {Move} from "../../shared/models/move";
+import {GameService} from "../../shared/services/game.service";
+import {PositionEnum} from "../../shared/models/position.enum";
 
 
 @Component({
@@ -11,12 +14,13 @@ import {Ship} from "../../shared/models/ship";
 export class FinalDestinationComponent implements OnInit {
 
   @Input()
-  id: string;
+  id: PositionEnum;
 
   @Input()
   ship: Ship;
 
-  constructor() {
+  constructor(private gameService: GameService) {
+
 
   }
 
@@ -28,6 +32,11 @@ export class FinalDestinationComponent implements OnInit {
     ship.isInHarbour = false;
     this.ship = ship;
     console.log("droped ship_ ", ship);
+
+
+
+    let moveToSend = new Move(null, PositionEnum.DepartingHarbour, this.id, this.ship.id);
+    this.gameService.sendMove(moveToSend)
   }
 
 }

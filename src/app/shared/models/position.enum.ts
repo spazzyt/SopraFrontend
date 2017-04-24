@@ -11,6 +11,7 @@ export enum PositionEnum {
   BurialChamber=<any>"BurialChamber",
   Obelisk=<any>"Obelisk",
   Market=<any>"Market",
+  DepartingHarbour=<any>"DepartingHarbour",
 
 
   //TODO remove old enums

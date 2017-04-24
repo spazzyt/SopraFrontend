@@ -90,6 +90,7 @@ export class GameComponent  implements OnInit {
   // player field of current active player
   currentActivePlayerField:ColourEnum;
   private playerMap: Map<any, any>;
+  private colourMap: Map<any, any>;
 
 
   // store ships via their id
@@ -160,8 +161,7 @@ export class GameComponent  implements OnInit {
               private gameService: GameService,
               private wsService: WSService,
               private userService: UserService,
-              private route: ActivatedRoute,
-              private _ngZone: NgZone) {
+              private route: ActivatedRoute) {
 
     //dragula subscriptions
     this.dragula_subscribeDragEvent();
@@ -239,9 +239,6 @@ export class GameComponent  implements OnInit {
 
   ngOnInit() {
 
-
-
-
     this.sites["Pyramid"] = this.pyramidComponent;
     this.sites["Temple"] = this.templeComponent;
     this.sites["BurialChamber"] = this.burialChamberComponent;
@@ -265,13 +262,21 @@ export class GameComponent  implements OnInit {
 
 // TODO this still throws errors, but should be added when backend delivers correct data
 
-          //Map players to colours
+          //Map player names to components
           this.playerMap = new Map();
 
           this.playerMap[this.game.players[0].username] = this.bottomLeftComponent;
           this.playerMap[this.game.players[1].username] = this.topLeftComponent;
           if(this.game.numPlayers > 2) this.playerMap[this.game.players[2].username] = this.topRightComponent;
           if(this.game.numPlayers > 3) this.playerMap[this.game.players[3].username] = this.bottomRightComponent;
+
+          //Map player colours to components
+          this.colourMap = new Map();
+
+          this.colourMap[ColourEnum.black] = this.bottomLeftComponent;
+          this.colourMap[ColourEnum.white] = this.topLeftComponent;
+          if(this.game.numPlayers > 2) this.colourMap[ColourEnum.brown] = this.topRightComponent;
+          if(this.game.numPlayers > 3) this.colourMap[ColourEnum.gray] = this.bottomRightComponent;
 
           //Initialize the new game
           this.initializeNewGame(this.game);
@@ -370,6 +375,10 @@ export class GameComponent  implements OnInit {
 
     //set class variable
     this.game = game_backend;
+
+    //pass game information to gameService
+    this.gameService.setGame(this.game);
+
     let fakegame = this.getFakeGame();               //TODO delete this as soon as the backend passes the necessary arguments
     this.game.marketCards = fakegame.marketCards;   //TODO delete this
     this.game.ships = fakegame.ships;               //TODO delete this
@@ -1044,6 +1053,26 @@ export class GameComponent  implements OnInit {
       case PositionEnum.Pyramid:
         //TODO finish this shit
         this.moveShipById(move.pos, 'Pyramid'); //TODO get site
+        break;
+
+      case PositionEnum.Temple:
+        //TODO finish this shit
+        this.moveShipById(move.pos, 'Temple'); //TODO get site
+        break;
+
+      case PositionEnum.BurialChamber:
+        //TODO finish this shit
+        this.moveShipById(move.pos, 'BurialChamber'); //TODO get site
+        break;
+
+      case PositionEnum.Obelisk:
+        //TODO finish this shit
+        this.moveShipById(move.pos, 'Obelisk'); //TODO get site
+        break;
+
+      case PositionEnum.Market:
+        //TODO finish this shit
+        this.moveShipById(move.pos, 'Market'); //TODO get site
         break;
     }
 
@@ -2063,9 +2092,8 @@ export class GameComponent  implements OnInit {
 
     console.log('This player takes stones from Quarry:', playerField);
 
-    if(playerField===ColourEnum.black){
-      stonesInQuarry=this.bottomLeftComponent.quarryStones;
-      stonesInSled=this.bottomLeftComponent.sledStones;
+      stonesInQuarry=this.colourMap[playerField].quarryStones;
+      stonesInSled=this.colourMap[playerField].sledStones;
 
       if(stonesInSled < 5){
         if(stonesInSled < 3){
@@ -2075,21 +2103,21 @@ export class GameComponent  implements OnInit {
           stonesToTake = Math.min(stonesInQuarry, 5-stonesInSled);
         }
 
-        this.bottomLeftComponent.quarryStones -= stonesToTake;
-        this.bottomLeftComponent.sledStones += stonesToTake;
+        this.colourMap[playerField].quarryStones -= stonesToTake;
+        this.colourMap[playerField].sledStones += stonesToTake;
 
       }
       else{
         this.showSnackbarMessage("You cannot take stones from the quarry.")
         return;
       }
-    }
+
 
     //send move object to backend
     //ToDo: Communication Channel to Backend
     //ToDo: send move object to backend
     let moveToSend = new Move(1, PositionEnum.Quarry, PositionEnum.Sled, stonesToTake);
-    this.gameService.sendMove(moveToSend, this.game.id); //Send move to backend
+    this.gameService.sendMove(moveToSend); //Send move to backend
 
 
     //snackbar message

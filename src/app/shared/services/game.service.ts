@@ -10,6 +10,7 @@ import {Move} from "../models/move";
 @Injectable()
 export class GameService {
   private apiUrl: string;
+  private game: Game;
 
   constructor(private http: Http,
               private router: Router,
@@ -21,7 +22,9 @@ export class GameService {
     this.apiUrl = 'http://localhost:8080'
   }
 
-
+  setGame(game: Game){
+    this.game = game;
+  }
 
   getGame(gameId): Observable<Game> {
     // add authorization header with token
@@ -33,7 +36,7 @@ export class GameService {
       .map((response: Response) => response.json());
   }
 
-  sendMove(move: Move, gameId: number){
+  sendMove(move: Move){
     let bodyString = JSON.stringify(move); // Stringify payload
     let headers = new Headers({
       'Content-Type': 'application/json',
@@ -43,7 +46,7 @@ export class GameService {
     params.set("token", this.authenticationService.token)
     let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
-    this.http.post(this.apiUrl + '/game/' + gameId + '/move', bodyString, options) // ...using post request
+    this.http.post(this.apiUrl + '/game/' + this.game.id + '/move', bodyString, options) // ...using post request
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')) //...errors if
       .subscribe(response => {
         console.log("Sent Move: ", move);
