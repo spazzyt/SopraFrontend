@@ -1,3 +1,19 @@
+
+.harbour_parent{
+  border: 1px solid greenyellow;
+  width: 22%;
+  height: 100%;
+  float: left;
+}
+
+.site_parent{
+  border: 1px solid maroon;
+  width: 78%;
+  height: 100%;
+  float: left;
+}
+
+
 #space_left{
   float: left;
   float: top;

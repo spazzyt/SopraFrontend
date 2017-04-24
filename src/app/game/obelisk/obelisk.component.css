@@ -4,6 +4,22 @@
   font-style: normal;
 }
 
+
+.harbour_parent{
+  border: 1px solid greenyellow;
+  width: 22%;
+  height: 100%;
+  float: left;
+}
+
+.site_parent{
+  border: 1px solid maroon;
+  width: 78%;
+  height: 100%;
+  float: left;
+}
+
+
 #spacing_left{
   width: 38%;
   height: 100%;

@@ -1,20 +1,27 @@
-<div class="space">
-  <div class="market_info" id="market"></div>
-</div>
+<div class="site_parent">
+
+  <div class="space">
+    <div class="market_info" id="market"></div>
+  </div>
 
 
-<!--add marketCardSlot_i-->
-<div *ngFor="let i of [0,1,2,3];"
-     id="market_card_slot_{{i+1}}" class="market_card_slot">
+  <!--add marketCardSlot_i-->
+  <div *ngFor="let i of [0,1,2,3];"
+       id="market_card_slot_{{i+1}}" class="market_card_slot">
 
-  <!--add marketCard_i to market-->
-  <div class="left_spacing"></div>
-  <div *ngIf="marketCards[i]" id="ngifMarketCards" class="market_card_slot card">
-    <div id="market_card_{{i+1}}" class="market_card_{{i+1}} card_picture"
-         [ngStyle]="{ 'background-image': 'url(' + marketCards[i].imageUrl + ')' }">
+    <!--add marketCard_i to market-->
+    <div class="left_spacing"></div>
+    <div *ngIf="marketCards[i]" id="ngifMarketCards" class="market_card_slot card">
+      <div id="market_card_{{i+1}}" class="market_card_{{i+1}} card_picture"
+           [ngStyle]="{ 'background-image': 'url(' + marketCards[i].imageUrl + ')' }">
+      </div>
     </div>
   </div>
+
 </div>
 
 
+<div class="harbour_parent">
+  <final-destination id="site_harbour_Market" [id]="'Market'" [ship]="ship"></final-destination>
+</div>
 

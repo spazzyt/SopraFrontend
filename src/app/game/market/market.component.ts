@@ -1,13 +1,14 @@
 import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {MarketCard} from "../../shared/models/market-card";
 import {Position} from "../../shared/models/position.enum"
+import {Site} from "../../shared/site";
 
 @Component({
   selector: 'app-market',
   templateUrl: './market.component.html',
   styleUrls: ['./market.component.css']
 })
-export class MarketComponent implements OnInit {
+export class MarketComponent extends Site implements OnInit {
 
   //===============
   //Class Variables
@@ -28,8 +29,7 @@ export class MarketComponent implements OnInit {
   //Constructor
   //===============
   constructor() {
-
-
+    super("Market");
   }
 
   //===============

@@ -125,8 +125,9 @@
 
 .market_site{
   height: 100%;
-  width: 25%;
+  width: 33%;
   float: left;
+  border: 1px solid blueviolet;
 }
 
 .market_harbour{
