@@ -1,3 +1,11 @@
+
+<div class="harbour_parent">
+  <final-destination id="site_harbour_Temple" [id]="'Temple'" [ship]="ship"></final-destination>
+</div>
+
+
+<div class="site_parent">
+
 <div class="third" id="top">
   <div class="half" id="left">
     <div class="points_assignment" id="temple_points"></div>
@@ -39,8 +47,7 @@
       </div>
   <div class="section" id="spacing_right"></div>
 </div>
-    <div class="third" id="bottom"><div *ngFor="let field_id_lvl of fieldArray" id="field_{{field_id_lvl}}" class="field">{{fieldHeight[field_id_lvl-1]}}</div></div>
-
+    <div class="third" id="bottom"><div *ngFor="let field_id_lvl of fieldArray" id="field_{{field_id_lvl}}" class="field">{{fieldHeight[field_id_lvl-1]}}</div></div></div>
 
   <!--
     <div *ngFor="let stone of stones; let i = index" id="field_{{i+1}}" class="field">

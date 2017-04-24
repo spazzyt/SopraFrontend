@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild, EventEmitter, Output} from '@angular/core'
 import {Stone} from "../../shared/models/stone";
 import {Game} from "../../shared/models/game";
 import {GameComponent} from "../game.component";
+import {Site} from "../../shared/site";
 
 @Component({
   selector: 'app-temple',
@@ -12,7 +13,7 @@ import {GameComponent} from "../game.component";
 //===========
 // Component
 //===========
-export class TempleComponent implements OnInit {
+export class TempleComponent extends Site implements OnInit {
 
   //===============
   //Class Variables
@@ -42,7 +43,10 @@ export class TempleComponent implements OnInit {
   //Constructor
   //===============
 
-  constructor() { }
+  constructor() {
+
+    super("Temple");
+  }
 
 
   //==========

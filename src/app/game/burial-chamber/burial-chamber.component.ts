@@ -1,12 +1,13 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Stone} from "../../shared/models/stone";
+import {Site} from "../../shared/site";
 
 @Component({
   selector: 'app-burial-chamber',
   templateUrl: './burial-chamber.component.html',
   styleUrls: ['./burial-chamber.component.css']
 })
-export class BurialChamberComponent implements OnInit {
+export class BurialChamberComponent extends Site implements OnInit {
 
   //===============
   //Class Variables
@@ -19,7 +20,9 @@ export class BurialChamberComponent implements OnInit {
   //===============
   //Constructor
   //===============
-  constructor() { }
+  constructor() {
+    super("BurialChamber");
+  }
 
   ngOnInit() {
     //styles in styles.css at the end under popover, to style:

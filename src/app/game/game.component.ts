@@ -243,7 +243,10 @@ export class GameComponent  implements OnInit {
 
 
     this.sites["Pyramid"] = this.pyramidComponent;
-
+    this.sites["Temple"] = this.templeComponent;
+    this.sites["BurialChamber"] = this.burialChamberComponent;
+    this.sites["Obelisk"] = this.obeliskComponent;
+    this.sites["Market"] = this.marketComponent;
 
 
     // (+) converts string 'id' to a number

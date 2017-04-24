@@ -1,3 +1,21 @@
+
+.harbour_parent{
+  width: 60%;
+  height: 30%;
+  float: left;
+  margin-top: -110%;
+  margin-left: 80%;
+  transform: rotate(90deg);
+}
+
+.site_parent{
+  width: 78%;
+  height: 100%;
+  float: left;
+}
+
+
+
 .market_info{
   width: 55%;
   height: 50%;
