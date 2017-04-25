@@ -39,6 +39,8 @@ export class ObeliskComponent extends Site implements OnInit {
 
   constructor() {
     super("Obelisk");
+
+    console.log("yo", this.myComp);
   }
 
 
@@ -72,7 +74,7 @@ export class ObeliskComponent extends Site implements OnInit {
   //used for ship movements (with event listener)
   //---------------------------------------------
   placeStones(targetStones: Stone[]){
-
+console.log("WHOAT")
     // FORMAT FOR stonenumbers Array
     // 0: black
     // 1: white

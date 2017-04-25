@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Injector} from '@angular/core';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import {Ship} from "../../shared/models/ship";
 import {Move} from "../../shared/models/move";
@@ -19,12 +19,19 @@ export class FinalDestinationComponent implements OnInit {
   @Input()
   ship: Ship;
 
-  constructor(private gameService: GameService) {
+  @Input()
+  parent;
+
+  constructor(private gameService: GameService,
+           private inj:Injector) {
+
 
 
   }
 
   ngOnInit() {
+
+    console.log(this.parent);
   }
 
   addTo($event: any) {
@@ -33,7 +40,8 @@ export class FinalDestinationComponent implements OnInit {
     this.ship = ship;
     console.log("dropped ship_ ", ship);
 
-
+    this.parent.placeStones(this.ship.slots);
+    this.ship.slots = null;
 
     let moveToSend = new Move(PositionEnum.DepartingHarbour, this.id, ship.id);
     this.gameService.sendMove(moveToSend)

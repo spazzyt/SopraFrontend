@@ -1068,6 +1068,8 @@ export class GameComponent  implements OnInit {
       //Sail ship to Pyramid:
       case PositionEnum.Pyramid:
         this.moveShipById(move.pos, 'Pyramid');
+        console.log("PLACING ON PYRAMID: ", move.pos, this.game.ships[move.pos])
+        this.pyramidComponent.placeStones(this.game.ships[move.pos].slots);
         break;
 
       //Sail ship to Temple:
