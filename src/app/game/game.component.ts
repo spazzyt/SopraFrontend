@@ -335,6 +335,8 @@ export class GameComponent  implements OnInit {
   //Fake Game
   getFakeGame(){
 
+    console.log("DO NOT USE THE FAKE GAME ANYMORE!!!!");
+
     //fill fake stone array
     this.stones_target.push(this.stone1);
     this.stones_target.push(this.stone2);
@@ -369,8 +371,9 @@ export class GameComponent  implements OnInit {
 
 
 
-    let returnGame = new Game(0, 'token', 'name', GameStatusEnum.RUNNING, 4,  this.players_target, 1, this.ships_target, this.marketCards, this.currentActivePlayerField, null);
+    let returnGame = new Game(0, 'token', 'name', GameStatusEnum.RUNNING, 4,  this.players_target, 1, this.ships_target, this.marketCards, this.game.currentActivePlayerField, null);
     return returnGame;
+
   }
 
 
@@ -441,7 +444,6 @@ export class GameComponent  implements OnInit {
 
     //Read current active player field (set class variable)
     let currentActivePlayerField=this.game.currentActivePlayerField;
-    this.currentActivePlayerField=currentActivePlayerField;
 
     //Initialize Myself
     //(depends on whether you are the active or inactive player)
