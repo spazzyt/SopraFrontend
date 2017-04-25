@@ -49,7 +49,11 @@ export class ShipComponent implements OnInit {
 
   }
 
+  addTo($event: any, shipId: number, slotId: number) {
+    let stone = $event.dragData;
 
+    console.log("dropped stone_ ", stone, shipId, slotId);
+    this.ship.addStoneById(stone, slotId);
 
-
+  }
 }
