@@ -33,7 +33,7 @@ export class LobbyComponent implements OnInit {
   public games: Game[] = []; //fetched with: this.gameService.getGames()
 
   //request interval time to get data from backend
-  public requestIntervalTime = 500; // set to 500 ms during development, for production set to 500 ms
+  public requestIntervalTime = 1000; // set to 500 ms during development, for production set to 500 ms
 
   //who am I
   public mySelf:User; //fetched with: this.userService.MySelf()
@@ -119,6 +119,19 @@ export class LobbyComponent implements OnInit {
       .subscribe(games => {
         if(1){console.log("fetch games: ", this.games);}
         this.games = games;
+
+        let foundmyself = false;
+        for(let game of games){
+          for(let player of game.players){
+            if(player.username == this.mySelf.username){
+              this.joinedGame = game.id;
+              foundmyself=true;
+            }
+          }
+        }
+        if(!foundmyself){
+          this.joinedGame = -1;
+        }
       });
   }
 
@@ -128,6 +141,7 @@ export class LobbyComponent implements OnInit {
     .subscribe(game => {
       //this.game = game;
       if(1){console.log("add game ");}
+      console.log("JoinedGame IS: pepepepeppepe", this.joinedGame);
       return this.loadGameList();
     });
   }
@@ -138,7 +152,6 @@ export class LobbyComponent implements OnInit {
       .subscribe(game => {
         //this.game = game;
         if(1){console.log("leave game ");}
-        this.joinedGame=-1;
         return this.loadGameList();
       });
   }
@@ -149,7 +162,6 @@ export class LobbyComponent implements OnInit {
       .subscribe(game => {
         //this.game = game;
         if(1){console.log("join game ");}
-        this.joinedGame=gameId;
 
         this.currentGameChecker = setInterval(()=>this.waitForGameStart(gameId), this.requestIntervalTime);
 

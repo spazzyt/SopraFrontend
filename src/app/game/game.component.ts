@@ -382,10 +382,24 @@ export class GameComponent  implements OnInit {
   initializeNewGame(game_backend:Game){
 
     //set class variable
-    this.game = game_backend;
+    let game = new Game(game_backend.id, game_backend.token, game_backend.name, game_backend.status, game_backend.numPlayers, game_backend.players, game_backend.roundNumber, game_backend.ships, game_backend.marketCards, game_backend.currentActivePlayerField);
+    this.game = game;
 
     //set username in game model
     this.game.myUserName = this.myUserName;
+
+    //initialize card arrays
+    /*
+    this.game.playerFieldIconsBlack =[0,0,0,0,0,0,0,0,0,0,0,0];
+    this.game.playerFieldIconsWhite =[0,0,0,0,0,0,0,0,0,0,0,0];
+    this.game.playerFieldIconsBrown =[0,0,0,0,0,0,0,0,0,0,0,0];
+    this.game.playerFieldIconsGray =[0,0,0,0,0,0,0,0,0,0,0,0];
+
+    this.game.playerFieldIconsBlackAsBoolean =this.game.numberToBoolean(this.game.playerFieldIconsBlack);
+    this.game.playerFieldIconsWhiteAsBoolean =this.game.numberToBoolean(this.game.playerFieldIconsWhite);
+    this.game.playerFieldIconsBrownAsBoolean =this.game.numberToBoolean(this.game.playerFieldIconsBrown);
+    this.game.playerFieldIconsGrayAsBoolean  =this.game.numberToBoolean(this.game.playerFieldIconsGray);
+*/
 
     //pass game information to gameService
     this.gameService.setGame(this.game);
@@ -435,7 +449,7 @@ export class GameComponent  implements OnInit {
 
     // set Dragula Options (Depending on whether you are the active or inactive player)
     //---------------------------------------------------------------------------------
-    //this.dragulaShipMovement_setOptions(amI_CurrentActivePlayer); //TODO Fix these
+    //this.dragulaShipMovement_setOptions(amI_CurrentActivePlayer);
     //this.dragulaStoneMovement_setOptions(amI_CurrentActivePlayer);
 
   }
@@ -1435,7 +1449,10 @@ export class GameComponent  implements OnInit {
 
     if(playerField_==ColourEnum.black){
       for(let i = 0; i < ArrayOf0To11.length; i++){
+        console.log("this works", ArrayOf0To11, this.game);
         this.game.playerFieldIconsBlack[i] += ArrayOf0To11[i];
+        console.log("that works");
+
       }
     }
     if(playerField_==ColourEnum.white){
@@ -1817,14 +1834,14 @@ export class GameComponent  implements OnInit {
 
         //only switch on Market Icon colors with numbers in it
         //----------------------------------------------------
-        if(this.game.playerFieldIconsBlack != null){
 
-          if(1){console.log([0,1,2,3,4,5,6,7,8,9,10,11].slice(3,12));}
+        if(this.game.playerFieldIconsBlack != null){
+          if(1){console.log([0,1,2,3,4,5,6,7,8,9,10,11].slice(3,11));}
           console.log("test: ", this.game.playerFieldIconsBlack, this.game.playerFieldIconsBlackAsBoolean);
-          this.bottomLeftComponent.deactivateOrActivateIcons(this.game.playerFieldIconsBlackAsBoolean.slice(3,12));
-          this.bottomRightComponent.deactivateOrActivateIcons(this.game.playerFieldIconsWhiteAsBoolean.slice(3,12));
-          this.topLeftComponent.deactivateOrActivateIcons(this.game.playerFieldIconsBrownAsBoolean.slice(3,12));
-          this.topRightComponent.deactivateOrActivateIcons(this.game.playerFieldIconsGrayAsBoolean.slice(3,12));
+          this.bottomLeftComponent.deactivateOrActivateIcons(this.game.playerFieldIconsBlackAsBoolean.slice(3,11));
+          this.bottomRightComponent.deactivateOrActivateIcons(this.game.playerFieldIconsWhiteAsBoolean.slice(3,11));
+          this.topLeftComponent.deactivateOrActivateIcons(this.game.playerFieldIconsBrownAsBoolean.slice(3,11));
+          this.topRightComponent.deactivateOrActivateIcons(this.game.playerFieldIconsGrayAsBoolean.slice(3,11));
 
         }
         //switch on your Quarry colors, switch off the others
@@ -2230,7 +2247,7 @@ export class GameComponent  implements OnInit {
     newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour1;
 
     //store own decision object in game model
-    this.game.ownDecisions.push(newDecision);
+    //this.game.ownDecisions.push(newDecision);
 
 
     //send decision object to backend
@@ -2446,7 +2463,7 @@ export class GameComponent  implements OnInit {
     newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour4;
 
     //store own decision object in game model
-    this.game.ownDecisions.push(newDecision);
+    //this.game.ownDecisions.push(newDecision);
 
 
     //send decision object to backend
@@ -2508,7 +2525,7 @@ export class GameComponent  implements OnInit {
     newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour5;
 
     //store own decision object in game model
-    this.game.ownDecisions.push(newDecision);
+    //this.game.ownDecisions.push(newDecision);
 
 
     //send decision object to backend
@@ -2534,6 +2551,7 @@ export class GameComponent  implements OnInit {
       console.log("marketCards 1: data: ", data);
     }
     if (data[0] != null) {
+      console.log("card exists.", data[0]);
       if (data[0].colour == "red") {
         this.takeRedMarketCardFromMarket(data[0], 1);
       }
@@ -2584,7 +2602,7 @@ export class GameComponent  implements OnInit {
   takeRedMarketCardFromMarket(marketCard:MarketCard, marketCardSlot){
 
     //called from click event in market component
-    if(1){console.log("take red market card from market");}
+    if(1){console.log("take red market card from market", marketCard, marketCardSlot);}
 
     //determine which specific market card (id) was taken
     //according to our market card model
@@ -2596,13 +2614,13 @@ export class GameComponent  implements OnInit {
     let place:string;
     let additionalDataSent:number[];
 
-
     //choose player field
     // change numbers in quarry
     //-------------------------
     let stonesInQuarry:number;
     let playerField=this.game.currentActivePlayerField;
     let howMany:number=0;
+
 
 
     //bottom left
@@ -2627,7 +2645,6 @@ export class GameComponent  implements OnInit {
           this.obeliskComponent.placeStones([newStone,null,null,null]);
 
           //update game model
-          this.obeliskComponent.stones[0]+=1;
 
           //for other clients
           additionalDataSent=this.obeliskComponent.stones;
@@ -2674,6 +2691,7 @@ export class GameComponent  implements OnInit {
 
       //change numbers
       this.bottomLeftComponent.quarryStones-=howMany;
+
     }
 
     //top left
@@ -2904,41 +2922,14 @@ export class GameComponent  implements OnInit {
     }
 
 
-    //generate decision object
-    //------------------------
-    let newDecision:Decision = new Decision();
-    newDecision.decisionMadeBy=this.game.myPlayerField;
-    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
-      this.game.myPlayerField+ " player picked red market card "+ marketCardName +" and placed "+ howMany +
-      " stone(s) from quarry to " + place + " .";
-    newDecision.madeAction= new Action();
-    newDecision.madeAction.actionName=ActionEnum.takeRedMarketCard;
-    newDecision.madeAction.actionName2=marketCardAction;
-    newDecision.madeAction.madeMove= new Move();
-    newDecision.madeAction.madeMove.from=PositionEnum.stoneQuarry;
-    newDecision.madeAction.madeMove.to=marketCardMoveTo;
-    newDecision.madeAction.data=additionalDataSent;
+    //generate move object to send to backend
+    //----------------------------------------
+    let snackbarMsg= this.game.myUserName+ " picked red market card "+ marketCardName +" and placed "+ howMany +
+      " stone(s) from quarry to " + place + ".";
 
-    if(this.game.myPlayerField===ColourEnum.black){
-      newDecision.id[1]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.white){
-      newDecision.id[2]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.brown){
-      newDecision.id[3]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.gray){
-      newDecision.id[4]+=1;
-    }
-
-    //store own decision object in game model
-    this.game.ownDecisions.push(newDecision);
-
-
-    //send decision object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
+    //send to backend
+    let moveToSend = new Move(1, PositionEnum.Market, PositionEnum.PlayerCardStack, marketCardId, snackbarMsg);
+    this.gameService.sendMove(moveToSend); //Send move to backend
 
 
     //snackbar message
@@ -3083,7 +3074,7 @@ export class GameComponent  implements OnInit {
         this.bottomRightComponent.deactivateOrActivateIcons_onChange([,,,,,"true",,,]);
       }
     }
-    if (marketCardId==28 || marketCardId==29){//hammer
+    if (marketCardId==30 || marketCardId==31){//hammer
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,0,0,0,0,0,0,1,0,0], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,0,0,0,0,0,0,1,0,0], playerField);
       marketCardAction=ActionEnum.takeBlueMarketCard;
@@ -3101,7 +3092,7 @@ export class GameComponent  implements OnInit {
         this.bottomRightComponent.deactivateOrActivateIcons_onChange([,,,,,,"true",,]);
       }
     }
-    if (marketCardId==30 || marketCardId==31){//lever
+    if (marketCardId==28 || marketCardId==29){//lever
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,0,0,0,0,0,0,0,0,1], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,0,0,0,0,0,0,0,0,1], playerField);
       marketCardAction=ActionEnum.takeBlueMarketCard;
@@ -3154,40 +3145,15 @@ export class GameComponent  implements OnInit {
       this.marketComponent.chooseMarketCard_4_OnClick()
     }
 
+    //generate move object to send to backend
+    //----------------------------------------
 
-    //generate decision object
-    //------------------------
-    let newDecision:Decision = new Decision();
-    newDecision.decisionMadeBy=this.game.myPlayerField;
-    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
-      this.game.myPlayerField+ " player picked market card "+ marketCardName + " .";
-    newDecision.madeAction= new Action();
-    newDecision.madeAction.actionName=marketCardAction;
-    newDecision.madeAction.actionName2=marketCardAction;
-    newDecision.madeAction.madeMove= new Move();
-
-    console.log(this.game.myPlayerField);
-    if(this.game.myPlayerField===ColourEnum.black){
-      newDecision.id[1]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.white){
-      newDecision.id[2]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.brown){
-      newDecision.id[3]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.gray){
-      newDecision.id[4]+=1;
-    }
-
-    //store own decision object in game model
-    this.game.ownDecisions.push(newDecision);
+    let snackbarMsg =this.game.myUserName+ " picked market card "+ marketCardName + ".";
 
 
-    //send decision object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
-
+    //send to backend
+    let moveToSend = new Move(1, PositionEnum.Market, PositionEnum.PlayerCardStack, marketCardId, snackbarMsg);
+    this.gameService.sendMove(moveToSend); //Send move to backend
 
     //snackbar message
     this.showSnackbarMessage("You picked market card " + marketCardName + " .");
