@@ -335,6 +335,8 @@ export class GameComponent  implements OnInit {
   //Fake Game
   getFakeGame(){
 
+    console.log("DO NOT USE THE FAKE GAME ANYMORE!!!!");
+
     //fill fake stone array
     this.stones_target.push(this.stone1);
     this.stones_target.push(this.stone2);
@@ -369,8 +371,9 @@ export class GameComponent  implements OnInit {
 
 
 
-    let returnGame = new Game(0, 'token', 'name', GameStatusEnum.RUNNING, 4,  this.players_target, 1, this.ships_target, this.marketCards, this.currentActivePlayerField, null);
+    let returnGame = new Game(0, 'token', 'name', GameStatusEnum.RUNNING, 4,  this.players_target, 1, this.ships_target, this.marketCards, this.game.currentActivePlayerField, null);
     return returnGame;
+
   }
 
 
@@ -441,7 +444,6 @@ export class GameComponent  implements OnInit {
 
     //Read current active player field (set class variable)
     let currentActivePlayerField=this.game.currentActivePlayerField;
-    this.currentActivePlayerField=currentActivePlayerField;
 
     //Initialize Myself
     //(depends on whether you are the active or inactive player)
@@ -1214,8 +1216,9 @@ export class GameComponent  implements OnInit {
   //------------------
 
   setPlayerField(name: string){
-    console.log("target name: ", name);
+    console.log("Active player name: ", name);
     this.game.currentActivePlayerField = this.nameToColourMap[name];
+    console.log("Active player colour: ", this.game.currentActivePlayerField);
 
     //Status Update:
     //Determine whether you are the active player (set class variable)
@@ -2040,7 +2043,7 @@ export class GameComponent  implements OnInit {
     //send move object to backend
     //ToDo: Communication Channel to Backend
     //ToDo: send move object to backend
-    let moveToSend = new Move(1, PositionEnum.Quarry, PositionEnum.Sled, stonesToTake);
+    let moveToSend = new Move(PositionEnum.Quarry, PositionEnum.Sled, stonesToTake);
     this.gameService.sendMove(moveToSend); //Send move to backend
 
 
@@ -2541,7 +2544,7 @@ export class GameComponent  implements OnInit {
       " stone(s) from quarry to " + place + ".";
 
     //send to backend
-    let moveToSend = new Move(1, PositionEnum.Market, PositionEnum.PlayerCardStack, marketCardId, snackbarMsg);
+    let moveToSend = new Move(PositionEnum.Market, PositionEnum.PlayerCardStack, marketCardId);
     this.gameService.sendMove(moveToSend); //Send move to backend
 
 
@@ -2745,7 +2748,7 @@ export class GameComponent  implements OnInit {
 
 
     //send to backend
-    let moveToSend = new Move(1, PositionEnum.Market, PositionEnum.PlayerCardStack, marketCardId, snackbarMsg);
+    let moveToSend = new Move(PositionEnum.Market, PositionEnum.PlayerCardStack, marketCardId);
     this.gameService.sendMove(moveToSend); //Send move to backend
 
     //snackbar message
