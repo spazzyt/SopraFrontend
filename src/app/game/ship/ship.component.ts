@@ -60,7 +60,7 @@ export class ShipComponent implements OnInit {
 
 
 
-    let moveToSend = new Move(null, PositionEnum.Sled, PositionEnum.DepartingHarbour, slotId, null, shipId);
+    let moveToSend = new Move(null, PositionEnum.Sled, PositionEnum.ShipToken, slotId, null, shipId);
     this.gameService.sendMove(moveToSend);
   }
 }
