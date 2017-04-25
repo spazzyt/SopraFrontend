@@ -2,6 +2,9 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Ship} from "../../shared/models/ship";
 import {Stone} from "../../shared/models/stone";
 import {ColourEnum} from "../../shared/models/colour.enum";
+import {PositionEnum} from "../../shared/models/position.enum";
+import {Move} from "../../shared/models/move";
+import {GameService} from "../../shared/services/game.service";
 
 @Component({
   selector: 'app-ship',
@@ -30,7 +33,7 @@ export class ShipComponent implements OnInit {
   //===============
   //Constructor
   //===============
-  constructor() {
+  constructor(private gameService: GameService) {
   }
 
   //===============
@@ -55,5 +58,9 @@ export class ShipComponent implements OnInit {
     console.log("dropped stone_ ", stone, shipId, slotId);
     this.ship.addStoneById(stone, slotId);
 
+
+
+    let moveToSend = new Move(null, PositionEnum.Sled, PositionEnum.DepartingHarbour, slotId, null, shipId);
+    this.gameService.sendMove(moveToSend);
   }
 }
