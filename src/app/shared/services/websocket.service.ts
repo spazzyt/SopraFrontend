@@ -37,13 +37,14 @@ export class WSService {
           //generate usable ship array from backend input (backend ship model differs from ours; here we create ships based on the data sent to us)
           let inputships = [null, null, null, null];
           for(let i = 0; i < 4; i++){
-            inputships[i] = new Ship(i+1, msg.payload.ships[i].numFields);  //ID is needed, otherwise slots don't work
+            inputships[i] = new Ship(msg.payload.ships[i].shipId, msg.payload.ships[i].numFields);  //ID is needed, otherwise slots don't work
           }
 
           //create new round
           let newround = new Round(msg.payload.roundNumber, inputships, [null, null, null, null]);
           console.log(msg.payload.ships);
           console.log('new round created: ' + msg.payload.roundNumber);
+          console.log(newround);
           gameComponent.initRound(newround);
           break;
 
