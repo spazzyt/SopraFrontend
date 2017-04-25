@@ -446,12 +446,6 @@ export class GameComponent  implements OnInit {
     //Initialize Myself
     //(depends on whether you are the active or inactive player)
     this.initializeMySelf(amI_CurrentActivePlayer, currentActivePlayerField);
-
-    // set Dragula Options (Depending on whether you are the active or inactive player)
-    //---------------------------------------------------------------------------------
-    //this.dragulaShipMovement_setOptions(amI_CurrentActivePlayer);
-    //this.dragulaStoneMovement_setOptions(amI_CurrentActivePlayer);
-
   }
 
   // Init Sites
@@ -2205,57 +2199,6 @@ export class GameComponent  implements OnInit {
 
   moveShipToPyramids(whichShip:number, stonesToMove:Stone[]){
 
-    //called from dragula_subscribeDropEvent()
-    if(1){console.log("moveShipToPyramids: whichShip, stonesToMove: ",whichShip, stonesToMove);}
-
-    //generate decision object
-    let newDecision:Decision = new Decision();
-    newDecision.decisionMadeBy=this.game.myPlayerField;
-    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField +
-      " sailed ship "+ whichShip +" to pyramids.";
-    newDecision.madeAction= new Action();
-    newDecision.madeAction.actionName=ActionEnum.sailShip;
-    newDecision.madeAction.actionName2=ActionEnum.sailShipToPyramid;
-    newDecision.madeAction.madeMove= new Move();
-
-    if(whichShip==1){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
-    }
-    else if(whichShip==2){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;
-    }
-    else if(whichShip==3){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;
-    }
-    else if(whichShip==4){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;
-    }
-
-    if(this.game.myPlayerField===ColourEnum.black){
-      newDecision.id[1]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.white){
-      newDecision.id[2]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.brown){
-      newDecision.id[3]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.gray){
-      newDecision.id[4]+=1;
-    }
-
-    newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour1;
-
-    //store own decision object in game model
-    //this.game.ownDecisions.push(newDecision);
-
-
-    //send decision object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
-
-
-
     //snackbar message
     this.showSnackbarMessage("you sailed ship "+ whichShip +" to pyramids.");
 
@@ -2284,57 +2227,6 @@ export class GameComponent  implements OnInit {
 
   moveShipToTemple(whichShip:number, stonesToMove:Stone[]){
 
-    //called from dragula_subscribeDropEvent()
-    if(1){console.log("moveShipToTemple: whichShip, stonesToMove: ",whichShip, stonesToMove);}
-
-    //generate decision object
-    let newDecision:Decision = new Decision();
-    newDecision.decisionMadeBy=this.game.myPlayerField;
-    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
-      " sailed ship "+ whichShip +" to temple.";
-    newDecision.madeAction= new Action();
-    newDecision.madeAction.actionName=ActionEnum.sailShip;
-    newDecision.madeAction.actionName2=ActionEnum.sailShipToTemple;
-    newDecision.madeAction.madeMove= new Move();
-
-    if(whichShip==1){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
-    }
-    else if(whichShip==2){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;
-    }
-    else if(whichShip==3){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;
-    }
-    else if(whichShip==4){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;
-    }
-
-    if(this.game.myPlayerField===ColourEnum.black){
-      newDecision.id[1]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.white){
-      newDecision.id[2]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.brown){
-      newDecision.id[3]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.gray){
-      newDecision.id[4]+=1;
-    }
-
-    newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour2;
-
-    //store own decision object in game model
-   // this.game.ownDecisions.push(newDecision);
-
-
-    //send decision object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
-
-
-
     //snackbar message
     this.showSnackbarMessage("you sailed ship "+ whichShip +" to temple.");
 
@@ -2345,56 +2237,6 @@ export class GameComponent  implements OnInit {
   //======================
 
   moveShipToBurialChamber(whichShip:number, stonesToMove:Stone[]){
-
-    //called from dragula_subscribeDropEvent()
-    if(1){console.log("moveShipToBurialChamber: whichShip, stonesToMove: ",whichShip, stonesToMove);}
-
-    //generate decision object
-    let newDecision:Decision = new Decision();
-    newDecision.decisionMadeBy=this.game.myPlayerField;
-    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
-      " sailed ship "+ whichShip +" to burial chamber.";
-    newDecision.madeAction= new Action();
-    newDecision.madeAction.actionName=ActionEnum.sailShip;
-    newDecision.madeAction.actionName2=ActionEnum.sailShipToBurialChamber;
-    newDecision.madeAction.madeMove= new Move();
-
-    if(whichShip==1){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
-    }
-    else if(whichShip==2){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;
-    }
-    else if(whichShip==3){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;
-    }
-    else if(whichShip==4){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;
-    }
-
-    if(this.game.myPlayerField===ColourEnum.black){
-      newDecision.id[1]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.white){
-      newDecision.id[2]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.brown){
-      newDecision.id[3]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.gray){
-      newDecision.id[4]+=1;
-    }
-
-    newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour3;
-
-    //store own decision object in game model
-  //  this.game.ownDecisions.push(newDecision); //TODO fix errors in this step, happening only in new game with real id
-
-
-    //send decision object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
-
 
     //snackbar message
     this.showSnackbarMessage("you sailed ship "+ whichShip +" to burial chamber.");
@@ -2421,56 +2263,6 @@ export class GameComponent  implements OnInit {
 
   moveShipToObelisks(whichShip:number, stonesToMove:Stone[]){
 
-    //called from dragula_subscribeDropEvent()
-    if(1){console.log("moveShipToObelisks: whichShip, stonesToMove: ",whichShip, stonesToMove);}
-
-    //generate decision object
-    let newDecision:Decision = new Decision();
-    newDecision.decisionMadeBy=this.game.myPlayerField;
-    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
-      " sailed ship "+ whichShip +" to obelisks.";
-    newDecision.madeAction= new Action();
-    newDecision.madeAction.actionName=ActionEnum.sailShip;
-    newDecision.madeAction.actionName2=ActionEnum.sailShipToObelisk;
-    newDecision.madeAction.madeMove= new Move();
-
-    if(whichShip==1){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
-    }
-    else if(whichShip==2){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;
-    }
-    else if(whichShip==3){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;
-    }
-    else if(whichShip==4){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;
-    }
-
-    if(this.game.myPlayerField===ColourEnum.black){
-      newDecision.id[1]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.white){
-      newDecision.id[2]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.brown){
-      newDecision.id[3]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.gray){
-      newDecision.id[4]+=1;
-    }
-
-    newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour4;
-
-    //store own decision object in game model
-    //this.game.ownDecisions.push(newDecision);
-
-
-    //send decision object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
-
-
     //snackbar message
     this.showSnackbarMessage("you sailed ship "+ whichShip +" to obelisks.");
 
@@ -2482,56 +2274,6 @@ export class GameComponent  implements OnInit {
   //=================
 
   moveShipToMarket(whichShip:number, stonesToMove:Stone[]){
-
-    //called from dragula_subscribeDropEvent()
-    if(1){console.log("moveShipToMarket: whichShip, stonesToMove: ",whichShip, stonesToMove);}
-
-    //generate decision object
-    let newDecision:Decision = new Decision();
-    newDecision.decisionMadeBy=this.game.myPlayerField;
-    newDecision.whoMadeWhatDecisionSnackbarMessage=this.game.myPlayerField+
-      " sailed ship "+ whichShip +" to market.";
-    newDecision.madeAction= new Action();
-    newDecision.madeAction.actionName=ActionEnum.sailShip;
-    newDecision.madeAction.actionName2=ActionEnum.sailShipToMarket;
-    newDecision.madeAction.madeMove= new Move();
-
-    if(whichShip==1){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour1;
-    }
-    else if(whichShip==2){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour2;
-    }
-    else if(whichShip==3){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour3;
-    }
-    else if(whichShip==4){
-      newDecision.madeAction.madeMove.from=PositionEnum.departingHarbour4;
-    }
-
-    if(this.game.myPlayerField===ColourEnum.black){
-      newDecision.id[1]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.white){
-      newDecision.id[2]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.brown){
-      newDecision.id[3]+=1;
-    }
-    else if(this.game.myPlayerField===ColourEnum.gray){
-      newDecision.id[4]+=1;
-    }
-
-    newDecision.madeAction.madeMove.to=PositionEnum.arrivingHarbour5;
-
-    //store own decision object in game model
-    //this.game.ownDecisions.push(newDecision);
-
-
-    //send decision object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
-
 
     //snackbar message
     this.showSnackbarMessage("you sailed ship "+ whichShip +" to market.");
@@ -2609,8 +2351,6 @@ export class GameComponent  implements OnInit {
     //---------------------------------------------------
     let marketCardId=marketCard.id;
     let marketCardName:string;
-    let marketCardAction:ActionEnum;
-    let marketCardMoveTo:PositionEnum;
     let place:string;
     let additionalDataSent:number[];
 
@@ -2635,8 +2375,6 @@ export class GameComponent  implements OnInit {
         if (marketCardId==1 || marketCardId==2){
           marketCardName="paved path";
           place="obelisk";
-          marketCardAction=ActionEnum.takeRedMarketCardPavedPath;
-          marketCardMoveTo=PositionEnum.obelisks;
 
           //place one black stone on obelisk board
           let stoneId=99999;//unknown
@@ -2656,8 +2394,6 @@ export class GameComponent  implements OnInit {
         else if (marketCardId==3 || marketCardId==4){
           marketCardName="sarcophargus";
           place="burial chamber";
-          marketCardAction=ActionEnum.takeRedMarketCardSarcophargus;
-          marketCardMoveTo=PositionEnum.burialChamber;
 
           //place one black stone on burial chamber board
           let stoneId=99999;//unknown
@@ -2671,8 +2407,6 @@ export class GameComponent  implements OnInit {
         else if (marketCardId==5 || marketCardId==6){
           marketCardName="entrance";
           place="pyramid";
-          marketCardAction=ActionEnum.takeRedMarketCardEntrance;
-          marketCardMoveTo=PositionEnum.pyramid;
 
 
           //place one black stone on pyramid board
@@ -2706,8 +2440,6 @@ export class GameComponent  implements OnInit {
         if (marketCardId==1 || marketCardId==2){
           marketCardName="paved path";
           place="obelisk";
-          marketCardAction=ActionEnum.takeRedMarketCardPavedPath;
-          marketCardMoveTo=PositionEnum.obelisks;
 
           //place one white stone on obelisk board
           let stoneId=99999; //unknown
@@ -2727,8 +2459,6 @@ export class GameComponent  implements OnInit {
         else if (marketCardId==3 || marketCardId==4){
           marketCardName="sarcophargus";
           place="burial chamber";
-          marketCardAction=ActionEnum.takeRedMarketCardSarcophargus;
-          marketCardMoveTo=PositionEnum.burialChamber;
 
 
           //place one white stone on burial chamber board
@@ -2743,8 +2473,6 @@ export class GameComponent  implements OnInit {
         else if (marketCardId==5 || marketCardId==6){
           marketCardName="entrance";
           place="pyramid";
-          marketCardAction=ActionEnum.takeRedMarketCardEntrance;
-          marketCardMoveTo=PositionEnum.pyramid;
 
           //place one white stone on pyramid board
           let stoneId=99999;//unknown
@@ -2777,8 +2505,6 @@ export class GameComponent  implements OnInit {
         if (marketCardId==1 || marketCardId==2){
           marketCardName="paved path";
           place="obelisk";
-          marketCardAction=ActionEnum.takeRedMarketCardPavedPath;
-          marketCardMoveTo=PositionEnum.obelisks;
 
           //place one brown stone on obelisk board
           let stoneId=99999;//unknown
@@ -2798,8 +2524,6 @@ export class GameComponent  implements OnInit {
         else if (marketCardId==3 || marketCardId==4){
           marketCardName="sarcophargus";
           place="burial chamber";
-          marketCardAction=ActionEnum.takeRedMarketCardSarcophargus;
-          marketCardMoveTo=PositionEnum.burialChamber;
 
 
           //place one brown stone on burial chamber board
@@ -2813,8 +2537,6 @@ export class GameComponent  implements OnInit {
         else if (marketCardId==5 || marketCardId==6){
           marketCardName="entrance";
           place="pyramid";
-          marketCardAction=ActionEnum.takeRedMarketCardEntrance;
-          marketCardMoveTo=PositionEnum.pyramid;
 
           //place one brown stone on pyramid board
           let stoneId=99999;//unknown
@@ -2846,8 +2568,6 @@ export class GameComponent  implements OnInit {
         if (marketCardId==1 || marketCardId==2){
           marketCardName="paved path";
           place="obelisk";
-          marketCardAction=ActionEnum.takeRedMarketCardPavedPath;
-          marketCardMoveTo=PositionEnum.obelisks;
 
           //place one gray stone on obelisk board
           let stoneId=99999;//unknown
@@ -2867,8 +2587,6 @@ export class GameComponent  implements OnInit {
         else if (marketCardId==3 || marketCardId==4){
           marketCardName="sarcophargus";
           place="burial chamber";
-          marketCardAction=ActionEnum.takeRedMarketCardSarcophargus;
-          marketCardMoveTo=PositionEnum.burialChamber;
 
 
           //place one gray stone on burial chamber board
@@ -2883,8 +2601,6 @@ export class GameComponent  implements OnInit {
         else if (marketCardId==5 || marketCardId==6){
           marketCardName="entrance";
           place="pyramid";
-          marketCardAction=ActionEnum.takeRedMarketCardEntrance;
-          marketCardMoveTo=PositionEnum.pyramid;
 
           //place one gray stone on burial pyramid
           let stoneId=99999;//unknown
@@ -2954,8 +2670,6 @@ export class GameComponent  implements OnInit {
     //---------------------------------------------------
     let marketCardId=marketCard.id;
     let marketCardName=marketCard.name;
-    let marketCardAction:ActionEnum;
-    let marketCardAction2:ActionEnum;
 
     //choose player field
     // change numbers in market icons
@@ -2968,8 +2682,6 @@ export class GameComponent  implements OnInit {
     if (marketCardId==7 || marketCardId==8){//pyramid
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,0,1,0,0,0,0,0,0,0], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,0,1,0,0,0,0,0,0,0], playerField);
-      marketCardAction=ActionEnum.takeGreenMarketCard;
-      marketCardAction2=ActionEnum.takeGreenMarketCardPyramidDecoration;
       if(playerField===ColourEnum.black){
         this.bottomLeftComponent.deactivateOrActivateIcons_onChange([,"true",,,,,,,]);
       }
@@ -2987,8 +2699,6 @@ export class GameComponent  implements OnInit {
     if (marketCardId==9 || marketCardId==10){//temple
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,0,0,1,0,0,0,0,0,0], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,0,0,1,0,0,0,0,0,0], playerField);
-      marketCardAction=ActionEnum.takeGreenMarketCard;
-      marketCardAction2=ActionEnum.takeGreenMarketCardTempleDecoration;
       if(playerField===ColourEnum.black){
         this.bottomLeftComponent.deactivateOrActivateIcons_onChange([,,"true",,,,,,]);
       }
@@ -3005,8 +2715,6 @@ export class GameComponent  implements OnInit {
     if (marketCardId==11 || marketCardId==12){//burial chamber
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,0,0,0,1,0,0,0,0,0], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,0,0,0,1,0,0,0,0,0], playerField);
-      marketCardAction=ActionEnum.takeGreenMarketCard;
-      marketCardAction2=ActionEnum.takeGreenMarketCardBurialChamberDecoration;
       if(playerField===ColourEnum.black){
         this.bottomLeftComponent.deactivateOrActivateIcons_onChange([,,,"true",,,,,]);
       }
@@ -3023,8 +2731,6 @@ export class GameComponent  implements OnInit {
     if (marketCardId==13 || marketCardId==14){//obelisk
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,0,0,0,0,1,0,0,0,0], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,0,0,0,0,1,0,0,0,0], playerField);
-      marketCardAction=ActionEnum.takeGreenMarketCard;
-      marketCardAction2=ActionEnum.takeGreenMarketCardObeliskDecoration;
       if(playerField===ColourEnum.black){
         this.bottomLeftComponent.deactivateOrActivateIcons_onChange([,,,,"true",,,,]);
       }
@@ -3041,8 +2747,6 @@ export class GameComponent  implements OnInit {
     if (marketCardId>=15 && marketCardId<=24){//statues
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,1,0,0,0,0,0,0,0,0], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,1,0,0,0,0,0,0,0,0], playerField);
-      marketCardAction=ActionEnum.takeVioletMarketCard;
-      marketCardAction2=ActionEnum.takeVioletMarketCardStatues;
       if(playerField===ColourEnum.black){
         this.bottomLeftComponent.deactivateOrActivateIcons_onChange(["true",,,,,,,,]);
       }
@@ -3059,8 +2763,6 @@ export class GameComponent  implements OnInit {
     if (marketCardId==25 || marketCardId==26 || marketCardId==27){//chisel
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,0,0,0,0,0,1,0,0,0], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,0,0,0,0,0,1,0,0,0], playerField);
-      marketCardAction=ActionEnum.takeBlueMarketCard;
-      marketCardAction2=ActionEnum.takeBlueMarketCardChisel;
       if(playerField===ColourEnum.black){
         this.bottomLeftComponent.deactivateOrActivateIcons_onChange([,,,,,"true",,,]);
       }
@@ -3077,8 +2779,6 @@ export class GameComponent  implements OnInit {
     if (marketCardId==30 || marketCardId==31){//hammer
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,0,0,0,0,0,0,1,0,0], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,0,0,0,0,0,0,1,0,0], playerField);
-      marketCardAction=ActionEnum.takeBlueMarketCard;
-      marketCardAction2=ActionEnum.takeBlueMarketCardHammer;
       if(playerField===ColourEnum.black){
         this.bottomLeftComponent.deactivateOrActivateIcons_onChange([,,,,,,"true",,]);
       }
@@ -3095,8 +2795,6 @@ export class GameComponent  implements OnInit {
     if (marketCardId==28 || marketCardId==29){//lever
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,0,0,0,0,0,0,0,0,1], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,0,0,0,0,0,0,0,0,1], playerField);
-      marketCardAction=ActionEnum.takeBlueMarketCard;
-      marketCardAction2=ActionEnum.takeBlueMarketCardLever;
       if(playerField===ColourEnum.black){
         this.bottomLeftComponent.deactivateOrActivateIcons_onChange([,,,,,,,,"true"]);
       }
@@ -3113,8 +2811,6 @@ export class GameComponent  implements OnInit {
     if (marketCardId==32 || marketCardId==33 || marketCardId==34){//sail
       this.updateGameModelPlayerData_increaseByNumber([0,0,0,0,0,0,0,0,0,0,1,0], playerField);
       this.updatePlayerDataWithArray_increaseByNumber([0,0,0,0,0,0,0,0,0,0,1,0], playerField);
-      marketCardAction=ActionEnum.takeBlueMarketCard;
-      marketCardAction2=ActionEnum.takeBlueMarketCardSail;
       if(playerField===ColourEnum.black){
         this.bottomLeftComponent.deactivateOrActivateIcons_onChange([,,,,,,,"true",]);
       }
