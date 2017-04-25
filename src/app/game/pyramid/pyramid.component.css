@@ -6,14 +6,12 @@
 }
 
 .harbour_parent{
-  border: 1px solid greenyellow;
   width: 22%;
   height: 100%;
   float: left;
 }
 
 .site_parent{
-  border: 1px solid maroon;
   width: 78%;
   height: 100%;
   float: left;
@@ -30,7 +28,6 @@
 }
 
 .level_continuous{
-  border: 1px solid red;
   height: 30%;
   width: 100%;
   margin-top: 20%;
