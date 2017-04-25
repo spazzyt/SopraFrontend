@@ -1052,32 +1052,32 @@ export class GameComponent  implements OnInit {
 
     switch(move.to){
       case PositionEnum.Sled:
-        this.playerMap[username].update_takeStonesFromQuarry(move.pos); //add the amount of stones determined in the move
+        this.playerMap[username].update_takeStonesFromQuarry(move.pos);
         break;
 
       case PositionEnum.Pyramid:
-        //TODO finish this shit
-        this.moveShipById(move.pos, 'Pyramid'); //TODO get site
+        this.moveShipById(move.pos, 'Pyramid');
         break;
 
       case PositionEnum.Temple:
-        //TODO finish this shit
-        this.moveShipById(move.pos, 'Temple'); //TODO get site
+        this.moveShipById(move.pos, 'Temple');
         break;
 
       case PositionEnum.BurialChamber:
-        //TODO finish this shit
-        this.moveShipById(move.pos, 'BurialChamber'); //TODO get site
+        this.moveShipById(move.pos, 'BurialChamber');
         break;
 
       case PositionEnum.Obelisk:
-        //TODO finish this shit
-        this.moveShipById(move.pos, 'Obelisk'); //TODO get site
+        this.moveShipById(move.pos, 'Obelisk');
         break;
 
       case PositionEnum.Market:
-        //TODO finish this shit
-        this.moveShipById(move.pos, 'Market'); //TODO get site
+        this.moveShipById(move.pos, 'Market');
+        break;
+
+      case PositionEnum.ShipToken:
+        let stoneToAdd = new Stone(-1, ColourEnum.black);
+        this.ships[move.shipId].addStoneById(stoneToAdd, move.pos); //TODO determine proper stone colour and add stone
         break;
     }
 

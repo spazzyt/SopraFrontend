@@ -13,6 +13,7 @@ export enum PositionEnum {
   Market=<any>"Market",
   DepartingHarbour=<any>"DepartingHarbour",
   PlayerCardStack=<any>"PlayerCardStack",
+  ShipToken=<any>"ShipToken",
 
 }
 
