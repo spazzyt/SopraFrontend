@@ -35,7 +35,7 @@ export class FinalDestinationComponent implements OnInit {
 
 
 
-    let moveToSend = new Move(null, PositionEnum.DepartingHarbour, this.id, this.ship.id);
+    let moveToSend = new Move(PositionEnum.DepartingHarbour, this.id, ship.id);
     this.gameService.sendMove(moveToSend)
   }
 
