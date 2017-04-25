@@ -409,7 +409,7 @@ export class GameComponent  implements OnInit {
 
     let fakegame = this.getFakeGame();               //TODO delete this as soon as the backend passes the necessary arguments
     this.game.marketCards = fakegame.marketCards;   //TODO delete this
-    this.game.ships = fakegame.ships;               //TODO delete this
+    this.game.ships = [null, null, null, null];//fakegame.ships;               //TODO delete this
 
     //Site Board Components: the island
     this.initializeMarketComponent(this.game.marketCards);
@@ -1009,6 +1009,8 @@ export class GameComponent  implements OnInit {
     this.game.roundNumber = round.roundNumber;
     this.game.ships = round.ships;
 
+
+    // init the ship map
     for(let ship of this.game.ships)
       this.ships[ship.id] = ship;
 
