@@ -39,17 +39,19 @@ export class PyramidComponent extends Site implements OnInit  {
 
 
   placeStones(targetStones: Stone[]){
-    for (let i = 0; i < targetStones.length; i++) {
+    if(targetStones) {
+      for (let i = 0; i < targetStones.length; i++) {
 
-      if(this.totalStones < 120) {  //hacker check
+        if (this.totalStones < 120) {  //hacker check
 
-        if (targetStones[i] != null) //only do this for stones that exist in the input array
-        {
-          //this function determines in which column the stone needs to be placed
-          this.stones[this.totalStones] = targetStones[i];
+          if (targetStones[i] != null) //only do this for stones that exist in the input array
+          {
+            //this function determines in which column the stone needs to be placed
+            this.stones[this.totalStones] = targetStones[i];
 
-          //increase the total stone counter by one
-          this.totalStones += 1;
+            //increase the total stone counter by one
+            this.totalStones += 1;
+          }
         }
       }
     }
