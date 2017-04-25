@@ -31,7 +31,7 @@ export class FinalDestinationComponent implements OnInit {
     let ship = $event.dragData;
     ship.isInHarbour = false;
     this.ship = ship;
-    console.log("droped ship_ ", ship);
+    console.log("dropped ship_ ", ship);
 
 
 

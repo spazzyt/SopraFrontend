@@ -90,7 +90,6 @@ export class Game {
   //-----------
 
   //TODO Remove this
-  /*
 
   //Temple
   public stonesInTemple:Stone[];
@@ -120,13 +119,11 @@ export class Game {
   public bottomRight_quarryStones:number=24;
   public bottomRight_marketCards:number[];
 
-*/
 
   // Own Decisions
   //--------------
 
   //to store own decisions
-  public ownDecisions:Decision[]=[];
 
 
 
@@ -151,7 +148,7 @@ export class Game {
   constructor(id_:number, token_:string, name_:string, status_: GameStatusEnum,
                 numPlayers_:number, players_:User[],
                 roundNumber_:number, ships_:Ship[], marketCards_:MarketCard[],
-                currentActivePlayerField_:ColourEnum, decision_:Decision){
+                currentActivePlayerField_:ColourEnum, decision_?:Decision){
 
       //static info added in lobby
       this.id=id_;
@@ -166,11 +163,11 @@ export class Game {
       this.marketCards=marketCards_;
       //changing decision info
       this.currentActivePlayerField=currentActivePlayerField_;
-      this.decisions.push(decision_);
+      //this.decisions.push(decision_);
 
 
 
-    }
+  }
 
     addDecision(decision_){
       this.decisions.push(decision_);
@@ -191,6 +188,7 @@ export class Game {
       }
       return resultArray;
     }
+
 }
 
 

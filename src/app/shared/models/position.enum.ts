@@ -12,6 +12,7 @@ export enum PositionEnum {
   Obelisk=<any>"Obelisk",
   Market=<any>"Market",
   DepartingHarbour=<any>"DepartingHarbour",
+  PlayerCardStack=<any>"PlayerCardStack",
 
 
   //TODO remove old enums

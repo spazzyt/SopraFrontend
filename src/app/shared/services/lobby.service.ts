@@ -53,9 +53,10 @@ export class LobbyService {
     return this.http.post(this.apiUrl + '/game', bodyString, this.getRequestOptions()) // ...using post request
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
-        let game = response//.json() && response.json();
+        let game = response.json() // && response.json();
         if (game) {
           console.log(game)
+          return game;
         } else {
           // return false to indicate failed login
           return null;
