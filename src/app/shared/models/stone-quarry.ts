@@ -35,7 +35,7 @@ export class StoneQuarry {
       if(0){console.log("instantiate stone quarry, instantiate stones: ",
                           numberOfStones_, startId_, this.stones);}
 
-      this.stones.push(new Stone(startId_+i, this.colour, PositionEnum.stoneQuarry));
+      this.stones.push(new Stone(startId_+i, this.colour, PositionEnum.Quarry));
     }
   }
 
