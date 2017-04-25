@@ -1,12 +1,13 @@
 import {ShipSlot} from "./ship-slot";
 import {PositionEnum} from "./position.enum";
+import {Stone} from "./stone";
 
 export class Ship {
 
   //Backend attributes
   //==================
 
-
+  public draggable = false;
 
   //Additional Frontend attributes
   //==============================
@@ -23,7 +24,7 @@ export class Ship {
   public minStones:number=-1;
 
   //array of slot objects
-  public slots:ShipSlot[] = [];
+  public slots:Stone[];
 
   //ship image
   public imageUrl:string="";
@@ -35,19 +36,37 @@ export class Ship {
     //initialize attributes
     this.id=id_;
     this.size=size_;
-    this.minStones=this.fmin(minStones_);
+
+    //calculate min stones
+    if(this.size==1){
+      this.minStones = 1;
+    }
+    else{
+      this.minStones = this.size-1;
+    }
     this.imageUrl = "../../../assets/images/ship_" + size_ + ".png"
-    this.slots=new Array<ShipSlot>(size_);
+    this.slots=new Array<Stone>(size_);
 
   }
-  fmin(minStones):number{
-    if (minStones===null){
-      if(this.size==1){
-        return 1;
-      }
-      else{
-        return this.size - 1;
+
+
+
+
+  addStoneById(stone: Stone, slot: number){
+    this.slots[slot] = stone;
+
+    let counter = 0;
+    for(let stone of this.slots){
+      if(stone != null){
+        counter += 1;
       }
     }
+
+    if(counter >= this.minStones)
+      this.draggable = true;
+    else
+      this.draggable = false;
+
+    console.log(this);
   }
 }
