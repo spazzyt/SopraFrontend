@@ -7,8 +7,11 @@ export class Site {
 
   public siteName:string;
 
+  public myComp;
+
   constructor(siteName:string) {
     this.siteName = siteName;
+    this.myComp = this;
     console.log("init site: ",siteName);
   }
 
