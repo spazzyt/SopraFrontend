@@ -1043,167 +1043,63 @@ export class GameComponent  implements OnInit {
   }
 
   //===========================================================
-  // Update Game UI for one Decision of another client
+  // Update Game UI for one Move of another client
   //===========================================================
 
   updateUiForOneMove2(move: Move, username: string){
 
-    console.log('Game component received this move: ', move);
 
+
+    console.log('Updating UI for this move: ', move, " by Player ", username);
+
+
+    //SWITCH based on what move the backend sent us
     switch(move.to){
+
+      //Take stones from quarry
       case PositionEnum.Sled:
         this.playerMap[username].update_takeStonesFromQuarry(move.pos);
         break;
 
+      //Sail ship to Pyramid:
       case PositionEnum.Pyramid:
         this.moveShipById(move.pos, 'Pyramid');
         break;
 
+      //Sail ship to Temple:
       case PositionEnum.Temple:
         this.moveShipById(move.pos, 'Temple');
         break;
 
+      //Sail ship to Burial Chamber:
       case PositionEnum.BurialChamber:
         this.moveShipById(move.pos, 'BurialChamber');
         break;
 
+      //Sail ship to Obelisk:
       case PositionEnum.Obelisk:
         this.moveShipById(move.pos, 'Obelisk');
         break;
 
+      //Sail ship to Market:
       case PositionEnum.Market:
         this.moveShipById(move.pos, 'Market');
         break;
 
+      //Place stone on ship:
       case PositionEnum.ShipToken:
-        let stoneToAdd = new Stone(-1, ColourEnum.black);
-        this.ships[move.shipId].addStoneById(stoneToAdd, move.pos); //TODO determine proper stone colour and add stone
+        //TODO check if this delivers the proper stone colour
+        let stoneToAdd = new Stone(-1, this.nameToColourMap[username]);
+        this.ships[move.shipId].addStoneById(stoneToAdd, move.pos);
         break;
     }
 
-    //apply move
 
   }
 
+
+  //TODO implement these cases (for playing cards)
   /*
-  updateUiForOneMove(newDecision_:Decision, isItMyDecision:boolean) {
-
-    //In the hope this is what we get from backend.
-    let lastDecisionActionName = newDecision_.madeAction.actionName;
-    let lastDecisionActionName2 = newDecision_.madeAction.actionName2;
-    let lastDecisionActionName3 = newDecision_.madeAction.actionName3;
-
-    //update game UI only, if it was not your decision
-    if (!isItMyDecision) {
-
-      //Took Stones from Quarry
-      //-----------------------
-      if (lastDecisionActionName === ActionEnum.fillSledWithStonesFromQuarry) {
-
-        //update Numbers on PlayerField: Quarry and Sled
-        this.updatePlayerData();
-
-        //show Snackbarinfo
-        let text="replace this string";
-        this.showSnackbarMessage(text);
-
-      }
-
-      //Placed Stone on Ship
-      //-------------------
-      else if (lastDecisionActionName === ActionEnum.placeStoneFromSledToShip) {
-
-        //update Numbers on PlayerField: Sled
-        this.updatePlayerData();
-
-        //show stone on ship
-        this.updateStoneOnShip();
-
-        //show Snackbarinfo
-        let text="replace this string";
-        this.showSnackbarMessage(text);
-
-      }
-
-      //Sail Ship to left side of island (no blue market card was not played)
-      //-----------------------------------------------------------------------
-      else if (lastDecisionActionName === ActionEnum.sailShip
-          && !(lastDecisionActionName2 === ActionEnum.sailShipToMarket)
-          && !(lastDecisionActionName3 === ActionEnum.playBlueMarketCard)) {
-
-        //update Numbers on PlayerField: Score
-        this.updatePlayerData();
-
-        //remove ship from departing harbour
-        //this.removeShipFromDepartingHarbour();
-
-        //add ship to arriving harbour
-        //this.addShipToArrivingHarbour();
-
-        //place stones to site
-        this.placeStonesToSite();
-
-        //show Snackbarinfo
-        let text="replace this string";
-        this.showSnackbarMessage(text);
-
-      }
-
-      //Sailed Ship to market (no blue market card was not played)
-      //------------------------------------------------------------
-      else if (lastDecisionActionName === ActionEnum.sailShip
-        && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)
-        && !(lastDecisionActionName3 === ActionEnum.playBlueMarketCard)) {
-
-        //remove ship from departing harbour
-        //this.removeShipFromDepartingHarbour();
-
-        //add ship to arriving harbour
-        //this.addShipToArrivingHarbour();
-
-        //show Snackbarinfo
-        let text="replace this string";
-        this.showSnackbarMessage(text);
-
-      }
-
-      //Took Red Card from Market
-      //-------------------------
-      else if (lastDecisionActionName === ActionEnum.sailShip
-        && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
-
-        //update Numbers on PlayerField: Quarry
-        this.updatePlayerData();
-
-        //remove Card from Market
-        this.removeCardFromMarket();
-
-        //add stones to Site
-        this.addTwoStonesToSite();
-
-        //show Snackbarinfo
-        let text="replace this string";
-        this.showSnackbarMessage(text);
-
-      }
-
-      //Took NO Red but another Card from Market
-      //----------------------------------------
-      else if (lastDecisionActionName === ActionEnum.sailShip
-        && (lastDecisionActionName2 === ActionEnum.sailShipToMarket)) {
-
-        //update Numbers on PlayerField: MarketCardIcons
-        this.updatePlayerData();
-
-        //remove Card from Market
-        this.removeCardFromMarket();
-
-        //show Snackbarinfo
-        let text="replace this string";
-        this.showSnackbarMessage(text);
-
-      }
-
       //Played Blue Market Card Hammer
       //------------------------------
       else if (lastDecisionActionName === ActionEnum.playBlueMarketCardHammer) {
@@ -1263,7 +1159,8 @@ export class GameComponent  implements OnInit {
         this.showSnackbarMessage(text);
 
       }
-
+*/
+  /*
       //Played Blue Market Card Lever (Sail Ship to left side of island)
       //----------------------------------------------------------------
       else if (lastDecisionActionName === ActionEnum.playBlueMarketCardLever
