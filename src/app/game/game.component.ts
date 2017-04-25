@@ -1094,10 +1094,9 @@ export class GameComponent  implements OnInit {
       case PositionEnum.ShipToken:
         //TODO check if this delivers the proper stone colour
         let stoneToAdd = new Stone(-1, this.nameToColourMap[username]);
-        this.ships[move.shipId].addStoneById(stoneToAdd, move.pos);
+        this.ships[move.ShipID].addStoneById(stoneToAdd, move.pos);
         break;
     }
-
 
   }
 

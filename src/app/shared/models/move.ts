@@ -7,7 +7,7 @@ export class Move {
   public to:PositionEnum;
   public pos:number; //check with backend about usage
   public message:string;
-  public shipId:number;
+  public ShipID:number;
 
 
   //Additional Frontend attributes
@@ -18,7 +18,7 @@ export class Move {
     this.from=from_;
     this.to=to_;
     this.pos=pos_;
-    this.shipId=shipId_;
+    this.ShipID=shipId_;
 
   }
 
