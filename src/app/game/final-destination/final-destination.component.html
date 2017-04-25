@@ -2,7 +2,7 @@
 
 
 
-<div  id="arriving_harbour_{{id}}" class="row arriving_harbour" dnd-droppable (onDropSuccess)="addTo($event)">
+<div  id="arriving_harbour_{{id}}" class="row arriving_harbour" dnd-droppable [dropZones]="['sites']" (onDropSuccess)="addTo($event)">
 {{id}}
 
 
