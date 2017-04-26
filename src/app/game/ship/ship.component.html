@@ -5,7 +5,7 @@
     <!--add slots to slots container of ship_i-->
     <div *ngFor="let slots of ship.slots; let j= index"
          id="ship_{{ship.id+1}}_slot_{{j+1}}" class="ship_slot"
-         dnd-droppable [dropZones]="['slots']" (onDropSuccess)="addTo($event,ship.id, j)">
+         dnd-droppable [dropZones]="['slots']" [dropEnabled]="!ship.slots[j]" (onDropSuccess)="addTo($event,ship.id, j)">
       <div *ngIf="ship.slots[j] != null" class="ship_slot"  id="ngifStone">
         <app-stone class="appStone" [stone] = ship.slots[j] ></app-stone>
       </div>
