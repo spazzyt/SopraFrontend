@@ -8,12 +8,12 @@
   <!--drag and drop zone-->
   <div id="supply_sled_2" class="low_m ">
 
-    <div class="supply_sled_2">
-      <p class="non-draggable" id="stone_label_2">{{sledStones}}/5</p>
-    </div>
-
     <div id="bag_2" class="stone_icon" dnd-draggable [dragEnabled]="true" [dropZones]="['slots']" [dragData]="playerFieldStone">
       <app-stone id="stones_2" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
+    </div>
+
+    <div class="supply_sled_2">
+      <p class="non-draggable" id="stone_label_2">{{sledStones}}/5</p>
     </div>
 
   </div>
