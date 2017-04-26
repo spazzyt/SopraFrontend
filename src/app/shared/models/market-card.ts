@@ -53,7 +53,7 @@ export class MarketCard {
    - Burial Chamber Decoration (2)
    - Obelisk Decoration (2)
 
-   VIOLET CARD
+   PURPLE CARD
    - Statue (10)
 
    BLUE CARDS

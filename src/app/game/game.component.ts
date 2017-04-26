@@ -975,6 +975,10 @@ export class GameComponent  implements OnInit {
 
   initRound(round: Round){
 
+    //only make stones draggable if player has stones
+    this.updateStoneDragStatus();
+
+
     for(let ship of this.game.ships){
       ship = null;
     }
@@ -1041,6 +1045,11 @@ export class GameComponent  implements OnInit {
     }
   }
 
+  updateStoneDragStatus(){
+    for(let player of this.game.players){
+      this.playerMap[player.username].checkStonesDragable();
+    }
+  }
 
   //===========================================================
   // Update Game UI for one Move of another client
@@ -1048,9 +1057,8 @@ export class GameComponent  implements OnInit {
 
   updateUiForOneMove2(move: Move, username: string, berlinerScore: Map<string, number>, sleds: Map<string, number>, quarries: Map<string, number>){
 
-    for(let player of this.game.players){
-      this.playerMap[player.username].checkStonesDragable();
-    }
+    //only set stones to draggable if player has stones
+    this.updateStoneDragStatus();
 
     console.log('Updating UI for this move: ', move, " by Player ", username);
 
