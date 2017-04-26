@@ -93,13 +93,13 @@ p{
   opacity:0.7;
   border: none !important;
   /* Styling changes inside ship slots */
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(212, 189, 136, 0.5);
 }
 
 .dnd-drag-over {
   border: none !important;
   /* Styling changes inside site harbours */
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(212, 189, 136, 0.5);
   border-radius: 15%;
 }
 
