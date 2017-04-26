@@ -2,23 +2,23 @@
 
 <div class="bottom_part">
   <div id="score_2" class="low_l score">
-    <p class="non-draggable">{{score}}</p>
+    <p id="score_number" class="non-draggable">{{score}}</p>
   </div>
 
   <!--drag and drop zone-->
   <div id="supply_sled_2" class="low_m ">
 
-    <div class="supply_sled_2">
-      <p class="non-draggable" id="stone_label_2">{{sledStones}}/5</p>
-    </div>
-
     <div id="bag_2" class="stone_icon" dnd-draggable [dragEnabled]="true" [dropZones]="['slots']" [dragData]="playerFieldStone">
       <app-stone id="stones_2" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
     </div>
 
+    <div class="supply_sled_2">
+      <p class="non-draggable" id="stone_label_2">{{sledStones}}/5</p>
+    </div>
+
   </div>
   <div id="quarry_2" class="low_r quarry">
-    <p class="non-draggable">{{quarryStones}}</p>
+    <p id="quarry_number" class="non-draggable">{{quarryStones}}</p>
   </div>
 </div>
 

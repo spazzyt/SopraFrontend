@@ -70,8 +70,6 @@ export class TopRightComponent implements OnInit {
   //==========
 
   ngOnInit() {
-    this.score=0;
-    this.quarryStones=29;
 
     //Popovers must be initialized in ngOnInit()
     this.initializePopovers();
