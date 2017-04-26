@@ -128,7 +128,7 @@
   transform: scale(0.2);
 }
 
-/* Smoke animation */
+/* Smoke animation
 
 @keyframes smokeL {
   0%   { transform: scale(0.0) translate(0, 0) }
@@ -152,10 +152,10 @@
 #smoke .s7 { animation: smokeR 10s 7s infinite }
 #smoke .s8 { animation: smokeL 10s 8s infinite }
 #smoke .s9 { animation: smokeR 10s 9s infinite }
+*/
 
 
-
-/* Smoke container  -- Right One */
+/* Smoke container  -- Right One
 
 #smoke2 {
   position: relative;
@@ -163,8 +163,8 @@
   width: 1px; height: 80px;
   left: 70%; bottom: 30px;
 }
-
-/* smoke balls */
+*/
+/* smoke balls
 
 #smoke2 span {
   display: block;
@@ -189,7 +189,7 @@
 #smoke2 .s8 { animation: smokeL 10s 8s infinite }
 #smoke2 .s9 { animation: smokeR 10s 9s infinite }
 
-
+*/
 
 
 

@@ -971,6 +971,10 @@ export class GameComponent  implements OnInit {
 
   initRound(round: Round){
 
+    //only make stones draggable if player has stones
+    this.updateStoneDragStatus();
+
+
     for(let ship of this.game.ships){
       ship = null;
     }
@@ -1037,6 +1041,11 @@ export class GameComponent  implements OnInit {
     }
   }
 
+  updateStoneDragStatus(){
+    for(let player of this.game.players){
+      this.playerMap[player.username].checkStonesDragable();
+    }
+  }
 
   //===========================================================
   // Update Game UI for one Move of another client
@@ -1044,9 +1053,8 @@ export class GameComponent  implements OnInit {
 
   updateUiForOneMove2(move: Move, username: string, berlinerScore: Map<string, number>, sleds: Map<string, number>, quarries: Map<string, number>){
 
-    for(let player of this.game.players){
-      this.playerMap[player.username].checkStonesDragable();
-    }
+    //only set stones to draggable if player has stones
+    this.updateStoneDragStatus();
 
     console.log('Updating UI for this move: ', move, " by Player ", username);
 
@@ -2119,7 +2127,7 @@ export class GameComponent  implements OnInit {
     }
     if (data[0] != null) {
       console.log("card exists.", data[0]);
-      if (data[0].colour == "red") {
+      if (data[0].type == "Red") {
         this.takeRedMarketCardFromMarket(data[0], 1);
       }
       else {
@@ -2131,7 +2139,7 @@ export class GameComponent  implements OnInit {
   marketComponent_onEvent_setClickHandlerOnMarketCards_2_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 2: data: ",data);}
     if (data[1] != null) {
-      if (data[1].colour == "red") {
+      if (data[1].type == "Red") {
         this.takeRedMarketCardFromMarket(data[1], 2);
       }
       else {
@@ -2142,7 +2150,7 @@ export class GameComponent  implements OnInit {
   marketComponent_onEvent_setClickHandlerOnMarketCards_3_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 3: data: ",data);}
     if (data[2] != null) {
-      if (data[2].colour == "red") {
+      if (data[2].type == "Red") {
         this.takeRedMarketCardFromMarket(data[2], 3);
       }
       else {
@@ -2153,7 +2161,7 @@ export class GameComponent  implements OnInit {
   marketComponent_onEvent_setClickHandlerOnMarketCards_4_marketCards(data:MarketCard[]){
     if(1){console.log("marketCards 4: data: ",data);}
     if (data[3] != null) {
-      if (data[3].colour == "red") {
+      if (data[3].type == "Red") {
         this.takeRedMarketCardFromMarket(data[3], 4);
       }
       else {
