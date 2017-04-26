@@ -981,6 +981,12 @@ export class GameComponent  implements OnInit {
     this.game.roundNumber = round.roundNumber;
     this.game.ships = round.ships;
 
+    //delete ships from final destinations within site
+    this.pyramidComponent.ship = null;
+    this.templeComponent.ship = null;
+    this.burialChamberComponent.ship = null;
+    this.obeliskComponent.ship = null;
+    this.marketComponent.ship = null;
 
     // init the ship map
     for(let ship of this.game.ships)
