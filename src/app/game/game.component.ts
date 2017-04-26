@@ -1065,6 +1065,8 @@ export class GameComponent  implements OnInit {
         this.playerMap[username].update_takeStonesFromQuarry(move.pos);
         break;
 
+
+      //TODO condense the site functions (except market) into one single function
       //Sail ship to Pyramid:
       case PositionEnum.Pyramid:
         this.moveShipById(move.pos, 'Pyramid');
@@ -1106,6 +1108,10 @@ export class GameComponent  implements OnInit {
       //Sail ship to Market:
       case PositionEnum.Market:
         this.moveShipById(move.pos, 'Market');
+
+        //remove stones from ship
+        this.game.ships[move.pos].slots = [];
+
         break;
 
 
