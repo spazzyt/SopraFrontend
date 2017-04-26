@@ -1023,11 +1023,29 @@ export class GameComponent  implements OnInit {
 
   }
 
+  updateScoreSledQuarry(scores: Map<string, number>, sleds: Map<string, number>, quarries: Map<string, number>,){
+
+    //set current score for player
+    for(let player of this.game.players) {
+      this.playerMap[player.username].setStonesInSled(scores[player.username]);
+    }
+
+    //set current sled stones for player
+    for(let player of this.game.players) {
+      this.playerMap[player.username].setStonesInSled(sleds[player.username]);
+    }
+    //set current quarry stones for player
+    for(let player of this.game.players) {
+      this.playerMap[player.username].setStonesInQuarry(quarries[player.username]);
+    }
+  }
+
+
   //===========================================================
   // Update Game UI for one Move of another client
   //===========================================================
 
-  updateUiForOneMove2(move: Move, username: string, berlinerScore: Map<string, number>){
+  updateUiForOneMove2(move: Move, username: string, berlinerScore: Map<string, number>, sleds: Map<string, number>, quarries: Map<string, number>){
 
 
 
@@ -1040,6 +1058,11 @@ export class GameComponent  implements OnInit {
       //Take stones from quarry
       case PositionEnum.Sled:
         this.playerMap[username].update_takeStonesFromQuarry(move.pos);
+
+        //update score, sled & quarry
+        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+
+
         break;
 
 
@@ -1053,10 +1076,8 @@ export class GameComponent  implements OnInit {
         //remove stones from ship
         this.game.ships[move.pos].slots = [];
 
-        //set current score for each player
-        for(let player of this.game.players){
-          this.playerMap[player.username].setScore(berlinerScore[player.username]);
-        }
+        //update score, sled & quarry
+        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
 
         break;
 
@@ -1068,10 +1089,9 @@ export class GameComponent  implements OnInit {
         //remove stones from ship
         this.game.ships[move.pos].slots = [];
 
-        //set current score for each player
-        for(let player of this.game.players){
-          this.playerMap[player.username].setScore(berlinerScore[player.username]);
-        }
+        //update score, sled & quarry
+        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+
         break;
 
       //Sail ship to Burial Chamber:
@@ -1082,10 +1102,9 @@ export class GameComponent  implements OnInit {
         //remove stones from ship
         this.game.ships[move.pos].slots = [];
 
-        //set current score for each player
-        for(let player of this.game.players) {
-          this.playerMap[player.username].setScore(berlinerScore[player.username]);
-        }
+        //update score, sled & quarry
+        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+
         break;
 
       //Sail ship to Obelisk:
@@ -1096,10 +1115,9 @@ export class GameComponent  implements OnInit {
         //remove stones from ship
         this.game.ships[move.pos].slots = [];
 
-          //set current score for each player
-          for(let player of this.game.players) {
-            this.playerMap[player.username].setScore(berlinerScore[player.username]);
-          }
+        //update score, sled & quarry
+        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+
         break;
 
 
@@ -1118,6 +1136,10 @@ export class GameComponent  implements OnInit {
         //TODO check if this delivers the proper stone colour
         let stoneToAdd = new Stone(-1, this.nameToColourMap[username]);
         this.ships[move.ShipID].addStoneById(stoneToAdd, move.pos);
+
+        //update score, sled & quarry
+        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+
         break;
     }
 
