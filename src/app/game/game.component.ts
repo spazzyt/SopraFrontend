@@ -2051,8 +2051,9 @@ export class GameComponent  implements OnInit {
 
 
         //TODO these are not needed, get data from backend
-        //this.colourMap[playerField].quarryStones -= stonesToTake;
-        //this.colourMap[playerField].sledStones += stonesToTake;
+        this.colourMap[playerField].quarryStones -= stonesToTake;
+        this.colourMap[playerField].sledStones += stonesToTake;
+        console.log("locally taking stones: ", stonesToTake);
 
       }
       else{
