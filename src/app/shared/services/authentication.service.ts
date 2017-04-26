@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions, Jsonp} from "@angular/http";
 import {User} from "../models/user";
 import {Observable} from 'rxjs/Rx';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable()
 export class AuthenticationService {
@@ -37,7 +39,8 @@ export class AuthenticationService {
 
     //TODO fill in your heroku-backend URL
     //this.apiUrl = 'https://sopra-fs17-group13.herokuapp.com';
-    this.apiUrl = 'http://localhost:8080'
+    //this.apiUrl = 'http://localhost:8080'
+    this.apiUrl = environment.apiUrl;
   }
 
   updateCookie(){

@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {Game} from "../models/game";
 import {Router} from "@angular/router";
 import {Move} from "../models/move";
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class GameService {
@@ -19,7 +20,8 @@ export class GameService {
 
     //TODO fill in your heroku-backend URL
     //this.apiUrl = 'https://sopra-fs17-group13.herokuapp.com';
-    this.apiUrl = 'http://localhost:8080'
+   // this.apiUrl = 'http://localhost:8080'
+    this.apiUrl = environment.apiUrl;
   }
 
   setGame(game: Game){
