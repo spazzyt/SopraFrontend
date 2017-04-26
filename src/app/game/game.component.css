@@ -104,6 +104,8 @@
 .game_footer{
   height: 13%;
   width: 100%;
+  border: none !important;
+  background-color: transparent !important;
   /*background-color: rgba(50, 200, 50, 0.4);*/
 }
 
