@@ -2049,8 +2049,10 @@ export class GameComponent  implements OnInit {
           stonesToTake = Math.min(stonesInQuarry, 5-stonesInSled);
         }
 
-        this.colourMap[playerField].quarryStones -= stonesToTake;
-        this.colourMap[playerField].sledStones += stonesToTake;
+
+        //TODO these are not needed, get data from backend
+        //this.colourMap[playerField].quarryStones -= stonesToTake;
+        //this.colourMap[playerField].sledStones += stonesToTake;
 
       }
       else{
