@@ -73,8 +73,8 @@ export class WSService {
           console.log(msg.payload);
           if(msg.payload.player != this.authenticationService.mySelf.username) //if this move is not from me, update:
           {
-            let moveToDo = msg.payload.move;                                                          //TODO change this to scores, quarries ASAP
-            gameComponent.updateUiForOneMove2(moveToDo, msg.payload.player, msg.payload.berlinerScore, msg.payload.berlinerScore, msg.payload.berlinerScore);
+            let moveToDo = msg.payload.move;
+            gameComponent.updateUiForOneMove2(moveToDo, msg.payload.player, msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
 
           }
           break;
