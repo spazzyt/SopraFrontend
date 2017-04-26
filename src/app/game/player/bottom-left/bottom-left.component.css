@@ -80,6 +80,7 @@ p{
   /*border: 1px solid #ff56e9;*/
 }
 
+/*Copy from here*/
 .supply_sled_1{
   /*background-image: url("../../../../assets/images/supply_sled.png");*/
   background-repeat: no-repeat;
@@ -96,7 +97,7 @@ p{
 .quarry{
   background-image: url("../../../../assets/images/quarry.png");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: left;
   /*border: 1px solid #ffef5c;*/
 }
 
@@ -119,6 +120,7 @@ p{
   height: 100%;
   float: bottom;
   float: left;
+  padding-right: 13%;
 }
 
 
@@ -306,7 +308,7 @@ p{
   display:block;
 }
 
-
+/*Copy from here*/
 #stone_label_1{
   z-index:200;
   top:15px;
