@@ -9,7 +9,6 @@ import {TempleComponent} from "./temple/temple.component";
 import {PyramidComponent} from "./pyramid/pyramid.component";
 import {ObeliskComponent} from "./obelisk/obelisk.component";
 import {SiteHarbourComponent} from "./site-harbour/site-harbour.component";
-import {MarketHarbourComponent} from "./market-harbour/market-harbour.component";
 import {BurialChamberComponent} from "./burial-chamber/burial-chamber.component";
 import {ShipComponent} from "./ship/ship.component";
 import {BottomRightComponent} from "./player/bottom-right/bottom-right.component";
@@ -130,9 +129,6 @@ export class GameComponent  implements OnInit {
 
   // Enable communication with SiteHarbour
   @ViewChild(SiteHarbourComponent) siteHarbourComponent:SiteHarbourComponent;
-
-  // Enable communication with MaketHarbour
-  @ViewChild(MarketHarbourComponent) maketHarbourComponent:MarketHarbourComponent;
 
   // Enable communication with PyramidComponent
   @ViewChild(PyramidComponent) pyramidComponent:PyramidComponent;
