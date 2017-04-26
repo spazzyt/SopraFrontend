@@ -158,18 +158,10 @@ export class GameComponent  implements OnInit {
   //===============
   //Constructor
   //===============
-  constructor(private dragulaService: DragulaService,
-              private gameService: GameService,
+  constructor(private gameService: GameService,
               private wsService: WSService,
               private userService: UserService,
               private route: ActivatedRoute) {
-
-    //dragula subscriptions
-    this.dragula_subscribeDragEvent();
-    this.dragula_subscribeDropEvent();
-
-
-
   }
 
 
@@ -189,9 +181,6 @@ export class GameComponent  implements OnInit {
   playerPlayerFieldStatus_target:boolean=false;
   roundNumber:number=3;
   glow_target:boolean=true;
-
-  //used in dragula drop
-  playedBlueMarketCard_lever=false;
 
 
   //Fake Ships
@@ -249,18 +238,12 @@ export class GameComponent  implements OnInit {
     // (+) converts string 'id' to a number
     let id = +this.route.snapshot.params['id'];
 
-    // if the game component is loaded without an :id parameter in the url (the original state,
-    // we continue with the "old fake game"
-    // otherwise load the real "fake" game from the backend
     if(!isNaN(id)) {
 
       this.gameService.getGame(id)
         .subscribe((game: Game) => {
           this.game = game;
 
-
-
-// TODO this still throws errors, but should be added when backend delivers correct data
 
           //Map player names to components
           this.playerMap = new Map();
@@ -294,7 +277,7 @@ export class GameComponent  implements OnInit {
 
           //Initialize the whole market card set
           for (let i=1; i<=34; i++){
-            //this.game.wholeMarketCardSet.push(new MarketCard(i)); //TODO fix this
+            //this.game.wholeMarketCardSet.push(new MarketCard(i)); //TODO is this needed? see below
           }
 
           console.log("Initializing game with id: ", id, game);
@@ -304,6 +287,7 @@ export class GameComponent  implements OnInit {
         });
     }
 
+    //TODO is this needed? implement later if yes
     //Initialize the new game
     //this.initializeNewGame(this.getFakeGame());
 
@@ -391,25 +375,15 @@ export class GameComponent  implements OnInit {
     //set username in game model
     this.game.myUserName = this.myUserName;
 
-    //initialize card arrays
-    /*
-    this.game.playerFieldIconsBlack =[0,0,0,0,0,0,0,0,0,0,0,0];
-    this.game.playerFieldIconsWhite =[0,0,0,0,0,0,0,0,0,0,0,0];
-    this.game.playerFieldIconsBrown =[0,0,0,0,0,0,0,0,0,0,0,0];
-    this.game.playerFieldIconsGray =[0,0,0,0,0,0,0,0,0,0,0,0];
-
-    this.game.playerFieldIconsBlackAsBoolean =this.game.numberToBoolean(this.game.playerFieldIconsBlack);
-    this.game.playerFieldIconsWhiteAsBoolean =this.game.numberToBoolean(this.game.playerFieldIconsWhite);
-    this.game.playerFieldIconsBrownAsBoolean =this.game.numberToBoolean(this.game.playerFieldIconsBrown);
-    this.game.playerFieldIconsGrayAsBoolean  =this.game.numberToBoolean(this.game.playerFieldIconsGray);
-*/
-
     //pass game information to gameService
     this.gameService.setGame(this.game);
 
-    let fakegame = this.getFakeGame();               //TODO delete this as soon as the backend passes the necessary arguments
-    this.game.marketCards = fakegame.marketCards;   //TODO delete this
-    this.game.ships = [null, null, null, null];//fakegame.ships;               //TODO delete this
+    //TODO delete as soon as we get proper market cards from backend
+    let fakegame = this.getFakeGame();
+    this.game.marketCards = fakegame.marketCards;
+
+    //fill ship array with nulls
+    this.game.ships = [null, null, null, null];
 
     //Site Board Components: the island
     this.initializeMarketComponent(this.game.marketCards);
@@ -420,7 +394,7 @@ export class GameComponent  implements OnInit {
 
     this.shipsInDepartingHarbour = this.game.ships;
 
-    this.shipsInSiteHarbour = []
+    this.shipsInSiteHarbour = [];
 
     //Departing Harbour: the ships
     this.initializeDepartingHarbourComponent(this.game.ships);
@@ -459,24 +433,20 @@ export class GameComponent  implements OnInit {
   }
 
   initializeObeliskComponent(){
-    let obelisk:Obelisk; //ToDo: What for?
     this.obeliskComponent.setAttributes(this.game.numPlayers);
     this.obeliskComponent.removeStones();
   }
 
   initializePyramidComponent(){
-    let pyramid:Pyramid;//ToDo: What for?
     this.pyramidComponent.removeStones();
   }
 
   initializeTempleComponent(){
-    let temple:Temple;//ToDo: What for?
     this.templeComponent.setAttributes(this.game.numPlayers);
     this.templeComponent.removeStones();
   }
 
   initializeBurialChamberComponent(){
-    let burialChamber:BurialChamber;//ToDo: What for?
     this.burialChamberComponent.removeStones();
   }
 
@@ -1005,27 +975,26 @@ export class GameComponent  implements OnInit {
 
   initRound(round: Round){
 
+    this.game.ships = [];
+
     //Update internal data arrays with data from backend:
     this.game.roundNumber = round.roundNumber;
     this.game.ships = round.ships;
 
+    //delete ships from final destinations within site
+    this.pyramidComponent.ship = null;
+    this.templeComponent.ship = null;
+    this.burialChamberComponent.ship = null;
+    this.obeliskComponent.ship = null;
+    this.marketComponent.ship = null;
 
     // init the ship map
     for(let ship of this.game.ships)
       this.ships[ship.id] = ship;
 
-    this.game.marketCards = round.marketCards;
-    //this.activateActivePlayerInteractions(true, ColourEnum.black);  //TODO add real data here
+    this.game.marketCards = round.marketCards; //TODO get real input from backend
 
-
-      //remove stones from ships (with JQuery?) --> already done in initialize-functions (i think)
-
-    //remove ships from arriving harbours (with JQuery?)
-
-    //Initialize Market with new cards
-    //this.initializeMarketComponent(this.game.marketCards);    //TODO add when getting correct input
-
-    //Initialize Departing Harbour with new ships
+    //initialize with new ships
     this.initializeDepartingHarbourComponent(this.game.ships);
 
     //increase round in info box
@@ -1262,6 +1231,7 @@ export class GameComponent  implements OnInit {
     this.sortScores();
   }
 
+
   sortScores(){
 
     for(let i = 0; i < this.playerNames.length; i++){
@@ -1273,15 +1243,6 @@ export class GameComponent  implements OnInit {
 
   }
 
-  //show stone on ship
-  updateStoneOnShip(){
-
-  }
-
-  //remove ship from departing harbour
-  removeShipFromDepartingHarbour(shipid: string){
-
-  }
 
   //add ship to arriving harbour
   addShipToArrivingHarbour(target: PositionEnum, shipid: number){
@@ -1297,33 +1258,6 @@ export class GameComponent  implements OnInit {
     //remove ship from departing harbour
     this.departingHarbourComponent.removeShip(shipid);
   }
-
-  //place stones to site
-  placeStonesToSite(){
-
-  }
-
-  //remove stone from ship, place it to quarry
-  removeStoneFromShip(){
-
-  };
-
-  //remove Card from Market
-  removeCardFromMarket(){
-
-  };
-
-  //add stones to Site
-  addTwoStonesToSite(){
-
-  };
-
-  //switch order of stones on ship
-  switchOrderOfStonesOnShip(){
-
-
-  };
-
 
   //===========================================================
   // Update data for one player field
@@ -1594,9 +1528,8 @@ export class GameComponent  implements OnInit {
     //-----------------------
     if (!amI_CurrentActivePlayer){
 
-      //Dragula Options
       //------------------------------------------
-      //-automatically inactivate all ships
+      // TODO automatically deactivate all ships
       //------------------------------------------
 
       //hide all stones in sleds (no see, no touch)
@@ -1682,8 +1615,8 @@ export class GameComponent  implements OnInit {
 
 
   //=============================================================
-  // Main Task 2: Active Player receives his Decision Object
-  // Activate allowed interactions
+  // Main Task 2:
+  // Activate allowed interactions for active Player
   //=============================================================
 
 
@@ -1694,9 +1627,7 @@ export class GameComponent  implements OnInit {
     if (amI_CurrentActivePlayer) {
 
       //------------------------------------
-      //ToDo:Parse Decision Object
-      //ToDo:---------------------
-      //ToDo:
+
       //ToDo:Set the flags below for:
       //ToDo:------------------------
       //ToDo:all player field opacity effects (hardcoded)
@@ -1711,21 +1642,15 @@ export class GameComponent  implements OnInit {
       //ToDo:------------------------------
       //ToDo:Quarry
       //ToDo:
-      //ToDo:hide/show object for:
-      //ToDo:--------------------
-      //ToDo:Sled Stone
-      //ToDo:
       //ToDo:Set/remove drag/drop handlers for:
       //ToDo:----------------------------------
-      //ToDo:ships (dragula option should do that automatically)
-      //ToDo:stones on ship (dragula option should do that automatically)
-      //ToDo:
-      //ToDo:Check whether:
-      //ToDo:--------------
-      //ToDo:Client state on ships is what decision object says
+      //ToDo:ships
+      //ToDo:stones on ship
       //------------------------------------
 
 
+
+      //TODO condense this into one function, NOT if-else
       //I am active player on black field
       //--------------------------------
       if(currentActivePlayerField===ColourEnum.black){
@@ -1984,7 +1909,7 @@ export class GameComponent  implements OnInit {
       }
 
     }
-
+    //TODO cleanup/condense until here
   }
 
 
@@ -2061,14 +1986,12 @@ export class GameComponent  implements OnInit {
 
       }
       else{
-        this.showSnackbarMessage("You cannot take stones from the quarry.")
+        this.showSnackbarMessage("You can't take stone because your sled is full.")
         return;
       }
 
 
     //send move object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send move object to backend
     let moveToSend = new Move(PositionEnum.Quarry, PositionEnum.Sled, stonesToTake);
     this.gameService.sendMove(moveToSend); //Send move to backend
 
@@ -2083,57 +2006,6 @@ export class GameComponent  implements OnInit {
     if(1){console.log("take stones from Quarry to Sled:Component.sledStones ",this.bottomLeftComponent.sledStones);}
 
   }
-
-
-
-
-  //===========================================================
-  // Main Action 2: move stone from sled to shipSlot
-  //===========================================================
-
-  moveStoneFromSledToShipSlot(){
-
-    //listen to drop of stone on ship slot
-
-    ActionEnum.placeStoneFromSledToShip
-
-    //generate decision object
-
-    //send decision object to backend
-
-
-    //send decision object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
-
-
-    //snackbar message
-    this.showSnackbarMessage("You moved a stone from sled to shipSlot ");
-
-  }
-
-
-
-  //===========================================================
-  // Main Action 3: move ship to site
-  //===========================================================
-
-
-  //=================
-  // Sail to Pyramids
-  //=================
-
-  moveShipToPyramids(whichShip:number, stonesToMove:Stone[]){
-
-    //snackbar message
-    this.showSnackbarMessage("you sailed ship "+ whichShip +" to pyramids.");
-
-  }
-
-
-  //=================
-  // Sail to Temple
-  //=================
 
   //received data from child components
   //-----------------------------------
@@ -2151,28 +2023,6 @@ export class GameComponent  implements OnInit {
   };
 
 
-  moveShipToTemple(whichShip:number, stonesToMove:Stone[]){
-
-    //snackbar message
-    this.showSnackbarMessage("you sailed ship "+ whichShip +" to temple.");
-
-  }
-
-  //======================
-  // Sail to BurialChamber
-  //======================
-
-  moveShipToBurialChamber(whichShip:number, stonesToMove:Stone[]){
-
-    //snackbar message
-    this.showSnackbarMessage("you sailed ship "+ whichShip +" to burial chamber.");
-
-  }
-
-  //=================
-  // Sail to Obelisk
-  //=================
-
   //received data from child components
   //-----------------------------------
 
@@ -2186,25 +2036,6 @@ export class GameComponent  implements OnInit {
     console.log("data from Game Model",this.obeliskComponent.stones);
 
   };
-
-  moveShipToObelisks(whichShip:number, stonesToMove:Stone[]){
-
-    //snackbar message
-    this.showSnackbarMessage("you sailed ship "+ whichShip +" to obelisks.");
-
-
-  }
-
-  //=================
-  // Sail to Market
-  //=================
-
-  moveShipToMarket(whichShip:number, stonesToMove:Stone[]){
-
-    //snackbar message
-    this.showSnackbarMessage("you sailed ship "+ whichShip +" to market.");
-
-  }
 
 
   //===========================================================
@@ -2884,7 +2715,7 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
+    //ToDo: send move object to backend
 
 
 
@@ -2906,7 +2737,7 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
+    //ToDo: send move object to backend
 
 
 
@@ -2930,1237 +2761,10 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
+    //ToDo: send move object to backend
 
   }
 
-
-
-  //==================================================
-  // Test-Methods: Communication with Child Components
-  //==================================================
-
-  // Communication with PlayerComponent or Players BottomLeftComponent etc. directly
-  //--------------------------------------------------------------------------------
-  trigger_setPlayerName(){
-    this.bottomLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
-    this.bottomRightComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
-    this.topLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
-    this.topRightComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
-  }
-
-  trigger_moveShipToSite(){
-    this.addShipToArrivingHarbour(PositionEnum.Pyramid, 0);
-
-    this.addShipToArrivingHarbour(PositionEnum.Temple, 1);
-
-    this.addShipToArrivingHarbour(PositionEnum.BurialChamber, 2);
-
-    this.addShipToArrivingHarbour(PositionEnum.Obelisk, 3);
-  }
-
-  trigger_FieldGlow(){
-    this.bottomLeftComponent.playerFieldGlow(this.glow_target);
-    this.topLeftComponent.playerFieldGlow(this.glow_target);
-    this.bottomRightComponent.playerFieldGlow(this.glow_target);
-    this.topRightComponent.playerFieldGlow(this.glow_target);
-
-    this.glow_target = !this.glow_target;
-  }
-  trigger_setMarketCards(){
-    this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
-    this.bottomRightComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
-    this.topLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
-    this.topRightComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
-
-  }
-  trigger_setScore(){
-    this.bottomLeftComponent.setScore(this.score_target); //(click)="trigger_setScore()"
-    this.bottomRightComponent.setScore(this.score_target); //(click)="trigger_setScore()"
-    this.topLeftComponent.setScore(this.score_target); //(click)="trigger_setScore()"
-    this.topRightComponent.setScore(this.score_target); //(click)="trigger_setScore()"
-  }
-  trigger_setStonesInSled(){
-    this.bottomLeftComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
-    this.bottomRightComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
-    this.topLeftComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
-    this.topRightComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
-
-  }
-  trigger_setStonesInQuarry(){
-    this.bottomLeftComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
-    this.bottomRightComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
-    this.topLeftComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
-    this.topRightComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
-
-  }
-
-  trigger_deactivateOrActivateIcons(){
-
-    this.bottomLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
-    this.bottomRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
-    this.topLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
-    this.topRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
-
-    //used to toggle boolean array this.playerIconsStatus_target
-    for(let i = 0; i < this.playerIconsStatus_target.length; i++){
-      this.playerIconsStatus_target[i] = !this.playerIconsStatus_target[i];
-    }
-  }
-
-  trigger_deactivateOrActivateStoneQuarry(){
-
-    this.bottomLeftComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.bottomRightComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.topLeftComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.topRightComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-
-  }
-
-  trigger_deactivateOrActivateStoneSled(){
-
-    this.bottomLeftComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
-    this.bottomRightComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
-    this.topLeftComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
-    this.topRightComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
-
-  }
-
-  trigger_deactivateOrActivatePlayerField(){
-
-    this.bottomLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
-    this.bottomRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
-    this.topLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
-    this.topRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
-
-  }
-
-
-  trigger_setClickHandlerOnBlueMarketCards(){
-
-    this.bottomLeftComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
-    this.bottomRightComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
-    this.topLeftComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
-    this.topRightComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
-
-  }
-
-  trigger_removeClickHandlerOnBlueMarketCards(){
-
-    this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
-    this.bottomRightComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
-    this.topLeftComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
-    this.topRightComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
-
-  }
-
-
-  // Communication with active player component BottomLeftComponent usw.
-  // no delegation to children
-  //--------------------------------------------------------------------
-  trigger_TemplateFunction(){}/*used to compile*/
-
-
-  trigger_showSnackbarMessenger() {
-    let text_="Hi Player 1,  Player 2  has moved Ship 2 to the Temple, " +
-      "be informed, that you have exactly 10 seconds to read this information. After that " +
-      "the snackbar will be closed."
-    let time_=10000
-    this.showSnackbarMessenger(text_,time_);
-  }
-
-
-  trigger_showLastMoveOfOtherPlayer(){
-
-
-
-  }
-
-
-  trigger_collectLastMoveOfActivePlayer(){
-
-  }
-
-
-
-  // Communication with DepartingHarbour
-  //------------------------------------
-  trigger_removeShips(){
-    this.departingHarbourComponent.removeShips(); //(click)="trigger_removeShips()"
-  }
-
-  trigger_generateFourShips(ship1,ship2,ship3,ship4){
-    this.departingHarbourComponent.generateFourShips(this.ships_target); //(click)="trigger_generateFourShips()"
-  }
-
-  trigger_generateShip(){
-    this.departingHarbourComponent.generateShip(this.ship1); //(click)="trigger_generateShip()"
-  }
-
-  trigger_removeShip(id:number){
-    this.departingHarbourComponent.removeShip(id); //(click)="trigger_removeShip()"
-  }
-
-  trigger_deactivateShipOnDepartingHarbour(){
-    this.departingHarbourComponent.deactivateShipOnDepartingHarbour(this.ship1);//(click)="trigger_deactivateShipOnDepartingHarbour()"
-
-  }
-
-  trigger_activateShipOnDepartingHarbour(){
-    this.departingHarbourComponent.ractivateShipOnDepartingHarbour(this.ship1);//(click)="trigger_activateShipOnDepartingHarbour()"
-
-  }
-
-  trigger_countStonesOnShip(){
-    this.departingHarbourComponent.countStonesOnShip(this.ship1);//click)="trigger_countStonesOnShip()"
-
-  }
-
-  trigger_takeStonesFromQuarryToSled(){
-    this.takeStonesFromQuarryToSled(ColourEnum.black);//click)="trigger_countStonesOnShip()"
-
-  }
-
-
-
-  // Communication with SiteHarbour
-  //-------------------------------
-
-
-  // Communication with MarketHarbour
-  //--------------------------------
-
-
-
-  // Communication with PyramidComponent
-  //------------------------------------
-  trigger_placeOnPyramid(){
-    this.pyramidComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
-  }
-
-  trigger_removeFromPyramid(){
-    this.pyramidComponent.removeStones(); //(click)="trigger_setMarketCards()"
-  }
-
-  // Communication with TempleComponent
-  //-----------------------------------
-  trigger_placeOnTemple(){
-    this.templeComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
-  }
-
-  trigger_removeFromTemple(){
-    this.templeComponent.removeStones(); //(click)="trigger_setMarketCards()"
-  }
-
-  // Communication with BurialChamberComponent
-  //------------------------------------------
-  trigger_placeOnBurial(){
-    this.burialChamberComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
-  }
-
-  trigger_removeFromBurial(){
-    this.burialChamberComponent.removeStones(); //(click)="trigger_setMarketCards()"
-  }
-
-  // Communication with ObeliskComponent
-  //------------------------------------
-  trigger_placeOnObelisk(){
-    this.obeliskComponent.placeStones(this.stones_target); //(click)="trigger_setMarketCards()"
-  }
-
-  trigger_removeFromObelisk(){
-    this.obeliskComponent.removeStones(); //(click)="trigger_setMarketCards()"
-  }
-
-  // Communication with MarketComponent
-  //-----------------------------------
-  trigger_removeUnusedMarketCards(){
-    this.marketComponent.removeUnusedMarketCards(); //(click)="trigger_removeUnusedMarketCards()"
-  }
-  trigger_generateFourMarketCards(){
-    this.marketComponent.generateFourMarketCards(this.marketCards); //(click)="trigger_generateFourMarketCards()"
-  }
-
-  trigger_setClickHandlerOnMarketCards(){
-    this.marketComponent.setClickHandlerOnMarketCards(); //(click)="trigger_setClickHandlerOnMarketCards()"
-  }
-
-  trigger_removeClickHandlerOnMarketCards(){
-    this.marketComponent.removeClickHandlerOnMarketCards(); //(click)="trigger_setClickHandlerOnMarketCards()"
-  }
-
-
-  trigger_deactivateOrActivateMarketCards(){
-
-    //gray out and make unclickable
-    //this.marketComponent.deactivateOrActivateMarketCards(); //(click)="trigger_deactivateOrActivateMarketCards()"
-  }
-
-
-  // Communication with ShipComponent
-  //---------------------------------
-  trigger_deactivateOrActivateShips(){
-
-    this.shipComponent.deactivateOrActivateShips();//(click)="trigger_deactivateOrActivateShips()"
-
-  }
-
-  trigger_setClickHandlerOnSlot() {
-    //only works via parent, DepatingHarbourComponent or GameComponent
-    let slot="ship_2_slot_1";
-    this.departingHarbourComponent.setClickHandlerOnStone(slot);
-  }
-
-  trigger_removeClickHandlerOnSlot() {
-    //only works via parent, DepatingHarbourComponent or GameComponent
-    let slot="ship_3_slot_1";
-    this.departingHarbourComponent.removeClickHandlerOnStone(slot);
-  }
-
-
-  // Communication with InfoBoxComponent
-  //---------------------------------
-  trigger_increaseRoundInInfoBox(){
-
-    this.infoBoxComponent.increaseRoundInInfoBox(this.roundNumber);//(click)="trigger_increaseRoundInInfoBox()"
-
-  }
-
-
-  // Communication with Stones
-  //---------------------------------
-
-  stoneHtmlId="stone_dragulaId_2";
-
-  trigger_setClickHandlerOnStone(){
-    //only works via parent, DepatingHarbourComponent or GameComponent
-    this.departingHarbourComponent.setClickHandlerOnStone(this.stoneHtmlId); //(click)="trigger_setClickHandlerOnStone()"
-  }
-
-  trigger_removeClickHandlerOnStone(){
-    //only works via parent, DepatingHarbourComponent or GameComponent
-    this.departingHarbourComponent.removeClickHandlerOnStone(this.stoneHtmlId); //(click)="trigger_removeClickHandlerOnStone()"
-  }
-
-
-  trigger_removeAllStones(){
-    this.pyramidComponent.removeStones();
-    this.templeComponent.removeStones();
-    this.burialChamberComponent.removeStones();
-    this.obeliskComponent.removeStones();
-  }
-
-
-  trigger_showStonesInSled(){
-    this.bottomLeftComponent.showStone()
-    this.topLeftComponent.showStone()
-    this.topRightComponent.showStone()
-    this.bottomRightComponent.showStone()
-  }
-
-  //===================
-  // Subscribe-Methods
-  //===================
-
-
-
-
-
-  //===============
-  // Other-Methods
-
-  //===============
-
-
-
-
-  //================
-  // Dragula-Methods
-  //================
-
-  //------------------
-  //stone id generator
-  //------------------
-  stoneId:number=1;
-
-  generateStoneId(){
-    this.stoneId+=1;
-    let id=""
-    if(this.stoneId<10){
-      id="0"+this.stoneId.toString();
-    }else{
-      id=this.stoneId.toString();
-    }
-    if(1){console.log("stone id generator: ", id)}
-    return id
-  }
-
-
-  //--------------------------------
-  //Dragula Drag Event Subscription
-  //--------------------------------
-  dragula_subscribeDragEvent() {
-    this.dragulaService.drag.subscribe((value) => {
-
-      if(0){console.log("5.1.0 dragula-subscribe-drag");}
-
-      if (value){
-
-        //--------------------------
-        //get id of arriving harbour
-        //--------------------------
-        if(value[0] === 'departing_bag'){
-          if(0){console.log("5.2.1 ", `drop: ${value[0]}`);}
-
-          //id of harbour
-          let departing_harbour_id=value[2].id;
-          if(0){console.log("5.2.2 ", `drop: ${value[2].id}`);}
-
-
-          //do something with it
-
-        }
-
-        //--------------
-        //get id of ship
-        //--------------
-        if(value[0] === 'harbours_bag') {
-
-          //id of site harbour
-          let departing_harbour = value[2];
-
-          if(0){console.log("5.3.1 ", `drag: ${value[0]}`);}
-
-
-          //change options on drag (pandora's box, TO TEST FIRST)
-          if (0) {
-            this.dragulaService.setOptions('harbours_bag', {
-              invalid: function (el, handle) {}
-            });
-          }
-
-        }
-      }
-    });
-  }
-
-
-  //--------------------------------
-  //Draguala Drop Event Subscription
-  //--------------------------------
-  dragula_subscribeDropEvent() {
-    this.dragulaService.drop.subscribe((value) => {
-
-      if(1){console.log("6.1.0 dragula-subscribe-drop");}
-      if(1){console.log(value[0],value[1],value[2])}
-
-      let comp = value[1];
-
-      console.log("check: ", comp, comp.ship)
-      //-------------------------------------------
-      //value object not null; otherwise do nothing
-      //-------------------------------------------
-      if (value[0] && value[1] && value[2]) {
-
-
-        //----------------------------------------
-        //get id of stone slot ('stone_slots_bag')
-        //----------------------------------------
-        if(value[0] === 'stone_slots_bag'){
-          if(0){console.log("6.1.1 ", `drop: ${value[0]}`);}
-
-          //stone slot id
-          let stoneSlot=value[2];
-          if(0){console.log("6.1.2 ", `drop: ${value[2].id}`);}
-
-        }
-
-
-        //-----------------------------------
-        //set id of stone ('stone_slots_bag')
-        //-----------------------------------
-        if(value[0] === 'stone_slots_bag'){
-          if(0){console.log("6.2.1 ", `drop: ${value[0]}`);}
-
-          //<app-stone>-tag as html string; there should only be one child [0]
-          let appStone=value[1];
-          if(0){console.log("6.2.2 ", `drop: ${value[1].children[0].className}`);}
-          if(0){console.log("6.2.3 ", `drop: ${value[1].children[0].id}`);}
-
-          //stoneDiv-tag
-          let stoneDiv=value[1].children[0];
-          if(0){console.log("6.2.4 ", `drop: ${value[1].children[0].className}`);}
-          if(0){console.log("6.2.5 ", `drop: ${value[1].children[0].id}`);}
-
-          //set stone id in DOM (unique id, starting from 1)
-          //------------------------------------------------
-
-          //call function in GameComponent
-          let newStoneId:string=this.generateStoneId();
-
-
-          //determine ship and slot
-          let stoneSlotId=value[2].id
-
-          //determine stone colour
-          let stoneClass=value[1].children[0].className;
-          let stoneColour=stoneClass.trim().substring(15,17);
-
-          //set attribute id in Dom
-          stoneDiv.setAttribute("id", stoneSlotId+"_"+stoneColour+"_dragulaId_"+newStoneId)
-          if(0){console.log("6.2.6 ", `drop: ${value[1].children[0].id}`);}
-
-        }
-
-        //----------------------------------------
-        //(Buggy-Dragula Fix)
-        //If this drop event is triggered
-        // make sure the stone is placed into the slot
-        // even if it falls back into the sled
-        //We switched to Angular 2 style
-        // ('stone_slots_bag')
-        //----------------------------------------
-        if(value[0] === 'stone_slots_bag'){
-          if(0){console.log("6.3.1 ", `drop: ${value[0]}`);}
-
-          //stone slot id
-          let stoneSlot=value[2];
-          if(0){console.log("6.3.2 ", `drop: ${value[2].id}`);}
-
-          //<app-stone>-tag
-          let appStone=value[1];
-          let stoneDiv=value[1].children[0];
-          if(0){console.log("6.3.3 ", `drop: ${value[1].children[0].id}`);}
-
-          if(stoneSlot.children[0]){
-            if(0){console.log("6.3.4 ", `drop: stone is in slot`);}
-            if(0){console.log("6.3.5 ", `drop: ${stoneSlot.children[0].id}`);}
-            if(0){console.log("6.3.6 ", `drop: ${stoneSlot.children[0].class}`);}
-            stoneSlot.removeChild(appStone); //added: new version angular 2 style
-          }else{
-            if(0){console.log("6.3.7 ", `drop: stone is back in sled`);}
-            //stoneSlot.appendChild(appStone); //removed: new version angular 2 style
-          }
-
-          //--------------------------------------------
-          //call add stone to ship (angular 2 style)
-          //--------------------------------------------
-          this.departingHarbourComponent.addStoneToShip(stoneDiv.id);
-
-        }
-
-
-
-
-        //-------------------------------------------
-        //get id of arriving harbour ('harbours_bag')
-        //-------------------------------------------
-        if(value[0] === 'harbours_bag'){
-          if(0){console.log("6.3.1 ", `drop: ${value[0]}`);}
-
-          //id of harbour
-          let arriving_harbour_id=value[2].id;
-          if(0){console.log("6.3.2 ", `drop: ${value[2].id}`);}
-
-
-          //do something with it
-
-
-        }
-
-
-        //--------------------------------------------
-        //call move stone from ship to site
-        //--------------------------------------------
-        if(value[0] === 'harbours_bag'){
-
-          let leverPlayed = this.playedBlueMarketCard_lever;
-
-          if (leverPlayed) {
-            if (1) {console.log("6.5.1 add stone to site manually", `drop: leverPlayed:  ${leverPlayed}`);}
-
-          }
-          else {
-            if (1) {console.log("6.5.2 add stone to site automatically", `drop: lever Played: ${leverPlayed}`);}
-
-            //Determine which ship sailed
-            //---------------------------
-            let shipDiv_;
-            shipDiv_=value[1].children[0].children[0];
-            let shipId=shipDiv_.id;
-            let whichShip=Number(shipId.substring(5,6));
-
-            if(1){console.log("shipId, whichShip",shipId, whichShip)}
-
-            //Determine which arriving harbour ship sailed to
-            //-----------------------------------------------
-            let arrivingHarbour_;
-            arrivingHarbour_=value[2];
-            let arrivingHarbourId=arrivingHarbour_.id;
-            let whichArrivingHarbour=Number(arrivingHarbourId.substring(17,18));
-
-            if(1){console.log("arrivingHarbourId, whichArrivingHarbour",arrivingHarbourId, whichArrivingHarbour)}
-
-            //get stone array on ship
-            //-----------------------
-            let stonesToMove=new Array<Stone>();
-            stonesToMove=this.departingHarbourComponent.passStonesToSite(whichShip);
-
-
-            //Move stones to correct site
-            //---------------------------
-            if (whichArrivingHarbour==1){
-
-              //Delete Stones on ship
-              this.departingHarbourComponent.emptyStoneArray(whichShip);
-
-              //Place Stones on site
-              this.pyramidComponent.placeStones(stonesToMove);
-
-              //Make Decision Object
-              this.moveShipToPyramids(whichShip, stonesToMove);
-
-            }
-            if (whichArrivingHarbour==2){
-
-              //Delete Stones on ship
-              this.departingHarbourComponent.emptyStoneArray(whichShip);
-
-              //Place Stones on site
-              this.templeComponent.placeStones(stonesToMove);
-
-              //Make Decision Object
-              this.moveShipToTemple(whichShip, stonesToMove);
-
-            }
-            if (whichArrivingHarbour==3){
-
-              //Delete Stones on ship
-              this.departingHarbourComponent.emptyStoneArray(whichShip);
-
-              //Place Stones on site
-              this.burialChamberComponent.placeStones(stonesToMove);
-
-              //Make Decision Object
-              this.moveShipToBurialChamber(whichShip, stonesToMove);
-
-            }
-            if (whichArrivingHarbour==4){
-
-              //Delete Stones on ship
-              this.departingHarbourComponent.emptyStoneArray(whichShip);
-
-              //Place Stones on site
-              this.obeliskComponent.placeStones(stonesToMove);
-
-              //Make Decision Object
-              this.moveShipToObelisks(whichShip, stonesToMove);
-
-            }
-            if (whichArrivingHarbour==5){
-
-              //Delete Stones on ship
-              this.departingHarbourComponent.emptyStoneArray(whichShip);
-
-              //Make Decision Object
-              this.moveShipToMarket(whichShip, stonesToMove);
-
-            }
-
-          }
-          //End: call add stone to site
-        }
-
-      }
-
-    });
-  }
-
-
-
-
-  //-----------------------------------
-  //Draguala Ship Movement Set Options
-  //-----------------------------------
-  dragulaShipMovement_setOptions(amI_CurrentActivePlayer:boolean){
-
-    //-----------------------------------
-    //Options for the currentActivePlayer
-    //he has all options acc. to the rules
-    //-----------------------------------
-    if (amI_CurrentActivePlayer){
-
-      this.dragulaService.setOptions('harbours_bag', {
-
-        accepts: function (el, target, source, sibling) {
-
-          /*where drop is allowed*/
-
-          if(0){console.log("harbours_bag:accepts ", `el: ${el}`);
-          console.log("harbours_bag:accepts ", `source: ${source}`);
-          console.log("harbours_bag:accepts ", `target: ${target}`);
-          console.log("harbours_bag:accepts ", `sibling: ${sibling}`);}
-
-          if (el && target && source){
-
-            let isEmpty = target.innerHTML === "";
-            let isArrivingHarbour = target.parentElement.id === "arriving_harbours";
-
-
-            if(0){console.log("10.1.1 ", `el: ${el}`); //moved element
-             console.log("10.1.2 ", `el.id: ${el.id}`); //its id
-             console.log("10.2.1 ", `source: ${source}`); //source element
-             console.log("10.2.2 ", `source.id: ${source.id}`); //its id
-             console.log("10.2.1 ", `sibling: ${sibling}`);
-             console.log("10.3.1 ", `target: ${target}`); //target element
-             console.log("10.3.2 ", `target.id: ${target.id}`); //its id
-             console.log("10.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
-             console.log("10.4.1 ", `target.parentElement: ${target.parentElement}`);
-             console.log("10.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
-             console.log("10.5.1 ", "isEmpty: " ,isEmpty);
-             console.log("10.5.2 ", "isArrivingHarbour: " ,isArrivingHarbour);}
-
-
-            if (isEmpty && isArrivingHarbour) {
-              if(0){console.log("10.6.1 dragula-accepts:", "---ArrivingHarbour (True=drop allowed)---");}
-              return true;
-            }
-            else {
-                if(0){console.log("10.6.2 dragula-accepts", "---ArrivingHarbour (False=drop disallowed)---");}
-              return false;
-            }
-          }
-        },
-
-        moves: function (el, source, handle, sibling) {
-
-          /*element draggable*/
-
-          if(0){console.log("harbours_bag:moves ", `el: ${el}`);
-          console.log("harbours_bag:moves ", `source: ${source}`);
-          console.log("harbours_bag:moves ", `handle: ${handle}`);}
-
-          if (el && source && handle){
-            return true; //true: elements are always draggable by default
-          }
-          else{
-            return false;
-          }
-        },
-
-        isContainer: function (el) {
-
-          if(0){console.log("harbours_bag:iscontainer ", `el: ${el}`);}
-
-          if (el) {
-            return false;  //only elements in drake.containers will be taken into account
-          }
-        },
-
-        invalid: function (el, handle) {
-
-          /*where drag is disallowed*/
-
-          if(0){console.log("harbours_bag:invalid ", `el: ${el}`);
-          console.log("harbours_bag:invalid ", `handle: ${handle}`);
-          console.log("harbours_bag:invalid ", `el.id: ${el.id}`);
-          console.log("harbours_bag:invalid ", `el.parent.parent.id: ${el.parentElement.parentElement.parentElement.id}`);}
-
-
-          /*departing harbour check: if isDepartingHarbour then set invalid...BUT...*/
-          if (el && handle && el.parentElement && el.parentElement.parentElement
-            && el.parentElement.parentElement.parentElement) {
-
-            /*...BUT if enoughStones then set valid */
-
-            let isDepartingHarbour = el.parentElement.parentElement.parentElement.id === "departing_harbours";
-
-            if(0){console.log("10.11.1 dragula-invalid", `isDepartingHarbour: ${isDepartingHarbour}`);};
-              if(isDepartingHarbour){
-
-                //<app-ship>
-                let appShip_id=el.id;
-                if(0){console.log("10.11.2 dragula-invalid", `appShip_id: ${appShip_id}`);};
-
-                //ship-<div>
-                let divShip_id=el.children[0].id;
-                if(0){console.log("10.11.3 dragula-invalid", `divShip_id: ${divShip_id}`);};
-
-                //ship-slots<div>
-                let divShip_divSlots_id = el.children[0].children[0].id;
-                if(0){console.log("10.11.4 dragula-invalid", `divShip_divSlots_id: ${divShip_divSlots_id}`);};
-
-                //not needed
-                let divShip_divSlots_divSlot_id = el.children[0].children[0].children[0].id;
-                if(0){console.log("10.11.5 dragula-invalid", `divShip_divSlots_divSlot_id: ${divShip_divSlots_divSlot_id}`);};
-
-                //may not exist
-                let divShip_divSlots_divSlot_divNgIf = el.children[0].children[0].children[0].children[0];
-                if(0){console.log("10.11.6 dragula-invalid", `divShip_divSlots_divSlot_divNgIf: ${divShip_divSlots_divSlot_divNgIf}`);};
-
-
-                //has ship enough stones
-                //----------------------
-                //(no helper functions allowed: this.hasShipEnoughStones(ship_i_slots_id);)
-
-                //count slots
-                let divShip_divSlots = el.children[0].children[0];
-                let countSlots:number=0;
-                if(divShip_divSlots.children[0]){
-                  countSlots+=1;
-                }
-                if(divShip_divSlots.children[1]){
-                  countSlots+=1;
-                }
-                if(divShip_divSlots.children[2]){
-                  countSlots+=1;
-                }
-                if(divShip_divSlots.children[3]){
-                  countSlots+=1;
-                }
-                if(1){console.log("10.11.8 dragula-invalid", el)};
-                if(1){console.log("10.11.8 dragula-invalid", el.children[0].children[0])};
-                if(1){console.log("10.11.8 dragula-invalid", `countSlots: ${countSlots}`);}
-
-
-                //count stones
-                let countStones:number=0;
-                if(divShip_divSlots.children[0]){
-                  if(divShip_divSlots.children[0].children[0] && divShip_divSlots.children[0].children[0].children[0]){countStones+=1;}
-                }
-                if(divShip_divSlots.children[1]){
-                  if(divShip_divSlots.children[1].children[0] && divShip_divSlots.children[1].children[0].children[0]){countStones+=1;}
-                }
-                if(divShip_divSlots.children[2]){
-                  if(divShip_divSlots.children[2].children[0] && divShip_divSlots.children[2].children[0].children[0]){countStones+=1;}
-                }
-                if(divShip_divSlots.children[3]){
-                  if(divShip_divSlots.children[3].children[0] && divShip_divSlots.children[3].children[0].children[0]){countStones+=1;}
-                }
-                if(1){console.log("10.11.9 dragula-invalid", `countStones: ${countStones}`);};
-
-
-                //check if it can move
-                let hasNotEnoughStones=true;
-                if(countSlots==1){
-                  if(countStones==1){hasNotEnoughStones=false;}
-                }
-                if(countSlots==2){
-                  if(countStones>=1){hasNotEnoughStones=false;}
-                }
-                if(countSlots==3){
-                  if(countStones>=2){hasNotEnoughStones=false;}
-                }
-                if(countSlots==4){
-                  if(countStones>=3){hasNotEnoughStones=false;}
-                }
-                if(1){console.log("10.11.10 dragula-invalid", `hasNotEnoughStones: ${hasNotEnoughStones}`);};
-
-
-                let isInvalid = hasNotEnoughStones;
-
-                if(1){console.log("10.11.11 dragula-invalid", `isInvalid : ${isInvalid}`);};
-                if (isInvalid) {
-                  if(1){console.log("10.11.12 dragula-invalid", "---DepartingHarbour (True=drag disallowed)---");}
-                  return true;
-                }
-                else {
-                  if(1){console.log("10.11.13 dragula-invalid", "---DepartingHarbour (False=drag allowed)---");}
-                  return false; //false: don't prevent any drags from initiating by default
-                }
-              }
-          }
-
-
-          /*arriving harbour check: if isArrivingHarbour then set invalid*/
-          if (el && handle && el.parentElement && el.parentElement.parentElement) {
-
-            let isArrivingHarbour = el.parentElement.parentElement.id === "arriving_harbours";
-            let isInvalid = isArrivingHarbour;
-            if(0){console.log("10.12.0 dragula-invalid", `isArrivingHarbour: ${isArrivingHarbour}`);}
-
-            if (isInvalid) {
-              if(0){console.log("10.12.1 dragula-invalid", "---ArrivingHarbour (True=drag disallowed)---");}
-              return true;
-            }
-            else {
-                if(0){console.log("10.12.2 dragula-invalid", "---ArrivingHarbour (False=drag allowed)---");}
-              return false; //false: don't prevent any drags from initiating by default
-            }
-          }
-
-        },
-
-        direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
-
-        copy: function (el, source) {
-
-          /*elements are copied or moved*/
-
-          if(0){console.log("harbours_bag:copy ", `el: ${el}`);
-          console.log("harbours_bag:copy ", `source: ${source}`);}
-
-          if (el && source) {
-
-            let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
-            let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
-
-
-            if(0){console.log("10.15.1 ", `el.id: ${el.id}`); //moved element
-             console.log("10.15.2 ", `el.className: ${el.className}`);
-             console.log("10.15.1 ", `el.isCopyClass: ${isCopyClass}`);
-             console.log("10.15.2 ", `el.isCopyId: ${isCopyId}`);}
-
-            if (isCopyClass || isCopyId) {
-              if(0){console.log("10.16.1 dragula-accepts", "---ArrivingHarbour (True=copy disallowed)---");}
-              return true;
-            }
-            else {
-                if(0){console.log("10.16.2 dragula-accepts", "---ArrivingHarbour (False=copy disallowed)---");}
-              return false;
-            }
-          }
-
-        },
-
-        //spilling will put the element back where it was dragged from, if this is true
-        revertOnSpill: false,
-
-        //spilling will `.remove` the element, if this is true
-        removeOnSpill: false,
-
-      });
-
-    }
-
-    //------------------------------------------
-    //Options for all the currentInActivePlayers
-    // they cannot drag anything
-    //------------------------------------------
-    else{
-
-      this.dragulaService.setOptions('harbours_bag', {
-
-        accepts: function (el, target, source, sibling) {
-
-          /*where drop is allowed*/
-
-          return false; //nowhere is drop allowed
-
-        },
-
-        moves: function (el, source, handle, sibling) {
-
-          /*element draggable*/
-
-          return false; //none is draggable
-        },
-
-        isContainer: function (el) {
-
-          if(0){console.log("harbours_bag:iscontainer ", `el: ${el}`);}
-
-          if (el) {
-            return false;  //only elements in drake.containers will be taken into account
-          }
-        },
-
-        invalid: function (el, handle) {
-
-          /*where drag is disallowed*/
-
-          return true; //everywhere is drag disallowed
-
-        },
-
-        direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
-
-        copy: function (el, source) {
-
-          /*elements are copied or moved*/
-
-          if (el && source) {
-
-            let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
-            let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
-
-            if (isCopyClass || isCopyId) {
-              if(0){console.log("10.16.1 dragula-accepts", "---ArrivingHarbour (True=copy disallowed)---");}
-              return true;
-            }
-            else {
-              if(0){console.log("10.16.2 dragula-accepts", "---ArrivingHarbour (False=copy disallowed)---");}
-              return false;
-            }
-          }
-
-        },
-
-        //spilling will put the element back where it was dragged from, if this is true
-        revertOnSpill: false,
-
-        //spilling will `.remove` the element, if this is true
-        removeOnSpill: false,
-
-      });
-
-
-    }
-  }
-
-
-  //-----------------------------------
-  //Draguala Stone Movement Set Options
-  //-----------------------------------
-
-  dragulaStoneMovement_setOptions(amI_CurrentActivePlayer:boolean){
-
-    //-----------------------------------
-    //Options for the currentActivePlayer
-    //-----------------------------------
-    if (amI_CurrentActivePlayer){
-
-      this.dragulaService.setOptions('stone_slots_bag', {
-
-        accepts: function (el, target, source, sibling) {
-
-          /*where drop is allowed*/
-
-          if(0){console.log("stone_slots_bag:accepts ", `el: ${el}`);
-          console.log("stone_slots_bag:accepts ", `source: ${source}`);
-          console.log("stone_slots_bag:accepts ", `target: ${target}`);
-          console.log("stone_slots_bag:accepts ", `sibling: ${sibling}`);}
-
-          if(0){console.log("stone_slots_bag:accepts ", el.id, target.id,
-            source.id, target.children[0])};
-
-          if (el && target && source){
-
-            //let isEmpty = target.innerHTML === ""; //old version
-            //let isEmpty = target.children[0]=== null; //does not work out
-
-            //target is class ship_slot or id ship_i_slot_j
-            let isEmpty = target.innerHTML.substring(target.innerHTML.length - 3, target.innerHTML.length)==='-->';
-            let isStoneSlot_1 = target.parentElement.id === "ship_1_slots";
-            let isStoneSlot_2 = target.parentElement.id === "ship_2_slots";
-            let isStoneSlot_3 = target.parentElement.id === "ship_3_slots";
-            let isStoneSlot_4 = target.parentElement.id === "ship_4_slots";
-
-
-            if(0){console.log("11.1.0 ",target.innerHTML.substring(target.innerHTML.length - 3, target.innerHTML.length))}
-            if(0){console.log("11.1.0 ",target.innerHTML.substring(target.innerHTML.length - 3, target.innerHTML.length)==='-->')}
-
-            if(0){console.log("11.1.1 ", `el: ${el}`); //moved element
-             console.log("11.1.2 ", `el.id: ${el.id}`); //its id
-             console.log("11.2.1 ", `source: ${source}`); //source element
-             console.log("11.2.2 ", `source.id: ${source.id}`); //its id
-             console.log("11.2.1 ", `sibling: ${sibling}`);
-             console.log("11.3.1 ", `target: ${target}`); //target element
-             console.log("11.3.2 ", `target.id: ${target.id}`); //its id
-             console.log("11.3.3 ", `target.innerHTML: ${target.innerHTML}`); //its innerHTML
-             console.log("11.4.1 ", `target.parentElement: ${target.parentElement}`);
-             console.log("11.4.2 ", `target.parentElement.id: ${target.parentElement.id}`);
-             console.log("11.5.1 ", "isEmpty: " ,isEmpty);
-             console.log("11.5.2 ", "isStoneSlot_1: " ,isStoneSlot_1);
-             console.log("11.5.3 ", "isStoneSlot_2: " ,isStoneSlot_2);
-             console.log("11.5.4 ", "isStoneSlot_3: " ,isStoneSlot_3);
-             console.log("11.5.5 ", "isStoneSlot_4: " ,isStoneSlot_4);}
-
-
-            if (isEmpty && (isStoneSlot_1 || isStoneSlot_2 || isStoneSlot_3 || isStoneSlot_4 )) {
-              if(0){console.log("11.6.1 dragula-accepts:", "---ship slots (True=drop allowed)---");}
-              return true;
-            }
-            else {
-                if(0){console.log("11.6.2 dragula-accepts:", "---ship slots (False=drop disallowed)---");}
-              return false;
-            }
-          }
-
-        },
-
-        moves: function (el, source, handle, sibling) {
-
-          if(0){console.log("stone_slots_bag:moves ", `el: ${el}`);
-          console.log("stone_slots_bag:moves ", `source: ${source}`);
-          console.log("stone_slots_bag:moves ", `handle: ${handle}`);}
-
-
-          if (el && source && handle) {
-            return true; //true: elements are always draggable by default
-          }
-          else{
-            return false;
-          }
-        },
-
-        isContainer: function (el) {
-
-          if(0){console.log("stone_slots_bag:iscontainer ", `el: ${el}`);}
-
-          if (el) {
-            return false;  //only elements in drake.containers will be taken into account
-          }
-          else{
-            return true;
-          }
-        },
-
-        invalid: function (el, handle) {
-
-          /*where drag is disallowed*/
-
-          if(0){console.log("stone_slots_bag:invalid ", `el: ${el}`);
-          console.log("stone_slots_bag:invalid ", `handle: ${handle}`);
-          console.log("stone_slots_bag:invalid ", `el.parent.parent: ${el.parentElement.parentElement}`);}
-
-          if (el && handle && el.parentElement.parentElement && el.parentElement.parentElement.parentElement) {
-
-            let isStoneSlot = el.parentElement.parentElement.parentElement.classList.contains('ship_slots');
-            let isInvalid = isStoneSlot;
-
-            if(0){console.log("stone_slots_bag:invalid ", el.id, el.parentElement.id,
-                    el.parentElement.parentElement.id, el.parentElement.parentElement.parentElement.id)};
-
-
-              if (isInvalid) {
-              if(0){console.log("10.10.1 dragula-invalid:", "---ship slots (True=drag disallowed)---");}
-
-              return true;
-            }
-            else {
-              if(0){console.log("10.10.2 dragula-invalid:", "---ship slots (False=drag allowed)---");}
-
-              return false; //false: don't prevent any drags from initiating by default
-            }
-          }
-
-        },
-
-        direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
-
-        //copy: true, //false: elements are moved by default, not copied. true: copies el to target and leaves it in source
-        copy: function (el, source) {
-
-          /*elements are copied or moved*/
-
-          if(0){console.log("stone_slots_bag:copy ", `el: ${el.id}`);
-          console.log("stone_slots_bag:copy ", `source: ${source}`);}
-
-
-          if (el && source) {
-
-            let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
-            let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
-
-
-            if(0){console.log("11.15.1 ", `el.id: ${el.id}`); //moved element
-             console.log("11.15.2 ", `el.className: ${el.className}`);
-             console.log("11.15.1 ", `el.isCopyClass: ${isCopyClass}`);
-             console.log("11.15.2 ", `el.isCopyId: ${isCopyId}`);}
-
-            if (isCopyClass || isCopyId) {
-              if(0){console.log("11.16.1 dragula-copy:", "---stones (True=copy allowed)---");}
-              return true;
-            }
-            else {
-                if(0){console.log("11.16.2 dragula-copy:", "---stones (False=copy disallowed)---");}
-              return false;
-            }
-          }
-
-        },
-
-        //spilling will put the element back where it was dragged from, if this is true
-        revertOnSpill: false,
-
-        // spilling will `.remove` the element, if this is true
-        removeOnSpill: false,
-      });
-    }
-
-    //--------------------------------------
-    //Options for the currentInActivePlayers
-    //--------------------------------------
-    else{
-
-      this.dragulaService.setOptions('stone_slots_bag', {
-
-        accepts: function (el, target, source, sibling) {
-
-          /*where drop is allowed*/
-
-          return false; //nowhere allowed
-
-        },
-
-        moves: function (el, source, handle, sibling) {
-
-          return false; //true: elements are always draggable by default
-
-        },
-
-        isContainer: function (el) {
-
-          if(0){console.log("stone_slots_bag:iscontainer ", `el: ${el}`);}
-
-          if (el) {
-            return false;  //only elements in drake.containers will be taken into account
-          }
-          else{
-            return true;
-          }
-        },
-
-        invalid: function (el, handle) {
-
-          /*where drag is disallowed*/
-
-          return true; //everywhere disallowd
-
-        },
-
-        direction: 'vertical',  //X (horizontal) or Y axis (vertical) is considered when determining where an element would be dropped
-
-        //copy: true, //false: elements are moved by default, not copied. true: copies el to target and leaves it in source
-        copy: function (el, source) {
-
-          /*elements are copied or moved*/
-
-
-          if (el && source) {
-
-            let isCopyClass = el.classList.contains('you-may-copy-us'); //the css class name
-            let isCopyId = el.id === '#you-may-copy-me'; //the css id; but use a className for this
-
-
-            if(0){console.log("11.15.1 ", `el.id: ${el.id}`); //moved element
-              console.log("11.15.2 ", `el.className: ${el.className}`);
-              console.log("11.15.1 ", `el.isCopyClass: ${isCopyClass}`);
-              console.log("11.15.2 ", `el.isCopyId: ${isCopyId}`);}
-
-            if (isCopyClass || isCopyId) {
-              if(0){console.log("11.16.1 dragula-copy:", "---stones (True=copy allowed)---");}
-              return true;
-            }
-            else {
-              if(0){console.log("11.16.2 dragula-copy:", "---stones (False=copy disallowed)---");}
-              return false;
-            }
-          }
-
-        },
-
-        //spilling will put the element back where it was dragged from, if this is true
-        revertOnSpill: false,
-
-        // spilling will `.remove` the element, if this is true
-        removeOnSpill: false,
-      });
-    }
-
-
-  }
 
 
   //===========================================

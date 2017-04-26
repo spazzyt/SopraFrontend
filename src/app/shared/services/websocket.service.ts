@@ -32,6 +32,7 @@ export class WSService {
           console.log(msg.payload + ' connected.');
           break;
 
+        //Start new round
         case 'NEWROUND':
 
           //generate usable ship array from backend input (backend ship model differs from ours; here we create ships based on the data sent to us)
@@ -40,7 +41,7 @@ export class WSService {
             inputships[i] = new Ship(msg.payload.ships[i].shipId, msg.payload.ships[i].numFields);  //ID is needed, otherwise slots don't work
           }
 
-          //create new round
+          //create new round object
           let newround = new Round(msg.payload.roundNumber, inputships, [null, null, null, null]);
           console.log(msg.payload.ships);
           console.log('new round created: ' + msg.payload.roundNumber);
@@ -48,20 +49,27 @@ export class WSService {
           gameComponent.initRound(newround);
           break;
 
+
+        //End game & show scoreboard
+        case 'ENDGAME':
+          console.log("THE GAME HAS ENDED");
+          //TODO add end-game functionality for showing scoreboard (requires array of player names, array of scores)
+          break;
+
+
+        //Update currentActivePlayerField in game component
         case 'CURRENTTURN':
           //let game know whose turn it is
           console.log('It\'s ' + msg.payload + "'s turn.");
           console.log("my name is: ", gameComponent.game.myPlayerField, gameComponent.game.myUserName)
           gameComponent.setPlayerField(msg.payload);
-          // TODO add function for telling game component who is the current player
           break;
 
 
+        //Execute other player's move
         case 'PLAYEDMOVE':
-          //TODO do whatever the turn sent to us from the backend tells us to do
           console.log("The server tells us to do the following:")
           console.log(msg.payload);
-          //TODO create a decision object based on backend information
           if(msg.payload.player != this.authenticationService.mySelf.username) //if this move is not from me, update:
           {
             let moveToDo = msg.payload.move;
