@@ -42,7 +42,7 @@ export class WSService {
           }
 
           //create new round object
-          let newround = new Round(msg.payload.roundNumber, inputships, [null, null, null, null]);
+          let newround = new Round(msg.payload.roundNumber, inputships, [null, null, null, null], msg.payload.berlinerScore);
           console.log(msg.payload.ships);
           console.log('new round created: ' + msg.payload.roundNumber);
           console.log(newround);
@@ -74,7 +74,8 @@ export class WSService {
           if(msg.payload.player != this.authenticationService.mySelf.username) //if this move is not from me, update:
           {
             let moveToDo = msg.payload.move;
-            gameComponent.updateUiForOneMove2(moveToDo, msg.payload.player);
+            gameComponent.updateUiForOneMove2(moveToDo, msg.payload.player, msg.payload.berlinerScore);
+
           }
           break;
 

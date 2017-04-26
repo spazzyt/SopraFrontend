@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {Stone} from "../../../shared/models/stone";
 import {ColourEnum} from "../../../shared/models/colour.enum";
 import {SupplySled} from "../../../shared/models/supply-sled";
@@ -15,7 +15,6 @@ import {StoneQuarry} from "../../../shared/models/stone-quarry";
 // Component
 //===========
 export class BottomRightComponent implements OnInit {
-
 
   //===============
   //Class Variables
@@ -47,13 +46,24 @@ export class BottomRightComponent implements OnInit {
   public marketCards:number[] = [];
 
 
+  //==============
+  // Event Emitter
+  //==============
+
+  @Output() onEvent_setClickHandlerOnStoneQuarry_sledStones = new EventEmitter<number>();
+  @Output() onEvent_setClickHandlerOnStoneQuarry_quarryStones = new EventEmitter<number>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_bll_4_marketCards = new EventEmitter<number[]>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_bml_4_marketCards = new EventEmitter<number[]>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_bmr_4_marketCards = new EventEmitter<number[]>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_brr_4_marketCards = new EventEmitter<number[]>();
+
+
   //===============
   //Constructor
   //===============
   constructor() {
 
   }
-
 
   //==========
   // ngOnInit
@@ -66,8 +76,17 @@ export class BottomRightComponent implements OnInit {
 
     // stone generated in supply sled
     // (used by dragula to copy)
-    this.playerFieldStone = new Stone(90, ColourEnum.gray)
-    if(0){console.log("ColourEnum: ", ColourEnum.gray);}
+    this.playerFieldStone = new Stone(0, ColourEnum.gray);
+  }
+
+  //================
+  // ngAfterViewInit
+  //================
+
+  ngAfterViewInit() {
+
+    //this.show_hide_stone_at_init();
+
   }
 
   //===============
@@ -84,7 +103,9 @@ export class BottomRightComponent implements OnInit {
     //set click handler for  bll_1
     (<any>$(document)).ready(() =>{
       (<any>$("#quarry_4")).on("click", () =>{
-        alert("The stone quarry 4 was clicked.");
+        // alert("The stone quarry 4 was clicked.");
+        this.onEvent_setClickHandlerOnStoneQuarry_sledStones.emit(this.sledStones);
+        this.onEvent_setClickHandlerOnStoneQuarry_quarryStones.emit(this.quarryStones);
       });
     });
 
@@ -104,28 +125,32 @@ export class BottomRightComponent implements OnInit {
     //set click handler for  bll_4
     (<any>$(document)).ready(() =>{
       (<any>$("#bll_4_")).on("click", () =>{
-        alert("The chisel was clicked."); this.marketCards[5]-=1;
+        alert("The chisel was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_bll_4_marketCards.emit(this.marketCards);
       });
     });
 
     //set click handler for  bml_4
     (<any>$(document)).ready(() =>{
       (<any>$("#bml_4_")).on("click", () =>{
-        alert("The hammer was clicked."); this.marketCards[6]-=1;
+        alert("The hammer was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_bml_4_marketCards.emit(this.marketCards);
       })
     });
 
     //set click handler for  bmr_4
     (<any>$(document)).ready(() =>{
       (<any>$("#bmr_4_")).on("click", () =>{
-        alert("The sail was clicked."); this.marketCards[7]-=1;
+        alert("The sail was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_bmr_4_marketCards.emit(this.marketCards);
       })
     });
 
     //set click handler for  brr_4
     (<any>$(document)).ready(() =>{
       (<any>$("#brr_4_")).on("click", () =>{
-        alert("The lever was clicked."); this.marketCards[8]-=1;
+        alert("The lever was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_brr_4_marketCards.emit(this.marketCards);
       })
     });
   }
@@ -189,7 +214,6 @@ export class BottomRightComponent implements OnInit {
 
   }
 
-
   setMarketCards(marketCards_target:number[]){
 
     // define protocol: which market card
@@ -197,6 +221,7 @@ export class BottomRightComponent implements OnInit {
     //tll..trr, bll..brr, purple
 
     for(let i = 0; i < marketCards_target.length; i++){
+      if(marketCards_target[i] != null)
       this.marketCards[i] = marketCards_target[i];
     }
   }
@@ -220,6 +245,11 @@ export class BottomRightComponent implements OnInit {
     // update attribute:
     this.quarryStones=quarryStones_target;
 
+  }
+
+  update_takeStonesFromQuarry(howMany: number){              //this function is used for telling that the player has taken stones from the quarry
+    this.quarryStones -= howMany;
+    this.sledStones += howMany;
   }
 
   hideStone(){
@@ -257,10 +287,10 @@ export class BottomRightComponent implements OnInit {
   // this function cannot reactivate icon
 
 
-  deactivateOrActivateIcons_onChange(playerIconsStatus_target){
+  deactivateOrActivateIcons_onChange(playerIconsStatus_target:string[]){
 
 
-    //deactivates market card icons at the top of player bottom-left
+    //deactivates market card icons at the top of player bottom-right
     //--------------------------------------------------------------
 
     if (playerIconsStatus_target[1] == "false") {
@@ -269,14 +299,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[1] == "true"){
       (<any>$(document)).ready(function (){
         (<any>$("#tll_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[2] == "false") {
@@ -285,14 +319,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[2] == "true"){
       (<any>$(document)).ready(function (){
         (<any>$("#tml_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[3] == "false") {
@@ -301,14 +339,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[3] == "true"){
       (<any>$(document)).ready(function (){
         (<any>$("#tmr_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[4] == "false") {
@@ -317,14 +359,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[4] == "true"){
       (<any>$(document)).ready(function (){
         (<any>$("#trr_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     //deactivates market card icons at the bottom of player bottom-left
@@ -337,14 +383,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[5] == "true"){
       (<any>$(document)).ready(function (){
         (<any>$("#bll_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[6] == "false") {
@@ -353,14 +403,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[6] == "true"){
       (<any>$(document)).ready(function (){
         (<any>$("#bml_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[7] == "false") {
@@ -369,14 +423,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[7] == "true"){
       (<any>$(document)).ready(function (){
         (<any>$("#bmr_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[8] == "false") {
@@ -385,18 +443,22 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[8] == "true"){
       (<any>$(document)).ready(function (){
         (<any>$("#brr_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
 
-    //deactivates purple market card icon of player bottom-left
+    //deactivates purple market card icon of player bottom-right
     //---------------------------------------------------------
 
 
@@ -406,20 +468,23 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[0] == "true"){
       (<any>$(document)).ready(function (){
         (<any>$("#purple_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
   }
 
-  deactivateOrActivateIcons(playerIconsStatus_target){
-
+  deactivateOrActivateIcons(playerIconsStatus_target:boolean[]){
 
     //deactivates market card icons at the top of player bottom-left
     //--------------------------------------------------------------
@@ -430,14 +495,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[1] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#tll_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[2] == false) {
@@ -446,14 +515,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[2] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#tml_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[3] == false) {
@@ -462,14 +535,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[3] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#tmr_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[4] == false) {
@@ -478,17 +555,21 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[4] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#trr_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
-    //deactivates market card icons at the bottom of player bottom-left
+    //deactivates market card icons at the bottom of player bottom-right
     //-----------------------------------------------------------------
 
 
@@ -498,14 +579,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[5] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bll_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[6] == false) {
@@ -514,14 +599,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[6] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bml_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[7] == false) {
@@ -530,14 +619,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[7] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#bmr_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
     if (playerIconsStatus_target[8] == false) {
@@ -546,18 +639,22 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[8] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#brr_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
 
-    //deactivates purple market card icon of player bottom-left
+    //deactivates purple market card icon of player bottom-right
     //---------------------------------------------------------
 
 
@@ -567,14 +664,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateIcons: false")}
+      if(0){
+        console.log("deactivateOrActivateIcons: false")
+      }
     }
     if (playerIconsStatus_target[0] == true){
       (<any>$(document)).ready(function (){
         (<any>$("#purple_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateIcons: true")}
+      if(0){
+        console.log("deactivateOrActivateIcons: true")
+      }
     }
 
   }
@@ -588,14 +689,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateScore: false")}
+      if(0){
+        console.log("deactivateOrActivateScore: false")
+      }
     }
     if (playerStoneQuarryStatus_target == true){
       (<any>$(document)).ready(function (){
         (<any>$("#score_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateScore: true")}
+      if(0){
+        console.log("deactivateOrActivateScore: true")
+      }
     }
 
   }
@@ -609,14 +714,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateStoneQuarry: false")}
+      if(0){
+        console.log("deactivateOrActivateStoneQuarry: false")
+      }
     }
     if (playerStoneQuarryStatus_target == true){
       (<any>$(document)).ready(function (){
         (<any>$("#quarry_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateStoneQuarry: true")}
+      if(0){
+        console.log("deactivateOrActivateStoneQuarry: true")
+      }
     }
 
   }
@@ -629,14 +738,18 @@ export class BottomRightComponent implements OnInit {
 
       });
 
-      if(0){console.log("deactivateOrActivateSupplySled: false")}
+      if(0){
+        console.log("deactivateOrActivateSupplySled: false")
+      }
     }
     if (playerSupplySledStatus_target == true){
       (<any>$(document)).ready(function (){
         (<any>$("#supply_sled_4")).css("opacity", "1.0");
 
       });
-      if(0){console.log("deactivateOrActivateSupplySled: true")}
+      if(0){
+        console.log("deactivateOrActivateSupplySled: true")
+      }
     }
 
   }
