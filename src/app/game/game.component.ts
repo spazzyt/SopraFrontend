@@ -1027,7 +1027,7 @@ export class GameComponent  implements OnInit {
   // Update Game UI for one Move of another client
   //===========================================================
 
-  updateUiForOneMove2(move: Move, username: string){
+  updateUiForOneMove2(move: Move, username: string, berlinerScore: Map<string, number>){
 
 
 
@@ -1052,6 +1052,12 @@ export class GameComponent  implements OnInit {
         this.pyramidComponent.placeStones(this.game.ships[move.pos].slots);
         //remove stones from ship
         this.game.ships[move.pos].slots = [];
+
+        //set current score for each player
+        for(let player of this.game.players){
+          this.playerMap[player.username].setScore(berlinerScore[player.username]);
+        }
+
         break;
 
       //Sail ship to Temple:
@@ -1061,6 +1067,11 @@ export class GameComponent  implements OnInit {
         this.templeComponent.placeStones(this.game.ships[move.pos].slots);
         //remove stones from ship
         this.game.ships[move.pos].slots = [];
+
+        //set current score for each player
+        for(let player of this.game.players){
+          this.playerMap[player.username].setScore(berlinerScore[player.username]);
+        }
         break;
 
       //Sail ship to Burial Chamber:
@@ -1070,6 +1081,11 @@ export class GameComponent  implements OnInit {
         this.burialChamberComponent.placeStones(this.game.ships[move.pos].slots);
         //remove stones from ship
         this.game.ships[move.pos].slots = [];
+
+        //set current score for each player
+        for(let player of this.game.players) {
+          this.playerMap[player.username].setScore(berlinerScore[player.username]);
+        }
         break;
 
       //Sail ship to Obelisk:
@@ -1079,6 +1095,11 @@ export class GameComponent  implements OnInit {
         this.obeliskComponent.placeStones(this.game.ships[move.pos].slots);
         //remove stones from ship
         this.game.ships[move.pos].slots = [];
+
+          //set current score for each player
+          for(let player of this.game.players) {
+            this.playerMap[player.username].setScore(berlinerScore[player.username]);
+          }
         break;
 
 
@@ -1235,6 +1256,12 @@ export class GameComponent  implements OnInit {
   }
 
   endGame(scores: number[]){
+
+    //update scores in player field one last time
+    for(let i = 0; i < this.game.players.length; i++)
+    {
+      this.playerMap[this.game.players[i].username].setScore(scores[i]);
+    }
 
     //save score array from backend locally
     this.playerScores = scores;
