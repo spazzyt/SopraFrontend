@@ -45,6 +45,9 @@ export class TopLeftComponent implements OnInit {
   // the player's nine market card icons
   public marketCards:number[] = [];
 
+  // does the player have stones in his sleds
+  public hasStones:boolean;
+
 
   //==============
   // Event Emitter
@@ -79,6 +82,10 @@ export class TopLeftComponent implements OnInit {
     // (used by dragula to copy)
     this.playerFieldStone = new Stone(0, ColourEnum.white);
 
+  }
+
+  checkStonesDragable(){
+    this.hasStones=this.sledStones>0;
   }
 
   //================

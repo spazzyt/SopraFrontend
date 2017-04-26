@@ -82,6 +82,10 @@ export class BottomLeftComponent implements OnInit {
     this.playerFieldStone = new Stone(0, ColourEnum.black);
   }
 
+  checkStonesDragable(){
+    this.hasStones=this.sledStones>0;
+  }
+
   //================
   // ngAfterViewInit
   //================
