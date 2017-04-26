@@ -1069,7 +1069,10 @@ export class GameComponent  implements OnInit {
       case PositionEnum.Pyramid:
         this.moveShipById(move.pos, 'Pyramid');
         console.log("PLACING ON PYRAMID FROM OTHER'S MOVE: ", move.pos, this.game.ships[move.pos])
+        //place stones on site
         this.pyramidComponent.placeStones(this.game.ships[move.pos].slots);
+        //remove stones from ship
+        this.game.ships[move.pos].slots = [];
         break;
 
       //Sail ship to Temple:
@@ -1077,6 +1080,8 @@ export class GameComponent  implements OnInit {
         this.moveShipById(move.pos, 'Temple');
         console.log("PLACING ON TEMPLE FROM OTHER'S MOVE: ", move.pos, this.game.ships[move.pos])
         this.templeComponent.placeStones(this.game.ships[move.pos].slots);
+        //remove stones from ship
+        this.game.ships[move.pos].slots = [];
         break;
 
       //Sail ship to Burial Chamber:
@@ -1084,6 +1089,8 @@ export class GameComponent  implements OnInit {
         this.moveShipById(move.pos, 'BurialChamber');
         console.log("PLACING ON BURIALCHAMBER FROM OTHER'S MOVE: ", move.pos, this.game.ships[move.pos])
         this.burialChamberComponent.placeStones(this.game.ships[move.pos].slots);
+        //remove stones from ship
+        this.game.ships[move.pos].slots = [];
         break;
 
       //Sail ship to Obelisk:
@@ -1091,6 +1098,8 @@ export class GameComponent  implements OnInit {
         this.moveShipById(move.pos, 'Obelisk');
         console.log("PLACING ON OBELISK FROM OTHER'S MOVE: ", move.pos, this.game.ships[move.pos])
         this.obeliskComponent.placeStones(this.game.ships[move.pos].slots);
+        //remove stones from ship
+        this.game.ships[move.pos].slots = [];
         break;
 
 
