@@ -304,3 +304,7 @@ table{
   margin-bottom: 25px;
 }
 
+
+#ngButton{
+  visibility: hidden !important;
+}

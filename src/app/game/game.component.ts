@@ -1228,9 +1228,21 @@ export class GameComponent  implements OnInit {
     this.deactivateInactivePlayerInteractions(this.game.amI_CurrentActivePlayer, this.game.currentActivePlayerField);
   }
 
-  //TODO add functionality for showing modal through this function
-  showScoreboard(){
+  endGame(scores: number[]){
+
+    //save score array from backend locally
+    this.playerScores = scores;
+
+    //sort player scores
     this.sortScores();
+
+    this.showScoreboard();
+  }
+
+
+  showScoreboard(){
+    document.getElementById('ngButton').click()
+    //TODO add functionality for showing modal through this function
   }
 
 
