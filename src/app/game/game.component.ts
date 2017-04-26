@@ -1101,7 +1101,7 @@ export class GameComponent  implements OnInit {
 
 
       //Place stone on ship:
-      case PositionEnum.ShipToken:
+      case PositionEnum.DepartingHarbour:
         //TODO check if this delivers the proper stone colour
         let stoneToAdd = new Stone(-1, this.nameToColourMap[username]);
         this.ships[move.ShipID].addStoneById(stoneToAdd, move.pos);
