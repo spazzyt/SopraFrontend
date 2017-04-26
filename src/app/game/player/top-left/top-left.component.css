@@ -102,6 +102,7 @@ p{
 }
 
 .low_l{
+  padding-left: 4%;
   width: 30%;
   height: 100%;
   float: top;
@@ -327,4 +328,10 @@ p{
   display: inline;
 }
 
+#score_number{
+  color: black;
+}
 
+#quarry_number{
+  color: black;
+}
