@@ -749,7 +749,7 @@ export class TopLeftComponent implements OnInit {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statues.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statue.png"/>'
     });
 
     //From top-left-left
