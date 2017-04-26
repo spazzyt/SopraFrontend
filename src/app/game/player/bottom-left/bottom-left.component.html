@@ -1,8 +1,11 @@
 <div class="background" id="glow1">
+
 <div class="top_part">
+
   <div class="player_name">
     <p class = name_text>{{playerName}}</p>
   </div>
+
   <!-- copied from cards.component.html -->
   <div class="cards_container">
 
@@ -26,7 +29,6 @@
       <div class="purple_card"><div id="purple_1" class="purple_icon"><p class="non-draggable" style="position:absolute; margin-top:20%;">{{marketCards[0]}}</p></div></div>
     </div>
   </div>
-  <!-- copied from cards.component.html -->
 </div>
 
 
@@ -34,22 +36,47 @@
   <div id="score_1" class="low_l score">
     <p class="non-draggable">{{score}}</p>
   </div>
+
   <!--drag and drop zone-->
   <div id="supply_sled_1" class="low_m">
 
     <div id="bag_1" class="stone_icon" dnd-draggable [dragEnabled]="true" [dropZones]="['slots']" [dragData]="playerFieldStone">
-
       <app-stone id="stones_1" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
     </div>
+
     <div class="supply_sled_1">
       <p class="non-draggable" id="stone_label_1">{{sledStones}}/5</p>
     </div>
+
   </div>
+
+
   <div id="quarry_1" class="low_r quarry">
     <p class="non-draggable">{{quarryStones}}</p>
   </div>
 </div>
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

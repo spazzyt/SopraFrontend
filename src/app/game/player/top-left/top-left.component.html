@@ -1,58 +1,57 @@
 <div class="background" id="glow2">
-<div class="bottom_part">
 
+<div class="bottom_part">
   <div id="score_2" class="low_l score">
     <p class="non-draggable">{{score}}</p>
   </div>
 
+  <!--drag and drop zone-->
   <div id="supply_sled_2" class="low_m ">
 
-  <div class="supply_sled_2">
-	  <p class="non-draggable" id="stone_label_2">{{sledStones}}/5</p>
-  </div>
+    <div class="supply_sled_2">
+      <p class="non-draggable" id="stone_label_2">{{sledStones}}/5</p>
+    </div>
 
     <div id="bag_2" class="stone_icon" dnd-draggable [dragEnabled]="true" [dropZones]="['slots']" [dragData]="playerFieldStone">
-
-    <app-stone id="stones_2" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
-  </div>
+      <app-stone id="stones_2" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
+    </div>
 
   </div>
   <div id="quarry_2" class="low_r quarry">
     <p class="non-draggable">{{quarryStones}}</p>
   </div>
-
 </div>
 
 
-<div class="top_part">
-  <!-- copied from cards.component.html -->
-  <div class="cards_container">
+  <div class="top_part">
+    <!-- copied from cards.component.html -->
+    <div class="cards_container">
 
-    <div class="left_part">
-      <div class="upper_quarter">
-        <div class="card top_left_left"><div id="tll_2" class="tll_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[1]}}</p></div></div>
-        <div class="card top_middle_left"><div id="tml_2" class="tml_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[2]}}</p></div></div>
-        <div class="card top_middle_right"><div id="tmr_2" class="tmr_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[3]}}</p></div></div>
-        <div class="card top_right_right"><div id="trr_2" class="trr_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[4]}}</p></div></div>
+      <div class="left_part">
+        <div class="upper_quarter">
+          <div class="card top_left_left"><div id="tll_2" class="tll_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[1]}}</p></div></div>
+          <div class="card top_middle_left"><div id="tml_2" class="tml_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[2]}}</p></div></div>
+          <div class="card top_middle_right"><div id="tmr_2" class="tmr_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[3]}}</p></div></div>
+          <div class="card top_right_right"><div id="trr_2" class="trr_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[4]}}</p></div></div>
+        </div>
+
+        <div class="lower_quarter">
+          <div id="bll_2_" class="card bottom_left_left"><div id="bll_2" class="bll_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[5]}}</p></div></div>
+          <div id="bml_2_" class="card bottom_middle_left"><div id="bml_2" class="bml_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[6]}}</p></div></div>
+          <div id="bmr_2_" class="card bottom_middle_right"><div id="bmr_2" class="bmr_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[7]}}</p></div></div>
+          <div id="brr_2_" class="card bottom_right_right"><div id="brr_2" class="brr_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[8]}}</p></div></div>
+        </div>
       </div>
 
-      <div class="lower_quarter">
-        <div id="bll_2_" class="card bottom_left_left"><div id="bll_2" class="bll_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[5]}}</p></div></div>
-        <div id="bml_2_" class="card bottom_middle_left"><div id="bml_2" class="bml_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[6]}}</p></div></div>
-        <div id="bmr_2_" class="card bottom_middle_right"><div id="bmr_2" class="bmr_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[7]}}</p></div></div>
-        <div id="brr_2_" class="card bottom_right_right"><div id="brr_2" class="brr_icon"><p class="non-draggable" style="position:absolute;">{{marketCards[8]}}</p></div></div>
+      <div class="right_part">
+        <div class="purple_card"><div id="purple_2" class="purple_icon"><p class="non-draggable" style="position:absolute; margin-top:20%;">{{marketCards[0]}}</p></div></div>
       </div>
     </div>
 
-    <div class="right_part">
-      <div class="purple_card"><div id="purple_2" class="purple_icon"><p class="non-draggable" style="position:absolute; margin-top:20%;">{{marketCards[0]}}</p></div></div>
+    <div class="player_name">
+      <p class = name_text>{{playerName}}</p>
     </div>
-  </div>
-  <!-- copied from cards.component.html -->
 
-  <div class="player_name">
-    <p class = name_text>{{playerName}}</p>
   </div>
-</div>
 </div>
 

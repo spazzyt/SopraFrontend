@@ -4,7 +4,15 @@
   <div class="container_side container_left">
     <!-- Top Left Player Field -->
     <div class="player_field player_top_left">
-      <app-top-left id="playerField_2"></app-top-left>
+      <app-top-left id="playerField_2"
+                    (onEvent_setClickHandlerOnStoneQuarry_sledStones)="topLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones($event)"
+                    (onEvent_setClickHandlerOnStoneQuarry_quarryStones)="topLeftComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones($event)"
+                    (onEvent_setClickHandlerOnBlueMarketCards_bll_2_marketCards)="topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards($event)"
+                    (onEvent_setClickHandlerOnBlueMarketCards_bml_2_marketCards)="topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_2_marketCards($event)"
+                    (onEvent_setClickHandlerOnBlueMarketCards_bmr_2_marketCards)="topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_2_marketCards($event)"
+                    (onEvent_setClickHandlerOnBlueMarketCards_brr_2_marketCards)="topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_2_marketCards($event)"
+
+      ></app-top-left>
     </div>
 
 
