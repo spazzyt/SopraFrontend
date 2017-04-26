@@ -6,6 +6,8 @@ import {Ship} from "../models/ship";
 import {Decision} from "../models/decision";
 import {Move} from "../models/move";
 import { environment } from '../../../environments/environment';
+import {MarketCard} from "../models/market-card";
+
 
 export class WSMessage {
   public type:string;
