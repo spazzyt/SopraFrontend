@@ -5,6 +5,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {User} from "../models/user";
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ActivePlayerService {
@@ -17,7 +18,8 @@ export class ActivePlayerService {
 
     //TODO fill in your heroku-backend URL
     //this.apiUrl = 'https://sopra-fs17-group13.herokuapp.com';
-    this.apiUrl = 'http://localhost:8080'
+   // this.apiUrl = 'http://localhost:8080'
+    this.apiUrl = environment.apiUrl;
   }
 
   getActivePlayer(): Observable<User> {
