@@ -117,4 +117,20 @@ export class LobbyService {
         this.router.navigate(['/game', gameId]);
       });
   }
+
+  quickStartBob() {
+    //TODO finish quickstart
+    console.log("quickstart init");
+
+    let bodyString = JSON.stringify({}); // Stringify payload
+
+    this.http.post(this.apiUrl + '/bob', bodyString, this.getRequestOptions()) // ...using post request
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error')) //...errors if
+      .subscribe(response => {
+        let gameId = response.text();
+        console.log("quick starting game: ", gameId, response);
+
+        this.router.navigate(['/game', gameId]);
+      });
+  }
 }
