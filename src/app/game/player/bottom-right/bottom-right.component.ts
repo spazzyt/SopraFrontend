@@ -45,6 +45,9 @@ export class BottomRightComponent implements OnInit {
   // the player's nine market card icons
   public marketCards:number[] = [];
 
+  // does the player have stones in his sleds
+  public hasStones:boolean;
+
 
   //==============
   // Event Emitter
@@ -77,6 +80,10 @@ export class BottomRightComponent implements OnInit {
     // stone generated in supply sled
     // (used by dragula to copy)
     this.playerFieldStone = new Stone(0, ColourEnum.gray);
+  }
+
+  checkStonesDragable(){
+    this.hasStones=this.sledStones>0;
   }
 
   //================
