@@ -44,6 +44,9 @@ export class BottomLeftComponent implements OnInit {
   // the player's nine market card icons
   public marketCards:number[] = [];
 
+  // does the player have stones in his sleds
+  public hasStones:boolean;
+
 
   //==============
   // Event Emitter
