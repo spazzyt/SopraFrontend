@@ -53,7 +53,7 @@ export class WSService {
         //End game & show scoreboard
         case 'ENDGAME':
           console.log("THE GAME HAS ENDED");
-          //gameComponent.endGame(msg.payload.scores);
+          gameComponent.endGame(msg.payload.finalScoreDumbArray);
           //TODO add end-game functionality for showing scoreboard (requires array of player names, array of scores)
           break;
 
