@@ -354,6 +354,27 @@ Styling for the new game modal
 }
 
 
+#welcome-txt{
+  float: right;
+  width: 100%;
+  text-align: center;
+  color: #867558;
+  margin-top: 8%;
+  margin-bottom: 5%;
+  font: 200 20px/1.2 'Lithos Pro', Helvetica, sans-serif;
+  text-shadow: 3px 3px 2px #d4bd88;
+}
+
+#logout-btn{
+  float: right;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  color: #867558;
+  font: 200 20px/1.2 'Lithos Pro', Helvetica, sans-serif;
+  text-shadow: 3px 3px 2px #d4bd88;
+}
+
 .pepe_btn{
   height: 130px;
   width: 170px;

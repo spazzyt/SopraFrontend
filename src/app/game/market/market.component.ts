@@ -2,6 +2,7 @@ import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {MarketCard} from "../../shared/models/market-card";
 import {Position} from "../../shared/models/position.enum"
 import {Site} from "../../shared/site";
+import {Stone} from "../../shared/models/stone";
 
 @Component({
   selector: 'app-market',
@@ -205,6 +206,10 @@ export class MarketComponent extends Site implements OnInit {
 
   }
 
+  //This function is used for passing the stone array from a ship to this site
+  placeStones(targetStones: Stone[]){
+
+  }
 }
 
 
