@@ -2649,44 +2649,44 @@ export class GameComponent  implements OnInit {
   }
 
 
-  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
+  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_2_marketCards(data:number[]){
     this.topLeftComponent.marketCards=data;
   }
-  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
+  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_2_marketCards(data:number[]){
     this.topLeftComponent.marketCards=data;
   }
-  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
+  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_2_marketCards(data:number[]){
     this.topLeftComponent.marketCards=data;
   }
-  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
+  topLeftComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_2_marketCards(data:number[]){
     this.topLeftComponent.marketCards=data;
   }
 
 
-  topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
+  topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_3_marketCards(data:number[]){
     this.topRightComponent.marketCards=data;
   }
-  topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
+  topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_3_marketCards(data:number[]){
     this.topRightComponent.marketCards=data;
   }
-  topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
+  topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_3_marketCards(data:number[]){
     this.topRightComponent.marketCards=data;
   }
-  topRighttComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
+  topRightComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_3_marketCards(data:number[]){
     this.topRightComponent.marketCards=data;
   }
 
 
-  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_1_marketCards(data:number[]){
+  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bll_4_marketCards(data:number[]){
     this.bottomRightComponent.marketCards=data;
   }
-  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_1_marketCards(data:number[]){
+  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bml_4_marketCards(data:number[]){
     this.bottomRightComponent.marketCards=data;
   }
-  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_1_marketCards(data:number[]){
+  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_bmr_4_marketCards(data:number[]){
     this.bottomRightComponent.marketCards=data;
   }
-  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards(data:number[]){
+  bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_4_marketCards(data:number[]){
     this.bottomRightComponent.marketCards=data;
   }
 
