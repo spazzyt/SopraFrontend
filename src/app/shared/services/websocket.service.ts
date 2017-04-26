@@ -37,12 +37,18 @@ export class WSService {
       console.log(event.data, msg);
 
       switch (msg.type){
+
+        //User joined game
         case 'USERCONNECTED':
           console.log(msg.payload + ' connected.');
           break;
 
-        //Start new round
+        //Started new round
         case 'NEWROUND':
+
+          //update player stones & quarry
+          gameComponent.updateScoreSledQuarry(msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
+
 
           //generate usable ship array from backend input (backend ship model differs from ours; here we create ships based on the data sent to us)
           let inputships = [null, null, null, null];
