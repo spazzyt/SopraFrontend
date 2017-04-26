@@ -202,7 +202,7 @@ export class LobbyComponent implements OnInit {
     this.authenticationService.logout();
 
     //and navigate to home screen
-    return this.router.navigate(['']);
+    return this.router.navigate(['login']);
 
   }
 
