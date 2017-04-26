@@ -3,6 +3,7 @@ import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {AuthenticationService} from "./authentication.service";
 import {Observable} from "rxjs";
 import {User} from "../models/user";
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class UserService {
@@ -22,7 +23,8 @@ export class UserService {
 
     //TODO fill in your heroku-backend URL
     //this.apiUrl = 'https://sopra-fs17-group13.herokuapp.com';
-    this.apiUrl='http://localhost:8080'
+   // this.apiUrl='http://localhost:8080'
+    this.apiUrl = environment.apiProt + environment.apiUrl;
 
   }
 
