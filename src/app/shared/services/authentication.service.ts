@@ -40,7 +40,7 @@ export class AuthenticationService {
     //TODO fill in your heroku-backend URL
     //this.apiUrl = 'https://sopra-fs17-group13.herokuapp.com';
     //this.apiUrl = 'http://localhost:8080'
-    this.apiUrl = environment.apiUrl;
+    this.apiUrl = environment.apiProt + environment.apiUrl;
   }
 
   updateCookie(){

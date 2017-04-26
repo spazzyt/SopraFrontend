@@ -19,7 +19,7 @@ export class Action {
   public data5:any;
 
   //frontend sends his made Decision to backend and backend broadcasts decision to all players
-  public madeMove:Move= new Move();
+  public madeMove:Move;
 
   //backend sends allowed actions/moves
   public moves: Move[]=[];
