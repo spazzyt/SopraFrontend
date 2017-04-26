@@ -46,13 +46,6 @@ export class DepartingHarbourComponent {
   //Class Methods
   //===============
 
-
-  // Generate Ship
-  generateShip(ship:Ship){
-
-  }
-
-
   // Remove Ship
   removeShip(shipid:number){
     //removes a ship with a given position from the departing harbour

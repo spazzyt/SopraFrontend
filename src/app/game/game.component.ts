@@ -182,9 +182,6 @@ export class GameComponent  implements OnInit {
   roundNumber:number=3;
   glow_target:boolean=true;
 
-  //used in dragula drop
-  playedBlueMarketCard_lever=false;
-
 
   //Fake Ships
   ship1 = new Ship(1, 4);
@@ -241,18 +238,12 @@ export class GameComponent  implements OnInit {
     // (+) converts string 'id' to a number
     let id = +this.route.snapshot.params['id'];
 
-    // if the game component is loaded without an :id parameter in the url (the original state,
-    // we continue with the "old fake game"
-    // otherwise load the real "fake" game from the backend
     if(!isNaN(id)) {
 
       this.gameService.getGame(id)
         .subscribe((game: Game) => {
           this.game = game;
 
-
-
-// TODO this still throws errors, but should be added when backend delivers correct data
 
           //Map player names to components
           this.playerMap = new Map();
@@ -286,7 +277,7 @@ export class GameComponent  implements OnInit {
 
           //Initialize the whole market card set
           for (let i=1; i<=34; i++){
-            //this.game.wholeMarketCardSet.push(new MarketCard(i)); //TODO fix this
+            //this.game.wholeMarketCardSet.push(new MarketCard(i)); //TODO is this needed? see below
           }
 
           console.log("Initializing game with id: ", id, game);
@@ -296,6 +287,7 @@ export class GameComponent  implements OnInit {
         });
     }
 
+    //TODO is this needed? implement later if yes
     //Initialize the new game
     //this.initializeNewGame(this.getFakeGame());
 
@@ -383,25 +375,15 @@ export class GameComponent  implements OnInit {
     //set username in game model
     this.game.myUserName = this.myUserName;
 
-    //initialize card arrays
-    /*
-    this.game.playerFieldIconsBlack =[0,0,0,0,0,0,0,0,0,0,0,0];
-    this.game.playerFieldIconsWhite =[0,0,0,0,0,0,0,0,0,0,0,0];
-    this.game.playerFieldIconsBrown =[0,0,0,0,0,0,0,0,0,0,0,0];
-    this.game.playerFieldIconsGray =[0,0,0,0,0,0,0,0,0,0,0,0];
-
-    this.game.playerFieldIconsBlackAsBoolean =this.game.numberToBoolean(this.game.playerFieldIconsBlack);
-    this.game.playerFieldIconsWhiteAsBoolean =this.game.numberToBoolean(this.game.playerFieldIconsWhite);
-    this.game.playerFieldIconsBrownAsBoolean =this.game.numberToBoolean(this.game.playerFieldIconsBrown);
-    this.game.playerFieldIconsGrayAsBoolean  =this.game.numberToBoolean(this.game.playerFieldIconsGray);
-*/
-
     //pass game information to gameService
     this.gameService.setGame(this.game);
 
-    let fakegame = this.getFakeGame();               //TODO delete this as soon as the backend passes the necessary arguments
-    this.game.marketCards = fakegame.marketCards;   //TODO delete this
-    this.game.ships = [null, null, null, null];//fakegame.ships;               //TODO delete this
+    //TODO delete as soon as we get proper market cards from backend
+    let fakegame = this.getFakeGame();
+    this.game.marketCards = fakegame.marketCards;
+
+    //fill ship array with nulls
+    this.game.ships = [null, null, null, null];
 
     //Site Board Components: the island
     this.initializeMarketComponent(this.game.marketCards);
@@ -412,7 +394,7 @@ export class GameComponent  implements OnInit {
 
     this.shipsInDepartingHarbour = this.game.ships;
 
-    this.shipsInSiteHarbour = []
+    this.shipsInSiteHarbour = [];
 
     //Departing Harbour: the ships
     this.initializeDepartingHarbourComponent(this.game.ships);
@@ -451,24 +433,20 @@ export class GameComponent  implements OnInit {
   }
 
   initializeObeliskComponent(){
-    let obelisk:Obelisk; //ToDo: What for?
     this.obeliskComponent.setAttributes(this.game.numPlayers);
     this.obeliskComponent.removeStones();
   }
 
   initializePyramidComponent(){
-    let pyramid:Pyramid;//ToDo: What for?
     this.pyramidComponent.removeStones();
   }
 
   initializeTempleComponent(){
-    let temple:Temple;//ToDo: What for?
     this.templeComponent.setAttributes(this.game.numPlayers);
     this.templeComponent.removeStones();
   }
 
   initializeBurialChamberComponent(){
-    let burialChamber:BurialChamber;//ToDo: What for?
     this.burialChamberComponent.removeStones();
   }
 
@@ -1247,6 +1225,7 @@ export class GameComponent  implements OnInit {
     this.sortScores();
   }
 
+
   sortScores(){
 
     for(let i = 0; i < this.playerNames.length; i++){
@@ -1258,15 +1237,6 @@ export class GameComponent  implements OnInit {
 
   }
 
-  //show stone on ship
-  updateStoneOnShip(){
-
-  }
-
-  //remove ship from departing harbour
-  removeShipFromDepartingHarbour(shipid: string){
-
-  }
 
   //add ship to arriving harbour
   addShipToArrivingHarbour(target: PositionEnum, shipid: number){
@@ -1282,33 +1252,6 @@ export class GameComponent  implements OnInit {
     //remove ship from departing harbour
     this.departingHarbourComponent.removeShip(shipid);
   }
-
-  //place stones to site
-  placeStonesToSite(){
-
-  }
-
-  //remove stone from ship, place it to quarry
-  removeStoneFromShip(){
-
-  };
-
-  //remove Card from Market
-  removeCardFromMarket(){
-
-  };
-
-  //add stones to Site
-  addTwoStonesToSite(){
-
-  };
-
-  //switch order of stones on ship
-  switchOrderOfStonesOnShip(){
-
-
-  };
-
 
   //===========================================================
   // Update data for one player field
@@ -1693,21 +1636,15 @@ export class GameComponent  implements OnInit {
       //ToDo:------------------------------
       //ToDo:Quarry
       //ToDo:
-      //ToDo:hide/show object for:
-      //ToDo:--------------------
-      //ToDo:Sled Stone
-      //ToDo:
       //ToDo:Set/remove drag/drop handlers for:
       //ToDo:----------------------------------
-      //ToDo:ships (dragula option should do that automatically)
-      //ToDo:stones on ship (dragula option should do that automatically)
-      //ToDo:
-      //ToDo:Check whether:
-      //ToDo:--------------
-      //ToDo:Client state on ships is what decision object says
+      //ToDo:ships
+      //ToDo:stones on ship
       //------------------------------------
 
 
+
+      //TODO condense this into one function, NOT if-else
       //I am active player on black field
       //--------------------------------
       if(currentActivePlayerField===ColourEnum.black){
@@ -1966,7 +1903,7 @@ export class GameComponent  implements OnInit {
       }
 
     }
-
+    //TODO cleanup/condense until here
   }
 
 
@@ -2043,14 +1980,12 @@ export class GameComponent  implements OnInit {
 
       }
       else{
-        this.showSnackbarMessage("You cannot take stones from the quarry.")
+        this.showSnackbarMessage("You can't take stone because your sled is full.")
         return;
       }
 
 
     //send move object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send move object to backend
     let moveToSend = new Move(PositionEnum.Quarry, PositionEnum.Sled, stonesToTake);
     this.gameService.sendMove(moveToSend); //Send move to backend
 
@@ -2065,57 +2000,6 @@ export class GameComponent  implements OnInit {
     if(1){console.log("take stones from Quarry to Sled:Component.sledStones ",this.bottomLeftComponent.sledStones);}
 
   }
-
-
-
-
-  //===========================================================
-  // Main Action 2: move stone from sled to shipSlot
-  //===========================================================
-
-  moveStoneFromSledToShipSlot(){
-
-    //listen to drop of stone on ship slot
-
-    ActionEnum.placeStoneFromSledToShip
-
-    //generate decision object
-
-    //send decision object to backend
-
-
-    //send decision object to backend
-    //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
-
-
-    //snackbar message
-    this.showSnackbarMessage("You moved a stone from sled to shipSlot ");
-
-  }
-
-
-
-  //===========================================================
-  // Main Action 3: move ship to site
-  //===========================================================
-
-
-  //=================
-  // Sail to Pyramids
-  //=================
-
-  moveShipToPyramids(whichShip:number, stonesToMove:Stone[]){
-
-    //snackbar message
-    this.showSnackbarMessage("you sailed ship "+ whichShip +" to pyramids.");
-
-  }
-
-
-  //=================
-  // Sail to Temple
-  //=================
 
   //received data from child components
   //-----------------------------------
@@ -2133,28 +2017,6 @@ export class GameComponent  implements OnInit {
   };
 
 
-  moveShipToTemple(whichShip:number, stonesToMove:Stone[]){
-
-    //snackbar message
-    this.showSnackbarMessage("you sailed ship "+ whichShip +" to temple.");
-
-  }
-
-  //======================
-  // Sail to BurialChamber
-  //======================
-
-  moveShipToBurialChamber(whichShip:number, stonesToMove:Stone[]){
-
-    //snackbar message
-    this.showSnackbarMessage("you sailed ship "+ whichShip +" to burial chamber.");
-
-  }
-
-  //=================
-  // Sail to Obelisk
-  //=================
-
   //received data from child components
   //-----------------------------------
 
@@ -2168,25 +2030,6 @@ export class GameComponent  implements OnInit {
     console.log("data from Game Model",this.obeliskComponent.stones);
 
   };
-
-  moveShipToObelisks(whichShip:number, stonesToMove:Stone[]){
-
-    //snackbar message
-    this.showSnackbarMessage("you sailed ship "+ whichShip +" to obelisks.");
-
-
-  }
-
-  //=================
-  // Sail to Market
-  //=================
-
-  moveShipToMarket(whichShip:number, stonesToMove:Stone[]){
-
-    //snackbar message
-    this.showSnackbarMessage("you sailed ship "+ whichShip +" to market.");
-
-  }
 
 
   //===========================================================
@@ -2866,7 +2709,7 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
+    //ToDo: send move object to backend
 
 
 
@@ -2888,7 +2731,7 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
+    //ToDo: send move object to backend
 
 
 
@@ -2912,143 +2755,8 @@ export class GameComponent  implements OnInit {
 
     //send decision object to backend
     //ToDo: Communication Channel to Backend
-    //ToDo: send decision object to backend
+    //ToDo: send move object to backend
 
-  }
-
-
-
-  //==================================================
-  // Test-Methods: Communication with Child Components
-  //==================================================
-
-  // Communication with PlayerComponent or Players BottomLeftComponent etc. directly
-  //--------------------------------------------------------------------------------
-  trigger_setPlayerName(){
-    this.bottomLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
-    this.bottomRightComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
-    this.topLeftComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
-    this.topRightComponent.setPlayerName(this.playerName_target); //(click)="trigger_setPlayerName()"
-  }
-
-  trigger_moveShipToSite(){
-    this.addShipToArrivingHarbour(PositionEnum.Pyramid, 0);
-
-    this.addShipToArrivingHarbour(PositionEnum.Temple, 1);
-
-    this.addShipToArrivingHarbour(PositionEnum.BurialChamber, 2);
-
-    this.addShipToArrivingHarbour(PositionEnum.Obelisk, 3);
-  }
-
-  trigger_FieldGlow(){
-    this.bottomLeftComponent.playerFieldGlow(this.glow_target);
-    this.topLeftComponent.playerFieldGlow(this.glow_target);
-    this.bottomRightComponent.playerFieldGlow(this.glow_target);
-    this.topRightComponent.playerFieldGlow(this.glow_target);
-
-    this.glow_target = !this.glow_target;
-  }
-  trigger_setMarketCards(){
-    this.bottomLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
-    this.bottomRightComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
-    this.topLeftComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
-    this.topRightComponent.setMarketCards(this.marketCards_target); //(click)="trigger_setMarketCards()"
-
-  }
-  trigger_setScore(){
-    this.bottomLeftComponent.setScore(this.score_target); //(click)="trigger_setScore()"
-    this.bottomRightComponent.setScore(this.score_target); //(click)="trigger_setScore()"
-    this.topLeftComponent.setScore(this.score_target); //(click)="trigger_setScore()"
-    this.topRightComponent.setScore(this.score_target); //(click)="trigger_setScore()"
-  }
-  trigger_setStonesInSled(){
-    this.bottomLeftComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
-    this.bottomRightComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
-    this.topLeftComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
-    this.topRightComponent.setStonesInSled(this.sledStones_target); //(click)="trigger_setStonesInSled()"
-
-  }
-  trigger_setStonesInQuarry(){
-    this.bottomLeftComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
-    this.bottomRightComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
-    this.topLeftComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
-    this.topRightComponent.setStonesInQuarry(this.quarryStones_target); //(click)="trigger_setStonesInQuarry()"
-
-  }
-
-  trigger_deactivateOrActivateIcons(){
-
-    this.bottomLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
-    this.bottomRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
-    this.topLeftComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
-    this.topRightComponent.deactivateOrActivateIcons(this.playerIconsStatus_target); //(click)="trigger_deactivateOrActivateIcons()"
-
-    //used to toggle boolean array this.playerIconsStatus_target
-    for(let i = 0; i < this.playerIconsStatus_target.length; i++){
-      this.playerIconsStatus_target[i] = !this.playerIconsStatus_target[i];
-    }
-  }
-
-  trigger_deactivateOrActivateStoneQuarry(){
-
-    this.bottomLeftComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.bottomRightComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.topLeftComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-    this.topRightComponent.deactivateOrActivateStoneQuarry(this.playerStoneQuarryStatus_target); //(click)="trigger_deactivateOrActivateStoneQuarry()"
-
-  }
-
-  trigger_deactivateOrActivateStoneSled(){
-
-    this.bottomLeftComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
-    this.bottomRightComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
-    this.topLeftComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
-    this.topRightComponent.deactivateOrActivateSupplySled(this.playerSupplySledStatus_target); //(click)="trigger_deactivateOrActivateSupplySled()"
-
-  }
-
-  trigger_deactivateOrActivatePlayerField(){
-
-    this.bottomLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
-    this.bottomRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
-    this.topLeftComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
-    this.topRightComponent.deactivateOrActivatePlayerField(this.playerPlayerFieldStatus_target); //(click)="trigger_deactivateOrActivatePlayerField()"
-
-  }
-
-
-  trigger_setClickHandlerOnBlueMarketCards(){
-
-    this.bottomLeftComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
-    this.bottomRightComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
-    this.topLeftComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
-    this.topRightComponent.setClickHandlerOnBlueMarketCards(); //(click)="trigger_setClickHandlerOnBlueMarketCards()"
-
-  }
-
-  trigger_removeClickHandlerOnBlueMarketCards(){
-
-    this.bottomLeftComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
-    this.bottomRightComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
-    this.topLeftComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
-    this.topRightComponent.removeClickHandlerOnBlueMarketCards(); //(click)="trigger_removeClickHandlerOnBlueMarketCards()"
-
-  }
-
-
-  // Communication with active player component BottomLeftComponent usw.
-  // no delegation to children
-  //--------------------------------------------------------------------
-  trigger_TemplateFunction(){}/*used to compile*/
-
-
-  trigger_showSnackbarMessenger() {
-    let text_="Hi Player 1,  Player 2  has moved Ship 2 to the Temple, " +
-      "be informed, that you have exactly 10 seconds to read this information. After that " +
-      "the snackbar will be closed."
-    let time_=10000
-    this.showSnackbarMessenger(text_,time_);
   }
 
 
