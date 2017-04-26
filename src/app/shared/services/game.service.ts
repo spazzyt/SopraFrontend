@@ -7,6 +7,7 @@ import {Game} from "../models/game";
 import {Router} from "@angular/router";
 import {Move} from "../models/move";
 import { environment } from '../../../environments/environment';
+import {ColourEnum} from "../models/colour.enum";
 
 @Injectable()
 export class GameService {
@@ -53,12 +54,6 @@ export class GameService {
       .subscribe(response => {
         console.log("Sent Move: ", move);
       });
-  }
-
-  //TODO implement: Observable<string[]>{...}
-  getRoundCard() {
-    let dummy = ["ship_1", "ship_4", "ship_3", "ship_2"]
-    return  dummy;
   }
 
 }

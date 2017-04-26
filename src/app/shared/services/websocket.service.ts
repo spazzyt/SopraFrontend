@@ -91,6 +91,14 @@ export class WSService {
             gameComponent.updateUiForOneMove2(moveToDo, msg.payload.player, msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
 
           }
+          //if move was by me, only update stone statistics
+          else{
+
+            console.log("Received my own move from server, updating values");
+            gameComponent.updateScoreSledQuarry(msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
+            //gameComponent.updateStoneDragStatus();  //TODO add this if stone drag breaks
+
+          }
           break;
 
       }
