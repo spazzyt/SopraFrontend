@@ -1241,6 +1241,7 @@ export class GameComponent  implements OnInit {
 
 
   showScoreboard(){
+    document.getElementById('ngButton').click()
     //TODO add functionality for showing modal through this function
   }
 
