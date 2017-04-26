@@ -11,7 +11,8 @@
 	  <p class="non-draggable" id="stone_label_2">{{sledStones}}/5</p>
   </div>
 
-  <div id="bag_2" class="stone_icon" [dragula]="'stone_slots_bag'">
+    <div id="bag_2" class="stone_icon" dnd-draggable [dragEnabled]="true" [dropZones]="['slots']" [dragData]="playerFieldStone">
+
     <app-stone id="stones_2" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
   </div>
 
