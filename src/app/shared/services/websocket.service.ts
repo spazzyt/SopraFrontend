@@ -5,7 +5,9 @@ import {GameComponent} from "../../game/game.component";
 import {Ship} from "../models/ship";
 import {Decision} from "../models/decision";
 import {Move} from "../models/move";
+import { environment } from '../../../environments/environment';
 import {MarketCard} from "../models/market-card";
+
 
 export class WSMessage {
   public type:string;
@@ -17,11 +19,17 @@ export class WSService {
 
   private webSocket: WebSocket;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  private apiUrl:string;
+
+  constructor(private authenticationService: AuthenticationService) {
+
+    this.apiUrl = environment.apiUrl;
+
+  }
 
   connectToGame(gameId, gameComponent) {
 
-     this.webSocket = new WebSocket('ws://localhost:8080/websocket');
+     this.webSocket = new WebSocket(environment.wsProt + this.apiUrl +  '/websocket');
 
     this.webSocket.onmessage =  (event) => {
 

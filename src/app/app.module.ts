@@ -36,15 +36,11 @@ import { DragComponent } from './demo-temp/drag/drag.component';
 import { DropComponent } from './demo-temp/drop/drop.component';
 import { PlayingfieldComponent } from './demo-temp/playingfield/playingfield.component';
 import { GameService } from "./shared/services/game.service";
-import { LobbyDemoComponent } from './demo-temp/lobby-demo/lobby-demo.component';
 import { DynamicChangesComponent } from './demo-temp/dynamic-changes/dynamic-changes.component';
 import { PopoverBootstrapComponent } from './demo-temp/popover-bootstrap/popover-bootstrap.component';
 
 import * as $ from 'jquery';
 import { ModalsComponent } from './demo-temp/modals/modals.component';
-import { MarketHarbourComponent} from './game/market-harbour/market-harbour.component';
-import { ScrollbarComponent } from './demo-temp/scrollbar/scrollbar.component';
-import { DragulaDemoComponent } from './demo-temp/dragula-demo/dragula-demo.component';
 
 import {DndModule} from 'ng2-dnd';
 
@@ -82,13 +78,9 @@ import { FinalDestinationComponent } from './game/final-destination/final-destin
     DragComponent,
     DropComponent,
     PlayingfieldComponent,
-    LobbyDemoComponent,
     DynamicChangesComponent,
     PopoverBootstrapComponent,
     ModalsComponent,
-    MarketHarbourComponent,
-    ScrollbarComponent,
-    DragulaDemoComponent,
     StoneComponent,
     FinalDestinationComponent,
   ],
