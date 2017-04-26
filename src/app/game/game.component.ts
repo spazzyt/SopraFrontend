@@ -1002,6 +1002,12 @@ export class GameComponent  implements OnInit {
     //increase round in info box
     this.infoBoxComponent.increaseRoundInInfoBox(round.roundNumber);
 
+    //set current score for each player
+    for(let player of this.game.players){
+      this.playerMap[player.username].setScore(round.berlinerScore[player.username]);
+    }
+
+
   }
 
 

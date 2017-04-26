@@ -18,6 +18,8 @@ export class Round {
   //market cards in each round
   public marketCards:MarketCard[];
 
+  //player score array
+  public berlinerScore: Map<string, number>;
 
   //Additional Frontend attributes
   //==============================
@@ -29,11 +31,14 @@ export class Round {
 
   constructor(roundNumber_:number,
               ships_:Ship[],
-              marketCards_:MarketCard[]){
+              marketCards_:MarketCard[],
+              berlinerScore_?: Map<string, number>,
+  ){
 
     this.roundNumber=roundNumber_;
     this.ships=ships_;
     this.marketCards=marketCards_;
+    this.berlinerScore=berlinerScore_;
 
   }
 }

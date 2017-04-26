@@ -42,7 +42,7 @@ export class WSService {
           }
 
           //create new round object
-          let newround = new Round(msg.payload.roundNumber, inputships, [null, null, null, null]);
+          let newround = new Round(msg.payload.roundNumber, inputships, [null, null, null, null], msg.payload.berlinerScore);
           console.log(msg.payload.ships);
           console.log('new round created: ' + msg.payload.roundNumber);
           console.log(newround);
