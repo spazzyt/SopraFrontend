@@ -2057,7 +2057,7 @@ export class GameComponent  implements OnInit {
 
       }
       else{
-        this.showSnackbarMessage("You can't take stone because your sled is full.")
+        this.showSnackbarMessage("You can't take any stones because your sled is full.")
         return;
       }
 
