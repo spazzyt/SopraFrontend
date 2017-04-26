@@ -4,27 +4,6 @@
   <!-- Left -->
   <div class="column_left">
 
-    <!-- User List for debugging purposes -->
-    <h3>For debugging purposes</h3>
-    <p>Howdy {{mySelf.username}}, your user id is {{mySelf.id}}</p>
-
-    <div class="user_list">
-      <h2>List of Players</h2>
-      <div>
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let user of users">{{user?.username}}</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3>Navigate to Game</h3>
-    <button class="btn btn-sm btn-primary btn-block"
-            type="submit" (click)="navigateToGame()">Game Screen</button>
-
-    <h3>Logout</h3>
-    <button class="btn btn-sm btn-primary btn-block"
-            type="submit" (click)="Logout()">Logout</button>
-
     <h3>Pepe-Button (quickstart game)</h3>
     <button class="btn btn-sm btn-primary btn-block pepe_btn"
             type="submit" (click)="quickStart()"></button>
@@ -131,7 +110,10 @@
 
   <!-- Right -->
   <div class="column_right">
+    <p id="welcome-txt">Welcome, {{mySelf.username}}!</p>
 
+    <button id="logout-btn" class="btn btn-sm btn-primary btn-block"
+            type="submit" (click)="Logout()">Logout</button>
   </div>
 
 

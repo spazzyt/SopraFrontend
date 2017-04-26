@@ -8,7 +8,7 @@
 
 p{
   -webkit-user-select: none;
-  cursor: pointer !important;
+  cursor: default !important;
 }
 
 /* Popover*/

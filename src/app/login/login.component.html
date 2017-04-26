@@ -7,7 +7,7 @@
     <!--input field-->
     <label for="name" class="sr-only">Username</label>
     <input id="name" type="text" class="form-control" maxlength="10"
-           placeholder="Username"
+           placeholder="Username" autofocus
            onkeydown = "if (event.keyCode == 13)
                         document.getElementById('login_btn').click()"
            [(ngModel)]="mySelf.username">
