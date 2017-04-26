@@ -7,7 +7,6 @@ import {Decision} from "../models/decision";
 import {Move} from "../models/move";
 import { environment } from '../../../environments/environment';
 
-
 export class WSMessage {
   public type:string;
   public payload:string;
@@ -49,8 +48,13 @@ export class WSService {
             inputships[i] = new Ship(msg.payload.ships[i].shipId, msg.payload.ships[i].numFields);  //ID is needed, otherwise slots don't work
           }
 
+          let inputcards = [null, null, null, null];
+          for(let j = 0; j < 4; j++){
+            inputcards[j] = new MarketCard(msg.payload.marketCards[j].id, msg.payload.marketCards[j].type, msg.payload.marketCards[j].name);
+          }
+
           //create new round object
-          let newround = new Round(msg.payload.roundNumber, inputships, [null, null, null, null], msg.payload.berlinerScore);
+          let newround = new Round(msg.payload.roundNumber, inputships, inputcards, msg.payload.berlinerScore);
           console.log(msg.payload.ships);
           console.log('new round created: ' + msg.payload.roundNumber);
           console.log(newround);
