@@ -1048,7 +1048,9 @@ export class GameComponent  implements OnInit {
 
   updateUiForOneMove2(move: Move, username: string, berlinerScore: Map<string, number>, sleds: Map<string, number>, quarries: Map<string, number>){
 
-
+    for(let player of this.game.players){
+      this.playerMap[player.username].checkStonesDragable();
+    }
 
     console.log('Updating UI for this move: ', move, " by Player ", username);
 
