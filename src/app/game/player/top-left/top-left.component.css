@@ -81,19 +81,23 @@ p{
 }
 
 .supply_sled_2{
-  background-image: url("../../../../assets/images/supply_sled.png");
+  /*background-image: url("../../../../assets/images/supply_sled.png");*/
   background-repeat: no-repeat;
   background-position: center;
-  width:70%;
-  height:100%;
-  float:right;
+  width: 50%;
+  height: 100%;
+  z-index: 100;
+  float: left;
+  /*border: 1px solid #44ff62;*/
+  margin-right: -35%;
+  pointer-events: none !important;
   /*border: 1px solid #44ff62;*/
 }
 
 .quarry{
   background-image: url("../../../../assets/images/quarry.png");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: left;
   /**border: 1px solid #fffb54;*/
 }
 
@@ -109,6 +113,7 @@ p{
   height: 100%;
   float: top;
   float: left;
+  padding-top: 1%;
 }
 
 .low_r{
@@ -116,6 +121,8 @@ p{
   height: 100%;
   float: top;
   float: left;
+  /*border: 1px solid blue;*/
+  padding-right: 13%;
 }
 
 
@@ -286,15 +293,38 @@ p{
   position:relative;
   display:block;
 }
-
-
 #stone_label_2{
   z-index:200;
   top:15px;
   right:0px;
-  float:right;
-  float:top;
-  margin-right:15%;
-  /*position:relative;*/
   /*border: 1px solid #44ff62;*/
+  /*position:relative;*/
+  float:right;
+  text-align: center;
+  float: right;
+  /*border: 1px solid red;*/
+  pointer-events: none !important;
+  margin-right: -30%;
+  padding-top: 16%;
+}
+
+.top_part{
+  /*border: 2px solid black;*/
+}
+
+#supply_sled_2{
+  /*border: 1px solid black;*/
+  width: 30%;
+}
+
+.stone_icon{
+  float:right;
+  /*border: 1px solid blue;*/
+  padding-right: 38%;
+  padding-top: 6%;
+}
+
+.low_l{
+  padding-top: 0.5%;
+  padding-left: 5%;
 }
