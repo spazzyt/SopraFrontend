@@ -1005,6 +1005,8 @@ export class GameComponent  implements OnInit {
 
   initRound(round: Round){
 
+    this.game.ships = [];
+
     //Update internal data arrays with data from backend:
     this.game.roundNumber = round.roundNumber;
     this.game.ships = round.ships;
