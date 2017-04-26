@@ -27,11 +27,14 @@ export class MarketCard {
 
     this.id = id_;
     this.type = type_;
-    if(true){ //type_ == 'Statue'){    //TODO remove as soon as backend delivers correct name
+    this.name = 'statue';
+    /*
+    if(type_ == 'Statue'){    //TODO remove as soon as backend delivers correct name
       this.name = 'statue';
     }
-    //else
-      //this.name = name_;
+    else
+      this.name = name_;
+    */
 
     this.imageUrl = "../../../assets/images/cards/" + this.name + ".png"    //TODO ensure that name has the correct format
   }
