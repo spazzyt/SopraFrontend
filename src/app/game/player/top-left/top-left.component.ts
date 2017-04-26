@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {Stone} from "../../../shared/models/stone";
 import {ColourEnum} from "../../../shared/models/colour.enum";
 import {SupplySled} from "../../../shared/models/supply-sled";
@@ -46,6 +46,18 @@ export class TopLeftComponent implements OnInit {
   public marketCards:number[] = [];
 
 
+  //==============
+  // Event Emitter
+  //==============
+
+  @Output() onEvent_setClickHandlerOnStoneQuarry_sledStones = new EventEmitter<number>();
+  @Output() onEvent_setClickHandlerOnStoneQuarry_quarryStones = new EventEmitter<number>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_bll_2_marketCards = new EventEmitter<number[]>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_bml_2_marketCards = new EventEmitter<number[]>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_bmr_2_marketCards = new EventEmitter<number[]>();
+  @Output() onEvent_setClickHandlerOnBlueMarketCards_brr_2_marketCards = new EventEmitter<number[]>();
+
+
   //===============
   //Constructor
   //===============
@@ -65,8 +77,17 @@ export class TopLeftComponent implements OnInit {
 
     // stone generated in supply sled
     // (used by dragula to copy)
-    this.playerFieldStone = new Stone(30, ColourEnum.white);
-    if(0){console.log("ColourEnum: ", ColourEnum.white);}
+    this.playerFieldStone = new Stone(0, ColourEnum.white);
+
+  }
+
+  //================
+  // ngAfterViewInit
+  //================
+
+  ngAfterViewInit() {
+
+    //this.show_hide_stone_at_init();
 
   }
 
@@ -83,7 +104,9 @@ export class TopLeftComponent implements OnInit {
     //set click handler for  bll_1
     (<any>$(document)).ready(() =>{
       (<any>$("#quarry_2")).on("click", () =>{
-        alert("The stone quarry 2 was clicked.");
+        // alert("The stone quarry 2 was clicked.");
+        this.onEvent_setClickHandlerOnStoneQuarry_sledStones.emit(this.sledStones);
+        this.onEvent_setClickHandlerOnStoneQuarry_quarryStones.emit(this.quarryStones);
       });
     });
 
@@ -104,28 +127,32 @@ export class TopLeftComponent implements OnInit {
     //set click handler for  bll_2
     (<any>$(document)).ready(() =>{
       (<any>$("#bll_2_")).on("click", () =>{
-        alert("The chisel was clicked."); this.marketCards[5]-=1;
+        alert("The chisel was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_bll_2_marketCards.emit(this.marketCards);
       });
     });
 
     //set click handler for  bml_2
     (<any>$(document)).ready(() =>{
       (<any>$("#bml_2_")).on("click", () =>{
-        alert("The hammer was clicked."); this.marketCards[6]-=1;
+        alert("The hammer was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_bml_2_marketCards.emit(this.marketCards);
       })
     });
 
     //set click handler for  bmr_2
     (<any>$(document)).ready(() =>{
       (<any>$("#bmr_2_")).on("click", () =>{
-        alert("The sail was clicked."); this.marketCards[7]-=1;
+        alert("The sail was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_bmr_2_marketCards.emit(this.marketCards);
       })
     });
 
     //set click handler for  brr_2
     (<any>$(document)).ready(() =>{
       (<any>$("#brr_2_")).on("click", () =>{
-        alert("The lever was clicked."); this.marketCards[8]-=1;
+        alert("The lever was clicked.");
+        this.onEvent_setClickHandlerOnBlueMarketCards_brr_2_marketCards.emit(this.marketCards);
       })
     });
   }
@@ -193,6 +220,7 @@ export class TopLeftComponent implements OnInit {
     //tll..trr, bll..brr, purple
 
     for(let i = 0; i < marketCards_target.length; i++){
+      if(marketCards_target[i] != null)
       this.marketCards[i] = marketCards_target[i];
     }
   }
@@ -255,7 +283,7 @@ export class TopLeftComponent implements OnInit {
   // this function cannot reactivate icon
 
 
-  deactivateOrActivateIcons_onChange(playerIconsStatus_target){
+  deactivateOrActivateIcons_onChange(playerIconsStatus_target:string[]){
 
 
     //deactivates market card icons at the top of player bottom-left
@@ -324,7 +352,7 @@ export class TopLeftComponent implements OnInit {
       if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
-    //deactivates market card icons at the bottom of player bottom-left
+    //deactivates market card icons at the bottom of player top-left
     //-----------------------------------------------------------------
 
     if (playerIconsStatus_target[5] == "false") {
@@ -392,7 +420,7 @@ export class TopLeftComponent implements OnInit {
     }
 
 
-    //deactivates purple market card icon of player bottom-left
+    //deactivates purple market card icon of player top-left
     //---------------------------------------------------------
 
     if (playerIconsStatus_target[0] == "false") {
@@ -414,10 +442,10 @@ export class TopLeftComponent implements OnInit {
   }
 
 
-  deactivateOrActivateIcons(playerIconsStatus_target){
+  deactivateOrActivateIcons(playerIconsStatus_target:boolean[]){
 
 
-    //deactivates market card icons at the top of player bottom-left
+    //deactivates market card icons at the top of player top-left
     //--------------------------------------------------------------
 
     if (playerIconsStatus_target[1] == false) {
@@ -483,7 +511,7 @@ export class TopLeftComponent implements OnInit {
       if(0){console.log("deactivateOrActivateIcons: true")}
     }
 
-    //deactivates market card icons at the bottom of player bottom-left
+    //deactivates market card icons at the bottom of player top-left
     //-----------------------------------------------------------------
 
     if (playerIconsStatus_target[5] == false) {
