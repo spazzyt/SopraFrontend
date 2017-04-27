@@ -22,16 +22,6 @@ export class MarketComponent extends Site implements OnInit {
   //===============
 
 
-  //==============
-  // Event Emitter
-  //==============
-
-  //@Output() onEvent_setClickHandlerOnMarketCards_1_marketCards = new EventEmitter<MarketCard[]>();
-  //@Output() onEvent_setClickHandlerOnMarketCards_2_marketCards = new EventEmitter<MarketCard[]>();
-  //@Output() onEvent_setClickHandlerOnMarketCards_3_marketCards = new EventEmitter<MarketCard[]>();
-  //@Output() onEvent_setClickHandlerOnMarketCards_4_marketCards = new EventEmitter<MarketCard[]>();
-
-
   //===============
   //Constructor
   //===============
@@ -68,144 +58,15 @@ export class MarketComponent extends Site implements OnInit {
   //===============
 
 
-  //===========================================================
-  // Set / Remove Card(s)
-  //===========================================================
-
   //User chooses a market card
   //--------------------------
-  chooseMarketCard_1_OnClick(){
-    //this.marketCards[0]=null;
+  takeMarketCard(index: number){
+    console.log("TAKING CARD " + index + ".")
   }
 
-  chooseMarketCard_2_OnClick(){
-    //this.marketCards[1]=null;
-  }
-
-  chooseMarketCard_3_OnClick(){
-    //this.marketCards[2]=null;
-  }
-
-  chooseMarketCard_4_OnClick(){
-    //this.marketCards[3]=null;
-  }
-
-  //Unused market cards will be removed after each round
-  //----------------------------------------------------
-  removeUnusedMarketCards(){
-    //this.marketCards = [];
-  }
-
-  //===========================================================
-  // Click Events
-  //===========================================================
 
 
-  setClickHandlerOnMarketCards() {
-/*
-    //set click handler for  1
-    (<any>$(document)).ready(() =>{
-      (<any>$("#market_card_1")).on("click", () =>{
-        //alert("You clicked market card in slot 1.");
-        this.removeClickHandlerOnMarketCard1();
-        this.onEvent_setClickHandlerOnMarketCards_1_marketCards.emit(this.marketCards);
-        //this.chooseMarketCard_1_OnClick(); //not here: generates errors
-      });
-    });
-
-    //set click handler for  2
-    (<any>$(document)).ready(() =>{
-      (<any>$("#market_card_2")).on("click", () =>{
-        //alert("You clicked market card in slot 2.");
-        this.removeClickHandlerOnMarketCard2();
-        this.onEvent_setClickHandlerOnMarketCards_2_marketCards.emit(this.marketCards);
-        //this.chooseMarketCard_2_OnClick(); //not here: generates errors
-      })
-    });
-
-    //set click handler for  3
-    (<any>$(document)).ready(() =>{
-      (<any>$("#market_card_3")).on("click", () =>{
-        //alert("You clicked market card in slot 3.");
-        this.removeClickHandlerOnMarketCard3();
-        this.onEvent_setClickHandlerOnMarketCards_3_marketCards.emit(this.marketCards);
-        //this.chooseMarketCard_3_OnClick(); //not here: generates errors
-      })
-    });
-
-    //set click handler for  4
-    (<any>$(document)).ready(() =>{
-      (<any>$("#market_card_4")).on("click", () =>{
-        //alert("You clicked market card in slot 4.");
-        this.removeClickHandlerOnMarketCard4();
-        this.onEvent_setClickHandlerOnMarketCards_4_marketCards.emit(this.marketCards);
-        //this.chooseMarketCard_4_OnClick(); //not here: generates errors
-      })
-    });
-    */
-  }
-
-  removeClickHandlerOnMarketCards(){
-
-    //remove click handler for  1
-    (<any>$(document)).ready(function () {
-      (<any>$("#market_card_1")).off("click");
-    });
-
-    //remove click handler for  2
-    (<any>$(document)).ready(function () {
-      (<any>$("#market_card_2")).off("click");
-    });
-
-    //remove click handler for  3
-    (<any>$(document)).ready(function () {
-      (<any>$("#market_card_3")).off("click");
-    });
-
-    //remove click handler for  4
-    (<any>$(document)).ready(function () {
-      (<any>$("#market_card_4")).off("click");
-    });
-
-  }
-
-  removeClickHandlerOnMarketCard1(){
-
-    //remove click handler for  1
-    (<any>$(document)).ready(function () {
-      (<any>$("#market_card_1")).off("click");
-    });
-
-  }
-
-  removeClickHandlerOnMarketCard2(){
-
-    //remove click handler for  2
-    (<any>$(document)).ready(function () {
-      (<any>$("#market_card_2")).off("click");
-    });
-
-  }
-
-  removeClickHandlerOnMarketCard3(){
-
-    //remove click handler for  3
-    (<any>$(document)).ready(function () {
-      (<any>$("#market_card_3")).off("click");
-    });
-
-  }
-
-  removeClickHandlerOnMarketCard4(){
-
-    //remove click handler for  4
-    (<any>$(document)).ready(function () {
-      (<any>$("#market_card_4")).off("click");
-    });
-
-  }
-
-  //This function is used for passing the stone array from a ship to this site
+  //This function is used for passing the stone array from a ship to this site, needed because site parent requires it
   placeStones(targetStones: Stone[]){
 
   }
