@@ -1209,10 +1209,6 @@ export class GameComponent  implements OnInit {
     //-----------------------
     if (!amI_CurrentActivePlayer){
 
-      //------------------------------------------
-      // TODO automatically deactivate all ships
-      //------------------------------------------
-
       //hide all stones in sleds (no see, no touch)
       //-------------------------------------------
       this.bottomLeftComponent.hideStone();
