@@ -55,29 +55,18 @@
           <app-pyramid></app-pyramid>
         </div>
         <div class="site_board">
-          <app-temple (onEvent_placeStones_stones)="templeComponent_onEvent_placeStones_stones($event)"
-                      (onEvent_placeStones_totalStones)="templeComponent_onEvent_placeStones_totalStones($event)"
-                      (onEvent_placeStones_fieldHeight)="templeComponent_onEvent_placeStones_fieldHeight($event)">
-
-          </app-temple>
+          <app-temple></app-temple>
         </div>
         <div class="site_board">
           <app-burial-chamber></app-burial-chamber>
         </div>
         <div class="site_board">
-          <app-obelisk (onEvent_placeStones_stones)="obeliskComponent_onEvent_placeStones_stones($event)"
-                       (onEvent_removeStones_stones)="obeliskComponent_onEvent_placeStones_stones($event)">
-          </app-obelisk>
+          <app-obelisk></app-obelisk>
         </div>
       </div>
 
       <div class="market_site">
-        <app-market [marketCards]="game?.marketCards"
-                    (onEvent_setClickHandlerOnMarketCards_1_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_1_marketCards($event)"
-                    (onEvent_setClickHandlerOnMarketCards_2_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_2_marketCards($event)"
-                    (onEvent_setClickHandlerOnMarketCards_3_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_3_marketCards($event)"
-                    (onEvent_setClickHandlerOnMarketCards_4_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_4_marketCards($event)">
-        </app-market>
+        <app-market [marketCards]="game?.marketCards"</app-market>
       </div>
 
     </div>
