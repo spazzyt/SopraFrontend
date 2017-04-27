@@ -1044,6 +1044,10 @@ export class GameComponent  implements OnInit {
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
 
+        //show snackbar
+        let shipnr = move.pos+1;
+        this.showSnackbarMessage(username + ' sailed ship ' + shipnr + ' to the ' + this.siteToStringMap[move.to] + '.');
+
         break;
 
 
