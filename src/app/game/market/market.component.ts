@@ -57,7 +57,6 @@ export class MarketComponent extends Site implements OnInit {
   //Class Methods
   //===============
 
-
   //User chooses a market card
   //--------------------------
   takeMarketCard(index: number){

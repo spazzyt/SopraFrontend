@@ -13,7 +13,7 @@
     <div class="left_spacing"></div>
     <div *ngIf="marketCards[i]" id="ngifMarketCards" class="market_card_slot card">
       <div id="market_card_{{i+1}}" class="market_card_{{i+1}} card_picture"
-           onclick="takeMarketCard(i)" [ngStyle]="{ 'background-image': 'url(' + marketCards[i].imageUrl + ')' }">
+           (click)="takeMarketCard(i)" [ngStyle]="{ 'background-image': 'url(' + marketCards[i].imageUrl + ')' }">
       </div>
     </div>
   </div>

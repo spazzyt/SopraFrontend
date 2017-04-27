@@ -39,6 +39,7 @@ export class MarketCard {
   }
 
 
+
   /** List of possible cards:
 
    RED CARDS
