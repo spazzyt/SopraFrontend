@@ -663,7 +663,7 @@ export class GameComponent  implements OnInit {
         this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
-
+/*
         //switch on your Quarry colors, switch off the others
         this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
         this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
@@ -681,7 +681,7 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateScore(false);
         this.topRightComponent.deactivateOrActivateScore(false);
         this.bottomRightComponent.deactivateOrActivateScore(false);
-
+*/
 
         // switch on click handlers on your stone quarry, switch off the others
         this.bottomLeftComponent.setClickHandlerOnStoneQuarry();
@@ -718,7 +718,7 @@ export class GameComponent  implements OnInit {
         this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
-
+/*
         //switch on your Quarry colors, switch off the others
         this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
         this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
@@ -736,7 +736,7 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateScore(true);
         this.topRightComponent.deactivateOrActivateScore(false);
         this.bottomRightComponent.deactivateOrActivateScore(false);
-
+*/
 
         // switch on click handlers on your stone quarry, switch off the others
         this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
@@ -774,7 +774,7 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
 
-
+/*
         //switch on your Quarry colors, switch off the others
         this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
         this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
@@ -792,7 +792,7 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateScore(false);
         this.topRightComponent.deactivateOrActivateScore(true);
         this.bottomRightComponent.deactivateOrActivateScore(false);
-
+*/
 
         // switch on click handlers on your stone quarry, switch off the others
         this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
@@ -830,7 +830,7 @@ export class GameComponent  implements OnInit {
         this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
-
+/*
         //switch on your Quarry colors, switch off the others
         this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
         this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
@@ -848,7 +848,7 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateScore(false);
         this.topRightComponent.deactivateOrActivateScore(false);
         this.bottomRightComponent.deactivateOrActivateScore(true);
-
+*/
 
         // switch on click handlers on your stone quarry, switch off the others
         this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
@@ -907,7 +907,7 @@ export class GameComponent  implements OnInit {
       this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
       this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
       this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
-
+/*
       //switch off Quarry colors
       this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
       this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
@@ -925,7 +925,7 @@ export class GameComponent  implements OnInit {
       this.topLeftComponent.deactivateOrActivateScore(false);
       this.topRightComponent.deactivateOrActivateScore(false);
       this.bottomRightComponent.deactivateOrActivateScore(false);
-
+*/
 
       // switch off click handlers on all stone quarries
       this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
@@ -1007,7 +1007,7 @@ export class GameComponent  implements OnInit {
 
   removeCardById(id: number){
     for(let i = 0; i < this.game.marketCards.length; i++){
-      if(this.game.marketCards[i].id == id){
+      if(this.game.marketCards[i] != null && this.game.marketCards[i].id == id){
         this.game.marketCards[i] = null;
         return;
       }
@@ -1033,7 +1033,7 @@ export class GameComponent  implements OnInit {
         this.playerMap[username].update_takeStonesFromQuarry(move.pos);
 
         //show snackbar
-        this.showSnackbarMessage(username + ' took ' + move.pos + ' stones from the quarry.');
+        this.showSnackbarMessage(username.substring(0,10) + ' took ' + move.pos + ' stones from the quarry.');
 
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
@@ -1055,7 +1055,7 @@ export class GameComponent  implements OnInit {
 
         //show snackbar
         let shipnr = move.pos+1;
-        this.showSnackbarMessage(username + ' sailed ship ' + shipnr + ' to the ' + this.siteToStringMap[move.to] + '.');
+        this.showSnackbarMessage(username.substring(0,10) + ' sailed ship ' + shipnr + ' to the ' + this.siteToStringMap[move.to] + '.');
 
         break;
 
@@ -1255,11 +1255,12 @@ export class GameComponent  implements OnInit {
       this.topRightComponent.removeClickHandlerOnBlueMarketCards();
 
       //switch off all Market Icon colors since no one has any
+
       this.bottomLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
       this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
       this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
       this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
-
+       /*
       //switch off Quarry colors
       this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
       this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
@@ -1277,7 +1278,7 @@ export class GameComponent  implements OnInit {
       this.topLeftComponent.deactivateOrActivateScore(false);
       this.topRightComponent.deactivateOrActivateScore(false);
       this.bottomRightComponent.deactivateOrActivateScore(false);
-
+*/
       // switch off click handlers on all stone quarries
       this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
       this.topLeftComponent.removeClickHandlerOnStoneQuarry();
