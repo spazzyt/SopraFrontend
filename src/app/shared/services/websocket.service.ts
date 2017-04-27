@@ -92,7 +92,7 @@ export class WSService {
         case 'PICKCARD':
           let whoseCardTurn = msg.payload.user;
           console.log(whoseCardTurn + " should pick a card");
-              break;
+          break;
 
         //Execute other player's move
         case 'PLAYEDMOVE':

@@ -360,14 +360,12 @@ export class GameComponent  implements OnInit {
     this.gameService.setGame(this.game);
 
     //TODO delete as soon as we get proper market cards from backend
-    let fakegame = this.getFakeGame();
-    this.game.marketCards = fakegame.marketCards;
+    //let fakegame = this.getFakeGame();
 
     //fill ship array with nulls
     this.game.ships = [null, null, null, null];
 
     //Site Board Components: the island
-    this.initializeMarketComponent(this.game.marketCards);
     this.initializeObeliskComponent();
     this.initializePyramidComponent();
     this.initializeTempleComponent();
@@ -407,9 +405,8 @@ export class GameComponent  implements OnInit {
 
   // Init Sites
   //-----------
-  initializeMarketComponent(marketCards:MarketCard[]){
+  initializeMarketComponent(){
     this.marketComponent.removeUnusedMarketCards();
-    this.marketComponent.generateFourMarketCards(marketCards);
     //do not set click handlers here
   }
 
@@ -982,7 +979,7 @@ export class GameComponent  implements OnInit {
 
     this.game.marketCards = round.marketCards; //TODO fix this
 
-    this.initializeMarketComponent(this.game.marketCards);
+    this.initializeMarketComponent();
 
     //initialize with new ships
     this.initializeDepartingHarbourComponent(this.game.ships);
