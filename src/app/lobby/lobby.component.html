@@ -30,8 +30,13 @@
               <td id="td1">{{game?.name}}'s Game</td>
               <td id="td2">{{game?.players.length}} / {{game?.numPlayers}}</td>
               <td id="td3">
+                <!-- buttons for join/leave/game full, depending on state -->
 
-                <button *ngIf="joinedGame!=game?.id"
+                <button *ngIf="joinedGame!=game?.id && game?.numPlayers <= game?.players.length"
+                        class="btn btn-sm btn-primary btn-block btn_gamefull"
+                        type="submit">Game full</button>
+
+                <button *ngIf="joinedGame!=game?.id && game?.numPlayers > game?.players.length"
                         class="btn btn-sm btn-primary btn-block btn_joinleave"
                         type="submit" (click)="joinGame(game?.id)">Join</button>
 

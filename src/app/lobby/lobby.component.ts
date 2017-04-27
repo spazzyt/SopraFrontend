@@ -78,7 +78,7 @@ export class LobbyComponent implements OnInit {
     this.authenticationService.updateCookie();
 
     // interval to update game list (every X ms a request is made to the frontend)
-    this.userListChecker = setInterval(()=>this.loadUserList(), this.requestIntervalTime);
+    //this.userListChecker = setInterval(()=>this.loadUserList(), this.requestIntervalTime);
     this.gameListChecker = setInterval(()=>this.loadGameList(), this.requestIntervalTime);
 
     // get username from userService
