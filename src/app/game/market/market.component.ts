@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
 import {MarketCard} from "../../shared/models/market-card";
 import {Position} from "../../shared/models/position.enum"
 import {Site} from "../../shared/site";
@@ -11,20 +11,26 @@ import {Stone} from "../../shared/models/stone";
 })
 export class MarketComponent extends Site implements OnInit {
 
+
+
+  @Input()
+  marketCards: MarketCard[];
+
+
   //===============
   //Class Variables
   //===============
-  marketCards:MarketCard[] = [];
 
 
   //==============
   // Event Emitter
   //==============
 
-  @Output() onEvent_setClickHandlerOnMarketCards_1_marketCards = new EventEmitter<MarketCard[]>();
-  @Output() onEvent_setClickHandlerOnMarketCards_2_marketCards = new EventEmitter<MarketCard[]>();
-  @Output() onEvent_setClickHandlerOnMarketCards_3_marketCards = new EventEmitter<MarketCard[]>();
-  @Output() onEvent_setClickHandlerOnMarketCards_4_marketCards = new EventEmitter<MarketCard[]>();
+  //@Output() onEvent_setClickHandlerOnMarketCards_1_marketCards = new EventEmitter<MarketCard[]>();
+  //@Output() onEvent_setClickHandlerOnMarketCards_2_marketCards = new EventEmitter<MarketCard[]>();
+  //@Output() onEvent_setClickHandlerOnMarketCards_3_marketCards = new EventEmitter<MarketCard[]>();
+  //@Output() onEvent_setClickHandlerOnMarketCards_4_marketCards = new EventEmitter<MarketCard[]>();
+
 
   //===============
   //Constructor
@@ -69,33 +75,25 @@ export class MarketComponent extends Site implements OnInit {
   //User chooses a market card
   //--------------------------
   chooseMarketCard_1_OnClick(){
-    this.marketCards[0]=null;
+    //this.marketCards[0]=null;
   }
 
   chooseMarketCard_2_OnClick(){
-    this.marketCards[1]=null;
+    //this.marketCards[1]=null;
   }
 
   chooseMarketCard_3_OnClick(){
-    this.marketCards[2]=null;
+    //this.marketCards[2]=null;
   }
 
   chooseMarketCard_4_OnClick(){
-    this.marketCards[3]=null;
+    //this.marketCards[3]=null;
   }
 
   //Unused market cards will be removed after each round
   //----------------------------------------------------
   removeUnusedMarketCards(){
-    this.marketCards = [];
-  }
-
-
-  //Generate four new market cards
-  //------------------------------
-  generateFourMarketCards(cards: MarketCard[]){
-    this.marketCards = cards;
-
+    //this.marketCards = [];
   }
 
   //===========================================================
@@ -104,7 +102,7 @@ export class MarketComponent extends Site implements OnInit {
 
 
   setClickHandlerOnMarketCards() {
-
+/*
     //set click handler for  1
     (<any>$(document)).ready(() =>{
       (<any>$("#market_card_1")).on("click", () =>{
@@ -144,6 +142,7 @@ export class MarketComponent extends Site implements OnInit {
         //this.chooseMarketCard_4_OnClick(); //not here: generates errors
       })
     });
+    */
   }
 
   removeClickHandlerOnMarketCards(){

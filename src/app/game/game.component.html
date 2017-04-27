@@ -72,7 +72,8 @@
       </div>
 
       <div class="market_site">
-        <app-market (onEvent_setClickHandlerOnMarketCards_1_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_1_marketCards($event)"
+        <app-market [marketCards]="game?.marketCards"
+                    (onEvent_setClickHandlerOnMarketCards_1_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_1_marketCards($event)"
                     (onEvent_setClickHandlerOnMarketCards_2_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_2_marketCards($event)"
                     (onEvent_setClickHandlerOnMarketCards_3_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_3_marketCards($event)"
                     (onEvent_setClickHandlerOnMarketCards_4_marketCards)="marketComponent_onEvent_setClickHandlerOnMarketCards_4_marketCards($event)">
@@ -83,7 +84,6 @@
 
 
     <div style="border: 10px solid orange;" class="game_footer">
-      <!-- Rolands, test buttons: remove them later -->
 
       <div class="row">
         <!--  SCORE BOARD BUTTON -->
