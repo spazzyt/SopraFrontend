@@ -1033,7 +1033,11 @@ export class GameComponent  implements OnInit {
         this.playerMap[username].update_takeStonesFromQuarry(move.pos);
 
         //show snackbar
-        this.showSnackbarMessage(username.substring(0,10) + ' took ' + move.pos + ' stones from the quarry.');
+        let numStones;
+        if(move.pos > 3)      //TODO get correct number from backend (lol)
+          numStones = 3
+        else numStones = move.pos
+        this.showSnackbarMessage(username.substring(0,10) + ' took ' + numStones + ' stone(s) from the quarry.');
 
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
