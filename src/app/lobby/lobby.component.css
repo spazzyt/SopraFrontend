@@ -181,6 +181,16 @@ btn:focus{
   margin-right: 10%;
 }
 
+.btn_gamefull{
+  float: right;
+  margin-right: 10%;
+  background-color: #877e6b;
+  border: 3px solid #776f5f;
+  color: #d5c9b1;
+  opacity: 0.5;
+  text-align: center;
+}
+
 /*Scrollbar styling*/
 
 ::-webkit-scrollbar
