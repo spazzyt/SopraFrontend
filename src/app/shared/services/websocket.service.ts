@@ -59,6 +59,7 @@ export class WSService {
           let inputcards = [null, null, null, null];
           for(let j = 0; j < 4; j++){
             inputcards[j] = new MarketCard(msg.payload.marketCards[j].id, msg.payload.marketCards[j].type, msg.payload.marketCards[j].name);
+            //console.log("market card for game: ", inputcards[j])
           }
 
           //create new round object
