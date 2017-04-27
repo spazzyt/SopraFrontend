@@ -16,6 +16,9 @@ export class MarketComponent extends Site implements OnInit {
   @Input()
   marketCards: MarketCard[];
 
+  @Input()
+  canIPick: boolean;
+
 
   //===============
   //Class Variables
@@ -60,7 +63,14 @@ export class MarketComponent extends Site implements OnInit {
   //User chooses a market card
   //--------------------------
   takeMarketCard(index: number){
-    console.log("TAKING CARD " + index + ".")
+
+    console.log("PLAYER TRIES TO TAKE CARD " + index)
+
+    if(this.canIPick){  //TODO from game component
+      console.log("PLAYER CAN TAKE CARD!!")
+      //TODO generate & send move
+    }
+
   }
 
 

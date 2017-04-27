@@ -57,9 +57,8 @@ export class Game {
   // active player
   public currentActivePlayerField: ColourEnum;
 
-
-  // decision
-  public decisions:Decision[]=[];
+  public whoCanPickCard: string;
+  public canIPick: boolean;
 
 
   //Additional Frontend attributes
@@ -84,46 +83,6 @@ export class Game {
   public playerFieldIconsWhiteAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsWhite);
   public playerFieldIconsBrownAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsBrown);
   public playerFieldIconsGrayAsBoolean:boolean[]=this.numberToBoolean(this.playerFieldIconsGray);
-
-
-  // Game State
-  //-----------
-
-  //TODO Remove this
-
-  //Temple
-  public stonesInTemple:Stone[];
-  public totalStonesInTemple:number;
-  public fieldHeightInTemple:number[];
-
-  //Obelisk
-  public stonesInObelisk:number[];
-
-  //Player bottom left
-  public bottomLeft_sledStones:number=2;
-  public bottomLeft_quarryStones:number=27;
-  public bottomLeft_marketCards:number[];
-
-  //Player top left
-  public topLeft_sledStones:number=3;
-  public topLeft_quarryStones:number=26;
-  public topLeft_marketCards:number[];
-
-  //Player top right
-  public topRight_sledStones:number=4;
-  public topRight_quarryStones:number=25;
-  public topRight_marketCards:number[];
-
-  //Player bottom right
-  public bottomRight_sledStones:number=5;
-  public bottomRight_quarryStones:number=24;
-  public bottomRight_marketCards:number[];
-
-
-  // Own Decisions
-  //--------------
-
-  //to store own decisions
 
 
 
@@ -158,23 +117,16 @@ export class Game {
       this.numPlayers=numPlayers_;
       this.players=players_;
       //changing round info
-      this.roundNumber=roundNumber_;//or gameStatusEnum.round1
+      this.roundNumber=roundNumber_;
       this.ships=ships_;
       this.marketCards=marketCards_;
-      //changing decision info
       this.currentActivePlayerField=currentActivePlayerField_;
-      //this.decisions.push(decision_);
 
 
 
   }
 
-    addDecision(decision_){
-      this.decisions.push(decision_);
-    }
-    getLastDecision(){
-      return this.decisions[this.decisions.length];
-    }
+
 
     numberToBoolean(playerFieldIcons):boolean[]{
       let resultArray:boolean[]=[false,false,false,false,false,false,false,false,false,false,false,false];

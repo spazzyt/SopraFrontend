@@ -91,6 +91,12 @@ export class WSService {
         case 'PICKCARD':
           let whoseCardTurn = msg.payload.user;
           console.log(whoseCardTurn + " should pick a card");
+
+          //pass to game who's turn it is to pick card
+          gameComponent.game.whoCanPickCard = msg.payload.user;
+          gameComponent.updateCardPick();
+          console.log(gameComponent.game.whoCanPickCard, gameComponent.game.canIPick)
+
           break;
 
         //Execute other player's move
