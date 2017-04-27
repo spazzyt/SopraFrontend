@@ -201,10 +201,6 @@ export class GameComponent  implements OnInit {
   id2=Math.floor(Math.random() * (14 - 7 + 1)) + 7;
   id3=Math.floor(Math.random() * (25 - 15 + 1)) + 15;
   id4=Math.floor(Math.random() * (34 - 26 + 1)) + 26;
-  marketCard1 = new MarketCard(this.id1);
-  marketCard2 = new MarketCard(this.id2);
-  marketCard3 = new MarketCard(this.id3);
-  marketCard4 = new MarketCard(this.id4);
 
   marketCards = new Array<MarketCard>();
 
@@ -328,17 +324,6 @@ export class GameComponent  implements OnInit {
     this.ships_target.push(this.ship2);
     this.ships_target.push(this.ship3);
     this.ships_target.push(this.ship4);
-
-    //fill fake market cards array
-    console.log(this.marketCard1.id);
-    console.log(this.marketCard2.id);
-    console.log(this.marketCard3.id);
-    console.log(this.marketCard4.id);
-
-    this.marketCards.push(this.marketCard1);
-    this.marketCards.push(this.marketCard2);
-    this.marketCards.push(this.marketCard3);
-    this.marketCards.push(this.marketCard4);
 
     //fill fake player array
     this.players_target.push(this.player1,);
@@ -995,7 +980,9 @@ export class GameComponent  implements OnInit {
     for(let ship of this.game.ships)
       this.ships[ship.id] = ship;
 
-    this.game.marketCards = round.marketCards; //TODO get real input from backend
+    this.game.marketCards = round.marketCards; //TODO fix this
+
+    this.initializeMarketComponent(this.game.marketCards);
 
     //initialize with new ships
     this.initializeDepartingHarbourComponent(this.game.ships);
