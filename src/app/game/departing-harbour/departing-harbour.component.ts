@@ -44,29 +44,4 @@ export class DepartingHarbourComponent {
 
   }
 
-  //===============
-  //Class Methods
-  //===============
-
-  // Remove Ship
-  removeShip(shipid:number){
-    //removes a ship with a given position from the departing harbour
-    this.ships[shipid] = null;
-  }
-
-
-
-  // Generate Ships
-  generateFourShips(ships_target: Ship[]){
-
-    //fill ships array
-    this.ships = ships_target;
-
-  }
-
-  // Remove Ships
-  removeShips(){
-    this.ships = [];
-  }
-
 }
