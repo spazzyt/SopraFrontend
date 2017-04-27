@@ -89,13 +89,13 @@ export class WSService {
           break;
 
         case 'PICKCARD':
-          let whoseCardTurn = msg.payload.user;
-          console.log(whoseCardTurn + " should pick a card");
-
           //pass to game who's turn it is to pick card
           gameComponent.game.whoCanPickCard = msg.payload.user;
           gameComponent.updateCardPick();
-          console.log(gameComponent.game.whoCanPickCard, gameComponent.game.canIPick)
+          gameComponent.setPlayerField();
+          gameComponent.game.amI_CurrentActivePlayer = false;
+
+          console.log(gameComponent.game.whoCanPickCard, 'can pick a card, is that me? ' ,gameComponent.game.canIPick)
 
           break;
 
@@ -103,6 +103,8 @@ export class WSService {
         case 'PLAYEDMOVE':
           console.log("The server tells us to do the following:")
           console.log(msg.payload);
+          gameComponent.game.whoCanPickCard = null;
+
           if(msg.payload.player != this.authenticationService.mySelf.username) //if this move is not from me, update:
           {
             let moveToDo = msg.payload.move;
