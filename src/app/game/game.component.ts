@@ -1009,7 +1009,7 @@ export class GameComponent  implements OnInit {
   // Update Game UI for one Move of another client
   //===========================================================
 
-  updateUiForOneMove2(move: Move, username: string, berlinerScore: Map<string, number>, sleds: Map<string, number>, quarries: Map<string, number>){
+  updateUiForOneMove(move: Move, username: string, berlinerScore: Map<string, number>, sleds: Map<string, number>, quarries: Map<string, number>){
 
     //only set stones to draggable if player has stones
     this.updateStoneDragStatus();
@@ -1128,12 +1128,6 @@ export class GameComponent  implements OnInit {
 
   }
 
-
-
-  //===========================================================
-  // Update data for one player field
-  // e.g. helper function for function like "updateUiForOneMove()"
-  //===========================================================
 
   //TODO fix this to update just cards
   updatePlayerCards(){

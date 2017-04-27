@@ -133,7 +133,7 @@ export class WSService {
           if(msg.payload.player != this.authenticationService.mySelf.username) //if this move is not from me, update:
           {
             let moveToDo = msg.payload.move;
-            gameComponent.updateUiForOneMove2(moveToDo, msg.payload.player, msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
+            gameComponent.updateUiForOneMove(moveToDo, msg.payload.player, msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
 
           }
           //if move was by me, only update stone statistics
