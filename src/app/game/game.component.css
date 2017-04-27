@@ -308,3 +308,16 @@ table{
 #ngButton{
   visibility: hidden !important;
 }
+
+.playerField_3_empty{
+  background-image: url(../../assets/images/top_right_empty.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.playerField_4_empty{
+  background-image: url(../../assets/images/bottom_right_empty.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
