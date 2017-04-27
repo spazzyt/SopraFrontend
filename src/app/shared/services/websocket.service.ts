@@ -100,17 +100,17 @@ export class WSService {
           gameComponent.setPlayerField();
           gameComponent.game.amI_CurrentActivePlayer = false;
 
-          console.log(gameComponent.game.whoCanPickCard, 'can pick a card, is that me? ' ,gameComponent.game.canIPick)
+          console.log(gameComponent.game.whoCanPickCard, 'can pick a card, is that me? ->' ,gameComponent.game.canIPick)
 
-          //TODO activate the one whose pick it is
           //ensure correct player field status (active/inactive)
           gameComponent.bottomLeftComponent.playerFieldGlow(false);
           gameComponent.topLeftComponent.playerFieldGlow(false);
           gameComponent.topRightComponent.playerFieldGlow(false);
           gameComponent.bottomRightComponent.playerFieldGlow(false);
 
-
+          //activate glow on the player whose pick it is
           gameComponent.playerMap[gameComponent.game.whoCanPickCard].playerFieldGlow(true);
+
 
           //Snackbar message: who can pick a card?
           if(gameComponent.game.canIPick) //i can pick
