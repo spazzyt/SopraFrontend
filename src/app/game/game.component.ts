@@ -1548,7 +1548,7 @@ export class GameComponent  implements OnInit {
   //show Snackbarinfo
   showSnackbarMessage(text_) {
     let text= text_;
-    let time_= 10000; //show 10 seconds
+    let time_= 3000; //show 10 seconds
     this.showSnackbarMessenger(text_,time_);
   }
 
