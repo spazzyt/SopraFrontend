@@ -91,6 +91,8 @@ export class GameComponent  implements OnInit {
   private playerMap: Map<any, any>;
   private colourMap: Map<any, any>;
   private nameToColourMap: Map<any, any>;
+  private siteMap: Map<any, any>;
+  private siteToStringMap: Map<any, any>;
 
 
   // store ships via their id
@@ -260,6 +262,20 @@ export class GameComponent  implements OnInit {
           this.nameToColourMap[this.game.players[1].username] = ColourEnum.white;
           if(this.game.numPlayers > 2) this.nameToColourMap[this.game.players[2].username] = ColourEnum.brown;
           if(this.game.numPlayers > 3) this.nameToColourMap[this.game.players[3].username] = ColourEnum.gray;
+
+          this.siteMap = new Map();
+
+          this.siteMap['Pyramid'] = this.pyramidComponent;
+          this.siteMap['Temple'] = this.templeComponent;
+          this.siteMap['BurialChamber'] = this.burialChamberComponent;
+          this.siteMap['Obelisk'] = this.obeliskComponent;
+
+          this.siteToStringMap = new Map();
+
+          this.siteToStringMap[PositionEnum.Pyramid] = 'Pyramid';
+          this.siteToStringMap[PositionEnum.Temple] = 'Temple';
+          this.siteToStringMap[PositionEnum.BurialChamber] = 'BurialChamber';
+          this.siteToStringMap[PositionEnum.Obelisk] = 'Obelisk';
 
           //Initialize the new game
           this.initializeNewGame(this.game);
@@ -1006,53 +1022,22 @@ export class GameComponent  implements OnInit {
       //Take stones from quarry
       case PositionEnum.Sled:
         this.playerMap[username].update_takeStonesFromQuarry(move.pos);
+
+        //show snackbar
+        this.showSnackbarMessage(username + ' took ' + move.pos + ' stones from the quarry.');
+
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
         break;
 
-
-      //TODO condense the site cases (except market) into one single function
-      //Sail ship to Pyramid:
+      //Sail ship to site:
       case PositionEnum.Pyramid:
-        this.moveShipById(move.pos, 'Pyramid');
-        //place stones on site
-        this.pyramidComponent.placeStones(this.game.ships[move.pos].slots);
-        //remove stones from ship
-        this.game.ships[move.pos].slots = [];
-
-        //update score, sled & quarry
-        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
-
-        break;
-
-      //Sail ship to Temple:
       case PositionEnum.Temple:
-        this.moveShipById(move.pos, 'Temple');
-        this.templeComponent.placeStones(this.game.ships[move.pos].slots);
-        //remove stones from ship
-        this.game.ships[move.pos].slots = [];
-
-        //update score, sled & quarry
-        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
-
-        break;
-
-      //Sail ship to Burial Chamber:
       case PositionEnum.BurialChamber:
-        this.moveShipById(move.pos, 'BurialChamber');
-        this.burialChamberComponent.placeStones(this.game.ships[move.pos].slots);
-        //remove stones from ship
-        this.game.ships[move.pos].slots = [];
-
-        //update score, sled & quarry
-        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
-
-        break;
-
-      //Sail ship to Obelisk:
       case PositionEnum.Obelisk:
-        this.moveShipById(move.pos, 'Obelisk');
-        this.obeliskComponent.placeStones(this.game.ships[move.pos].slots);
+        this.moveShipById(move.pos, this.siteToStringMap[move.to]);
+        //place stones on site
+        this.siteMap[this.siteToStringMap[move.to]].placeStones(this.game.ships[move.pos].slots);
         //remove stones from ship
         this.game.ships[move.pos].slots = [];
 

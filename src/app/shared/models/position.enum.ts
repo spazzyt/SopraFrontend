@@ -3,7 +3,6 @@ export class Position {
 
 export enum PositionEnum {
 
-  //NEW enums, as used by backend
   Quarry=<any>"Quarry",
   Sled=<any>"Sled",
   Pyramid=<any>"Pyramid",

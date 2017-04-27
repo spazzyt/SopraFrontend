@@ -68,13 +68,13 @@ export class MarketComponent extends Site implements OnInit {
 
     console.log("PLAYER TRIES TO TAKE CARD " + index)
 
-    if(this.canIPick){  //TODO from game component
+    if(this.canIPick){
       console.log("PLAYER CAN TAKE CARD!!")
 
       //TODO update player cards
 
+
       //generate Move object
-      //TODO check if correct ID is delivered
       let moveToSend = new Move(PositionEnum.Market, PositionEnum.PlayerCardStack, this.marketCards[index].id);
       //Send move to backend
       this.gameService.sendMove(moveToSend);
