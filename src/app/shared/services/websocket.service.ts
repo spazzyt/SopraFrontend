@@ -81,12 +81,18 @@ export class WSService {
 
         //Update currentActivePlayerField in game component
         case 'CURRENTTURN':
+          let whoseTurn = msg.payload.user;
+
           //let game know whose turn it is
-          console.log('It\'s ' + msg.payload + "'s turn.");
+          console.log('It\'s ' + whoseTurn + "'s turn.");
           console.log("my name is: ", gameComponent.game.myPlayerField, gameComponent.game.myUserName)
-          gameComponent.setPlayerField(msg.payload);
+          gameComponent.setPlayerField(whoseTurn);
           break;
 
+        case 'PICKCARD':
+          let whoseCardTurn = msg.payload.user;
+          console.log(whoseCardTurn + " should pick a card");
+              break;
 
         //Execute other player's move
         case 'PLAYEDMOVE':
