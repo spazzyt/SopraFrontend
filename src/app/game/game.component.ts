@@ -389,7 +389,7 @@ export class GameComponent  implements OnInit {
     }
 
     //Determine whether you are the active player (set class variable)
-    let amI_CurrentActivePlayer=this.game.currentActivePlayerField===this.game.myPlayerField;
+    let amI_CurrentActivePlayer= this.game.currentActivePlayerField===this.game.myPlayerField;
     this.amI_CurrentActivePlayer=amI_CurrentActivePlayer; //important for dragula to work
 
     //Read current active player field (set class variable)
@@ -1096,7 +1096,11 @@ export class GameComponent  implements OnInit {
 
     //Status Update:
     //Determine whether you are the active player (set class variable)
-    this.game.amI_CurrentActivePlayer=this.game.currentActivePlayerField===this.game.myPlayerField;
+    if(this.game.whoCanPickCard != this.myUserName)
+      this.game.amI_CurrentActivePlayer= this.game.currentActivePlayerField===this.game.myPlayerField;
+    else
+      this.game.amI_CurrentActivePlayer = false;
+
     this.amI_CurrentActivePlayer=this.game.amI_CurrentActivePlayer; //important for dragula to work
 
     this.activateActivePlayerInteractions(this.game.amI_CurrentActivePlayer, this.game.currentActivePlayerField);
@@ -1613,7 +1617,7 @@ export class GameComponent  implements OnInit {
       }
 
 
-    //send move object to backend
+    //generate move object
     let moveToSend = new Move(PositionEnum.Quarry, PositionEnum.Sled, stonesToTake);
     //Send move to backend
     this.gameService.sendMove(moveToSend);

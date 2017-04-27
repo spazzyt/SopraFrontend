@@ -1,8 +1,10 @@
 import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
 import {MarketCard} from "../../shared/models/market-card";
-import {Position} from "../../shared/models/position.enum"
+import {Position, PositionEnum} from "../../shared/models/position.enum"
 import {Site} from "../../shared/site";
 import {Stone} from "../../shared/models/stone";
+import {Move} from "../../shared/models/move";
+import {GameService} from "../../shared/services/game.service";
 
 @Component({
   selector: 'app-market',
@@ -28,7 +30,7 @@ export class MarketComponent extends Site implements OnInit {
   //===============
   //Constructor
   //===============
-  constructor() {
+  constructor(private gameService: GameService,) {
     super("Market");
   }
 
@@ -68,16 +70,23 @@ export class MarketComponent extends Site implements OnInit {
 
     if(this.canIPick){  //TODO from game component
       console.log("PLAYER CAN TAKE CARD!!")
-      //TODO generate & send move
+
+      //TODO update player cards
+
+      //generate Move object
+      //TODO check if correct ID is delivered
+      let moveToSend = new Move(PositionEnum.Market, PositionEnum.PlayerCardStack, this.marketCards[index].id);
+      //Send move to backend
+      this.gameService.sendMove(moveToSend);
     }
 
   }
 
 
 
-  //This function is used for passing the stone array from a ship to this site, needed because site parent requires it
+  //This function is just here because the parent model (site) requires it
   placeStones(targetStones: Stone[]){
-
+    console.log("a ship has sailed to the market!");
   }
 }
 
