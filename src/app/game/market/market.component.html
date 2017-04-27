@@ -6,14 +6,15 @@
 
 
   <!--add marketCardSlot_i-->
-  <div *ngFor="let card of marketCards; let i = index"
-       id="market_card_slot_{{i+1}}" class="market_card_slot">
+  <div *ngIf="marketCards">
+    <div *ngFor="let i of [0,1,2,3]" id="market_card_slot_{{i+1}}" class="market_card_slot">
 
-    <!--add marketCard_i to market-->
-    <div class="left_spacing"></div>
-    <div *ngIf="marketCards[i]" id="ngifMarketCards" class="market_card_slot card">
-      <div id="market_card_{{i+1}}" class="market_card_{{i+1}} card_picture"
-           (click)="takeMarketCard(i)" [ngStyle]="{ 'background-image': 'url(' + marketCards[i].imageUrl + ')' }">
+      <!--add marketCard_i to market-->
+      <div class="left_spacing"></div>
+      <div *ngIf="marketCards[i]" class="card">
+        <div id="market_card_{{i+1}}" class="market_card_{{i+1}} card_picture"
+             (click)="takeMarketCard(i)" [ngStyle]="{ 'background-image': 'url(' + marketCards[i].imageUrl + ')' }">
+        </div>
       </div>
     </div>
   </div>
