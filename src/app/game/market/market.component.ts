@@ -73,11 +73,12 @@ export class MarketComponent extends Site implements OnInit {
 
       //TODO update player cards
 
-
       //generate Move object
       let moveToSend = new Move(PositionEnum.Market, PositionEnum.PlayerCardStack, this.marketCards[index].id);
       //Send move to backend
       this.gameService.sendMove(moveToSend);
+
+      this.marketCards[index] = null;
     }
 
   }
