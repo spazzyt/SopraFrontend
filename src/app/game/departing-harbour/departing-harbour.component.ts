@@ -19,7 +19,9 @@ export class DepartingHarbourComponent {
 
   //used to set the ships in a departing harbour slot
   @Input()
-  ships: Ship[] = [];
+    ships: Ship[] = [];
+  @Input()
+    isActive: boolean;
 
 
   // used to set the stones on a ship slot
