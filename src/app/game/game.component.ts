@@ -1005,6 +1005,15 @@ export class GameComponent  implements OnInit {
 
   }
 
+  removeCardById(id: number){
+    for(let i = 0; i < this.game.marketCards.length; i++){
+      if(this.game.marketCards[i].id == id){
+        this.game.marketCards[i] = null;
+        return;
+      }
+    }
+  }
+
   //===========================================================
   // Update Game UI for one Move of another client
   //===========================================================
@@ -1069,6 +1078,12 @@ export class GameComponent  implements OnInit {
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
 
+        break;
+
+      //Take card from market
+      case PositionEnum.PlayerCardStack:
+        console.log("OTHER PLAYER PICKED CARD: ", move.pos)
+        this.removeCardById(move.pos);
         break;
     }
 
