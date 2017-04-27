@@ -1925,7 +1925,6 @@ export class GameComponent  implements OnInit {
   // Main Action 1: take stones from Quarry to Sled
   //===========================================================
 
-
   //received data from child components
   //-----------------------------------
 
@@ -2017,36 +2016,6 @@ export class GameComponent  implements OnInit {
     if(1){console.log("take stones from Quarry to Sled:Component.sledStones ",this.bottomLeftComponent.sledStones);}
 
   }
-
-  //received data from child components
-  //-----------------------------------
-
-  templeComponent_onEvent_placeStones_stones(data:Stone[]){
-    this.templeComponent.stones=data;
-  };
-
-  templeComponent_onEvent_placeStones_totalStones(data:number){
-    this.templeComponent.totalStones=data;
-  };
-
-  templeComponent_onEvent_placeStones_fieldHeight(data:number[]){
-    this.templeComponent.fieldHeight=data;
-  };
-
-
-  //received data from child components
-  //-----------------------------------
-
-  obeliskComponent_onEvent_placeStones_stones(data:number[]){
-
-    console.log("data from obeliskComponent",data);
-
-    //store data into Game Model
-    this.obeliskComponent.stones=data;
-
-    console.log("data from Game Model",this.obeliskComponent.stones);
-
-  };
 
 
   //===========================================================
