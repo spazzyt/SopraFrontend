@@ -23,18 +23,17 @@ export class MarketCard {
 
 
   //constructor
-  constructor(id_:number, type_?: string, name_?: string){
+  constructor(id_:number, type_: string, name_: string){
 
     this.id = id_;
     this.type = type_;
-    this.name = 'statue';
-    /*
     if(type_ == 'Statue'){    //TODO remove as soon as backend delivers correct name
       this.name = 'statue';
     }
     else
+    {
       this.name = name_;
-    */
+    }
 
     this.imageUrl = "../../../assets/images/cards/" + this.name + ".png"    //TODO ensure that name has the correct format
   }
