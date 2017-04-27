@@ -82,12 +82,17 @@ export class WSService {
         case 'CURRENTTURN':
           let whoseTurn = msg.payload.user;
 
+          //ensure players can't pick card if not intended
+          gameComponent.game.whoCanPickCard = null;
+          gameComponent.updateCardPick();
+
           //let game know whose turn it is
           console.log('It\'s ' + whoseTurn + "'s turn.");
           console.log("my name is: ", gameComponent.game.myPlayerField, gameComponent.game.myUserName)
           gameComponent.setPlayerField(whoseTurn);
           break;
 
+        //Someone has to pick a card
         case 'PICKCARD':
           //pass to game who's turn it is to pick card
           gameComponent.game.whoCanPickCard = msg.payload.user;
@@ -99,11 +104,15 @@ export class WSService {
 
           break;
 
+
         //Execute other player's move
         case 'PLAYEDMOVE':
           console.log("The server tells us to do the following:")
           console.log(msg.payload);
+
+          //ensure players can't pick card if not intended
           gameComponent.game.whoCanPickCard = null;
+          gameComponent.updateCardPick();
 
           if(msg.payload.player != this.authenticationService.mySelf.username) //if this move is not from me, update:
           {
