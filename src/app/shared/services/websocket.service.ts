@@ -102,7 +102,7 @@ export class WSService {
 
             console.log("Received my own move from server, updating values");
             gameComponent.updateScoreSledQuarry(msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
-            //gameComponent.updateStoneDragStatus();  //TODO add this if stone drag breaks
+            gameComponent.updateStoneDragStatus();  //TODO check if this fixes stone drag bug (draggable with 0)
 
           }
           break;
