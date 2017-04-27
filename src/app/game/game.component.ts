@@ -983,6 +983,12 @@ export class GameComponent  implements OnInit {
     }
   }
 
+  updateCardPick(){
+    //determine if this player can pick
+    this.game.canIPick = this.game.whoCanPickCard == this.myUserName;
+
+  }
+
   //===========================================================
   // Update Game UI for one Move of another client
   //===========================================================
