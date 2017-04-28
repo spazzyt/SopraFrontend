@@ -598,7 +598,7 @@ export class GameComponent  implements OnInit {
 
 @font-face {
   font-family: 'Lithos Pro';
-  src: url("../../fonts/LithosPro-Regular.otf") format("opentype");
+  src: url("../../assets/fonts/LithosPro-Regular.otf") format("opentype");
   font-style: normal;
 }
 .container_game_screen {
