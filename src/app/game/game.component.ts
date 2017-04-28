@@ -1622,7 +1622,7 @@ export class GameComponent  implements OnInit {
 
 
     //snackbar message (only locally)
-    this.showSnackbarMessage("You took "+ stonesToTake+" stones from the quarry.");
+    this.showSnackbarMessage("You took "+ stonesToTake+" stone(s) from the quarry.");
   }
 
 

@@ -55,7 +55,6 @@ export class InfoBoxComponent implements OnInit {
       this.router.navigate(['/lobby']);
     });
 
-
   }
 
 }
