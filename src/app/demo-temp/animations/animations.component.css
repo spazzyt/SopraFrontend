@@ -12,8 +12,8 @@
   height: 100px;
   background-color: red;
   position: relative;
-  -webkit-animation-name: example_div; /* Safari 4.0 - 8.0 */
-  -webkit-animation-duration: 40s; /* Safari 4.0 - 8.0 */
+  -webkit-animation-name: example_div;
+  -webkit-animation-duration: 40s;
   animation-delay: 2s;
   animation-iteration-count: infinite;
 }
@@ -36,9 +36,10 @@
   background-image:url(bird.png);
   background-size:cover;
   position: relative;
-  -webkit-animation-name: example_bird; /* Safari 4.0 - 8.0 */
-  -webkit-animation-duration: 40s; /* Safari 4.0 - 8.0 */
+  -webkit-animation-name: example_bird;
+  -webkit-animation-duration: 40s;
   animation-iteration-count: infinite;
+  border-radius: 50%;
 }
 
 
@@ -46,9 +47,9 @@
 /*shark*/
 
 /*move from to*/
-@keyframes example {
-  from {left:200px; top:200px;}
-  to {left:400px; top:400px;}
+@-webkit-keyframes example_shark {
+  from {left:600px; top:200px;}
+  to {left:800px; top:400px;}
 }
 
 #shark_1{
@@ -57,13 +58,35 @@
   background-image:url(shark.png);
   background-size:cover;
   position: relative;
-  -webkit-animation-name: example_bird; /* Safari 4.0 - 8.0 */
-  -webkit-animation-duration: 20s; /* Safari 4.0 - 8.0 */
+  -webkit-animation-name: example_shark;
+  -webkit-animation-duration: 20s;
   animation-direction: alternate;
   animation-iteration-count: infinite;
+  border-radius: 50%;
 }
 
+/*flying fish*/
 
+/*move from to*/
+@-webkit-keyframes example_flyingFish {
+  from {left:500px; top:200px; -webkit-transform: rotate(0deg);}
+  to {left:600px; top:300px; -webkit-transform: rotate(360deg);}
+}
 
+#flyingFish_1 {
+  width: 100px;
+  height: 100px;
+  background-image:url(flyingFish.png);
+  background-size:cover;
+  position: relative;
+  -webkit-animation-name: example_flyingFish;
+  -webkit-animation-duration: 20s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+  -webkit-transform-origin: left;
+  -webkit-transform: translate(50%, 50%) rotate(90deg) ;
+  border-radius: 50%;
+}
 
 

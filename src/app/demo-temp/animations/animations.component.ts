@@ -8,11 +8,12 @@ import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 })
 export class AnimationsComponent implements OnInit, AfterViewInit {
 
-  myfile="/src/app/demo-temp/animations/Bakermat - Living (Audio) ft. Alex Clare.mp3"
+  /*myFile="/src/app/demo-temp/animations/Bakermat - Living (Audio) ft. Alex Clare.mp3";*/
+  myFile:any;
 
   constructor(){}
 
-  ngOnInit() {}
+  ngOnInit() { this.localFileAudioPlayer()}
 
   //sound effect after init
   ngAfterViewInit() {
@@ -27,5 +28,24 @@ export class AnimationsComponent implements OnInit, AfterViewInit {
     audio.src = "/src/app/demo-temp/animations/Water_Lapping_Wind.mp3";
     audio.play();
   }
+
+  //file picker
+  localFileAudioPlayer() {
+    let URL = window.URL;
+    let playSelectedFile = function (event) {
+      let file = this.files[0];
+      let audioNode = document.querySelector('audio');
+
+      let fileURL = URL.createObjectURL(file);
+      if(0){console.log("2.0",fileURL);}
+      audioNode.src = fileURL;
+      if(0){console.log("2.1",audioNode);}
+    };
+    let inputNode = document.querySelector('input');
+    inputNode.addEventListener('change', playSelectedFile, false);
+
+      if(0){console.log("2.2",inputNode);}
+  }
+
 
 }
