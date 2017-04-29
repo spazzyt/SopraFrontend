@@ -1,0 +1,69 @@
+
+@-webkit-keyframes example_div {
+  0%   {background-color:red; left:500px; top:0px;}
+  25%  {background-color:yellow; left:700px; top:0px;}
+  50%  {background-color:blue; left:700px; top:200px;}
+  75%  {background-color:green; left:500px; top:200px;}
+  100% {background-color:red; left:500px; top:0px;}
+}
+
+#div_1 {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+  -webkit-animation-name: example_div; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 40s; /* Safari 4.0 - 8.0 */
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+}
+
+
+/*bird*/
+
+/*move change at x% completion*/
+@-webkit-keyframes example_bird {
+  0%   {left:0px; top:0px;}
+  25%  {left:200px; top:0px;}
+  50%  {left:200px; top:200px;}
+  75%  {left:0px; top:200px;}
+  100% {left:0px; top:0px;}
+}
+
+#bird_1{
+  width: 100px;
+  height: 100px;
+  background-image:url(bird.png);
+  background-size:cover;
+  position: relative;
+  -webkit-animation-name: example_bird; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 40s; /* Safari 4.0 - 8.0 */
+  animation-iteration-count: infinite;
+}
+
+
+
+/*shark*/
+
+/*move from to*/
+@keyframes example {
+  from {left:200px; top:200px;}
+  to {left:400px; top:400px;}
+}
+
+#shark_1{
+  width: 100px;
+  height: 100px;
+  background-image:url(shark.png);
+  background-size:cover;
+  position: relative;
+  -webkit-animation-name: example_bird; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 20s; /* Safari 4.0 - 8.0 */
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+
+
+
+
