@@ -133,7 +133,7 @@ export class WSService {
           if(msg.payload.player != this.authenticationService.mySelf.username) //if this move is not from me, update:
           {
             let moveToDo = msg.payload.move;
-            gameComponent.updateUiForOneMove(moveToDo, msg.payload.player, msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
+            gameComponent.updateUiForOneMove(moveToDo, msg.payload.player, msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries, msg.payload.youMad);
 
           }
           //if move was by me, only update stone statistics
@@ -141,6 +141,7 @@ export class WSService {
 
             console.log("Received my own move from server, updating values");
             gameComponent.updateScoreSledQuarry(msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
+            gameComponent.updatePlayerCards(msg.payload.youMad); //update player cards
             gameComponent.updateStoneDragStatus();
 
           }
