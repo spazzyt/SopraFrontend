@@ -281,15 +281,6 @@ export class GameComponent  implements OnInit {
         });
     }
 
-    //TODO is this needed? implement later if yes
-    //Initialize the new game
-    //this.initializeNewGame(this.getFakeGame());
-
-    //Initialize the whole market card set
-    //for (let i=1; i<=34; i++){
-    //  this.game.wholeMarketCardSet.push(new MarketCard(i));
-    //}
-
     //snackbar div in game footer (has to be in ngOnInit, not in Constructor)
     this.generateSnackbarDiv();
 
@@ -360,9 +351,6 @@ export class GameComponent  implements OnInit {
 
     //pass game information to gameService
     this.gameService.setGame(this.game);
-
-    //TODO delete as soon as we get proper market cards from backend
-    //let fakegame = this.getFakeGame();
 
     //fill ship array with nulls
     this.game.ships = [null, null, null, null];

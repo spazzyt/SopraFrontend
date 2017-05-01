@@ -176,13 +176,8 @@
       </app-top-right>
     </div>
 
-    <!-- if no player 3, add hidden player field
-    <div *ngIf="game?.players.length < 3" class="player_field playerField_3_empty">
-
-      <app-top-right style="visibility: hidden;"></app-top-right>
-
-    </div>
--->
+    <!-- if no player 3, add hidden player field-->
+    <div *ngIf="game?.players.length < 3" class="player_field playerField_3_empty"></div>
     <!-- Departing Harbours -->
     <div class="info_box">
       <app-info-box [game]="game"></app-info-box>
@@ -198,12 +193,7 @@
                         (onEvent_setClickHandlerOnBlueMarketCards_brr_1_marketCards)="bottomRightComponent_onEvent_setClickHandlerOnBlueMarketCards_brr_4_marketCards($event)"></app-bottom-right>
     </div>
 
-    <!-- if no player 4, add hidden player field
-    <div *ngIf="game?.players.length < 4" class="player_field playerField_4_empty">
-
-      <app-bottom-right style="visibility: hidden;"></app-bottom-right>
-
-    </div>
- -->
+    <!-- if no player 4, add hidden player field -->
+    <div *ngIf="game?.players.length < 4" class="player_field playerField_4_empty"></div>
   </div>
 </div>

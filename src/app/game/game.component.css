@@ -310,12 +310,14 @@ table{
 }
 
 .playerField_3_empty{
+  margin-top: -56.2%;
   background-image: url(../../assets/images/top_right_empty.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .playerField_4_empty{
+  margin-top: -56.2%;
   background-image: url(../../assets/images/bottom_right_empty.png);
   background-size: cover;
   background-repeat: no-repeat;
