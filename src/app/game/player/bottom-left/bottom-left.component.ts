@@ -200,28 +200,10 @@ export class BottomLeftComponent implements OnInit {
 
   }
 
-  setPlayerDataWithArray_increaseByNumber(ArrayOf0To11:number[]){
-
-    // [Score, Sled, Quarry, Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
-    //    0      1      2      3        4       5       6      7        8      9      10     11
-
-    //update attribute: score
-    this.score+=ArrayOf0To11[0];
-
-    //update attribute: sledStones
-    this.sledStones+=ArrayOf0To11[1];
-
-    // update attribute: quarryStones
-    this.quarryStones+=ArrayOf0To11[2];
-
-    // purple[0],tll..trr,[1-4] bll..brr,[5-8]
-    for(let i = 0; i < ArrayOf0To11.length; i++){
-        this.marketCards[i] += ArrayOf0To11[i+3];
-    }
-
-  }
-
   setMarketCards(marketCards_target:number[]){
+
+    // [Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
+    //    0      1      2      3        4       5       6      7        8
 
     // define protocol: which market card
     // corresponds to which array index

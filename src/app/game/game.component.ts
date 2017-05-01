@@ -893,7 +893,7 @@ export class GameComponent  implements OnInit {
   // Update Game UI for one Move of another client
   //===========================================================
 
-  updateUiForOneMove(move: Move, username: string, berlinerScore: Map<string, number>, sleds: Map<string, number>, quarries: Map<string, number>){
+  updateUiForOneMove(move: Move, username: string, berlinerScore: Map<string, number>, sleds: Map<string, number>, quarries: Map<string, number>, playerCards: Map<string, MarketCard[]>){
 
     //only set stones to draggable if player has stones
     this.updateStoneDragStatus();
@@ -916,6 +916,7 @@ export class GameComponent  implements OnInit {
 
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+        this.updatePlayerCards(playerCards);
         break;
 
       //Sail ship to site:
@@ -931,6 +932,7 @@ export class GameComponent  implements OnInit {
 
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+        this.updatePlayerCards(playerCards);
 
         //show snackbar
         let shipnr = move.pos+1;
@@ -956,6 +958,7 @@ export class GameComponent  implements OnInit {
 
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+        this.updatePlayerCards(playerCards);
 
         break;
 
@@ -1026,9 +1029,14 @@ export class GameComponent  implements OnInit {
   }
 
 
-  //TODO fix this to update just cards
-  updatePlayerCards(){
+  updatePlayerCards(input: Map<string, MarketCard[]>){
 
+    for(let player of this.game.players) {
+
+      let arrayAsNumbers = this.game.cardArrayToNumberArray(input[player.username]);
+
+      this.playerMap[player.username].setMarketCards(arrayAsNumbers);
+    }
   }
 
   // Input array format:

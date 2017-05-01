@@ -222,13 +222,16 @@ export class TopLeftComponent implements OnInit {
 
   setMarketCards(marketCards_target:number[]){
 
+    // [Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
+    //    0      1      2      3        4       5       6      7        8
+
     // define protocol: which market card
     // corresponds to which array index
     //tll..trr, bll..brr, purple
 
     for(let i = 0; i < marketCards_target.length; i++){
       if(marketCards_target[i] != null)
-      this.marketCards[i] = marketCards_target[i];
+        this.marketCards[i] = marketCards_target[i];
     }
   }
 
