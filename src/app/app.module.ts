@@ -50,6 +50,7 @@ import { StoneComponent } from './game/stone/stone.component';
 import {WSService} from "./shared/services/websocket.service";
 import {LobbyService} from "./shared/services/lobby.service";
 import { FinalDestinationComponent } from './game/final-destination/final-destination.component';
+import { AnimationsComponent } from './demo-temp/animations/animations.component';
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import { FinalDestinationComponent } from './game/final-destination/final-destin
     ModalsComponent,
     StoneComponent,
     FinalDestinationComponent,
+    AnimationsComponent,
   ],
   imports: [
     BrowserModule,

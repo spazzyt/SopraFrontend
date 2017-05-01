@@ -1,0 +1,92 @@
+
+@-webkit-keyframes example_div {
+  0%   {background-color:red; left:500px; top:0px;}
+  25%  {background-color:yellow; left:700px; top:0px;}
+  50%  {background-color:blue; left:700px; top:200px;}
+  75%  {background-color:green; left:500px; top:200px;}
+  100% {background-color:red; left:500px; top:0px;}
+}
+
+#div_1 {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+  -webkit-animation-name: example_div;
+  -webkit-animation-duration: 40s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+}
+
+
+/*bird*/
+
+/*move change at x% completion*/
+@-webkit-keyframes example_bird {
+  0%   {left:0px; top:0px;}
+  25%  {left:200px; top:0px;}
+  50%  {left:200px; top:200px;}
+  75%  {left:0px; top:200px;}
+  100% {left:0px; top:0px;}
+}
+
+#bird_1{
+  width: 100px;
+  height: 100px;
+  background-image:url(bird.png);
+  background-size:cover;
+  position: relative;
+  -webkit-animation-name: example_bird;
+  -webkit-animation-duration: 40s;
+  animation-iteration-count: infinite;
+  border-radius: 50%;
+}
+
+
+
+/*shark*/
+
+/*move from to*/
+@-webkit-keyframes example_shark {
+  from {left:600px; top:200px;}
+  to {left:800px; top:400px;}
+}
+
+#shark_1{
+  width: 100px;
+  height: 100px;
+  background-image:url(shark.png);
+  background-size:cover;
+  position: relative;
+  -webkit-animation-name: example_shark;
+  -webkit-animation-duration: 20s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  border-radius: 50%;
+}
+
+/*flying fish*/
+
+/*move from to*/
+@-webkit-keyframes example_flyingFish {
+  from {left:500px; top:200px; -webkit-transform: rotate(0deg);}
+  to {left:600px; top:300px; -webkit-transform: rotate(360deg);}
+}
+
+#flyingFish_1 {
+  width: 100px;
+  height: 100px;
+  background-image:url(flyingFish.png);
+  background-size:cover;
+  position: relative;
+  -webkit-animation-name: example_flyingFish;
+  -webkit-animation-duration: 20s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+  -webkit-transform-origin: left;
+  -webkit-transform: translate(50%, 50%) rotate(90deg) ;
+  border-radius: 50%;
+}
+
+

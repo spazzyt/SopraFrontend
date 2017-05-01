@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Router} from "@angular/router";
+import {Game} from "../../shared/models/game";
+import {LobbyService} from "../../shared/services/lobby.service";
 
 @Component({
   selector: 'app-info-box',
@@ -12,6 +14,9 @@ import {Router} from "@angular/router";
 //===========
 export class InfoBoxComponent implements OnInit {
 
+  @Input()
+  game: Game;
+
   //============
   // Attributes
   //============
@@ -20,7 +25,9 @@ export class InfoBoxComponent implements OnInit {
   //=============
   // Constructor
   //=============
-  constructor(private router:Router) { }
+  constructor(private router:Router,
+              private lobbyService:LobbyService
+  ) { }
 
 
   //==========
@@ -39,6 +46,14 @@ export class InfoBoxComponent implements OnInit {
   increaseRoundInInfoBox(roundNumber_:number){
 
     this.roundNumber=roundNumber_;
+
+  }
+
+  leaveGame(){
+    this.lobbyService.leaveGameService(this.game.id).subscribe(game => {
+
+      this.router.navigate(['/lobby']);
+    });
 
   }
 

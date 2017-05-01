@@ -18,7 +18,7 @@ const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
 
     //Demo screen
-     // { path: 'demo', component: DemoTempComponent },
+    { path: 'demo', component: DemoTempComponent },
 
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 

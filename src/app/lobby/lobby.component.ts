@@ -141,7 +141,7 @@ export class LobbyComponent implements OnInit {
     .subscribe(game => {
       //this.game = game;
       if(1){console.log("add game ");}
-      console.log("JoinedGame IS: pepepepeppepe", this.joinedGame);
+      console.log("JoinedGame is:", this.joinedGame);
       this.currentGameChecker = setInterval(()=>this.waitForGameStart(game.id), this.requestIntervalTime);
 
       return this.loadGameList();
