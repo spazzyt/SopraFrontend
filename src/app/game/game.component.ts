@@ -87,7 +87,6 @@ export class GameComponent  implements OnInit {
   myPlayerField:ColourEnum;
 
   // player field of current active player
-  currentActivePlayerField:ColourEnum;
   private playerMap: Map<any, any>;
   private colourMap: Map<any, any>;
   private nameToColourMap: Map<any, any>;
@@ -102,35 +101,27 @@ export class GameComponent  implements OnInit {
   // access map for all sites
   sites:Map<string,any> = new Map();
 
+  //===========================================
+  // Enable Communication with Child Components
+  //===========================================
 
-  // Current Target (Soll) Game state
-  // ( current-game-state package from backend sent to all players)
-  //currentTargetGameState:CurrentGameState;
+  // Enable communication with active player component BottomLeftComponent
+  @ViewChild(BottomLeftComponent) bottomLeftComponent:BottomLeftComponent;
 
-  // Current Actual (Ist) Game state
-  // ( current-game-state package from backend sent to all players)
-  //currentActualGameState:CurrentGameState;
+  // Enable communication with not active player component BottomLeftComponent
+  @ViewChild(TopLeftComponent) topLeftComponent:TopLeftComponent;
 
-  // Last players move/action/decision
-  // ( decision package from backend sent to not active players)
-  //lastPlayerDecision:Decision;
+  // Enable communication with not active player component BottomLeftComponent
+  @ViewChild(TopRightComponent) topRightComponent:TopRightComponent;
 
-  // Current active Player
-  //currentActivePlayer:User;
+  // Enable communication with not active player component BottomLeftComponent
+  @ViewChild(BottomRightComponent) bottomRightComponent:BottomRightComponent;
 
-  // Allowed moves/actions/decisions
-  // ( decision package from backend sent to active player, (to not active players as info))
-  //allowedActivePlayerDecisions:Decision;
-
-  // Active player move/action/decision
-  // (decision package from active player sent to backend)
-  //chosenActivePlayerDecision:Decision;
+  // Enable communication with InfoBoxComponent
+  @ViewChild(InfoBoxComponent) infoBoxComponent:InfoBoxComponent;
 
   // Enable communication with DepartingHarbour
   @ViewChild(DepartingHarbourComponent) departingHarbourComponent:DepartingHarbourComponent;
-
-  // Enable communication with SiteHarbour
-  @ViewChild(SiteHarbourComponent) siteHarbourComponent:SiteHarbourComponent;
 
   // Enable communication with PyramidComponent
   @ViewChild(PyramidComponent) pyramidComponent:PyramidComponent;
@@ -147,11 +138,6 @@ export class GameComponent  implements OnInit {
   // Enable communication with MarketComponent
   @ViewChild(MarketComponent) marketComponent:MarketComponent;
 
-
-
-  shipsInDepartingHarbour:Ship[] = [];
-
-  shipsInSiteHarbour:Ship[] = [];
 
   //===============
   //Constructor
@@ -387,9 +373,6 @@ export class GameComponent  implements OnInit {
     this.initializeTempleComponent();
     this.initializeBurialChamberComponent();
 
-    this.shipsInDepartingHarbour = this.game.ships;
-
-    this.shipsInSiteHarbour = [];
 
     //Player Component: the four player fields (what everyone concerns)
     this.initializePlayerComponents(this.game.players, this.game.numPlayers);
@@ -663,25 +646,6 @@ export class GameComponent  implements OnInit {
         this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
-/*
-        //switch on your Quarry colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(true);
-        this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
-        this.topRightComponent.deactivateOrActivateStoneQuarry(false);
-        this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
-
-        //switch on your Sled colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateSupplySled(true);
-        this.topLeftComponent.deactivateOrActivateSupplySled(false);
-        this.topRightComponent.deactivateOrActivateSupplySled(false);
-        this.bottomRightComponent.deactivateOrActivateSupplySled(false);
-
-        //switch on your Score colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateScore(true);
-        this.topLeftComponent.deactivateOrActivateScore(false);
-        this.topRightComponent.deactivateOrActivateScore(false);
-        this.bottomRightComponent.deactivateOrActivateScore(false);
-*/
 
         // switch on click handlers on your stone quarry, switch off the others
         this.bottomLeftComponent.setClickHandlerOnStoneQuarry();
@@ -718,25 +682,6 @@ export class GameComponent  implements OnInit {
         this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
-/*
-        //switch on your Quarry colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
-        this.topLeftComponent.deactivateOrActivateStoneQuarry(true);
-        this.topRightComponent.deactivateOrActivateStoneQuarry(false);
-        this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
-
-        //switch on your Sled colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
-        this.topLeftComponent.deactivateOrActivateSupplySled(true);
-        this.topRightComponent.deactivateOrActivateSupplySled(false);
-        this.bottomRightComponent.deactivateOrActivateSupplySled(false);
-
-        //switch on your Score colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateScore(false);
-        this.topLeftComponent.deactivateOrActivateScore(true);
-        this.topRightComponent.deactivateOrActivateScore(false);
-        this.bottomRightComponent.deactivateOrActivateScore(false);
-*/
 
         // switch on click handlers on your stone quarry, switch off the others
         this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
@@ -774,26 +719,6 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
 
-/*
-        //switch on your Quarry colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
-        this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
-        this.topRightComponent.deactivateOrActivateStoneQuarry(true);
-        this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
-
-        //switch on your Sled colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
-        this.topLeftComponent.deactivateOrActivateSupplySled(false);
-        this.topRightComponent.deactivateOrActivateSupplySled(true);
-        this.bottomRightComponent.deactivateOrActivateSupplySled(false);
-
-        //switch on your Score colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateScore(false);
-        this.topLeftComponent.deactivateOrActivateScore(false);
-        this.topRightComponent.deactivateOrActivateScore(true);
-        this.bottomRightComponent.deactivateOrActivateScore(false);
-*/
-
         // switch on click handlers on your stone quarry, switch off the others
         this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
         this.topLeftComponent.removeClickHandlerOnStoneQuarry();
@@ -830,25 +755,6 @@ export class GameComponent  implements OnInit {
         this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
         this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
-/*
-        //switch on your Quarry colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
-        this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
-        this.topRightComponent.deactivateOrActivateStoneQuarry(false);
-        this.bottomRightComponent.deactivateOrActivateStoneQuarry(true);
-
-        //switch on your Sled colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
-        this.topLeftComponent.deactivateOrActivateSupplySled(false);
-        this.topRightComponent.deactivateOrActivateSupplySled(false);
-        this.bottomRightComponent.deactivateOrActivateSupplySled(true);
-
-        //switch on your Score colors, switch off the others
-        this.bottomLeftComponent.deactivateOrActivateScore(false);
-        this.topLeftComponent.deactivateOrActivateScore(false);
-        this.topRightComponent.deactivateOrActivateScore(false);
-        this.bottomRightComponent.deactivateOrActivateScore(true);
-*/
 
         // switch on click handlers on your stone quarry, switch off the others
         this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
@@ -907,25 +813,6 @@ export class GameComponent  implements OnInit {
       this.bottomRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
       this.topLeftComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
       this.topRightComponent.deactivateOrActivateIcons([false,false,false,false,false,false,false,false,false]);
-/*
-      //switch off Quarry colors
-      this.bottomLeftComponent.deactivateOrActivateStoneQuarry(false);
-      this.bottomRightComponent.deactivateOrActivateStoneQuarry(false);
-      this.topLeftComponent.deactivateOrActivateStoneQuarry(false);
-      this.topRightComponent.deactivateOrActivateStoneQuarry(false);
-
-      //switch off Sled colors
-      this.bottomLeftComponent.deactivateOrActivateSupplySled(false);
-      this.bottomRightComponent.deactivateOrActivateSupplySled(false);
-      this.topLeftComponent.deactivateOrActivateSupplySled(false);
-      this.topRightComponent.deactivateOrActivateSupplySled(false);
-
-      //switch off your Score colors
-      this.bottomLeftComponent.deactivateOrActivateScore(false);
-      this.topLeftComponent.deactivateOrActivateScore(false);
-      this.topRightComponent.deactivateOrActivateScore(false);
-      this.bottomRightComponent.deactivateOrActivateScore(false);
-*/
 
       // switch off click handlers on all stone quarries
       this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
@@ -963,7 +850,7 @@ export class GameComponent  implements OnInit {
     for(let ship of this.game.ships)
       this.ships[ship.id] = ship;
 
-    this.game.marketCards = round.marketCards; //TODO fix this
+    this.game.marketCards = round.marketCards;
 
     //increase round in info box
     this.infoBoxComponent.increaseRoundInInfoBox(round.roundNumber);
@@ -1723,34 +1610,5 @@ export class GameComponent  implements OnInit {
   playBlueMarketCardLever(){
 
   }
-
-  //===========================================
-  // Enable Communication with Child Components
-  //===========================================
-
-  // Enable communication with PlayerComponent
-  @ViewChild(PlayerComponent) playerComponent:PlayerComponent;
-
-  // Enable communication with active player component BottomLeftComponent
-  @ViewChild(BottomLeftComponent) bottomLeftComponent:BottomLeftComponent;
-
-  // Enable communication with not active player component BottomLeftComponent
-  @ViewChild(TopLeftComponent) topLeftComponent:TopLeftComponent;
-
-  // Enable communication with not active player component BottomLeftComponent
-  @ViewChild(TopRightComponent) topRightComponent:TopRightComponent;
-
-  // Enable communication with not active player component BottomLeftComponent
-  @ViewChild(BottomRightComponent) bottomRightComponent:BottomRightComponent;
-
-
-  // Enable communication with ShipComponent
-  @ViewChild(ShipComponent) shipComponent:ShipComponent;
-
-  // Enable communication with InfoBoxComponent
-  @ViewChild(InfoBoxComponent) infoBoxComponent:InfoBoxComponent;
-
-  // Enable communication with StoneComponent
-  @ViewChild(StoneComponent) stoneComponent:StoneComponent;
 
 }
