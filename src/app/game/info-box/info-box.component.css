@@ -14,6 +14,7 @@ p{
   max-width: 100px;
   margin: 0 auto;
   font-size: 15px;
+  outline: none;
 }
 
 .btn{
@@ -23,16 +24,19 @@ p{
   font-family: "Lithos Pro", Serif;
   font-size: 25px;
   padding: 2px;
+  outline: none;
 }
 
 .btn:active{
   background-color: #8a6e49;
   border: 3px solid #8a6e49;
   color: #edcd98;
+  outline: none;
 }
 
 .btn:hover{
   box-shadow: 1px 1px 10px #8a6e49;
+  outline: none;
 }
 
 
