@@ -932,6 +932,7 @@ export class GameComponent  implements OnInit {
 
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+        this.updatePlayerCards(playerCards);
 
         //show snackbar
         let shipnr = move.pos+1;
@@ -957,6 +958,7 @@ export class GameComponent  implements OnInit {
 
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+        this.updatePlayerCards(playerCards);
 
         break;
 
