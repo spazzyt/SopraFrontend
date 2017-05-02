@@ -690,7 +690,6 @@ export class GameComponent  implements OnInit {
     for(let i = 0; i < this.game.marketCards.length; i++){
       if(this.game.marketCards[i] != null && this.game.marketCards[i].id == id){
         this.game.marketCards[i] = null;
-        this.updatePlayerCards(playerCards);
         return;
       }
     }
@@ -731,21 +730,30 @@ export class GameComponent  implements OnInit {
       case PositionEnum.Temple:
       case PositionEnum.BurialChamber:
       case PositionEnum.Obelisk:
-        //TODO add a check here for if this move was caused by a red card
-        this.moveShipById(move.pos, this.siteToStringMap[move.to]);
-        //place stones on site
-        this.siteMap[this.siteToStringMap[move.to]].placeStones(this.game.ships[move.pos].slots);
-        //remove stones from ship
-        this.game.ships[move.pos].slots = [];
+        if(move.from == PositionEnum.Quarry){
+          console.log("TAKE RED CARD ASDFASDFASDF");
+          //if it's a move caused by a red card
+          let stoneToPlace: Stone[] = [new Stone(this.nameToColourMap[username])]
+          this.siteMap[this.siteToStringMap[move.to]].placeStones(stoneToPlace);
+          //update score, sled & quarry
+          this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+          this.updatePlayerCards(playerCards);
 
-        //update score, sled & quarry
-        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
-        this.updatePlayerCards(playerCards);
+          this.showSnackbarMessage(username.substring(0,10) + ' placed a stone to the ' + this.siteToStringMap[move.to] + ' with a red card.');
 
-        //show snackbar
-        let shipnr = move.pos+1;
-        this.showSnackbarMessage(username.substring(0,10) + ' sailed ship ' + shipnr + ' to the ' + this.siteToStringMap[move.to] + '.');
+        }
+        else{
+          this.moveShipById(move.pos, this.siteToStringMap[move.to]);
+          //place stones on site
+          this.siteMap[this.siteToStringMap[move.to]].placeStones(this.game.ships[move.pos].slots);
+          //remove stones from ship
+          this.game.ships[move.pos].slots = [];
 
+
+          //show snackbar
+          let shipnr = move.pos+1;
+          this.showSnackbarMessage(username.substring(0,10) + ' sailed ship ' + shipnr + ' to the ' + this.siteToStringMap[move.to] + '.');
+        }
         break;
 
 

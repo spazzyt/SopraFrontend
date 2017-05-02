@@ -7,6 +7,7 @@ import {Decision} from "../models/decision";
 import {Move} from "../models/move";
 import { environment } from '../../../environments/environment';
 import {MarketCard} from "../models/market-card";
+import {PositionEnum} from "../models/position.enum";
 
 
 export class WSMessage {
@@ -130,7 +131,7 @@ export class WSService {
           gameComponent.game.whoCanPickCard = null;
           gameComponent.updateCardPick();
 
-          if(msg.payload.player != this.authenticationService.mySelf.username) //if this move is not from me, update:
+          if(msg.payload.player != this.authenticationService.mySelf.username || msg.payload.move.from == PositionEnum.Quarry && msg.payload.move.to != PositionEnum.Sled) //if this move is not from me, update:
           {
             let moveToDo = msg.payload.move;
             gameComponent.updateUiForOneMove(moveToDo, msg.payload.player, msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries, msg.payload.youMad);
