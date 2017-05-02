@@ -121,7 +121,12 @@ Styling for the Lever modal
   border: 1px solid magenta;
 }
 
-
+.stone{
+  width: auto;
+  height: auto;
+  margin: 5px;
+  float: left;
+}
 
 
 

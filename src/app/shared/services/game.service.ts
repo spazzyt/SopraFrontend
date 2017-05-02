@@ -40,20 +40,22 @@ export class GameService {
   }
 
   sendMove(move: Move){
-    let bodyString = JSON.stringify(move); // Stringify payload
-    let headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.authenticationService.token
-    });// ... Set content type to JSON
-    let params = new URLSearchParams();
-    params.set("token", this.authenticationService.token)
-    let options = new RequestOptions({headers: headers, search: params}); // Create a request option
+    if(!this.game.leverModalOpen){ //if the lever modal is open, the ships shall not send any moves for moving stones on them
 
-    this.http.post(this.apiUrl + '/game/' + this.game.id + '/move', bodyString, options) // ...using post request
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error')) //...errors if
-      .subscribe(response => {
-        console.log("Sent Move: ", move);
-      });
-  }
+      let bodyString = JSON.stringify(move); // Stringify payload
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.token
+      });// ... Set content type to JSON
+      let params = new URLSearchParams();
+      params.set("token", this.authenticationService.token)
+      let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
+      this.http.post(this.apiUrl + '/game/' + this.game.id + '/move', bodyString, options) // ...using post request
+        .catch((error: any) => Observable.throw(error.json().error || 'Server error')) //...errors if
+        .subscribe(response => {
+          console.log("Sent Move: ", move);
+        });
+    }
+    }
 }

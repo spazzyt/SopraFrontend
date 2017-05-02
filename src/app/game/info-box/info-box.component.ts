@@ -72,7 +72,10 @@ export class InfoBoxComponent implements OnInit {
   }
 
   sendLeverOrder(){
-    //TODO change order of stuff on ship, maybe this function isn't needed if done directly by DND
+    //tell the game that lever modal was closed
+    this.game.leverModalOpen = false;
+
+    //TODO tell game to continue, send move??
   }
 
 }

@@ -1156,7 +1156,7 @@ export class GameComponent  implements OnInit {
       tempStones.push(this.ships[shipNr].slots[i]);
       this.ships[shipNr].slots[i] = null;
     }
-
+    this.game.leverModalOpen = true;
     this.infoBoxComponent.showLeverModal(tempStones)
   }
 }

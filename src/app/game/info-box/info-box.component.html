@@ -69,8 +69,8 @@
             <div *ngIf="leverStones != null" class="stones">
 
               <div *ngFor="let stone of leverStones; let j= index"
-                   id="slot_{{j+1}}" class="ship_slot"
-                   dnd-draggable [dragData]="playerFieldStone" [dropZones]="['slots']" [dragEnabled]="true">
+                   class="stone"
+                   dnd-draggable [dragData]="stone" [dropZones]="['slots']" [dragEnabled]="true" (drag)="leverStones[j] = null">
 
                   <app-stone *ngIf="stone != null" [stone] = stone ></app-stone>
 

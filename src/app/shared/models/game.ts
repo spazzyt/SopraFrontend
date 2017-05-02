@@ -57,6 +57,7 @@ export class Game {
 
   public whoCanPickCard: string;
   public canIPick: boolean;
+  public leverModalOpen: boolean;
 
   // Own Player info
   //------------
@@ -93,6 +94,7 @@ export class Game {
       this.ships=ships_;
       this.marketCards=marketCards_;
       this.currentActivePlayerField=currentActivePlayerField_;
+      this.leverModalOpen = false;
   }
 
 }
