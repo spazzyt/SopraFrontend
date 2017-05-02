@@ -76,7 +76,8 @@ export class InfoBoxComponent implements OnInit {
     //the leverModalOpen boolean is used locally to determine whether we need to send putting a stone on the ship as a move
     this.game.leverModalOpen = false;
 
-    //TODO tell game to continue, send move??
+    //TODO tell game to continue, send move?? --> check with backend
   }
+
 
 }

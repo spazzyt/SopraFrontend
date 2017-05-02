@@ -120,12 +120,16 @@ Styling for the Lever modal
 }
 
 .stone{
-  width: auto;
+  width: 40px;
   height: auto;
   margin: 5px;
   float: left;
 }
 
+#ngButton5{
+  margin-left: 37%;
+  width: 26%
+}
 
 
 
@@ -298,10 +302,7 @@ h4{
 
 }
 
-#ngButton5{
-  margin-left: 37%;
-  width: 26%
-}
+
 
 
 .close{
