@@ -26,13 +26,13 @@
             <!--leave modal-->
             <div id="backToLobby">
               <button type="button" class="newgame_btn btn btn-primary"
-                      id="ngButton1" (click)="staticModal.hide()">No</button>
+                      id="ngButton1" (click)="leaveGame()">Yes</button>
             </div>
 
             <!--add game and leave modal-->
             <div id="CreateNewGame">
               <button type="submit" class="newgame_btn btn btn-primary"
-                      id="ngButton2" (click)="leaveGame()" >Yes</button>
+                      id="ngButton2" (click)="staticModal.hide()" >No</button>
             </div>
           </div>
         </div>
@@ -40,5 +40,55 @@
       </div>
     </div>
   </div>
+
+
+
+  <!-- Call Lever Button -->
+  <div id="lever_button">
+    <button type="button" class="lever_btn btn btn-sm btn-primary btn-block"
+            (click)="leverModal.show()">Lever</button>
+  </div>
+
+  <!-- Modal: Lever -->
+  <div class="modal fade" bsModal #leverModal="bs-modal" [config]="{backdrop: 'static'}"
+       tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div id="lever_title" class="modal-header">
+          <h4 class="modal-title2 pull-left">Choose the order of the stones.</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="leverModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <img class="ship" src="../../../assets/images/ship_4.png">
+
+
+          <div class="row">
+            <!-- go back to game-->
+            <div id="backToGame">
+              <button type="button" class="finish_btn btn btn-primary"
+                      id="ngButton4" (click)="leverModal.hide()">Back to Game</button>
+            </div>
+
+            <!-- click done button after choosing order of stones-->
+            <div id="Done">
+              <button type="button" class="finish_btn btn btn-primary"
+                      id="ngButton5" (click)="leverModal.hide()" >Done</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
 
 </div>

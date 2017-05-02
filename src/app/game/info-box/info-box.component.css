@@ -17,6 +17,16 @@ p{
   outline: none;
 }
 
+.lever_btn{
+  bottom: 25%;
+  right: 10%;
+  max-width: 100px;
+  font-size: 15px;
+  margin-top: 240px;
+  outline: none;
+}
+
+
 .btn{
   background-color: #aa895b;
   border: 3px solid #8a6e49;
@@ -38,6 +48,63 @@ p{
   box-shadow: 1px 1px 10px #8a6e49;
   outline: none;
 }
+
+
+/*
+=============================================================================
+=============================================================================
+Styling for the Lever modal
+=============================================================================
+=============================================================================
+ */
+
+
+#lever_button{
+  text-align: center;
+  /*border: 1px solid black;*/
+  outline: none;
+}
+
+#ngButton4{
+  display: inline-block;
+  width: 40%;
+  font-size: 150%;
+  outline: none;
+}
+
+#ngButton5{
+  display: inline-block;
+  width: 40%;
+  font-size: 150%;
+  outline: none;
+}
+
+.finish_btn{
+  margin-left: 6%;
+  width: 41%;
+  height: 60px;
+  font-size: 30px;
+  float: left;
+
+}
+
+#lever_title{
+  text-align: center;
+}
+
+.modal-title2{
+  text-align: center;
+  width: auto;
+  margin-top: 1%;
+  margin-left: 10%;
+}
+
+.ship{
+  height: 100%;
+  padding-bottom: 10%;
+}
+
+
 
 
 
@@ -100,7 +167,9 @@ Styling for the Leave game modal
   float: top;
   font: 400 18px/1.2 'Lithos Pro', Helvetica, sans-serif;
 }
-.modal-header{
+
+.modal-header {
+  border-radius: 70%;
   border-bottom: none;
   text-align: center;
   background-color: #edcd98;
@@ -116,7 +185,6 @@ h4{
   text-align: center;
   font-size: 30px;
   color: #867558;
-  margin-left: 15%;
 }
 
 
@@ -129,6 +197,7 @@ h4{
   text-align: center;
   width: auto;
   margin-top: 1%;
+  margin-left: 15%;
 }
 
 .modal-body {
