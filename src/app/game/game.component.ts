@@ -690,6 +690,7 @@ export class GameComponent  implements OnInit {
     for(let i = 0; i < this.game.marketCards.length; i++){
       if(this.game.marketCards[i] != null && this.game.marketCards[i].id == id){
         this.game.marketCards[i] = null;
+        this.updatePlayerCards(playerCards);
         return;
       }
     }
@@ -772,6 +773,7 @@ export class GameComponent  implements OnInit {
       case PositionEnum.PlayerCardStack:
         console.log("OTHER PLAYER PICKED CARD: ", move.pos)
         this.removeCardById(move.pos);
+        this.updatePlayerCards(playerCards);
         break;
     }
 

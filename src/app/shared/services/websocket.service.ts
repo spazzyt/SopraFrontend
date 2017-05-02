@@ -143,7 +143,6 @@ export class WSService {
             gameComponent.updateScoreSledQuarry(msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
             gameComponent.updatePlayerCards(msg.payload.youMad); //update player cards
             gameComponent.updateStoneDragStatus();
-
           }
           break;
 
