@@ -786,7 +786,7 @@ export class GameComponent  implements OnInit {
         break;
     }
 
-    //TODO cases for playing market cards
+    //TODO cases for playing blue/green market cards
 
   }
 

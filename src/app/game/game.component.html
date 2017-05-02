@@ -19,7 +19,7 @@
 
     <!-- Bottom Left Player Field -->
     <div class="player_field player_bottom_left">
-      <app-bottom-left id="playerField_1" [marketCards]="game?.player1CardDeck"
+      <app-bottom-left id="playerField_1" [ships]="game?.ships" [marketCards]="game?.player1CardDeck" [canIPlay]="game?.amI_CurrentActivePlayer" [myColour]="game?.myPlayerField"
                        (onEvent_setClickHandlerOnStoneQuarry_sledStones)="bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones($event)"
                        (onEvent_setClickHandlerOnStoneQuarry_quarryStones)="bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones($event)"
       ></app-bottom-left>

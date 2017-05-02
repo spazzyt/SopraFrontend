@@ -4,6 +4,8 @@ import {ColourEnum} from "../../../shared/models/colour.enum";
 import {StoneQuarry} from "../../../shared/models/stone-quarry";
 import {SupplySled} from "../../../shared/models/supply-sled";
 import {MarketCard} from "../../../shared/models/market-card";
+import {Game} from "../../../shared/models/game";
+import {Ship} from "../../../shared/models/ship";
 
 @Component({
   selector: 'app-bottom-left',
@@ -17,7 +19,13 @@ import {MarketCard} from "../../../shared/models/market-card";
 export class BottomLeftComponent implements OnInit {
 
   @Input()
+  ships: Ship[];
+  @Input()
   marketCards: MarketCard[];
+  @Input()
+  canIPlay: boolean;
+  @Input()
+  myColour: ColourEnum;
 
   //===============
   //Class Variables
@@ -172,22 +180,94 @@ export class BottomLeftComponent implements OnInit {
   // Market Card Functionalities
   //=============================
 
-  deactivateOrActivateIcons(playerIconsStatus_target:boolean[]){
-      //TODO probably do this automatically
+  playCard(index: number){  //TODO add this to other players
+    console.log("PLAYER TRIES TO PLAY CARD " + index)
+
+    //TODO when copypasting, adapt "black" to other players colour!!
+    //if player has this card and it's his turn
+    if(this.myColour == ColourEnum.black && this.canIPlay && this.cardNumbers[index] > 0){
+
+      console.log("SHIPPERINOS: ", this.ships);
+      //determine amount of free slots on all ships (to check if you can place two stones on ships)
+      let freeSlots = 0;
+      for(let ship of this.ships){
+        if(ship.isInHarbour){
+          for(let i = 0; i < ship.slots.length; i++){
+            if(ship.slots[i] == null){
+              freeSlots++;
+            }
+          }
+        }
+      }
+
+
+
+      //WARNING, MAD SORCERY AHEAD, DO NOT EDIT
+      //check if any ships are sailable;
+
+      let shipsSailable = false;
+      for(let ship of this.ships){
+        if(ship.isInHarbour && ship.draggable) shipsSailable = true; //if any ship is sailable, set to true
+      }
+      let shipsSailableWithOneStone = false;
+
+      for(let ship of this.ships){
+        if(ship.isInHarbour && !ship.draggable) {
+
+          let freeSlotsOnShip = 0;      //how many stones are on the ship?
+
+          for(let slot of ship.slots){
+            if(slot == null){
+              freeSlotsOnShip++;
+            }
+          }
+          if(freeSlotsOnShip >= 1 && freeSlotsOnShip <= 2){
+            shipsSailableWithOneStone = true; //if any ship is sailable, set to true
+          }
+        }
+      }
+
+      //Checks for each possible card if it's not playable (if not playable, return)
+      if(index == 5 && this.sledStones < 2 && freeSlots >= 2){
+        return;
+      }
+
+      if(index == 6 && (this.quarryStones < 3 || freeSlots < 1)){
+        return;
+      }
+      if(index == 7 && freeSlots < 1 && !shipsSailableWithOneStone){
+        return;
+      }
+      if(index == 8 && !shipsSailable){
+        return;
+      }
+
+      //END OF MAD SORCERY
+
+      console.log('PLAYING CARD ' + index + ' YOLO');
+
+      switch(index){
+        case 5: //Chisel
+          //TODO send move to backend
+          break;
+
+        case 6: //Hammer
+          //TODO send move to backend
+          break;
+
+        case 7: //Sail
+          //TODO send move to backend
+          break;
+
+        case 8: //Lever
+          //TODO wait until player sails a ship to a site
+          //TODO then show modal for choosing stone order (WITH the corresponding ship)
+          break;
+      }
+
+    }
   }
 
-  numberToBoolean(playerFieldIcons):boolean[]{
-    let resultArray:boolean[]=[false,false,false,false,false,false,false,false,false];
-    for (let i=0; i<playerFieldIcons.length;i++){
-      if (playerFieldIcons[i]>0){
-        resultArray[i]=true;
-      }
-      else{
-        resultArray[i]=false;
-      }
-    }
-    return resultArray;
-  }
 
   cardArrayToNumberArray(cards: MarketCard[]){
 
