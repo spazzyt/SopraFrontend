@@ -689,7 +689,6 @@ export class BottomLeftComponent implements OnInit {
         console.log("deactivateOrActivateScore: true")
       }
     }
-
   }
 
   deactivateOrActivateStoneQuarry(playerStoneQuarryStatus_target){

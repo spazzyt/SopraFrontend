@@ -49,3 +49,83 @@
   height: 33.333%;
 }
 
+/*
+_________________________
+_________________________
+
+FIRE ANIMATION
+_________________________
+_________________________
+ */
+
+
+.container{
+  margin: 80px auto;
+  width: 20px;
+  height: 20px;
+  position:relative;
+  transform-origin:center bottom;
+  animation-name: flicker;
+  animation-duration: 3ms;
+  animation-delay: 200ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.flame{
+  bottom:0;
+  position:absolute;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-top-left-radius: 50%;
+  transform:rotate(-45deg) scale(1.5,1.5);
+}
+
+.red{
+  left: 5px;
+  width: 10px;
+  height: 10px;
+  background: red;
+  box-shadow: 0px 0px 2px 2px red;
+}
+
+.orange{
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  background:orangered;
+  box-shadow: 0px 0px 2px 2px orangered;
+}
+
+.yellow{
+  left: 6px;
+  width: 6px;
+  height: 6px;
+  background: orange;
+  box-shadow: 0px 0px 2px 2px orange;
+}
+
+.white{
+  left: 8px;
+  bottom: -2px;
+  width: 1px;
+  height: 1px;
+  background: white;
+  box-shadow: 0px 0px 2px 2px white;
+}
+
+.circle{
+  border-radius: 50%;
+  position:absolute;
+}
+
+
+@keyframes flicker{
+  0%   {transform: rotate(-2deg);}
+  20%  {transform: rotate(2deg);}
+  40%  {transform: rotate(-2deg);}
+  60%  {transform: rotate(2deg) scaleY(1.04);}
+  80%  {transform: rotate(-3deg) scaleY(0.92);}
+  100% {transform: rotate(2deg);}
+}
