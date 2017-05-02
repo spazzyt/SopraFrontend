@@ -248,7 +248,7 @@ export class BottomLeftComponent implements OnInit {
 
       switch(index){
         case 5: //Chisel
-          //TODO send move to backend
+          //TODO send move to backend - determine format??
           break;
 
         case 6: //Hammer

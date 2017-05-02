@@ -714,10 +714,7 @@ export class GameComponent  implements OnInit {
         this.playerMap[username].update_takeStonesFromQuarry(move.pos);
 
         //show snackbar
-        let numStones;
-        if(move.pos > 3)      //TODO get correct number from backend (lol)
-          numStones = 3
-        else numStones = move.pos
+        let numStones = move.pos //TODO check that backend number is at most 3
         this.showSnackbarMessage(username.substring(0,10) + ' took ' + numStones + ' stone(s) from the quarry.');
 
         //update score, sled & quarry
@@ -786,7 +783,7 @@ export class GameComponent  implements OnInit {
         break;
     }
 
-    //TODO cases for playing blue/green market cards
+    //TODO cases for playing blue market cards - how does the backend pass this information?
 
   }
 
@@ -1151,27 +1148,15 @@ export class GameComponent  implements OnInit {
     this.showSnackbarMessage("You took "+ stonesToTake+" stone(s) from the quarry.");
   }
 
-  //===========================================================
-  // Main Action 5: play blue market card
-  //===========================================================
+  showLeverModal(shipNr){
 
+    let tempStones = new Array<Stone>();
 
-  //TODO these blue market card functions
+    for(let i = 0; i < this.ships[shipNr].slots.length; i++){
+      tempStones.push(this.ships[shipNr].slots[i]);
+      this.ships[shipNr].slots[i] = null;
+    }
 
-  playBlueMarketCardHammer(){
-
+    this.infoBoxComponent.showLeverModal(tempStones)
   }
-
-  playBlueMarketCardChisel(){
-
-  }
-
-  playBlueMarketCardSail(){
-
-  }
-
-  playBlueMarketCardLever(){
-
-  }
-
 }

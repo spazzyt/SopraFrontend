@@ -166,7 +166,7 @@
     <div *ngIf="game?.players.length < 3" class="player_field playerField_3_empty"></div>
     <!-- Departing Harbours -->
     <div class="info_box">
-      <app-info-box [game]="game"></app-info-box>
+      <app-info-box [ships]="game?.ships" [game]="game"></app-info-box>
     </div>
     <!-- Bottom Right Player Field -->
     <div class="player_field player_bottom_right"> <!-- re-add: *ngIf="game?.players.length > 3"  -->
@@ -180,3 +180,7 @@
     <div *ngIf="game?.players.length < 4" class="player_field playerField_4_empty"></div>
   </div>
 </div>
+
+<!-- TODO set correct ship number, assign button an ID to call it from function -->
+<button type="button" class="lever_btn btn btn-sm btn-primary btn-block"
+        (click)="showLeverModal(0)">TESTTEST</button>

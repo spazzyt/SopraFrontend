@@ -2,6 +2,8 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Router} from "@angular/router";
 import {Game} from "../../shared/models/game";
 import {LobbyService} from "../../shared/services/lobby.service";
+import {Ship} from "../../shared/models/ship";
+import {Stone} from "../../shared/models/stone";
 
 @Component({
   selector: 'app-info-box',
@@ -17,10 +19,14 @@ export class InfoBoxComponent implements OnInit {
   @Input()
   game: Game;
 
+  @Input()
+  ships: Ship[];
+
   //============
   // Attributes
   //============
   roundNumber:number=1;
+  leverStones: Stone[];
 
   //=============
   // Constructor
@@ -58,7 +64,10 @@ export class InfoBoxComponent implements OnInit {
   }
 
   //Called from gameComponent using this.infoboxcomponent.showlevermodal()
-  showLeverModal(){
+  showLeverModal(stones: Stone[]){
+
+    this.leverStones = stones;
+
     document.getElementById('lever_btn').click();
   }
 
