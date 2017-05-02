@@ -723,6 +723,7 @@ export class GameComponent  implements OnInit {
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
         this.updatePlayerCards(playerCards);
+
         break;
 
       //Sail ship to site:
@@ -731,8 +732,7 @@ export class GameComponent  implements OnInit {
       case PositionEnum.BurialChamber:
       case PositionEnum.Obelisk:
         if(move.from == PositionEnum.Quarry){
-          console.log("TAKE RED CARD ASDFASDFASDF");
-          //if it's a move caused by a red card
+          //if it's a move caused by a red card, don't move a ship
           let stoneToPlace: Stone[] = [new Stone(this.nameToColourMap[username])]
           this.siteMap[this.siteToStringMap[move.to]].placeStones(stoneToPlace);
           //update score, sled & quarry
@@ -742,7 +742,7 @@ export class GameComponent  implements OnInit {
           this.showSnackbarMessage(username.substring(0,10) + ' placed a stone to the ' + this.siteToStringMap[move.to] + ' with a red card.');
 
         }
-        else{
+        else{ //Move not caused by red card
           this.moveShipById(move.pos, this.siteToStringMap[move.to]);
           //place stones on site
           this.siteMap[this.siteToStringMap[move.to]].placeStones(this.game.ships[move.pos].slots);
@@ -774,6 +774,7 @@ export class GameComponent  implements OnInit {
         //update score, sled & quarry
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
         this.updatePlayerCards(playerCards);
+        this.showSnackbarMessage(username.substring(0,10) + ' placed a stone on Ship ' + (move.ShipID+1) + '.');
 
         break;
 

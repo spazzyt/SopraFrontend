@@ -71,8 +71,6 @@ export class MarketComponent extends Site implements OnInit {
     if(this.canIPick){
       console.log("PLAYER CAN TAKE CARD!!")
 
-      //TODO update player cards
-
       //generate Move object
       let moveToSend = new Move(PositionEnum.Market, PositionEnum.PlayerCardStack, this.marketCards[index].id);
       //Send move to backend
