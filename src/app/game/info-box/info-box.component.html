@@ -70,7 +70,7 @@
 
               <div *ngFor="let stone of leverStones; let j= index"
                    class="stone"
-                   dnd-draggable [dragData]="stone" [dropZones]="['slots']" [dragEnabled]="true" (drag)="leverStones[j] = null">
+                   dnd-draggable [dragData]="stone" [dropZones]="['slots']" (drag)="leverStones[j] = null;">
 
                   <app-stone *ngIf="stone != null" [stone] = stone ></app-stone>
 
