@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Output} from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
 import {Stone} from "../../../shared/models/stone";
 import {ColourEnum} from "../../../shared/models/colour.enum";
-import {SupplySled} from "../../../shared/models/supply-sled";
 import {StoneQuarry} from "../../../shared/models/stone-quarry";
+import {SupplySled} from "../../../shared/models/supply-sled";
+import {MarketCard} from "../../../shared/models/market-card";
 
 @Component({
   selector: 'app-top-left',
@@ -14,6 +15,9 @@ import {StoneQuarry} from "../../../shared/models/stone-quarry";
 // Component
 //===========
 export class TopLeftComponent implements OnInit {
+
+  @Input()
+  marketCards: MarketCard[];
 
 
   //===============
@@ -43,7 +47,7 @@ export class TopLeftComponent implements OnInit {
   public quarryStones:number;
 
   // the player's nine market card icons
-  public marketCards:number[] = [];
+  public cardNumbers:number[] = [0,0,0,0,0,0,0,0,0];
 
   // does the player have stones in his sleds
   public hasStones:boolean;
@@ -55,10 +59,6 @@ export class TopLeftComponent implements OnInit {
 
   @Output() onEvent_setClickHandlerOnStoneQuarry_sledStones = new EventEmitter<number>();
   @Output() onEvent_setClickHandlerOnStoneQuarry_quarryStones = new EventEmitter<number>();
-  @Output() onEvent_setClickHandlerOnBlueMarketCards_bll_2_marketCards = new EventEmitter<number[]>();
-  @Output() onEvent_setClickHandlerOnBlueMarketCards_bml_2_marketCards = new EventEmitter<number[]>();
-  @Output() onEvent_setClickHandlerOnBlueMarketCards_bmr_2_marketCards = new EventEmitter<number[]>();
-  @Output() onEvent_setClickHandlerOnBlueMarketCards_brr_2_marketCards = new EventEmitter<number[]>();
 
 
   //===============
@@ -68,18 +68,12 @@ export class TopLeftComponent implements OnInit {
 
   }
 
-
-  //==========
-  // ngOnInit
-  //==========
-
   ngOnInit() {
 
     //Popovers must be initialized in ngOnInit()
     this.initializePopovers();
 
     // stone generated in supply sled
-    // (used by dragula to copy)
     this.playerFieldStone = new Stone(0, ColourEnum.white);
 
   }
@@ -88,21 +82,11 @@ export class TopLeftComponent implements OnInit {
     this.hasStones=this.sledStones>0;
   }
 
-  //================
-  // ngAfterViewInit
-  //================
-
-  ngAfterViewInit() {
-
-    //this.show_hide_stone_at_init();
-
+  updateCardNumbers(){
+    this.cardNumbers = this.cardArrayToNumberArray(this.marketCards);
   }
 
-  //===============
-  // Other-Methods
-  //===============
-
-  //===========================================================
+   //===========================================================
   // Click Events
   //===========================================================
 
@@ -128,66 +112,6 @@ export class TopLeftComponent implements OnInit {
 
   }
 
-
-  setClickHandlerOnBlueMarketCards() {
-
-    //set click handler for  bll_2
-    (<any>$(document)).ready(() =>{
-      (<any>$("#bll_2_")).on("click", () =>{
-        alert("The chisel was clicked.");
-        this.onEvent_setClickHandlerOnBlueMarketCards_bll_2_marketCards.emit(this.marketCards);
-      });
-    });
-
-    //set click handler for  bml_2
-    (<any>$(document)).ready(() =>{
-      (<any>$("#bml_2_")).on("click", () =>{
-        alert("The hammer was clicked.");
-        this.onEvent_setClickHandlerOnBlueMarketCards_bml_2_marketCards.emit(this.marketCards);
-      })
-    });
-
-    //set click handler for  bmr_2
-    (<any>$(document)).ready(() =>{
-      (<any>$("#bmr_2_")).on("click", () =>{
-        alert("The sail was clicked.");
-        this.onEvent_setClickHandlerOnBlueMarketCards_bmr_2_marketCards.emit(this.marketCards);
-      })
-    });
-
-    //set click handler for  brr_2
-    (<any>$(document)).ready(() =>{
-      (<any>$("#brr_2_")).on("click", () =>{
-        alert("The lever was clicked.");
-        this.onEvent_setClickHandlerOnBlueMarketCards_brr_2_marketCards.emit(this.marketCards);
-      })
-    });
-  }
-
-  removeClickHandlerOnBlueMarketCards(){
-
-    //remove click handler for  bll_2
-    (<any>$(document)).ready(function () {
-      (<any>$("#bll_2_")).off("click");
-    });
-
-    //remove click handler for  bml_2
-    (<any>$(document)).ready(function () {
-      (<any>$("#bml_2_")).off("click");
-    });
-
-    //remove click handler for  bmr_2
-    (<any>$(document)).ready(function () {
-      (<any>$("#bmr_2_")).off("click");
-    });
-
-    //remove click handler for  brr_2
-    (<any>$(document)).ready(function () {
-      (<any>$("#brr_2_")).off("click");
-    });
-
-  }
-
   //===========================================================
   // Change Text / Numbers
   //===========================================================
@@ -196,65 +120,24 @@ export class TopLeftComponent implements OnInit {
 
     //update attribute: score
     this.playerName=playerName_target;
-
-  }
-
-  setPlayerDataWithArray_increaseByNumber(ArrayOf0To11:number[]){
-
-    // [Score, Sled, Quarry, Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
-    //    0      1      2      3        4       5       6      7        8      9      10     11
-
-    //update attribute: score
-    this.score+=ArrayOf0To11[0];
-
-    //update attribute: sledStones
-    this.sledStones+=ArrayOf0To11[1];
-
-    // update attribute: quarryStones
-    this.quarryStones+=ArrayOf0To11[2];
-
-    // purple[0],tll..trr,[1-4] bll..brr,[5-8]
-    for(let i = 0; i < ArrayOf0To11.length; i++){
-      this.marketCards[i] += ArrayOf0To11[i+3];
-    }
-
-  }
-
-  setMarketCards(marketCards_target:number[]){
-
-    // [Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
-    //    0      1      2      3        4       5       6      7        8
-
-    // define protocol: which market card
-    // corresponds to which array index
-    //tll..trr, bll..brr, purple
-
-    for(let i = 0; i < marketCards_target.length; i++){
-      if(marketCards_target[i] != null)
-        this.marketCards[i] = marketCards_target[i];
-    }
   }
 
   setScore(score_target:number){
 
     //update attribute: score
     this.score=score_target;
-
   }
 
   setStonesInSled(sledStones_target:number){
 
     //update attribute: sledStones
     this.sledStones=sledStones_target;
-
   }
 
   setStonesInQuarry(quarryStones_target:number){
 
     // update attribute:
     this.quarryStones=quarryStones_target;
-    //this.playerFieldStone = new Stone(0, ColourEnum.white)
-
   }
 
   update_takeStonesFromQuarry(howMany: number){              //this function is used for telling that the player has taken stones from the quarry
@@ -289,408 +172,69 @@ export class TopLeftComponent implements OnInit {
     });
   }
 
-  //deactivates at the moment the icon top-left-left,
-  // this function cannot reactivate icon
-
-
-  deactivateOrActivateIcons_onChange(playerIconsStatus_target:string[]){
-
-
-    //deactivates market card icons at the top of player bottom-left
-    //--------------------------------------------------------------
-
-    if (playerIconsStatus_target[1] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tll_2")).css("opacity", "0.3");
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[1] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tll_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[2] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tml_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[2] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tml_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[3] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tmr_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[3] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tmr_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[4] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#trr_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[4] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#trr_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    //deactivates market card icons at the bottom of player top-left
-    //-----------------------------------------------------------------
-
-    if (playerIconsStatus_target[5] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[5] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[6] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bml_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[6] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bml_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[7] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bmr_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[7] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bmr_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[8] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#brr_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[8] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#brr_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-
-    //deactivates purple market card icon of player top-left
-    //---------------------------------------------------------
-
-    if (playerIconsStatus_target[0] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#purple_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[0] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#purple_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-  }
-
+  //=============================
+  // Market Card Functionalities
+  //=============================
 
   deactivateOrActivateIcons(playerIconsStatus_target:boolean[]){
-
-
-    //deactivates market card icons at the top of player top-left
-    //--------------------------------------------------------------
-
-    if (playerIconsStatus_target[1] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tll_2")).css("opacity", "0.3");
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[1] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tll_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[2] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tml_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[2] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tml_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[3] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tmr_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[3] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tmr_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[4] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#trr_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[4] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#trr_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    //deactivates market card icons at the bottom of player top-left
-    //-----------------------------------------------------------------
-
-    if (playerIconsStatus_target[5] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[5] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[6] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bml_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[6] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bml_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[7] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bmr_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[7] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bmr_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-    if (playerIconsStatus_target[8] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#brr_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[8] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#brr_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
-
-    //deactivates purple market card icon of player bottom-left
-    //---------------------------------------------------------
-
-    if (playerIconsStatus_target[0] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#purple_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateIcons: false")}
-    }
-    if (playerIconsStatus_target[0] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#purple_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateIcons: true")}
-    }
-
+    //TODO probably do this automatically
   }
 
-  deactivateOrActivateScore(playerStoneQuarryStatus_target){
-
-    if (playerStoneQuarryStatus_target == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#score_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateScore: false")}
+  numberToBoolean(playerFieldIcons):boolean[]{
+    let resultArray:boolean[]=[false,false,false,false,false,false,false,false,false];
+    for (let i=0; i<playerFieldIcons.length;i++){
+      if (playerFieldIcons[i]>0){
+        resultArray[i]=true;
+      }
+      else{
+        resultArray[i]=false;
+      }
     }
-    if (playerStoneQuarryStatus_target == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#score_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateScore: true")}
-    }
-
+    return resultArray;
   }
 
-  deactivateOrActivateStoneQuarry(playerStoneQuarryStatus_target){
+  cardArrayToNumberArray(cards: MarketCard[]){
 
-    if (playerStoneQuarryStatus_target == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#quarry_2")).css("opacity", "0.3");
+    // PlayerFieldsIcons
+    // [Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
+    //      0      1      2        3      4       5       6      7      8
 
-      });
+    let returnArray = [0,0,0,0,0,0,0,0,0];
+    if(!cards)
+      return returnArray;
 
-      if(0){console.log("deactivateOrActivateStoneQuarry: false")}
+    for(let card of cards){
+      if(card.id >= 0 && card.id <= 9){ //Statue
+        returnArray[0] += 1;
+      }
+      else if(card.id >= 10 && card.id <= 11){
+        returnArray[1] += 1;
+      }
+      else if(card.id >= 12 && card.id <= 13){
+        returnArray[4] += 1;
+      }
+      else if(card.id >= 14 && card.id <= 15){
+        returnArray[3] += 1;
+      }
+      else if(card.id >= 16 && card.id <= 17){
+        returnArray[2] += 1;
+      }
+      else if(card.id >= 24 && card.id <= 26){
+        returnArray[5] += 1;
+      }
+      else if(card.id >= 27 && card.id <= 28){
+        returnArray[8] += 1;
+      }
+      else if(card.id >= 29 && card.id <= 30){
+        returnArray[6] += 1;
+      }
+      else if(card.id >= 31 && card.id <= 33){
+        returnArray[7] += 1;
+      }
     }
-    if (playerStoneQuarryStatus_target == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#quarry_2")).css("opacity", "1.0");
 
-      });
-      if(0){console.log("deactivateOrActivateStoneQuarry: true")}
-    }
-
+    return returnArray;
   }
-
-  deactivateOrActivateSupplySled(playerSupplySledStatus_target){
-
-    if (playerSupplySledStatus_target == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#supply_sled_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("deactivateOrActivateSupplySled: false")}
-    }
-    if (playerSupplySledStatus_target == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#supply_sled_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("deactivateOrActivateSupplySled: true")}
-    }
-
-  }
-
-  deactivateOrActivatePlayerField(playerPlayerFieldStatus_target){
-
-    if (playerPlayerFieldStatus_target == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#playerField_2")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("playerPlayerFieldStatus: false")}
-    }
-    if (playerPlayerFieldStatus_target == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#playerField_2")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("playerPlayerFieldStatus: true")}
-    }
-
-
-  }
-
 
   //================
   // Popover-Methods

@@ -169,7 +169,7 @@ export class BottomLeftComponent implements OnInit {
   }
 
   //=============================
-  // Market Card Funcitonalities
+  // Market Card Functionalities
   //=============================
 
   deactivateOrActivateIcons(playerIconsStatus_target:boolean[]){
@@ -195,7 +195,7 @@ export class BottomLeftComponent implements OnInit {
     // [Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
     //      0      1      2        3      4       5       6      7      8
 
-    let returnArray = [0,0,0,0,0,0,0,0,0]
+    let returnArray = [0,0,0,0,0,0,0,0,0];
     if(!cards)
       return returnArray;
 
