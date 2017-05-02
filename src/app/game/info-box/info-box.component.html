@@ -68,11 +68,11 @@
 
             <div *ngIf="leverStones != null" class="stones">
 
-              <div *ngFor="let stone of leverStones; let j= index"
+              <div *ngFor="let num of [0,1,2,3];"
                    class="stone"
-                   dnd-draggable [dragData]="stone" [dropZones]="['slots']" (drag)="leverStones[j] = null;">
+                   dnd-draggable [dragData]="leverStones[num]" [dropZones]="['slots']" (drag)="leverStones[num] = null;">
 
-                  <app-stone *ngIf="stone != null" [stone] = stone ></app-stone>
+                  <app-stone *ngIf="leverStones[num] != null" [stone] = leverStones[num] ></app-stone>
 
               </div>
 

@@ -104,7 +104,6 @@ Styling for the Lever modal
   width: 34%;
   margin-left: 33%;
   margin-top: -5%;
-  border: 1px solid red;
   float: left;
 }
 
@@ -118,7 +117,6 @@ Styling for the Lever modal
   height: 40%;
   width: 100%;
   float: left;
-  border: 1px solid magenta;
 }
 
 .stone{
