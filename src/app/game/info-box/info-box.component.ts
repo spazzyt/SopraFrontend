@@ -78,11 +78,13 @@ export class InfoBoxComponent implements OnInit {
 
     for(let i = 0; i < this.leverStones.length; i++){
       if(!isNullOrUndefined(this.leverStones[i])){
-        return; //if one of the stones in the "choose" array is not null
+        return; //if one of the stones in the "choose" array is not null, the player hasn't finished yet
       }
     }
 
+    //close the modal by clicking hidden button (that workaround though)
     document.getElementById('hidden_btn').click();
+
     //tell the game that lever modal was closed
     //the leverModalOpen boolean is used locally to determine whether we need to send putting a stone on the ship as a move
     this.game.leverModalOpen = false;
