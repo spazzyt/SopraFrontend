@@ -244,7 +244,7 @@ export class BottomLeftComponent implements OnInit {
 
       //END OF MAD SORCERY
 
-      console.log('PLAYING CARD ' + index + ' YOLO');
+      console.log('PLAYER CAN PLAY CARD ' + index + ', SENDING TO BACKEND');
 
       switch(index){
         case 5: //Chisel
