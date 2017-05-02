@@ -45,7 +45,7 @@
 
   <!-- Call Lever Button -->
   <div id="lever_button">
-    <button type="button" class="lever_btn btn btn-sm btn-primary btn-block"
+    <button id="lever_btn" type="button" class="lever_btn btn btn-sm btn-primary btn-block"
             (click)="leverModal.show()">Lever</button>
   </div>
 
@@ -69,15 +69,11 @@
 
           <div class="row">
             <!-- go back to game-->
-            <div id="backToGame">
-              <button type="button" class="finish_btn btn btn-primary"
-                      id="ngButton4" (click)="leverModal.hide()">Back to Game</button>
-            </div>
 
             <!-- click done button after choosing order of stones-->
             <div id="Done">
               <button type="button" class="finish_btn btn btn-primary"
-                      id="ngButton5" (click)="leverModal.hide()" >Done</button>
+                      id="ngButton5" (click)="sendLeverOrder(); leverModal.hide()" >Done</button>
             </div>
           </div>
         </div>

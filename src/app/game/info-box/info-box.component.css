@@ -58,7 +58,7 @@ Styling for the Lever modal
 =============================================================================
  */
 
-
+/* TODO set visibility: hidden as soon as the modal is auto-opened when playing lever card*/
 #lever_button{
   text-align: center;
   /*border: 1px solid black;*/

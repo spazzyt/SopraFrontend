@@ -57,4 +57,13 @@ export class InfoBoxComponent implements OnInit {
 
   }
 
+  //Called from gameComponent using this.infoboxcomponent.showlevermodal()
+  showLeverModal(){
+    document.getElementById('lever_btn').click();
+  }
+
+  sendLeverOrder(){
+    //TODO change order of stuff on ship, maybe this function isn't needed if done directly by DND
+  }
+
 }
