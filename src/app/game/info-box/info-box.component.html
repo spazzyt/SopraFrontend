@@ -56,7 +56,7 @@
       <div class="modal-content">
 
         <div id="lever_title" class="modal-header">
-          <h4 class="modal-title2 pull-left">Drag the stones in the order you want:</h4>
+          <h4 class="modal-title2 pull-left">Choose the order of the stones:</h4>
         </div>
 
         <div class="modal-body">
@@ -87,7 +87,8 @@
             <!-- click done button after choosing order of stones-->
             <div id="Done">
               <button type="button" class="finish_btn btn btn-primary"
-                      id="ngButton5" (click)="sendLeverOrder(); leverModal.hide()" >Done</button>
+                      id="ngButton5" (click)="sendLeverOrder();" >Done</button>
+              <button id="hidden_btn" (click)="leverModal.hide()"></button>
             </div>
           </div>
         </div>

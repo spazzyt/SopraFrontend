@@ -131,7 +131,9 @@ Styling for the Lever modal
   width: 26%
 }
 
-
+#hidden_btn{
+  visibility: hidden;
+}
 
 /*
 =============================================================================

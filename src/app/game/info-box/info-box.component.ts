@@ -4,6 +4,7 @@ import {Game} from "../../shared/models/game";
 import {LobbyService} from "../../shared/services/lobby.service";
 import {Ship} from "../../shared/models/ship";
 import {Stone} from "../../shared/models/stone";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-info-box',
@@ -72,6 +73,16 @@ export class InfoBoxComponent implements OnInit {
   }
 
   sendLeverOrder(){
+    //check if all stones have been taken
+    console.log("LEVERSTONES: ", this.leverStones)
+
+    for(let i = 0; i < this.leverStones.length; i++){
+      if(!isNullOrUndefined(this.leverStones[i])){
+        return; //if one of the stones in the "choose" array is not null
+      }
+    }
+
+    document.getElementById('hidden_btn').click();
     //tell the game that lever modal was closed
     //the leverModalOpen boolean is used locally to determine whether we need to send putting a stone on the ship as a move
     this.game.leverModalOpen = false;
