@@ -247,6 +247,8 @@ export class BottomLeftComponent implements OnInit {
 
       console.log('PLAYER CAN PLAY CARD ' + index + ', SENDING TO BACKEND');
 
+      //TODO: tell player when he can't play the chosen card
+
       switch(index){
         case 5: //Chisel
           //TODO send move to backend - determine format??

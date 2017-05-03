@@ -149,6 +149,9 @@ export class GameComponent  implements OnInit {
 
     if(!isNaN(id)) {
 
+      //pass information about this component to game service (so it can open lever modal)
+      this.gameService.gameComp = this;
+
       this.gameService.getGame(id)
         .subscribe((game: Game) => {
           this.game = game;

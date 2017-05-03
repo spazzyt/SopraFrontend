@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Input} from '@angular/core';
 import {Http, Headers, RequestOptions, Response, URLSearchParams} from "@angular/http";
 import {AuthenticationService} from "./authentication.service";
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
@@ -13,6 +13,10 @@ import {ColourEnum} from "../models/colour.enum";
 export class GameService {
   private apiUrl: string;
   private game: Game;
+
+
+  @Input()
+  gameComp: any;
 
   constructor(private http: Http,
               private router: Router,
@@ -40,7 +44,10 @@ export class GameService {
   }
 
   sendMove(move: Move){
-    if(!this.game.leverModalOpen){ //if the lever modal is open, the ships shall not send any moves for moving stones on them
+    if(this.game.leverPlayed){  //Lever played: let player choose order before sending move
+      this.gameComp.showLeverModal(move.pos);
+    }
+    else if(!this.game.leverModalOpen){ //if the lever modal is open, the ships shall not send any moves for moving stones on them
 
       let bodyString = JSON.stringify(move); // Stringify payload
       let headers = new Headers({
@@ -65,7 +72,6 @@ export class GameService {
   //===========================================================
   //TODO overhaul to make work on right-side players
   //IDs like "bll" are for bottom components, "bll_2" for top components
-
 
   initializePopovers(){
 

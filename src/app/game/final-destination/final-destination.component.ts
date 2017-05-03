@@ -40,6 +40,7 @@ export class FinalDestinationComponent implements OnInit {
     this.ship = ship;
     console.log("dropped ship_ ", ship);
 
+    //TODO get info from parent on whether lever has been played
     this.parent.placeStones(this.ship.slots);
     this.ship.slots = null;
 
