@@ -66,9 +66,6 @@ export class GameComponent  implements OnInit {
   // get username from userService
   myUserName:string=this.userService.mySelf().username;
 
-  // am I the current active player
-  amI_CurrentActivePlayer:boolean;
-
   // my player field
   myPlayerField:ColourEnum;
 
@@ -222,7 +219,7 @@ export class GameComponent  implements OnInit {
 
   initializeNewGame(game_backend:Game){
 
-    this.initializePopovers();
+    this.gameService.initializePopovers();
 
     //set class variable
     let game = new Game(game_backend.id, game_backend.token, game_backend.name, game_backend.status, game_backend.numPlayers, game_backend.players, game_backend.roundNumber, game_backend.ships, game_backend.marketCards, game_backend.currentActivePlayerField);
@@ -256,18 +253,8 @@ export class GameComponent  implements OnInit {
       this.playerNames[i] = this.game.players[i].username;
     }
 
-    //Determine whether you are the active player (set class variable)
-    let amI_CurrentActivePlayer= this.game.currentActivePlayerField===this.game.myPlayerField;
-    this.amI_CurrentActivePlayer=amI_CurrentActivePlayer; //important for dragula to work
+    this.setActivePlayerfield(this.game.currentActivePlayerField);
 
-    //Read current active player field (set class variable)
-    let currentActivePlayerField=this.game.currentActivePlayerField;
-
-    this.activateActivePlayerInteractions(this.game.currentActivePlayerField);
-
-    //Initialize Myself
-    //(depends on whether you are the active or inactive player)
-    this.initializeMySelf(amI_CurrentActivePlayer, currentActivePlayerField);
   }
 
   // Init Sites
@@ -462,130 +449,6 @@ export class GameComponent  implements OnInit {
     return myPlayerField;
   }
 
-
-  // Init MySelf ( depending on whether you are the active or inactive player)
-  //--------------------------------------------------------------------------
-  initializeMySelf(amI_CurrentActivePlayer:boolean,
-                   currentActivePlayerField:ColourEnum){
-
-
-    if(1){console.log("initializeMySelf: ", {amI_CurrentActivePlayer, currentActivePlayerField})};
-
-    //I am the active player
-    //----------------------
-    if (amI_CurrentActivePlayer){
-
-
-      //I am active player on black field
-      //--------------------------------
-      if(currentActivePlayerField===ColourEnum.black){
-
-        //let active player field glow, not the others
-        this.bottomLeftComponent.playerFieldGlow(true);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(false);
-
-        // switch on click handlers on your stone quarry, switch off the others
-        this.bottomLeftComponent.setClickHandlerOnStoneQuarry();
-        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topRightComponent.removeClickHandlerOnStoneQuarry();
-        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
-
-      }
-
-      //I am active player on white field
-      //--------------------------------
-      else if(this.myPlayerField===ColourEnum.white){
-
-        //let active player field glow, not the others
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(true);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(false);
-
-        // switch on click handlers on your stone quarry, switch off the others
-        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topLeftComponent.setClickHandlerOnStoneQuarry();
-        this.topRightComponent.removeClickHandlerOnStoneQuarry();
-        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
-      }
-
-      //I am active player on brown field
-      //--------------------------------
-      else if(this.myPlayerField===ColourEnum.brown){
-
-        //let active player field glow, not the others
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(true);
-        this.bottomRightComponent.playerFieldGlow(false);
-
-        // switch on click handlers on your stone quarry, switch off the others
-        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topRightComponent.setClickHandlerOnStoneQuarry();
-        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
-      }
-
-      //I am active player on gray field
-      //-------------------------------
-      if(this.myPlayerField===ColourEnum.gray){
-
-        //let active player field glow, not the others
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(true);
-
-        // switch on click handlers on your stone quarry, switch off the others
-        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topRightComponent.removeClickHandlerOnStoneQuarry();
-        this.bottomRightComponent.setClickHandlerOnStoneQuarry();
-      }
-
-    }
-
-    //I am an inactive player
-    //-----------------------
-    else{
-
-      //let active player field glow, not the others
-      if(currentActivePlayerField===ColourEnum.black){
-        this.bottomLeftComponent.playerFieldGlow(true);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(false);
-      }
-      if(currentActivePlayerField===ColourEnum.white){
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(true);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(false);
-      }
-      if(currentActivePlayerField===ColourEnum.brown){
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(true);
-        this.bottomRightComponent.playerFieldGlow(false);
-      }
-      if(currentActivePlayerField===ColourEnum.gray){
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(true);
-      }
-
-      // switch off click handlers on all stone quarries
-      this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
-      this.topLeftComponent.removeClickHandlerOnStoneQuarry();
-      this.topRightComponent.removeClickHandlerOnStoneQuarry();
-      this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
-
-    }
-  }
-
   initRound(round: Round){
 
     //only make stones draggable if player has stones
@@ -770,9 +633,7 @@ export class GameComponent  implements OnInit {
     else
       this.game.amI_CurrentActivePlayer = false;
 
-    this.amI_CurrentActivePlayer=this.game.amI_CurrentActivePlayer; //important for dragula to work
-
-    this.activateActivePlayerInteractions(this.game.currentActivePlayerField);
+    this.setActivePlayerfield(this.game.currentActivePlayerField);
   }
 
   //Called exactly once, when the server tells us the game has ended
@@ -866,65 +727,22 @@ export class GameComponent  implements OnInit {
 
 
   //=============================================================
-  // Main Task 2:
-  // Activate allowed interactions for active Player
+  // Make active player fields glow
   //=============================================================
 
-
-  activateActivePlayerInteractions(currentActivePlayerField:ColourEnum){
-
+  setActivePlayerfield(currentActivePlayerField:ColourEnum){
     for(let player of this.game.players){
-
       let isThisFieldActive = (currentActivePlayerField == this.nameToColourMap[player.username]);
       this.playerMap[player.username].playerFieldGlow(isThisFieldActive)
       console.log("Player " + name + " is active? " + isThisFieldActive)
     }
   }
 
-
   //===========================================================
   // Main Action 1: take stones from Quarry to Sled
   //===========================================================
 
-  //TODO this is cancer, maybe overhaul
-  //-----------------------------------
-
-  bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
-    this.bottomLeftComponent.sledStones=data;
-    this.takeStonesFromQuarryToSled(ColourEnum.black);
-  }
-  bottomLeftComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
-    this.bottomLeftComponent.quarryStones=data;
-  }
-
-
-  topLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
-    this.topLeftComponent.sledStones=data;
-    this.takeStonesFromQuarryToSled(ColourEnum.white);
-  }
-  topLeftComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
-    this.topLeftComponent.quarryStones=data;
-  }
-
-
-  topRightComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
-    this.topRightComponent.sledStones=data;
-    this.takeStonesFromQuarryToSled(ColourEnum.brown);
-  }
-  topRightComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
-    this.topRightComponent.quarryStones=data;
-  }
-
-
-  bottomRightComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones(data:number){
-    this.bottomRightComponent.sledStones=data;
-    this.takeStonesFromQuarryToSled(ColourEnum.gray);
-  }
-  bottomRightComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones(data:number){
-    this.bottomRightComponent.quarryStones=data;
-  }
-
-
+  //TODO call this function from within the player components - or add it there?
   takeStonesFromQuarryToSled(playerField:ColourEnum){
 
     //make calculations (how many stones, needed to send correct move to backend)
@@ -958,7 +776,6 @@ export class GameComponent  implements OnInit {
   }
 
   showLeverModal(shipNr){
-
     let tempStones = new Array<Stone>();
 
     for(let i = 0; i < this.ships[shipNr].slots.length; i++){
@@ -967,219 +784,5 @@ export class GameComponent  implements OnInit {
     }
     this.game.leverModalOpen = true;
     this.infoBoxComponent.showLeverModal(tempStones)
-  }
-
-
-  //===========================================================
-  // Popover Methods
-  //===========================================================
-
-  //IDs like "bll" are for bottom components, "bll_2" for top components
-
-  initializePopovers(){
-
-    //From bottom-left-left
-    (<any>$('#bll')).popover({
-      placement: 'top',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px"  class="non-draggable" src="../../../../assets/images/cards/chisel.png"/>'
-    });
-
-
-    //From bottom-middle-left
-    (<any>$('#bml')).popover({
-      placement: 'top',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/hammer.png"/>'
-    });
-
-
-    //From bottom-middle-right
-    (<any>$('#bmr')).popover({
-      placement: 'top',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/sail.png"/>'
-    });
-
-    //From bottom-right-right
-    (<any>$('#brr')).popover({
-      placement: 'top',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/lever.png"/>'
-    });
-
-    //From purple-card
-    (<any>$('#purple')).popover({
-      placement: 'top',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statue.png"/>'
-    });
-
-    //From top-left-left
-    (<any>$('#tll')).popover({
-      placement: 'top',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/pyramiddec.png"/>'
-    });
-
-    //From top-middle-left
-    (<any>$('#tml')).popover({
-      placement: 'top',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/templedec.png"/>'
-    });
-
-    //From top-middle-right
-    (<any>$('#tmr')).popover({
-      placement: 'top',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/burialdec.png"/>'
-    });
-
-    //From top-right-right
-    (<any>$('#trr')).popover({
-      placement: 'top',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/obeliskdec.png"/>'
-    });
-
-
-    //From bottom-left-left
-    (<any>$('#bll_2')).popover({
-      placement: 'bottom',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/chisel.png"/>'
-    });
-
-
-    //From bottom-middle-left
-    (<any>$('#bml_2')).popover({
-      placement: 'bottom',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/hammer.png"/>'
-    });
-
-
-    //From bottom-middle-right
-    (<any>$('#bmr_2')).popover({
-      placement: 'bottom',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/sail.png"/>'
-    });
-
-    //From bottom-right-right
-    (<any>$('#brr_2')).popover({
-      placement: 'bottom',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/lever.png"/>'
-    });
-
-    //From purple-card
-    (<any>$('#purple_2')).popover({
-      placement: 'bottom',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statue.png"/>'
-    });
-
-    //From top-left-left
-    (<any>$('#tll_2')).popover({
-      placement: 'bottom',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/pyramiddec.png"/>'
-    });
-
-    //From top-middle-left
-    (<any>$('#tml_2')).popover({
-      placement: 'bottom',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/templedec.png"/>'
-    });
-
-    //From top-middle-right
-    (<any>$('#tmr_2')).popover({
-      placement: 'bottom',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/burialdec.png"/>'
-    });
-
-    //From top-right-right
-    (<any>$('#trr_2')).popover({
-      placement: 'bottom',
-      trigger : 'hover',
-      toggle: 'popover',
-      title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
-      html: true,
-      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/obeliskdec.png"/>'
-    });
-
   }
 }

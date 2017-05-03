@@ -58,4 +58,218 @@ export class GameService {
         });
     }
     }
+
+
+  //===========================================================
+  // Popover Methods
+  //===========================================================
+  //TODO overhaul to make work on right-side players
+  //IDs like "bll" are for bottom components, "bll_2" for top components
+
+
+  initializePopovers(){
+
+    //From bottom-left-left
+    (<any>$('#bll')).popover({
+      placement: 'top',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px"  class="non-draggable" src="../../../../assets/images/cards/chisel.png"/>'
+    });
+
+
+    //From bottom-middle-left
+    (<any>$('#bml')).popover({
+      placement: 'top',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/hammer.png"/>'
+    });
+
+
+    //From bottom-middle-right
+    (<any>$('#bmr')).popover({
+      placement: 'top',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/sail.png"/>'
+    });
+
+    //From bottom-right-right
+    (<any>$('#brr')).popover({
+      placement: 'top',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/lever.png"/>'
+    });
+
+    //From purple-card
+    (<any>$('#purple')).popover({
+      placement: 'top',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statue.png"/>'
+    });
+
+    //From top-left-left
+    (<any>$('#tll')).popover({
+      placement: 'top',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/pyramiddec.png"/>'
+    });
+
+    //From top-middle-left
+    (<any>$('#tml')).popover({
+      placement: 'top',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/templedec.png"/>'
+    });
+
+    //From top-middle-right
+    (<any>$('#tmr')).popover({
+      placement: 'top',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/burialdec.png"/>'
+    });
+
+    //From top-right-right
+    (<any>$('#trr')).popover({
+      placement: 'top',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/obeliskdec.png"/>'
+    });
+
+    //From bottom-left-left
+    (<any>$('#bll_2')).popover({
+      placement: 'bottom',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/chisel.png"/>'
+    });
+
+
+    //From bottom-middle-left
+    (<any>$('#bml_2')).popover({
+      placement: 'bottom',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/hammer.png"/>'
+    });
+
+
+    //From bottom-middle-right
+    (<any>$('#bmr_2')).popover({
+      placement: 'bottom',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/sail.png"/>'
+    });
+
+    //From bottom-right-right
+    (<any>$('#brr_2')).popover({
+      placement: 'bottom',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/lever.png"/>'
+    });
+
+    //From purple-card
+    (<any>$('#purple_2')).popover({
+      placement: 'bottom',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statue.png"/>'
+    });
+
+    //From top-left-left
+    (<any>$('#tll_2')).popover({
+      placement: 'bottom',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/pyramiddec.png"/>'
+    });
+
+    //From top-middle-left
+    (<any>$('#tml_2')).popover({
+      placement: 'bottom',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/templedec.png"/>'
+    });
+
+    //From top-middle-right
+    (<any>$('#tmr_2')).popover({
+      placement: 'bottom',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/burialdec.png"/>'
+    });
+
+    //From top-right-right
+    (<any>$('#trr_2')).popover({
+      placement: 'bottom',
+      trigger : 'hover',
+      toggle: 'popover',
+      title: '',
+      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      html: true,
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/obeliskdec.png"/>'
+    });
+
+  }
 }
