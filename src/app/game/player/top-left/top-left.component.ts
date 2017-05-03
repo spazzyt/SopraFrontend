@@ -273,11 +273,6 @@ export class TopLeftComponent implements OnInit {
   }
 
 
-
-
-
-
-
   cardArrayToNumberArray(cards: MarketCard[]){
 
     // PlayerFieldsIcons

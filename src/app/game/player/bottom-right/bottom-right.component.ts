@@ -1,8 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
 import {Stone} from "../../../shared/models/stone";
 import {ColourEnum} from "../../../shared/models/colour.enum";
 import {SupplySled} from "../../../shared/models/supply-sled";
 import {StoneQuarry} from "../../../shared/models/stone-quarry";
+import {Ship} from "../../../shared/models/ship";
+import {MarketCard} from "../../../shared/models/market-card";
 
 @Component({
   selector: 'app-bottom-right',
@@ -15,6 +17,16 @@ import {StoneQuarry} from "../../../shared/models/stone-quarry";
 // Component
 //===========
 export class BottomRightComponent implements OnInit {
+
+  @Input()
+  ships: Ship[];
+  @Input()
+  marketCards: MarketCard[];
+  @Input()
+  canIPlay: boolean;
+  @Input()
+  myColour: ColourEnum;
+
 
   //===============
   //Class Variables
@@ -43,7 +55,7 @@ export class BottomRightComponent implements OnInit {
   public quarryStones:number;
 
   // the player's nine market card icons
-  public marketCards:number[] = [];
+  public cardNumbers:number[] = [0,0,0,0,0,0,0,0,0];
 
   // does the player have stones in his sleds
   public hasStones:boolean;
@@ -55,11 +67,6 @@ export class BottomRightComponent implements OnInit {
 
   @Output() onEvent_setClickHandlerOnStoneQuarry_sledStones = new EventEmitter<number>();
   @Output() onEvent_setClickHandlerOnStoneQuarry_quarryStones = new EventEmitter<number>();
-  @Output() onEvent_setClickHandlerOnBlueMarketCards_bll_4_marketCards = new EventEmitter<number[]>();
-  @Output() onEvent_setClickHandlerOnBlueMarketCards_bml_4_marketCards = new EventEmitter<number[]>();
-  @Output() onEvent_setClickHandlerOnBlueMarketCards_bmr_4_marketCards = new EventEmitter<number[]>();
-  @Output() onEvent_setClickHandlerOnBlueMarketCards_brr_4_marketCards = new EventEmitter<number[]>();
-
 
   //===============
   //Constructor
@@ -86,21 +93,9 @@ export class BottomRightComponent implements OnInit {
     this.hasStones=this.sledStones>0;
   }
 
-  //================
-  // ngAfterViewInit
-  //================
-
-  ngAfterViewInit() {
-
-    //this.show_hide_stone_at_init();
-
+  updateCardNumbers(){
+    this.cardNumbers = this.cardArrayToNumberArray(this.marketCards);
   }
-
-  //===============
-  // Other-Methods
-  //===============
-
-
   //===========================================================
   // Click Events
   //===========================================================
@@ -127,67 +122,6 @@ export class BottomRightComponent implements OnInit {
 
   }
 
-  setClickHandlerOnBlueMarketCards() {
-
-    //set click handler for  bll_4
-    (<any>$(document)).ready(() =>{
-      (<any>$("#bll_4_")).on("click", () =>{
-        alert("The chisel was clicked.");
-        this.onEvent_setClickHandlerOnBlueMarketCards_bll_4_marketCards.emit(this.marketCards);
-      });
-    });
-
-    //set click handler for  bml_4
-    (<any>$(document)).ready(() =>{
-      (<any>$("#bml_4_")).on("click", () =>{
-        alert("The hammer was clicked.");
-        this.onEvent_setClickHandlerOnBlueMarketCards_bml_4_marketCards.emit(this.marketCards);
-      })
-    });
-
-    //set click handler for  bmr_4
-    (<any>$(document)).ready(() =>{
-      (<any>$("#bmr_4_")).on("click", () =>{
-        alert("The sail was clicked.");
-        this.onEvent_setClickHandlerOnBlueMarketCards_bmr_4_marketCards.emit(this.marketCards);
-      })
-    });
-
-    //set click handler for  brr_4
-    (<any>$(document)).ready(() =>{
-      (<any>$("#brr_4_")).on("click", () =>{
-        alert("The lever was clicked.");
-        this.onEvent_setClickHandlerOnBlueMarketCards_brr_4_marketCards.emit(this.marketCards);
-      })
-    });
-  }
-
-  removeClickHandlerOnBlueMarketCards(){
-
-    //remove click handler for  bll_4
-    (<any>$(document)).ready(function () {
-      (<any>$("#bll_4_")).off("click");
-    });
-
-    //remove click handler for  bml_4
-    (<any>$(document)).ready(function () {
-      (<any>$("#bml_4_")).off("click");
-    });
-
-    //remove click handler for  bmr_4
-    (<any>$(document)).ready(function () {
-      (<any>$("#bmr_4_")).off("click");
-    });
-
-    //remove click handler for  brr_4
-    (<any>$(document)).ready(function () {
-      (<any>$("#brr_4_")).off("click");
-    });
-
-  }
-
-
-
   //===========================================================
   // Change Text / Numbers
   //===========================================================
@@ -198,42 +132,6 @@ export class BottomRightComponent implements OnInit {
     //update attribute: score
     this.playerName=playerName_target;
 
-  }
-
-  setPlayerDataWithArray_increaseByNumber(ArrayOf0To11:number[]){
-
-    // [Score, Sled, Quarry, Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
-    //    0      1      2      3        4       5       6      7        8      9      10     11
-
-    //update attribute: score
-    this.score+=ArrayOf0To11[0];
-
-    //update attribute: sledStones
-    this.sledStones+=ArrayOf0To11[1];
-
-    // update attribute: quarryStones
-    this.quarryStones+=ArrayOf0To11[2];
-
-    // purple[0],tll..trr,[1-4] bll..brr,[5-8]
-    for(let i = 0; i < ArrayOf0To11.length; i++){
-      this.marketCards[i] += ArrayOf0To11[i+3];
-    }
-
-  }
-
-  setMarketCards(marketCards_target:number[]){
-
-    // [Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
-    //    0      1      2      3        4       5       6      7        8
-
-    // define protocol: which market card
-    // corresponds to which array index
-    //tll..trr, bll..brr, purple
-
-    for(let i = 0; i < marketCards_target.length; i++){
-      if(marketCards_target[i] != null)
-        this.marketCards[i] = marketCards_target[i];
-    }
   }
 
   setScore(score_target:number){
@@ -293,498 +191,141 @@ export class BottomRightComponent implements OnInit {
   }
 
 
-  //deactivates at the moment the icon top-left-left,
-  // this function cannot reactivate icon
+//=============================
+  // Market Card Functionalities
+  //=============================
 
+  playCard(index: number){  //TODO add this to other players
+    console.log("PLAYER TRIES TO PLAY CARD " + index)
 
-  deactivateOrActivateIcons_onChange(playerIconsStatus_target:string[]){
+    //TODO when copypasting, adapt "black" to other players colour!!
+    //if player has this card and it's his turn
+    if(this.myColour == ColourEnum.black && this.canIPlay && this.cardNumbers[index] > 0){
 
-
-    //deactivates market card icons at the top of player bottom-right
-    //--------------------------------------------------------------
-
-    if (playerIconsStatus_target[1] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tll_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
+      console.log("SHIPPERINOS: ", this.ships);
+      //determine amount of free slots on all ships (to check if you can place two stones on ships)
+      let freeSlots = 0;
+      for(let ship of this.ships){
+        if(ship.isInHarbour){
+          for(let i = 0; i < ship.slots.length; i++){
+            if(ship.slots[i] == null){
+              freeSlots++;
+            }
+          }
+        }
       }
-    }
-    if (playerIconsStatus_target[1] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tll_4")).css("opacity", "1.0");
 
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
+
+
+      //WARNING, MAD SORCERY AHEAD, DO NOT EDIT
+      //check if any ships are sailable;
+
+      let shipsSailable = false;
+      for(let ship of this.ships){
+        if(ship.isInHarbour && ship.draggable) shipsSailable = true; //if any ship is sailable, set to true
       }
-    }
+      let shipsSailableWithOneStone = false;
 
-    if (playerIconsStatus_target[2] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tml_4")).css("opacity", "0.3");
+      for(let ship of this.ships){
+        if(ship.isInHarbour && !ship.draggable) {
 
-      });
+          let freeSlotsOnShip = 0;      //how many stones are on the ship?
 
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
+          for(let slot of ship.slots){
+            if(slot == null){
+              freeSlotsOnShip++;
+            }
+          }
+          if(freeSlotsOnShip >= 1 && freeSlotsOnShip <= 2){
+            shipsSailableWithOneStone = true; //if any ship is sailable, set to true
+          }
+        }
       }
-    }
-    if (playerIconsStatus_target[2] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tml_4")).css("opacity", "1.0");
 
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
+      //Checks for each possible card if it's not playable (if not playable, return)
+      if(index == 5 && this.sledStones < 2 && freeSlots >= 2){
+        return;
       }
-    }
 
-    if (playerIconsStatus_target[3] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tmr_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
+      if(index == 6 && (this.quarryStones < 3 || freeSlots < 1)){
+        return;
       }
-    }
-    if (playerIconsStatus_target[3] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tmr_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
+      if(index == 7 && freeSlots < 1 && !shipsSailableWithOneStone){
+        return;
       }
-    }
-
-    if (playerIconsStatus_target[4] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#trr_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
+      if(index == 8 && !shipsSailable){
+        return;
       }
-    }
-    if (playerIconsStatus_target[4] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#trr_4")).css("opacity", "1.0");
 
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
+      //END OF MAD SORCERY
+
+      console.log('PLAYER CAN PLAY CARD ' + index + ', SENDING TO BACKEND');
+
+      switch(index){
+        case 5: //Chisel
+          //TODO send move to backend - determine format??
+          break;
+
+        case 6: //Hammer
+          //TODO send move to backend
+          break;
+
+        case 7: //Sail
+          //TODO send move to backend
+          break;
+
+        case 8: //Lever
+          //TODO wait until player sails a ship to a site
+          //TODO then show modal for choosing stone order (WITH the corresponding ship)
+          break;
       }
+
     }
-
-    //deactivates market card icons at the bottom of player bottom-left
-    //-----------------------------------------------------------------
-
-
-    if (playerIconsStatus_target[5] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[5] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-    if (playerIconsStatus_target[6] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bml_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[6] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bml_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-    if (playerIconsStatus_target[7] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bmr_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[7] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bmr_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-    if (playerIconsStatus_target[8] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#brr_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[8] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#brr_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-
-    //deactivates purple market card icon of player bottom-right
-    //---------------------------------------------------------
-
-
-    if (playerIconsStatus_target[0] == "false") {
-      (<any>$(document)).ready(function (){
-        (<any>$("#purple_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[0] == "true"){
-      (<any>$(document)).ready(function (){
-        (<any>$("#purple_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-  }
-
-  deactivateOrActivateIcons(playerIconsStatus_target:boolean[]){
-
-    //deactivates market card icons at the top of player bottom-left
-    //--------------------------------------------------------------
-
-    if (playerIconsStatus_target[1] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tll_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[1] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tll_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-    if (playerIconsStatus_target[2] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tml_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[2] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tml_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-    if (playerIconsStatus_target[3] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#tmr_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[3] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#tmr_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-    if (playerIconsStatus_target[4] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#trr_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[4] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#trr_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-    //deactivates market card icons at the bottom of player bottom-right
-    //-----------------------------------------------------------------
-
-
-    if (playerIconsStatus_target[5] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[5] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bll_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-    if (playerIconsStatus_target[6] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bml_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[6] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bml_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-    if (playerIconsStatus_target[7] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#bmr_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[7] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#bmr_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-    if (playerIconsStatus_target[8] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#brr_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[8] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#brr_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
-
-    //deactivates purple market card icon of player bottom-right
-    //---------------------------------------------------------
-
-
-    if (playerIconsStatus_target[0] == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#purple_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateIcons: false")
-      }
-    }
-    if (playerIconsStatus_target[0] == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#purple_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateIcons: true")
-      }
-    }
-
   }
 
 
-  deactivateOrActivateScore(playerStoneQuarryStatus_target){
+  cardArrayToNumberArray(cards: MarketCard[]){
 
-    if (playerStoneQuarryStatus_target == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#score_4")).css("opacity", "0.3");
+    // PlayerFieldsIcons
+    // [Statue, PyrDec, TemDec, BurDec, ObeDec, Chisel, Hammer, Sail, Lever]
+    //      0      1      2        3      4       5       6      7      8
 
-      });
+    let returnArray = [0,0,0,0,0,0,0,0,0];
+    if(!cards)
+      return returnArray;
 
-      if(0){
-        console.log("deactivateOrActivateScore: false")
+    for(let card of cards){
+      if(card.id >= 0 && card.id <= 9){ //Statue
+        returnArray[0] += 1;
+      }
+      else if(card.id >= 10 && card.id <= 11){
+        returnArray[1] += 1;
+      }
+      else if(card.id >= 12 && card.id <= 13){
+        returnArray[4] += 1;
+      }
+      else if(card.id >= 14 && card.id <= 15){
+        returnArray[3] += 1;
+      }
+      else if(card.id >= 16 && card.id <= 17){
+        returnArray[2] += 1;
+      }
+      else if(card.id >= 24 && card.id <= 26){
+        returnArray[5] += 1;
+      }
+      else if(card.id >= 27 && card.id <= 28){
+        returnArray[8] += 1;
+      }
+      else if(card.id >= 29 && card.id <= 30){
+        returnArray[6] += 1;
+      }
+      else if(card.id >= 31 && card.id <= 33){
+        returnArray[7] += 1;
       }
     }
-    if (playerStoneQuarryStatus_target == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#score_4")).css("opacity", "1.0");
 
-      });
-      if(0){
-        console.log("deactivateOrActivateScore: true")
-      }
-    }
-
+    return returnArray;
   }
-
-
-  deactivateOrActivateStoneQuarry(playerStoneQuarryStatus_target){
-
-    if (playerStoneQuarryStatus_target == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#quarry_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateStoneQuarry: false")
-      }
-    }
-    if (playerStoneQuarryStatus_target == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#quarry_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateStoneQuarry: true")
-      }
-    }
-
-  }
-
-  deactivateOrActivateSupplySled(playerSupplySledStatus_target){
-
-    if (playerSupplySledStatus_target == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#supply_sled_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){
-        console.log("deactivateOrActivateSupplySled: false")
-      }
-    }
-    if (playerSupplySledStatus_target == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#supply_sled_4")).css("opacity", "1.0");
-
-      });
-      if(0){
-        console.log("deactivateOrActivateSupplySled: true")
-      }
-    }
-
-  }
-
-  deactivateOrActivatePlayerField(playerPlayerFieldStatus_target){
-
-    if (playerPlayerFieldStatus_target == false) {
-      (<any>$(document)).ready(function (){
-        (<any>$("#playerField_4")).css("opacity", "0.3");
-
-      });
-
-      if(0){console.log("playerPlayerFieldStatus: false")}
-    }
-    if (playerPlayerFieldStatus_target == true){
-      (<any>$(document)).ready(function (){
-        (<any>$("#playerField_4")).css("opacity", "1.0");
-
-      });
-      if(0){console.log("playerPlayerFieldStatus: true")}
-    }
-
-
-  }
-
 
 
   //===========================================================
