@@ -49,6 +49,7 @@ export class GameComponent  implements OnInit {
   //Class Variables
   //===============
 
+  public myComp;
 
   // initial Game object received from Backend
   game: Game;
@@ -127,6 +128,7 @@ export class GameComponent  implements OnInit {
               private wsService: WSService,
               private userService: UserService,
               private route: ActivatedRoute) {
+    this.myComp = this;
   }
 
   //==========
@@ -669,9 +671,7 @@ export class GameComponent  implements OnInit {
     this.nameAndScores = this.nameAndScores.sort((n1,n2) => n2.score - n1.score);
   }
 
-
   updatePlayerCards(input: Map<string, MarketCard[]>){
-
     this.game.player1CardDeck = input[this.game.players[0].username];
     this.game.player2CardDeck = input[this.game.players[1].username];
     if(this.game.players.length > 2)
@@ -725,7 +725,6 @@ export class GameComponent  implements OnInit {
     if(1){console.log("showSnackbarMessenger")};
   }
 
-
   //=============================================================
   // Make active player fields glow
   //=============================================================
@@ -738,43 +737,7 @@ export class GameComponent  implements OnInit {
     }
   }
 
-  //===========================================================
-  // Main Action 1: take stones from Quarry to Sled
-  //===========================================================
-
-  //TODO call this function from within the player components - or add it there?
-  takeStonesFromQuarryToSled(playerField:ColourEnum){
-
-    //make calculations (how many stones, needed to send correct move to backend)
-    let stonesInQuarry:number;
-    let stonesInSled:number;
-    let stonesToTake:number;
-
-      stonesInQuarry=this.colourMap[playerField].quarryStones;
-      stonesInSled=this.colourMap[playerField].sledStones;
-
-      if(stonesInSled < 5){
-        if(stonesInSled < 3){
-          stonesToTake = Math.min(stonesInQuarry, 3);
-        }
-        else{
-          stonesToTake = Math.min(stonesInQuarry, 5-stonesInSled);
-        }
-      }
-      else{
-        this.showSnackbarMessage("You can't take any stones because your sled is full.")
-        return;
-      }
-
-    //generate move object
-    let moveToSend = new Move(PositionEnum.Quarry, PositionEnum.Sled, stonesToTake);
-    //Send move to backend
-    this.gameService.sendMove(moveToSend);
-
-    //snackbar message (only locally)
-    this.showSnackbarMessage("You took "+ stonesToTake+" stone(s) from the quarry.");
-  }
-
+  //Show lever modal (for choosing stone order)
   showLeverModal(shipNr){
     let tempStones = new Array<Stone>();
 

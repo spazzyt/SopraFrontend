@@ -88,6 +88,9 @@ export class InfoBoxComponent implements OnInit {
     //tell the game that lever modal was closed
     //the leverModalOpen boolean is used locally to determine whether we need to send putting a stone on the ship as a move
     this.game.leverModalOpen = false;
+    this.game.leverPlayed = false; //TODO check this
+    console.log("LEVER STATUS: " + this.game.leverPlayed)
+
 
     //TODO tell game to continue, send move?? --> check with backend
   }

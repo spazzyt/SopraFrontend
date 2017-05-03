@@ -30,6 +30,9 @@ export class BottomLeftComponent implements OnInit {
   @Input()
   myColour: ColourEnum;
 
+  @Input()
+  gameComp: any;
+
   //===============
   //Class Variables
   //===============
@@ -258,6 +261,10 @@ export class BottomLeftComponent implements OnInit {
           break;
 
         case 8: //Lever
+          //lets the game know the lever has been played
+          console.log("PLAYING LEVER! STATUS: " + this.gameComp.game.leverPlayed)
+          this.gameComp.game.leverPlayed = true;
+          console.log("THE LEVER HAS BEEN PLAYED! STATUS: " + this.gameComp.game.leverPlayed)
           //TODO wait until player sails a ship to a site
           //TODO then show modal for choosing stone order (WITH the corresponding ship)
           break;

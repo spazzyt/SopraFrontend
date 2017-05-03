@@ -57,7 +57,12 @@ export class Game {
 
   public whoCanPickCard: string;
   public canIPick: boolean;
+
+  //Is the lever modal open? (If yes, we don't send moves to the backend when moving stones to ship)
   public leverModalOpen: boolean;
+
+  //This determines (locally) if the player has just played the lever card
+  public leverPlayed: boolean;
 
   // Own Player info
   //------------
@@ -95,6 +100,7 @@ export class Game {
       this.marketCards=marketCards_;
       this.currentActivePlayerField=currentActivePlayerField_;
       this.leverModalOpen = false;
+      this.leverPlayed = false;
   }
 
 }
