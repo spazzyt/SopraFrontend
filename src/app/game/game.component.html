@@ -4,7 +4,7 @@
   <div class="container_side container_left">
     <!-- Top Left Player Field -->
     <div class="player_field player_top_left">
-      <app-top-left id="playerField_2" [marketCards]="game?.player2CardDeck"
+      <app-top-left id="playerField_2" [ships]="game?.ships" [marketCards]="game?.player2CardDeck" [canIPlay]="game?.amI_CurrentActivePlayer" [myColour]="game?.myPlayerField"
                     (onEvent_setClickHandlerOnStoneQuarry_sledStones)="topLeftComponent_onEvent_setClickHandlerOnStoneQuarry_sledStones($event)"
                     (onEvent_setClickHandlerOnStoneQuarry_quarryStones)="topLeftComponent_onEvent_setClickHandlerOnStoneQuarry_quarryStones($event)"
       ></app-top-left>
