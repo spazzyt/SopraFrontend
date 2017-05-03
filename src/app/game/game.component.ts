@@ -732,8 +732,9 @@ export class GameComponent  implements OnInit {
       case PositionEnum.Obelisk:
         if(move.from == PositionEnum.Quarry){
           //if it's a move caused by a red card, don't move a ship
-          let stoneToPlace: Stone[] = [new Stone(this.nameToColourMap[username])]
+          let stoneToPlace: Stone[] = [new Stone(null, this.nameToColourMap[username])]
           this.siteMap[this.siteToStringMap[move.to]].placeStones(stoneToPlace);
+          console.log("PLACED A"+ this.nameToColourMap[username] + " STONE ON " + this.siteToStringMap[move.to] + "WITH RED CARD.");
           //update score, sled & quarry
           this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
           this.updatePlayerCards(playerCards);
