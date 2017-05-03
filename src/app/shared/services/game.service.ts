@@ -45,6 +45,7 @@ export class GameService {
 
   sendMove(move: Move){
     if(this.gameComp.game.leverPlayed){  //Lever played: let player choose order before sending move
+      this.gameComp.infoBoxComponent.leverShip = move.pos;
       this.gameComp.showLeverModal(move.pos);
     }
     else if(!this.game.leverModalOpen){ //if the lever modal is open, the ships shall not send any moves for moving stones on them

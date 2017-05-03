@@ -23,6 +23,9 @@ export class InfoBoxComponent implements OnInit {
   @Input()
   ships: Ship[];
 
+  @Input()
+  leverShip: number;
+
   //============
   // Attributes
   //============
