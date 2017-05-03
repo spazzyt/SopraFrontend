@@ -163,19 +163,6 @@ export class BottomRightComponent implements OnInit {
     this.sledStones += howMany;
   }
 
-  hideStone(){
-    (<any>$(document)).ready(function (){
-      (<any>$("#bag_4")).hide();
-    });
-
-  }
-
-  showStone(){
-    (<any>$(document)).ready(function (){
-      (<any>$("#bag_4")).show();
-    });
-  }
-
 
 
   //===========================================================

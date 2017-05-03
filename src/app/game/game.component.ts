@@ -263,6 +263,8 @@ export class GameComponent  implements OnInit {
     //Read current active player field (set class variable)
     let currentActivePlayerField=this.game.currentActivePlayerField;
 
+    this.activateActivePlayerInteractions(this.game.currentActivePlayerField);
+
     //Initialize Myself
     //(depends on whether you are the active or inactive player)
     this.initializeMySelf(amI_CurrentActivePlayer, currentActivePlayerField);
@@ -478,13 +480,6 @@ export class GameComponent  implements OnInit {
       //--------------------------------
       if(currentActivePlayerField===ColourEnum.black){
 
-        //show my stone in sled, hide the others
-        /*
-        this.bottomLeftComponent.showStone();
-        this.topLeftComponent.hideStone();
-        this.topRightComponent.hideStone();
-        this.bottomRightComponent.hideStone();
-*/
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(true);
         this.topLeftComponent.playerFieldGlow(false);
@@ -503,13 +498,6 @@ export class GameComponent  implements OnInit {
       //--------------------------------
       else if(this.myPlayerField===ColourEnum.white){
 
-        //show my stone in sled, hide the others
-        /*
-        this.bottomLeftComponent.hideStone();
-        this.topLeftComponent.showStone();
-        this.topRightComponent.hideStone();
-        this.bottomRightComponent.hideStone();
-*/
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(true);
@@ -521,20 +509,12 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.setClickHandlerOnStoneQuarry();
         this.topRightComponent.removeClickHandlerOnStoneQuarry();
         this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
-
       }
 
       //I am active player on brown field
       //--------------------------------
       else if(this.myPlayerField===ColourEnum.brown){
 
-        //show my stone in sled, hide the others$
-        /*
-        this.bottomLeftComponent.hideStone();
-        this.topLeftComponent.hideStone();
-        this.topRightComponent.showStone();
-        this.bottomRightComponent.hideStone();
-*/
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(false);
@@ -546,20 +526,12 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.removeClickHandlerOnStoneQuarry();
         this.topRightComponent.setClickHandlerOnStoneQuarry();
         this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
-
-
       }
 
       //I am active player on gray field
       //-------------------------------
       if(this.myPlayerField===ColourEnum.gray){
-/*
-        //show my stone in sled, hide the others
-        this.bottomLeftComponent.hideStone();
-        this.topLeftComponent.hideStone();
-        this.topRightComponent.hideStone();
-        this.bottomRightComponent.showStone();
-*/
+
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(false);
@@ -571,7 +543,6 @@ export class GameComponent  implements OnInit {
         this.topLeftComponent.removeClickHandlerOnStoneQuarry();
         this.topRightComponent.removeClickHandlerOnStoneQuarry();
         this.bottomRightComponent.setClickHandlerOnStoneQuarry();
-
       }
 
     }
@@ -579,13 +550,7 @@ export class GameComponent  implements OnInit {
     //I am an inactive player
     //-----------------------
     else{
-/*
-      //hide all stones in sleds
-      this.bottomLeftComponent.hideStone();
-      this.topLeftComponent.hideStone();
-      this.topRightComponent.hideStone();
-      this.bottomRightComponent.hideStone();
-*/
+
       //let active player field glow, not the others
       if(currentActivePlayerField===ColourEnum.black){
         this.bottomLeftComponent.playerFieldGlow(true);
@@ -619,7 +584,6 @@ export class GameComponent  implements OnInit {
       this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
 
     }
-
   }
 
   initRound(round: Round){
@@ -808,8 +772,7 @@ export class GameComponent  implements OnInit {
 
     this.amI_CurrentActivePlayer=this.game.amI_CurrentActivePlayer; //important for dragula to work
 
-    this.activateActivePlayerInteractions(this.game.amI_CurrentActivePlayer, this.game.currentActivePlayerField);
-    this.deactivateInactivePlayerInteractions(this.game.amI_CurrentActivePlayer, this.game.currentActivePlayerField);
+    this.activateActivePlayerInteractions(this.game.currentActivePlayerField);
   }
 
   //Called exactly once, when the server tells us the game has ended
@@ -901,62 +864,6 @@ export class GameComponent  implements OnInit {
     if(1){console.log("showSnackbarMessenger")};
   }
 
-  //===========================================================
-  // Main Task 1: Inactive Players: Make them passive
-  //===========================================================
-
-  deactivateInactivePlayerInteractions(amI_CurrentActivePlayer:boolean,
-                                       currentActivePlayerField:ColourEnum){
-    //I am an inactive player
-    //-----------------------
-    if (!amI_CurrentActivePlayer){
-
-      //hide all stones in sleds (no see, no touch)
-      //-------------------------------------------
-      /*
-      this.bottomLeftComponent.hideStone();
-      this.topLeftComponent.hideStone();
-      this.topRightComponent.hideStone();
-      this.bottomRightComponent.hideStone();
-      */
-
-      //let active player field glow, not the others
-      //--------------------------------------------
-      if(currentActivePlayerField===ColourEnum.black){
-        this.bottomLeftComponent.playerFieldGlow(true);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(false);
-      }
-      if(currentActivePlayerField===ColourEnum.white){
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(true);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(false);
-      }
-      if(currentActivePlayerField===ColourEnum.brown){
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(true);
-        this.bottomRightComponent.playerFieldGlow(false);
-      }
-      if(currentActivePlayerField===ColourEnum.gray){
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(true);
-      }
-
-      // switch off click handlers on all stone quarries
-      this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
-      this.topLeftComponent.removeClickHandlerOnStoneQuarry();
-      this.topRightComponent.removeClickHandlerOnStoneQuarry();
-      this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
-
-    }
-
-  }
-
 
   //=============================================================
   // Main Task 2:
@@ -964,123 +871,13 @@ export class GameComponent  implements OnInit {
   //=============================================================
 
 
-  activateActivePlayerInteractions(
-                                   amI_CurrentActivePlayer:boolean,
-                                   currentActivePlayerField:ColourEnum){
+  activateActivePlayerInteractions(currentActivePlayerField:ColourEnum){
 
-    if (amI_CurrentActivePlayer) {
-      //TODO condense this into one function, NOT if-else
+    for(let player of this.game.players){
 
-      //TODO market card update shit needs to be re-written
-
-      //I am active player on black field
-      //--------------------------------
-      if(currentActivePlayerField===ColourEnum.black){
-
-        //show my stone in sled, hide the others
-        //BUT only if enough stones in sled
-        /*
-        this.bottomLeftComponent.showStone();
-        this.topLeftComponent.hideStone();
-        this.topRightComponent.hideStone();
-        this.bottomRightComponent.hideStone();
-*/
-        //let active player field glow, not the others
-        this.bottomLeftComponent.playerFieldGlow(true);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(false);
-
-        //only switch on Market Icon colors with numbers in it
-        //----------------------------------------------------
-
-        // switch on click handlers on your stone quarry, switch off the others
-        this.bottomLeftComponent.setClickHandlerOnStoneQuarry();
-        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topRightComponent.removeClickHandlerOnStoneQuarry();
-        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
-
-
-      }
-
-      //I am active player on white field
-      //--------------------------------
-      else if(this.myPlayerField===ColourEnum.white){
-
-        //show my stone in sled, hide the others
-        //BUT only if enough stones in sled
-        /*
-        this.bottomLeftComponent.hideStone();
-        this.topLeftComponent.showStone();
-        this.topRightComponent.hideStone();
-        this.bottomRightComponent.hideStone();
-*/
-        //let active player field glow, not the others
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(true);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(false);
-
-        // switch on click handlers on your stone quarry, switch off the others
-        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topLeftComponent.setClickHandlerOnStoneQuarry();
-        this.topRightComponent.removeClickHandlerOnStoneQuarry();
-        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
-      }
-
-      //I am active player on brown field
-      //--------------------------------
-      else if(this.myPlayerField===ColourEnum.brown){
-
-        //show my stone in sled, hide the others
-        //BUT only if enough stones in sled
-        /*
-        this.bottomLeftComponent.hideStone();
-        this.topLeftComponent.hideStone();
-        this.topRightComponent.showStone();
-        this.bottomRightComponent.hideStone();
-*/
-        //let active player field glow, not the others
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(true);
-        this.bottomRightComponent.playerFieldGlow(false);
-
-        // switch on click handlers on your stone quarry, switch off the others
-        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topRightComponent.setClickHandlerOnStoneQuarry();
-        this.bottomRightComponent.removeClickHandlerOnStoneQuarry();
-
-      }
-
-      //I am active player on gray field
-      //-------------------------------
-      if(this.myPlayerField===ColourEnum.gray){
-
-        //show my stone in sled, hide the others
-        //BUT only if enough stones in sled
-        /*
-        this.bottomLeftComponent.hideStone();
-        this.topLeftComponent.hideStone();
-        this.topRightComponent.hideStone();
-        this.bottomRightComponent.showStone();
-*/
-
-        //let active player field glow, not the others
-        this.bottomLeftComponent.playerFieldGlow(false);
-        this.topLeftComponent.playerFieldGlow(false);
-        this.topRightComponent.playerFieldGlow(false);
-        this.bottomRightComponent.playerFieldGlow(true);
-
-        // switch on click handlers on your stone quarry, switch off the others
-        this.bottomLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topLeftComponent.removeClickHandlerOnStoneQuarry();
-        this.topRightComponent.removeClickHandlerOnStoneQuarry();
-        this.bottomRightComponent.setClickHandlerOnStoneQuarry();
-
-      }
-
+      let isThisFieldActive = (currentActivePlayerField == this.nameToColourMap[player.username]);
+      this.playerMap[player.username].playerFieldGlow(isThisFieldActive)
+      console.log("Player " + name + " is active? " + isThisFieldActive)
     }
   }
 

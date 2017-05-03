@@ -158,18 +158,6 @@ export class BottomLeftComponent implements OnInit {
       this.sledStones += howMany;
   }
 
-  hideStone(){
-    (<any>$(document)).ready(function (){
-      (<any>$("#bag_1")).hide();
-    });
-  }
-
-  showStone(){
-    (<any>$(document)).ready(function (){
-      (<any>$("#bag_1")).show();
-    });
-  }
-
   //===========================================================
   // PlayerField and Icon Colouring / Opacity change
   //===========================================================

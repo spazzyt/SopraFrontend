@@ -159,19 +159,6 @@ export class TopLeftComponent implements OnInit {
     this.sledStones += howMany;
   }
 
-  hideStone(){
-    (<any>$(document)).ready(function (){
-      (<any>$("#bag_2")).hide();
-    });
-
-  }
-
-  showStone(){
-    (<any>$(document)).ready(function (){
-      (<any>$("#bag_2")).show();
-    });
-  }
-
 
   //===========================================================
   // PlayerField and Icon Colouring / Opacity change
