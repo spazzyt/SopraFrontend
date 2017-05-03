@@ -143,7 +143,6 @@ export class GameComponent  implements OnInit {
     this.sites["Obelisk"] = this.obeliskComponent;
     this.sites["Market"] = this.marketComponent;
 
-
     // (+) converts string 'id' to a number
     let id = +this.route.snapshot.params['id'];
 
@@ -742,6 +741,13 @@ export class GameComponent  implements OnInit {
 
   //Show lever modal (for choosing stone order)
   showLeverModal(shipNr){
+
+    this.pyramidComponent.finalDestinationComponent.leverPlayed = this.game.leverPlayed;
+    this.templeComponent.finalDestinationComponent.leverPlayed = this.game.leverPlayed;
+    this.burialChamberComponent.finalDestinationComponent.leverPlayed = this.game.leverPlayed;
+    this.obeliskComponent.finalDestinationComponent.leverPlayed = this.game.leverPlayed;
+    this.marketComponent.finalDestinationComponent.leverPlayed = this.game.leverPlayed;
+
     let tempStones = new Array<Stone>();
 
     for(let i = 0; i < this.ships[shipNr].slots.length; i++){

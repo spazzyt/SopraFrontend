@@ -22,6 +22,8 @@ export class FinalDestinationComponent implements OnInit {
   @Input()
   parent;
 
+  leverPlayed: boolean;
+
   constructor(private gameService: GameService,
            private inj:Injector) {
 
@@ -39,10 +41,17 @@ export class FinalDestinationComponent implements OnInit {
     ship.isInHarbour = false;
     this.ship = ship;
     console.log("dropped ship_ ", ship);
+    console.log("lever status: ", this.leverPlayed);
 
-    //TODO get info from parent on whether lever has been played
-    this.parent.placeStones(this.ship.slots);
-    this.ship.slots = null;
+
+    if(!this.leverPlayed)
+    {
+      this.parent.placeStones(this.ship.slots);
+      this.ship.slots = null;
+    }
+    else{
+      console.log('LEVER HAS BEEN PLAYED, OPENING MODAL');
+    }
 
     let moveToSend = new Move(PositionEnum.DepartingHarbour, this.id, ship.id);
     this.gameService.sendMove(moveToSend)

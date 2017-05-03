@@ -264,9 +264,17 @@ export class BottomLeftComponent implements OnInit {
 
         case 8: //Lever
           //lets the game know the lever has been played
-          console.log("PLAYING LEVER! STATUS: " + this.gameComp.game.leverPlayed)
+          console.log("PLAYING LEVER! STATUS: " + this.gameComp.game.leverPlayed);
           this.gameComp.game.leverPlayed = true;
-          console.log("THE LEVER HAS BEEN PLAYED! STATUS: " + this.gameComp.game.leverPlayed)
+          console.log("THE LEVER HAS BEEN PLAYED! STATUS: " + this.gameComp.game.leverPlayed);
+
+
+          this.gameComp.pyramidComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.templeComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.burialChamberComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.obeliskComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.marketComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+
           //TODO wait until player sails a ship to a site
           //TODO then show modal for choosing stone order (WITH the corresponding ship)
           break;
