@@ -154,7 +154,6 @@ export class BottomLeftComponent implements OnInit {
     (<any>$(document)).ready(function (){
       (<any>$("#bag_1")).hide();
     });
-
   }
 
   showStone(){
