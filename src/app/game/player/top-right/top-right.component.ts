@@ -174,10 +174,10 @@ export class TopRightComponent implements OnInit {
 
   playerFieldGlow(status: boolean) {
     (<any>$(document)).ready(() => {
-      if(status) // TODO change glow to glow3?
-        (<any>$("#glow")).css("background-image", "url(../../assets/images/top_right_active.png)");
+      if(status)
+        (<any>$("#glow3")).css("background-image", "url(../../assets/images/top_right_active.png)");
       else
-        (<any>$("#glow")).css("background-image", "url(../../assets/images/top_right.png)");
+        (<any>$("#glow3")).css("background-image", "url(../../assets/images/top_right.png)");
     });
   }
 
