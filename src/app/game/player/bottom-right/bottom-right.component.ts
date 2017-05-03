@@ -200,7 +200,7 @@ export class BottomRightComponent implements OnInit {
 
     //TODO when copypasting, adapt "black" to other players colour!!
     //if player has this card and it's his turn
-    if(this.myColour == ColourEnum.black && this.canIPlay && this.cardNumbers[index] > 0){
+    if(this.myColour == ColourEnum.gray && this.canIPlay && this.cardNumbers[index] > 0){
 
       console.log("SHIPPERINOS: ", this.ships);
       //determine amount of free slots on all ships (to check if you can place two stones on ships)
