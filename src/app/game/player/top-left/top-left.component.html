@@ -8,7 +8,7 @@
   <!--drag and drop zone-->
   <div id="supply_sled_2" class="low_m ">
 
-    <div id="bag_2" class="stone_icon" dnd-draggable [dragEnabled]="hasStones" [dropZones]="['slots']" [dragData]="playerFieldStone">
+    <div id="bag_2" class="stone_icon" dnd-draggable [dragEnabled]="isThisMyField && hasStones" [dropZones]="['slots']" [dragData]="playerFieldStone">
       <app-stone id="stones_2" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
     </div>
 

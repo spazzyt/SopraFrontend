@@ -479,11 +479,12 @@ export class GameComponent  implements OnInit {
       if(currentActivePlayerField===ColourEnum.black){
 
         //show my stone in sled, hide the others
+        /*
         this.bottomLeftComponent.showStone();
         this.topLeftComponent.hideStone();
         this.topRightComponent.hideStone();
         this.bottomRightComponent.hideStone();
-
+*/
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(true);
         this.topLeftComponent.playerFieldGlow(false);
@@ -503,11 +504,12 @@ export class GameComponent  implements OnInit {
       else if(this.myPlayerField===ColourEnum.white){
 
         //show my stone in sled, hide the others
+        /*
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.showStone();
         this.topRightComponent.hideStone();
         this.bottomRightComponent.hideStone();
-
+*/
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(true);
@@ -526,12 +528,13 @@ export class GameComponent  implements OnInit {
       //--------------------------------
       else if(this.myPlayerField===ColourEnum.brown){
 
-        //show my stone in sled, hide the others
+        //show my stone in sled, hide the others$
+        /*
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.hideStone();
         this.topRightComponent.showStone();
         this.bottomRightComponent.hideStone();
-
+*/
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(false);
@@ -550,13 +553,13 @@ export class GameComponent  implements OnInit {
       //I am active player on gray field
       //-------------------------------
       if(this.myPlayerField===ColourEnum.gray){
-
+/*
         //show my stone in sled, hide the others
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.hideStone();
         this.topRightComponent.hideStone();
         this.bottomRightComponent.showStone();
-
+*/
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(false);
@@ -576,13 +579,13 @@ export class GameComponent  implements OnInit {
     //I am an inactive player
     //-----------------------
     else{
-
+/*
       //hide all stones in sleds
       this.bottomLeftComponent.hideStone();
       this.topLeftComponent.hideStone();
       this.topRightComponent.hideStone();
       this.bottomRightComponent.hideStone();
-
+*/
       //let active player field glow, not the others
       if(currentActivePlayerField===ColourEnum.black){
         this.bottomLeftComponent.playerFieldGlow(true);
@@ -910,10 +913,12 @@ export class GameComponent  implements OnInit {
 
       //hide all stones in sleds (no see, no touch)
       //-------------------------------------------
+      /*
       this.bottomLeftComponent.hideStone();
       this.topLeftComponent.hideStone();
       this.topRightComponent.hideStone();
       this.bottomRightComponent.hideStone();
+      */
 
       //let active player field glow, not the others
       //--------------------------------------------
@@ -974,11 +979,12 @@ export class GameComponent  implements OnInit {
 
         //show my stone in sled, hide the others
         //BUT only if enough stones in sled
+        /*
         this.bottomLeftComponent.showStone();
         this.topLeftComponent.hideStone();
         this.topRightComponent.hideStone();
         this.bottomRightComponent.hideStone();
-
+*/
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(true);
         this.topLeftComponent.playerFieldGlow(false);
@@ -1003,11 +1009,12 @@ export class GameComponent  implements OnInit {
 
         //show my stone in sled, hide the others
         //BUT only if enough stones in sled
+        /*
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.showStone();
         this.topRightComponent.hideStone();
         this.bottomRightComponent.hideStone();
-
+*/
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(true);
@@ -1027,11 +1034,12 @@ export class GameComponent  implements OnInit {
 
         //show my stone in sled, hide the others
         //BUT only if enough stones in sled
+        /*
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.hideStone();
         this.topRightComponent.showStone();
         this.bottomRightComponent.hideStone();
-
+*/
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);
         this.topLeftComponent.playerFieldGlow(false);
@@ -1052,11 +1060,12 @@ export class GameComponent  implements OnInit {
 
         //show my stone in sled, hide the others
         //BUT only if enough stones in sled
+        /*
         this.bottomLeftComponent.hideStone();
         this.topLeftComponent.hideStone();
         this.topRightComponent.hideStone();
         this.bottomRightComponent.showStone();
-
+*/
 
         //let active player field glow, not the others
         this.bottomLeftComponent.playerFieldGlow(false);

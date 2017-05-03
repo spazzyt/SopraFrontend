@@ -60,6 +60,9 @@ export class TopLeftComponent implements OnInit {
   // does the player have stones in his sleds
   public hasStones:boolean;
 
+  //is this my field?
+  public isThisMyField: boolean = false;
+
 
   //==============
   // Event Emitter
@@ -85,6 +88,11 @@ export class TopLeftComponent implements OnInit {
   }
 
   checkStonesDragable(){
+    if(this.myColour == ColourEnum.white){
+      this.isThisMyField = true;
+    }
+    else this.isThisMyField = false;
+
     this.hasStones=this.sledStones>0;
   }
 
