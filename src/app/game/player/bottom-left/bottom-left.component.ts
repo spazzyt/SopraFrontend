@@ -316,7 +316,7 @@ export class BottomLeftComponent implements OnInit {
 
   takeStonesFromQuarryToSled(){
 
-    if(this.canIPlay && this.quarryStones > 0){
+    if(this.myColour == ColourEnum.black && this.canIPlay && this.quarryStones > 0){
 
       //make calculations (how many stones, needed to send correct move to backend)
       let stonesInQuarry:number;

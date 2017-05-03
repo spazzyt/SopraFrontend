@@ -5,6 +5,9 @@ import {SupplySled} from "../../../shared/models/supply-sled";
 import {StoneQuarry} from "../../../shared/models/stone-quarry";
 import {Ship} from "../../../shared/models/ship";
 import {MarketCard} from "../../../shared/models/market-card";
+import {GameService} from "../../../shared/services/game.service";
+import {Move} from "../../../shared/models/move";
+import {PositionEnum} from "../../../shared/models/position.enum";
 
 @Component({
   selector: 'app-bottom-right',
@@ -73,7 +76,7 @@ export class BottomRightComponent implements OnInit {
   //===============
   //Constructor
   //===============
-  constructor() {
+  constructor(private gameService: GameService) {
 
   }
 
@@ -315,5 +318,44 @@ export class BottomRightComponent implements OnInit {
     }
 
     return returnArray;
+  }
+
+  //=============================
+  // Quarry Functionality
+  //=============================
+
+  takeStonesFromQuarryToSled(){
+
+    if(this.myColour == ColourEnum.gray && this.canIPlay && this.quarryStones > 0){
+
+      //make calculations (how many stones, needed to send correct move to backend)
+      let stonesInQuarry:number;
+      let stonesInSled:number;
+      let stonesToTake:number;
+
+      stonesInQuarry=this.quarryStones;
+      stonesInSled=this.sledStones;
+
+      if(stonesInSled < 5){
+        if(stonesInSled < 3){
+          stonesToTake = Math.min(stonesInQuarry, 3);
+        }
+        else{
+          stonesToTake = Math.min(stonesInQuarry, 5-stonesInSled);
+        }
+      }
+      else{
+        //this.showSnackbarMessage("You can't take any stones because your sled is full.")
+        return;
+      }
+
+      //generate move object
+      let moveToSend = new Move(PositionEnum.Quarry, PositionEnum.Sled, stonesToTake);
+      //Send move to backend
+      this.gameService.sendMove(moveToSend);
+
+      //snackbar message (only locally)
+      //this.showSnackbarMessage("You took "+ stonesToTake+" stone(s) from the quarry.");
+    }
   }
 }
