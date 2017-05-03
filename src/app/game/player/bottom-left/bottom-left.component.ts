@@ -38,7 +38,7 @@ export class BottomLeftComponent implements OnInit {
   public supplySled: SupplySled;
 
   // the player's name
-  public playerName:string;
+  public playerName:string = '.';
 
   // the player's score
   public score:number;

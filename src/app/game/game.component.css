@@ -46,7 +46,7 @@
 }
 
 .info_box{
-  /* Uses a workaround at the moment to overflow background image into the top and bottom playerfields */
+  /* Uses a workaround to overflow background image into the top and bottom playerfields */
   width: 184px;
   height: 521px;
   background-image: url(../../assets/images/infobox.png);
