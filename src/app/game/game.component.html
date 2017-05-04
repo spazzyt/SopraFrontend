@@ -150,7 +150,7 @@
   <div class="container_side container_right">
     <!-- Top Right Player Field -->
     <div class="player_field player_top_right"> <!-- re-add:  *ngIf="game?.players.length > 2"  -->
-      <app-top-right id="playerField_3" [ships]="game?.ships" [marketCards]="game?.player3CardDeck" [canIPlay]="game?.amI_CurrentActivePlayer" [myColour]="game?.myPlayerField"></app-top-right>
+      <app-top-right id="playerField_3" [players]="game?.players" [ships]="game?.ships" [marketCards]="game?.player3CardDeck" [canIPlay]="game?.amI_CurrentActivePlayer" [myColour]="game?.myPlayerField"></app-top-right>
     </div>
 
     <!-- if no player 3, add hidden player field
@@ -161,7 +161,7 @@
     </div>
     <!-- Bottom Right Player Field -->
     <div class="player_field player_bottom_right"> <!-- re-add: *ngIf="game?.players.length > 3"  -->
-      <app-bottom-right id="playerField_4" [ships]="game?.ships" [marketCards]="game?.player4CardDeck" [canIPlay]="game?.amI_CurrentActivePlayer" [myColour]="game?.myPlayerField"></app-bottom-right>
+      <app-bottom-right id="playerField_4" [players]="game?.players" [ships]="game?.ships" [marketCards]="game?.player4CardDeck" [canIPlay]="game?.amI_CurrentActivePlayer" [myColour]="game?.myPlayerField"></app-bottom-right>
     </div>
 
     <!-- if no player 4, add hidden player field

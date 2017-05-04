@@ -1,5 +1,5 @@
 <div class="background" id="glow">
-<div class="bottom_part">
+<div [ngStyle]="{'visibility': (players?.length > 2)?'visible':'hidden'}" class="bottom_part">
 
   <div id="score_3" class="low_r score">
     <p class="non-draggable">{{score}}</p>
@@ -21,7 +21,7 @@
 
 </div>
 
-<div class="top_part">
+<div [ngStyle]="{'visibility': (players?.length > 2)?'visible':'hidden'}" class="top_part">
 
   <!-- copied from cards.component.html -->
   <div class="cards_container">

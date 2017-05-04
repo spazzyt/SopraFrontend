@@ -1,6 +1,6 @@
 <div class="background" id="glow4">
 
-<div class="top_part">
+<div [ngStyle]="{'visibility': (players?.length > 3)?'visible':'hidden'}" class="top_part">
 
   <div class="player_name">
     <p class = name_text>{{playerName}}</p>
@@ -34,7 +34,7 @@
 </div>
 
 
-<div class="bottom_part">
+<div [ngStyle]="{'visibility': (players?.length > 3)?'visible':'hidden'}" class="bottom_part">
   <div id="score_4" class="low_r score">
     <p class="non-draggable">{{score}}</p>
   </div>

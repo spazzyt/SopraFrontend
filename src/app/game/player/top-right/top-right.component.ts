@@ -9,6 +9,7 @@ import {Ship} from "../../../shared/models/ship";
 import {GameService} from "../../../shared/services/game.service";
 import {Move} from "../../../shared/models/move";
 import {PositionEnum} from "../../../shared/models/position.enum";
+import {User} from "../../../shared/models/user";
 
 @Component({
   selector: 'app-top-right',
@@ -29,6 +30,9 @@ export class TopRightComponent implements OnInit {
   canIPlay: boolean;
   @Input()
   myColour: ColourEnum;
+
+  @Input()
+  players: User[];
 
   //===============
   //Class Variables
