@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {Move} from "../models/move";
 import { environment } from '../../../environments/environment';
 import {ColourEnum} from "../models/colour.enum";
+import {PositionEnum} from "../models/position.enum";
 
 @Injectable()
 export class GameService {
@@ -45,10 +46,12 @@ export class GameService {
 
   sendMove(move: Move){
     if(this.gameComp.game.leverPlayed){  //Lever played: let player choose order before sending move
-      this.gameComp.infoBoxComponent.leverShip = move.pos;
-      this.gameComp.showLeverModal(move.pos);
+      if(move.to != PositionEnum.DepartingHarbour){
+        this.gameComp.infoBoxComponent.leverShip = move.pos;
+        this.gameComp.showLeverModal(move.pos);
+      }
     }
-    else if(!this.game.leverModalOpen){ //if the lever modal is open, the ships shall not send any moves for moving stones on them
+    else if(!this.game.leverPlayed){ //if the lever modal is open, the ships shall not send any moves for moving stones on them
 
       let bodyString = JSON.stringify(move); // Stringify payload
       let headers = new Headers({

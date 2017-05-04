@@ -71,7 +71,7 @@ export class InfoBoxComponent implements OnInit {
   showLeverModal(stones: Stone[]){
 
     this.leverStones = stones;
-
+    console.log("SAVED STONES FOR LEVER: ", this.leverStones)
     document.getElementById('lever_btn').click();
   }
 
@@ -93,7 +93,6 @@ export class InfoBoxComponent implements OnInit {
     this.game.leverModalOpen = false;
     this.game.leverPlayed = false; //TODO check this
     console.log("LEVER STATUS: " + this.game.leverPlayed)
-
 
     //TODO tell game to continue, send move?? --> check with backend
   }

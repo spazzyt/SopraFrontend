@@ -28,7 +28,6 @@ import {MarketCard} from "../shared/models/market-card";
 import {UserService} from "../shared/services/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {Round} from "../shared/models/round";
-import {GameStatusEnum} from "../shared/models/game-status.enum";
 import {PositionEnum} from "../shared/models/position.enum";
 import {Move} from "../shared/models/move";
 import {WSService} from "../shared/services/websocket.service";

@@ -275,8 +275,6 @@ export class BottomLeftComponent implements OnInit {
           this.gameComp.obeliskComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
           this.gameComp.marketComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
 
-          //TODO wait until player sails a ship to a site
-          //TODO then show modal for choosing stone order (WITH the corresponding ship)
           break;
       }
 
