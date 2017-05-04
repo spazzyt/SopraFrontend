@@ -138,21 +138,26 @@ export class InfoBoxComponent implements OnInit {
     let leverMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, cardId, shipId, stoneArray);
 
     //Send to backend
-    this.gameService.sendMove(leverMove);
-    console.log("SENT FIRST MOVE: ", leverMove);
+    this.gameService.sendMove(leverMove).subscribe( resp => {
 
-    //Generate & send second move: ship to site
-    let destination = this.leverDestination;
-    console.log("LEVER DESTINATION: ", this.leverDestination);
+      console.log("SENT FIRST MOVE: ", leverMove);
 
-    let leverMove2 = new Move(PositionEnum.DepartingHarbour, destination, this.leverShip)
+      //Generate & send second move: ship to site
+      let destination = this.leverDestination;
+      console.log("LEVER DESTINATION: ", this.leverDestination);
 
-    //Send to backend
-    this.gameService.sendMove(leverMove2);
+      let leverMove2 = new Move(PositionEnum.DepartingHarbour, destination, this.leverShip)
 
-    console.log("SENT SECOND MOVE: ", leverMove2);
+      //Send to backend
+      this.gameService.sendMove(leverMove2);
 
-    console.log("LEVER FINISHED, NEW STATUS: " + this.game.leverPlayed)
+      console.log("SENT SECOND MOVE: ", leverMove2);
+
+      console.log("LEVER FINISHED, NEW STATUS: " + this.game.leverPlayed)
+
+      }
+    );
+
 
 
   }

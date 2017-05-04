@@ -549,7 +549,7 @@ export class GameComponent  implements OnInit {
         this.playerMap[username].update_takeStonesFromQuarry(move.pos);
 
         //show snackbar
-        let numStones = move.pos //TODO check that backend number is at most 3
+        let numStones = move.pos;
         this.showSnackbarMessage(username.substring(0,10) + ' took ' + numStones + ' stone(s) from the quarry.');
 
         //update score, sled & quarry
