@@ -590,13 +590,44 @@ export class GameComponent  implements OnInit {
         break;
 
 
-      //Sail ship to Market:
+      //Sail ship to Market OR player played card:
       case PositionEnum.Market:
-        this.moveShipById(move.pos, 'Market');
 
-        //remove stones from ship
-        this.game.ships[move.pos].slots = [];
+        //Case 1: a player played a card
+        if(move.from == PositionEnum.PlayerCardStack){
 
+          //If it's a lever card
+          if(move.LeverStones != null){
+            for(let i = 0; i < move.LeverStones.length; i++){
+              if(move.LeverStones[i] == 0){
+                this.game.ships[move.pos].slots[i] = null;
+              }
+              else if(move.LeverStones[i] == 1){
+                this.game.ships[move.pos].slots[i] = new Stone(null, ColourEnum.black);
+              }
+              else if(move.LeverStones[i] == 2){
+                this.game.ships[move.pos].slots[i] = new Stone(null, ColourEnum.white);
+              }
+              else if(move.LeverStones[i] == 3){
+                this.game.ships[move.pos].slots[i] = new Stone(null, ColourEnum.brown);
+              }
+              else if(move.LeverStones[i] == 4){
+                this.game.ships[move.pos].slots[i] = new Stone(null, ColourEnum.gray);
+              }
+            }
+          }
+
+          //TODO other cards if needed
+
+        }
+        else
+        {
+          //Ship to market
+          this.moveShipById(move.pos, 'Market');
+
+          //remove stones from ship
+          this.game.ships[move.pos].slots = [];
+        }
         break;
 
       //Place stone on ship:

@@ -1,5 +1,4 @@
 import {PositionEnum} from "./position.enum";
-import {Stone} from "./stone";
 export class Move {
 
   //Backend attributes

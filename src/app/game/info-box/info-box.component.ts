@@ -108,7 +108,7 @@ export class InfoBoxComponent implements OnInit {
 
 
     //Generate & send first move: new card order
-    let cardId = this.leverId;      //TODO get correct
+    let cardId = this.leverId;
     console.log("SHIP ID SENT TO BACKEND: ", this.leverShip);
     let shipId = this.leverShip;
 
