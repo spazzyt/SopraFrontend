@@ -596,23 +596,27 @@ export class GameComponent  implements OnInit {
         //Case 1: a player played a card
         if(move.from == PositionEnum.PlayerCardStack){
 
+          console.log("OTHER PLAYER PLAYED A CARD!");
           //If it's a lever card
           if(move.LeverStones != null){
+
+            console.log("OTHER PLAYER PLAYED LEVER, STONES ARE: ", move.LeverStones, move.pos);
+            console.log("CHANGE STONES ON THIS SHIP: ", this.game.ships[move.ShipID]);
             for(let i = 0; i < move.LeverStones.length; i++){
               if(move.LeverStones[i] == 0){
-                this.game.ships[move.pos].slots[i] = null;
+                this.game.ships[move.ShipID].slots[i] = null;
               }
               else if(move.LeverStones[i] == 1){
-                this.game.ships[move.pos].slots[i] = new Stone(null, ColourEnum.black);
+                this.game.ships[move.ShipID].slots[i] = new Stone(null, ColourEnum.black);
               }
               else if(move.LeverStones[i] == 2){
-                this.game.ships[move.pos].slots[i] = new Stone(null, ColourEnum.white);
+                this.game.ships[move.ShipID].slots[i] = new Stone(null, ColourEnum.white);
               }
               else if(move.LeverStones[i] == 3){
-                this.game.ships[move.pos].slots[i] = new Stone(null, ColourEnum.brown);
+                this.game.ships[move.ShipID].slots[i] = new Stone(null, ColourEnum.brown);
               }
               else if(move.LeverStones[i] == 4){
-                this.game.ships[move.pos].slots[i] = new Stone(null, ColourEnum.gray);
+                this.game.ships[move.ShipID].slots[i] = new Stone(null, ColourEnum.gray);
               }
             }
           }
