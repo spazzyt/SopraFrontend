@@ -48,6 +48,12 @@ export class GameService {
     if(this.gameComp.game.leverPlayed){  //Lever played: let player choose order before sending move
       if(move.to != PositionEnum.DepartingHarbour){
         this.gameComp.infoBoxComponent.leverShip = move.pos;
+
+        //If ship was moved to site, save site name to infoboxcomponent (for use in its sendmove)
+        if(move.to == PositionEnum.Market || move.to == PositionEnum.Pyramid || move.to == PositionEnum.Temple || move.to == PositionEnum.BurialChamber || move.to == PositionEnum.Obelisk   ){
+          this.gameComp.infoBoxComponent.leverDestination = move.to;
+        }
+
         this.gameComp.showLeverModal(move.pos);
       }
     }

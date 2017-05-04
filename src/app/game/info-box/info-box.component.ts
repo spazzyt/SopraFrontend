@@ -5,6 +5,9 @@ import {LobbyService} from "../../shared/services/lobby.service";
 import {Ship} from "../../shared/models/ship";
 import {Stone} from "../../shared/models/stone";
 import {isNullOrUndefined} from "util";
+import {GameService} from "../../shared/services/game.service";
+import {Move} from "../../shared/models/move";
+import {PositionEnum} from "../../shared/models/position.enum";
 
 @Component({
   selector: 'app-info-box',
@@ -32,11 +35,17 @@ export class InfoBoxComponent implements OnInit {
   roundNumber:number=1;
   leverStones: Stone[];
 
+  //TODO set from other component, use
+  leverDestination: PositionEnum;
+  leverOrder: Stone[];
+
+
   //=============
   // Constructor
   //=============
   constructor(private router:Router,
-              private lobbyService:LobbyService
+              private lobbyService:LobbyService,
+              private gameService:GameService
   ) { }
 
 
@@ -81,6 +90,7 @@ export class InfoBoxComponent implements OnInit {
 
     for(let i = 0; i < this.leverStones.length; i++){
       if(!isNullOrUndefined(this.leverStones[i])){
+        //TODO display a message like "you haven't chosen all stones yet"
         return; //if one of the stones in the "choose" array is not null, the player hasn't finished yet
       }
     }
@@ -90,11 +100,37 @@ export class InfoBoxComponent implements OnInit {
 
     //tell the game that lever modal was closed
     //the leverModalOpen boolean is used locally to determine whether we need to send putting a stone on the ship as a move
+    //IMPORTANT: This MUST be set before sending move to backend, else it won't send (checks in sendMove for open levermodal)
     this.game.leverModalOpen = false;
-    this.game.leverPlayed = false; //TODO check this
-    console.log("LEVER STATUS: " + this.game.leverPlayed)
+    this.game.leverPlayed = false;
 
-    //TODO tell game to continue, send move?? --> check with backend
+
+    //Generate & send first move: new card order
+    let cardId = 23;      //TODO get correct
+    console.log("SHIP ID SENT TO BACKEND: ", this.leverShip);
+    let shipId = this.leverShip;
+    let stones: Stone[] = [null, null, null, null]; //TODO git gud
+
+    let leverMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, cardId, shipId, stones);
+
+    //Send to backend
+    this.gameService.sendMove(leverMove);
+    console.log("SENT FIRST MOVE: ", leverMove);
+
+    //Generate & send second move: ship to site
+    let destination = this.leverDestination;
+    console.log("LEVER DESTINATION: ", this.leverDestination);
+
+    let leverMove2 = new Move(PositionEnum.DepartingHarbour, destination, this.leverShip)
+
+    //Send to backend
+    this.gameService.sendMove(leverMove2);
+
+    console.log("SENT SECOND MOVE: ", leverMove);
+
+    console.log("LEVER FINISHED, NEW STATUS: " + this.game.leverPlayed)
+
+
   }
 
 
