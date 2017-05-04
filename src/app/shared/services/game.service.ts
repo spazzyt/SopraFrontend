@@ -91,7 +91,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px"  class="non-draggable" src="../../../../assets/images/cards/chisel.png"/>'
     });
@@ -103,7 +103,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/hammer.png"/>'
     });
@@ -115,7 +115,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/sail.png"/>'
     });
@@ -126,7 +126,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/lever.png"/>'
     });
@@ -137,7 +137,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statue.png"/>'
     });
@@ -148,7 +148,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/pyramiddec.png"/>'
     });
@@ -159,7 +159,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/templedec.png"/>'
     });
@@ -170,7 +170,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/burialdec.png"/>'
     });
@@ -181,7 +181,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/obeliskdec.png"/>'
     });
@@ -192,7 +192,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/chisel.png"/>'
     });
@@ -204,7 +204,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/hammer.png"/>'
     });
@@ -216,7 +216,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/sail.png"/>'
     });
@@ -227,7 +227,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/lever.png"/>'
     });
@@ -238,7 +238,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statue.png"/>'
     });
@@ -249,7 +249,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/pyramiddec.png"/>'
     });
@@ -260,7 +260,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/templedec.png"/>'
     });
@@ -271,7 +271,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/burialdec.png"/>'
     });
@@ -282,7 +282,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/obeliskdec.png"/>'
     });
@@ -293,7 +293,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/chisel.png"/>'
     });
@@ -305,7 +305,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/hammer.png"/>'
     });
@@ -317,7 +317,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/sail.png"/>'
     });
@@ -328,7 +328,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/lever.png"/>'
     });
@@ -339,7 +339,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statue.png"/>'
     });
@@ -350,7 +350,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/pyramiddec.png"/>'
     });
@@ -361,7 +361,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/templedec.png"/>'
     });
@@ -372,7 +372,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/burialdec.png"/>'
     });
@@ -383,7 +383,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/obeliskdec.png"/>'
     });
@@ -394,7 +394,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px"  class="non-draggable" src="../../../../assets/images/cards/chisel.png"/>'
     });
@@ -406,7 +406,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/hammer.png"/>'
     });
@@ -418,7 +418,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/sail.png"/>'
     });
@@ -429,7 +429,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/lever.png"/>'
     });
@@ -440,7 +440,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/statue.png"/>'
     });
@@ -451,7 +451,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/pyramiddec.png"/>'
     });
@@ -462,7 +462,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/templedec.png"/>'
     });
@@ -473,7 +473,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/burialdec.png"/>'
     });
@@ -484,7 +484,7 @@ export class GameService {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      delay: {show: 50, hide: 20}, //delay-test for popover hover
       html: true,
       content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/obeliskdec.png"/>'
     });

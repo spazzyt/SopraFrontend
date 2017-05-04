@@ -48,7 +48,8 @@ export class MarketComponent extends Site implements OnInit {
       trigger : 'hover',
       toggle: 'popover',
       title: '',
-      delay: {show: 500, hide: 500}, //delay-test for popover hover
+      show: 5500,
+      hide: 5500, //delay-test for popover hover
       html: true,
       content : '<p>For each stone delivered here, ' +
                     'the owner of the stone can immediately take any 1 face-up market card.</p>'
