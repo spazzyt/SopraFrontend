@@ -50,6 +50,7 @@ export class GameService {
         this.gameComp.infoBoxComponent.leverShip = move.pos;
 
         //If ship was moved to site, save site name to infoboxcomponent (for use in its sendmove)
+        //TODO add here so that gameComp executes the stone-unloading move locally, as soon as backend fixes its shit
         if(move.to == PositionEnum.Market || move.to == PositionEnum.Pyramid || move.to == PositionEnum.Temple || move.to == PositionEnum.BurialChamber || move.to == PositionEnum.Obelisk   ){
           this.gameComp.infoBoxComponent.leverDestination = move.to;
         }
