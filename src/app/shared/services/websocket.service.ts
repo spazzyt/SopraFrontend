@@ -135,12 +135,14 @@ export class WSService {
           {
             let moveToDo = msg.payload.move;
             gameComponent.updateUiForOneMove(moveToDo, msg.payload.player, msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries, msg.payload.youMad);
-
+            console.log("score array: ", msg.payload.berlinerScore);
           }
           //if move was by me, only update stone statistics
           else{
 
             console.log("Received my own move from server, updating values");
+            console.log("score array: ", msg.payload.berlinerScore);
+
             gameComponent.updateScoreSledQuarry(msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
             gameComponent.updatePlayerCards(msg.payload.youMad); //update player cards
             gameComponent.updateStoneDragStatus();

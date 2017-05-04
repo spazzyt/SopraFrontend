@@ -494,7 +494,8 @@ export class GameComponent  implements OnInit {
 
     //set current score for player
     for(let player of this.game.players) {
-      this.playerMap[player.username].setStonesInSled(scores[player.username]);
+      this.playerMap[player.username].setScore(scores[player.username]);
+      console.log("SETTING PLAYER " + player.username + "'S SCORE TO: " + scores[player.username])
     }
 
     //set current sled stones for player
