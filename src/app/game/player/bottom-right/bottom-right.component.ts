@@ -9,6 +9,7 @@ import {Ship} from "../../../shared/models/ship";
 import {Move} from "../../../shared/models/move";
 import {PositionEnum} from "../../../shared/models/position.enum";
 import {GameService} from "../../../shared/services/game.service";
+import {User} from "../../../shared/models/user";
 
 @Component({
   selector: 'app-bottom-right',
@@ -32,7 +33,7 @@ export class BottomRightComponent implements OnInit {
   myColour: ColourEnum;
 
   @Input()
-  gameComp: any;
+  players: User[];
 
 
   //===============
