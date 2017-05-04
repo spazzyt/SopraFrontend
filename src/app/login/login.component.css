@@ -113,3 +113,47 @@
   outline: none;
 }
 
+.modal {
+  padding-right: 49%;
+}
+
+.modal-content{
+  border: 2px solid black;
+  width: 1080px;
+  background-color: #edcd98;
+}
+
+.modal-header{
+  border: 2px solid cyan;
+  width: 1040px;
+}
+
+
+.modal-body{
+  text-align: center;
+  border: 2px solid magenta;
+  width: 1040px;
+}
+
+.modal-title{
+  font-size: 26px;
+  color: #867558;
+  text-align: center;
+}
+
+
+.modal-footer{
+  border: 2px solid red;
+  width: 1040px;
+}
+
+#manualsize{
+  border: 2px solid greenyellow;
+  width: 1040px;
+  height: 500px;
+}
+
+
+
+
+
