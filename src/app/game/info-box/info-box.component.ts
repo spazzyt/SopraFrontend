@@ -8,6 +8,7 @@ import {isNullOrUndefined} from "util";
 import {GameService} from "../../shared/services/game.service";
 import {Move} from "../../shared/models/move";
 import {PositionEnum} from "../../shared/models/position.enum";
+import {ColourEnum} from "../../shared/models/colour.enum";
 
 @Component({
   selector: 'app-info-box',
@@ -35,10 +36,11 @@ export class InfoBoxComponent implements OnInit {
   roundNumber:number=1;
   leverStones: Stone[];
 
-  //TODO set from other component, use
+  //set from gameService, it tells the modal to which site the ship has sailed (so we can send the correct move)
   leverDestination: PositionEnum;
-  leverOrder: Stone[] = [null, null, null, null];
 
+  //ID of the lever card that was played; TODO set from other component
+  leverId: number;
 
   //=============
   // Constructor
@@ -106,11 +108,34 @@ export class InfoBoxComponent implements OnInit {
 
 
     //Generate & send first move: new card order
-    let cardId = 23;      //TODO get correct
+    let cardId = this.leverId;      //TODO get correct
     console.log("SHIP ID SENT TO BACKEND: ", this.leverShip);
     let shipId = this.leverShip;
-    let stones = this.leverOrder;
-    let leverMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, cardId, shipId, this.ships[shipId].slots);
+
+    //construct stone array in backend approved format:
+    // 0 = empty, 1 = black, 2 = white, 3 = brown, 4 = gray
+
+    let stoneArray: number[] = [];
+
+    for(let i = 0; i < this.ships[shipId].slots.length; i++){
+      if(this.ships[shipId].slots[i] == null){
+        stoneArray.push(0);
+      }
+      else if(this.ships[shipId].slots[i].colour == ColourEnum.black){
+        stoneArray.push(1);
+      }
+      else if(this.ships[shipId].slots[i].colour == ColourEnum.white){
+        stoneArray.push(2);
+      }
+      else if(this.ships[shipId].slots[i].colour == ColourEnum.brown){
+        stoneArray.push(3);
+      }
+      else if(this.ships[shipId].slots[i].colour == ColourEnum.gray){
+        stoneArray.push(4);
+      }
+    }
+
+    let leverMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, cardId, shipId, stoneArray);
 
     //Send to backend
     this.gameService.sendMove(leverMove);

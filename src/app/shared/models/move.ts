@@ -8,13 +8,13 @@ export class Move {
   public to:PositionEnum;
   public pos:number; //check with backend about usage
   public ShipID:number;
-  public LeverStones:Stone[];
+  public LeverStones:number[];
 
 
   //Additional Frontend attributes
   //==============================
 
-  constructor(from_: PositionEnum, to_: PositionEnum, pos_: number, shipId_?: number, leverStones_?: Stone[]){
+  constructor(from_: PositionEnum, to_: PositionEnum, pos_: number, shipId_?: number, leverStones_?: number[]){
 
     this.from=from_;
     this.to=to_;

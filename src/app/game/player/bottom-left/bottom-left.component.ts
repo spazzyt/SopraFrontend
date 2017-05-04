@@ -269,6 +269,21 @@ export class BottomLeftComponent implements OnInit {
           console.log("THE LEVER HAS BEEN PLAYED! STATUS: " + this.gameComp.game.leverPlayed);
 
 
+          let cardId= -1;
+
+          for(let card of this.marketCards){
+
+            //search for lever card in card array
+            if(card.id == 27 || card.id == 28){
+              cardId = card.id;
+              break;
+            }
+          }
+
+
+          this.gameComp.infoBoxComponent.leverId = cardId;
+          console.log("PLAYED LEVER CARD WITH ID " + cardId);
+
           this.gameComp.pyramidComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
           this.gameComp.templeComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
           this.gameComp.burialChamberComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
