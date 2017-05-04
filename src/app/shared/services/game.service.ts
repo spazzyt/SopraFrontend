@@ -206,7 +206,7 @@ export class GameService {
       title: '',
       delay: {show: 500, hide: 500}, //delay-test for popover hover
       html: true,
-      content : '<img height="150px" width="250px" src="../../../../assets/images/cards/hammer.png"/>'
+      content : '<img height="150px" width="250px" class="non-draggable" src="../../../../assets/images/cards/hammer.png"/>'
     });
 
 
