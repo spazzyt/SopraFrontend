@@ -1,13 +1,14 @@
 import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
 import {Stone} from "../../../shared/models/stone";
 import {ColourEnum} from "../../../shared/models/colour.enum";
-import {SupplySled} from "../../../shared/models/supply-sled";
 import {StoneQuarry} from "../../../shared/models/stone-quarry";
-import {Ship} from "../../../shared/models/ship";
+import {SupplySled} from "../../../shared/models/supply-sled";
 import {MarketCard} from "../../../shared/models/market-card";
-import {GameService} from "../../../shared/services/game.service";
+import {Game} from "../../../shared/models/game";
+import {Ship} from "../../../shared/models/ship";
 import {Move} from "../../../shared/models/move";
 import {PositionEnum} from "../../../shared/models/position.enum";
+import {GameService} from "../../../shared/services/game.service";
 
 @Component({
   selector: 'app-bottom-right',
@@ -29,6 +30,9 @@ export class BottomRightComponent implements OnInit {
   canIPlay: boolean;
   @Input()
   myColour: ColourEnum;
+
+  @Input()
+  gameComp: any;
 
 
   //===============
