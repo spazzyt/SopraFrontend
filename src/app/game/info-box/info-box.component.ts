@@ -37,7 +37,7 @@ export class InfoBoxComponent implements OnInit {
 
   //TODO set from other component, use
   leverDestination: PositionEnum;
-  leverOrder: Stone[];
+  leverOrder: Stone[] = [null, null, null, null];
 
 
   //=============
@@ -109,9 +109,8 @@ export class InfoBoxComponent implements OnInit {
     let cardId = 23;      //TODO get correct
     console.log("SHIP ID SENT TO BACKEND: ", this.leverShip);
     let shipId = this.leverShip;
-    let stones: Stone[] = [null, null, null, null]; //TODO git gud
-
-    let leverMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, cardId, shipId, stones);
+    let stones = this.leverOrder;
+    let leverMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, cardId, shipId, this.ships[shipId].slots);
 
     //Send to backend
     this.gameService.sendMove(leverMove);
@@ -126,7 +125,7 @@ export class InfoBoxComponent implements OnInit {
     //Send to backend
     this.gameService.sendMove(leverMove2);
 
-    console.log("SENT SECOND MOVE: ", leverMove);
+    console.log("SENT SECOND MOVE: ", leverMove2);
 
     console.log("LEVER FINISHED, NEW STATUS: " + this.game.leverPlayed)
 
