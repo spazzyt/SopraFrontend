@@ -44,7 +44,7 @@ export class GameService {
       .map((response: Response) => response.json());
   }
 
-  sendMove(move: Move){
+  sendMove(move: Move) : Observable<Response> {
     if(this.gameComp.game.leverPlayed){  //Lever played: let player choose order before sending move
       if(move.to != PositionEnum.DepartingHarbour){
         this.gameComp.infoBoxComponent.leverShip = move.pos;
@@ -68,11 +68,13 @@ export class GameService {
       params.set("token", this.authenticationService.token)
       let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
-      this.http.post(this.apiUrl + '/game/' + this.game.id + '/move', bodyString, options) // ...using post request
-        .catch((error: any) => Observable.throw(error.json().error || 'Server error')) //...errors if
-        .subscribe(response => {
+      let req= this.http.post(this.apiUrl + '/game/' + this.game.id + '/move', bodyString, options) // ...using post request
+        .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+
+        req.subscribe(response => {
           console.log("Sent Move: ", move);
         });
+        return req;
     }
     }
 
