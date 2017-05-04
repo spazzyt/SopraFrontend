@@ -118,21 +118,23 @@
 }
 
 .modal-content{
-  border: 2px solid black;
+  /*border: 2px solid black;*/
   width: 1080px;
   background-color: #edcd98;
 }
 
 .modal-header{
-  border: 2px solid cyan;
-  width: 1040px;
+  /*border: 2px solid cyan;*/
+  width: 1080px;
+  border-bottom: none;
 }
 
 
 .modal-body{
   text-align: center;
-  border: 2px solid magenta;
+  /*border: 2px solid magenta;*/
   width: 1040px;
+  border-bottom: none;
 }
 
 .modal-title{
@@ -143,12 +145,13 @@
 
 
 .modal-footer{
-  border: 2px solid red;
-  width: 1040px;
+  /*border: 2px solid red;*/
+  width: 1080px;
+  border-top: none;
 }
 
 #manualsize{
-  border: 2px solid greenyellow;
+  /*border: 2px solid greenyellow;*/
   width: 1040px;
   height: 500px;
 }
