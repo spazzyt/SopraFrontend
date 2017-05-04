@@ -123,8 +123,9 @@
   display: block;
   position: absolute;
   bottom: -35px; left: 50%; margin-left:-20px;
-  height: 0px; width: 0px;
-  border: 35px solid gray;
+  height: 0px;
+  width: 0px;
+  border: 35px solid #8d8d8d;
   border-radius: 35px;
   left: -14px; opacity: 0;
   transform: scale(0.2);
@@ -134,16 +135,16 @@
 
 @keyframes smokeL {
   0%   { transform: scale(0.0) translate(0, 0) }
-  10%  { opacity: 0.8; transform: scale(0.1) translate(0, -5px) }
-  90% { opacity: 0.4; transform: scale(0.3) translate(-20px, -180px) }
-  100% { opacity: 0; transform: scale(0.3) translate(-20px, -180px) }
+  10%  { opacity: 0.7; transform: scale(0.1) translate(0, -5px) }
+  90% { opacity: 0.4; transform: scale(0.19) translate(-20px, -145px) }
+  100% { opacity: 0; transform: scale(0.23) translate(-20px, -145px) }
 }
 
 @keyframes smokeR {
   0%   { transform: scale(0.0) translate(0, 0) }
-  10%  { opacity: 0.8; transform: scale(0.1) translate(0, -5px) }
-  90% { opacity: 0.4; transform: scale(0.3) translate(20px, -180px) }
-  100% { opacity: 0; transform: scale(0.3) translate(20px, -180px) }
+  10%  { opacity: 0.7; transform: scale(0.1) translate(0, -5px) }
+  90% { opacity: 0.4; transform: scale(0.19) translate(20px, -145px) }
+  100% { opacity: 0; transform: scale(0.23) translate(20px, -145px) }
 }
 
 #smoke .s0 { animation: smokeL 10s 0s infinite }
@@ -176,7 +177,8 @@
   display: block;
   position: absolute;
   bottom: -35px; left: 50%; margin-left:-20px;
-  height: 0px; width: 0px;
+  height: 0px;
+  width: 0px;
   border: 35px solid gray;
   border-radius: 35px;
   left: -14px; opacity: 0;
