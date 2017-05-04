@@ -230,16 +230,27 @@ export class BottomLeftComponent implements OnInit {
 
       //Checks for each possible card if it's not playable (if not playable, return)
       if(index == 5 && this.sledStones < 2 && freeSlots >= 2){
+        if(this.sledStones >= 2)
+          this.gameComp.showSnackbarMessage("There aren't two free stone slots.");
+        else
+          this.gameComp.showSnackbarMessage("You don't have enough stones.");
         return;
       }
 
       if(index == 6 && (this.quarryStones < 3 || freeSlots < 1)){
+        if(this.quarryStones < 3)
+          this.gameComp.showSnackbarMessage("You don't have 3 stones in your quarry.");
+        else
+          this.gameComp.showSnackbarMessage("There are no free stone slots.");
+
         return;
       }
-      if(index == 7 && freeSlots < 1 && !shipsSailableWithOneStone){
+      if(index == 7 && freeSlots < 1 || !shipsSailableWithOneStone){
+        this.gameComp.showSnackbarMessage("You can't play the sail card at the moment.");
         return;
       }
       if(index == 8 && !shipsSailable){
+        this.gameComp.showSnackbarMessage("No ship is sailable.");
         return;
       }
 
