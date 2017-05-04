@@ -600,7 +600,7 @@ export class GameComponent  implements OnInit {
           console.log("OTHER PLAYER PLAYED A CARD!");
           //If it's a lever card
           if(move.LeverStones != null){
-
+            this.showSnackbarMessage(username.substring(0,10) + ' played the Lever card and moved ship ' + move.ShipID + ' to the ' + this.siteToStringMap[move.to] + '.');
             console.log("OTHER PLAYER PLAYED LEVER, STONES ARE: ", move.LeverStones, move.pos);
             console.log("CHANGE STONES ON THIS SHIP: ", this.game.ships[move.ShipID]);
             for(let i = 0; i < move.LeverStones.length; i++){

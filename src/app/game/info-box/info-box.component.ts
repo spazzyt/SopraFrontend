@@ -106,7 +106,6 @@ export class InfoBoxComponent implements OnInit {
     this.game.leverModalOpen = false;
     this.game.leverPlayed = false;
 
-
     //Generate & send first move: new card order
     let cardId = this.leverId;
     console.log("SHIP ID SENT TO BACKEND: ", this.leverShip);

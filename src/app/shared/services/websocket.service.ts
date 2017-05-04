@@ -140,6 +140,14 @@ export class WSService {
           //if move was by me, only update stone statistics
           else{
 
+            let moveToDo = msg.payload.move;
+            //if this move was my ship moving to a site, check if it actually is there (lever card)
+            if(moveToDo.from == PositionEnum.DepartingHarbour){
+              if(gameComponent.game.ships[moveToDo.pos].slots[0] != null || gameComponent.game.ships[moveToDo.pos].slots[1] != null || gameComponent.game.ships[moveToDo.pos].slots[2] != null || gameComponent.game.ships[moveToDo.pos].slots[3] != null){
+                gameComponent.updateUiForOneMove(moveToDo, msg.payload.player, msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries, msg.payload.youMad);
+              }
+            }
+
             console.log("Received my own move from server, updating values");
             console.log("score array: ", msg.payload.berlinerScore);
 
