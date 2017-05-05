@@ -107,7 +107,6 @@ export class Game {
       this.leverPlayed = false;
       this.hammerPlayed = false;
       this.hammerId = 0;
-
   }
 
 }

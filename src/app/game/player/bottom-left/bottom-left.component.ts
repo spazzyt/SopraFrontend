@@ -285,10 +285,10 @@ export class BottomLeftComponent implements OnInit {
 
           console.log("PLAYED HAMMER CARD WITH ID " + hammerId);
 
-          //TODO increase quarry number, check if corekt?
           this.quarryStones -= 3;
           this.sledStones += 3;
-          //TODO prevent player from taking stones, etc.
+          this.hasStones = true; //TODO check that this doesn't destroy logic
+          //TODO updateUI for hammer card from other player!!! (--> interpret like quarry to sled)
 
           break;
 

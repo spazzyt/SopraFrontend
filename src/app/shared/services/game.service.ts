@@ -53,10 +53,10 @@ export class GameService {
       this.sendMove(moveToSend);
       console.log("SENT HAMMER MOVE 1 TO BACKEND:", moveToSend)
 
-      let moveToSend2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, 0); //TODO get ship id
+      let moveToSend2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID); //TODO get ship id
       this.gameComp.game.hammerPlayed = false;
       this.sendMove(moveToSend2);
-      console.log("SENT HAMMER MOVE 2 TO BACKEND:", moveToSend2)
+      console.log("SENT HAMMER MOVE 2 TO BACKEND:", moveToSend2);
       //TODO check that backend gets correct info
 
     }
