@@ -245,7 +245,8 @@ export class BottomLeftComponent implements OnInit {
 
         return;
       }
-      if(index == 7 && freeSlots < 1 || !shipsSailableWithOneStone){
+      if(index == 7 && (freeSlots < 1 || !shipsSailableWithOneStone)){
+        console.log("CARD INDEX IS ", index);
         this.gameComp.showSnackbarMessage("You can't play the sail card at the moment.");
         return;
       }
@@ -258,15 +259,32 @@ export class BottomLeftComponent implements OnInit {
 
       console.log('PLAYER CAN PLAY CARD ' + index + ', SENDING TO BACKEND');
 
-      //TODO: tell player when he can't play the chosen card
-
       switch(index){
         case 5: //Chisel
           //TODO send move to backend - determine format??
           break;
 
         case 6: //Hammer
-          //TODO send move to backend
+
+          //lets the game know the hammer has been played
+          console.log("PLAYING HAMMER! STATUS: " + this.gameComp.game.hammerPlayed);
+          this.gameComp.game.hammerPlayed = true;
+          console.log("THE HAMMER HAS BEEN PLAYED! STATUS: " + this.gameComp.game.hammerPlayed);
+
+          let hammerId= -1;
+
+          for(let card of this.marketCards){
+
+            //search for hammer card in player's card array
+            if(card.id == 29 || card.id == 30){
+              hammerId = card.id;
+              break;
+            }
+
+            console.log("PLAYED HAMMER CARD WITH ID " + hammerId);
+
+            //TODO send move
+          }
           break;
 
         case 7: //Sail
