@@ -373,6 +373,7 @@ Styling for the Game manual modal
 
 .manual-footer{
   border-top: none;
+  background-color: #edcd98;
 }
 
 .manual-close {
@@ -380,6 +381,8 @@ Styling for the Game manual modal
   outline: none;
 }
 
-
+#gameManual{
+  margin-top: 170%;
+}
 
 
