@@ -1,5 +1,7 @@
 <div class="container_game_screen">
-  <audio autoplay id="audio" loop volume="0.5">
+
+  <audio  autoplay loop volume="0.5">
+
     <source src="../../assets/MusicInGame.mp3" type="audio/mpeg">
   </audio>
 
@@ -13,7 +15,7 @@
 
     <!-- Departing Harbours -->
     <div class="departing_harbours">
-      <app-departing-harbour [hammerPlayed]="game?.hammerPlayed" [ships]="game?.ships" [isActive]="game?.amI_CurrentActivePlayer"></app-departing-harbour>
+      <app-departing-harbour [hammerPlayed]="game?.hammerPlayed" [chiselPlayed]="game?.chiselPlayed" [ships]="game?.ships" [isActive]="game?.amI_CurrentActivePlayer"></app-departing-harbour>
     </div>
 
 

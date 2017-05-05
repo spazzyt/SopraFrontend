@@ -68,6 +68,10 @@ export class Game {
   public hammerPlayed: boolean;
   public hammerId: number;
 
+  //This determines (locally) if the player has just played the lever card
+  public chiselPlayed: boolean;
+  public chiselId: number;
+
   // Own Player info
   //------------
 
@@ -107,6 +111,8 @@ export class Game {
       this.leverPlayed = false;
       this.hammerPlayed = false;
       this.hammerId = 0;
+      this.chiselPlayed = false;
+      this.chiselId = 0;
   }
 
 }

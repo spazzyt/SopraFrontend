@@ -146,6 +146,7 @@ export class WSService {
             console.log("score array: ", msg.payload.berlinerScore);
 
             gameComponent.updateScoreSledQuarry(msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
+            console.log("CARDS: ", msg.payload.youMad)
             gameComponent.updatePlayerCards(msg.payload.youMad); //update player cards
             gameComponent.updateStoneDragStatus();
           }

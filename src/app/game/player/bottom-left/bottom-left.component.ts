@@ -69,13 +69,6 @@ export class BottomLeftComponent implements OnInit {
   public isThisMyField: boolean = false;
 
 
-  //==============
-  // Event Emitter
-  //==============
-
-  @Output() onEvent_setClickHandlerOnStoneQuarry_sledStones = new EventEmitter<number>();
-  @Output() onEvent_setClickHandlerOnStoneQuarry_quarryStones = new EventEmitter<number>();
-
   //===============
   //Constructor
   //===============
@@ -103,32 +96,6 @@ export class BottomLeftComponent implements OnInit {
 
   updateCardNumbers(){
     this.cardNumbers = this.cardArrayToNumberArray(this.marketCards);
-  }
-
-  //===========================================================
-  // Click Events
-  //===========================================================
-
-  setClickHandlerOnStoneQuarry() {
-
-    //set click handler for  bll_1
-    (<any>$(document)).ready(() =>{
-      (<any>$("#quarry_1")).on("click", () =>{
-        //alert("The stone quarry 1 was clicked.");
-        this.onEvent_setClickHandlerOnStoneQuarry_sledStones.emit(this.sledStones);
-        this.onEvent_setClickHandlerOnStoneQuarry_quarryStones.emit(this.quarryStones);
-      });
-    });
-
-  }
-
-  removeClickHandlerOnStoneQuarry() {
-
-    //set click handler for  bll_1
-    (<any>$(document)).ready(() =>{
-      (<any>$("#quarry_1")).off("click");
-    });
-
   }
 
   //===========================================================
@@ -240,7 +207,7 @@ export class BottomLeftComponent implements OnInit {
       if(index == 6 && (this.quarryStones < 3 || freeSlots < 1 || this.sledStones > 2)){
         if(this.quarryStones < 3)
           this.gameComp.showSnackbarMessage("You don't have 3 stones in your quarry.");
-        else
+        else    //TODO tell player more clearly why he can't play card (for all cases)
           this.gameComp.showSnackbarMessage("You can't play the hammer card at the moment.");
 
         return;
@@ -251,7 +218,7 @@ export class BottomLeftComponent implements OnInit {
         return;
       }
       if(index == 8 && !shipsSailable){
-        this.gameComp.showSnackbarMessage("No ship is sailable.");
+        this.gameComp.showSnackbarMessage("Can't play lever card, no ship is sailable.");
         return;
       }
 
@@ -261,7 +228,23 @@ export class BottomLeftComponent implements OnInit {
 
       switch(index){
         case 5: //Chisel
-          //TODO send move to backend - determine format??
+          console.log("PLAYING CHISEL! STATUS: " + this.gameComp.game.chiselPlayed);
+          this.gameComp.game.chiselPlayed = true;
+          console.log("THE CHISEL HAS BEEN PLAYED! STATUS: " + this.gameComp.game.chiselPlayed);
+          let chiselId= -1;
+
+          for(let card of this.marketCards){
+
+            //search for hammer card in player's card array
+            if(card.id == 24 || card.id == 25 || card.id == 26){
+              chiselId = card.id;
+              break;
+            }
+          }
+          this.gameComp.game.chiselId = chiselId;
+          console.log("PLAYED CHISEL CARD WITH ID " + chiselId);
+
+          //TODO send move to backend - THREE MOVES set up??
           break;
 
         case 6: //Hammer
@@ -287,12 +270,11 @@ export class BottomLeftComponent implements OnInit {
 
           this.quarryStones -= 3;
           this.sledStones += 3;
-          this.hasStones = true; //TODO check that this doesn't destroy logic
-          //TODO check that UI update is correct
-
+          this.hasStones = true;
           break;
 
         case 7: //Sail
+          //TODO nasty sail stuff
           //TODO send move to backend
           break;
 
@@ -381,7 +363,7 @@ export class BottomLeftComponent implements OnInit {
   takeStonesFromQuarryToSled(){
 
     console.log("PLAYER TRIES TO TAKE FROM QUARRY, HAMMER STATUS: ", this.gameComp.game.hammerPlayed);
-    if(this.gameComp.game.hammerPlayed == false && this.myColour == ColourEnum.black && this.canIPlay && this.quarryStones > 0){
+    if(this.gameComp.game.chiselPlayed == false && this.gameComp.game.hammerPlayed == false && this.myColour == ColourEnum.black && this.canIPlay && this.quarryStones > 0){
 
       //make calculations (how many stones, needed to send correct move to backend)
       let stonesInQuarry:number;
