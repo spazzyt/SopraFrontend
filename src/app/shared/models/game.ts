@@ -64,6 +64,9 @@ export class Game {
   //This determines (locally) if the player has just played the lever card
   public leverPlayed: boolean;
 
+  //This determines (locally) if the player has just played the lever card
+  public hammerPlayed: boolean;
+
   // Own Player info
   //------------
 
@@ -101,6 +104,8 @@ export class Game {
       this.currentActivePlayerField=currentActivePlayerField_;
       this.leverModalOpen = false;
       this.leverPlayed = false;
+      this.hammerPlayed = false;
+
   }
 
 }
