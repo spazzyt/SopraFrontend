@@ -50,14 +50,16 @@ export class GameService {
     if(this.gameComp.game.hammerPlayed){
       let moveToSend = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.hammerId);
       this.gameComp.game.hammerPlayed = false;
-      this.sendMove(moveToSend);
-      console.log("SENT HAMMER MOVE 1 TO BACKEND:", moveToSend)
+      this.sendMove(moveToSend).subscribe( resp => {
 
-      let moveToSend2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID); //TODO get ship id
-      this.gameComp.game.hammerPlayed = false;
-      this.sendMove(moveToSend2);
-      console.log("SENT HAMMER MOVE 2 TO BACKEND:", moveToSend2);
-      //TODO check that backend gets correct info
+        console.log("SENT HAMMER MOVE 1 TO BACKEND:", moveToSend)
+        let moveToSend2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID); //TODO get ship id
+        this.gameComp.game.hammerPlayed = false;
+        this.sendMove(moveToSend2);
+        console.log("SENT HAMMER MOVE 2 TO BACKEND:", moveToSend2);
+        //TODO check that backend gets correct info
+
+      });
 
     }
 

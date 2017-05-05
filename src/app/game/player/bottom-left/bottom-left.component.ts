@@ -288,7 +288,7 @@ export class BottomLeftComponent implements OnInit {
           this.quarryStones -= 3;
           this.sledStones += 3;
           this.hasStones = true; //TODO check that this doesn't destroy logic
-          //TODO updateUI for hammer card from other player!!! (--> interpret like quarry to sled)
+          //TODO check that UI update is correct
 
           break;
 
