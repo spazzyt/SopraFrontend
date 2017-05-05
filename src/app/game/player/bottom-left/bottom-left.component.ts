@@ -280,11 +280,14 @@ export class BottomLeftComponent implements OnInit {
               hammerId = card.id;
               break;
             }
-
-            console.log("PLAYED HAMMER CARD WITH ID " + hammerId);
-
-            //TODO send move
           }
+
+          console.log("PLAYED HAMMER CARD WITH ID " + hammerId);
+
+          let moveToSend = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, hammerId);
+          this.gameService.sendMove(moveToSend);
+          console.log("SENT HAMMER MOVE TO BACKEND:", moveToSend)
+          //TODO check that backend gets correct info
           break;
 
         case 7: //Sail
