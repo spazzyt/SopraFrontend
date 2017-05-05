@@ -304,9 +304,82 @@ h4{
 
 }
 
-
-
-
 .close{
   outline: none;
 }
+
+
+
+
+/*
+=============================================================================
+=============================================================================
+Styling for the Game manual modal
+=============================================================================
+=============================================================================
+ */
+
+
+
+.manual {
+  width: 1366px;
+  height: 768px;
+  /*border: 3px solid orangered;*/
+
+}
+
+.manual-content{
+  /*border: 3px solid black;*/
+  width: 1080px;
+  background-color: #edcd98;
+  height: 716px;
+}
+
+.manual-dialog{
+  /*border: 5px solid yellow;*/
+  margin-left: 10%;
+  margin-right: 10%;
+
+}
+
+.manual-header{
+  /*border: 2px solid cyan;*/
+  width: 1080px;
+  border-bottom: none;
+}
+
+.manual-body{
+  text-align: center;
+  /*border: 2px solid magenta;*/
+  width: 1040px;
+  height: 650px;
+  border-bottom: none;
+  float: top;
+  margin-top: -2%;
+
+}
+
+.manual-title{
+  font-size: 26px;
+  color: #867558;
+  text-align: center;
+}
+
+#manualsize{
+  /*border: 2px solid greenyellow;*/
+  width: 1040px;
+  height: 640px;
+}
+
+.manual-footer{
+  border-top: none;
+}
+
+.manual-close {
+  font-size: 32px;
+  outline: none;
+}
+
+
+
+
