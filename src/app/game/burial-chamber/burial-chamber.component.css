@@ -60,9 +60,8 @@ _________________________
 
 
 .container{
-  margin: 80px auto;
   width: 20px;
-  height: 20px;
+  height: 15px;
   position:relative;
   transform-origin:center bottom;
   animation-name: flicker;
@@ -71,6 +70,25 @@ _________________________
   animation-timing-function: ease-in;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  /*border: 2px solid white;*/
+  margin-top: 23.5%;
+  margin-left: 21%;
+}
+
+.container2{
+  width: 20px;
+  height: 15px;
+  position:relative;
+  transform-origin:center bottom;
+  animation-name: flicker2;
+  animation-duration: 3ms;
+  animation-delay: 200ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  /*border: 2px solid black;*/
+  margin-top: -3%;
+  margin-left: 63%;
 }
 
 .flame{
@@ -122,6 +140,15 @@ _________________________
 
 
 @keyframes flicker{
+  0%   {transform: rotate(-2deg);}
+  20%  {transform: rotate(2deg);}
+  40%  {transform: rotate(-2deg);}
+  60%  {transform: rotate(2deg) scaleY(1.04);}
+  80%  {transform: rotate(-3deg) scaleY(0.92);}
+  100% {transform: rotate(2deg);}
+}
+
+@keyframes flicker2{
   0%   {transform: rotate(-2deg);}
   20%  {transform: rotate(2deg);}
   40%  {transform: rotate(-2deg);}
