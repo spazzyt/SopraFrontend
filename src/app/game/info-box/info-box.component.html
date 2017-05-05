@@ -3,6 +3,38 @@
 
   <!-- <button class="leave_btn btn btn-sm btn-primary btn-block" type="submit" [routerLink]="['/lobby']">Leave</button> -->
 
+
+
+  <!-- Button trigger modal -->
+  <button class="btn btn-lg btn-primary btn-lg" style="margin-left: 1%" data-toggle="modal" data-target="#myModal">Game Instructions</button>
+
+  <!-- Modal -->
+  <div class="manual modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="manual-dialog modal-dialog">
+      <div class="manual-content modal-content">
+        <div class="manual-header modal-header">
+          <button type="button" class="manual-close close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="manual-title modal-title" id="myModalLabel">Imhotep Game Manual</h4>
+        </div>
+        <div class="manual-body modal-body">
+          <div>
+
+            <iframe src="../../assets/Imhotep_Manual.pdf#zoom=126%"
+                    id="manualsize" frameborder="0">
+              <param name="view" value="Fit" />
+            </iframe>
+
+          </div>
+
+        </div>
+        <div class="manual-footer modal-footer"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+
   <!-- Call Leave Button -->
     <div id="new_game_button">
       <button type="button" class="leave_btn btn btn-sm btn-primary btn-block" id="ngButton"
