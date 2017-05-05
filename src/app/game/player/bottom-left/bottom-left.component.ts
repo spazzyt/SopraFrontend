@@ -237,11 +237,11 @@ export class BottomLeftComponent implements OnInit {
         return;
       }
 
-      if(index == 6 && (this.quarryStones < 3 || freeSlots < 1)){
+      if(index == 6 && (this.quarryStones < 3 || freeSlots < 1 || this.sledStones > 2)){
         if(this.quarryStones < 3)
           this.gameComp.showSnackbarMessage("You don't have 3 stones in your quarry.");
         else
-          this.gameComp.showSnackbarMessage("There are no free stone slots.");
+          this.gameComp.showSnackbarMessage("You can't play the hammer card at the moment.");
 
         return;
       }
@@ -281,13 +281,15 @@ export class BottomLeftComponent implements OnInit {
               break;
             }
           }
+          this.gameComp.game.hammerId = hammerId;
 
           console.log("PLAYED HAMMER CARD WITH ID " + hammerId);
 
-          let moveToSend = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, hammerId);
-          this.gameService.sendMove(moveToSend);
-          console.log("SENT HAMMER MOVE TO BACKEND:", moveToSend)
-          //TODO check that backend gets correct info
+          this.quarryStones -= 3;
+          this.sledStones += 3;
+          this.hasStones = true; //TODO check that this doesn't destroy logic
+          //TODO updateUI for hammer card from other player!!! (--> interpret like quarry to sled)
+
           break;
 
         case 7: //Sail
@@ -378,7 +380,8 @@ export class BottomLeftComponent implements OnInit {
 
   takeStonesFromQuarryToSled(){
 
-    if(this.myColour == ColourEnum.black && this.canIPlay && this.quarryStones > 0){
+    console.log("PLAYER TRIES TO TAKE FROM QUARRY, HAMMER STATUS: ", this.gameComp.game.hammerPlayed);
+    if(this.gameComp.game.hammerPlayed == false && this.myColour == ColourEnum.black && this.canIPlay && this.quarryStones > 0){
 
       //make calculations (how many stones, needed to send correct move to backend)
       let stonesInQuarry:number;
@@ -409,5 +412,5 @@ export class BottomLeftComponent implements OnInit {
       //snackbar message (only locally)
       //this.showSnackbarMessage("You took "+ stonesToTake+" stone(s) from the quarry.");
     }
-    }
+  }
 }

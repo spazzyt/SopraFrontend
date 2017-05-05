@@ -9,7 +9,7 @@
        id="departing_harbour_{{num}}" class="departing_harbour">
 
 <div *ngIf="ship">
-    <div dnd-draggable [dragEnabled]="ship.draggable && isActive" [dropZones]="['sites']" [dragData]="ship">
+    <div dnd-draggable [dragEnabled]="!hammerPlayed && ship.draggable && isActive" [dropZones]="['sites']" [dragData]="ship">
 
       <app-ship class="appShip"
                 *ngIf="ship.isInHarbour"

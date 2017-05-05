@@ -23,6 +23,9 @@ export class DepartingHarbourComponent {
   @Input()
     isActive: boolean;
 
+  @Input()
+    hammerPlayed: boolean;
+
 
   // used to set the stones on a ship slot
   stonesOnShip:Stone[][]=[[null,null,null,null],[null,null,null,null],
