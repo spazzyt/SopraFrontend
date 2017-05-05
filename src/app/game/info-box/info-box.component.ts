@@ -154,6 +154,9 @@ export class InfoBoxComponent implements OnInit {
 
       console.log("LEVER FINISHED, NEW STATUS: " + this.game.leverPlayed)
 
+      this.gameService.gameComp.siteMap[this.gameService.gameComp.siteToStringMap[this.leverDestination]].placeStones(this.game.ships[this.leverShip].slots);
+      //remove stones from ship
+      this.gameService.gameComp.game.ships[this.leverShip].slots = [];
       }
     );
 
