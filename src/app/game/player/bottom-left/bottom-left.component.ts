@@ -363,7 +363,7 @@ export class BottomLeftComponent implements OnInit {
   takeStonesFromQuarryToSled(){
 
     console.log("PLAYER TRIES TO TAKE FROM QUARRY, HAMMER STATUS: ", this.gameComp.game.hammerPlayed);
-    if(this.gameComp.game.hammerPlayed == false && this.myColour == ColourEnum.black && this.canIPlay && this.quarryStones > 0){
+    if(this.gameComp.game.chiselPlayed == false && this.gameComp.game.hammerPlayed == false && this.myColour == ColourEnum.black && this.canIPlay && this.quarryStones > 0){
 
       //make calculations (how many stones, needed to send correct move to backend)
       let stonesInQuarry:number;
