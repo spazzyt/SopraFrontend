@@ -66,6 +66,7 @@ export class Game {
 
   //This determines (locally) if the player has just played the lever card
   public hammerPlayed: boolean;
+  public hammerId: number;
 
   // Own Player info
   //------------
@@ -105,6 +106,7 @@ export class Game {
       this.leverModalOpen = false;
       this.leverPlayed = false;
       this.hammerPlayed = false;
+      this.hammerId = 0;
 
   }
 

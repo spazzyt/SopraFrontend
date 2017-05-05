@@ -48,11 +48,10 @@ export class GameService {
 
     //Hammer played:
     if(this.gameComp.game.hammerPlayed){
-      let moveToSend = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, 30); //TODO get correct ID, but HOW??
+      let moveToSend = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.hammerId);
       this.gameComp.game.hammerPlayed = false;
       this.sendMove(moveToSend);
       console.log("SENT HAMMER MOVE 1 TO BACKEND:", moveToSend)
-      //TODO check that backend gets correct info
 
       let moveToSend2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, 0); //TODO get ship id
       this.gameComp.game.hammerPlayed = false;

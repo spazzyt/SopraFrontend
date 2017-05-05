@@ -281,6 +281,7 @@ export class BottomLeftComponent implements OnInit {
               break;
             }
           }
+          this.gameComp.game.hammerId = hammerId;
 
           console.log("PLAYED HAMMER CARD WITH ID " + hammerId);
 
