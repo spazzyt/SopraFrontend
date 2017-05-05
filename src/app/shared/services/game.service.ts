@@ -45,7 +45,25 @@ export class GameService {
   }
 
   sendMove(move: Move) : Observable<Response> {
-    if(this.gameComp.game.leverPlayed){  //Lever played: let player choose order before sending move
+
+    //Hammer played:
+    if(this.gameComp.game.hammerPlayed){
+      let moveToSend = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, 30); //TODO get correct ID, but HOW??
+      this.gameComp.game.hammerPlayed = false;
+      this.sendMove(moveToSend);
+      console.log("SENT HAMMER MOVE 1 TO BACKEND:", moveToSend)
+      //TODO check that backend gets correct info
+
+      let moveToSend2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, 0); //TODO get ship id
+      this.gameComp.game.hammerPlayed = false;
+      this.sendMove(moveToSend2);
+      console.log("SENT HAMMER MOVE 2 TO BACKEND:", moveToSend2)
+      //TODO check that backend gets correct info
+
+    }
+
+    //Lever played: let player choose order before sending move
+    else if(this.gameComp.game.leverPlayed){
       if(move.to != PositionEnum.DepartingHarbour){
         this.gameComp.infoBoxComponent.leverShip = move.pos;
 
