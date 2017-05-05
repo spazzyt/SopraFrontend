@@ -129,6 +129,7 @@
   border-radius: 35px;
   left: -14px; opacity: 0;
   transform: scale(0.2);
+  box-shadow: 15px 15px 15px 15px #8d8d8d;
 }
 
 /* Smoke animation */
@@ -183,6 +184,7 @@
   border-radius: 35px;
   left: -14px; opacity: 0;
   transform: scale(0.2);
+  box-shadow: 15px 15px 15px 15px #8d8d8d;
 }
 
 
