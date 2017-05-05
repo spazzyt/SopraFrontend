@@ -102,6 +102,7 @@ export class BottomLeftComponent implements OnInit {
   }
 
   updateCardNumbers(){
+    console.log("COMPONENT GOT THIS CARD ARRAY: ", this.marketCards);
     this.cardNumbers = this.cardArrayToNumberArray(this.marketCards);
   }
 

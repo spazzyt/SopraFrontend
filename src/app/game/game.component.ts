@@ -716,10 +716,17 @@ export class GameComponent  implements OnInit {
     if(this.game.players.length > 3)
       this.game.player4CardDeck = input[this.game.players[3].username];
 
+    //make sure components get correct cards
+    this.bottomLeftComponent.marketCards = this.game.player1CardDeck;
+    this.topLeftComponent.marketCards = this.game.player2CardDeck;
+    this.topRightComponent.marketCards = this.game.player3CardDeck;
+    this.bottomRightComponent.marketCards = this.game.player4CardDeck;
+
     //display current numbers for everyone
     for(let i = 0; i < this.game.players.length; i++)
     {
       this.playerMap[this.game.players[i].username].updateCardNumbers();
+      console.log("UPDATED CARDS FOR PLAYER " + this.game.players[i].username + " to new values: ", this.game.player1CardDeck);
     }
   }
 
