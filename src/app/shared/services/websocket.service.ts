@@ -83,6 +83,14 @@ export class WSService {
         case 'CURRENTTURN':
           let whoseTurn = msg.payload.user;
 
+          //play sound for active player
+          console.log("Roland-Websocke-Sound ", whoseTurn, gameComponent.game.myUserName)
+          if (gameComponent.game.myUserName==whoseTurn){
+            let audio = new Audio();
+            audio.src = "../../../assets/71-yourTurn.mp3";
+            audio.play();
+          }
+
           //ensure players can't pick card if not intended
           gameComponent.game.whoCanPickCard = null;
           gameComponent.updateCardPick();
