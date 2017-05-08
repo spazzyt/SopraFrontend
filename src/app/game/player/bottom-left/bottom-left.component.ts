@@ -35,8 +35,10 @@ export class BottomLeftComponent implements OnInit {
 
   @Input()
   sailPlayed: boolean;
+
   @Input()
   sailMove: Move;
+
   //===============
   //Class Variables
   //===============
@@ -284,7 +286,7 @@ export class BottomLeftComponent implements OnInit {
           for(let card of this.marketCards){
 
             //search for sail card in player's card array
-            if(card.id == 31 || card.id == 33){
+            if(card.id == 31 || card.id == 32 || card.id == 33){
               sailId = card.id;
               break;
             }

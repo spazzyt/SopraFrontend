@@ -99,22 +99,23 @@ export class GameService {
 
         let chiselMove2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
 
-        //Let game know chisel playing is over
-        this.gameComp.game.chiselPlayed = false;
+        if(this.gameComp.game.chiselPlayed){
+          console.log("ENTER SENDING LOOP");
+          //Let game know chisel playing is over
+          this.gameComp.game.chiselPlayed = false;
 
-        this.sendMove(chiselCardMove).subscribe(resp => {
-          console.log("SENT CHISEL CARD MOVE TO BACKEND:", chiselCardMove);
+          this.sendMove(chiselCardMove).subscribe(resp => {
 
-          this.sendMove(this.gameComp.game.chiselMove).subscribe( resp => {
+            console.log("SENT CHISEL CARD MOVE TO BACKEND:", chiselCardMove);
 
+            this.sendMove(this.gameComp.game.chiselMove);
             console.log("SENT CHISEL MOVE 1 TO BACKEND:", this.gameComp.game.chiselMove);
             this.sendMove(chiselMove2);
             console.log("SENT CHISEL MOVE 2 TO BACKEND:", chiselMove2);
             //TODO check that backend gets correct info
-
           });
-        });
 
+        }
       }
     }
 
@@ -146,7 +147,8 @@ export class GameService {
         this.gameComp.showLeverModal(move.pos);
       }
     }
-    else if(!this.game.leverPlayed && !this.game.chiselPlayed && !this.game.sailPlayed && !this.game.hammerPlayed){ //if the lever modal is open, the ships shall not send any moves for moving stones on them
+
+    else{
 
       let bodyString = JSON.stringify(move); // Stringify payload
       let headers = new Headers({
