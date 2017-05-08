@@ -1,7 +1,8 @@
 .container_game_screen {
   width: 1366px;
   height: 768px;
-  background-image: url(../../assets/images/water_background.png);
+  /*background-image: url(../../assets/images/water_background.png);*/
+  background-image: url(../../assets/images/water_background.gif);
   background-size:cover;
 }
 
