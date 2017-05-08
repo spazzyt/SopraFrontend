@@ -53,18 +53,18 @@ export class GameService {
         //save first move in game (if there hasn't been a move yet)
         let sailMove1 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
         this.gameComp.game.sailMove = sailMove1;
+        console.log("Set first sail move to: ", sailMove1);
         return;
       }
       else{
 
         //Create the "play card" move to send to backend
-        //TODO ensure correct ID in player component
         let sailCardMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.sailId)
 
-        //TODO
-        let sailMove2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
+        //TODO check correct?
+        let sailMove2 = new Move(PositionEnum.DepartingHarbour, move.to, move.pos);
 
-        //Let game know chisel playing is over
+        //Let game know sail playing is over
         this.gameComp.game.sailPlayed = false;
 
         this.sendMove(sailCardMove).subscribe(resp => {
