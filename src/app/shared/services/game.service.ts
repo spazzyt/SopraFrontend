@@ -46,7 +46,44 @@ export class GameService {
 
   sendMove(move: Move) : Observable<Response> {
 
-    //chisel played:
+    //Sail played:
+    if(this.gameComp.game.sailPlayed){
+
+      if(this.gameComp.game.sailMove == null){
+        //save first move in game (if there hasn't been a move yet)
+        let sailMove1 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
+        this.gameComp.game.sailMove = sailMove1;
+        return;
+      }
+      else{
+
+        //Create the "play card" move to send to backend
+        //TODO ensure correct ID in player component
+        let sailCardMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.sailId)
+
+        //TODO
+        let sailMove2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
+
+        //Let game know chisel playing is over
+        this.gameComp.game.sailPlayed = false;
+
+        this.sendMove(sailCardMove).subscribe(resp => {
+          console.log("SENT SAIL CARD MOVE TO BACKEND:", sailCardMove);
+
+          this.sendMove(this.gameComp.game.sailMove).subscribe( resp => {
+
+            console.log("SENT SAIL MOVE 1 TO BACKEND:", this.gameComp.game.sailMove);
+            this.sendMove(sailMove2);
+            console.log("SENT SAIL MOVE 2 TO BACKEND:", sailMove2);
+            //TODO check that backend gets correct info
+
+          });
+        });
+
+      }
+    }
+
+    //Chisel played:
     if(this.gameComp.game.chiselPlayed){
 
       if(this.gameComp.game.chiselMove == null){
@@ -61,7 +98,7 @@ export class GameService {
         let chiselCardMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.chiselId)
 
         let chiselMove2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
-        //TODO send move that chisel card was played
+
         //Let game know chisel playing is over
         this.gameComp.game.chiselPlayed = false;
 
@@ -109,7 +146,7 @@ export class GameService {
         this.gameComp.showLeverModal(move.pos);
       }
     }
-    else if(!this.game.leverPlayed){ //if the lever modal is open, the ships shall not send any moves for moving stones on them
+    else if(!this.game.leverPlayed && !this.game.chiselPlayed && !this.game.sailPlayed && !this.game.hammerPlayed){ //if the lever modal is open, the ships shall not send any moves for moving stones on them
 
       let bodyString = JSON.stringify(move); // Stringify payload
       let headers = new Headers({
@@ -120,6 +157,7 @@ export class GameService {
       params.set("token", this.authenticationService.token)
       let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
+      console.log("send move: ", move);
       let req= this.http.post(this.apiUrl + '/game/' + this.game.id + '/move', bodyString, options) // ...using post request
         .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if
 
