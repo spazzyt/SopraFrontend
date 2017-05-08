@@ -40,7 +40,7 @@
   <!--drag and drop zone-->
   <div id="supply_sled_1" class="low_m">
 
-    <div id="bag_1" class="stone_icon" dnd-draggable [dragEnabled]="canIPlay && isThisMyField && hasStones" [dropZones]="['slots']" [dragData]="playerFieldStone">
+    <div id="bag_1" class="stone_icon" dnd-draggable [dragEnabled]="(!(sailPlayed == true && sailMove != null)) && canIPlay && isThisMyField && hasStones" [dropZones]="['slots']" [dragData]="playerFieldStone">
       <app-stone id="stones_1" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
     </div>
 

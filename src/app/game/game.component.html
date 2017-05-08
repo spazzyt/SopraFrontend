@@ -21,7 +21,7 @@
 
     <!-- Bottom Left Player Field -->
     <div class="player_field player_bottom_left">
-      <app-bottom-left id="playerField_1" [gameComp]="myComp" [ships]="game?.ships" [marketCards]="game?.player1CardDeck" [canIPlay]="game?.amI_CurrentActivePlayer" [myColour]="game?.myPlayerField"></app-bottom-left>
+      <app-bottom-left id="playerField_1" [sailMove]="game?.sailMove" [sailPlayed]="game?.sailPlayed"  [gameComp]="myComp" [ships]="game?.ships" [marketCards]="game?.player1CardDeck" [canIPlay]="game?.amI_CurrentActivePlayer" [myColour]="game?.myPlayerField"></app-bottom-left>
     </div>
   </div>
 

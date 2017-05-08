@@ -33,6 +33,10 @@ export class BottomLeftComponent implements OnInit {
   @Input()
   gameComp: any;
 
+  @Input()
+  sailPlayed: boolean;
+  @Input()
+  sailMove: Move;
   //===============
   //Class Variables
   //===============
@@ -243,8 +247,6 @@ export class BottomLeftComponent implements OnInit {
           }
           this.gameComp.game.chiselId = chiselId;
           console.log("PLAYED CHISEL CARD WITH ID " + chiselId);
-
-          //TODO send move to backend - THREE MOVES set up??
           break;
 
         case 6: //Hammer
