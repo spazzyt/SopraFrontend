@@ -321,10 +321,7 @@ Styling for the Game manual modal
 =============================================================================
  */
 
-.modal-content{
-  position: fixed;
-  margin-bottom: 500%;
-}
+
 
 .manual {
   width: 1366px;
@@ -337,7 +334,7 @@ Styling for the Game manual modal
   /*border: 3px solid black;*/
   width: 1080px;
   background-color: #edcd98;
-  height: 716px;
+  height: 725px;
 }
 
 .manual-dialog{
@@ -349,6 +346,7 @@ Styling for the Game manual modal
 
 .manual-header{
   /*border: 2px solid cyan;*/
+  text-align: center;
   width: 1080px;
   border-bottom: none;
 }
@@ -368,6 +366,7 @@ Styling for the Game manual modal
   font-size: 26px;
   color: #867558;
   text-align: center;
+  margin-left: 0%;
 }
 
 #manualsize{
@@ -376,10 +375,6 @@ Styling for the Game manual modal
   height: 640px;
 }
 
-.manual-footer{
-  border-top: none;
-  background-color: #edcd98;
-}
 
 .manual-close {
   font-size: 32px;
