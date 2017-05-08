@@ -84,7 +84,7 @@ export class GameService {
     }
 
     //Chisel played:
-    if(this.gameComp.game.chiselPlayed){
+    else if(this.gameComp.game.chiselPlayed){
 
       if(this.gameComp.game.chiselMove == null){
         //save first move in game (if there hasn't been a move yet)
