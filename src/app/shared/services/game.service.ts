@@ -61,7 +61,7 @@ export class GameService {
         //Create the "play card" move to send to backend
         let sailCardMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.sailId)
 
-        //TODO check correct?
+        //TODO check if correct? (should be)
         let sailMove2 = new Move(PositionEnum.DepartingHarbour, move.to, move.pos);
 
         //Let game know sail playing is over
@@ -71,7 +71,7 @@ export class GameService {
           console.log("SENT SAIL CARD MOVE TO BACKEND:", sailCardMove);
 
           this.sendMove(this.gameComp.game.sailMove).subscribe( resp => {
-
+            //TODO check if this has to be sent in order (probably not?)
             console.log("SENT SAIL MOVE 1 TO BACKEND:", this.gameComp.game.sailMove);
             this.sendMove(sailMove2);
             console.log("SENT SAIL MOVE 2 TO BACKEND:", sailMove2);
@@ -108,13 +108,13 @@ export class GameService {
 
             console.log("SENT CHISEL CARD MOVE TO BACKEND:", chiselCardMove);
 
-            this.sendMove(this.gameComp.game.chiselMove);
-            console.log("SENT CHISEL MOVE 1 TO BACKEND:", this.gameComp.game.chiselMove);
-            this.sendMove(chiselMove2);
-            console.log("SENT CHISEL MOVE 2 TO BACKEND:", chiselMove2);
-            //TODO check that backend gets correct info
+            this.sendMove(this.gameComp.game.chiselMove).subscribe( resp => {
+              console.log("SENT CHISEL MOVE 1 TO BACKEND:", this.gameComp.game.chiselMove);
+              this.sendMove(chiselMove2);
+              console.log("SENT CHISEL MOVE 2 TO BACKEND:", chiselMove2);
+              //TODO check that backend gets correct info
+            });
           });
-
         }
       }
     }
