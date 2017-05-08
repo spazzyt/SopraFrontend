@@ -176,8 +176,10 @@ Styling for the Leave game modal
 }
 
 .modal {
-  top: 25%;
-  height: 50%;
+  top: 30%;
+  width: 1366px;
+  height: 768px;
+  /*border: 3px solid orangered;*/
 }
 
 .modal-dialog {
