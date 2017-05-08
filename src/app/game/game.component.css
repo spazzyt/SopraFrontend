@@ -326,3 +326,104 @@ table{
   background-repeat: no-repeat;
 }
 
+
+
+/*
+=============================================================================
+=============================================================================
+Styling for the gif animations
+=============================================================================
+=============================================================================
+ */
+
+
+/*shark*/
+
+/*move from to*/
+@-webkit-keyframes example_shark {
+  from {right:-40px; top:20px; ; -webkit-transform: rotate(180deg);}
+  to {right:-100px; top:30px; ; -webkit-transform: rotate(0deg);}
+}
+
+#shark_1{
+  width: 60px;
+  height: 30px;
+  background-image:url(../../assets/images/shark.gif);
+  background-size:cover;
+  position: relative;
+  -webkit-animation-name: example_shark;
+  -webkit-animation-duration: 20s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+  -webkit-transform: translate(50%, 50%) rotate(90deg);
+  border-radius: 50%;
+}
+
+
+/*bird*/
+
+/*move change at x% completion*/
+@-webkit-keyframes example_bird_2 {
+  0%  {left:530px; top:180px; -webkit-transform: rotate(270deg);}
+  25% {left:330px; top:180px; -webkit-transform: rotate(360deg);}
+  50% {left:330px; top:100px; -webkit-transform: rotate(450deg);}
+  75% {left:530px; top:100px; -webkit-transform: rotate(540deg);}
+  100%{left:530px; top:180px; -webkit-transform: rotate(630deg);}
+}
+
+#bird_2{
+  width: 60px;
+  height: 30px;
+  background-image:url(../../assets/images/bird_2.gif);
+  background-size:cover;
+  position: relative;
+  -webkit-animation-name: example_bird_2;
+  -webkit-animation-duration: 240s;
+  animation-iteration-count: infinite;
+}
+
+
+/*move change at x% completion*/
+@-webkit-keyframes example_bird_1 {
+  0%   {left:30px; top:500px; -webkit-transform: rotate(90deg);}
+  25%  {left:200px; top:500px; -webkit-transform: rotate(180deg);}
+  50%  {left:200px; top:600px; -webkit-transform: rotate(270deg);}
+  75%  {left:200px; top:600px; -webkit-transform: rotate(360deg);}
+  100% {left:30px; top:500px; -webkit-transform: rotate(450deg);}
+}
+
+#bird_1{
+  width: 60px;
+  height: 30px;
+  background-image:url(../../assets/images/bird_2.gif);
+  background-size:cover;
+  position: relative;
+  -webkit-animation-name: example_bird_1;
+  -webkit-animation-duration: 360s;
+  animation-iteration-count: infinite;
+}
+
+/*flying fish*/
+
+/*move from to*/
+@-webkit-keyframes example_flyingFish {
+  from {left:650px; top:550px; -webkit-transform: rotate(0deg);}
+  to {left:700px; top:600px; -webkit-transform: rotate(360deg);}
+}
+
+#flyingFish_1 {
+  width: 60px;
+  height: 30px;
+  background-image:url(../../assets/images/flyingFish_1.gif);
+  background-size:cover;
+  position: relative;
+  -webkit-animation-name: example_flyingFish;
+  -webkit-animation-duration: 240s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+  -webkit-transform-origin: left;
+  -webkit-transform: translate(50%, 50%) rotate(90deg) ;
+  border-radius: 50%;
+}
