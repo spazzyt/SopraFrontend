@@ -40,13 +40,10 @@
       <button type="button" class="leave_btn btn btn-sm btn-primary btn-block" id="ngButton"
               (click)="staticModal.show()">Leave</button>
     </div>
-  <button onclick="document.getElementById('audio').pause()" id="pause" class="btn btn-lg btn-primary btn-lg" style="margin-left: 1%" data-toggle="" data-target="">
-    <span class="glyphicon glyphicon-pause"></span>
+  <button id="pause" class="btn btn-lg btn-primary btn-lg" style="margin-left: 1%" data-toggle="" data-target="">
+    <span *ngIf="sound" (click)="toggleGlyphicon()" onclick="document.getElementById('audio').pause()" class="glyphicon glyphicon-pause"></span>
+    <span *ngIf="!sound" (click)="toggleGlyphicon()" onclick="document.getElementById('audio').play()" class="glyphicon glyphicon-play"></span>
   </button>
-  <button onclick="document.getElementById('audio').play()" id="play" class="btn btn-lg btn-primary btn-lg" style="margin-left: 1%" data-toggle="" data-target="">
-    <span class="glyphicon glyphicon-play"></span>
-  </button>
-
 
   <!-- Modal: Leave Game -->
   <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
