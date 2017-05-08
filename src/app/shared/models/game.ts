@@ -3,6 +3,7 @@ import {GameStatusEnum} from "./game-status.enum";
 import {Ship} from "./ship";
 import {MarketCard} from "./market-card";
 import {ColourEnum} from "./colour.enum";
+import {Move} from "./move";
 /**
  * Created by benzro on 23.03.17.
  */
@@ -71,6 +72,7 @@ export class Game {
   //This determines (locally) if the player has just played the lever card
   public chiselPlayed: boolean;
   public chiselId: number;
+  public chiselMove: Move;
 
   // Own Player info
   //------------
@@ -113,6 +115,7 @@ export class Game {
       this.hammerId = 0;
       this.chiselPlayed = false;
       this.chiselId = 0;
+      this.chiselMove = null;
   }
 
 }

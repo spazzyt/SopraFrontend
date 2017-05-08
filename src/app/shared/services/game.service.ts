@@ -46,19 +46,52 @@ export class GameService {
 
   sendMove(move: Move) : Observable<Response> {
 
+    //chisel played:
+    if(this.gameComp.game.chiselPlayed){
+
+      if(this.gameComp.game.chiselMove == null){
+        //save first move in game (if there hasn't been a move yet)
+        let chiselMove1 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
+        this.gameComp.game.chiselMove = chiselMove1;
+        return;
+      }
+      else{
+
+        //Create the "play card" move to send to backend
+        let chiselCardMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.chiselId)
+
+        let chiselMove2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
+        //TODO send move that chisel card was played
+        //Let game know chisel playing is over
+        this.gameComp.game.chiselPlayed = false;
+
+        this.sendMove(chiselCardMove).subscribe(resp => {
+          console.log("SENT CHISEL CARD MOVE TO BACKEND:", chiselCardMove);
+
+          this.sendMove(this.gameComp.game.chiselMove).subscribe( resp => {
+
+            console.log("SENT CHISEL MOVE 1 TO BACKEND:", this.gameComp.game.chiselMove);
+            this.sendMove(chiselMove2);
+            console.log("SENT CHISEL MOVE 2 TO BACKEND:", chiselMove2);
+            //TODO check that backend gets correct info
+
+          });
+        });
+
+      }
+    }
+
     //Hammer played:
-    if(this.gameComp.game.hammerPlayed){
+    else if(this.gameComp.game.hammerPlayed){
       let moveToSend = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.hammerId);
       this.gameComp.game.hammerPlayed = false;
       this.sendMove(moveToSend).subscribe( resp => {
 
         console.log("SENT HAMMER MOVE 1 TO BACKEND:", moveToSend)
-        let moveToSend2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID); //TODO get ship id
+        let moveToSend2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
         this.gameComp.game.hammerPlayed = false;
         this.sendMove(moveToSend2);
         console.log("SENT HAMMER MOVE 2 TO BACKEND:", moveToSend2);
-        //TODO check that backend gets correct info
-
       });
 
     }
