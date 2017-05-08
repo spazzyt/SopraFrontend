@@ -245,7 +245,9 @@ Styling for the new game modal
 
 .modal {
   top: 25%;
-  height: 50%;
+  width: 1366px;
+  height: 768px;
+  /*border: 3px solid orangered;*/
 }
 
 .modal-dialog {
@@ -270,6 +272,8 @@ Styling for the new game modal
   color: #867558;
   text-align: center;
   font-size: 30px;
+  border-top-left-radius: 70%;
+  border-top-right-radius: 70%;
 }
 
 .modal-title{

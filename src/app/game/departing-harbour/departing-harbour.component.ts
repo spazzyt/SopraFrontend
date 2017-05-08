@@ -3,6 +3,7 @@ import {Ship} from "../../shared/models/ship";
 import {RoundCard} from "../../shared/models/round-card";
 import {Stone} from "../../shared/models/stone";
 import {ColourEnum} from "../../shared/models/colour.enum";
+import {Move} from "../../shared/models/move";
 
 
 @Component({
@@ -27,6 +28,10 @@ export class DepartingHarbourComponent {
     hammerPlayed: boolean;
   @Input()
     chiselPlayed: boolean;
+  @Input()
+    sailPlayed: boolean;
+  @Input()
+    sailMove: Move;
 
   //===============
   //Constructor

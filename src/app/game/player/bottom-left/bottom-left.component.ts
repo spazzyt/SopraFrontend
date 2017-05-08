@@ -33,6 +33,10 @@ export class BottomLeftComponent implements OnInit {
   @Input()
   gameComp: any;
 
+  @Input()
+  sailPlayed: boolean;
+  @Input()
+  sailMove: Move;
   //===============
   //Class Variables
   //===============
@@ -243,8 +247,6 @@ export class BottomLeftComponent implements OnInit {
           }
           this.gameComp.game.chiselId = chiselId;
           console.log("PLAYED CHISEL CARD WITH ID " + chiselId);
-
-          //TODO send move to backend - THREE MOVES set up??
           break;
 
         case 6: //Hammer
@@ -274,8 +276,21 @@ export class BottomLeftComponent implements OnInit {
           break;
 
         case 7: //Sail
-          //TODO nasty sail stuff
-          //TODO send move to backend
+          console.log("PLAYING SAIL! STATUS: " + this.gameComp.game.sailPlayed);
+          this.gameComp.game.sailPlayed = true;
+          console.log("THE SAIL HAS BEEN PLAYED! STATUS: " + this.gameComp.game.sailPlayed);
+          let sailId= -1;
+
+          for(let card of this.marketCards){
+
+            //search for sail card in player's card array
+            if(card.id == 31 || card.id == 33){
+              sailId = card.id;
+              break;
+            }
+          }
+          this.gameComp.game.sailId = sailId;
+          console.log("PLAYED SAIL CARD WITH ID " + sailId);
           break;
 
         case 8: //Lever
@@ -363,7 +378,7 @@ export class BottomLeftComponent implements OnInit {
   takeStonesFromQuarryToSled(){
 
     console.log("PLAYER TRIES TO TAKE FROM QUARRY, HAMMER STATUS: ", this.gameComp.game.hammerPlayed);
-    if(this.gameComp.game.chiselPlayed == false && this.gameComp.game.hammerPlayed == false && this.myColour == ColourEnum.black && this.canIPlay && this.quarryStones > 0){
+    if(this.gameComp.game.sailPlayed == false && this.gameComp.game.chiselPlayed == false && this.gameComp.game.hammerPlayed == false && this.myColour == ColourEnum.black && this.canIPlay && this.quarryStones > 0){
 
       //make calculations (how many stones, needed to send correct move to backend)
       let stonesInQuarry:number;

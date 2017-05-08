@@ -15,13 +15,13 @@
 
     <!-- Departing Harbours -->
     <div class="departing_harbours">
-      <app-departing-harbour [hammerPlayed]="game?.hammerPlayed" [chiselPlayed]="game?.chiselPlayed" [ships]="game?.ships" [isActive]="game?.amI_CurrentActivePlayer"></app-departing-harbour>
+      <app-departing-harbour [sailPlayed]="game?.sailPlayed" [sailMove]="game?.sailMove" [hammerPlayed]="game?.hammerPlayed" [chiselPlayed]="game?.chiselPlayed" [ships]="game?.ships" [isActive]="game?.amI_CurrentActivePlayer"></app-departing-harbour>
     </div>
 
 
     <!-- Bottom Left Player Field -->
     <div class="player_field player_bottom_left">
-      <app-bottom-left id="playerField_1" [gameComp]="myComp" [ships]="game?.ships" [marketCards]="game?.player1CardDeck" [canIPlay]="game?.amI_CurrentActivePlayer" [myColour]="game?.myPlayerField"></app-bottom-left>
+      <app-bottom-left id="playerField_1" [sailMove]="game?.sailMove" [sailPlayed]="game?.sailPlayed"  [gameComp]="myComp" [ships]="game?.ships" [marketCards]="game?.player1CardDeck" [canIPlay]="game?.amI_CurrentActivePlayer" [myColour]="game?.myPlayerField"></app-bottom-left>
     </div>
   </div>
 
