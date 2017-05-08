@@ -42,6 +42,8 @@ export class InfoBoxComponent implements OnInit {
   //ID of the lever card that was played; TODO set from other component
   leverId: number;
 
+  sound:boolean=true;
+
   //=============
   // Constructor
   //=============
@@ -60,6 +62,12 @@ export class InfoBoxComponent implements OnInit {
   //===============
   // Other-Methods
   //===============
+
+  toggleGlyphicon(){
+    this.sound=!this.sound;
+    console.log('into function works!!!');
+  }
+
   navigateToLobby(){
     this.router.navigate(['/game']);
   }
