@@ -1,5 +1,12 @@
 /* Ships of size (no of slots) 1, 2, 3 or 4*/
 .ship_size_1{
+  animation-name: ship;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-duration: 2s;
+  animation-delay: 0.5s;
+
   width:225px;
   height:70px;
   background-image:url("../../../assets/images/ship_1.png"); background-repeat: no-repeat;
@@ -8,6 +15,13 @@
   margin-top:7%;
 }
 .ship_size_2{
+  animation-name: ship;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-duration: 2.2s;
+  animation-delay: 0.7s;
+
   width:225px;
   height:70px;
   background-image:url("../../../assets/images/ship_2.png"); background-repeat: no-repeat;
@@ -16,6 +30,13 @@
   margin-top:7%;
 }
 .ship_size_3{
+  animation-name: ship;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-duration: 2.7s;
+  animation-delay: 0.1s;
+
   width:225px;
   height:70px;
   background-image:url("../../../assets/images/ship_3.png"); background-repeat: no-repeat;
@@ -24,6 +45,13 @@
   margin-top:7%;
 }
 .ship_size_4{
+  animation-name: ship;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-duration: 2.4s;
+  animation-delay: 0.9s;
+
   width:225px;
   height:70px;
   background-image:url("../../../assets/images/ship_4.png"); background-repeat: no-repeat;
@@ -184,4 +212,10 @@
   height: 65%;
   float: right;
   /*border: 3px solid #0c0c0c;*/
+}
+
+
+@keyframes ship {
+  from {transform: rotate(-1.5deg) scale(1)}
+  to {transform: rotate(1.5deg) scale(0.98)}
 }
