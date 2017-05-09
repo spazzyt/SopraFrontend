@@ -65,7 +65,6 @@ export class InfoBoxComponent implements OnInit {
 
   toggleGlyphicon(){
     this.sound=!this.sound;
-    console.log('into function works!!!');
   }
 
   navigateToLobby(){

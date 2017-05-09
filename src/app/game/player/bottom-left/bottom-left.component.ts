@@ -218,7 +218,7 @@ export class BottomLeftComponent implements OnInit {
 
         return;
       }
-      if(index == 7 && (freeSlots < 1 || !shipsSailableWithOneStone)){
+      if(index == 7 && (this.sledStones < 1 || freeSlots < 1 || !shipsSailableWithOneStone)){
         console.log("CARD INDEX IS ", index);
         this.gameComp.showSnackbarMessage("You can't play the sail card at the moment.");
         return;
@@ -248,6 +248,9 @@ export class BottomLeftComponent implements OnInit {
             }
           }
           this.gameComp.game.chiselId = chiselId;
+          this.gameComp.showSnackbarMessage("You played the chisel card. Place two stones.");
+          //remove card from local number array
+          this.cardNumbers[5]--;
           console.log("PLAYED CHISEL CARD WITH ID " + chiselId);
           break;
 
@@ -271,6 +274,9 @@ export class BottomLeftComponent implements OnInit {
           this.gameComp.game.hammerId = hammerId;
 
           console.log("PLAYED HAMMER CARD WITH ID " + hammerId);
+          this.gameComp.showSnackbarMessage("You played the hammer card. Place a stone.");
+          //remove card from local number array
+          this.cardNumbers[6]--;
 
           this.quarryStones -= 3;
           this.sledStones += 3;
@@ -293,6 +299,9 @@ export class BottomLeftComponent implements OnInit {
           }
           this.gameComp.game.sailId = sailId;
           console.log("PLAYED SAIL CARD WITH ID " + sailId);
+          this.gameComp.showSnackbarMessage("You played the sail card. Place a stone, then sail a ship.");
+          //remove card from local number array
+          this.cardNumbers[7]--;
           break;
 
         case 8: //Lever
@@ -300,7 +309,6 @@ export class BottomLeftComponent implements OnInit {
           console.log("PLAYING LEVER! STATUS: " + this.gameComp.game.leverPlayed);
           this.gameComp.game.leverPlayed = true;
           console.log("THE LEVER HAS BEEN PLAYED! STATUS: " + this.gameComp.game.leverPlayed);
-
 
           let cardId= -1;
 
@@ -316,6 +324,9 @@ export class BottomLeftComponent implements OnInit {
 
           this.gameComp.infoBoxComponent.leverId = cardId;
           console.log("PLAYED LEVER CARD WITH ID " + cardId);
+          this.gameComp.showSnackbarMessage("You played the lever card. Sail a ship.");
+          //remove card from local number array
+          this.cardNumbers[8]--;
 
           this.gameComp.pyramidComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
           this.gameComp.templeComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
