@@ -41,8 +41,8 @@
               (click)="staticModal.show()">Leave</button>
     </div>
   <button id="pause" class="btn btn-lg btn-primary btn-lg" style="margin-left: 1%" data-toggle="" data-target="">
-    <span *ngIf="sound" (click)="toggleGlyphicon()" onclick="document.getElementById('audio').pause()" class="glyphicon glyphicon-volume-off"></span>
-    <span *ngIf="!sound" (click)="toggleGlyphicon()" onclick="document.getElementById('audio').play()" class="glyphicon glyphicon-volume-up"></span>
+    <span *ngIf="sound" (click)="toggleGlyphicon()" onclick="document.getElementById('audio').pause()" class="glyphicon glyphicon-volume-up"></span>
+    <span *ngIf="!sound" (click)="toggleGlyphicon()" onclick="document.getElementById('audio').play()" class="glyphicon glyphicon-volume-off"></span>
   </button>
 
   <!-- Modal: Leave Game -->

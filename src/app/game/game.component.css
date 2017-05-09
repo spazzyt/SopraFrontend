@@ -4,14 +4,20 @@
   position: absolute;
   top: 0;
   left: 0;
-  /*background-image: url(../../assets/images/water_background.png);*/
   background-image: url(../../assets/images/water_background.png);
   background-size:cover;
-  filter        : blur(1px);
-  -moz-filter   : blur(1px);
-  -webkit-filter: blur(1px);
-  -o-filter     : blur(1px);
+  animation-name: water;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
 }
+
+@keyframes water {
+  from {background-image: url(../../assets/images/water_background.png); filter: blur(1px);}
+  to {background-image: url(../../assets/images/water_background3.png);   filter: blur(2px);}
+}
+
 
 .container_game_screen {
   width: 1366px;
