@@ -126,10 +126,15 @@ export class GameService {
       this.sendMove(moveToSend).subscribe( resp => {
 
         console.log("SENT HAMMER MOVE 1 TO BACKEND:", moveToSend)
-        let moveToSend2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
-        this.gameComp.game.hammerPlayed = false;
-        this.sendMove(moveToSend2);
-        console.log("SENT HAMMER MOVE 2 TO BACKEND:", moveToSend2);
+
+        let moveToSend2 = new Move(PositionEnum.Quarry, PositionEnum.Sled, 3)
+        this.sendMove(moveToSend2).subscribe( resp => {
+          console.log("SENT HAMMER MOVE 2 TO BACKEND:", moveToSend2)
+          let moveToSend3 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
+          this.gameComp.game.hammerPlayed = false;
+          this.sendMove(moveToSend3);
+          console.log("SENT HAMMER MOVE 3 TO BACKEND:", moveToSend3);
+        });
       });
 
     }
@@ -159,12 +164,12 @@ export class GameService {
       params.set("token", this.authenticationService.token)
       let options = new RequestOptions({headers: headers, search: params}); // Create a request option
 
-      console.log("send move: ", move);
+      console.log("Sent move: ", move);
       let req= this.http.post(this.apiUrl + '/game/' + this.game.id + '/move', bodyString, options) // ...using post request
         .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if
 
         req.subscribe(response => {
-          console.log("Sent Move: ", move);
+          console.log("Move arrived in backend: ", move);
         });
         return req;
     }
