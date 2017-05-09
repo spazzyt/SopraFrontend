@@ -9,7 +9,7 @@ import {Ship} from "../../../shared/models/ship";
 import {Move} from "../../../shared/models/move";
 import {PositionEnum} from "../../../shared/models/position.enum";
 import {GameService} from "../../../shared/services/game.service";
-import {User} from "../../../shared/models/user";
+
 
 @Component({
   selector: 'app-bottom-right',
@@ -33,9 +33,13 @@ export class BottomRightComponent implements OnInit {
   myColour: ColourEnum;
 
   @Input()
-  players: User[];
+  gameComp: any;
 
+  @Input()
+  sailPlayed: boolean;
 
+  @Input()
+  sailMove: Move;
   //===============
   //Class Variables
   //===============
@@ -71,12 +75,6 @@ export class BottomRightComponent implements OnInit {
   //is this my field?
   public isThisMyField: boolean = false;
 
-  //==============
-  // Event Emitter
-  //==============
-
-  @Output() onEvent_setClickHandlerOnStoneQuarry_sledStones = new EventEmitter<number>();
-  @Output() onEvent_setClickHandlerOnStoneQuarry_quarryStones = new EventEmitter<number>();
 
   //===============
   //Constructor
@@ -85,11 +83,10 @@ export class BottomRightComponent implements OnInit {
 
   }
 
-  //==========
-  // ngOnInit
-  //==========
-
   ngOnInit() {
+
+    //Popovers must be initialized in ngOnInit()
+    //this.initializePopovers();
 
     // stone generated in supply sled
     this.playerFieldStone = new Stone(0, ColourEnum.gray);
@@ -107,31 +104,6 @@ export class BottomRightComponent implements OnInit {
   updateCardNumbers(){
     this.cardNumbers = this.cardArrayToNumberArray(this.marketCards);
   }
-  //===========================================================
-  // Click Events
-  //===========================================================
-
-  setClickHandlerOnStoneQuarry() {
-
-    //set click handler for  bll_1
-    (<any>$(document)).ready(() =>{
-      (<any>$("#quarry_4")).on("click", () =>{
-        // alert("The stone quarry 4 was clicked.");
-        this.onEvent_setClickHandlerOnStoneQuarry_sledStones.emit(this.sledStones);
-        this.onEvent_setClickHandlerOnStoneQuarry_quarryStones.emit(this.quarryStones);
-      });
-    });
-
-  }
-
-  removeClickHandlerOnStoneQuarry() {
-
-    //set click handler for  bll_1
-    (<any>$(document)).ready(() =>{
-      (<any>$("#quarry_4")).off("click");
-    });
-
-  }
 
   //===========================================================
   // Change Text / Numbers
@@ -142,28 +114,24 @@ export class BottomRightComponent implements OnInit {
 
     //update attribute: score
     this.playerName=playerName_target;
-
   }
 
   setScore(score_target:number){
 
     //update attribute: score
     this.score=score_target;
-
   }
 
   setStonesInSled(sledStones_target:number){
 
     //update attribute: sledStones
     this.sledStones=sledStones_target;
-
   }
 
   setStonesInQuarry(quarryStones_target:number){
 
     // update attribute:
     this.quarryStones=quarryStones_target;
-
   }
 
   update_takeStonesFromQuarry(howMany: number){              //this function is used for telling that the player has taken stones from the quarry
@@ -242,16 +210,28 @@ export class BottomRightComponent implements OnInit {
 
       //Checks for each possible card if it's not playable (if not playable, return)
       if(index == 5 && this.sledStones < 2 && freeSlots >= 2){
+        if(this.sledStones >= 2)
+          this.gameComp.showSnackbarMessage("There aren't two free stone slots.");
+        else
+          this.gameComp.showSnackbarMessage("You don't have enough stones.");
         return;
       }
 
-      if(index == 6 && (this.quarryStones < 3 || freeSlots < 1)){
+      if(index == 6 && (this.quarryStones < 3 || freeSlots < 1 || this.sledStones > 2)){
+        if(this.quarryStones < 3)
+          this.gameComp.showSnackbarMessage("You don't have 3 stones in your quarry.");
+        else    //TODO tell player more clearly why he can't play card (for all cases)
+          this.gameComp.showSnackbarMessage("You can't play the hammer card at the moment.");
+
         return;
       }
-      if(index == 7 && freeSlots < 1 && !shipsSailableWithOneStone){
+      if(index == 7 && (freeSlots < 1 || !shipsSailableWithOneStone)){
+        console.log("CARD INDEX IS ", index);
+        this.gameComp.showSnackbarMessage("You can't play the sail card at the moment.");
         return;
       }
       if(index == 8 && !shipsSailable){
+        this.gameComp.showSnackbarMessage("Can't play lever card, no ship is sailable.");
         return;
       }
 
@@ -261,20 +241,95 @@ export class BottomRightComponent implements OnInit {
 
       switch(index){
         case 5: //Chisel
-          //TODO send move to backend - determine format??
+          console.log("PLAYING CHISEL! STATUS: " + this.gameComp.game.chiselPlayed);
+          this.gameComp.game.chiselPlayed = true;
+          console.log("THE CHISEL HAS BEEN PLAYED! STATUS: " + this.gameComp.game.chiselPlayed);
+          let chiselId= -1;
+
+          for(let card of this.marketCards){
+
+            //search for hammer card in player's card array
+            if(card.id == 24 || card.id == 25 || card.id == 26){
+              chiselId = card.id;
+              break;
+            }
+          }
+          this.gameComp.game.chiselId = chiselId;
+          console.log("PLAYED CHISEL CARD WITH ID " + chiselId);
           break;
 
         case 6: //Hammer
-          //TODO send move to backend
+
+          //lets the game know the hammer has been played
+          console.log("PLAYING HAMMER! STATUS: " + this.gameComp.game.hammerPlayed);
+          this.gameComp.game.hammerPlayed = true;
+          console.log("THE HAMMER HAS BEEN PLAYED! STATUS: " + this.gameComp.game.hammerPlayed);
+
+          let hammerId= -1;
+
+          for(let card of this.marketCards){
+
+            //search for hammer card in player's card array
+            if(card.id == 29 || card.id == 30){
+              hammerId = card.id;
+              break;
+            }
+          }
+          this.gameComp.game.hammerId = hammerId;
+
+          console.log("PLAYED HAMMER CARD WITH ID " + hammerId);
+
+          this.quarryStones -= 3;
+          this.sledStones += 3;
+          this.hasStones = true;
           break;
 
         case 7: //Sail
-          //TODO send move to backend
+          console.log("PLAYING SAIL! STATUS: " + this.gameComp.game.sailPlayed);
+          this.gameComp.game.sailPlayed = true;
+          console.log("THE SAIL HAS BEEN PLAYED! STATUS: " + this.gameComp.game.sailPlayed);
+          let sailId= -1;
+
+          for(let card of this.marketCards){
+
+            //search for sail card in player's card array
+            if(card.id == 31 || card.id == 32 || card.id == 33){
+              sailId = card.id;
+              break;
+            }
+          }
+          this.gameComp.game.sailId = sailId;
+          console.log("PLAYED SAIL CARD WITH ID " + sailId);
           break;
 
         case 8: //Lever
-          //TODO wait until player sails a ship to a site
-          //TODO then show modal for choosing stone order (WITH the corresponding ship)
+          //lets the game know the lever has been played
+          console.log("PLAYING LEVER! STATUS: " + this.gameComp.game.leverPlayed);
+          this.gameComp.game.leverPlayed = true;
+          console.log("THE LEVER HAS BEEN PLAYED! STATUS: " + this.gameComp.game.leverPlayed);
+
+
+          let cardId= -1;
+
+          for(let card of this.marketCards){
+
+            //search for lever card in card array
+            if(card.id == 27 || card.id == 28){
+              cardId = card.id;
+              break;
+            }
+          }
+
+
+          this.gameComp.infoBoxComponent.leverId = cardId;
+          console.log("PLAYED LEVER CARD WITH ID " + cardId);
+
+          this.gameComp.pyramidComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.templeComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.burialChamberComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.obeliskComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.marketComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+
           break;
       }
 
@@ -331,7 +386,8 @@ export class BottomRightComponent implements OnInit {
 
   takeStonesFromQuarryToSled(){
 
-    if(this.myColour == ColourEnum.gray && this.canIPlay && this.quarryStones > 0){
+    console.log("PLAYER TRIES TO TAKE FROM QUARRY, HAMMER STATUS: ", this.gameComp.game.hammerPlayed);
+    if(this.gameComp.game.sailPlayed == false && this.gameComp.game.chiselPlayed == false && this.gameComp.game.hammerPlayed == false && this.myColour == ColourEnum.gray && this.canIPlay && this.quarryStones > 0){
 
       //make calculations (how many stones, needed to send correct move to backend)
       let stonesInQuarry:number;
