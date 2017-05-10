@@ -44,6 +44,8 @@ export class InfoBoxComponent implements OnInit {
 
   sound:boolean=true;
 
+  public reorderCallback: (any) => void;
+
   //=============
   // Constructor
   //=============
@@ -142,37 +144,9 @@ export class InfoBoxComponent implements OnInit {
       }
     }
 
-    let leverMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, cardId);
-    //TODO send correctly?
-    let leverMoveSort = new Move(PositionEnum.DepartingHarbour, PositionEnum.DepartingHarbour, shipId, shipId, stoneArray);
+    this.reorderCallback(stoneArray);
 
-    //Send to backend
-    this.gameService.sendMove(leverMove).subscribe( resp => {
 
-      console.log("SENT FIRST MOVE: ", leverMove);
-      this.game.leverPlayed = false;
-      this.gameService.sendMove(leverMoveSort).subscribe( resp => {
-        this.game.leverPlayed = true; //TODO maybe not needed?
-        console.log("SENT SECOND MOVE: ", leverMoveSort);
-
-        //Generate & send second move: ship to site
-        let destination = this.leverDestination;
-        console.log("LEVER DESTINATION: ", this.leverDestination);
-
-        let leverMove2 = new Move(PositionEnum.DepartingHarbour, destination, this.leverShip);
-
-        //Send to backend
-        this.gameService.sendMove(leverMove2);
-
-        console.log("SENT THIRD MOVE: ", leverMove2);
-
-        console.log("LEVER FINISHED, NEW STATUS: " + this.game.leverPlayed);
-
-        this.gameService.gameComp.siteMap[this.gameService.gameComp.siteToStringMap[this.leverDestination]].placeStones(this.game.ships[this.leverShip].slots);
-        //remove stones from ship
-        this.gameService.gameComp.game.ships[this.leverShip].slots = [];
-      });
-    });
 
 
   }
