@@ -9,6 +9,7 @@ import {Move} from "../models/move";
 import { environment } from '../../../environments/environment';
 import {ColourEnum} from "../models/colour.enum";
 import {PositionEnum} from "../models/position.enum";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class GameService {
@@ -45,136 +46,313 @@ export class GameService {
   }
 
   sendMove(move: Move) : Observable<Response> {
+    console.log("sendMove=>",move,);
+    // response observable
+    let req = null;
 
-    //Sail played:
-    if(this.gameComp.game.sailPlayed){
+    let leverSailMove;
 
-      if(this.gameComp.game.sailMove == null){
-        //save first move in game (if there hasn't been a move yet)
-        let sailMove1 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
-        this.gameComp.game.sailMove = sailMove1;
-        console.log("Set first sail move to: ", sailMove1);
-        return;
-      }
-      else{
-
-        //Create the "play card" move to send to backend
-        let sailCardMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.sailId)
-
-        //TODO check if correct? (should be)
-        let sailMove2 = new Move(PositionEnum.DepartingHarbour, move.to, move.pos);
-
-        //Let game know sail playing is over
-        this.gameComp.game.sailPlayed = false;
-
-        this.sendMove(sailCardMove).subscribe(resp => {
-          console.log("SENT SAIL CARD MOVE TO BACKEND:", sailCardMove);
-
-          this.sendMove(this.gameComp.game.sailMove).subscribe( resp => {
-            //TODO check if this has to be sent in order (probably not?)
-            console.log("SENT SAIL MOVE 1 TO BACKEND:", this.gameComp.game.sailMove);
-            this.sendMove(sailMove2);
-            console.log("SENT SAIL MOVE 2 TO BACKEND:", sailMove2);
-            //TODO check that backend gets correct info
-
-          });
-        });
-
-      }
+    // special case for stupide lever
+    if(this.gameComp.game.leverPlayed &&
+      (move.from === PositionEnum.DepartingHarbour || move.to === PositionEnum.DepartingHarbour)){
+      leverSailMove = move;
+      req = new Subject();
+    } else {
+      // send the move first
+      req = this._sendMove(move);
     }
 
+
+
+    req.subscribe(response => {
+      console.log("Move arrived in backend: ", move);
+    });
+
+    if(  this.gameComp.game.sailPlayed
+      || this.gameComp.game.chiselPlayed
+      || this.gameComp.game.hammerPlayed
+      || this.gameComp.game.leverPlayed) {
+
+      console.log("a card play is ongoing");
+
+      // a part of the card move is played
+      this.game.openCardMoves--;
+    }
+
+    //Sail played:
+    if(this.gameComp.game.sailPlayed) {
+    console.log("SendMove:SailHook");
+
+      //after we placed the stone 'mark' step two, <- hack
+      if(this.game.openCardMoves == 1)
+        this.gameComp.game.sailMove = true;
+
+      // once there are no more open moves
+      if(this.game.openCardMoves == 0)
+        this.gameComp.game.sailPlayed = false;
+    }
     //Chisel played:
-    else if(this.gameComp.game.chiselPlayed){
+    else if(this.gameComp.game.chiselPlayed) {
 
-      if(this.gameComp.game.chiselMove == null){
-        //save first move in game (if there hasn't been a move yet)
-        let chiselMove1 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
-        this.gameComp.game.chiselMove = chiselMove1;
-        return;
-      }
-      else{
+      console.log("SendMove:ChiselHook");
 
-        //Create the "play card" move to send to backend
-        let chiselCardMove = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.chiselId)
+      //after we placed the first 'mark' step two, <- hack
+      if(this.game.openCardMoves == 1)
+        this.gameComp.game.chiselMove = true;
 
-        let chiselMove2 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
+      // once there are no more open moves
+      if(this.game.openCardMoves == 0)
+        this.gameComp.game.chiselPlayed = false;
 
-        if(this.gameComp.game.chiselPlayed){
-          console.log("ENTER SENDING LOOP");
-          //Let game know chisel playing is over
-          this.gameComp.game.chiselPlayed = false;
-
-          this.sendMove(chiselCardMove).subscribe(resp => {
-
-            console.log("SENT CHISEL CARD MOVE TO BACKEND:", chiselCardMove);
-
-            this.sendMove(this.gameComp.game.chiselMove).subscribe( resp => {
-              console.log("SENT CHISEL MOVE 1 TO BACKEND:", this.gameComp.game.chiselMove);
-              this.sendMove(chiselMove2);
-              console.log("SENT CHISEL MOVE 2 TO BACKEND:", chiselMove2);
-              //TODO check that backend gets correct info
-            });
-          });
-        }
-      }
     }
 
     //Hammer played:
-    else if(this.gameComp.game.hammerPlayed){
-      let moveToSend = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, this.gameComp.game.hammerId);
-      this.gameComp.game.hammerPlayed = false;
-      this.sendMove(moveToSend).subscribe( resp => {
+    else if(this.gameComp.game.hammerPlayed) {
 
-        console.log("SENT HAMMER MOVE 1 TO BACKEND:", moveToSend)
+      console.log("SendMove:HammerHook");
 
-        let moveToSend2 = new Move(PositionEnum.Quarry, PositionEnum.Sled, 3)
-        this.sendMove(moveToSend2).subscribe( resp => {
-          console.log("SENT HAMMER MOVE 2 TO BACKEND:", moveToSend2)
-          let moveToSend3 = new Move(PositionEnum.Sled, PositionEnum.DepartingHarbour, move.pos, move.ShipID);
-          this.gameComp.game.hammerPlayed = false;
-          this.sendMove(moveToSend3);
-          console.log("SENT HAMMER MOVE 3 TO BACKEND:", moveToSend3);
+      // after playing the card
+      if(this.game.openCardMoves == 2) {
+
+        req.subscribe( resp => {
+          console.log("HammerCard sent to market...");
+
+          let moveToSend = new Move(PositionEnum.Quarry, PositionEnum.Sled, 3);
+          console.log("BEFORE SENT HAMMER MOVE 1 TO BACKEND:", moveToSend);
+          this.sendMove(moveToSend).subscribe(resp => {
+            console.log("SENT HAMMER MOVE 1 TO BACKEND:", moveToSend)
+          });
+
         });
-      });
+      }
+      //after we the stones 'mark' step two, <- hack
+      if(this.game.openCardMoves == 1)
+        this.gameComp.game.hammerMove = true;
+
+      // once there are no more open moves
+      if(this.game.openCardMoves == 0)
+        this.gameComp.game.hammerPlayed = false;
 
     }
 
     //Lever played: let player choose order before sending move
-    else if(this.gameComp.game.leverPlayed){
-      if(move.to != PositionEnum.DepartingHarbour){
+    else if(this.gameComp.game.leverPlayed) {
+      console.log("SendMove:LeverHook");
+
+      // when we sail
+      if(this.game.openCardMoves == 1)
+      if(move.to != PositionEnum.DepartingHarbour) {
+
+
         this.gameComp.infoBoxComponent.leverShip = move.pos;
+        let shipId = move.pos;
 
         //If ship was moved to site, save site name to infoboxcomponent (for use in its sendmove)
-        if(move.to == PositionEnum.Market || move.to == PositionEnum.Pyramid || move.to == PositionEnum.Temple || move.to == PositionEnum.BurialChamber || move.to == PositionEnum.Obelisk   ){
+        if (move.to == PositionEnum.Market || move.to == PositionEnum.Pyramid || move.to == PositionEnum.Temple || move.to == PositionEnum.BurialChamber || move.to == PositionEnum.Obelisk) {
           this.gameComp.infoBoxComponent.leverDestination = move.to;
         }
+
+        // will be called once the reordering is finished
+        this.gameComp.infoBoxComponent.reorderCallback = (stoneArray) => {
+
+          // first send the reordering!
+          let leverMoveSort = new Move(PositionEnum.DepartingHarbour, PositionEnum.DepartingHarbour, shipId, shipId, stoneArray);
+
+
+          this._sendMove(leverMoveSort).subscribe(resp => {
+            console.log("SENT FIRST MOVE: ", leverMoveSort);
+
+            // now we can resend the ship move
+            this._sendMove(leverSailMove).subscribe(resp => {
+              console.log("SENT SECOND MOVE: ", leverSailMove);
+
+              this.game.leverPlayed = false;
+
+              this.gameComp.siteMap[this.gameComp.siteToStringMap[move.to]].placeStones(this.game.ships[shipId].slots);
+              //remove stones from ship
+              this.gameComp.game.ships[shipId].slots = [];
+            });
+          });
+        };
 
         this.gameComp.showLeverModal(move.pos);
       }
     }
 
-    else{
-
-      let bodyString = JSON.stringify(move); // Stringify payload
-      let headers = new Headers({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.authenticationService.token
-      });// ... Set content type to JSON
-      let params = new URLSearchParams();
-      params.set("token", this.authenticationService.token)
-      let options = new RequestOptions({headers: headers, search: params}); // Create a request option
-
-      console.log("Sent move: ", move);
-      let req= this.http.post(this.apiUrl + '/game/' + this.game.id + '/move', bodyString, options) // ...using post request
-        .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if
-
-        req.subscribe(response => {
-          console.log("Move arrived in backend: ", move);
-        });
-        return req;
-    }
+    return req;
     }
 
+
+    /*
+     Actual sending to the backend without them wicked hooks
+     */
+  private _sendMove(move: Move) : Observable<Response> {
+    let bodyString = JSON.stringify(move); // Stringify payload
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.authenticationService.token
+    });// ... Set content type to JSON
+    let params = new URLSearchParams();
+    params.set("token", this.authenticationService.token)
+    let options = new RequestOptions({headers: headers, search: params}); // Create a request option
+
+    console.log("Sent move: ", move);
+    return this.http.post(this.apiUrl + '/game/' + this.game.id + '/move', bodyString, options)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+      .map((response: Response) => response.json())// ...using post request
+      .share(); //...errors if
+  }
+
+    playCard(id: number) {
+
+      let userDashboard = this.gameComp.playerMap[this.gameComp.myUserName];
+
+
+      let cardId= -1;
+
+
+      switch(id){
+        /*
+         Place 2 stones on 1 ship or 1 stone on each of 2 ships .
+         After play, the card is placed on the discard pile .
+         If you have not used the card by the end of the game, you
+         will get 1 point for it.
+         */
+        case 5: //Chisel
+          // card + place stone + place stone
+          this.game.openCardMoves = 3;
+
+          console.log("PLAYING CHISEL! STATUS: " + this.gameComp.game.chiselPlayed);
+          this.gameComp.game.chiselPlayed = true;
+          console.log("THE CHISEL HAS BEEN PLAYED! STATUS: " + this.gameComp.game.chiselPlayed);
+
+          for(let card of userDashboard.marketCards){
+
+            //search for hammer card in player's card array
+            if(card.id == 24 || card.id == 25 || card.id == 26){
+              cardId = card.id;
+              break;
+            }
+          }
+          this.gameComp.game.chiselId = cardId;
+          console.log("PLAYED CHISEL CARD WITH ID " + cardId);
+          break;
+
+
+         /*
+          Take 3 stones from the quarry and place them on your
+          supply sled token . Then, place 1 stone from your supply
+          sled token on 1 ship .
+          After play, the card is placed on the discard pile .
+          If you have not used the
+           */
+        case 6: //Hammer
+          // card + take stones + place stone
+          this.game.openCardMoves = 3;
+
+          //lets the game know the hammer has been played
+          console.log("PLAYING HAMMER! STATUS: " + this.gameComp.game.hammerPlayed);
+          this.gameComp.game.hammerPlayed = true;
+          console.log("THE HAMMER HAS BEEN PLAYED! STATUS: " + this.gameComp.game.hammerPlayed);
+
+          for(let card of userDashboard.marketCards){
+
+            //search for hammer card in player's card array
+            if(card.id == 29 || card.id == 30){
+              cardId = card.id;
+              break;
+            }
+          }
+          this.gameComp.game.hammerId = cardId;
+
+          console.log("PLAYED HAMMER CARD WITH ID " + cardId);
+
+          userDashboard.quarryStones -= 3;
+          userDashboard.sledStones += 3;
+          userDashboard.hasStones = true;
+
+
+
+          break;
+
+          /*
+           Place 1 stone on 1 ship and sail this ship to a site.
+           As always, of course, both conditions for sailing a ship
+           must have been met.
+           After play, the card is placed on the discard pile .
+           If you have not used the card by the end of the game, you
+           will get 1 point for it.
+           */
+        case 7: //Sail
+          // card + place stone + sail
+          this.game.openCardMoves = 3;
+
+          console.log("PLAYING SAIL! STATUS: " + this.gameComp.game.sailPlayed);
+          this.gameComp.game.sailPlayed = true;
+          console.log("THE SAIL HAS BEEN PLAYED! STATUS: " + this.gameComp.game.sailPlayed);
+
+          for(let card of userDashboard.marketCards){
+
+            //search for sail card in player's card array
+            if(card.id == 31 || card.id == 32 || card.id == 33){
+              cardId = card.id;
+              break;
+            }
+          }
+          this.gameComp.game.sailId = cardId;
+          console.log("PLAYED SAIL CARD WITH ID " + cardId);
+          break;
+
+          /*
+           Sail 1 ship to a site. Decide for yourself what sequence to
+           follow when unloading the stones.
+           As always, of course, both conditions for sailing a ship
+           must have been met. After play, the card is placed on the
+           discard pile . If you have not used the card by the end of
+           the game, you will get 1 point for it.
+           */
+        case 8: //Lever
+          // card + sail + order
+          this.game.openCardMoves = 3;
+
+          //lets the game know the lever has been played
+          console.log("PLAYING LEVER! STATUS: " + this.gameComp.game.leverPlayed);
+          this.gameComp.game.leverPlayed = true;
+          console.log("THE LEVER HAS BEEN PLAYED! STATUS: " + this.gameComp.game.leverPlayed);
+
+
+          for(let card of userDashboard.marketCards){
+
+            //search for lever card in card array
+            if(card.id == 27 || card.id == 28){
+              cardId = card.id;
+              break;
+            }
+          }
+
+
+          this.gameComp.infoBoxComponent.leverId = cardId;
+          console.log("PLAYED LEVER CARD WITH ID " + cardId);
+
+
+
+          this.gameComp.pyramidComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.templeComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.burialChamberComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.obeliskComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+          this.gameComp.marketComponent.finalDestinationComponent.leverPlayed = this.gameComp.game.leverPlayed;
+
+          break;
+      }
+
+
+      let moveToSend = new Move(PositionEnum.PlayerCardStack, PositionEnum.Market, cardId);
+      console.log("SendingMove: ", moveToSend);
+      this.sendMove(moveToSend).subscribe( (res) => {
+        console.log("Sent move:", res );
+      });
+
+    }
 
   //===========================================================
   // Popover Methods
