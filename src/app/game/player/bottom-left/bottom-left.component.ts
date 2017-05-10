@@ -218,7 +218,7 @@ export class BottomLeftComponent implements OnInit {
 
         return;
       }
-      if(index == 7 && (freeSlots < 1 || !shipsSailableWithOneStone)){
+      if(index == 7 && (this.sledStones < 1 || freeSlots < 1 || !shipsSailableWithOneStone)){
         console.log("CARD INDEX IS ", index);
         this.gameComp.showSnackbarMessage("You can't play the sail card at the moment.");
         return;

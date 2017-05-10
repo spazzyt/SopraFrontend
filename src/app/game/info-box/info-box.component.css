@@ -9,12 +9,14 @@ p{
 
 .leave_btn{
   position: absolute;
-  bottom: 25%;
-  right: 10%;
-  max-width: 100px;
+  bottom: 26%;
+  left: 48%;
+  width: 123px !important;
+  height: 42px !important;
   margin: 0 auto;
   font-size: 15px;
   outline: none;
+  border-radius: 6px !important;
 }
 
 .lever_btn{
@@ -393,5 +395,7 @@ Styling for the Game manual modal
   margin-top: 50%;
 }
 #pause{
-  margin-top: 50%;
+  margin-top: 44%;
+  height: 35px;
+  width: 35px;
 }

@@ -26,6 +26,9 @@ export class Ship {
   //array of slot objects
   public slots:Stone[];
 
+  //number of stones on ship
+  public stoneNum: number = 0;
+
   //ship image
   public imageUrl:string="";
 
@@ -67,6 +70,7 @@ export class Ship {
     else
       this.draggable = false;
 
+    this.stoneNum++;
     console.log(this);
   }
 }

@@ -1,4 +1,4 @@
-<div class="background" id="glow"> <!-- TRY to get background img: [ngStyle]="{'background-image':(players?.length < 3)?'url(/../../../../assets/images/top_right_empty.png)': ''}" -->
+<div class="background" id="glow3"> <!-- TRY to get background img: [ngStyle]="{'background-image':(players?.length < 3)?'url(/../../../../assets/images/top_right_empty.png)': ''}" -->
 <div [ngStyle]="{'visibility': (players?.length > 2)?'visible':'hidden'}" class="bottom_part">
 
   <div id="score_3" class="low_r score">
@@ -6,7 +6,7 @@
   </div>
   <div id="supply_sled_3" class="low_m">
 
-    <div id="bag_3" class="stone_icon" dnd-draggable [dragEnabled]="canIPlay && isThisMyField && hasStones" [dropZones]="['slots']" [dragData]="playerFieldStone">
+    <div id="bag_3" class="stone_icon" dnd-draggable [dragEnabled]="(!(sailPlayed == true && sailMove != null)) && canIPlay && isThisMyField && hasStones" [dropZones]="['slots']" [dragData]="playerFieldStone">
       <app-stone id="stones_3" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
     </div>
 

@@ -28,7 +28,7 @@ export class ShipComponent implements OnInit {
 
   //Add stones to ship
   //stonesOnShip: Stone[] = []; // = [new Stone(1, ColourEnum.brown), null]
-  @Input() stonesOnShip:Stone[][];
+  @Input() sailPlayed:boolean;
 
   //===============
   //Constructor
@@ -45,12 +45,6 @@ export class ShipComponent implements OnInit {
   //===============
   //Class Methods
   //===============
-
-
-  //TODO:
-  deactivateOrActivateShips(){
-
-  }
 
   addTo($event: any, shipId: number, slotId: number) {
     let stone = $event.dragData;

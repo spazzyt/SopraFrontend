@@ -60,6 +60,7 @@ _________________________
 
 
 .container{
+  z-index: -100 !important;
   width: 20px;
   height: 15px;
   position:relative;
@@ -76,6 +77,7 @@ _________________________
 }
 
 .container2{
+  z-index: -100 !important;
   width: 20px;
   height: 15px;
   position:relative;
@@ -92,6 +94,7 @@ _________________________
 }
 
 .flame{
+  z-index: -100 !important;
   bottom:0;
   position:absolute;
   border-bottom-right-radius: 50%;
@@ -101,6 +104,7 @@ _________________________
 }
 
 .red{
+  z-index: -100 !important;
   left: 5px;
   width: 10px;
   height: 10px;
@@ -109,6 +113,7 @@ _________________________
 }
 
 .orange{
+  z-index: -100 !important;
   left: 6px;
   width: 8px;
   height: 8px;
@@ -117,6 +122,7 @@ _________________________
 }
 
 .yellow{
+  z-index: -100 !important;
   left: 6px;
   width: 6px;
   height: 6px;
@@ -125,6 +131,7 @@ _________________________
 }
 
 .white{
+  z-index: -100 !important;
   left: 8px;
   bottom: -2px;
   width: 1px;
@@ -134,6 +141,7 @@ _________________________
 }
 
 .circle{
+  z-index: -100 !important;
   border-radius: 50%;
   position:absolute;
 }
