@@ -6,11 +6,13 @@
   left: 0;
   background-image: url(../../assets/images/water_background.png);
   background-size:cover;
+  /*
   animation-name: water;
   animation-duration: 2s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
+  */
 }
 
 @keyframes water {
@@ -49,6 +51,7 @@
 }
 
 .container_middle {
+  z-index: 10 !important;
   width: 59%;
   height: 100%;
   position: relative;
@@ -376,11 +379,13 @@ Styling for the gif animations
 #shark_1{
 
 
+  z-index: 1 !important;
+
   filter        : blur(1px);
   -moz-filter   : blur(1px);
   -webkit-filter: blur(1px);
   -o-filter     : blur(1px);
-  opacity: 0.4;
+  opacity: 0.8;
   width: 30px;
   height: 60px;
   background-image:url(../../assets/images/shark.gif);
