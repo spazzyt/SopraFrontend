@@ -76,6 +76,10 @@ export class WSService {
         case 'ENDGAME':
           console.log("THE GAME HAS ENDED");
           gameComponent.endGame(msg.payload.finalScoreDumbArray);
+          //play sound for endgame
+          let audio = new Audio();
+          audio.src = "../../../assets/71-yourTurn.mp3";
+          audio.play();
           break;
 
 
@@ -87,7 +91,7 @@ export class WSService {
           console.log("Roland-Websocke-Sound ", whoseTurn, gameComponent.game.myUserName)
           if (gameComponent.game.myUserName==whoseTurn){
             let audio = new Audio();
-            audio.src = "../../../assets/71-yourTurn.mp3";
+            audio.src = "../../../assets/71-yourTurn.wav";
             audio.play();
           }
 
