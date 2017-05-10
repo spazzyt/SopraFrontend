@@ -9,6 +9,7 @@ import {Ship} from "../../../shared/models/ship";
 import {Move} from "../../../shared/models/move";
 import {PositionEnum} from "../../../shared/models/position.enum";
 import {GameService} from "../../../shared/services/game.service";
+import {User} from "../../../shared/models/user";
 
 
 @Component({
@@ -40,6 +41,10 @@ export class BottomRightComponent implements OnInit {
 
   @Input()
   sailMove: Move;
+
+  @Input()
+  players: User[];
+
   //===============
   //Class Variables
   //===============
@@ -220,12 +225,16 @@ export class BottomRightComponent implements OnInit {
       if(index == 6 && (this.quarryStones < 3 || freeSlots < 1 || this.sledStones > 2)){
         if(this.quarryStones < 3)
           this.gameComp.showSnackbarMessage("You don't have 3 stones in your quarry.");
-        else    //TODO tell player more clearly why he can't play card (for all cases)
-          this.gameComp.showSnackbarMessage("You can't play the hammer card at the moment.");
+        else{
+          if(this.sledStones > 2)
+            this.gameComp.showSnackbarMessage("You don't have room for 3 stones in your sled.");
+          else
+            this.gameComp.showSnackbarMessage("There is no free slot on a ship.");
+        }
 
         return;
       }
-      if(index == 7 && (freeSlots < 1 || !shipsSailableWithOneStone)){
+      if(index == 7 && (this.sledStones < 1 || freeSlots < 1 || !shipsSailableWithOneStone)){
         console.log("CARD INDEX IS ", index);
         this.gameComp.showSnackbarMessage("You can't play the sail card at the moment.");
         return;

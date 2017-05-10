@@ -213,8 +213,12 @@ export class BottomLeftComponent implements OnInit {
       if(index == 6 && (this.quarryStones < 3 || freeSlots < 1 || this.sledStones > 2)){
         if(this.quarryStones < 3)
           this.gameComp.showSnackbarMessage("You don't have 3 stones in your quarry.");
-        else    //TODO tell player more clearly why he can't play card (for all cases)
-          this.gameComp.showSnackbarMessage("You can't play the hammer card at the moment.");
+        else{
+          if(this.sledStones > 2)
+            this.gameComp.showSnackbarMessage("You don't have room for 3 stones in your sled.");
+          else
+            this.gameComp.showSnackbarMessage("There is no free slot on a ship.");
+        }
 
         return;
       }
