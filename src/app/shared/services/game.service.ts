@@ -84,11 +84,11 @@ export class GameService {
     console.log("SendMove:SailHook");
 
       //after we placed the stone 'mark' step two, <- hack
-      if(this.game.openCardMoves == 1)
+      if(this.game.openCardMoves === 1)
         this.gameComp.game.sailMove = true;
 
       // once there are no more open moves
-      if(this.game.openCardMoves == 0)
+      if(this.game.openCardMoves === 0)
         this.gameComp.game.sailPlayed = false;
     }
     //Chisel played:
@@ -97,11 +97,11 @@ export class GameService {
       console.log("SendMove:ChiselHook");
 
       //after we placed the first 'mark' step two, <- hack
-      if(this.game.openCardMoves == 1)
+      if(this.game.openCardMoves === 1)
         this.gameComp.game.chiselMove = true;
 
       // once there are no more open moves
-      if(this.game.openCardMoves == 0)
+      if(this.game.openCardMoves === 0)
         this.gameComp.game.chiselPlayed = false;
 
     }
@@ -112,7 +112,7 @@ export class GameService {
       console.log("SendMove:HammerHook");
 
       // after playing the card
-      if(this.game.openCardMoves == 2) {
+      if(this.game.openCardMoves === 2) {
 
         req.subscribe( resp => {
           console.log("HammerCard sent to market...");
@@ -126,11 +126,11 @@ export class GameService {
         });
       }
       //after we the stones 'mark' step two, <- hack
-      if(this.game.openCardMoves == 1)
+      if(this.game.openCardMoves === 1)
         this.gameComp.game.hammerMove = true;
 
       // once there are no more open moves
-      if(this.game.openCardMoves == 0)
+      if(this.game.openCardMoves === 0)
         this.gameComp.game.hammerPlayed = false;
 
     }
@@ -140,7 +140,7 @@ export class GameService {
       console.log("SendMove:LeverHook");
 
       // when we sail
-      if(this.game.openCardMoves == 1)
+      if(this.game.openCardMoves === 1)
       if(move.to != PositionEnum.DepartingHarbour) {
 
 
