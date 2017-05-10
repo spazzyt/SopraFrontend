@@ -47,11 +47,11 @@
       </div>
   <div class="section" id="spacing_right"></div>
 </div>
-    <div class="third" id="bottom"><div *ngFor="let field_id_lvl of fieldArray" id="field_{{field_id_lvl}}" class="field">{{fieldHeight[field_id_lvl-1]}}</div></div></div>
+    <div class="third" id="bottom">
+      <div *ngFor="let field_id_lvl of fieldArray" id="field_{{field_id_lvl}}" class="field">{{fieldHeight[field_id_lvl-1]}}</div>
+    </div>
+  </div>
 
-  <!--
-    <div *ngFor="let stone of stones; let i = index" id="field_{{i+1}}" class="field">
-
-  <app-stone [stone]="stone"></app-stone>
 </div>
--->
+
+</div>

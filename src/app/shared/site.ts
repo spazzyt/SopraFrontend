@@ -1,4 +1,4 @@
-import {Input, ViewChild} from '@angular/core';
+import {ViewChild} from '@angular/core';
 import {Ship} from "../shared/models/ship";
 import {FinalDestinationComponent} from "../game/final-destination/final-destination.component";
 

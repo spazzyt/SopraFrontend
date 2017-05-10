@@ -33,7 +33,7 @@ export class AuthenticationService {
 
     // set mySelf, if saved in local storage
     // (assumes local user always logs in with the same name)
-    let mySelf = JSON.parse(localStorage.getItem('mySelf'));
+    const mySelf = JSON.parse(localStorage.getItem('mySelf'));
     this.token = mySelf && mySelf.token;
     this.mySelf = mySelf;
 
@@ -44,7 +44,7 @@ export class AuthenticationService {
   }
 
   updateCookie(){
-    let mySelf = JSON.parse(localStorage.getItem('mySelf'));
+    const mySelf = JSON.parse(localStorage.getItem('mySelf'));
     this.token = mySelf && mySelf.token;
     this.mySelf = mySelf;
   }
@@ -63,7 +63,7 @@ export class AuthenticationService {
     let bodyString = JSON.stringify({username: user.username});
 
     // Set content type to JSON
-    let headers = new Headers({'Content-Type': 'application/json'});
+    const headers = new Headers({'Content-Type': 'application/json'});
 
     // Create a request option
     let options = new RequestOptions({headers: headers});
@@ -76,12 +76,7 @@ export class AuthenticationService {
 
         // login successful if there's a jwt token in the response
         //let user = response.json() && response.json();
-        let user = response.json()
-
-        console.log("authentication.service.ts-login()-response: ", response)
-        console.log("authentication.service.ts-login()-response.json: ", response.json)
-        console.log("authentication.service.ts-login()-user: ", user)
-        console.log("authentication.service.ts-login()-user.token: ", user.token)
+        const user = response.json();
 
         if (user) {
 

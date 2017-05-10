@@ -70,7 +70,7 @@ export class GameComponent  implements OnInit {
   myPlayerField:ColourEnum;
 
   // player field of current active player
-  private playerMap: Map<any, any>;
+  private playerMap: Map<String, any>;
   private colourMap: Map<any, any>;
   private nameToColourMap: Map<any, any>;
   private siteMap: Map<any, any>;

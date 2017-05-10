@@ -147,14 +147,13 @@ export class WSService {
           }
           //if move was by me, only update stone statistics
           else{
-            let moveToDo = msg.payload.move;
             //if this move was my ship moving to a site, check if it actually is there (lever card)
 
             console.log("Received my own move from server, updating values");
             console.log("score array: ", msg.payload.berlinerScore);
 
             gameComponent.updateScoreSledQuarry(msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
-            console.log("CARDS: ", msg.payload.youMad)
+            console.log("CARDS: ", msg.payload.youMad);
             gameComponent.updatePlayerCards(msg.payload.youMad); //update player cards
             gameComponent.updateStoneDragStatus();
           }
@@ -162,18 +161,19 @@ export class WSService {
 
       }
 
-    }
+    };
+
     this.webSocket.onopen = (event) => {
       console.log("Socket is open", event);
 
       // Tell server we joined the mage
-      var msg = {
+      const msg = {
         gameId: gameId,
         user: this.authenticationService.mySelf.username
       };
 
       this.webSocket.send(JSON.stringify(msg));
-    }
+    };
 
   }
 }

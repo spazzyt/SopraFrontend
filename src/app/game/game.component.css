@@ -13,6 +13,7 @@
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
   */
+  z-index: -1000 !important;
 }
 
 @keyframes water {
@@ -59,6 +60,7 @@
   background-image: url(../../assets/images/island_background.png);
   background-size:cover;
   background-position: center;
+  z-index: -500 !important;
 }
 
 .player_field{

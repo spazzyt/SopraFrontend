@@ -79,6 +79,9 @@ export class Game {
   public sailId: number;
   public sailMove: Move;
 
+
+  // if a card play is still ongoing
+  public openCardMoves: number = 0;
   // Own Player info
   //------------
 
