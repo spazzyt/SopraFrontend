@@ -37,15 +37,15 @@ export class GameService {
 
   getGame(gameId): Observable<Game> {
     // add authorization header with token
-    let headers = new Headers({'Authorization': 'Bearer ' + this.authenticationService.token});
-    let options = new RequestOptions({headers: headers});
+    const headers = new Headers({'Authorization': 'Bearer ' + this.authenticationService.token});
+    const options = new RequestOptions({headers: headers});
 
     // get users from api
     return this.http.get(this.apiUrl + '/game/' + gameId, options)
       .map((response: Response) => response.json());
   }
 
-  sendMove(move: Move) : Observable<Response> {
+  sendMove(move: Move): Observable<Response> {
     console.log("sendMove=>",move,);
     // response observable
     let req = null;
