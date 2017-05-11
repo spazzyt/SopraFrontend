@@ -88,8 +88,10 @@ export class GameService {
         this.gameComp.game.sailMove = true;
 
       // once there are no more open moves
-      if(this.game.openCardMoves === 0)
+      if(this.game.openCardMoves === 0){
         this.gameComp.game.sailPlayed = false;
+        this.gameComp.game.sailMove = null;
+      }
     }
     //Chisel played:
     else if(this.gameComp.game.chiselPlayed) {
