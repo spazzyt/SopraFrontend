@@ -88,12 +88,12 @@ export class WSService {
           let whoseTurn = msg.payload.user;
 
           //play sound for active player
-          console.log("Roland-Websocke-Sound ", whoseTurn, gameComponent.game.myUserName)
-          if (gameComponent.game.myUserName==whoseTurn){
-            let audio = new Audio();
-            audio.src = "../../../assets/71-yourTurn.wav";
-            audio.play();
-          }
+          //console.log("Roland-Websocke-Sound ", whoseTurn, gameComponent.game.myUserName)
+          //if (gameComponent.game.myUserName==whoseTurn){
+          //  let audio = new Audio();
+          //  audio.src = "../../../assets/71-yourTurn.wav";
+          //  audio.play();
+          //}
 
           //ensure players can't pick card if not intended
           gameComponent.game.whoCanPickCard = null;
