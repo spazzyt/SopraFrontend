@@ -573,9 +573,6 @@ export class GameComponent  implements OnInit {
           let stoneToPlace: Stone[] = [new Stone(null, this.nameToColourMap[username])]
           this.siteMap[this.siteToStringMap[move.to]].placeStones(stoneToPlace);
           console.log("PLACED A"+ this.nameToColourMap[username] + " STONE ON " + this.siteToStringMap[move.to] + "WITH RED CARD.");
-          //update score, sled & quarry
-          this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
-          this.updatePlayerCards(playerCards);
 
           this.showSnackbarMessage(username.substring(0,10) + ' placed a stone to the ' + this.siteToStringMap[move.to] + ' with a red card.');
 
@@ -657,9 +654,6 @@ export class GameComponent  implements OnInit {
         this.updatePlayerCards(playerCards);
         break;
     }
-
-    //TODO cases for playing blue market cards - how does the backend pass this information?
-
   }
 
   //Sets interactions for active and inactive players
