@@ -434,23 +434,21 @@ Styling for the gif animations
 
 /*move change at x% completion*/
 @-webkit-keyframes example_bird_1 {
-  0%  { -webkit-transform: rotate(-180deg) translateX(5px) translateY(120px) rotate(0deg) scale(1); }
-  25%  { -webkit-transform: rotate(-90deg) translateX(5px) translateY(120px) rotate(-90deg) scale(.75); }
-  50%  { -webkit-transform: rotate(0deg) translateX(5px) translateY(120px) rotate(-180deg) scale(.60); }
-  75%  { -webkit-transform: rotate(90deg) translateX(5px) translateY(120px) rotate(-270deg) scale(.75); }
-  100%  { -webkit-transform: rotate(180deg) translateX(5px) translateY(120px) rotate(-360deg) scale(1); }
+  from  { -webkit-transform: rotate(0deg) translateX(5px) translateY(70px) }
+  to  { -webkit-transform: rotate(360deg) translateX(5px) translateY(70px) }
 }
 
 #bird_1{
-  width: 24px;
-  height: 12px;
+
+  width: 12px;
+  height: 24px;
   background-image:url(../../assets/images/bird_2.gif);
   background-size:cover;
   position: relative;
-  top: 490px;
-  left: 110px;
+  top: 500px;
+  left: 180px;
   -webkit-animation-name: example_bird_1;
-  -webkit-animation-duration: 6s;
+  -webkit-animation-duration: 9s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
