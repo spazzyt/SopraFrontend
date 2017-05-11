@@ -8,6 +8,9 @@ export class Site {
   @Input()
   amIActive: boolean;
 
+  @Input()
+  myTurn: boolean;
+
   public ship:Ship;
 
   public siteName:string;

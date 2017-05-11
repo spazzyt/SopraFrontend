@@ -48,21 +48,21 @@
 
         <div class="site_board">
 
-          <app-pyramid [amIActive]="isDraggingShip"></app-pyramid>
+          <app-pyramid [myTurn]="game?.amI_CurrentActivePlayer" [amIActive]="isDraggingShip"></app-pyramid>
         </div>
         <div class="site_board">
-          <app-temple [amIActive]="isDraggingShip"></app-temple>
+          <app-temple [myTurn]="game?.amI_CurrentActivePlayer" [amIActive]="isDraggingShip"></app-temple>
         </div>
         <div class="site_board">
-          <app-burial-chamber [amIActive]="isDraggingShip"></app-burial-chamber>
+          <app-burial-chamber [myTurn]="game?.amI_CurrentActivePlayer" [amIActive]="isDraggingShip"></app-burial-chamber>
         </div>
         <div class="site_board">
-          <app-obelisk [amIActive]="isDraggingShip"></app-obelisk>
+          <app-obelisk [myTurn]="game?.amI_CurrentActivePlayer" [amIActive]="isDraggingShip"></app-obelisk>
         </div>
       </div>
 
       <div class="market_site">
-        <app-market [amIActive]="isDraggingShip" [marketCards]="game?.marketCards" [canIPick]="game?.canIPick"></app-market>
+        <app-market [myTurn]="game?.amI_CurrentActivePlayer" [amIActive]="isDraggingShip" [marketCards]="game?.marketCards" [canIPick]="game?.canIPick"></app-market>
       </div>
 
     </div>
