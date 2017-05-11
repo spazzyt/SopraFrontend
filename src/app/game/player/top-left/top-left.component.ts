@@ -159,6 +159,13 @@ export class TopLeftComponent implements OnInit {
   playCard(index: number){
     console.log("PLAYER TRIES TO PLAY CARD " + index)
 
+
+    //check if card already played
+    if(this.gameComp.game.leverPlayed || this.gameComp.game.sailPlayed || this.gameComp.game.chiselPlayed || this.gameComp.game.hammerPlayed){
+      this.gameComp.showSnackbarMessage("You already played a card.");
+      return;
+    }
+
     //TODO when copypasting, adapt "black" to other players colour!!
     //if player has this card and it's his turn
     if(this.myColour == ColourEnum.white && this.canIPlay && this.cardNumbers[index] > 0){
