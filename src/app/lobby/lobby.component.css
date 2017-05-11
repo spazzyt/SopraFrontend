@@ -394,6 +394,7 @@ Styling for the new game modal
   /*background-image: url(../../assets/images/hypnotoad.gif);*/
   background-size: contain;
   background-repeat: no-repeat;
+  visibility: hidden;
 }
 
 
