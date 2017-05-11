@@ -330,3 +330,14 @@ p{
 .low_m{
   padding-top: 1%;
 }
+
+
+.noplayer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../../assets/images/top_right_empty.png");
+  background-size: cover;
+}
