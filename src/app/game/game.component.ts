@@ -541,6 +541,9 @@ export class GameComponent  implements OnInit {
     this.updateStoneDragStatus();
 
     console.log('Updating UI for this move from other player: ', move, " by Player ", username);
+    console.log("UPDATE SCORES WITH: ", berlinerScore);
+    this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+    this.updatePlayerCards(playerCards);
 
     //SWITCH based on what move the backend sent us
     switch(move.to){
@@ -554,6 +557,7 @@ export class GameComponent  implements OnInit {
         this.showSnackbarMessage(username.substring(0,10) + ' took ' + numStones + ' stone(s) from the quarry.');
 
         //update score, sled & quarry
+        console.log("UPDATE SCORES WITH: ", berlinerScore);
         this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
         this.updatePlayerCards(playerCards);
 
@@ -622,7 +626,6 @@ export class GameComponent  implements OnInit {
             }
           }
 
-          //TODO other cards if needed
 
         }
         else
