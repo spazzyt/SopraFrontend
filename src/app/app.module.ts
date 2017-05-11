@@ -26,31 +26,16 @@ import { BottomLeftComponent } from './game/player/bottom-left/bottom-left.compo
 import { BottomRightComponent } from './game/player/bottom-right/bottom-right.component';
 import { TopLeftComponent } from './game/player/top-left/top-left.component';
 import { TopRightComponent } from './game/player/top-right/top-right.component';
-
 import { AlertModule, ModalModule } from 'ng2-bootstrap';
 import { TooltipModule } from "ng2-tooltip";
-
-import { DemoTempComponent } from './demo-temp/demo-temp.component';
-import { DragDropComponent } from './demo-temp/drag-drop/drag-drop.component';
-import { DragComponent } from './demo-temp/drag/drag.component';
-import { DropComponent } from './demo-temp/drop/drop.component';
-import { PlayingfieldComponent } from './demo-temp/playingfield/playingfield.component';
 import { GameService } from "./shared/services/game.service";
-import { DynamicChangesComponent } from './demo-temp/dynamic-changes/dynamic-changes.component';
-import { PopoverBootstrapComponent } from './demo-temp/popover-bootstrap/popover-bootstrap.component';
-
-import * as $ from 'jquery';
-import { ModalsComponent } from './demo-temp/modals/modals.component';
-
 import {DndModule} from 'ng2-dnd';
-
 import { DragulaService, DragulaModule } from 'ng2-dragula/ng2-dragula';
 import {ShipService} from "./shared/services/ship.service";
 import { StoneComponent } from './game/stone/stone.component';
 import {WSService} from "./shared/services/websocket.service";
 import {LobbyService} from "./shared/services/lobby.service";
 import { FinalDestinationComponent } from './game/final-destination/final-destination.component';
-import { AnimationsComponent } from './demo-temp/animations/animations.component';
 
 
 @NgModule({
@@ -74,17 +59,8 @@ import { AnimationsComponent } from './demo-temp/animations/animations.component
     BottomRightComponent,
     TopLeftComponent,
     TopRightComponent,
-    DemoTempComponent,
-    DragDropComponent,
-    DragComponent,
-    DropComponent,
-    PlayingfieldComponent,
-    DynamicChangesComponent,
-    PopoverBootstrapComponent,
-    ModalsComponent,
     StoneComponent,
     FinalDestinationComponent,
-    AnimationsComponent,
   ],
   imports: [
     BrowserModule,

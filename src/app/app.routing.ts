@@ -6,9 +6,6 @@ import {GameComponent} from "./game/game.component";
 import {HomeComponent} from "./home/home.component";
 import {LobbyComponent} from "./lobby/lobby.component";
 
-//Demo screen
-import {DemoTempComponent} from "./demo-temp/demo-temp.component";
-
 const appRoutes: Routes = [
     { path: 'lobby', component: LobbyComponent },
     { path: 'login', component: LoginComponent },
@@ -16,9 +13,6 @@ const appRoutes: Routes = [
     { path: 'game/:id', component: GameComponent },
     //{ path: 'game', component: GameComponent, canActivate: [AuthGuardService] },
     { path: 'home', component: HomeComponent },
-
-    //Demo screen
-    { path: 'demo', component: DemoTempComponent },
 
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 
