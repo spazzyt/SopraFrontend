@@ -69,6 +69,9 @@ export class GameComponent  implements OnInit {
   // my player field
   myPlayerField:ColourEnum;
 
+  //overlay status
+  overlayOpen: boolean = true;
+
   // player field of current active player
   private playerMap: Map<String, any>;
   private colourMap: Map<any, any>;
@@ -795,5 +798,10 @@ export class GameComponent  implements OnInit {
     }
     this.game.leverModalOpen = true;
     this.infoBoxComponent.showLeverModal(tempStones)
+  }
+
+  closeOverlay(){
+    if(this.overlayOpen)
+      this.overlayOpen = false;
   }
 }
