@@ -317,7 +317,7 @@ export class TopLeftComponent implements OnInit {
         }
       }
       else{
-        //this.showSnackbarMessage("You can't take any stones because your sled is full.")
+        this.gameComp.showSnackbarMessage("You can't take any stones because your sled is full.")
         return;
       }
 
@@ -327,7 +327,14 @@ export class TopLeftComponent implements OnInit {
       this.gameService.sendMove(moveToSend);
 
       //snackbar message (only locally)
-      //this.showSnackbarMessage("You took "+ stonesToTake+" stone(s) from the quarry.");
+      this.gameComp.showSnackbarMessage("You took "+ stonesToTake+" stone(s) from the quarry.");
+    }
+  }
+
+
+  nonPlayable(){
+    if(this.myColour == ColourEnum.white && this.canIPlay) {
+      this.gameComp.showSnackbarMessage("You can only play blue cards.");
     }
   }
 

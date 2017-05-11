@@ -328,4 +328,11 @@ export class BottomLeftComponent implements OnInit {
       this.gameComp.showSnackbarMessage("You took "+ stonesToTake+" stone(s) from the quarry.");
     }
   }
+
+
+  nonPlayable(){
+    if(this.myColour == ColourEnum.black && this.canIPlay) {
+      this.gameComp.showSnackbarMessage("You can only play blue cards.");
+    }
+  }
 }

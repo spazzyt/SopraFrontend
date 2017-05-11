@@ -11,10 +11,10 @@
 
     <div class="left_part">
       <div class="upper_quarter">
-        <div class="card top_left_left"><div [ngStyle]="{opacity: 0.3 + 0.7*(cardNumbers[1])}" id="tll_4" class="tll_icon"><p class="non-draggable" style="position:absolute;">{{cardNumbers[1]}}</p></div></div>
-        <div class="card top_middle_left"><div [ngStyle]="{opacity: 0.3 + 0.7*(cardNumbers[2])}" id="tml_4" class="tml_icon"><p class="non-draggable" style="position:absolute;">{{cardNumbers[2]}}</p></div></div>
-        <div class="card top_middle_right"><div [ngStyle]="{opacity: 0.3 + 0.7*(cardNumbers[3])}" id="tmr_4" class="tmr_icon"><p class="non-draggable" style="position:absolute;">{{cardNumbers[3]}}</p></div></div>
-        <div class="card top_right_right"><div [ngStyle]="{opacity: 0.3 + 0.7*(cardNumbers[4])}" id="trr_4" class="trr_icon"><p class="non-draggable" style="position:absolute;">{{cardNumbers[4]}}</p></div></div>
+        <div class="card top_left_left"><div (click)="nonPlayable()" [ngStyle]="{opacity: 0.3 + 0.7*(cardNumbers[1])}" id="tll_4" class="tll_icon"><p class="non-draggable" style="position:absolute;">{{cardNumbers[1]}}</p></div></div>
+        <div class="card top_middle_left"><div (click)="nonPlayable()" [ngStyle]="{opacity: 0.3 + 0.7*(cardNumbers[2])}" id="tml_4" class="tml_icon"><p class="non-draggable" style="position:absolute;">{{cardNumbers[2]}}</p></div></div>
+        <div class="card top_middle_right"><div (click)="nonPlayable()" [ngStyle]="{opacity: 0.3 + 0.7*(cardNumbers[3])}" id="tmr_4" class="tmr_icon"><p class="non-draggable" style="position:absolute;">{{cardNumbers[3]}}</p></div></div>
+        <div class="card top_right_right"><div (click)="nonPlayable()" [ngStyle]="{opacity: 0.3 + 0.7*(cardNumbers[4])}" id="trr_4" class="trr_icon"><p class="non-draggable" style="position:absolute;">{{cardNumbers[4]}}</p></div></div>
       </div>
 
       <div class="lower_quarter">
@@ -26,7 +26,7 @@
     </div>
 
     <div class="right_part">
-      <div class="purple_card"><div [ngStyle]="{opacity: 0.3 + 0.7*(cardNumbers[0])}" id="purple_4" class="purple_icon"><p class="non-draggable" style="position:absolute; margin-top:20%;">{{cardNumbers[0]}}</p></div></div>
+      <div class="purple_card"><div (click)="nonPlayable()" [ngStyle]="{opacity: 0.3 + 0.7*(cardNumbers[0])}" id="purple_4" class="purple_icon"><p class="non-draggable" style="position:absolute; margin-top:20%;">{{cardNumbers[0]}}</p></div></div>
     </div>
 
   </div>
