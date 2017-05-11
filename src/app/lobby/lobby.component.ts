@@ -159,6 +159,8 @@ export class LobbyComponent implements OnInit {
       .subscribe(game => {
         //this.game = game;
         if(1){console.log("leave game ");}
+        this.joinedGame = -1;
+        clearInterval(this.currentGameChecker);
         return this.loadGameList();
       });
   }

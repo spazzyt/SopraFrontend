@@ -63,6 +63,10 @@
         <!-- Game Table -->
         <table class="table table-hover">
           <tbody class="tbody">
+          <div *ngIf="games.length == 0" class="no_games">
+            <p> No games found. <br> Why don't you create one? </p>
+          </div>
+
           <div *ngIf="games">
             <tr class="game-row" *ngFor="let game of games">
               <td id="td1">{{game?.name.substring(0,10)}}'s Game</td>
