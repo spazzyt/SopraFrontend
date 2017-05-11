@@ -41,7 +41,7 @@
 
   <div id="supply_sled_4" class="low_m ">
 
-    <div id="bag_4" class="stone_icon" dnd-draggable [dragEnabled]="(!(sailPlayed == true && sailMove != null)) && canIPlay && isThisMyField && hasStones" [dropZones]="['slots']" [dragData]="playerFieldStone">
+    <div id="bag_4" class="stone_icon" dnd-draggable [dragEnabled]="(!(sailPlayed == true && sailMove != null)) && canIPlay && isThisMyField && hasStones && !leverPlayed" [dropZones]="['slots']" [dragData]="playerFieldStone">
       <app-stone id="stones_4" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
     </div>
 

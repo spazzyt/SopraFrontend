@@ -224,6 +224,8 @@ export class GameService {
           // card + place stone + place stone
           this.game.openCardMoves = 3;
 
+          this.gameComp.showSnackbarMessage("Place two stones on any of the ships.")
+
           console.log("PLAYING CHISEL! STATUS: " + this.gameComp.game.chiselPlayed);
           this.gameComp.game.chiselPlayed = true;
           console.log("THE CHISEL HAS BEEN PLAYED! STATUS: " + this.gameComp.game.chiselPlayed);
@@ -251,6 +253,8 @@ export class GameService {
         case 6: //Hammer
           // card + take stones + place stone
           this.game.openCardMoves = 3;
+
+          this.gameComp.showSnackbarMessage("Got 3 stones from quarry, place a stone on a ship.");
 
           //lets the game know the hammer has been played
           console.log("PLAYING HAMMER! STATUS: " + this.gameComp.game.hammerPlayed);
@@ -288,7 +292,7 @@ export class GameService {
         case 7: //Sail
           // card + place stone + sail
           this.game.openCardMoves = 3;
-
+          this.gameComp.showSnackbarMessage("Place a stone on a ship, then sail it.")
           console.log("PLAYING SAIL! STATUS: " + this.gameComp.game.sailPlayed);
           this.gameComp.game.sailPlayed = true;
           console.log("THE SAIL HAS BEEN PLAYED! STATUS: " + this.gameComp.game.sailPlayed);
@@ -316,6 +320,8 @@ export class GameService {
         case 8: //Lever
           // card + sail + order
           this.game.openCardMoves = 3;
+
+          this.gameComp.showSnackbarMessage("Sail any ship, then choose the stone order.");
 
           //lets the game know the lever has been played
           console.log("PLAYING LEVER! STATUS: " + this.gameComp.game.leverPlayed);
@@ -359,7 +365,6 @@ export class GameService {
   //===========================================================
   // Popover Methods
   //===========================================================
-  //TODO overhaul to make work on right-side players
   //IDs like "bll" are for bottom components, "bll_2" for top components
 
   initializePopovers(){

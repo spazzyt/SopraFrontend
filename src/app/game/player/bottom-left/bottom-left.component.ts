@@ -167,7 +167,6 @@ export class BottomLeftComponent implements OnInit {
     //if player has this card and it's his turn
     if(this.myColour == ColourEnum.black && this.canIPlay && this.cardNumbers[index] > 0){
 
-      console.log("SHIPPERINOS: ", this.ships);
       //determine amount of free slots on all ships (to check if you can place two stones on ships)
       let freeSlots = 0;
       for(let ship of this.ships){
@@ -316,7 +315,7 @@ export class BottomLeftComponent implements OnInit {
         }
       }
       else{
-        //this.showSnackbarMessage("You can't take any stones because your sled is full.")
+        this.gameComp.showSnackbarMessage("You can't take any stones because your sled is full.")
         return;
       }
 
@@ -326,7 +325,7 @@ export class BottomLeftComponent implements OnInit {
       this.gameService.sendMove(moveToSend);
 
       //snackbar message (only locally)
-      //this.showSnackbarMessage("You took "+ stonesToTake+" stone(s) from the quarry.");
+      this.gameComp.showSnackbarMessage("You took "+ stonesToTake+" stone(s) from the quarry.");
     }
   }
 }
