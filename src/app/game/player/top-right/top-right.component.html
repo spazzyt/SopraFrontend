@@ -6,7 +6,7 @@
   </div>
   <div id="supply_sled_3" class="low_m">
 
-    <div id="bag_3" class="stone_icon" dnd-draggable [dragEnabled]="(!(sailPlayed == true && sailMove != null)) && canIPlay && isThisMyField && hasStones && !leverPlayed" [dropZones]="['slots']" [dragData]="playerFieldStone">
+    <div id="bag_3" class="stone_icon" dnd-draggable [dragEnabled]="(!(sailPlayed == true && sailMove != null)) && canIPlay && isThisMyField && hasStones && !gameComp.game.leverPlayed" [dropZones]="['slots']" [dragData]="playerFieldStone">
       <app-stone id="stones_3" [stone]="playerFieldStone" class="you-may-copy-us"></app-stone>
     </div>
 
