@@ -480,19 +480,14 @@ Styling for the Game manual modal
 }
 
 #pause{
-  height: 5%;
+  height: 6%;
   width: 25%;
   left: 100px;
   position: relative;
   margin-top: 5%;
 }
 
-.glyphicon glyphicon-volume-up{
-  width: 100%;
-  height: 100%;
+.glyphicon{
+  transform: scale(1.5,1.5);
 }
 
-.glyphicon glyphicon-volume-off{
-  width: 100%;
-  height: 100%;
-}
