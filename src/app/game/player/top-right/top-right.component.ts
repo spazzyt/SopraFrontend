@@ -197,7 +197,7 @@ export class TopRightComponent implements OnInit {
       let shipsSailableWithOneStone = false;
 
       for(let ship of this.ships){
-        if(ship.isInHarbour && !ship.draggable) {
+        if(ship.isInHarbour) {
 
           let freeSlotsOnShip = 0;      //how many stones are on the ship?
 
@@ -208,9 +208,12 @@ export class TopRightComponent implements OnInit {
           }
           if(freeSlotsOnShip >= 1 && freeSlotsOnShip <= 2){
             shipsSailableWithOneStone = true; //if any ship is sailable, set to true
+            console.log("SHIP " + ship.id + " has this many slots: " + freeSlotsOnShip);
           }
         }
       }
+      console.log("CAN SAIL WITH ONE? " + shipsSailableWithOneStone);
+
 
       //Checks for each possible card if it's not playable (if not playable, return)
       if(index == 5 && (this.sledStones < 2 || freeSlots < 2)){
