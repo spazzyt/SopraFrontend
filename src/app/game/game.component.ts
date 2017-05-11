@@ -72,6 +72,9 @@ export class GameComponent  implements OnInit {
   //overlay status
   overlayOpen: boolean = true;
 
+  //is the player dragging a ship?
+  isDraggingShip: boolean = false;
+
   // player field of current active player
   private playerMap: Map<String, any>;
   private colourMap: Map<any, any>;

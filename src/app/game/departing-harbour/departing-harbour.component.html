@@ -4,7 +4,7 @@
        id="departing_harbour_{{num}}" class="departing_harbour">
 
 <div *ngIf="ship">
-    <div dnd-draggable [dragEnabled]="((!sailPlayed && sailMove == null) || (sailPlayed && sailMove != null)) && !chiselPlayed && !hammerPlayed && ship.draggable && isActive" [dropZones]="['sites']" [dragData]="ship">
+    <div dnd-draggable (dragstart)="gameComp.isDraggingShip = true" (dragend)="gameComp.isDraggingShip = false" [dragEnabled]="((!sailPlayed && sailMove == null) || (sailPlayed && sailMove != null)) && !chiselPlayed && !hammerPlayed && ship.draggable && isActive" [dropZones]="['sites']" [dragData]="ship">
 
       <app-ship class="appShip"
                 *ngIf="ship.isInHarbour"

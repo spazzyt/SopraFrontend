@@ -25,6 +25,9 @@ export class DepartingHarbourComponent {
     isActive: boolean;
 
   @Input()
+    gameComp: any;
+
+  @Input()
     hammerPlayed: boolean;
   @Input()
     chiselPlayed: boolean;
@@ -32,6 +35,7 @@ export class DepartingHarbourComponent {
     sailPlayed: boolean;
   @Input()
     sailMove: Move;
+
 
   //===============
   //Constructor
@@ -45,7 +49,6 @@ export class DepartingHarbourComponent {
   //===============
 
   ngOnInit() {
-
   }
 
 }

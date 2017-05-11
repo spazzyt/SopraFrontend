@@ -17,7 +17,7 @@
 
     <!-- Departing Harbours -->
     <div class="departing_harbours">
-      <app-departing-harbour [sailPlayed]="game?.sailPlayed" [sailMove]="game?.sailMove" [hammerPlayed]="game?.hammerPlayed" [chiselPlayed]="game?.chiselPlayed" [ships]="game?.ships" [isActive]="game?.amI_CurrentActivePlayer"></app-departing-harbour>
+      <app-departing-harbour [gameComp]="myComp" [sailPlayed]="game?.sailPlayed" [sailMove]="game?.sailMove" [hammerPlayed]="game?.hammerPlayed" [chiselPlayed]="game?.chiselPlayed" [ships]="game?.ships" [isActive]="game?.amI_CurrentActivePlayer"></app-departing-harbour>
     </div>
 
 
@@ -48,21 +48,21 @@
 
         <div class="site_board">
 
-          <app-pyramid [amIActive]="game?.amI_CurrentActivePlayer"></app-pyramid>
+          <app-pyramid [amIActive]="isDraggingShip"></app-pyramid>
         </div>
         <div class="site_board">
-          <app-temple [amIActive]="game?.amI_CurrentActivePlayer"></app-temple>
+          <app-temple [amIActive]="isDraggingShip"></app-temple>
         </div>
         <div class="site_board">
-          <app-burial-chamber [amIActive]="game?.amI_CurrentActivePlayer"></app-burial-chamber>
+          <app-burial-chamber [amIActive]="isDraggingShip"></app-burial-chamber>
         </div>
         <div class="site_board">
-          <app-obelisk [amIActive]="game?.amI_CurrentActivePlayer"></app-obelisk>
+          <app-obelisk [amIActive]="isDraggingShip"></app-obelisk>
         </div>
       </div>
 
       <div class="market_site">
-        <app-market [amIActive]="game?.amI_CurrentActivePlayer" [marketCards]="game?.marketCards" [canIPick]="game?.canIPick"></app-market>
+        <app-market [amIActive]="isDraggingShip" [marketCards]="game?.marketCards" [canIPick]="game?.canIPick"></app-market>
       </div>
 
     </div>
