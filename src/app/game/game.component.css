@@ -16,6 +16,17 @@
   z-index: -1000 !important;
 }
 
+.overlay {
+  width: 1366px;
+  height: 768px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(../../assets/images/overlay.png);
+  background-size:cover;
+  z-index: 10000 !important;
+}
+
 @keyframes water {
   from {background-image: url(../../assets/images/water_background.png); filter: blur(1px);}
   to {background-image: url(../../assets/images/water_background3.png);   filter: blur(2px);}
