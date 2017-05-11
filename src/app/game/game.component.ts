@@ -605,6 +605,25 @@ export class GameComponent  implements OnInit {
         if(move.from == PositionEnum.PlayerCardStack){
 
           console.log("OTHER PLAYER PLAYED A CARD!");
+
+
+
+        }
+        else
+        {
+          //Ship to market
+          this.moveShipById(move.pos, 'Market');
+
+          //remove stones from ship
+          this.game.ships[move.pos].slots = [];
+        }
+        break;
+
+      //Place stone on ship:
+      case PositionEnum.DepartingHarbour:
+        // ship reoder
+        if(move.from == PositionEnum.DepartingHarbour) {
+
           //If it's a lever card
           if(move.LeverStones != null){
             this.showSnackbarMessage(username.substring(0,10) + ' played the Lever card and moved ship ' + move.ShipID + ' to the ' + this.siteToStringMap[move.to] + '.');
@@ -629,28 +648,15 @@ export class GameComponent  implements OnInit {
             }
           }
 
+        } else {
+          let stoneToAdd = new Stone(-1, this.nameToColourMap[username]);
+          this.ships[move.ShipID].addStoneById(stoneToAdd, move.pos);
 
+          //update score, sled & quarry
+          this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
+          this.updatePlayerCards(playerCards);
+          this.showSnackbarMessage(username.substring(0, 10) + ' placed a stone on Ship ' + (move.ShipID + 1) + '.');
         }
-        else
-        {
-          //Ship to market
-          this.moveShipById(move.pos, 'Market');
-
-          //remove stones from ship
-          this.game.ships[move.pos].slots = [];
-        }
-        break;
-
-      //Place stone on ship:
-      case PositionEnum.DepartingHarbour:
-        let stoneToAdd = new Stone(-1, this.nameToColourMap[username]);
-        this.ships[move.ShipID].addStoneById(stoneToAdd, move.pos);
-
-        //update score, sled & quarry
-        this.updateScoreSledQuarry(berlinerScore, sleds, quarries);
-        this.updatePlayerCards(playerCards);
-        this.showSnackbarMessage(username.substring(0,10) + ' placed a stone on Ship ' + (move.ShipID+1) + '.');
-
         break;
 
       //Take card from market
