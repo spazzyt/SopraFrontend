@@ -426,22 +426,25 @@ Styling for the gif animations
 
 /*move change at x% completion*/
 @-webkit-keyframes example_bird_1 {
-  0%   {left:30px; top:500px; -webkit-transform: rotate(90deg);}
-  25%  {left:200px; top:500px; -webkit-transform: rotate(180deg);}
-  50%  {left:200px; top:600px; -webkit-transform: rotate(270deg);}
-  75%  {left:200px; top:600px; -webkit-transform: rotate(360deg);}
-  100% {left:30px; top:500px; -webkit-transform: rotate(450deg);}
+  0%  { -webkit-transform: rotate(-180deg) translateX(5px) translateY(120px) rotate(0deg) scale(1); }
+  25%  { -webkit-transform: rotate(-90deg) translateX(5px) translateY(120px) rotate(-90deg) scale(.75); }
+  50%  { -webkit-transform: rotate(0deg) translateX(5px) translateY(120px) rotate(-180deg) scale(.60); }
+  75%  { -webkit-transform: rotate(90deg) translateX(5px) translateY(120px) rotate(-270deg) scale(.75); }
+  100%  { -webkit-transform: rotate(180deg) translateX(5px) translateY(120px) rotate(-360deg) scale(1); }
 }
 
 #bird_1{
-  width: 60px;
-  height: 30px;
+  width: 24px;
+  height: 12px;
   background-image:url(../../assets/images/bird_2.gif);
   background-size:cover;
   position: relative;
+  top: 490px;
+  left: 110px;
   -webkit-animation-name: example_bird_1;
-  -webkit-animation-duration: 360s;
+  -webkit-animation-duration: 6s;
   animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 /*flying fish*/
