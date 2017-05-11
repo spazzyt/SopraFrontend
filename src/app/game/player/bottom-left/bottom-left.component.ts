@@ -207,7 +207,7 @@ export class BottomLeftComponent implements OnInit {
       }
 
       //Checks for each possible card if it's not playable (if not playable, return)
-      if(index == 5 && this.sledStones < 2 && freeSlots >= 2){
+      if(index == 5 && (this.sledStones < 2 || freeSlots < 2)){
         if(this.sledStones >= 2)
           this.gameComp.showSnackbarMessage("There aren't two free stone slots.");
         else
