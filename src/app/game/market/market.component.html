@@ -13,7 +13,7 @@
       <div class="left_spacing"></div>
       <div *ngIf="marketCards[i]" class="card">
         <div id="market_card_{{i+1}}" class="market_card_{{i+1}} card_picture"
-             (click)="takeMarketCard(i)" [ngStyle]="{ 'background-image': 'url(' + marketCards[i].imageUrl + ')' }">
+             (click)="takeMarketCard(i)" [ngStyle]="{'box-shadow': canIPick ? '0px 10px 25px #fff' : '0px 0px 0px #fff', 'background-image': 'url(' + marketCards[i].imageUrl + ')' }">
         </div>
       </div>
     </div>
