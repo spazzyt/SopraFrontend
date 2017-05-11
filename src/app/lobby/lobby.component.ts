@@ -189,6 +189,11 @@ export class LobbyComponent implements OnInit {
         clearInterval(this.userListChecker);
       }
 
+      if(game.status == GameStatusEnum.FINISHED)
+      {
+        clearInterval(this.currentGameChecker);
+      }
+
     });
 
 

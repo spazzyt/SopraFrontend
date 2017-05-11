@@ -69,7 +69,7 @@
 
           <div *ngIf="games">
             <tr class="game-row" *ngFor="let game of games">
-              <td id="td1">{{game?.name.substring(0,10)}}'s Game</td>
+              <td id="td1">{{game?.name.substring(0,10)}}'s Game {{game?.status}}</td>
               <td id="td2">{{game?.players.length}} / {{game?.numPlayers}}</td>
               <td id="td3">
                 <!-- buttons for join/leave/game full, depending on state -->
