@@ -51,6 +51,7 @@ export class LobbyComponent implements OnInit {
   private gameListChecker;
   private userListChecker;
 
+  sound:boolean=true;
 
   //=============
   // Constructor
@@ -87,6 +88,10 @@ export class LobbyComponent implements OnInit {
 
 
 
+  }
+
+  toggleGlyphicon(){
+    this.sound=!this.sound;
   }
 
   //================

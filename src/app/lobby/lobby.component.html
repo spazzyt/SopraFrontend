@@ -1,5 +1,5 @@
 <div class="container_lobby_screen">
-  <audio autoplay loop>
+  <audio id="audio" autoplay loop>
     <source src="../assets/MusicLogin.mp3" type="audio/mpeg">
   </audio>
 
@@ -157,6 +157,10 @@
 
     <button id="logout-btn" class="btn btn-sm btn-primary btn-block"
             type="submit" (click)="Logout()">Logout</button>
+    <button id="pause" class="btn btn-lg btn-primary btn-lg" style="margin-left: 1%" data-toggle="" data-target="">
+      <span *ngIf="sound" (click)="toggleGlyphicon()" onclick="document.getElementById('audio').pause()" class="glyphicon glyphicon-volume-up"></span>
+      <span *ngIf="!sound" (click)="toggleGlyphicon()" onclick="document.getElementById('audio').play()" class="glyphicon glyphicon-volume-off"></span>
+    </button>
   </div>
 
 
