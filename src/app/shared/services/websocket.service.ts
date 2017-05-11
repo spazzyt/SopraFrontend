@@ -47,6 +47,9 @@ export class WSService {
         //Started new round
         case 'NEWROUND':
 
+          let roundnr = msg.payload.roundNumber+1;
+          gameComponent.showSnackbarMessage("Round " + roundnr + " has started.");
+
           //update player stones & quarry
           gameComponent.updateScoreSledQuarry(msg.payload.berlinerScore, msg.payload.sleds, msg.payload.quarries);
 

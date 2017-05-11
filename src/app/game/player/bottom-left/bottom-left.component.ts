@@ -154,7 +154,7 @@ export class BottomLeftComponent implements OnInit {
   // Market Card Functionalities
   //=============================
 
-  playCard(index: number){  //TODO add this to other players
+  playCard(index: number){
     console.log("PLAYER TRIES TO PLAY CARD " + index)
 
     //check if card already played
@@ -188,10 +188,12 @@ export class BottomLeftComponent implements OnInit {
       for(let ship of this.ships){
         if(ship.isInHarbour && ship.draggable) shipsSailable = true; //if any ship is sailable, set to true
       }
+
+
       let shipsSailableWithOneStone = false;
 
       for(let ship of this.ships){
-        if(ship.isInHarbour && !ship.draggable) {
+        if(ship.isInHarbour) {
 
           let freeSlotsOnShip = 0;      //how many stones are on the ship?
 
@@ -204,6 +206,7 @@ export class BottomLeftComponent implements OnInit {
             shipsSailableWithOneStone = true; //if any ship is sailable, set to true
           }
         }
+        console.log("SHIP " + ship.id + " is sailable with one stone? " + shipsSailableWithOneStone);
       }
 
       //Checks for each possible card if it's not playable (if not playable, return)
