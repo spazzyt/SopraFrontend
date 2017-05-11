@@ -736,8 +736,7 @@ export class GameComponent  implements OnInit {
 
   //show Snackbarinfo
   showSnackbarMessage(text_) {
-    let text= text_;
-    let time_= 3000; //show 10 seconds
+    let time_= 5000; //show for 5 seconds
     this.showSnackbarMessenger(text_,time_);
   }
 
@@ -754,19 +753,15 @@ export class GameComponent  implements OnInit {
   showSnackbarMessenger(textMessage, timeMilliSeconds) {
 
     (<any>$('#snackbar'))
-      .text(textMessage)
-      .addClass('show')
-      .css({'visibility': 'visible'});
+      .text(textMessage);
 
-    setTimeout(() => {
-        (<any>$('#snackbar'))
-          .addClass('hide')
-          .css({'visibility': 'hidden'});
-        if (1) {console.log("showSnackbarMessenger_callback")};
-      },
-      timeMilliSeconds);
+    var x = document.getElementById("snackbar")
 
-    if(1){console.log("showSnackbarMessenger")};
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, timeMilliSeconds);
+
   }
 
   //=============================================================
